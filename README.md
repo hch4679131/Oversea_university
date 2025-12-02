@@ -1,4 +1,4 @@
-# 启航留学 - Full-Stack Web Application
+# 汇生活留学 - Full-Stack Web Application
 
 Study abroad services website with integrated web scraper.
 
