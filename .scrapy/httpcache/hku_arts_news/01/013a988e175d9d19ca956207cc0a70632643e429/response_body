@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <base href="https://arts.hku.hk/" />
+
+<title  >Faculty of Arts - HKU</title> 
+
+<link  media="all"  href="/assets/css/projectbase.css"  type="text/css"  rel="stylesheet"  />
+    <link type="text/css" rel="stylesheet" media="print" href="/assets/css/print.css" />
+    <script type="text/javascript"> var page_language = ''; </script>
+    <script type="text/javascript">
+        var base_url = '/';
+    </script>
+<!--[if lt IE 8]>
+    <script type="text/javascript" src="/assets/js/ie7.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/ie7.css" />
+<![endif]--><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-37742340-1']);
+_gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+_linkedin_partner_id = "399859";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(){var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})();
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=399859&fmt=gif" />
+</noscript>
+
+<!-- Global site tag (gtag.js) - Google Ads: 773097646 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-773097646"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-773097646');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0M3M4J7L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0G0M3M4J7L');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TDHMGQS');</script>
+<!-- End Google Tag Manager -->
+
+    </head>
+    <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDHMGQS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+        <div id="wrapper">
+    <div id="header">
+    <div class="header-container">
+
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/img/hku-logo.png" alt="The University of Hong Kong" />
+                <div class="name"><span class="faculty-name">Faculty of Arts</span></div>
+            </a>
+        </div>
+        <div class="shortlinks">
+            <div class="top">
+                <div class="home"><a href="https://www.hku.hk/">HKU Home</a></div>
+                <div class="home"><a href="https://hkuportal.hku.hk/">HKU Portal</a></div>
+                <div class="version">
+                    <a href="https://www.facebook.com/ArtsHKU" target="_blank" class="apps facebook" title="facebook"><div>&nbsp;</div></a><a href="https://twitter.com/hkuarts" target="_blank" class="apps twitter" title="twitter"><div>&nbsp;</div></a>
+                </div>
+                <div class="textsize">
+                    <a class="text_small">A</a>
+                    <a class="text_normal">A</a>
+                    <a class="text_large">A</a>
+                </div>
+                <div class="search">
+                    <form action="https://www.google.com/cse" id="form_site_search" target="_blank">
+                        <input class="for-google-search" type="hidden" name="cx" value="016966053557825602977:h14undbgnrw" />
+                        <input class="for-google-search" type="hidden" name="ie" value="UTF-8" />
+                        <label for="search-box" style="display:none;">Search Box</label>
+                        <input id="search-box" type="text" value="Search" name="q" class="searchField" onblur="if(this.value=='') this.value='Search';" onfocus="if(this.value==this.defaultValue) this.value='';" />
+                        <button id="search-button" type="submit" title="Search" name="sa" value="Search"></button>
+                    </form>
+                </div>
+                <!--<div class="search">
+                    <label for="search-box" style="display:none">search box</label>
+                    <input type="text" id="search-box" value="Search" onfocus="if(this.value==this.defaultValue) this.value='';" onblur="if (this.value == '') this.value = 'Search';"/>
+                    <button id="search-button" title="Search"></button>
+                </div>-->
+                <div class="clear"><!--empty--></div>
+            </div>
+            <div class="bottom">
+                <div class="info-for">
+                    <ul>
+					
+                        <li><a href="https://hkuhk.sharepoint.com/sites/ResourcesforStaff/" target="_blank">Resources for staff</a></li>
+						<!--<li><a href="site_url()">Home</a></li>-->
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/contact-us">Contact Us</a></li>
+                        <li class="last"><a href="/site-map">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"><!--empty--></div>
+
+        <div class="top-nav" >
+            <div class="nav">
+                <ul id="mega-menu-1" class="mega-menu myMenu">
+                    <li class="item first "><a href="/about-us">About Us</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="about-us/vision-and-mission" >Vision &amp; Mission</a></li>
+<li><a class="level_2"   href="about-us/faculty-office" >Faculty Office</a></li>
+<li><a class="level_2"   href="about-us/faculty-centenary" >Faculty Centenary</a></li>
+<li><a class="level_2"   href="about-us/our-building" >Our Building</a></li>
+<li><a class="level_2"   href="/about-us/photo-gallery" target="_self">Photo Gallery</a></li>
+<li><a class="level_2"   href="https://jobs.hku.hk/en/filter/?search-keyword=&amp;brand=faculty%20of%20arts" target="_blank">Employment</a></li>
+<li><a class="level_2"   href="about-us/contact-us" >Contact Us</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/prospective-students">Prospective Students</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="https://arts.hku.hk/ugadmissions" target="_blank">Undergraduate</a></li>
+<li><a class="level_2"   href="prospective-students/research-postgraduate" >Research Postgraduate </a></li>
+<li><a class="level_2"   href="prospective-students/taught-postgraduate" >Taught Postgraduate</a></li>
+<li><a class="level_2"   href="https://siah.arts.hku.hk/" target="_blank">Summer Institute in the Arts &amp; Humanities</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/current-students">Current Students</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="current-students/undergraduate" >Undergraduate</a></li>
+<li><a class="level_2"   href="current-students/postgraduate" >Postgraduate</a></li>
+<li><a class="level_2"   href="current-students/student-global-experience" >Student Experiential Learning</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/teaching-and-learning">Teaching &amp; Learning</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="teaching-and-learning/academic-advising" >Academic Advising </a></li>
+<li><a class="level_2"   href="teaching-and-learning/FTEA" >Faculty Teaching Excellence Awards </a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/research">Research</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="research/sofhku" >Society of Fellows in the Humanities</a></li>
+<li><a class="level_2"   href="research/research-overview" >Research Overview</a></li>
+<li><a class="level_2"   href="research/research-highlights" >Research Highlights</a></li>
+<li><a class="level_2"   href="/research/conferences-and-seminars" target="_self">Conferences &amp; Seminars</a></li>
+<li><a class="level_2"   href="https://converge.arts.hku.hk/" target="_blank">FACULTY OF ARTS CONFERENCE (7-8 June 2024) </a></li>
+<li><a class="level_2"   href="research/Sin-Wai-Kin-Distinguished-Visiting-Professorship-in-the-Humanities-Lecture-Series" >【Sin Wai-Kin Distinguished Visiting Professorship in the Humanities】 Lecture Series</a></li>
+<li><a class="level_2"   href="research/CHAGS" >China, Humanities, and Global Studies (CHAGS)</a></li>
+<li><a class="level_2"   href="research/internal-research-funding-scheme" >Internal Research Funding Schemes</a></li>
+<li><a class="level_2"   href="research/find-a-research-collaborator" >Find a Research Collaborator</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/knowledge-exchange">Knowledge Exchange</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="knowledge-exchange/university-artists-scheme" >University Artists Scheme</a></li>
+<li><a class="level_2"   href="http://www.culture.hku.hk/" target="_blank">Advanced Cultural Leadership Programme</a></li>
+<li><a class="level_2"   href="knowledge-exchange/faculty-ke-award" >Faculty KE Award</a></li>
+<li><a class="level_2"   href="knowledge-exchange/interdisciplinary-ke-projects" >Interdisciplinary KE Projects</a></li>
+<li><a class="level_2"   href="knowledge-exchange/ke-impact-projects" >KE Impact Projects</a></li>
+<li><a class="level_2"   href="http://arts.hku.hk/UAS/photo_album_2008_10_.pdf" target="_blank">UAS Publications</a></li>
+<li><a class="level_2"   href="knowledge-exchange/ke-student-projects" >KE Student Projects</a></li>
+<li><a class="level_2"   href="knowledge-exchange/second-century-lecture-series" >Second Century Lecture Series</a></li>
+<li><a class="level_2"   href="knowledge-exchange/behind-the-scenes-lecture-series" >Behind the Scenes Lecture Series</a></li>
+<li><a class="level_2"   href="knowledge-exchange/newsletter" >Arts Faculty Newsletter</a></li>
+<li><a class="level_2"   href="knowledge-exchange/run-run-shaw-g-f-gallery" >G/F Gallery, Run Run Shaw Tower</a></li>
+<li><a class="level_2"   href="knowledge-exchange/find-a-media-contact" >Find a Media Contact</a></li>
+<li><a class="level_2"   href="knowledge-exchange/for-companies-and-organizations" >For Companies and Organizations</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/alumni">Alumni</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="alumni/alumni-stories" >Alumni Stories I</a></li>
+<li><a class="level_2"   href="alumni/recent-alumni-stories" >Alumni Stories II</a></li>
+<li><a class="level_2"   href="alumni/arts-centenary-celebrations" >Faculty Centenary</a></li>
+</ul>
+                    </li>
+                    <li class="item last "><a href="/giving">Giving to Arts</a>
+                                            </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+            <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div id="slides">
+        <div class="slides_container">	
+                                                    <div class="slide">
+                                        <a href="https://gcin.hku.hk/" target="_blank"><img src='/file/banner/6186/GCIN_banner.jpg?w=948&amp;h=292&amp;crop=1' alt='Learn more about BA in Global Creative Industries' title="Learn more about BA in Global Creative Industries" /></a>
+                    <div class="caption">
+                        <h2 class="caption-title">Learn more about BA in Global Creative Industries</h2>
+                                            </div>
+                </div>
+                            <div class="slide">
+                                        <a href="https://arts.hku.hk/current-students/faculty-nomination-YCA-2026" target="_blank"><img src='/file/banner/6183/YCA.jpg?w=948&amp;h=292&amp;crop=1' alt='Extended Round - Apply for the Faculty’s nomination for YCA (Cohort 2026)' title="Extended Round - Apply for the Faculty’s nomination for YCA (Cohort 2026)" /></a>
+                    <div class="caption">
+                        <h2 class="caption-title">Extended Round - Apply for the Faculty’s nomination for YCA (Cohort 2026)</h2>
+                                            </div>
+                </div>
+                            <div class="slide">
+                                        <a href="https://www.atlab.hku.hk/" target="_blank"><img src='/file/banner/5999/FoA website banner ver7.png?w=948&amp;h=292&amp;crop=1' alt='Arts Technology Lab - Strengthening AI Proficiency and Competitiveness' title="Arts Technology Lab - Strengthening AI Proficiency and Competitiveness" /></a>
+                    <div class="caption">
+                        <h2 class="caption-title">Arts Technology Lab - Strengthening AI Proficiency and Competitiveness</h2>
+                                            </div>
+                </div>
+                            <div class="slide">
+                                        <a href="https://www.ug.arts.hku.hk/" target="_blank"><img src='/file/banner/4675/Website Banner.jpg?w=948&amp;h=292&amp;crop=1' alt='Learn more about UG Admissions to Arts' title="Learn more about UG Admissions to Arts" /></a>
+                    <div class="caption">
+                        <h2 class="caption-title">Learn more about UG Admissions to Arts</h2>
+                                            </div>
+                </div>
+                            <div class="slide">
+                                        <a href="https://www.hdt.arts.hku.hk/" target="_blank"><img src='/file/banner/5291/BAHDT.JPG?w=948&amp;h=292&amp;crop=1' alt='Learn more about BA in Humanities and Digital Technologies' title="Learn more about BA in Humanities and Digital Technologies" /></a>
+                    <div class="caption">
+                        <h2 class="caption-title">Learn more about BA in Humanities and Digital Technologies</h2>
+                                            </div>
+                </div>
+                            <div class="slide">
+                                        <a href="https://ug.arts.hku.hk/scholarships" target="_blank"><img src='/file/banner/4936/HKDSE Scholarship Banner v3 CW 20210715_1.jpg?w=948&amp;h=292&amp;crop=1' alt='HKU Faculty of Arts Entrance Scholarship for HKDSE Students' title="HKU Faculty of Arts Entrance Scholarship for HKDSE Students" /></a>
+                    <div class="caption">
+                        <h2 class="caption-title">HKU Faculty of Arts Entrance Scholarship for HKDSE Students</h2>
+                                            </div>
+                </div>
+                            <div class="slide">
+                                        <a href="/giving" target="_self"><img src='/file/banner/4317/Landing Page Banner2.jpg?w=948&amp;h=292&amp;crop=1' alt='Support Arts!      Be our partner and let&#039;s create the future together!' title="Support Arts!      Be our partner and let&#039;s create the future together!" /></a>
+                    <div class="caption">
+                        <h2 class="caption-title">Support Arts!      Be our partner and let's create the future together!</h2>
+                                            </div>
+                </div>
+                            <div class="slide">
+                                        <a href="http://arts.hku.hk/research/sofhku" target="_blank"><img src='/file/banner/3858/SOF 2020-23 Web banner.jpg?w=948&amp;h=292&amp;crop=1' alt='Society of Fellows in the Humanities 2020-2023' title="Society of Fellows in the Humanities 2020-2023" /></a>
+                    <div class="caption">
+                        <h2 class="caption-title">Society of Fellows in the Humanities 2020-2023</h2>
+                                            </div>
+                </div>
+                    </div>
+        <a href="/#" class="prev"><img src="/assets/img/slide/arrow-prev.png" alt="Arrow Prev"></a>
+        <a href="/#" class="next"><img src="/assets/img/slide/arrow-next.png" alt="Arrow Next"></a>
+        
+    </div>
+        <div id="content">
+        <div class="content-container ">
+            
+                        
+            <!--<div class="content-container">-->
+    <!--landing content-->
+    <div class="three-col">
+        <div class="col-one">
+                                                <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>News</h2>
+                            <ul class="news">
+                                                                    <li><a href="/news/---hkuarts-collaborates-with-hkmoa-and-conservation-office-of-the-lcsd-to-launch-douglas-so-post-doctoral-fellowship-in-art-conservation-attracting-global-talent-for-scientific-analysis-of-chinese-paintings-research-fellowship-project">港大文學院攜手香港藝術館及康文署文物修復辦事處啟動「蘇彰德藝術文物修護博士後研究員計劃」
+
+招攬全球人才開展「中國書畫科學分析」研究項目
+
+HKUArts Collaborates with HKMoA and Conservation Office of the LCSD to Launch “Douglas So Post-doctoral Fellowship in Art Conservation”
+
+Attracting Global Talent for “Scientific Analysis of Chinese Paintings” Research Fellowship Project
+</a><br /><span class="date">22 November 2025</span></li>
+                                                                    <li><a href="/news/-ithc-inaugural-ceremony-and-international-symposium-mark-new-chapter-for-transnational-history-at-hku">中國跨國史研究院成立典禮暨國際研討會標誌港大跨國史研究新篇章
+ITHC Inaugural Ceremony and International Symposium Mark New Chapter for Transnational History at HKU</a><br /><span class="date">30 September 2025</span></li>
+                                                                    <li><a href="/news/mepop-hku-faculty-of-arts-to-launch-pioneering-music-entrepreneurship--popular-practice-initiative">香港大學文學院啟動跨領域「音樂產業創新與流行實踐」MEPoP計劃
+HKU Faculty of Arts to launch pioneering Music Entrepreneurship & Popular Practice Initiative</a><br /><span class="date">1 September 2025</span></li>
+                                                            </ul>
+                            <span class="more"><a href="/news">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                
+                                    <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Events</h2>
+                            <ul class="events">
+                                                                                                    <li>
+                                                                        <div class="left-img"><a href="/file/events/6162/2025-11-16-event.jpg" ><img src='/file/events/6162/2025-11-16-event.jpg?w=150&amp;h=101&amp;crop=1' alt='The 13th MaMa Charitable Foundation Lecture Series in Buddhist Studies: The Interrelationship Between the Texts, Images, and Rituals in Mongolian Buddhism' title="The 13th MaMa Charitable Foundation Lecture Series in Buddhist Studies: The Interrelationship Between the Texts, Images, and Rituals in Mongolian Buddhism" /></a></div>
+                                                                        <div class="details">
+                                        <a href="/file/events/6162/2025-11-16-event.jpg" >The 13th MaMa Charitable Foundation Lecture Series in Buddhist Studies: The Interrelationship Between the Texts, Images, and Rituals in Mongolian Buddhism</a>
+                                        <span>16 November 2025                                            <br />Lecture 1 - Nov 16, 2025 (Sun) | 3:00-5:00 pm                                        </span>
+                                        </div>
+                                    </li>
+                                                                                                    <li>
+                                                                        <div class="details">
+                                        <a href="https://english.hku.hk/event/559/11-Nov-2025" target="_blank">From "vp=start Crow" to Upstart Crow: Shakespeare as Comical Character from 16th to 21st Century Biofiction</a>
+                                        <span>11 November 2025                                            <br />4:00 pm - 5:30 pm                                        </span>
+                                        </div>
+                                    </li>
+                                                                                                    <li>
+                                                                        <div class="details">
+                                        <a href="https://english.hku.hk/event/558/06-Nov-2025" target="_blank">The Curious Incident of the Monster in the Nighttime: Circumstantial Evidence in Early English Legal Culture</a>
+                                        <span>6 November 2025                                            <br />4:00 pm - 5:30 pm                                        </span>
+                                        </div>
+                                    </li>
+                                                            </ul>
+                            <span class="more"><a href="/events">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                                    </div>
+
+                    <div class="col-two">
+                                                        <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Learn more about UG Admissions to Arts</h2>
+                            <ul class="highlights">
+                                <li>
+                                    <div class="mid-img">
+                                        <a href="https://www.ug.arts.hku.hk/" target="_blank">
+                                                                                            <img src="/file/blog/1548/HKUARTS_Logo2 Kit fm UG Adm website 20250609.png?w=160&amp;h=0&amp;proportional=1" alt="Learn more about UG Admissions to Arts" />
+                                                                                    </a>
+                                    </div>
+                                    <div class="details">
+                                    <a href="https://www.ug.arts.hku.hk/" target="_blank">Learn more about 
+UG Admissions to Arts</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span class="more"><a href="https://www.ug.arts.hku.hk/" target="_blank">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                                                        <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Arts Faculty Launches Tech Lab</h2>
+                            <ul class="highlights">
+                                <li>
+                                    <div class="mid-img">
+                                        <a href="https://bulletin.hku.hk/teaching_learning/arts-faculty-launches-tech-lab/" target="_blank">
+                                                                                            <img src="/file/blog/1548/ARTS ATLAB_Logo 2023_Standard Version_Full color_White BG png.png?w=160&amp;h=0&amp;proportional=1" alt="Arts Faculty Launches Tech Lab" />
+                                                                                    </a>
+                                    </div>
+                                    <div class="details">
+                                    <a href="https://bulletin.hku.hk/teaching_learning/arts-faculty-launches-tech-lab/" target="_blank">The potential of AI in arts and the humanities is in its early days, but the Faculty of Arts is at the frontline with the launch of its new Arts Tech Lab to support teaching on digital humanities and entrepreneurship and to promote AI in research...</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span class="more"><a href="https://bulletin.hku.hk/teaching_learning/arts-faculty-launches-tech-lab/" target="_blank">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                                                        <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>The Convivium of the Faculty of Arts</h2>
+                            <ul class="highlights">
+                                <li>
+                                    <div class="mid-img">
+                                        <a href="https://convivium.arts.hku.hk/" target="_blank">
+                                                                                            <img src="/file/blog/1548/Faculty of Arts_Convivium_logo 2023_trans FINAL 0904.png?w=160&amp;h=0&amp;proportional=1" alt="" />
+                                                                                    </a>
+                                    </div>
+                                    <div class="details">
+                                    <a href="https://convivium.arts.hku.hk/" target="_blank">The Convivium provides a place for professoriate researchers, postdoctoral fellows and postgraduate students to meet, and a context in which to discuss a variety of matters: from publishing strategies to teaching innovations to career networking and much more. </a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span class="more"><a href="https://convivium.arts.hku.hk/" target="_blank">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                                                        <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Giving to Arts</h2>
+                            <ul class="highlights">
+                                <li>
+                                    <div class="mid-img">
+                                        <a href="/giving" target="_self">
+                                                                                            <img src="/file/blog/1548/pageblock.jpg?w=160&amp;h=0&amp;proportional=1" alt="Giving to Arts" />
+                                                                                    </a>
+                                    </div>
+                                    <div class="details">
+                                    <a href="/giving" target="_self">Throughout the century, the establishment and development of the Faculty of Arts have been greatly supported by our philanthropic donors.  To preserve the remarkable legacy of the Faculty, your gifts enable us to continue our mission to make a difference in the futures of our students...</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span class="more"><a href="/giving" target="_self">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                                                        <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Faculty Global Exploration Fund (UG) (FGEF)</h2>
+                            <ul class="highlights">
+                                <li>
+                                    <div class="mid-img">
+                                        <a href="https://arts.hku.hk/current-students/student-global-experience/support/faculty-global-exploration-fund--ug---fgef-" target="_blank">
+                                                                                            <img src="/file/blog/1548/fine arts.jpg?w=160&amp;h=0&amp;proportional=1" alt="FSMF" />
+                                                                                    </a>
+                                    </div>
+                                    <div class="details">
+                                    <a href="https://arts.hku.hk/current-students/student-global-experience/support/faculty-global-exploration-fund--ug---fgef-" target="_blank">Faculty Global Exploration Fund (UG) (FGEF) is available to Arts students (BA, BA&amp;BEd and BA&amp;LLB) in need, who plan to participate in and have demonstrated commitment to the proposed mainland China and international learning experience starting from the academic year 2017-18.</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span class="more"><a href="https://arts.hku.hk/current-students/student-global-experience/support/faculty-global-exploration-fund--ug---fgef-" target="_blank">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                                                        <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Student Academic Advisers</h2>
+                            <ul class="highlights">
+                                <li>
+                                    <div class="mid-img">
+                                        <a href="http://arts.hku.hk/teaching-and-learning/academic-advising/SAA" target="_blank">
+                                                                                            <img src="/file/blog/1548/Dialogue.JPG?w=160&amp;h=0&amp;proportional=1" alt="Student Academic Advisers" />
+                                                                                    </a>
+                                    </div>
+                                    <div class="details">
+                                    <a href="http://arts.hku.hk/teaching-and-learning/academic-advising/SAA" target="_blank">In addition to seek academic advice from teachers/tutors and the relevant course-offering teaching units during a semester, students can also approach Student Academic Advisers for academic advice throughout an academic year. Please click here to see how Student Academic Advisers can help their fellow students plan for a fruitful degree studies. </a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span class="more"><a href="http://arts.hku.hk/teaching-and-learning/academic-advising/SAA" target="_blank">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                                                        <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Ground Floor Gallery</h2>
+                            <ul class="highlights">
+                                <li>
+                                    <div class="mid-img">
+                                        <a href="http://arts.hku.hk/knowledge-exchange/run-run-shaw-g-f-gallery" target="_blank">
+                                                                                            <img src="/file/blog/1548/0 2N6A8284.jpg?w=160&amp;h=0&amp;proportional=1" alt="Ground Floor Gallery" />
+                                                                                    </a>
+                                    </div>
+                                    <div class="details">
+                                    <a href="http://arts.hku.hk/knowledge-exchange/run-run-shaw-g-f-gallery" target="_blank">The Ground Floor Gallery, Run Run Shaw Tower, hosts exhibitions of works by staff, students and alumni of the Faculty.</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span class="more"><a href="http://arts.hku.hk/knowledge-exchange/run-run-shaw-g-f-gallery" target="_blank">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                                                        <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Photo Gallery</h2>
+                            <ul class="highlights">
+                                <li>
+                                    <div class="mid-img">
+                                        <a href="http://arts.hku.hk/about-us/photo-gallery" target="_blank">
+                                                                                            <img src="/file/blog/1548/20171202-HKU-Art-2-460.jpg?w=160&amp;h=0&amp;proportional=1" alt="Photo Gallery" />
+                                                                                    </a>
+                                    </div>
+                                    <div class="details">
+                                    <a href="http://arts.hku.hk/about-us/photo-gallery" target="_blank">View our event photos.</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span class="more"><a href="http://arts.hku.hk/about-us/photo-gallery" target="_blank">MORE</a></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="inner-box-bottom"></div>
+                    </div>
+                            </div>
+        
+        <div class="col-three">
+                            <div class="inner-box color">
+                    <div class="inner-box-middle">
+                        <ul>
+                                                                                            <li><a href="https://web.chinese.hku.hk/" target="_blank">School of Chinese</a></li>
+                                                                                            <li><a href="https://english.hku.hk/" target="_blank">School of English</a></li>
+                                                                                            <li><a href="https://arts.hku.hk/page/detail/514" target="_blank">School of Humanities</a></li>
+                                                                                            <li><a href="https://www.web.smlc.hku.hk/" target="_blank">School of Modern Languages & Cultures</a></li>
+                                                                                            <li><a href="https://caes.hku.hk/" target="_blank">Centre for Applied English Studies</a></li>
+                                                                                            <li><a href="https://www.buddhism.hku.hk/" target="_blank">Centre of Buddhist Studies</a></li>
+                                                                                            <li><a href="https://chm.hku.hk/" target="_blank">Centre for the Humanities and Medicine</a></li>
+                                                                                            <li><a href="https://arts.hku.hk/research/sofhku" target="_blank">Society of Fellows in the Humanities</a></li>
+                                                    </ul>
+                    </div>
+                </div>
+                        <div class="inner-box">
+                <div class="inner-box-middle social-plugin">
+                    <div class="fb-like-box" data-href="http://www.facebook.com/ArtsHKU" data-width="238" data-height="280" data-show-faces="false" data-stream="true" data-header="true"></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+                                                                    <div class="inner-box">
+                        <div class="inner-box-top"></div>
+                        <div class="inner-box-middle">
+                            <h2>Home for the Faculty of Arts </h2>
+                            <div class="right-img">
+                                                                    <a href="https://arts.hku.hk/about-us/our-building" target="_blank">
+                                                                                                            <img src="/file/blog/1548/Capture.JPG?w=208&amp;h=148&amp;crop=1" alt="New Home for the Faculty of Arts " />
+                                                                                                        </a>
+                                                            </div>
+                            <p class="">
+                                                                    <a href="https://arts.hku.hk/about-us/our-building" target="_blank">
+                                                                Room 405, Run Run Shaw Tower
+HKU, Pokfulam, Hong Kong
+Telephone: (852) 3917 8977                                                                     </a>
+                                                            </p>
+                            <div class="clear"></div>
+                      </div>
+                      <div class="inner-box-bottom"></div>
+                    </div>
+                            
+        </div>
+
+    </div>
+    <!--inner content end-->
+    <div class="clear"></div>
+    <p class="top-container display-block text-align-right"><a href="/prospective-students/undergraduate#" class="button top-btn">TOP</a></p>
+<!--</div>-->
+
+                        <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+    <div class="footer-container">
+        <div class="left"> <span class="copy">Copyright 2025 Faculty of Arts, The University of Hong Kong. All Rights Reserved.</span></div>
+        <div class="clear"><!--empty--></div>
+    </div>
+</div>
+
+
+
+        <script  type="text/javascript"  src="/assets/js/projectbase.js"  ></script> 
+        
+    </body>
+</html>

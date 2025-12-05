@@ -1,0 +1,10 @@
+Server: nginx/1.28.0
+Date: Fri, 05 Dec 2025 06:06:42 GMT
+Content-Type: text/html; charset=utf-8
+X-Powered-By: PHP/8.3.27
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: PHPSESSID=pgsh8lo61aobbuhohtu9tcbq7g; path=/
+Set-Cookie: ci_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22e56a85ab588cb231a8a8238f9be8e62e%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%2235.212.143.180%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A60%3A%22Mozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1764914802%3B%7D3a577a4ec5897b1a109b90ffac7e37df; expires=Fri, 05 Dec 2025 08:06:42 GMT; Max-Age=7200; path=/; secure
+Strict-Transport-Security: max-age=86400; includeSubDomains: always

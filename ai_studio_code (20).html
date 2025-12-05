@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN" x-data="app()" @scroll.window="handleScroll" @resize.window="handleResize" x-cloak>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKSD Club | 汇生会</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+SC:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        serif: ['"Playfair Display"', '"Noto Serif SC"', 'serif'],
+                    },
+                    colors: {
+                        paper: { 50: '#F9F8F4', 100: '#F2F0E9', 200: '#E6E2D6' },
+                        heritage: { 800: '#1A332A', 900: '#0F221C' },
+                        gold: { 400: '#C6A87C', 500: '#B08D55', 600: '#8E6F3E' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        body { background-color: #F9F8F4; color: #1A332A; }
+        .separator-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C6A87C, transparent);
+            margin: 2rem 0;
+        }
+        /* 优化性能 */
+        .will-change-transform { will-change: transform, opacity; }
+    </style>
+</head>
+<body class="antialiased selection:bg-heritage-900 selection:text-gold-400 overflow-x-hidden">
+
+    <!-- 1. 导航 -->
+    <nav class="fixed w-full z-50 transition-all duration-300"
+         :style="`
+            background-color: rgba(249, 248, 244, ${Math.min(scrollY / 100, 0.95)});
+            backdrop-filter: blur(${Math.min(scrollY / 20, 10)}px);
+            padding-top: ${Math.max(20 - scrollY/10, 0)}px;
+            padding-bottom: ${Math.max(20 - scrollY/10, 0)}px;
+            border-bottom: 1px solid rgba(26, 51, 42, ${Math.min(scrollY / 200, 0.1)});
+         `">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <div class="w-10 h-10 border-2 border-heritage-900 rounded-full flex items-center justify-center text-heritage-900 font-serif font-bold text-lg">H</div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-serif font-bold text-heritage-900 tracking-tight leading-none">HKSD</span>
+                    <span class="text-[9px] text-gold-600 font-bold uppercase tracking-[0.2em] mt-1">Since 2016</span>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-10 text-sm font-bold tracking-wide text-heritage-800/70 uppercase">
+                <a href="#academia" class="hover:text-heritage-900 hover:text-gold-600 transition-all" x-text="t[lang].menu_aca"></a>
+                <a href="#career" class="hover:text-heritage-900 hover:text-gold-600 transition-all" x-text="t[lang].menu_car"></a>
+                <a href="#hostel" class="hover:text-heritage-900 hover:text-gold-600 transition-all" x-text="t[lang].menu_hos"></a>
+            </div>
+            <div class="flex items-center text-sm font-serif italic text-heritage-900 gap-4 cursor-pointer select-none">
+                <span @click="lang = 'sc'" :class="{'font-bold text-gold-600 border-b border-gold-600': lang==='sc', 'opacity-50 hover:opacity-100': lang!=='sc'}">简</span>
+                <span class="opacity-30">/</span>
+                <span @click="lang = 'tc'" :class="{'font-bold text-gold-600 border-b border-gold-600': lang==='tc', 'opacity-50 hover:opacity-100': lang!=='tc'}">繁</span>
+                <span class="opacity-30">/</span>
+                <span @click="lang = 'en'" :class="{'font-bold text-gold-600 border-b border-gold-600': lang==='en', 'opacity-50 hover:opacity-100': lang!=='en'}">En</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Section -->
+    <header class="pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-screen flex flex-col lg:flex-row items-center gap-16 relative perspective-1000">
+        <!-- 装饰底纹 -->
+        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-gold-400/10 rounded-full blur-[100px] -z-10 will-change-transform"
+             :style="`transform: translateY(${scrollY * 0.2}px)`"></div>
+
+        <div class="flex flex-col lg:flex-row items-end gap-16 w-full">
+            <!-- Left Text: 滚动时淡出 -->
+            <div class="lg:w-7/12 relative z-10 will-change-transform"
+                 :style="`opacity: ${1 - p(0, 0.8)}; transform: translateY(${scrollY * 0.3}px) scale(${1 - p(0, 1) * 0.1});`">
+                
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="h-[1px] w-12 bg-heritage-900"></div>
+                    <span class="font-serif italic text-heritage-800 text-lg font-bold" x-text="t[lang].hero_tag"></span>
+                </div>
+                
+                <h1 class="text-5xl lg:text-7xl font-serif font-bold text-heritage-900 leading-[1.1] mb-8">
+                    <span x-text="t[lang].hero_h1"></span><br>
+                    <span class="text-gold-600 italic font-light" x-text="t[lang].hero_h2"></span>
+                </h1>
+                
+                <p class="text-xl text-heritage-800/80 max-w-2xl leading-relaxed font-light mb-12 border-l-4 border-gold-400 pl-6" x-text="t[lang].hero_p"></p>
+                
+                <div class="flex gap-6">
+                    <button class="bg-heritage-900 text-paper-50 px-10 py-4 font-serif font-bold tracking-wide shadow-xl transform transition hover:scale-105">
+                        <span x-text="t[lang].btn_join"></span>
+                    </button>
+                    <button class="px-10 py-4 border border-heritage-900 text-heritage-900 font-serif font-bold tracking-wide transform transition hover:bg-heritage-900 hover:text-paper-50">
+                        <span x-text="t[lang].btn_explore"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Big Number: 几乎不动，保留微小视差 -->
+            <div class="lg:w-5/12 w-full bg-heritage-900 text-paper-50 p-10 lg:p-16 relative shadow-2xl z-20 overflow-hidden">
+                <div class="absolute top-4 left-4 right-4 bottom-4 border border-gold-500/30 will-change-transform"
+                     :style="`transform: translateY(${scrollY * 0.05}px)`"></div>
+                
+                <div class="relative z-10 text-center lg:text-left will-change-transform"
+                     :style="`transform: translateY(${scrollY * 0.08}px)`">
+                    <div class="text-gold-400 font-bold uppercase tracking-widest text-xs mb-2">Community Scale</div>
+                    <div class="text-7xl lg:text-8xl font-serif font-bold mb-2">90k<span class="text-gold-400">+</span></div>
+                    <div class="text-xl font-serif italic opacity-80" x-text="t[lang].hero_stat"></div>
+                    <div class="mt-8 h-[1px] w-full bg-white/20"></div>
+                    <div class="mt-6 flex justify-between text-sm opacity-60 font-sans">
+                        <span>#PhD</span><span>#Masters</span><span>#Undergrad</span><span>#Alumni</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. Intro Section -->
+    <section class="py-24 bg-paper-100 border-y border-heritage-900/5 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16 relative z-10">
+            <!-- Left Text -->
+            <div class="md:w-1/2 text-center md:text-left will-change-transform"
+                 :style="`opacity: ${p(0.2, 0.8)}; transform: translateY(${50 - 50 * p(0.2, 0.8)}px);`">
+                <i data-lucide="feather" class="w-8 h-8 text-gold-600 mb-6 mx-auto md:mx-0"></i>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-heritage-900 mb-6 leading-snug" x-text="t[lang].intro_title"></h2>
+                <div class="separator-line w-24 mx-auto md:mx-0" :style="`width: ${p(0.3, 0.9) * 6}rem`"></div>
+                <p class="text-lg text-heritage-800/70 leading-loose font-serif italic" x-text="t[lang].intro_text"></p>
+            </div>
+
+            <!-- Right Image -->
+            <div class="md:w-1/2 relative perspective-1000">
+                <div class="relative w-full h-[400px] will-change-transform"
+                     :style="`
+                        opacity: ${p(0.3, 0.9)};
+                        transform: translateY(${100 - 100 * p(0.3, 0.9)}px) rotateY(${-10 + 10 * p(0.3, 0.9)}deg) scale(${0.8 + 0.2 * p(0.3, 0.9)});
+                     `">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                         class="w-full h-full object-cover rounded-2xl shadow-2xl border-4 border-paper-50" 
+                         alt="Discussion">
+                    <!-- 遮罩层，随滚动消失 -->
+                    <div class="absolute inset-0 bg-paper-100 mix-blend-color" :style="`opacity: ${1 - p(0.4, 0.9)}`"></div>
+                </div>
+
+                <div class="absolute -bottom-6 -left-6 z-30 bg-heritage-900 text-gold-400 px-6 py-4 rounded-lg shadow-xl will-change-transform"
+                     :style="`opacity: ${p(0.6, 1.0)}; transform: scale(${p(0.6, 1.0)}) translateY(${20 - 20 * p(0.6, 1.0)}px);`">
+                    <span class="font-serif italic font-bold text-lg">" Your Home Away From Home "</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Services -->
+    <section class="py-24 max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 will-change-transform"
+             :style="`opacity: ${p(0.8, 1.2)}; transform: translateX(${-50 + 50 * p(0.8, 1.2)}px)`">
+            <div>
+                <span class="text-gold-600 font-bold uppercase tracking-widest text-xs block mb-2">Our Pillars</span>
+                <h2 class="text-4xl font-serif font-bold text-heritage-900" x-text="t[lang].service_title"></h2>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-0 border border-heritage-900/10">
+            <!-- Service 1 -->
+            <div class="group relative bg-paper-50 p-12 border-b lg:border-b-0 lg:border-r border-heritage-900/10 hover:bg-white transition-colors duration-500 will-change-transform"
+                 :style="`opacity: ${p(0.9, 1.3)}; transform: translateY(${100 - 100 * p(0.9, 1.3)}px)`">
+                <div class="text-6xl text-heritage-900/5 font-serif font-bold absolute top-8 right-8">01</div>
+                <h3 class="text-2xl font-serif font-bold text-heritage-900 mb-6 flex items-center gap-3"><span x-text="t[lang].aca_title"></span></h3>
+                <p class="text-heritage-800/70 leading-relaxed mb-8" x-text="t[lang].aca_desc"></p>
+                <ul class="space-y-3 font-serif text-heritage-900 border-t border-heritage-900/10 pt-6">
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold-500 rounded-full"></span><span x-text="t[lang].aca_tag1"></span></li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-gold-500 rounded-full"></span><span x-text="t[lang].aca_tag2"></span></li>
+                </ul>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="group relative bg-paper-50 p-12 border-b lg:border-b-0 lg:border-r border-heritage-900/10 hover:bg-white transition-colors duration-500 will-change-transform"
+                 :style="`opacity: ${p(1.0, 1.4)}; transform: translateY(${100 - 100 * p(1.0, 1.4)}px)`">
+                <div class="text-6xl text-heritage-900/5 font-serif font-bold absolute top-8 right-8">02</div>
+                <h3 class="text-2xl font-serif font-bold text-heritage-900 mb-6 flex items-center gap-3"><span x-text="t[lang].car_title"></span></h3>
+                <p class="text-heritage-800/70 leading-relaxed mb-8" x-text="t[lang].car_desc"></p>
+                <div class="pt-6 border-t border-heritage-900/10">
+                     <p class="font-serif italic text-gold-600 mb-2">Network:</p>
+                     <p class="text-sm font-bold text-heritage-900 tracking-wide">TENCENT / GOLDMAN / MCKINSEY</p>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="group relative bg-paper-50 p-12 hover:bg-white transition-colors duration-500 will-change-transform"
+                 :style="`opacity: ${p(1.1, 1.5)}; transform: translateY(${100 - 100 * p(1.1, 1.5)}px)`">
+                <div class="text-6xl text-heritage-900/5 font-serif font-bold absolute top-8 right-8">03</div>
+                <h3 class="text-2xl font-serif font-bold text-heritage-900 mb-6 flex items-center gap-3"><span x-text="t[lang].hos_title"></span></h3>
+                <p class="text-heritage-800/70 leading-relaxed mb-8" x-text="t[lang].hos_desc"></p>
+                <div class="pt-6 border-t border-heritage-900/10 flex gap-4">
+                    <span class="border border-heritage-900/20 px-3 py-1 text-xs uppercase tracking-widest text-heritage-900">Safety</span>
+                    <span class="border border-heritage-900/20 px-3 py-1 text-xs uppercase tracking-widest text-heritage-900">Community</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Testimonials (调整了触发时机，确保底部可见) -->
+    <section class="py-24 bg-heritage-900 text-paper-100 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 will-change-transform" 
+             style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"
+             :style="`transform: translateY(${scrollY * 0.1}px)`"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 will-change-transform"
+                 :style="`opacity: ${p(1.3, 1.6)}; transform: scale(${0.9 + 0.1 * p(1.3, 1.6)})`">
+                <h2 class="text-4xl lg:text-5xl font-serif font-bold text-gold-400 mb-4" x-text="t[lang].testi_title"></h2>
+                <p class="text-heritage-200/60 max-w-2xl mx-auto font-serif italic">Every story adds to our history.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12">
+                <template x-for="(item, index) in t[lang].testimonials" :key="index">
+                    <!-- 减小了触发高度范围，确保早点显示 -->
+                    <div class="relative will-change-transform" 
+                         :style="`
+                            opacity: ${p(1.3 + index*0.1, 1.6 + index*0.1)}; 
+                            transform: translateY(${30 - 30 * p(1.3 + index*0.1, 1.6 + index*0.1)}px);
+                         `">
+                        <div class="text-6xl font-serif text-gold-600/20 absolute -top-8 -left-4">“</div>
+                        <p class="text-lg leading-relaxed font-serif text-paper-200 mb-8 indent-6" x-text="item.content"></p>
+                        <div class="flex items-center gap-4 border-t border-white/10 pt-6">
+                            <img :src="item.avatar" class="w-14 h-14 object-cover grayscale brightness-110 contrast-125 border border-gold-500/50" alt="Alumni">
+                            <div>
+                                <div class="font-bold text-gold-400 tracking-wide" x-text="item.name"></div>
+                                <div class="text-xs text-white/50 uppercase tracking-widest mt-1" x-text="item.role"></div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (触底判定优化) -->
+    <footer class="bg-paper-50 pt-24 pb-12 will-change-transform"
+            :style="`opacity: ${p(1.6, 1.9)}; transform: translateY(${30 - 30 * p(1.6, 1.9)}px)`">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="text-3xl font-serif font-bold text-heritage-900 mb-6">HKSD Club.</div>
+                    <p class="text-heritage-800/60 max-w-sm leading-relaxed mb-6">An exclusive community dedicated to the success of international scholars.</p>
+                    <div class="flex gap-4 opacity-50">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </div>
+                </div>
+                <div><h4 class="text-sm font-bold uppercase tracking-widest text-heritage-900 mb-6">Club</h4><ul class="space-y-4 text-heritage-800/60 font-serif text-sm"><li>Membership</li><li>Events</li><li>Our Story</li></ul></div>
+                <div><h4 class="text-sm font-bold uppercase tracking-widest text-heritage-900 mb-6">Legal</h4><ul class="space-y-4 text-heritage-800/60 font-serif text-sm"><li>Privacy</li><li>Terms</li><li>Contact</li></ul></div>
+            </div>
+            <div class="border-t border-heritage-900/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-heritage-900/40 uppercase tracking-widest">
+                <div>© 2016-2025 HKSD Club. All Rights Reserved.</div>
+                <div>Design with Gravitas.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('alpine:initialized', () => {
+             lucide.createIcons();
+             setTimeout(() => lucide.createIcons(), 100); 
+        });
+
+        function app() {
+            return {
+                lang: 'sc',
+                scrollY: 0,
+                windowHeight: window.innerHeight,
+                documentHeight: 0,
+                
+                handleScroll() {
+                    this.scrollY = window.pageYOffset;
+                },
+                
+                handleResize() {
+                    this.windowHeight = window.innerHeight;
+                    this.documentHeight = document.documentElement.scrollHeight;
+                },
+
+                // 核心计算函数 (带触底强制完成逻辑)
+                p(startVh, endVh) {
+                    // 1. 触底检测：如果滚动到了底部附近 (偏差50px)，强制返回 1
+                    // 这样保证底部元素一定能显示出来，不管屏幕多高
+                    const isAtBottom = (this.scrollY + this.windowHeight) >= (document.documentElement.scrollHeight - 50);
+                    if (isAtBottom) return 1;
+
+                    // 2. 正常计算进度
+                    const start = startVh * this.windowHeight;
+                    const end = endVh * this.windowHeight;
+                    const progress = (this.scrollY - start) / (end - start);
+                    return Math.min(Math.max(progress, 0), 1);
+                },
+
+                t: {
+                    sc: {
+                        menu_aca: '学术规划', menu_car: '名企生涯', menu_hos: '生活社区',
+                        hero_tag: '源自香港，更懂香港',
+                        hero_h1: '汇生会', 
+                        hero_h2: '你海外温暖的家',
+                        hero_p: '留学生涯的坚实后盾。我们是您的生活管家与职业导师。从入学到入职，HKSD Club 全程陪伴。',
+                        hero_stat: '全球认证校友',
+                        btn_join: '申请入会', btn_explore: '探索服务',
+                        
+                        intro_title: '所谓底蕴，是时间的答案',
+                        intro_text: '自2016年起，HKSD深耕留学领域。我们见证了数万名学子从迷茫到坚定，从校园走向世界的每一个高光时刻。这份厚重的经验，是我们最宝贵的资产。',
+
+                        service_title: '三大核心支柱',
+                        aca_title: 'Academia 学院派', aca_desc: '以严谨的学术态度对待每一次申请。深度挖掘个人特质，匹配最契合的名校资源。不做流水线，只做传世品。', aca_tag1: '名校导师团队', aca_tag2: '深度学术辅导',
+                        car_title: 'Career 领航者', car_desc: '依托庞大的校友网络，打通名企内部通道。这不是简单的求职中介，而是学长学姐的薪火相传。',
+                        hos_title: 'Hostel 归属地', hos_desc: '在繁华都市中为您保留一处静谧之所。严格筛选的高素质邻里社区，让每一次归家都充满安全感与归属感。',
+                        
+                        testi_title: '校友传承',
+                        testimonials: [
+                            {
+                                name: 'Alex Zhang',
+                                role: 'Class of 2018 | HKU',
+                                avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: 'HKSD给我的感觉不同于市面上的任何机构。这里有一种“家族”般的凝聚力。即使毕业多年，我依然能从这个社区获得支持。'
+                            },
+                            {
+                                name: 'Chloe Lin',
+                                role: 'Class of 2020 | CUHK',
+                                avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: '当年申请时的每一份文书都经过了反复打磨，那种对完美的执着让我深受感动。如今我也成为了导师，希望能将这份专业传承下去。'
+                            },
+                            {
+                                name: 'Dr. Wang',
+                                role: 'Class of 2017 | PolyU',
+                                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: '在HKSD公寓度过的时光是我博士生涯中最温暖的回忆。这里聚集了真正优秀的灵魂，我们在深夜的讨论中碰撞出了无数思想火花。'
+                            }
+                        ]
+                    },
+                    tc: {
+                        menu_aca: '學術規劃', menu_car: '名企生涯', menu_hos: '生活社區',
+                        hero_tag: '源自香港，更懂香港',
+                        hero_h1: '匯生會', 
+                        hero_h2: '你海外溫暖的家',
+                        hero_p: '留學生涯的堅實後盾。我們是您的生活管家與職業導師。從入學到入職，HKSD Club 全程陪伴。',
+                        hero_stat: '全球認證校友',
+                        btn_join: '申請入會', btn_explore: '探索服務',
+                        
+                        intro_title: '所謂底蘊，是時間的答案',
+                        intro_text: '自2016年起，HKSD深耕留學領域。我們見證了數萬名學子從迷茫到堅定，從校園走向世界的每一個高光時刻。這份厚重的經驗，是我們最寶貴的資產。',
+
+                        service_title: '三大核心支柱',
+                        aca_title: 'Academia 學院派', aca_desc: '以嚴謹的學術態度對待每一次申請。深度挖掘個人特質，匹配最契合的名校資源。不做流水線，只做傳世品。', aca_tag1: '名校導師團隊', aca_tag2: '深度學術輔導',
+                        car_title: 'Career 領航者', car_desc: '依託龐大的校友網絡，打通名企內部通道。這不是簡單的求職仲介，而是學長學姐的薪火相傳。',
+                        hos_title: 'Hostel 歸屬地', hos_desc: '在繁華都市中為您保留一處靜謐之所。嚴格篩選的高素質鄰里社區，讓每一次歸家都充滿安全感與歸屬感。',
+                        
+                        testi_title: '校友傳承',
+                        testimonials: [
+                            {
+                                name: 'Alex Zhang',
+                                role: 'Class of 2018 | HKU',
+                                avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: 'HKSD給我的感覺不同於市面上的任何機構。這裡有一種「家族」般的凝聚力。即使畢業多年，我依然能從這個社區獲得支持。'
+                            },
+                            {
+                                name: 'Chloe Lin',
+                                role: 'Class of 2020 | CUHK',
+                                avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: '當年申請時的每一份文書都經過了反覆打磨，那種對完美的執著讓我深受感動。如今我也成為了導師，希望能將這份專業傳承下去。'
+                            },
+                            {
+                                name: 'Dr. Wang',
+                                role: 'Class of 2017 | PolyU',
+                                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: '在HKSD公寓度過的時光是我博士生涯中最溫暖的回憶。這裡聚集了真正優秀的靈魂，我們在深夜的討論中碰撞出了無數思想火花。'
+                            }
+                        ]
+                    },
+                    en: {
+                        menu_aca: 'Academia', menu_car: 'Career Legacy', menu_hos: 'Residences',
+                        hero_tag: 'From HK, For HK',
+                        hero_h1: 'HKSD Club', 
+                        hero_h2: 'Your Warm Home Abroad',
+                        hero_p: 'The solid backing for your journey abroad. We are your life manager and career mentor. From admission to employment, HKSD Club is with you all the way.',
+                        hero_stat: 'Verified Alumni',
+                        btn_join: 'Apply for Membership', btn_explore: 'Explore Pillars',
+                        
+                        intro_title: 'Heritage is the Answer of Time',
+                        intro_text: 'Since 2016, HKSD has cultivated the field of international education. We have witnessed tens of thousands of scholars transform from students to global leaders. This depth of experience is our greatest asset.',
+
+                        service_title: 'The Three Pillars',
+                        aca_title: 'Academia', aca_desc: 'Approaching applications with academic rigor. We delve deep into personal character to match elite university resources. Not mass production, but craftsmanship.', aca_tag1: 'Elite Mentors', aca_tag2: 'Academic Guidance',
+                        car_title: 'Career', car_desc: 'Leveraging a massive alumni network to open internal doors at top firms. This is not recruitment; it is the passing of the torch.',
+                        hos_title: 'Sanctuary', hos_desc: 'Reserving a quiet place for you in the bustling metropolis. A strictly curated high-quality neighborhood that brings a sense of security and belonging.',
+                        
+                        testi_title: 'The Legacy',
+                        testimonials: [
+                            {
+                                name: 'Alex Zhang',
+                                role: 'Class of 2018 | HKU',
+                                avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: 'HKSD feels different from any agency. There is a family-like cohesion. Even years after graduation, I still draw support from this community.'
+                            },
+                            {
+                                name: 'Chloe Lin',
+                                role: 'Class of 2020 | CUHK',
+                                avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: 'Every essay was polished to perfection. That dedication moved me. Now as a mentor, I hope to pass on this professionalism.'
+                            },
+                            {
+                                name: 'Dr. Wang',
+                                role: 'Class of 2017 | PolyU',
+                                avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+                                content: 'My time at the HKSD residence was the warmest memory of my PhD. It gathered truly brilliant souls, and we sparked countless ideas.'
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

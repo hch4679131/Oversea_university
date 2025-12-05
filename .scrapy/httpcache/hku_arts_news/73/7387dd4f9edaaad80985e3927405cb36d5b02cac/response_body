@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <base href="https://arts.hku.hk/" />
+
+<title  >Faculty of Arts - HKU - Detail - News</title> 
+
+<link  media="all"  href="/assets/css/projectbase.css"  type="text/css"  rel="stylesheet"  />
+    <link type="text/css" rel="stylesheet" media="print" href="/assets/css/print.css" />
+    <script type="text/javascript"> var page_language = ''; </script>
+    <script type="text/javascript">
+        var base_url = '/';
+    </script>
+<!--[if lt IE 8]>
+    <script type="text/javascript" src="/assets/js/ie7.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/ie7.css" />
+<![endif]--><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-37742340-1']);
+_gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+_linkedin_partner_id = "399859";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(){var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})();
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=399859&fmt=gif" />
+</noscript>
+
+<!-- Global site tag (gtag.js) - Google Ads: 773097646 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-773097646"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-773097646');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0M3M4J7L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0G0M3M4J7L');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TDHMGQS');</script>
+<!-- End Google Tag Manager -->
+
+    </head>
+    <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDHMGQS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+        <div id="wrapper">
+    <div id="header">
+    <div class="header-container">
+
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/img/hku-logo.png" alt="The University of Hong Kong" />
+                <div class="name"><span class="faculty-name">Faculty of Arts</span></div>
+            </a>
+        </div>
+        <div class="shortlinks">
+            <div class="top">
+                <div class="home"><a href="https://www.hku.hk/">HKU Home</a></div>
+                <div class="home"><a href="https://hkuportal.hku.hk/">HKU Portal</a></div>
+                <div class="version">
+                    <a href="https://www.facebook.com/ArtsHKU" target="_blank" class="apps facebook" title="facebook"><div>&nbsp;</div></a><a href="https://twitter.com/hkuarts" target="_blank" class="apps twitter" title="twitter"><div>&nbsp;</div></a>
+                </div>
+                <div class="textsize">
+                    <a class="text_small">A</a>
+                    <a class="text_normal">A</a>
+                    <a class="text_large">A</a>
+                </div>
+                <div class="search">
+                    <form action="https://www.google.com/cse" id="form_site_search" target="_blank">
+                        <input class="for-google-search" type="hidden" name="cx" value="016966053557825602977:h14undbgnrw" />
+                        <input class="for-google-search" type="hidden" name="ie" value="UTF-8" />
+                        <label for="search-box" style="display:none;">Search Box</label>
+                        <input id="search-box" type="text" value="Search" name="q" class="searchField" onblur="if(this.value=='') this.value='Search';" onfocus="if(this.value==this.defaultValue) this.value='';" />
+                        <button id="search-button" type="submit" title="Search" name="sa" value="Search"></button>
+                    </form>
+                </div>
+                <!--<div class="search">
+                    <label for="search-box" style="display:none">search box</label>
+                    <input type="text" id="search-box" value="Search" onfocus="if(this.value==this.defaultValue) this.value='';" onblur="if (this.value == '') this.value = 'Search';"/>
+                    <button id="search-button" title="Search"></button>
+                </div>-->
+                <div class="clear"><!--empty--></div>
+            </div>
+            <div class="bottom">
+                <div class="info-for">
+                    <ul>
+					
+                        <li><a href="https://hkuhk.sharepoint.com/sites/ResourcesforStaff/" target="_blank">Resources for staff</a></li>
+						<!--<li><a href="site_url()">Home</a></li>-->
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/contact-us">Contact Us</a></li>
+                        <li class="last"><a href="/site-map">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"><!--empty--></div>
+
+        <div class="top-nav" >
+            <div class="nav">
+                <ul id="mega-menu-1" class="mega-menu myMenu">
+                    <li class="item first "><a href="/about-us">About Us</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="about-us/vision-and-mission" >Vision &amp; Mission</a></li>
+<li><a class="level_2"   href="about-us/faculty-office" >Faculty Office</a></li>
+<li><a class="level_2"   href="about-us/faculty-centenary" >Faculty Centenary</a></li>
+<li><a class="level_2"   href="about-us/our-building" >Our Building</a></li>
+<li><a class="level_2"   href="/about-us/photo-gallery" target="_self">Photo Gallery</a></li>
+<li><a class="level_2"   href="https://jobs.hku.hk/en/filter/?search-keyword=&amp;brand=faculty%20of%20arts" target="_blank">Employment</a></li>
+<li><a class="level_2"   href="about-us/contact-us" >Contact Us</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/prospective-students">Prospective Students</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="https://arts.hku.hk/ugadmissions" target="_blank">Undergraduate</a></li>
+<li><a class="level_2"   href="prospective-students/research-postgraduate" >Research Postgraduate </a></li>
+<li><a class="level_2"   href="prospective-students/taught-postgraduate" >Taught Postgraduate</a></li>
+<li><a class="level_2"   href="https://siah.arts.hku.hk/" target="_blank">Summer Institute in the Arts &amp; Humanities</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/current-students">Current Students</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="current-students/undergraduate" >Undergraduate</a></li>
+<li><a class="level_2"   href="current-students/postgraduate" >Postgraduate</a></li>
+<li><a class="level_2"   href="current-students/student-global-experience" >Student Experiential Learning</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/teaching-and-learning">Teaching &amp; Learning</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="teaching-and-learning/academic-advising" >Academic Advising </a></li>
+<li><a class="level_2"   href="teaching-and-learning/FTEA" >Faculty Teaching Excellence Awards </a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/research">Research</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="research/sofhku" >Society of Fellows in the Humanities</a></li>
+<li><a class="level_2"   href="research/research-overview" >Research Overview</a></li>
+<li><a class="level_2"   href="research/research-highlights" >Research Highlights</a></li>
+<li><a class="level_2"   href="/research/conferences-and-seminars" target="_self">Conferences &amp; Seminars</a></li>
+<li><a class="level_2"   href="https://converge.arts.hku.hk/" target="_blank">FACULTY OF ARTS CONFERENCE (7-8 June 2024) </a></li>
+<li><a class="level_2"   href="research/Sin-Wai-Kin-Distinguished-Visiting-Professorship-in-the-Humanities-Lecture-Series" >【Sin Wai-Kin Distinguished Visiting Professorship in the Humanities】 Lecture Series</a></li>
+<li><a class="level_2"   href="research/CHAGS" >China, Humanities, and Global Studies (CHAGS)</a></li>
+<li><a class="level_2"   href="research/internal-research-funding-scheme" >Internal Research Funding Schemes</a></li>
+<li><a class="level_2"   href="research/find-a-research-collaborator" >Find a Research Collaborator</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/knowledge-exchange">Knowledge Exchange</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="knowledge-exchange/university-artists-scheme" >University Artists Scheme</a></li>
+<li><a class="level_2"   href="http://www.culture.hku.hk/" target="_blank">Advanced Cultural Leadership Programme</a></li>
+<li><a class="level_2"   href="knowledge-exchange/faculty-ke-award" >Faculty KE Award</a></li>
+<li><a class="level_2"   href="knowledge-exchange/interdisciplinary-ke-projects" >Interdisciplinary KE Projects</a></li>
+<li><a class="level_2"   href="knowledge-exchange/ke-impact-projects" >KE Impact Projects</a></li>
+<li><a class="level_2"   href="http://arts.hku.hk/UAS/photo_album_2008_10_.pdf" target="_blank">UAS Publications</a></li>
+<li><a class="level_2"   href="knowledge-exchange/ke-student-projects" >KE Student Projects</a></li>
+<li><a class="level_2"   href="knowledge-exchange/second-century-lecture-series" >Second Century Lecture Series</a></li>
+<li><a class="level_2"   href="knowledge-exchange/behind-the-scenes-lecture-series" >Behind the Scenes Lecture Series</a></li>
+<li><a class="level_2"   href="knowledge-exchange/newsletter" >Arts Faculty Newsletter</a></li>
+<li><a class="level_2"   href="knowledge-exchange/run-run-shaw-g-f-gallery" >G/F Gallery, Run Run Shaw Tower</a></li>
+<li><a class="level_2"   href="knowledge-exchange/find-a-media-contact" >Find a Media Contact</a></li>
+<li><a class="level_2"   href="knowledge-exchange/for-companies-and-organizations" >For Companies and Organizations</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/alumni">Alumni</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="alumni/alumni-stories" >Alumni Stories I</a></li>
+<li><a class="level_2"   href="alumni/recent-alumni-stories" >Alumni Stories II</a></li>
+<li><a class="level_2"   href="alumni/arts-centenary-celebrations" >Faculty Centenary</a></li>
+</ul>
+                    </li>
+                    <li class="item last "><a href="/giving">Giving to Arts</a>
+                                            </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+            <div id="content">
+        <div class="content-container ">
+            
+                        
+            
+<div class="inner-content">
+    <div class="inner-content-top">
+        <h2 class="page-title">中國跨國史研究院成立典禮暨國際研討會標誌港大跨國史研究新篇章<br />
+ITHC Inaugural Ceremony and International Symposium Mark New Chapter for Transnational History at HKU</h2>
+    </div>
+    <div class="inner-content-mid">
+
+        <div class="display-block">
+            <p class="back-container float-right back"><a class="back photo-album-back" href="/news/2025/9">Back</a></p>
+            <div class="clear"></div>
+        </div>
+
+                    <div class="news-detail">
+                <p>30 September 2025 (Tuesday)</p>
+                <div class="richeditor">
+                    <!--templateType-white--><!--templateType-half-width--><table border="0" cellpadding="0" cellspacing="3" style="width:650px;" width="650">
+	<tbody>
+		<tr>
+			<td>
+			<h1 align="center"><strong>中國跨國史研究院成立典禮暨國際研討會</strong></h1>
+
+			<h1 align="center"><strong>標誌港大跨國史研究新篇章</strong></h1>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p align="center"></p>
+
+			<p></p>
+
+			<p><span style="color:black;font-size:1.1em;">中國跨國史研究院宣布，由文學院「Faculty Conference Support Scheme」資助的「中國跨國史國際研討會」（2025年8月29日至31日）圓滿落幕。研究院成立典禮也於8月29日成功舉行。</span></p>
+
+			<p><span style="color:black;font-size:1.1em;">為期三天的研討會匯集了演講嘉賓和與會人員，通過大量討論交流了來自不同背景的真知灼見，並推動了跨國視角下中國歷史研究的深入發展。</span></p>
+
+			<p><span style="color:black;font-size:1.1em;">成立典禮標誌著研究院已為未來的研究、合作和公眾參與奠定了堅實的基礎，並讓參與者共同見證該領域發展和研究院使命的重要里程碑。</span></p>
+
+			<p><span style="color:black;font-size:1.1em;">研究院創院院長暨張學義基金教授 (中國歷史)徐國琦教授表示：「香港因其獨特的歷史與地理位置，成為一個跨國界地區，與東西方文化和文明緊密相連。香港大學一直致力於成為中國跨國史領域的世界級研究中心。港大擁有開放包容的氛圍，有利於相關主題的思想交流和研究合作，是發展和持續推進此研究範疇的理想之地。」</span></p>
+
+			<p><span style="color:black;font-size:1.1em;">研究院旨在成為一個主要平台，倡導、推動與提升與中國相關的跨國史研究。研究院成立目的是要透過跨國視角，加深對中國悠長而複雜的歷史之理解，並透過檢視中國與世界之間跨越國界、文化和時間的動態互動，闡明人類經驗的相互關聯性，並挑戰傳統的敘事方式。研究院致力於走在這一學術領域的前沿，促進創新研究、跨學科合作、以及具備不同背景學者之間富深度意義的交流。</span></p>
+
+			<p></p>
+
+			<p><span style="color:black;font-size:1.1em;">有關中國跨國史研究院詳情，請瀏覽：<a href="https://ithc.hku.hk/">https://ithc.hku.hk/</a></span></p>
+
+			<p><span style="color:black;font-size:1.1em;">傳媒查詢，請聯絡中國跨國史研究院辦公室 (電郵：<a href="mailto:ithc@hku.hk">ithc@hku.hk</a>)。</span></p>
+			&nbsp;
+
+			<p></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p></p>
+
+<table border="0" cellpadding="0" cellspacing="3" style="width:650px;" width="650">
+	<tbody>
+		<tr>
+			<td>
+			<h1 align="center"><strong>ITHC Inaugural Ceremony and International Symposium Mark New Chapter for Transnational History at HKU</strong></h1>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p></p>
+
+			<p><span style="color:black;font-size:1.1em;">The Institute of Transnational History of China (ITHC) announces the successful conclusion of the International Symposium on Transnational History of China (August 29&ndash;31, 2025), which was supported by the Faculty of Arts&rsquo; Faculty Conference Support Scheme, as well as the Institute&rsquo;s Inaugural Ceremony on August 29.</span></p>
+
+			<p><span style="color:black;font-size:1.1em;">The three-day symposium brought together presenters and attendees for substantive exchanges of ideas and insights, fostering productive discussion and advancing the study of transnational approaches to China&rsquo;s past.</span></p>
+
+			<p><span style="color:black;font-size:1.1em;">The inaugural ceremony marked the formal launch of the Institute, setting a strong foundation for future research, collaboration, and public engagement. Together, these events represent an important milestone in the development of the field and the Institute&rsquo;s mission.</span></p>
+
+			<p><span style="color:black;font-size:1.1em;">The Founding Director of ITHC and David H Y Chang Professor in Chinese History, Professor Xu Guoqi stated, &ldquo;Hong Kong by history and location is a transnational place. It has been deeply interconnected with other cultures, civilizations, East, and West. The University of Hong Kong has been committed to become a world class research center in the field of transnational history of China. With its open and inclusive environment for exchanges of ideas and research collaborations on related topics, HKU represents the ideal place to develop and sustain this initiative.&rdquo;</span></p>
+
+			<p><span style="color:black;font-size:1.1em;">ITHC aims to serve as a major platform to advocate, promote, and advance the study of transnational history with special focus on China. The Institute was established to foster a deeper understanding of China&rsquo;s rich and complex history through a transnational lens. By examining the dynamic interactions between China and the world&mdash;across borders, cultures, and time&mdash;we aim to illuminate the interconnectedness of human experiences and challenge conventional narratives. ITHC seeks to be at the forefront of this scholarly endeavor, promoting innovative research, interdisciplinary collaboration, and meaningful dialogue among scholars from diverse backgrounds.</span></p>
+
+			<p></p>
+
+			<p><span style="color:black;font-size:1.1em;">For more information about ITHC, please visit: <a href="https://ithc.hku.hk/">https://ithc.hku.hk/</a></span></p>
+
+			<p><span style="color:black;font-size:1.1em;">For media enquiries, please contact ITHC General Office (E-mail: <a href="mailto:ithc@hku.hk">ithc@hku.hk</a>).</span></p>
+
+			<p></p>
+
+			<p></p>
+
+			<h5></h5>
+
+			<div></div>
+
+			<div></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+                </div>
+            </div>
+        
+        <div class="clear"></div>
+        <p class="top-container display-block text-align-right"><a href="/news/-ithc-inaugural-ceremony-and-international-symposium-mark-new-chapter-for-transnational-history-at-hku#" class="button top-btn">TOP</a></p>
+    </div>
+    <div class="inner-content-bottom"></div>
+</div>
+
+                        <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+    <div class="footer-container">
+        <div class="left"> <span class="copy">Copyright 2025 Faculty of Arts, The University of Hong Kong. All Rights Reserved.</span></div>
+        <div class="clear"><!--empty--></div>
+    </div>
+</div>
+
+
+
+        <script  type="text/javascript"  src="/assets/js/projectbase.js"  ></script> 
+        
+    </body>
+</html>

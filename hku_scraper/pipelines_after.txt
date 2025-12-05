@@ -1,0 +1,28 @@
+﻿            spider.logger.info(f'[WeChat] 已发送文本消息: {resp.json()}')
+            
+            # 发送图片
+            images = article_data.get('images', [])
+            if images:
+                images_dir = self.data_dir / 'images'
+                for img_rel_path in images:
+                    img_path = images_dir / img_rel_path
+                    if img_path.exists():
+                        try:
+                            with open(img_path, 'rb') as f:
+                                img_data = f.read()
+                            
+                            import base64
+                            b64 = base64.b64encode(img_data).decode('utf-8')
+                            md5 = hashlib.md5(img_data).hexdigest()
+                            
+                            img_payload = {
+                                'msgtype': 'image',
+                                'image': {'base64': b64, 'md5': md5}
+                            }
+                            
+                            img_resp = requests.post(webhook_url, json=img_payload, timeout=10)
+                            spider.logger.info(f'[WeChat] 已发送图片: {img_rel_path} - {img_resp.json()}')
+                        except Exception as e:
+                            spider.logger.error(f'[WeChat] 发送图片失败 {img_rel_path}: {e}')
+        except Exception as e:
+            spider.logger.error(f'[WeChat] 发送失败: {e}')

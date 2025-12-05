@@ -1,0 +1,7 @@
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+Cookie: PHPSESSID=utcbkm2ldhnue9uae2ifa4t39o; ci_session=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%224b918112bce2b60b760b3a5f2ac57907%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%2235.212.143.180%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A60%3A%22Mozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1764762712%3B%7Dbc4e852401f5dc37df6dd502382c6612

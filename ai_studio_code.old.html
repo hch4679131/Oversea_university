@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汇生活留学 | 你的名校梦工场</title>
+    <!-- 引入 Tailwind CSS (CDN方式，生产环境建议本地构建) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#3b82f6',
+                            DEFAULT: '#1e40af', // 深蓝
+                            dark: '#1e3a8a',
+                            accent: '#f97316', // 橙色
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(30, 64, 175, 0.7), rgba(30, 58, 138, 0.8)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            max-width: 400px;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            animation: slideIn 0.3s ease-out;
+        }
+        .toast.success { background: #10b981; color: white; }
+        .toast.error { background: #ef4444; color: white; }
+        .toast.loading { background: #3b82f6; color: white; }
+        @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- LOGO -->
+            <div class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                <span class="text-2xl font-bold text-brand-dark">汇生活留学</span>
+            </div>
+            
+            <!-- 菜单 (桌面端) -->
+            <div class="hidden md:flex space-x-8 items-center font-medium">
+                <a href="#" class="text-gray-600 hover:text-brand transition">首页</a>
+                <a href="#services" class="text-gray-600 hover:text-brand transition">服务体系</a>
+                <a href="#countries" class="text-gray-600 hover:text-brand transition">热门国家</a>
+                <a href="#cases" class="text-gray-600 hover:text-brand transition">成功案例</a>
+                <a href="#contact" class="bg-brand-accent hover:bg-orange-600 text-white px-6 py-2 rounded-full transition shadow-lg">免费评估</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首屏 Hero Section -->
+    <header class="hero-bg h-screen flex items-center justify-center text-white pt-16">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                连接世界，<br class="md:hidden">成就你的<span class="text-brand-accent">无限可能</span>
+            </h1>
+            <p class="text-lg md:text-xl mb-10 text-gray-200 max-w-2xl mx-auto">
+                专注港英美澳加高端留学申请，10年经验，累计帮助 9000+ 学子圆梦世界名校。
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-brand-accent hover:bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition shadow-lg">
+                    立即规划留学方案
+                </a>
+                <a href="#cases" class="bg-transparent border-2 border-white hover:bg-white hover:text-brand-dark px-8 py-4 rounded-lg text-lg font-semibold transition">
+                    查看名校录取榜
+                </a>
+                <button data-scrape 
+                        data-scrape-url="https://arts.hku.hk/news/---hkuarts-collaborates-with-hkmoa-and-conservation-office-of-the-lcsd-to-launch-douglas-so-post-doctoral-fellowship-in-art-conservation-attracting-global-talent-for-scientific-analysis-of-chinese-paintings-research-fellowship-project"
+                        data-scrape-filename="hku_test"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition shadow-lg">
+                    🧪 爬虫抓取 (HKU)
+            </div>
+            
+            <!-- 数据展示 -->
+            <div class="mt-16 grid grid-cols-3 gap-4 md:gap-12 max-w-4xl mx-auto border-t border-white/20 pt-8">
+                <div>
+                    <div class="text-3xl md:text-4xl font-bold text-brand-accent">98.9%</div>
+                    <div class="text-sm md:text-base text-gray-300">名校录取率</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-bold text-brand-accent">9000+</div>
+                    <div class="text-sm md:text-base text-gray-300">成功案例</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-bold text-brand-accent">10yr</div>
+                    <div class="text-sm md:text-base text-gray-300">行业经验</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 服务流程 -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-brand-dark mb-4">一站式留学服务体系</h2>
+                <div class="w-20 h-1 bg-brand-accent mx-auto"></div>
+                <p class="mt-4 text-gray-600">从规划到入学，我们全程陪伴</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- 卡片 1 -->
+                <div class="p-8 border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition hover:-translate-y-2 bg-white">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6 text-brand">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">背景提升规划</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">根据目标院校要求，定制学术科研、实习实践方案，提升软硬实力。</p>
+                </div>
+                
+                <!-- 卡片 2 -->
+                <div class="p-8 border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition hover:-translate-y-2 bg-white">
+                    <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mb-6 text-brand-accent">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">文书深度打磨</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">外籍导师润色，挖掘个人亮点，拒绝模板化，打造独一无二的申请文书。</p>
+                </div>
+
+                <!-- 卡片 3 -->
+                <div class="p-8 border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition hover:-translate-y-2 bg-white">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6 text-brand">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">精准选校定位</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">基于大数据分析，结合个人意愿与职业规划，科学制定冲刺、匹配、保底方案。</p>
+                </div>
+
+                <!-- 卡片 4 -->
+                <div class="p-8 border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition hover:-translate-y-2 bg-white">
+                    <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mb-6 text-brand-accent">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">全程陪伴服务</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">从申请到落地，专业团队全程跟进，答疑解惑，确保录取后无忧启航。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成功案例 Section -->
+    <section id="cases" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-brand-dark mb-4">名校录取榜</h2>
+                <div class="w-20 h-1 bg-brand-accent mx-auto"></div>
+                <p class="mt-4 text-gray-600">部分学生录取学校 & 奖学金情况</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-2xl font-bold text-brand mb-2">Harvard University</div>
+                    <div class="text-gray-600">哈佛大学</div>
+                    <div class="mt-4 text-sm text-gray-500">Master of Business Administration</div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-2xl font-bold text-brand mb-2">Stanford University</div>
+                    <div class="text-gray-600">斯坦福大学</div>
+                    <div class="mt-4 text-sm text-gray-500">Master of Computer Science</div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-2xl font-bold text-brand mb-2">MIT</div>
+                    <div class="text-gray-600">麻省理工学院</div>
+                    <div class="mt-4 text-sm text-gray-500">Master of Engineering</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-brand-dark mb-4">准备好开启你的留学之旅了吗？</h2>
+                <div class="w-20 h-1 bg-brand-accent mx-auto"></div>
+                <p class="mt-4 text-gray-600 mb-8 max-w-2xl mx-auto">我们的专业团队随时准备为你解答关于留学申请的所有问题。联系我们获得一对一的免费咨询。</p>
+                
+                <div class="grid md:grid-cols-3 gap-8 mt-12">
+                    <div>
+                        <div class="text-4xl mb-4">📱</div>
+                        <h3 class="text-xl font-bold mb-2">电话</h3>
+                        <p class="text-gray-600">+86 123-4567-8901</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl mb-4">✉️</div>
+                        <h3 class="text-xl font-bold mb-2">邮箱</h3>
+                        <p class="text-gray-600">huishenghuo_liuxue.com</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl mb-4">📍</div>
+                        <h3 class="text-xl font-bold mb-2">地址</h3>
+                        <p class="text-gray-600">香港油麻地</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-brand-dark text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 汇生活留学. All rights reserved. | <a href="#" class="hover:text-brand-accent">隐私政策</a> | <a href="#" class="hover:text-brand-accent">服务条款</a></p>
+        </div>
+    </footer>
+
+    <!-- API Integration Script -->
+    <script>
+        /**
+         * 启航留学 - Frontend API Integration
+         * Provides button functionality to call backend scraping APIs
+         */
+
+        // Toast notification helper
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        // Check if backend is available
+        async function checkBackendHealth() {
+            try {
+                const response = await fetch('/api/health');
+                return response.ok;
+            } catch {
+                return false;
+            }
+        }
+
+        /**
+         * Scrape a URL and export to Excel
+         * @param {string} url - Website URL to scrape
+         * @param {string} filename - Excel filename
+         */
+        async function scrapeToExcel(url, filename = 'scraped_data') {
+            showToast('开始抓取网页内容...', 'loading');
+            try {
+                const response = await fetch('/api/scrape', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, filename })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showToast(`✓ Excel文件已保存: ${data.path}`, 'success');
+                } else {
+                    showToast(`✗ 错误: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                showToast(`✗ 网络错误: ${error.message}`, 'error');
+            }
+        }
+        
+        /**
+         * Scrape a URL and return JSON
+         * @param {string} url - Website URL to scrape
+         */
+        async function scrapeToJson(url) {
+            showToast('开始抓取网页内容...', 'loading');
+            try {
+                const response = await fetch('/api/scrape-json', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showToast('✓ 网页内容已获取', 'success');
+                    console.log('Scraped content:', data.content.substring(0, 200) + '...');
+                    return data;
+                } else {
+                    showToast(`✗ 错误: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                showToast(`✗ 网络错误: ${error.message}`, 'error');
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            const backendAvailable = await checkBackendHealth();
+            console.log('Backend status:', backendAvailable ? '✓ Connected' : '✗ Not available');
+            
+            // Add click handlers to buttons with data-scrape attribute
+            document.querySelectorAll('[data-scrape]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const url = btn.dataset.scrapeUrl || 'https://www.hku.hk/c_index.html';
+                    const filename = btn.dataset.scrapeFilename || 'scraped_data';
+                    scrapeToExcel(url, filename);
+                });
+            });
+        });
+
+        // Make functions globally accessible
+        window.scrapeToExcel = scrapeToExcel;
+        window.scrapeToJson = scrapeToJson;
+    </script>
+
+</body>
+</html>

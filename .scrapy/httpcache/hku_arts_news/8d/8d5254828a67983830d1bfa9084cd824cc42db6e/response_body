@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <base href="https://arts.hku.hk/" />
+
+<title  >Faculty of Arts - HKU - Detail - News</title> 
+
+<link  media="all"  href="/assets/css/projectbase.css"  type="text/css"  rel="stylesheet"  />
+    <link type="text/css" rel="stylesheet" media="print" href="/assets/css/print.css" />
+    <script type="text/javascript"> var page_language = ''; </script>
+    <script type="text/javascript">
+        var base_url = '/';
+    </script>
+<!--[if lt IE 8]>
+    <script type="text/javascript" src="/assets/js/ie7.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/ie7.css" />
+<![endif]--><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-37742340-1']);
+_gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+_linkedin_partner_id = "399859";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(){var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})();
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=399859&fmt=gif" />
+</noscript>
+
+<!-- Global site tag (gtag.js) - Google Ads: 773097646 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-773097646"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-773097646');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0M3M4J7L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0G0M3M4J7L');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TDHMGQS');</script>
+<!-- End Google Tag Manager -->
+
+    </head>
+    <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDHMGQS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+        <div id="wrapper">
+    <div id="header">
+    <div class="header-container">
+
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/img/hku-logo.png" alt="The University of Hong Kong" />
+                <div class="name"><span class="faculty-name">Faculty of Arts</span></div>
+            </a>
+        </div>
+        <div class="shortlinks">
+            <div class="top">
+                <div class="home"><a href="https://www.hku.hk/">HKU Home</a></div>
+                <div class="home"><a href="https://hkuportal.hku.hk/">HKU Portal</a></div>
+                <div class="version">
+                    <a href="https://www.facebook.com/ArtsHKU" target="_blank" class="apps facebook" title="facebook"><div>&nbsp;</div></a><a href="https://twitter.com/hkuarts" target="_blank" class="apps twitter" title="twitter"><div>&nbsp;</div></a>
+                </div>
+                <div class="textsize">
+                    <a class="text_small">A</a>
+                    <a class="text_normal">A</a>
+                    <a class="text_large">A</a>
+                </div>
+                <div class="search">
+                    <form action="https://www.google.com/cse" id="form_site_search" target="_blank">
+                        <input class="for-google-search" type="hidden" name="cx" value="016966053557825602977:h14undbgnrw" />
+                        <input class="for-google-search" type="hidden" name="ie" value="UTF-8" />
+                        <label for="search-box" style="display:none;">Search Box</label>
+                        <input id="search-box" type="text" value="Search" name="q" class="searchField" onblur="if(this.value=='') this.value='Search';" onfocus="if(this.value==this.defaultValue) this.value='';" />
+                        <button id="search-button" type="submit" title="Search" name="sa" value="Search"></button>
+                    </form>
+                </div>
+                <!--<div class="search">
+                    <label for="search-box" style="display:none">search box</label>
+                    <input type="text" id="search-box" value="Search" onfocus="if(this.value==this.defaultValue) this.value='';" onblur="if (this.value == '') this.value = 'Search';"/>
+                    <button id="search-button" title="Search"></button>
+                </div>-->
+                <div class="clear"><!--empty--></div>
+            </div>
+            <div class="bottom">
+                <div class="info-for">
+                    <ul>
+					
+                        <li><a href="https://hkuhk.sharepoint.com/sites/ResourcesforStaff/" target="_blank">Resources for staff</a></li>
+						<!--<li><a href="site_url()">Home</a></li>-->
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/contact-us">Contact Us</a></li>
+                        <li class="last"><a href="/site-map">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"><!--empty--></div>
+
+        <div class="top-nav" >
+            <div class="nav">
+                <ul id="mega-menu-1" class="mega-menu myMenu">
+                    <li class="item first "><a href="/about-us">About Us</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="about-us/vision-and-mission" >Vision &amp; Mission</a></li>
+<li><a class="level_2"   href="about-us/faculty-office" >Faculty Office</a></li>
+<li><a class="level_2"   href="about-us/faculty-centenary" >Faculty Centenary</a></li>
+<li><a class="level_2"   href="about-us/our-building" >Our Building</a></li>
+<li><a class="level_2"   href="/about-us/photo-gallery" target="_self">Photo Gallery</a></li>
+<li><a class="level_2"   href="https://jobs.hku.hk/en/filter/?search-keyword=&amp;brand=faculty%20of%20arts" target="_blank">Employment</a></li>
+<li><a class="level_2"   href="about-us/contact-us" >Contact Us</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/prospective-students">Prospective Students</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="https://arts.hku.hk/ugadmissions" target="_blank">Undergraduate</a></li>
+<li><a class="level_2"   href="prospective-students/research-postgraduate" >Research Postgraduate </a></li>
+<li><a class="level_2"   href="prospective-students/taught-postgraduate" >Taught Postgraduate</a></li>
+<li><a class="level_2"   href="https://siah.arts.hku.hk/" target="_blank">Summer Institute in the Arts &amp; Humanities</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/current-students">Current Students</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="current-students/undergraduate" >Undergraduate</a></li>
+<li><a class="level_2"   href="current-students/postgraduate" >Postgraduate</a></li>
+<li><a class="level_2"   href="current-students/student-global-experience" >Student Experiential Learning</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/teaching-and-learning">Teaching &amp; Learning</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="teaching-and-learning/academic-advising" >Academic Advising </a></li>
+<li><a class="level_2"   href="teaching-and-learning/FTEA" >Faculty Teaching Excellence Awards </a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/research">Research</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="research/sofhku" >Society of Fellows in the Humanities</a></li>
+<li><a class="level_2"   href="research/research-overview" >Research Overview</a></li>
+<li><a class="level_2"   href="research/research-highlights" >Research Highlights</a></li>
+<li><a class="level_2"   href="/research/conferences-and-seminars" target="_self">Conferences &amp; Seminars</a></li>
+<li><a class="level_2"   href="https://converge.arts.hku.hk/" target="_blank">FACULTY OF ARTS CONFERENCE (7-8 June 2024) </a></li>
+<li><a class="level_2"   href="research/Sin-Wai-Kin-Distinguished-Visiting-Professorship-in-the-Humanities-Lecture-Series" >【Sin Wai-Kin Distinguished Visiting Professorship in the Humanities】 Lecture Series</a></li>
+<li><a class="level_2"   href="research/CHAGS" >China, Humanities, and Global Studies (CHAGS)</a></li>
+<li><a class="level_2"   href="research/internal-research-funding-scheme" >Internal Research Funding Schemes</a></li>
+<li><a class="level_2"   href="research/find-a-research-collaborator" >Find a Research Collaborator</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/knowledge-exchange">Knowledge Exchange</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="knowledge-exchange/university-artists-scheme" >University Artists Scheme</a></li>
+<li><a class="level_2"   href="http://www.culture.hku.hk/" target="_blank">Advanced Cultural Leadership Programme</a></li>
+<li><a class="level_2"   href="knowledge-exchange/faculty-ke-award" >Faculty KE Award</a></li>
+<li><a class="level_2"   href="knowledge-exchange/interdisciplinary-ke-projects" >Interdisciplinary KE Projects</a></li>
+<li><a class="level_2"   href="knowledge-exchange/ke-impact-projects" >KE Impact Projects</a></li>
+<li><a class="level_2"   href="http://arts.hku.hk/UAS/photo_album_2008_10_.pdf" target="_blank">UAS Publications</a></li>
+<li><a class="level_2"   href="knowledge-exchange/ke-student-projects" >KE Student Projects</a></li>
+<li><a class="level_2"   href="knowledge-exchange/second-century-lecture-series" >Second Century Lecture Series</a></li>
+<li><a class="level_2"   href="knowledge-exchange/behind-the-scenes-lecture-series" >Behind the Scenes Lecture Series</a></li>
+<li><a class="level_2"   href="knowledge-exchange/newsletter" >Arts Faculty Newsletter</a></li>
+<li><a class="level_2"   href="knowledge-exchange/run-run-shaw-g-f-gallery" >G/F Gallery, Run Run Shaw Tower</a></li>
+<li><a class="level_2"   href="knowledge-exchange/find-a-media-contact" >Find a Media Contact</a></li>
+<li><a class="level_2"   href="knowledge-exchange/for-companies-and-organizations" >For Companies and Organizations</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/alumni">Alumni</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="alumni/alumni-stories" >Alumni Stories I</a></li>
+<li><a class="level_2"   href="alumni/recent-alumni-stories" >Alumni Stories II</a></li>
+<li><a class="level_2"   href="alumni/arts-centenary-celebrations" >Faculty Centenary</a></li>
+</ul>
+                    </li>
+                    <li class="item last "><a href="/giving">Giving to Arts</a>
+                                            </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+            <div id="content">
+        <div class="content-container ">
+            
+                        
+            
+<div class="inner-content">
+    <div class="inner-content-top">
+        <h2 class="page-title">港大文學院攜手香港藝術館及康文署文物修復辦事處啟動「蘇彰德藝術文物修護博士後研究員計劃」<br />
+<br />
+招攬全球人才開展「中國書畫科學分析」研究項目<br />
+<br />
+HKUArts Collaborates with HKMoA and Conservation Office of the LCSD to Launch “Douglas So Post-doctoral Fellowship in Art Conservation”<br />
+<br />
+Attracting Global Talent for “Scientific Analysis of Chinese Paintings” Research Fellowship Project<br />
+</h2>
+    </div>
+    <div class="inner-content-mid">
+
+        <div class="display-block">
+            <p class="back-container float-right back"><a class="back photo-album-back" href="/news/2025/11">Back</a></p>
+            <div class="clear"></div>
+        </div>
+
+                    <div class="news-detail">
+                <p>22 November 2025 (Saturday)</p>
+                <div class="richeditor">
+                    <!--templateType-white--><!--templateType-half-width--><table border="0" cellpadding="0" cellspacing="3" style="width:650px;" width="650">
+	<tbody>
+		<tr>
+			<td>
+			<h2 align="center">港大文學院攜手香港藝術館及康文署文物修復辦事處</h2>
+
+			<h2 align="center">啟動「蘇彰德藝術文物修護博士後研究員計劃」</h2>
+
+			<h2 align="center">招攬全球人才開展「中國書畫科學分析」研究項目</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p align="center"></p>
+
+			<p></p>
+
+			<p>香港大學（港大）文學院宣布啟動「蘇彰德藝術文物修護博士後研究員計劃」（「計劃」）。這項開創性的「四強聯手」合作項目，旨在吸引全球頂尖人才，推動香港及亞太區藝術文物修護的發展，展現各方對推動文化與科學卓越發展的共同承諾。</p>
+
+			<p>周六（11月22日）在香港藝術館舉行的啟動儀式上，香港首個四大領域共同參與的「中國書畫科學分析」研究項目亦正式啟動，參與者分別為來自學術界的港大文學院、公共博物館界別的香港藝術館、康樂及文化事務署文物修復辦事處（修復辦）的專業文物修護團隊，以及私人捐贈者蘇彰德教授。</p>
+
+			<p>港大協理副校長（文化及對外事務）兼博物館研究碩士課程主任孔德立教授分享說：「我們衷心感謝蘇彰德教授的慷慨捐贈與信任，讓學院得以與世界級夥伴合作，並惠及博物館及學術界, 以至香港及全球社會。我與團隊、蘇彰德教授、香港藝術館莫家詠博士及修復辦謝建輝先生通力合作，成功搭建這座橋樑，創立此項吸引全球頂尖藝術文物修護人才的博士後研究員計劃。獲選的研究員將進行學術研究，並為博物館提供藝術文物修護建議，同時推進其專業與學術發展。」</p>
+
+			<p>孔德立教授展望道：「在香港特區政府致力發展文化藝術產業之際，港大與香港藝術館攜手開創此項合作，別具意義。期待港大能在藝術文物修護培訓及科研領域引領香港、大灣區以至國際的發展，並帶來更多就業和其他機會，讓年輕人和公眾受益。」</p>
+
+			<p>大學與博物館的跨界合作，並結合私人資本，是國際公認能推動學術研究、促進公眾藝術參與及藏品保護的有效模式。藏品研究不僅是藝術文物修護的基礎，更是策展創新的關鍵。因此，這計劃將長期惠及香港藝術館與港大，並助力香港發展成為國際藝術、文化、及創意產業的樞紐，引進世界級修護人才，強化本地文化遺產修護能力，及促進跨學科協作。此策略性合作計劃將有助實現香港追求文化成就、創新發展及藝術文物修護領域國際領先地位的願景。</p>
+
+			<p>香港藝術館總館長莫家詠博士表示：「我們非常榮幸參與此項香港首創的計劃。在蘇彰德教授慷慨支持下，聯同港大文學院與修復辦招募全球人才, 開展這項突破性合作。我們將從藝術、學術及科學角度，深入研究館藏的世界級中國書畫珍品，並運用先進的修護技術，拓展對這些文化瑰寶的認知，揭開傳世傑作的神秘面紗。」</p>
+
+			<p>獲選的研究員將開展「中國書畫科學分析」研究項目，以香港藝術館指定的中國書畫藏品為研究對象。研究員將隸屬港大文學院的Society of Fellows in the Humanities (&ldquo;SoF&rdquo;)，並與港大博物館研究碩士課程馬文濤教授及修復辦總監謝建輝先生及其團隊緊密合作，進行日常研究工作。相關招聘資訊將適時於港大招聘網頁刊登。</p>
+
+			<p>謝建輝先生表示：「藝術文物修護的意義遠超保存文化遺產予後世，更在於透過研究提供科學新見解，支援策展人對館藏的深入探索。從而深化我們對這些無價珍品的歷史、藝術及科學價值的理解。中國書畫作為中華文化瑰寶，此計劃開展的修復研究不僅至關重要，更有望取得重大突破。透過連繫起修復、科學分析與策展研究，必將深化大眾對我們豐富文化遺產的認識與欣賞。」</p>
+
+			<p>馬文濤教授展望：「感謝蘇教授的慷慨支持，我們正開啟港大修復科學研究的新篇章。此計劃將提升我們的專業能力，培育本地人才，及在國際科研領域保持競爭力。」</p>
+
+			<p>港大文學院一直致力與本地及國際文化藝術與學術機構攜手合作，培育新一代藝術文化領袖。展望將來，港大文學院、香港藝術館與修復辦將持續深化合作，拓展學術課程及藝術保護工作。為實現推動創新與長遠發展的宏偉目標，各界持份者的鼎力支持非常重要，攜手為香港以至全球文化遺產的可持續發展貢獻力量。</p>
+
+			<p></p>
+
+			<p>港大招聘網站： <a href="https://jobs.hku.hk/en/listing/">https://jobs.hku.hk/en/listing/</a></p>
+
+			<p></p>
+
+			<p>傳媒查詢或採訪邀請，請聯絡：<br />
+			馬文濤教授（港大文學院博物館研究碩士課程），電郵：<a href="mailto:mwalton@hku.hk">mwalton@hku.hk</a><br />
+			鍾麗明女士（康樂及文化事務署傳訊主任(文物及博物館)），電郵：<a href="mailto:slmchung@lcsd.gov.hk">slmchung@lcsd.gov.hk</a></p>
+
+			<p></p>
+
+			<p>新聞稿網上版及照片，請瀏覽:<br />
+			<a href="http://www.hku.hk/press/c_news_detail_28771.html">http://www.hku.hk/press/c_news_detail_28771.html</a></p>
+			&nbsp;
+
+			<p></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p></p>
+
+<table border="0" cellpadding="0" cellspacing="3" style="width:650px;" width="650">
+	<tbody>
+		<tr>
+			<td>
+			<h2 align="center">HKUArts Collaborates with HKMoA and Conservation Office of the LCSD to Launch &ldquo;Douglas So Post-doctoral Fellowship in Art Conservation&rdquo;</h2>
+
+			<h2 align="center">Attracting Global Talent for &ldquo;Scientific Analysis of Chinese Paintings&rdquo; Research Fellowship Project</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">Faculty of Arts at The University of Hong Kong (&ldquo;HKUArts&rdquo;) announces the launch of its &quot;Douglas So Post-doctoral Fellowship in Art Conservation&quot; (&ldquo;Fellowship&rdquo;): a Pioneering 4-in-1 Powerhouse Partnership to attract global talent for expanding art conservation in Hong Kong and the Asia-Pacific Region &mdash; demonstrating a shared commitment to advancing cultural and scientific excellence.<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">At the launch held at the Hong Kong Museum of Art (&ldquo;HKMoA&rdquo;) &nbsp;on Saturday (22 November), this groundbreaking, world-class partnership has marked Hong Kong&rsquo;s first-ever strategic collaboration on a research fellowship project entitled &ldquo;Scientific Analysis of Chinese Paintings&quot;, among four leaders in the profession: an academic university (HKUArts), a public museum (HKMoA) and a dedicated team of conservation experts (Conservation Office of the Leisure and Cultural Services Department of the Government of the HKSAR, &ldquo;LCSD Conservation Office&rdquo;), and private funding donor (Professor Douglas So).<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">Professor Derek Collins, Associate Vice-President (Cultural and External Affairs) &amp; Director of the MA in Museum Studies Programme of the HKU shared, &ldquo;We sincerely thank Professor Douglas So, for his important gift and trust that provide the Faculty an opportunity to engage with our world-class partners and benefit the museum and academic sectors, Hong Kong and the global community at large.&nbsp; All the efforts my team and I put into working on the collaboration with Professor Douglas So, Dr Maria Mok of HKMoA and Mr Edward Tse of LCSD Conservation Office have enabled us to create a bridge, a postdoctoral fellowship that will attract the strongest talents in art conservation. The fellow will research and provide conservation advice to the museum while advancing their own professional and academic careers&rdquo;,&nbsp;he envisioned, &ldquo;With the HKSAR Government&#39;s commitment to developing its cultural sector and arts ecosystem, it&#39;s a thrilling moment in HK for HKU and HKMoA to pioneer this collaboration.&nbsp; I expect HKU to lead in art conservation training and conservation science research for HK and for the Greater Bay Area, and beyond. Young people and the public will be delighted at the employment and other opportunities created by these fields.&rdquo;<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">University and museum partnerships, including leveraging private capital, are the internationally proven way to advance scholarship, public engagement with art, and collection care for successive generations. Collection research is the foundation not only of art conservation but also of new exhibitions &ndash; and so this Fellowship will benefit HKMoA and HKU for years to come and it represents a pivotal step in advancing Hong Kong&rsquo;s position as a premier international hub for arts, culture, and creative industries which directly supports these objectives &mdash; bringing in world-class conservation talents, strengthening Hong Kong&rsquo;s heritage conservation capabilities, and fostering cross-disciplinary collaboration. &nbsp;Through this strategic alignment, the Fellowship will help realise Hong Kong&rsquo;s broader aspirations of cultural excellence, innovation-driven development, and positioning as a global leader in arts and heritage conservation.&nbsp;<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">Dr Maria Mok, Museum Director of the HKMoA said, &ldquo;We are very excited to launch this project&mdash;the first of its kind in Hong Kong to recruit global talent for this trailblazing collaboration between the HKMoA, HKUArts, and the Conservation Office, and with the generous support of Professor Douglas So. We will explore world class donation of Chinese painting collection of the museum from the artistic, academic and scientific perspective. We aim to largely expand the understanding of these treasures with the advancement of conservation methodologies, aspiring to unlock the secrets in these masterpieces.&rdquo;<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">A top postdoctoral fellow (&ldquo;Fellow&rdquo;) would undertake a research fellowship project entitled &ldquo;Scientific Analysis of Chinese Paintings&quot; (&lsquo;Research&rsquo;) with the designated Chinese painting collections of the HKMoA as the subject of study.&nbsp; The Fellow will be an affiliate of HKUArts&rsquo; Society of Fellows in the Humanities (&ldquo;SoF&rdquo;) and will work closely with Professor Marc Walton of the MA in Museum Studies Programme, and Mr Edward Tse, Head of Conservation Office of LCSD and his team on the daily research project works. The recruitment advertisement will be posted on the HKU Careers website in due course.<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">Mr Edward Tse shared, &ldquo;The importance of art conservation extends far beyond merely preserving our cultural heritage for future generations. It also plays a vital and active role in research, providing new scientific insight to support curatorial investigations into our collections. This, in turn, deepens our comprehension of the historical, artistic, and scientific significance of these invaluable pieces.&nbsp; Chinese paintings, in particular, stand as key cultural artefacts of our Chinese ancestry.&nbsp; The initiation of this Fellowship project in this field is not only essential but also promises to achieve significant breakthroughs. By bridging the gap between conservation, scientific analysis, and curatorial exploration, this project will undoubtedly contribute to a deeper understanding and appreciation of our rich cultural heritage.&rdquo;<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">&ldquo;Thanks to Professor So&#39;s generosity, we are embarking on an exciting new phase in conservation science at HKU. This Fellowship will allow us to enhance our capabilities, build local capacity, and compete internationally in scientific research,&rdquo; Professor Marc Walton envisioned.<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">HKUArts is keen on joining forces with significant, local and global partner institutions in the art and academic sectors to enhance the training of the next generation of art and cultural heritage leadership. Future developments and ongoing collaboration among HKUArts, HKMoA, and the LCSD Conservation Office will lead to further initiatives aimed at expanding academic programmes and enhancing art conservation efforts. To achieve these ambitious goals that promote transformative innovation and long-term success, increased support and engagement from all stakeholders are important to foster sustainable progress for Hong Kong and the global community at large.<o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">HKU Careers website: <a href="https://jobs.hku.hk/en/listing/">https://jobs.hku.hk/en/listing/</a><o:p></o:p></span></p>
+
+			<p style="line-height:18.0pt"></p>
+
+			<p style="line-height:18.0pt"><span style="font-size:10.5pt;font-family:Roboto">For media enquiries or press interview invitations, please contact:<br />
+			Professor Marc Walton, HKUArts and its MA in Museum Studies Programme (E-mail: <a href="mailto:mwalton@hku.hk">mwalton@hku.hk</a>)<br />
+			Ms. Sally Chung, Media Co-ordinator (Heritage &amp; Museums), Leisure and Cultural Services Department (Email: <a href="mailto:slmchung@lcsd.gov.hk">slmchung@lcsd.gov.hk</a>)<o:p></o:p></span></p>
+
+			<p></p>
+
+			<p>For the online press release and photo, please visit:<br />
+			<a href="http://www.hku.hk/press/news_detail_28771.html">http://www.hku.hk/press/news_detail_28771.html</a></p>
+
+			<p></p>
+
+			<h5></h5>
+
+			<div></div>
+
+			<div></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+                </div>
+            </div>
+        
+        <div class="clear"></div>
+        <p class="top-container display-block text-align-right"><a href="/news/---hkuarts-collaborates-with-hkmoa-and-conservation-office-of-the-lcsd-to-launch-douglas-so-post-doctoral-fellowship-in-art-conservation-attracting-global-talent-for-scientific-analysis-of-chinese-paintings-research-fellowship-project#" class="button top-btn">TOP</a></p>
+    </div>
+    <div class="inner-content-bottom"></div>
+</div>
+
+                        <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+    <div class="footer-container">
+        <div class="left"> <span class="copy">Copyright 2025 Faculty of Arts, The University of Hong Kong. All Rights Reserved.</span></div>
+        <div class="clear"><!--empty--></div>
+    </div>
+</div>
+
+
+
+        <script  type="text/javascript"  src="/assets/js/projectbase.js"  ></script> 
+        
+    </body>
+</html>

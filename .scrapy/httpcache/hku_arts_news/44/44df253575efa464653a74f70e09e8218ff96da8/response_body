@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <base href="https://arts.hku.hk/" />
+
+<title  >Faculty of Arts - HKU - Detail - News</title> 
+
+<link  media="all"  href="/assets/css/projectbase.css"  type="text/css"  rel="stylesheet"  />
+    <link type="text/css" rel="stylesheet" media="print" href="/assets/css/print.css" />
+    <script type="text/javascript"> var page_language = ''; </script>
+    <script type="text/javascript">
+        var base_url = '/';
+    </script>
+<!--[if lt IE 8]>
+    <script type="text/javascript" src="/assets/js/ie7.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/ie7.css" />
+<![endif]--><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-37742340-1']);
+_gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+_linkedin_partner_id = "399859";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(){var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})();
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=399859&fmt=gif" />
+</noscript>
+
+<!-- Global site tag (gtag.js) - Google Ads: 773097646 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-773097646"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-773097646');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0G0M3M4J7L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0G0M3M4J7L');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TDHMGQS');</script>
+<!-- End Google Tag Manager -->
+
+    </head>
+    <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDHMGQS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+        <div id="wrapper">
+    <div id="header">
+    <div class="header-container">
+
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/img/hku-logo.png" alt="The University of Hong Kong" />
+                <div class="name"><span class="faculty-name">Faculty of Arts</span></div>
+            </a>
+        </div>
+        <div class="shortlinks">
+            <div class="top">
+                <div class="home"><a href="https://www.hku.hk/">HKU Home</a></div>
+                <div class="home"><a href="https://hkuportal.hku.hk/">HKU Portal</a></div>
+                <div class="version">
+                    <a href="https://www.facebook.com/ArtsHKU" target="_blank" class="apps facebook" title="facebook"><div>&nbsp;</div></a><a href="https://twitter.com/hkuarts" target="_blank" class="apps twitter" title="twitter"><div>&nbsp;</div></a>
+                </div>
+                <div class="textsize">
+                    <a class="text_small">A</a>
+                    <a class="text_normal">A</a>
+                    <a class="text_large">A</a>
+                </div>
+                <div class="search">
+                    <form action="https://www.google.com/cse" id="form_site_search" target="_blank">
+                        <input class="for-google-search" type="hidden" name="cx" value="016966053557825602977:h14undbgnrw" />
+                        <input class="for-google-search" type="hidden" name="ie" value="UTF-8" />
+                        <label for="search-box" style="display:none;">Search Box</label>
+                        <input id="search-box" type="text" value="Search" name="q" class="searchField" onblur="if(this.value=='') this.value='Search';" onfocus="if(this.value==this.defaultValue) this.value='';" />
+                        <button id="search-button" type="submit" title="Search" name="sa" value="Search"></button>
+                    </form>
+                </div>
+                <!--<div class="search">
+                    <label for="search-box" style="display:none">search box</label>
+                    <input type="text" id="search-box" value="Search" onfocus="if(this.value==this.defaultValue) this.value='';" onblur="if (this.value == '') this.value = 'Search';"/>
+                    <button id="search-button" title="Search"></button>
+                </div>-->
+                <div class="clear"><!--empty--></div>
+            </div>
+            <div class="bottom">
+                <div class="info-for">
+                    <ul>
+					
+                        <li><a href="https://hkuhk.sharepoint.com/sites/ResourcesforStaff/" target="_blank">Resources for staff</a></li>
+						<!--<li><a href="site_url()">Home</a></li>-->
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/contact-us">Contact Us</a></li>
+                        <li class="last"><a href="/site-map">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"><!--empty--></div>
+
+        <div class="top-nav" >
+            <div class="nav">
+                <ul id="mega-menu-1" class="mega-menu myMenu">
+                    <li class="item first "><a href="/about-us">About Us</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="about-us/vision-and-mission" >Vision &amp; Mission</a></li>
+<li><a class="level_2"   href="about-us/faculty-office" >Faculty Office</a></li>
+<li><a class="level_2"   href="about-us/faculty-centenary" >Faculty Centenary</a></li>
+<li><a class="level_2"   href="about-us/our-building" >Our Building</a></li>
+<li><a class="level_2"   href="/about-us/photo-gallery" target="_self">Photo Gallery</a></li>
+<li><a class="level_2"   href="https://jobs.hku.hk/en/filter/?search-keyword=&amp;brand=faculty%20of%20arts" target="_blank">Employment</a></li>
+<li><a class="level_2"   href="about-us/contact-us" >Contact Us</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/prospective-students">Prospective Students</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="https://arts.hku.hk/ugadmissions" target="_blank">Undergraduate</a></li>
+<li><a class="level_2"   href="prospective-students/research-postgraduate" >Research Postgraduate </a></li>
+<li><a class="level_2"   href="prospective-students/taught-postgraduate" >Taught Postgraduate</a></li>
+<li><a class="level_2"   href="https://siah.arts.hku.hk/" target="_blank">Summer Institute in the Arts &amp; Humanities</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/current-students">Current Students</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="current-students/undergraduate" >Undergraduate</a></li>
+<li><a class="level_2"   href="current-students/postgraduate" >Postgraduate</a></li>
+<li><a class="level_2"   href="current-students/student-global-experience" >Student Experiential Learning</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/teaching-and-learning">Teaching &amp; Learning</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="teaching-and-learning/academic-advising" >Academic Advising </a></li>
+<li><a class="level_2"   href="teaching-and-learning/FTEA" >Faculty Teaching Excellence Awards </a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/research">Research</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="research/sofhku" >Society of Fellows in the Humanities</a></li>
+<li><a class="level_2"   href="research/research-overview" >Research Overview</a></li>
+<li><a class="level_2"   href="research/research-highlights" >Research Highlights</a></li>
+<li><a class="level_2"   href="/research/conferences-and-seminars" target="_self">Conferences &amp; Seminars</a></li>
+<li><a class="level_2"   href="https://converge.arts.hku.hk/" target="_blank">FACULTY OF ARTS CONFERENCE (7-8 June 2024) </a></li>
+<li><a class="level_2"   href="research/Sin-Wai-Kin-Distinguished-Visiting-Professorship-in-the-Humanities-Lecture-Series" >【Sin Wai-Kin Distinguished Visiting Professorship in the Humanities】 Lecture Series</a></li>
+<li><a class="level_2"   href="research/CHAGS" >China, Humanities, and Global Studies (CHAGS)</a></li>
+<li><a class="level_2"   href="research/internal-research-funding-scheme" >Internal Research Funding Schemes</a></li>
+<li><a class="level_2"   href="research/find-a-research-collaborator" >Find a Research Collaborator</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/knowledge-exchange">Knowledge Exchange</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="knowledge-exchange/university-artists-scheme" >University Artists Scheme</a></li>
+<li><a class="level_2"   href="http://www.culture.hku.hk/" target="_blank">Advanced Cultural Leadership Programme</a></li>
+<li><a class="level_2"   href="knowledge-exchange/faculty-ke-award" >Faculty KE Award</a></li>
+<li><a class="level_2"   href="knowledge-exchange/interdisciplinary-ke-projects" >Interdisciplinary KE Projects</a></li>
+<li><a class="level_2"   href="knowledge-exchange/ke-impact-projects" >KE Impact Projects</a></li>
+<li><a class="level_2"   href="http://arts.hku.hk/UAS/photo_album_2008_10_.pdf" target="_blank">UAS Publications</a></li>
+<li><a class="level_2"   href="knowledge-exchange/ke-student-projects" >KE Student Projects</a></li>
+<li><a class="level_2"   href="knowledge-exchange/second-century-lecture-series" >Second Century Lecture Series</a></li>
+<li><a class="level_2"   href="knowledge-exchange/behind-the-scenes-lecture-series" >Behind the Scenes Lecture Series</a></li>
+<li><a class="level_2"   href="knowledge-exchange/newsletter" >Arts Faculty Newsletter</a></li>
+<li><a class="level_2"   href="knowledge-exchange/run-run-shaw-g-f-gallery" >G/F Gallery, Run Run Shaw Tower</a></li>
+<li><a class="level_2"   href="knowledge-exchange/find-a-media-contact" >Find a Media Contact</a></li>
+<li><a class="level_2"   href="knowledge-exchange/for-companies-and-organizations" >For Companies and Organizations</a></li>
+</ul>
+                    </li>
+                    <li class="item "><a href="/alumni">Alumni</a>
+                        <ul class="sub-menu">
+<li><a class="level_2"   href="alumni/alumni-stories" >Alumni Stories I</a></li>
+<li><a class="level_2"   href="alumni/recent-alumni-stories" >Alumni Stories II</a></li>
+<li><a class="level_2"   href="alumni/arts-centenary-celebrations" >Faculty Centenary</a></li>
+</ul>
+                    </li>
+                    <li class="item last "><a href="/giving">Giving to Arts</a>
+                                            </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+            <div id="content">
+        <div class="content-container ">
+            
+                        
+            
+<div class="inner-content">
+    <div class="inner-content-top">
+        <h2 class="page-title">香港大學文學院啟動跨領域「音樂產業創新與流行實踐」MEPoP計劃<br />
+HKU Faculty of Arts to launch pioneering Music Entrepreneurship & Popular Practice Initiative</h2>
+    </div>
+    <div class="inner-content-mid">
+
+        <div class="display-block">
+            <p class="back-container float-right back"><a class="back photo-album-back" href="/news/2025/9">Back</a></p>
+            <div class="clear"></div>
+        </div>
+
+                    <div class="news-detail">
+                <p>1 September 2025 (Monday)</p>
+                <div class="richeditor">
+                    <!--templateType-white--><!--templateType-half-width--><table border="0" cellpadding="0" cellspacing="3" style="width:650px;" width="650">
+	<tbody>
+		<tr>
+			<td>
+			<h1 align="center">香港大學文學院啟動跨領域</h1>
+
+			<h1 align="center">「音樂產業創新與流行實踐」MEPoP計劃</h1>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p align="center"><img alt="A Group Photo of the Opening Ceremony, MALCS Graduate Show" src="/file/news/6141/MEPoP - Press Image Acronym Logo.png?h=195&amp;w=347&amp;proportional=1" style="width: 347px; height: 195px;" /></p>
+
+			<p></p>
+
+			<p><span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">香港大學 (港大) 文學院宣布啟動全新的跨領域「音樂產業創新與流行實踐」MEPoP計劃（項目英文全稱為Music Entrepreneurship &amp; Popular Practice）。這項亞洲首創，由跨國業界專家和學者聯合主導的計劃，旨在為流行音樂和創意文化產業生態系統，創造一個獨有的平台，讓音樂產業鏈的各持份者，從企業家、管理者、音樂藝術創作者、學者到評論家，能聚集在同一個時空裡碰撞、交流與合作。MEPoP希望將香港重塑為亞洲區內充滿活力的流行音樂文化樞紐，通過賦予未來一代音樂創作人與行政人員所需的技能與視野，協助他們在行業中取得成功。</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">亞洲音樂產業正以前所未有的速度增長：全球十大音樂市場中，有三個位於亞洲 &mdash; 中國大陸、日本與南韓。在這個不斷變化和面對創新科技顛覆的音樂世界中，MEPoP致力於建立一個社群，充分思考和探索音樂在文化產業中的意義和潛能並在實踐中不斷創新。憑藉來自業界與學界的全球人才，MEPoP將引領下一代創作人和業界領袖，最大化他們的藝術創作力與肩負社會責任感的創業家精神，同時培養他們的思辨能力和文化敏感度。</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">MEPoP以獨特的「產學合作」為基礎，建立連接藝術與商業、實踐與學術之間的重要橋樑。在學校為學生提供知識和人文思維基礎的同時，MEPoP則以業界的專業角度，補充課堂經驗，專注於培養學生在音樂與文化創意產業中，把握巨大機遇所必需的核心技能。</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">在項目啟動的初始階段，MEPoP的發展重心將劃分為「音樂商業與創業」及「流行音樂與創意文化實踐」兩大類別。首階段計劃將推出三門英文教學的密集課程，包括 Music Business and Entrepreneurship 課程、DJ 課程、Songwriting 課程。未來將持續拓展課程種類，並於官網公布最新資訊。此外 ，MEPoP也計劃推出更多面向公眾的項目和活動，包括公眾講座系列與圓桌討論、專業技能工作坊與大師班、歌曲創作營、創業創新比賽等。</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">MEPoP的聯席總監Jonathan Serbin先生與黃儒菁教授有豐富的跨界、產學合作經驗。自2022年以來，他們已經共同創辦並教授兩門在港大極受歡迎的音樂商業與創業本科課程。 港大文學院音樂系主任蔡寬量教授將擔任MEPoP的首席顧問。港大音樂系講師及博士畢業生Li Meng de Bakker博士將負責日常的管理工作，她同時是一位國際級DJ及製作人。 在現有的計劃和基礎上，MEPoP將為有志成為音樂企業家、行政人員、藝術家、歌曲創作人及製作人的公眾人士，貼身打造密集課程、和其他活動項目。MEPoP將不斷擴展，並歡迎來自全球的跨界音樂人才加入團隊。</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">蔡寬量教授表示：「我們非常興奮地宣布MEPoP的啟動。港大一向在融合理論學習與實踐應用方面，處於領先位置。我們相信，這令人振奮的計劃將為參加者提供額外的技能，幫助他們在音樂行業中成功發展。無論是高層行政人員、熱門單曲製作人，或是明日之星。」</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">Jonathan Serbin先生分享道：「亞洲的音樂市場繼續快速增長。音樂行業正是可融合理論與實踐技能的絕佳典範，並為那些想在行業發展的人提供強大的支持。對於企業家和行政人員來說，同時學習基礎理論 (例如財務模型、機會分析、數據分析等)，和業界精英的實戰經驗，可提升學生創造機會和建立成功企業的推動力。MEPoP希望在這交匯點上，為參與者提供在競爭激烈的環境中，取得成功所需的洞察力與技能。」</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">對於黃儒菁教授而言：「成立MEPoP讓我最為期待的是，它讓我們能有希望連接那些原本遙遠或零散的世界：在創意性與批判性思維之間、 『流行』 與 『獨立』之間、創造者與思考者之間、人與人工智能之間，以及業界與學界之間。在這個日益碎片化和分裂的世界裡，這一切都不可能輕易達成。但正因如此，我相信MEPoP有其存在的理由，也有能帶來真正改變的機會。」</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="box-sizing: border-box; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-weight: 800; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; margin: 0px; padding: 0px; color: rgb(51, 51, 51); text-align: justify; background-color: rgb(255, 255, 255);">關於Jonathan Serbin先生</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">Jonathan Serbin先生曾代表全球知名的音樂品牌在亞洲擴展業務。他曾擔任華納音樂亞洲地區的聯席總裁暨大中華地區CEO，在該職務上監督該區域十一個國家/ 地區的營運。他亦曾任Billboard的亞洲區負責人。Jonathan Serbin先生現時是Mammoth Media Asia的共同創辦人。Mammoth Media Asia正與美國首屈一指的音訊媒體公司iHeartMedia合作，在亞洲開發世界級的原創播客內容。他亦曾擔任音樂行業律師、投資銀行家和企業家。</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="box-sizing: border-box; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-weight: 800; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; margin: 0px; padding: 0px; color: rgb(51, 51, 51); text-align: justify; background-color: rgb(255, 255, 255);">關於Rujing Stacy Huang (黃儒菁) 教授</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">黃儒菁教授是一位音樂學家、批判性人工智能學者，也是港大音樂系助理教授。她從哈佛大學取得音樂人類學博士學位，也是AI Song Contest Foundation 的聯席總監。該基金會每年在全球範圍內舉辦 AI Song Contest (人工智能音樂創作大賽)，探討人機合作在歌曲創作中的可能性。該比賽在人工智能與音樂交叉領域擁有國際影響力，並被英文主流媒體廣泛報導。她也是全新國際跨學科期刊《Music and Data》的聯席編輯。該期刊旨在探討新興技術對全球音樂文化的影響。</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">有關Music Entrepreneurship &amp; Popular Practice (MEPoP) 計劃詳情，請瀏覽：</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<a href="https://www.mepop.hku.hk/" style="box-sizing: border-box; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; margin: 0px; padding: 0px; text-decoration-line: none; color: rgb(109, 188, 47); text-align: justify; background-color: rgb(255, 255, 255);" target="_blank" title="此連結會另開新頁">https://www.mepop.hku.hk</a><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">傳媒查詢，請聯絡Li Meng de Bakker博士 (電郵：</span><a href="mailto:lmdb@hku.hk" style="box-sizing: border-box; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; margin: 0px; padding: 0px; text-decoration-line: none; color: rgb(109, 188, 47); text-align: justify; background-color: rgb(255, 255, 255);">lmdb@hku.hk</a><span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">)。</span></p>
+
+			<p></p>
+
+			<p><span style="font-size: 12px;">新聞稿網上版及照片，請瀏覽:</span></p>
+			<a href="http://www.hku.hk/press/c_news_detail_28574.html">http://www.hku.hk/press/c_news_detail_28574.html</a>
+
+			<p></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p></p>
+
+<table border="0" cellpadding="0" cellspacing="3" style="width:650px;" width="650">
+	<tbody>
+		<tr>
+			<td>
+			<h1 align="center">HKU Faculty of Arts to launch pioneering Music Entrepreneurship &amp; Popular Practice Initiative</h1>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p></p>
+
+			<p><span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">HKU Faculty of Arts is excited to launch its pioneering Music Entrepreneurship and Popular Practice (MEPoP) initiative. This practitioner-driven, first-of-its-kind initiative in Asia will address existing gaps in the popular music ecosystem and the creative and cultural industries at large by creating a rare space where stakeholders across the value chain &mdash; from music executives and entrepreneurs to artists, scholars and critics &mdash; can come together in meaningful dialogue and collaboration. MEPoP aims to re-centre Hong Kong as a dynamic hub of popular music in Asia by arming the next generation of music-sector creators and executives with skills and perspectives needed to succeed in the industry.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">The Asian music industry is growing at an unprecedented pace: three of the top ten music markets worldwide &mdash; Mainland China, Japan and South Korea &mdash; are based in Asia. In this ever-evolving world of music confronted with technological innovation and disruption, MEPoP aims to build a community where music&rsquo;s potential as a cultural commodity can be explored, questioned, and innovated in practice. Powered by global talent from both industry and academia, MEPoP commits itself to fostering unparalleled artistry and responsible entrepreneurship in the next generation of creatives and business leaders, while nurturing in them an ability to think with intellectual rigour and innovate with cultural sensitivity.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">Founded on a unique industry-academia partnership, MEPoP seeks to bridge the worlds between art and business, and between practice and scholarship by bringing together stakeholders across the music value chain &mdash; from business executives and entrepreneurs to creative artists and cultural critics. While academia provides an intellectual foundation for students to excel in this marketplace, MEPoP supplements the classroom experience by providing an insider&rsquo;s view of the industry, focusing on developing essential skills needed to take advantage of the vast opportunities in the music and creative cultural sector.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">For its inaugural phase, the programming of MEPoP will consist of two main pillars, a music business and entrepreneurship pillar and a popular music and creative practice pillar. Among the offerings rolled out in this initial phase are three intensive courses: a course on Music Business and Entrepreneurship, a DJ course, and a Songwriting course. Participants may take classes across pillars, and additional courses will continue to be added and announced on the programme website. MEPoP also plans to offer a wide range of educational activities including but not limited to public lecture series and roundtables, specialised skill workshops and masterclasses, songwriting camps, innovation and entrepreneurship competitions, and other activities available to the general public.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">MEPoP&rsquo;s Co-Directors Mr&nbsp;Jonathan Serbin and Professor Stacy Huang have a fruitful history of fusing practical industry know-how with critical-cultural insights, having co-created and co-taught two popular undergraduate courses in music business and entrepreneurship at HKU since 2022. Professor Daniel Chua, Chair Professor of Music at HKU, will serve as MEPoP&rsquo;s chief advisor. Day-to-day management will be overseen by Dr&nbsp;Li Meng de Bakker, a Lecturer and PhD graduate of Music at HKU who is also an international DJ / producer based in Hong Kong. MEPoP will leverage the foundations of these existing initiatives and momentum to create highly targeted, public-facing intensive courses, event series, and programmes for aspiring music executives and entrepreneurs, artists, songwriters, and producers. The MEPoP team will keep expanding to welcome music talent from around the globe.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">Professor Daniel Chua stated, &ldquo;We are thrilled to announce the launch of MEPoP. HKU has always been a leader in fusing theoretical learning with practical applications. We believe this exciting initiative will provide participants with an extra set of skills to succeed in the music industry, both as executives at the highest levels and as creators of the hits of tomorrow.&rdquo;</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">Mr&nbsp;Jonathan Serbin shared, &ldquo;The music markets across Asia continue to grow rapidly. Music is the perfect example of an industry where theory and real-world skills can mesh to provide a powerful toolbox for those who wish to excel in the field. For both entrepreneurs and business executives, a fusion of underlying theory &mdash; financial modelling, opportunity analysis, data analysis, for example &mdash; combined with real-world experience and know-how taught by those who have &lsquo;lived it&rsquo; can serve as an accelerator for positioning students to uncover opportunities and build valuable businesses. MEPoP seeks to live at that very intersection, providing participants with the insight and skills they need to succeed in this exciting, but competitive, landscape.&rdquo;</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">For Professor Stacy Huang, &ldquo;What I most look forward to in building a platform such as MEPoP is the possibility it presents in connecting worlds otherwise distant or disjointed: between the creative and the critical, between &lsquo;pop&rsquo; and &lsquo;indie&rsquo;, between makers and thinkers, between human and AI, and between industry and academia. None of this will be easy, especially in the increasingly fragmented and divided world we live in, but it is for this reality that I believe MEPoP has a reason to exist and a true difference to make.&rdquo;</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="box-sizing: border-box; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-weight: 800; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; margin: 0px; padding: 0px; color: rgb(51, 51, 51); text-align: justify; background-color: rgb(255, 255, 255);">About Mr&nbsp;Jonathan Serbin</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">Mr&nbsp;Jonathan Serbin has represented some of the world&rsquo;s most-recognised music brands in their Asia expansion. He was most recently Co-President of Warner Music Asia and CEO of Greater China of Warner Music, overseeing eleven countries / territories across the region. He was formerly Head of Asia for Billboard and is now co-founder of Mammoth Media Asia which is partnering with iHeartMedia to develop world-class, original podcast content in Asia. He has also served as a music-sector lawyer, investment banker and entrepreneur.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="box-sizing: border-box; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-weight: 800; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; margin: 0px; padding: 0px; color: rgb(51, 51, 51); text-align: justify; background-color: rgb(255, 255, 255);">About Professor Rujing Stacy Huang</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">Professor Huang is a musicologist, critical AI scholar, and Assistant Professor of Music at HKU. She received her PhD in ethnomusicology from Harvard University, has industry and performing experiences, and is a co-director of the AI Song Contest Foundation. The foundation organises an annual international competition exploring human-AI partnership in songwriting that has been covered in mainstream media worldwide. She is also a co-editor of Music and Data, a new peer-reviewed journal that examines the impact of emerging technologies on global music cultures.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">For more information about MEPoP, please visit:&nbsp;</span><a href="https://www.mepop.hku.hk/" style="box-sizing: border-box; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; margin: 0px; padding: 0px; text-decoration-line: none; color: rgb(109, 188, 47); text-align: justify; background-color: rgb(255, 255, 255);" target="_blank" title="This link will pop up in a new window">https://www.mepop.hku.hk</a><span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">.</span><br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<br style="box-sizing: border-box; color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);" />
+			<span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">For media enquiries, please contact Dr&nbsp;Li Meng de Bakker (E-mail:&nbsp;</span><a href="mailto:lmdb@hku.hk" style="box-sizing: border-box; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-alternates: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-stretch: inherit; font-size: 14px; line-height: inherit; font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; vertical-align: baseline; margin: 0px; padding: 0px; text-decoration-line: none; color: rgb(109, 188, 47); text-align: justify; background-color: rgb(255, 255, 255);">lmdb@hku.hk</a><span style="color: rgb(51, 51, 51); font-family: roboto, Arial, sans-serif, &quot;Microsoft JhengHei revise&quot;, &quot;Microsoft JhengHei&quot;, MingLiU; font-size: 14px; text-align: justify; background-color: rgb(255, 255, 255);">).</span></p>
+
+			<p></p>
+
+			<p>For the online press release and photos, please visit:<br />
+			<a href="http://www.hku.hk/press/news_detail_28574.html">http://www.hku.hk/press/news_detail_28574.html</a>&nbsp;</p>
+
+			<h5></h5>
+
+			<div></div>
+
+			<div></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+
+<p></p>
+                </div>
+            </div>
+        
+        <div class="clear"></div>
+        <p class="top-container display-block text-align-right"><a href="/news/mepop-hku-faculty-of-arts-to-launch-pioneering-music-entrepreneurship--popular-practice-initiative#" class="button top-btn">TOP</a></p>
+    </div>
+    <div class="inner-content-bottom"></div>
+</div>
+
+                        <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+    <div class="footer-container">
+        <div class="left"> <span class="copy">Copyright 2025 Faculty of Arts, The University of Hong Kong. All Rights Reserved.</span></div>
+        <div class="clear"><!--empty--></div>
+    </div>
+</div>
+
+
+
+        <script  type="text/javascript"  src="/assets/js/projectbase.js"  ></script> 
+        
+    </body>
+</html>
