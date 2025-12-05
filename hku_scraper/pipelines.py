@@ -12,7 +12,7 @@ class SaveJsonPipeline:
     """
 
     def open_spider(self, spider):
-        self.data_dir = Path(os.getenv('USERPROFILE') or os.getenv('HOME') or '.') / 'Desktop' / 'hku_news_data'
+        self.data_dir = Path(spider.settings.get("DATA_DIR", "/root/hku_news_data"))
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.index_file = self.data_dir / 'news_index.json'
         # load index

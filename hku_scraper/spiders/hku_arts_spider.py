@@ -30,7 +30,7 @@ class HKUArtsNewsSpider(scrapy.Spider):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # 初始化数据存储路径
-        self.data_dir = Path(os.getenv('USERPROFILE')) / 'Desktop' / 'hku_news_data'
+        self.data_dir = Path('/root/hku_news_data')
         self.data_dir.mkdir(exist_ok=True)
         
         self.news_index_file = self.data_dir / 'news_index.json'
