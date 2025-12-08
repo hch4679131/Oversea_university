@@ -8,11 +8,25 @@ import time
 class SaveJsonPipeline:
     """Save item JSON after images are downloaded by ImagesPipeline.
     This pipeline expects item to contain fields: title, url, text, images (list from ImagesPipeline), scraped_at
-    It will save a file like `N_article.json` into Desktop/hku_news_data and update news_index.json.
+    It will save a file like `N_article.json` into DATA_DIR and update news_index.json.
     """
 
     def open_spider(self, spider):
-        self.data_dir = Path(spider.settings.get("DATA_DIR", "/root/hku_news_data"))
+        # Determine data directory from settings (prefer DATA_DIR, then IMAGES_STORE parent)
+        settings_obj = getattr(spider, 'settings', None) or getattr(getattr(spider, 'crawler', None), 'settings', None)
+        data_dir_setting = None
+        if settings_obj:
+            data_dir_setting = settings_obj.get('DATA_DIR') or None
+            if not data_dir_setting:
+                images_store = settings_obj.get('IMAGES_STORE')
+                if images_store:
+                    # use parent dir of images store (images are stored under IMAGES_STORE)
+                    data_dir_setting = str(Path(images_store).parent)
+
+        if not data_dir_setting:
+            data_dir_setting = os.path.join(os.getenv('HOME') or os.getenv('USERPROFILE') or '.', 'hku_news_data')
+
+        self.data_dir = Path(data_dir_setting)
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.index_file = self.data_dir / 'news_index.json'
         # load index
@@ -195,7 +209,11 @@ class SaveJsonPipeline:
             # 发送图片
             images = article_data.get('images', [])
             if images:
-                images_dir = self.data_dir / 'images'
+                # prefer IMAGES_STORE setting if present
+                settings_obj = getattr(spider, 'settings', None) or getattr(getattr(spider, 'crawler', None), 'settings', None)
+                images_store = settings_obj.get('IMAGES_STORE') if settings_obj else None
+                images_dir = Path(images_store) if images_store else (self.data_dir / 'images')
+
                 for img_rel_path in images:
                     img_path = images_dir / img_rel_path
                     if img_path.exists():
