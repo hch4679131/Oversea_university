@@ -127,7 +127,7 @@ class SaveJsonPipeline:
                 "2. 基于正文生成 2 句左右的中文概述（每句<=120字，口径客观，避免夸张）\n"
                 "3. 把整篇正文完整翻译为中文\n"
                 "严格输出 JSON，对象包含 title_zh、summary_zh、full_text_zh 三个字段。不要输出额外文本。\n"
-                f"Title:\n{title}\n\nBody:\n{text[:500]}"
+                f"Title:\n{title}\n\nBody:\n{text}"
             )
 
             payload = {
@@ -140,7 +140,7 @@ class SaveJsonPipeline:
                     {"role": "user", "content": prompt},
                 ],
                 "temperature": 0.3,
-                "max_tokens": 600,
+                "max_tokens": 4000,
             }
 
             headers = {
