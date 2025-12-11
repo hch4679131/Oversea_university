@@ -79,6 +79,12 @@ class SaveJsonPipeline:
         # 发送到企业微信
         self.send_to_wechat(out, spider)
         
+        # 文章之间增加延迟，避免连续发送多篇触发频率限制
+        # 企业微信限制：每分钟 20 条消息，每篇文章约 12 条（文本2段+图片10张）
+        # 因此至少需要等待 36 秒才能安全发送下一篇
+        spider.logger.info('[Rate Limit] 等待 40 秒后处理下一篇文章（避免 API 频率限制）...')
+        time.sleep(40)
+        
         return item
     
     def send_to_wechat(self, article_data, spider):
@@ -206,7 +212,7 @@ class SaveJsonPipeline:
             
             spider.logger.info(f'[WeChat] 已发送文本消息: {resp.json()}')
             
-            # 发送图片
+            # 发送图片（添加频率限制处理）
             images = article_data.get('images', [])
             if images:
                 # prefer IMAGES_STORE setting if present
@@ -214,7 +220,7 @@ class SaveJsonPipeline:
                 images_store = settings_obj.get('IMAGES_STORE') if settings_obj else None
                 images_dir = Path(images_store) if images_store else (self.data_dir / 'images')
 
-                for img_rel_path in images:
+                for idx, img_rel_path in enumerate(images, 1):
                     img_path = images_dir / img_rel_path
                     if img_path.exists():
                         try:
@@ -230,8 +236,31 @@ class SaveJsonPipeline:
                                 'image': {'base64': b64, 'md5': md5}
                             }
                             
-                            img_resp = requests.post(webhook_url, json=img_payload, timeout=10)
-                            spider.logger.info(f'[WeChat] 已发送图片: {img_rel_path} - {img_resp.json()}')
+                            # 发送图片，带重试机制
+                            max_retries = 3
+                            for retry in range(max_retries):
+                                img_resp = requests.post(webhook_url, json=img_payload, timeout=10)
+                                resp_data = img_resp.json()
+                                
+                                # 检查是否频率超限（errcode: 45009）
+                                if resp_data.get('errcode') == 45009:
+                                    if retry < max_retries - 1:
+                                        # 等待后重试（企业微信限制：每分钟 20 条）
+                                        wait_time = 5 * (retry + 1)  # 递增等待：5s, 10s, 15s
+                                        spider.logger.warning(f'[WeChat] 图片 {idx}/{len(images)} 频率超限，等待 {wait_time}s 后重试 ({retry+1}/{max_retries})')
+                                        time.sleep(wait_time)
+                                    else:
+                                        spider.logger.error(f'[WeChat] 图片 {idx}/{len(images)} 发送失败（频率超限，重试次数已用尽）: {img_rel_path}')
+                                        break
+                                else:
+                                    # 成功或其他错误
+                                    spider.logger.info(f'[WeChat] 已发送图片 {idx}/{len(images)}: {img_rel_path} - {resp_data}')
+                                    break
+                            
+                            # 图片间增加短延迟，避免连续触发频率限制
+                            if idx < len(images):
+                                time.sleep(1)
+                                
                         except Exception as e:
                             spider.logger.error(f'[WeChat] 发送图片失败 {img_rel_path}: {e}')
         except Exception as e:
