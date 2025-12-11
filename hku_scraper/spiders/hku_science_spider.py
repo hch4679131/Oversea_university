@@ -137,38 +137,30 @@ class HKUScienceNewsSpider(scrapy.Spider):
         
         self.logger.info(f'[Parsing Article] {title}')
         
-        # 提取文章主体内容（可能在不同的选择器中）
-        # 尝试多个可能的内容容器选择器
-        article_text = ''
-        article_html = ''
+        # 只抓取 div.container 内的正文内容（排除广告等）
+        # 优先使用 div.pressd__content（正文区域），fallback 到 div.container
+        content_container = response.css('div.pressd__content, div.container')
         
-        # 选择器优先级：article > main > div.content > div.article-body > 其他
-        content_selectors = [
-            'article',
-            'main',
-            'div.content',
-            'div.article-body',
-            'div.article-content',
-            'div.post-content',
-            'body'
-        ]
+        if not content_container:
+            self.logger.warning(f'  未找到内容容器，使用全文')
+            content_container = response.css('body')
         
-        for selector in content_selectors:
-            content = response.css(selector).get()
-            if content and len(content) > 100:  # 基本检查内容长度
-                article_html = content
-                break
-        
-        # 提取所有文本（去除脚本和样式标签）
-        article_text = ' '.join(response.css('article ::text, main ::text, div.content ::text').getall())
+        # 提取所有文本（只从容器内提取）
+        article_text = ' '.join(content_container.css('::text').getall())
         article_text = ' '.join(article_text.split())  # 清理多余空格
         
-        # 提取所有图片链接
-        image_urls = response.css('article img::attr(src), main img::attr(src), div.content img::attr(src), img::attr(src)').getall()
+        # 提取所有图片链接（只从容器内提取，排除 SVG）
+        image_urls = content_container.css('img::attr(src), img::attr(data-img-ori)').getall()
         image_urls = [urljoin(response.url, img.strip()) for img in image_urls if img and not img.endswith('.svg')]
         
-        # 去重
-        image_urls = list(set(image_urls))
+        # 去重并保持顺序
+        seen = set()
+        unique_images = []
+        for img in image_urls:
+            if img not in seen:
+                seen.add(img)
+                unique_images.append(img)
+        image_urls = unique_images
         
         self.logger.info(f'  文本长度: {len(article_text)} 字符')
         self.logger.info(f'  图片数量: {len(image_urls)}')
