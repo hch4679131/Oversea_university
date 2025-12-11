@@ -131,9 +131,8 @@ class HKUBusinessNewsSpider(scrapy.Spider):
         
         self.logger.info(f'[Parsing Article] {title}')
         
-        # 提取文章主体内容（商学院页面可能有不同的内容结构）
-        # 尝试多个可能的内容容器选择器
-        content_container = response.css('article, div.entry-content, div.post-content, div.content, main')
+        # 只抓取 article.blog-post-single-item 内的正文内容（排除广告等）
+        content_container = response.css('article.blog-post-single-item')
         
         if not content_container:
             self.logger.warning(f'  未找到内容容器，使用全文')
@@ -143,7 +142,8 @@ class HKUBusinessNewsSpider(scrapy.Spider):
         article_text = ' '.join(content_container.css('::text').getall())
         article_text = ' '.join(article_text.split())  # 清理多余空格
         
-        # 提取所有图片链接（优先使用高分辨率原图 data-src，其次使用 src）
+        # 提取所有图片链接（从 photo-gallary-item 或 article-content 中）
+        # 优先使用高分辨率 data-src，其次使用 src
         images = content_container.css('img')
         image_urls = []
         
