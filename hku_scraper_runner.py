@@ -43,9 +43,9 @@ def main():
     """主函数：定时运行所有爬虫"""
     logger.info('[HKU Scraper Runner] 启动...')
     logger.info('[Config] 检测间隔: 60分钟')
-    logger.info('[Spiders] hku_arts_news, hku_science_news')
+    logger.info('[Spiders] hku_arts_news, hku_science_news, hku_business_news')
     
-    spiders = ['hku_arts_news', 'hku_science_news']  # 要运行的所有爬虫
+    spiders = ['hku_arts_news', 'hku_science_news', 'hku_business_news']  # 要运行的所有爬虫
     interval = 60 * 60  # 60分钟 = 3600秒
     
     try:
