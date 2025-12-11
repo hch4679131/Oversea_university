@@ -149,9 +149,19 @@ class HKUScienceNewsSpider(scrapy.Spider):
         article_text = ' '.join(content_container.css('::text').getall())
         article_text = ' '.join(article_text.split())  # 清理多余空格
         
-        # 提取所有图片链接（只从容器内提取，排除 SVG）
-        image_urls = content_container.css('img::attr(src), img::attr(data-img-ori)').getall()
-        image_urls = [urljoin(response.url, img.strip()) for img in image_urls if img and not img.endswith('.svg')]
+        # 提取所有图片链接（优先使用高分辨率原图 data-img-ori，其次使用 src）
+        # 先取 data-img-ori（高分辨率），如果没有则用 src
+        images = content_container.css('img')
+        image_urls = []
+        
+        for img in images:
+            # 优先取 data-img-ori（原始高分辨率），否则取 src
+            img_url = img.css('::attr(data-img-ori)').get() or img.css('::attr(src)').get()
+            if img_url and not img_url.strip().endswith('.svg'):
+                image_urls.append(img_url.strip())
+        
+        # 转换为绝对路径
+        image_urls = [urljoin(response.url, img) for img in image_urls]
         
         # 去重并保持顺序
         seen = set()
