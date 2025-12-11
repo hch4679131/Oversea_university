@@ -58,6 +58,7 @@ class SaveJsonPipeline:
                 {
                     "title_zh": zh.get("title_zh"),
                     "summary_zh": zh.get("summary_zh"),
+                    "full_text_zh": zh.get("full_text_zh"),
                     "translation_model": zh.get("model"),
                     "translation_at": zh.get("timestamp"),
                 }
@@ -121,8 +122,11 @@ class SaveJsonPipeline:
             
             prompt = (
                 "你是中英文翻译和新闻摘要助手。\n"
-                "请把标题翻译为中文，并基于正文生成 2 句左右的中文摘要（每句<=120字，口径客观，避免夸张）。\n"
-                "严格输出 JSON，对象包含 title_zh 和 summary_zh 两个字段。不要输出额外文本。\n"
+                "请完成以下任务：\n"
+                "1. 把标题翻译为中文\n"
+                "2. 基于正文生成 2 句左右的中文概述（每句<=120字，口径客观，避免夸张）\n"
+                "3. 把整篇正文完整翻译为中文\n"
+                "严格输出 JSON，对象包含 title_zh、summary_zh、full_text_zh 三个字段。不要输出额外文本。\n"
                 f"Title:\n{title}\n\nBody:\n{text[:500]}"
             )
 
@@ -165,8 +169,7 @@ class SaveJsonPipeline:
 
             result = {
                 "title_zh": data.get("title_zh"),
-                "summary_zh": data.get("summary_zh"),
-                "model": model,
+                "summary_zh": data.get("summary_zh"),                "full_text_zh": data.get("full_text_zh"),                "model": model,
                 "timestamp": datetime.utcnow().isoformat() + "Z",
             }
             spider.logger.info(f"[DeepSeek] 翻译成功: {result['title_zh']}")
@@ -199,22 +202,38 @@ class SaveJsonPipeline:
                 spider.logger.info("[WeChat] 未配置 webhook，跳过发送")
                 return
 
-            # 优先使用翻译后的标题和摘要
+            # 优先使用翻译后的标题
             title = (
                 article_data.get("title_zh")
                 or article_data.get("title")
                 or "（无标题）"
             )
-            text = (
-                article_data.get("summary_zh")
-                or article_data.get("text", "")
-            )
+            summary = article_data.get("summary_zh", "")
+            full_text = article_data.get("full_text_zh", "")
             url = article_data.get("url", "")
             scraped_at = article_data.get("scraped_at", "")
 
+            # 先发送概述
+            if summary:
+                summary_content = f"**{title}**\n\n📝 **概述**\n{summary.strip()}\n\n[阅读原文]({url})\n\n_抓取时间: {scraped_at}_"
+                summary_bytes = len(summary_content.encode("utf-8"))
+                spider.logger.info(f"[WeChat] 发送概述: {summary_bytes} 字节")
+                
+                payload = {"msgtype": "markdown", "markdown": {"content": summary_content}}
+                resp = requests.post(webhook_url, json=payload, timeout=10)
+                spider.logger.info(f"[WeChat] 概述已发送: {resp.json()}")
+                time.sleep(1)
+
+            # 再发送全文翻译
+            if not full_text:
+                spider.logger.info("[WeChat] 无全文翻译，跳过")
+                return
+            
+            text = full_text
+
             # 构建 Markdown 消息
             plain_text = text.replace("\n", " ").strip()
-            md_template_prefix = f"**{title}**\n\n"
+            md_template_prefix = f"**{title}**\n\n📄 **全文翻译**\n\n"
             md_template_suffix = f"\n\n[阅读原文]({url})\n\n_抓取时间: {scraped_at}_"
             full_content = md_template_prefix + plain_text + md_template_suffix
             full_bytes = len(full_content.encode("utf-8"))
