@@ -64,7 +64,7 @@ class HKUArtsNewsSpider(scrapy.Spider):
         new_news_count = 0
         
         for idx, item in enumerate(news_items):
-            # 提取新闻链接和标题
+            # 提取新闻链接和标题123
             news_link = item.css('a::attr(href)').get()
             news_title = item.css('a::text').get()
             
