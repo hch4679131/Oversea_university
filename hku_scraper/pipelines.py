@@ -1,9 +1,11 @@
 import json
 import os
+from datetime import datetime
 from pathlib import Path
 import requests
 import hashlib
 import time
+from openai import OpenAI
 
 class SaveJsonPipeline:
     """Save item JSON after images are downloaded by ImagesPipeline.
@@ -48,6 +50,13 @@ class SaveJsonPipeline:
             if 'path' in im:
                 local_image_paths.append(str(Path(im['path']).as_posix()))
 
+        # 翻译与摘要（DeepSeek）
+        zh = self.translate_and_summarize(
+            item.get('title') or '',
+            item.get('text') or '',
+            spider,
+        )
+
         out = {
             'title': item.get('title'),
             'url': item.get('url'),
@@ -56,6 +65,14 @@ class SaveJsonPipeline:
             'scraped_at': item.get('scraped_at'),
             'status': item.get('status', 'completed')
         }
+
+        if zh:
+            out.update({
+                'title_zh': zh.get('title_zh'),
+                'summary_zh': zh.get('summary_zh'),
+                'translation_model': zh.get('model'),
+                'translation_at': zh.get('timestamp'),
+            })
 
         # generate filename index
         idx = len(self.index) + 1
@@ -86,6 +103,60 @@ class SaveJsonPipeline:
         time.sleep(40)
         
         return item
+
+    def _load_deepseek_key(self):
+        """加载 DeepSeek API Key，优先 config/deepseek.json，其次环境变量 DEEPSEEK_API_KEY"""
+        cfg_path = Path(__file__).parent.parent / 'config' / 'deepseek.json'
+        if cfg_path.exists():
+            try:
+                with open(cfg_path, 'r', encoding='utf-8') as f:
+                    cfg = json.load(f)
+                    if cfg.get('apiKey'):
+                        return cfg.get('apiKey')
+            except Exception:
+                pass
+        return os.getenv('DEEPSEEK_API_KEY')
+
+    def translate_and_summarize(self, title, text, spider):
+        """调用 DeepSeek，将标题翻译成中文并生成约 2 句摘要"""
+        api_key = self._load_deepseek_key()
+        if not api_key:
+            spider.logger.info('[DeepSeek] 未配置 API Key，跳过翻译/摘要')
+            return None
+        if not text:
+            return None
+
+        try:
+            client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com/v1")
+            prompt = (
+                "你是中英文翻译和新闻摘要助手。\n"
+                "请把标题翻译为中文，并基于正文生成 2 句左右的中文摘要（每句<=120字，口径客观，避免夸张）。\n"
+                "严格输出 JSON，对象包含 title_zh 和 summary_zh 两个字段。不要输出额外文本。\n"
+                f"Title:\n{title}\n\nBody:\n{text}"
+            )
+
+            resp = client.chat.completions.create(
+                model="deepseek-chat",
+                messages=[
+                    {"role": "system", "content": "You are a concise translator and summarizer."},
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=0.3,
+                max_tokens=600,
+            )
+
+            content = resp.choices[0].message.content.strip()
+            data = json.loads(content)
+
+            return {
+                'title_zh': data.get('title_zh'),
+                'summary_zh': data.get('summary_zh'),
+                'model': resp.model,
+                'timestamp': datetime.utcnow().isoformat() + 'Z',
+            }
+        except Exception as e:
+            spider.logger.error(f'[DeepSeek] 翻译/摘要失败: {e}')
+            return None
     
     def send_to_wechat(self, article_data, spider):
         """发送文章到企业微信机器人"""
@@ -106,8 +177,8 @@ class SaveJsonPipeline:
                 return
             
             # 构建文本消息
-            title = article_data.get('title', '（无标题）')
-            text = article_data.get('text', '')
+            title = article_data.get('title_zh') or article_data.get('title') or '（无标题）'
+            text = article_data.get('summary_zh') or article_data.get('text', '')
             url = article_data.get('url', '')
             scraped_at = article_data.get('scraped_at', '')
             
