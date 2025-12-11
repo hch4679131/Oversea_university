@@ -123,7 +123,7 @@ class HKUArtsNewsSpider(scrapy.Spider):
         item = {
             'title': title,
             'url': url,
-            'text': article_text[:5000],  # 限制文本长度
+            'text': article_text,  # 完整文本
             'image_urls': image_urls[:10],    # Scrapy ImagesPipeline 使用字段名 image_urls
             'scraped_at': datetime.now().isoformat(),
             'status': 'completed'

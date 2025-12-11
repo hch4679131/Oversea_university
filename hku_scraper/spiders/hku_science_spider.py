@@ -185,7 +185,7 @@ class HKUScienceNewsSpider(scrapy.Spider):
             'url': url,
             'published': pub_time,
             'description': description,
-            'text': article_text[:5000],  # 限制文本长度
+            'text': article_text,  # 完整文本
             'image_urls': image_urls[:10],  # Scrapy ImagesPipeline 使用字段名 image_urls
             'source': 'hku_science',  # 标识来源
             'scraped_at': datetime.now().isoformat(),

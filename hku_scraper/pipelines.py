@@ -153,7 +153,7 @@ class SaveJsonPipeline:
                 "https://api.deepseek.com/v1/chat/completions",
                 headers=headers,
                 json=payload,
-                timeout=30,
+                timeout=60,
             )
             resp.raise_for_status()
             body = resp.json()
