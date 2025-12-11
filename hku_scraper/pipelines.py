@@ -110,17 +110,20 @@ class SaveJsonPipeline:
         """调用 DeepSeek 翻译标题并生成摘要"""
         api_key = self._load_deepseek_key()
         if not api_key:
-            spider.logger.info("[DeepSeek] 未配置 API Key，跳过翻译/摘要")
+            spider.logger.warning("[DeepSeek] 未配置 API Key，跳过翻译/摘要")
             return None
         if not text:
+            spider.logger.warning("[DeepSeek] 文本为空，跳过翻译/摘要")
             return None
 
         try:
+            spider.logger.info(f"[DeepSeek] 开始翻译 (标题长度: {len(title)}, 正文长度: {len(text)})")
+            
             prompt = (
                 "你是中英文翻译和新闻摘要助手。\n"
                 "请把标题翻译为中文，并基于正文生成 2 句左右的中文摘要（每句<=120字，口径客观，避免夸张）。\n"
                 "严格输出 JSON，对象包含 title_zh 和 summary_zh 两个字段。不要输出额外文本。\n"
-                f"Title:\n{title}\n\nBody:\n{text}"
+                f"Title:\n{title}\n\nBody:\n{text[:500]}"
             )
 
             payload = {
@@ -128,7 +131,7 @@ class SaveJsonPipeline:
                 "messages": [
                     {
                         "role": "system",
-                        "content": "You are a concise translator and summarizer.",
+                        "content": "You are a concise translator and summarizer. Output only valid JSON.",
                     },
                     {"role": "user", "content": prompt},
                 ],
@@ -141,14 +144,16 @@ class SaveJsonPipeline:
                 "Content-Type": "application/json",
             }
 
+            spider.logger.info("[DeepSeek] 正在调用 API...")
             resp = requests.post(
                 "https://api.deepseek.com/v1/chat/completions",
                 headers=headers,
                 json=payload,
-                timeout=15,
+                timeout=30,
             )
             resp.raise_for_status()
             body = resp.json()
+            spider.logger.info(f"[DeepSeek] API 响应: {body.get('choices', [{}])[0].get('message', {}).get('content', '')[:100]}")
 
             content = body["choices"][0]["message"]["content"].strip()
             data = json.loads(content)
@@ -158,14 +163,22 @@ class SaveJsonPipeline:
                 or "deepseek-chat"
             )
 
-            return {
+            result = {
                 "title_zh": data.get("title_zh"),
                 "summary_zh": data.get("summary_zh"),
                 "model": model,
                 "timestamp": datetime.utcnow().isoformat() + "Z",
             }
+            spider.logger.info(f"[DeepSeek] 翻译成功: {result['title_zh']}")
+            return result
+        except requests.exceptions.RequestException as e:
+            spider.logger.error(f"[DeepSeek] HTTP 请求失败: {type(e).__name__}: {e}")
+            return None
+        except json.JSONDecodeError as e:
+            spider.logger.error(f"[DeepSeek] JSON 解析失败: {e} (原始响应: {content[:200] if 'content' in locals() else 'N/A'})")
+            return None
         except Exception as e:
-            spider.logger.error(f"[DeepSeek] 翻译/摘要失败: {e}")
+            spider.logger.error(f"[DeepSeek] 未知错误: {type(e).__name__}: {e}")
             return None
 
     def send_to_wechat(self, article_data, spider):
