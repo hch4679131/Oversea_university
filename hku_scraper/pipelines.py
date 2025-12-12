@@ -13,12 +13,19 @@ class SaveJsonPipeline:
     """保存文章 JSON，翻译摘要后发送到企业微信。"""
 
     def open_spider(self, spider):
-        self.data_dir = (
-            Path(os.getenv("USERPROFILE") or os.getenv("HOME") or ".")
-            / "Desktop"
-            / "hku_news_data"
-        )
-        self.data_dir.mkdir(parents=True, exist_ok=True)
+        # 统一数据目录，与爬虫保持一致，避免索引不一致导致重复发送
+        # 优先使用服务器目录 /root/hku_news_data；本地环境则回退到 Desktop/hku_news_data
+        server_dir = Path('/root/hku_news_data')
+        if server_dir.exists() or os.getenv('SERVER_ENV') == '1':
+            self.data_dir = server_dir
+            self.data_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            self.data_dir = (
+                Path(os.getenv("USERPROFILE") or os.getenv("HOME") or ".")
+                / "Desktop"
+                / "hku_news_data"
+            )
+            self.data_dir.mkdir(parents=True, exist_ok=True)
         
         # 根据爬虫名使用不同的索引文件
         spider_name = spider.name
