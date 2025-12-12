@@ -249,6 +249,15 @@ class SaveJsonPipeline:
             url = article_data.get("url", "")
             scraped_at = article_data.get("scraped_at", "")
             
+            # 识别来源学院
+            source_label = ""
+            if "arts" in spider.name.lower():
+                source_label = "🎨 HKU Arts"
+            elif "business" in spider.name.lower():
+                source_label = "💼 HKU Business"
+            elif "science" in spider.name.lower():
+                source_label = "🔬 HKU Science"
+            
             # 如果没有中文翻译，使用英文原文作为降级方案
             if not full_text:
                 spider.logger.warning("[WeChat] 无中文翻译，使用英文原文发送")
@@ -260,7 +269,7 @@ class SaveJsonPipeline:
 
             # 先发送概述（如果有）
             if summary:
-                summary_content = f"**{title}**\n\n📝 **概述**\n{summary.strip()}\n\n[阅读原文]({url})\n\n_抓取时间: {scraped_at}_"
+                summary_content = f"**{title}**\n\n{source_label} | 📝 **概述**\n{summary.strip()}\n\n[阅读原文]({url})\n\n_抓取时间: {scraped_at}_"
                 summary_bytes = len(summary_content.encode("utf-8"))
                 spider.logger.info(f"[WeChat] 发送概述: {summary_bytes} 字节")
                 
@@ -277,7 +286,7 @@ class SaveJsonPipeline:
 
             # 构建 Markdown 消息
             plain_text = text.replace("\n", " ").strip()
-            md_template_prefix = f"**{title}**\n\n📄 **{content_label}**\n\n"
+            md_template_prefix = f"**{title}**\n\n{source_label} | 📄 **{content_label}**\n\n"
             md_template_suffix = f"\n\n[阅读原文]({url})\n\n_抓取时间: {scraped_at}_"
             full_content = md_template_prefix + plain_text + md_template_suffix
             full_bytes = len(full_content.encode("utf-8"))
