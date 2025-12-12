@@ -116,8 +116,8 @@ class SaveJsonPipeline:
                 pass
         return os.getenv("DEEPSEEK_API_KEY")
 
-    def translate_and_summarize(self, title, text, spider):
-        """调用 DeepSeek 翻译标题并生成摘要"""
+    def translate_and_summarize(self, title, text, spider, retry=3):
+        """调用 DeepSeek 翻译标题并生成摘要，失败时重试"""
         api_key = self._load_deepseek_key()
         if not api_key:
             spider.logger.warning("[DeepSeek] 未配置 API Key，跳过翻译/摘要")
@@ -126,82 +126,99 @@ class SaveJsonPipeline:
             spider.logger.warning("[DeepSeek] 文本为空，跳过翻译/摘要")
             return None
 
-        try:
-            spider.logger.info(f"[DeepSeek] 开始翻译 (标题长度: {len(title)}, 正文长度: {len(text)})")
-            
-            prompt = (
-                "你是中英文翻译和新闻摘要助手。\n"
-                "请完成以下任务：\n"
-                "1. 把标题翻译为中文\n"
-                "2. 基于正文生成 2 句左右的中文概述（每句<=120字，口径客观，避免夸张）\n"
-                "3. 把整篇正文完整翻译为中文\n"
-                "严格输出 JSON，对象包含 title_zh、summary_zh、full_text_zh 三个字段。不要输出额外文本。\n"
-                f"Title:\n{title}\n\nBody:\n{text}"
-            )
+        for attempt in range(1, retry + 1):
+            try:
+                if attempt > 1:
+                    wait_time = 10 * attempt
+                    spider.logger.info(f"[DeepSeek] 第 {attempt}/{retry} 次重试，等待 {wait_time} 秒...")
+                    time.sleep(wait_time)
+                    
+                spider.logger.info(f"[DeepSeek] 开始翻译 (标题长度: {len(title)}, 正文长度: {len(text)})")
+                
+                prompt = (
+                    "你是中英文翻译和新闻摘要助手。\n"
+                    "请完成以下任务：\n"
+                    "1. 把标题翻译为中文\n"
+                    "2. 基于正文生成 2 句左右的中文概述（每句<=120字，口径客观，避免夸张）\n"
+                    "3. 把整篇正文完整翻译为中文\n"
+                    "严格输出 JSON，对象包含 title_zh、summary_zh、full_text_zh 三个字段。不要输出额外文本。\n"
+                    f"Title:\n{title}\n\nBody:\n{text}"
+                )
 
-            payload = {
-                "model": "deepseek-chat",
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": "You are a concise translator and summarizer. Output only valid JSON.",
-                    },
-                    {"role": "user", "content": prompt},
-                ],
-                "temperature": 0.3,
-                "max_tokens": 4000,
-            }
+                payload = {
+                    "model": "deepseek-chat",
+                    "messages": [
+                        {
+                            "role": "system",
+                            "content": "You are a concise translator and summarizer. Output only valid JSON.",
+                        },
+                        {"role": "user", "content": prompt},
+                    ],
+                    "temperature": 0.3,
+                    "max_tokens": 4000,
+                }
 
-            headers = {
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-            }
+                headers = {
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                }
 
-            spider.logger.info("[DeepSeek] 正在调用 API...")
-            resp = requests.post(
-                "https://api.deepseek.com/v1/chat/completions",
-                headers=headers,
-                json=payload,
-                timeout=60,
-            )
-            resp.raise_for_status()
-            body = resp.json()
-            spider.logger.info(f"[DeepSeek] API 响应: {body.get('choices', [{}])[0].get('message', {}).get('content', '')[:100]}")
+                spider.logger.info("[DeepSeek] 正在调用 API...")
+                resp = requests.post(
+                    "https://api.deepseek.com/v1/chat/completions",
+                    headers=headers,
+                    json=payload,
+                    timeout=60,
+                )
+                resp.raise_for_status()
+                body = resp.json()
+                spider.logger.info(f"[DeepSeek] API 响应: {body.get('choices', [{}])[0].get('message', {}).get('content', '')[:100]}")
 
-            content = body["choices"][0]["message"]["content"].strip()
-            
-            # 处理 DeepSeek 可能返回的 markdown 代码块格式
-            if content.startswith("```json"):
-                content = content[7:]  # 去掉 ```json
-            if content.startswith("```"):
-                content = content[3:]  # 去掉 ```
-            if content.endswith("```"):
-                content = content[:-3]  # 去掉结尾的 ```
-            content = content.strip()
-            
-            data = json.loads(content)
-            model = (
-                body.get("model")
-                or body["choices"][0].get("model")
-                or "deepseek-chat"
-            )
+                content = body["choices"][0]["message"]["content"].strip()
+                
+                # 处理 DeepSeek 可能返回的 markdown 代码块格式
+                if content.startswith("```json"):
+                    content = content[7:]  # 去掉 ```json
+                if content.startswith("```"):
+                    content = content[3:]  # 去掉 ```
+                if content.endswith("```"):
+                    content = content[:-3]  # 去掉结尾的 ```
+                content = content.strip()
+                
+                data = json.loads(content)
+                model = (
+                    body.get("model")
+                    or body["choices"][0].get("model")
+                    or "deepseek-chat"
+                )
 
-            result = {
-                "title_zh": data.get("title_zh"),
-                "summary_zh": data.get("summary_zh"),                "full_text_zh": data.get("full_text_zh"),                "model": model,
-                "timestamp": datetime.utcnow().isoformat() + "Z",
-            }
-            spider.logger.info(f"[DeepSeek] 翻译成功: {result['title_zh']}")
-            return result
-        except requests.exceptions.RequestException as e:
-            spider.logger.error(f"[DeepSeek] HTTP 请求失败: {type(e).__name__}: {e}")
-            return None
-        except json.JSONDecodeError as e:
-            spider.logger.error(f"[DeepSeek] JSON 解析失败: {e} (原始响应: {content[:200] if 'content' in locals() else 'N/A'})")
-            return None
-        except Exception as e:
-            spider.logger.error(f"[DeepSeek] 未知错误: {type(e).__name__}: {e}")
-            return None
+                result = {
+                    "title_zh": data.get("title_zh"),
+                    "summary_zh": data.get("summary_zh"),
+                    "full_text_zh": data.get("full_text_zh"),
+                    "model": model,
+                    "timestamp": datetime.utcnow().isoformat() + "Z",
+                }
+                spider.logger.info(f"[DeepSeek] 翻译成功: {result['title_zh']}")
+                return result
+                
+            except requests.exceptions.RequestException as e:
+                spider.logger.error(f"[DeepSeek] HTTP 请求失败 (第{attempt}次): {type(e).__name__}: {e}")
+                if attempt == retry:
+                    return None
+                continue
+            except json.JSONDecodeError as e:
+                spider.logger.error(f"[DeepSeek] JSON 解析失败 (第{attempt}次): {e} (原始响应: {content[:200] if 'content' in locals() else 'N/A'})")
+                if attempt == retry:
+                    return None
+                continue
+            except Exception as e:
+                spider.logger.error(f"[DeepSeek] 未知错误 (第{attempt}次): {type(e).__name__}: {e}")
+                if attempt == retry:
+                    return None
+                continue
+        
+        return None
 
     def send_to_wechat(self, article_data, spider):
         """发送文章到企业微信机器人（使用翻译后的标题和摘要）"""
@@ -221,7 +238,7 @@ class SaveJsonPipeline:
                 spider.logger.info("[WeChat] 未配置 webhook，跳过发送")
                 return
 
-            # 优先使用翻译后的标题
+            # 优先使用翻译后的标题，如果没有则用英文原标题
             title = (
                 article_data.get("title_zh")
                 or article_data.get("title")
@@ -231,8 +248,17 @@ class SaveJsonPipeline:
             full_text = article_data.get("full_text_zh", "")
             url = article_data.get("url", "")
             scraped_at = article_data.get("scraped_at", "")
+            
+            # 如果没有中文翻译，使用英文原文作为降级方案
+            if not full_text:
+                spider.logger.warning("[WeChat] 无中文翻译，使用英文原文发送")
+                title = article_data.get("title", "（无标题）")
+                full_text = article_data.get("text", "")
+                if not full_text:
+                    spider.logger.warning("[WeChat] 无任何内容可发送，跳过")
+                    return
 
-            # 先发送概述
+            # 先发送概述（如果有）
             if summary:
                 summary_content = f"**{title}**\n\n📝 **概述**\n{summary.strip()}\n\n[阅读原文]({url})\n\n_抓取时间: {scraped_at}_"
                 summary_bytes = len(summary_content.encode("utf-8"))
@@ -242,17 +268,16 @@ class SaveJsonPipeline:
                 resp = requests.post(webhook_url, json=payload, timeout=10)
                 spider.logger.info(f"[WeChat] 概述已发送: {resp.json()}")
                 time.sleep(1)
-
-            # 再发送全文翻译
-            if not full_text:
-                spider.logger.info("[WeChat] 无全文翻译，跳过")
-                return
+            else:
+                spider.logger.info("[WeChat] 无概述，直接发送全文")
             
+            # 发送全文（中文翻译或英文原文）
             text = full_text
+            content_label = "全文翻译" if article_data.get("full_text_zh") else "原文内容"
 
             # 构建 Markdown 消息
             plain_text = text.replace("\n", " ").strip()
-            md_template_prefix = f"**{title}**\n\n📄 **全文翻译**\n\n"
+            md_template_prefix = f"**{title}**\n\n📄 **{content_label}**\n\n"
             md_template_suffix = f"\n\n[阅读原文]({url})\n\n_抓取时间: {scraped_at}_"
             full_content = md_template_prefix + plain_text + md_template_suffix
             full_bytes = len(full_content.encode("utf-8"))
