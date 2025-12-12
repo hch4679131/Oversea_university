@@ -169,6 +169,16 @@ class SaveJsonPipeline:
             spider.logger.info(f"[DeepSeek] API 响应: {body.get('choices', [{}])[0].get('message', {}).get('content', '')[:100]}")
 
             content = body["choices"][0]["message"]["content"].strip()
+            
+            # 处理 DeepSeek 可能返回的 markdown 代码块格式
+            if content.startswith("```json"):
+                content = content[7:]  # 去掉 ```json
+            if content.startswith("```"):
+                content = content[3:]  # 去掉 ```
+            if content.endswith("```"):
+                content = content[:-3]  # 去掉结尾的 ```
+            content = content.strip()
+            
             data = json.loads(content)
             model = (
                 body.get("model")
