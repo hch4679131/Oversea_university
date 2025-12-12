@@ -19,7 +19,16 @@ class SaveJsonPipeline:
             / "hku_news_data"
         )
         self.data_dir.mkdir(parents=True, exist_ok=True)
-        self.index_file = self.data_dir / "news_index.json"
+        
+        # 根据爬虫名使用不同的索引文件
+        spider_name = spider.name
+        if spider_name == "hku_science_news":
+            self.index_file = self.data_dir / "science_news_index.json"
+        elif spider_name == "hku_business_news":
+            self.index_file = self.data_dir / "business_news_index.json"
+        else:  # hku_arts_news 或其他
+            self.index_file = self.data_dir / "news_index.json"
+        
         if self.index_file.exists():
             try:
                 with open(self.index_file, "r", encoding="utf-8") as f:
