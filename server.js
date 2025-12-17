@@ -16,6 +16,8 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
+// 兼容 x-www-form-urlencoded 以便在运维场景下通过 curl/表单提交
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.dirname(__filename)));
 
 // 挂载认证路由
