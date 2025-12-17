@@ -20,6 +20,14 @@ function maskPhone(p) {
     return String(p).replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2');
 }
 
+// 调试：记录进入 auth 路由的请求（便于定位 JSON 解析问题）
+router.use((req, res, next) => {
+    try {
+        console.log('[auth] incoming', req.method, req.url, req.headers['content-type'], req.body);
+    } catch (e) {}
+    next();
+});
+
 // MySQL 连接池
 const pool = mysql.createPool({
     host: 'localhost',
