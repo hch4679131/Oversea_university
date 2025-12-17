@@ -30,10 +30,13 @@ router.use((req, res, next) => {
 
 // MySQL 连接池
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Hksd2025!@#',
-    database: 'hksd_auth',
+    host: process.env.MYSQL_HOST || '127.0.0.1',
+    user: process.env.MYSQL_USER || 'root',
+    password: process.env.MYSQL_PASSWORD || 'Hksd2025!@#',
+    database: process.env.MYSQL_DATABASE || 'hksd_auth',
+    // Prefer socket if provided; otherwise default to known server port 3333
+    port: process.env.MYSQL_SOCKET ? undefined : (process.env.MYSQL_PORT ? Number(process.env.MYSQL_PORT) : 3333),
+    socketPath: process.env.MYSQL_SOCKET || undefined,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
