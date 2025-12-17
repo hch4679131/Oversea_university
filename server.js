@@ -9,6 +9,7 @@ const express = require('express');
 const path = require('path');
 const { scrapeWebsiteToExcel, scrapeMultipleUrls } = require('./scraper');
 const { sendWeChatWebhook, sendWeChatImage } = require('./wechat');
+const authRouter = require('./auth');  // 认证模块
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +17,9 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(express.static(path.dirname(__filename)));
+
+// 挂载认证路由
+app.use('/api/auth', authRouter);
 
 /**
  * API: POST /api/scrape
@@ -81,6 +85,7 @@ app.post('/api/scrape-batch', async (req, res) => {
             error: error.message
         });
     }
+    
 });
 
 /**
