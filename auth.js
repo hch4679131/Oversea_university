@@ -300,8 +300,8 @@ router.post('/register', [
     body('phone').isMobilePhone('zh-CN'),
     body('password').isLength({ min: 6 }).withMessage('密码至少 6 位'),
     body('code').isLength({ min: 6, max: 6 }).isNumeric(),
-    body('idCard').optional().isLength({ min: 18, max: 18 }),
-    body('idCardName').optional().notEmpty()
+    body('idCard').isLength({ min: 18, max: 18 }).withMessage('身份证号码格式错误'),
+    body('idCardName').notEmpty().withMessage('姓名不能为空')
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -327,13 +327,19 @@ router.post('/register', [
             return res.status(400).json({ success: false, message: '该手机号已注册' });
         }
         
+        // 校验身份证姓名一致性
+        const idResult = await verifyIDCard(idCard, idCardName);
+        if (!idResult.valid) {
+            return res.status(400).json({ success: false, message: idResult.message || '身份证验证失败' });
+        }
+
         // 加密密码
         const passwordHash = await bcrypt.hash(password, 10);
-        
-        // 创建用户
+
+        // 创建用户（verified 仅在身份证校验通过后置为 true）
         await pool.execute(
             'INSERT INTO users (phone, password_hash, id_card, id_card_name, verified) VALUES (?, ?, ?, ?, ?)',
-            [phone, passwordHash, idCard || null, idCardName || null, !!idCard]
+            [phone, passwordHash, idCard, idCardName, true]
         );
         
         // 标记验证码已使用
