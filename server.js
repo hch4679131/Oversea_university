@@ -766,7 +766,7 @@ app.get('/api/health', (req, res) => {
 
 // Serve HTML file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'ai_studio_code.html'));
+    res.sendFile(path.join(__dirname, 'ai_studio_code (20).html'));
 });
 
 // Error handling middleware

@@ -37,6 +37,24 @@
         }
         /* 优化性能 */
         .will-change-transform { will-change: transform, opacity; }
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            max-width: 360px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+            z-index: 9999;
+            color: #fff;
+            font-weight: 600;
+            animation: slideIn 0.25s ease-out;
+        }
+        .toast.success { background: #16a34a; }
+        .toast.error { background: #dc2626; }
+        .toast.loading { background: #2563eb; }
+        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
 <body class="antialiased selection:bg-heritage-900 selection:text-gold-400 overflow-x-hidden">
@@ -244,6 +262,47 @@
         </div>
     </section>
 
+    <!-- 6. Auth Section -->
+    <section id="auth" class="py-20 bg-paper-100 border-y border-heritage-900/5">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-10">
+            <div class="space-y-4">
+                <h2 class="text-3xl font-serif font-bold text-heritage-900">快速注册 / 登录</h2>
+                <p class="text-heritage-800/70 font-serif">手机号 + 验证码一体化。支持注册、登录、重置密码。</p>
+                <div class="bg-white p-6 border border-heritage-900/10 shadow-sm">
+                    <div class="grid gap-3">
+                        <input id="auth-phone" type="text" placeholder="手机号" class="px-4 py-3 border border-heritage-900/15 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-400" />
+                        <select id="auth-purpose" class="px-4 py-3 border border-heritage-900/15 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-400">
+                            <option value="register">注册</option>
+                            <option value="reset_password">重置密码</option>
+                            <option value="login">登录</option>
+                        </select>
+                        <div class="flex gap-3">
+                            <button id="auth-send-code" class="flex-1 bg-heritage-900 text-paper-50 py-3 rounded-md font-semibold hover:bg-heritage-800 transition">发送验证码</button>
+                            <input id="auth-code" type="text" placeholder="验证码" class="w-32 px-4 py-3 border border-heritage-900/15 rounded-md" />
+                        </div>
+                        <button id="auth-verify-code" class="bg-gold-500 text-paper-50 py-3 rounded-md font-semibold hover:bg-gold-600 transition">验证验证码</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-2xl font-serif font-bold text-heritage-900">注册 / 登录 / 重置</h3>
+                <div class="bg-white p-6 border border-heritage-900/10 shadow-sm space-y-3">
+                    <input id="auth-password" type="password" placeholder="设置密码（注册）" class="w-full px-4 py-3 border border-heritage-900/15 rounded-md" />
+                    <input id="auth-idcard" type="text" placeholder="身份证号（可选）" class="w-full px-4 py-3 border border-heritage-900/15 rounded-md" />
+                    <input id="auth-idname" type="text" placeholder="姓名（可选）" class="w-full px-4 py-3 border border-heritage-900/15 rounded-md" />
+                    <button id="auth-register" class="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 transition">注册</button>
+                    <div class="border-t border-heritage-900/10 my-2"></div>
+                    <input id="login-phone" type="text" placeholder="手机号（登录）" class="w-full px-4 py-3 border border-heritage-900/15 rounded-md" />
+                    <input id="login-password" type="password" placeholder="密码（登录）" class="w-full px-4 py-3 border border-heritage-900/15 rounded-md" />
+                    <button id="auth-login" class="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition">登录</button>
+                    <input id="reset-password" type="password" placeholder="新密码（重置）" class="w-full px-4 py-3 border border-heritage-900/15 rounded-md" />
+                    <button id="auth-reset" class="w-full bg-yellow-500 text-white py-3 rounded-md font-semibold hover:bg-yellow-600 transition">重置密码</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer (触底判定优化) -->
     <footer class="bg-paper-50 pt-24 pb-12 will-change-transform"
             :style="`opacity: ${p(1.6, 1.9)}; transform: translateY(${30 - 30 * p(1.6, 1.9)}px)`">
@@ -424,6 +483,94 @@
                 }
             }
         }
+    </script>
+
+    <script>
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const byId = (id) => document.getElementById(id);
+
+            const api = async (url, payload) => {
+                const resp = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                return resp.json();
+            };
+
+            const sendCodeBtn = byId('auth-send-code');
+            const verifyCodeBtn = byId('auth-verify-code');
+            const registerBtn = byId('auth-register');
+            const loginBtn = byId('auth-login');
+            const resetBtn = byId('auth-reset');
+
+            sendCodeBtn?.addEventListener('click', async () => {
+                const phone = byId('auth-phone').value.trim();
+                const purpose = byId('auth-purpose').value;
+                try {
+                    showToast('发送验证码...', 'loading');
+                    const data = await api('/api/auth/send-code', { phone, purpose });
+                    if (data.success) showToast('验证码已发送', 'success'); else showToast(data.message || '发送失败', 'error');
+                } catch (e) { showToast(e.message, 'error'); }
+            });
+
+            verifyCodeBtn?.addEventListener('click', async () => {
+                const phone = byId('auth-phone').value.trim();
+                const code = byId('auth-code').value.trim();
+                try {
+                    showToast('验证中...', 'loading');
+                    const data = await api('/api/auth/verify-code', { phone, code });
+                    if (data.success) showToast('验证成功', 'success'); else showToast(data.message || '验证失败', 'error');
+                } catch (e) { showToast(e.message, 'error'); }
+            });
+
+            registerBtn?.addEventListener('click', async () => {
+                const phone = byId('auth-phone').value.trim();
+                const code = byId('auth-code').value.trim();
+                const password = byId('auth-password').value;
+                const idCard = byId('auth-idcard').value.trim();
+                const idCardName = byId('auth-idname').value.trim();
+                try {
+                    showToast('注册中...', 'loading');
+                    const data = await api('/api/auth/register', { phone, code, password, idCard, idCardName });
+                    if (data.success) showToast('注册成功', 'success'); else showToast(data.message || '注册失败', 'error');
+                } catch (e) { showToast(e.message, 'error'); }
+            });
+
+            loginBtn?.addEventListener('click', async () => {
+                const phone = byId('login-phone').value.trim();
+                const password = byId('login-password').value;
+                try {
+                    showToast('登录中...', 'loading');
+                    const data = await api('/api/auth/login', { phone, password });
+                    if (data.success) {
+                        localStorage.setItem('auth_token', data.token);
+                        showToast('登录成功', 'success');
+                    } else {
+                        showToast(data.message || '登录失败', 'error');
+                    }
+                } catch (e) { showToast(e.message, 'error'); }
+            });
+
+            resetBtn?.addEventListener('click', async () => {
+                const phone = byId('auth-phone').value.trim();
+                const code = byId('auth-code').value.trim();
+                const newPassword = byId('reset-password').value;
+                try {
+                    showToast('重置密码中...', 'loading');
+                    const data = await api('/api/auth/reset-password', { phone, code, newPassword });
+                    if (data.success) showToast('密码重置成功', 'success'); else showToast(data.message || '重置失败', 'error');
+                } catch (e) { showToast(e.message, 'error'); }
+            });
+        });
     </script>
 </body>
 </html>
