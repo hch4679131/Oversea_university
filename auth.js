@@ -115,23 +115,32 @@ async function verifyIDCard(idCard, name) {
     
     try {
         const axios = require('axios');
+        const qs = require('querystring');
         
-        // 调用阿里云市场身份证实名认证 API
-        const response = await axios.get('https://jisusfz.market.alicloudapi.com/idcard/query', {
-            params: {
+        // 调用阿里云市场身份证实名认证 API (康展接口)
+        const response = await axios.post(
+            'https://kzidcardv1.market.alicloudapi.com/api-mall/api/id_card/check',
+            qs.stringify({
                 idcard: idCard,
                 name: name
-            },
-            headers: {
-                'Authorization': `APPCODE ${ALIYUN_CONFIG.idVerifyAppCode}`
-            },
-            timeout: 10000
-        });
+            }),
+            {
+                headers: {
+                    'Authorization': `APPCODE ${ALIYUN_CONFIG.idVerifyAppCode}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                timeout: 10000
+            }
+        );
         
-        console.log(`[身份证验证] ${name} - ${idCard}，结果: ${response.data.status}`);
+        console.log(`[身份证验证] ${name} - ${idCard}，返回: ${JSON.stringify(response.data)}`);
         
-        if (response.data.status === '0' && response.data.result) {
+        // 康展API返回格式: { code: 200, charge: true, msg: "成功", result: { res: 1/2 } }
+        // res=1 表示一致，res=2 表示不一致
+        if (response.data.code === 200 && response.data.result && response.data.result.res === 1) {
             return { valid: true, message: '身份证验证通过' };
+        } else if (response.data.result && response.data.result.res === 2) {
+            return { valid: false, message: '身份证与姓名不一致' };
         } else {
             return { valid: false, message: response.data.msg || '身份证验证失败' };
         }
