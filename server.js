@@ -10,6 +10,7 @@ const path = require('path');
 const { scrapeWebsiteToExcel, scrapeMultipleUrls } = require('./scraper');
 const { sendWeChatWebhook, sendWeChatImage } = require('./wechat');
 const authRouter = require('./auth');  // 认证模块
+const chatRouter = require('./chat');  // AI 聊天模块
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,8 @@ app.use(express.static(path.dirname(__filename)));
 
 // 挂载认证路由
 app.use('/api/auth', authRouter);
+// 挂载 AI 聊天路由
+app.use('/api', chatRouter);
 
 /**
  * API: POST /api/scrape
