@@ -796,6 +796,13 @@
                     console.log('[AI Chat] 发送消息:', message);
                     console.log('[AI Chat] Token:', token);
                     
+                    const requestBody = {
+                        message: message,
+                        history: chatHistory.slice(-10).map(m => ({ role: m.role, content: m.content }))
+                    };
+                    console.log('[AI Chat] Request Body:', requestBody);
+                    console.log('[AI Chat] JSON String:', JSON.stringify(requestBody));
+                    
                     const resp = await fetch('/api/chat', {
                         method: 'POST',
                         headers: {
