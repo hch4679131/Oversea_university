@@ -204,13 +204,11 @@ router.post('/send-code', [
             }
         }
         
-        // 生成并发送验证码
+        // 生成并发送验证码（过期时间由 MySQL 计算，避免时区/类型问题）
         const code = generateVerificationCode();
-        const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 分钟后过期
-        
         await pool.execute(
-            'INSERT INTO verification_codes (phone, code, purpose, expires_at) VALUES (?, ?, ?, ?)',
-            [phone, code, purpose, expiresAt]
+            'INSERT INTO verification_codes (phone, code, purpose, expires_at) VALUES (?, ?, ?, DATE_ADD(NOW(), INTERVAL 5 MINUTE))',
+            [phone, code, purpose]
         );
         
         const smsSent = await sendSMS(phone, code);
