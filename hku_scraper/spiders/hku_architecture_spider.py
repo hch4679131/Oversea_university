@@ -58,21 +58,18 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
         new_news_count = 0
 
         for idx, item in enumerate(news_items):
-            # 链接：仅取包含标题 div.title 的 a；或标题下的 a；或显式指向 /about/news/ 的 a
-            link = (
-                item.xpath('(.//div[contains(@class, "title")]/a/@href | .//a[div[contains(@class, "title")]]/@href | .//a[contains(@href, "/about/news/")]/@href)[1]').get()
-                or item.css('a::attr(href)').get()
-            )
+            # 链接：找eventItem内不含?cat=和?page=的第一个a标签
+            all_links = item.css('a::attr(href)').getall()
+            link = None
+            for candidate in all_links:
+                if not any(x in candidate for x in ['?cat=', '?page=', '/page/', '/category/', '/tag/']):
+                    link = candidate
+                    break
+            
             if not link:
                 continue
 
             full_url = urljoin(response.url, link.strip())
-
-            # 仅保留 /about/news/ 详情页链接；并过滤分页、分类等
-            if '/about/news/' not in full_url:
-                continue
-            if any(x in full_url for x in ['?cat=', '?page=', '/page/', '/category/', '/tag/']):
-                continue
 
             news_key = full_url
 
