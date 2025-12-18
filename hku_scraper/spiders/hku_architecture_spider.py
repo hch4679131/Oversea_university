@@ -64,6 +64,11 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
                 continue
 
             full_url = urljoin(response.url, link.strip())
+
+            # 过滤分页、分类、归档链接，只处理新闻详情页
+            if any(x in full_url for x in ['?cat=', '?page=', '/page/', '/category/', '/tag/']):
+                continue
+
             news_key = full_url
 
             # 标题：eventItem 中的 div.title 文本优先
@@ -129,11 +134,32 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
         content_container = response.css(
             'div.entry-content, div.post-content, div.postcontent, article .content, div.article-content, div.content-area'
         )
-        if content_container:
-            content_container = content_container[0]
-        else:
-            fallback = response.css('article, main')
-            content_container = fallback[0] if fallback else None
+        # 尝试以页面主标题为锚点，定位主内容块
+        if not content_container:
+            title_text = title.strip()
+            # 优先 h1/h2 精确匹配
+            title_node = response.xpath(
+                f"//h1[normalize-space()='{title_text}'] | //h2[normalize-space()='{title_text}']"
+            )
+            target = None
+            if title_node:
+                # 先找紧随标题之后的内容区块
+                sib = title_node.xpath(
+                    "following-sibling::*[(self::div or self::section or self::article) and (contains(@class,'content') or contains(@class,'entry') or contains(@class,'post'))][1]"
+                )
+                if sib:
+                    target = sib[0]
+                else:
+                    anc = title_node.xpath(
+                        "ancestor::*[(self::article or self::div) and (contains(@class,'content') or contains(@class,'entry') or contains(@class,'post'))][1]"
+                    )
+                    if anc:
+                        target = anc[0]
+            if target is not None:
+                content_container = target
+            else:
+                fallback = response.css('article, main')
+                content_container = fallback[0] if fallback else None
 
         if not content_container:
             self.logger.warning('[Parsing Article] 未找到正文容器，跳过')
