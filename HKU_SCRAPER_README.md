@@ -14,7 +14,10 @@ hku_scraper/
 ├── settings.py                      # Scrapy 配置
 ├── spiders/
 │   ├── __init__.py
-│   └── hku_arts_spider.py          # 主爬虫逻辑
+│   ├── hku_arts_spider.py          # 文学院
+│   ├── hku_business_spider.py      # 商学院
+│   ├── hku_science_spider.py       # 理学院
+│   └── hku_grad_spider.py          # 研究学院（News & Events）
 hku_scraper_runner.py               # 定时运行器（30秒检测一次）
 scrapy.cfg                           # Scrapy 配置文件
 ```
