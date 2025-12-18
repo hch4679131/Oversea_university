@@ -102,14 +102,14 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
             )
             preview_img = urljoin(response.url, preview_img.strip()) if preview_img else None
 
-            self.logger.info(f'[News Item {idx+1}] {title[:50]}... | {pub_time}')
+            self.logger.info(f'[News Item {idx+1}] {title[:50]}... | {pub_time} | URL: {full_url}')
 
             if news_key in self.existing_news:
-                self.logger.info('  → 已存在，跳过')
+                self.logger.info(f'  → 已存在，跳过')
                 continue
 
             new_news_count += 1
-            self.logger.info('  → 新增！准备爬取详情页...')
+            self.logger.info(f'  → 新增！准备爬取详情页...')
 
             yield scrapy.Request(
                 full_url,
