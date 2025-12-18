@@ -139,8 +139,18 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
             self.logger.warning('[Parsing Article] 未找到正文容器，跳过')
             return
 
-        article_text = ' '.join(content_container.css('::text').getall())
-        article_text = ' '.join(article_text.split())
+        # 过滤掉导航/菜单/侧栏/页脚等文本
+        text_nodes = content_container.xpath(
+            './/text()[
+                not(ancestor::nav)
+                and not(ancestor::header)
+                and not(ancestor::footer)
+                and not(ancestor::aside)
+                and not(ancestor::*[contains(@class, "menu") or contains(@class, "navbar") or contains(@class, "breadcrumbs") or contains(@class, "breadcrumb") or contains(@class, "pagination") or contains(@class, "sidebar") or contains(@id, "menu") or contains(@id, "nav")])
+            ]'
+        ).getall()
+
+        article_text = ' '.join([t.strip() for t in text_nodes if t.strip()])
 
         images = content_container.css('img')
         image_urls = []
