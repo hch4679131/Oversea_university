@@ -47,17 +47,20 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
             json.dump(self.existing_news, f, ensure_ascii=False, indent=2)
 
     def parse(self, response):
-        """解析建筑学院新闻列表"""
+        """解析建筑学院新闻列表（针对 #events-wrapper eventItem）"""
         self.logger.info('[Parse List] 开始解析 HKU Architecture 新闻列表')
 
-        # 兼容多种结构：article / news-item / list item
-        news_items = response.css('article, li, div.news-item, div.news-article, div.post')
+        # 优先匹配 #events-wrapper div.eventItem，避免误抓导航
+        news_items = response.css('#events-wrapper div.eventItem')
+        if not news_items:
+            news_items = response.css('article, li, div.news-item, div.news-article, div.post')
+
         self.logger.info(f'[News Found] 发现 {len(news_items)} 条新闻项')
 
         new_news_count = 0
 
         for idx, item in enumerate(news_items):
-            # 尝试多种链接选择器
+            # 链接：eventItem 内 a[href]
             link = item.css('a::attr(href)').get()
             if not link:
                 continue
@@ -65,20 +68,30 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
             full_url = urljoin(response.url, link.strip())
             news_key = full_url
 
-            # 提取标题
-            title = item.css('h2 a::text, h3 a::text, .title a::text, a::text').get()
+            # 标题：eventItem 中的 div.title 文本优先
+            title = (
+                item.css('a div.title::text').get()
+                or item.css('h2 a::text, h3 a::text, .title a::text').get()
+                or item.css('a::text').get()
+            )
             title = title.strip() if title else '未命名'
 
-            # 提取发布时间
-            pub_time = item.css('time::text, span.date::text, div.date::text, .published::text').get()
+            # 日期：eventItem 的 div.postdate 优先
+            pub_time = (
+                item.css('div.postdate::text').get()
+                or item.css('time::text, span.date::text, div.date::text, .published::text').get()
+            )
             pub_time = pub_time.strip() if pub_time else '未知日期'
 
-            # 提取描述/摘要
+            # 摘要
             description = item.css('p::text, .excerpt::text, .summary::text').get()
             description = description.strip() if description else ''
 
-            # 提取预览图片
-            preview_img = item.css('img::attr(data-src), img::attr(data-original), img::attr(src)').get()
+            # 预览图：eventItem 的 thumbimg 优先
+            preview_img = (
+                item.css('img.thumbimg::attr(src)').get()
+                or item.css('img::attr(data-src), img::attr(data-original), img::attr(src)').get()
+            )
             preview_img = urljoin(response.url, preview_img.strip()) if preview_img else None
 
             self.logger.info(f'[News Item {idx+1}] {title[:50]}... | {pub_time}')
