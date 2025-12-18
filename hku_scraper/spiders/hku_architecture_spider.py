@@ -58,8 +58,11 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
         new_news_count = 0
 
         for idx, item in enumerate(news_items):
-            # 链接：eventItem 内 a[href]
-            link = item.css('a::attr(href)').get()
+            # 链接：仅取包含标题 div.title 的 a，避免取到分类/标签链接
+            link = (
+                item.xpath('.//a[div[contains(@class, "title")]]/@href').get()
+                or item.css('a::attr(href)').get()
+            )
             if not link:
                 continue
 
@@ -130,26 +133,29 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
 
         self.logger.info(f'[Parsing Article] {title}')
 
-        # 聚焦正文容器，避免侧边栏/导航内容
-        content_container = response.css(
-            'div.entry-content, div.post-content, div.postcontent, article .content, div.article-content, div.content-area'
-        )
-        # 尝试以页面主标题为锚点，定位主内容块
+        # 1) 优先选择页面主内容块：innerContent（该站正文所在）
+        content_container = response.xpath("//div[contains(@class, 'innerContent')]")
+        # 2) 次选通用正文容器
+        if not content_container:
+            content_container = response.css(
+                'div.entry-content, div.post-content, div.postcontent, div.article-content, div.content-area, div.content'
+            )
+        # 3) 以标题为锚点查找最近的 innerContent 或 content 容器
         if not content_container:
             title_text = title.strip()
-            # 优先 h1/h2 精确匹配
-            title_node = response.xpath(
-                f"//h1[normalize-space()='{title_text}'] | //h2[normalize-space()='{title_text}']"
-            )
+            title_node = response.xpath("//h1[contains(@class,'pageTitle')] | //h1 | //h2")
             target = None
             if title_node:
-                # 先找紧随标题之后的内容区块
-                sib = title_node.xpath(
-                    "following-sibling::*[(self::div or self::section or self::article) and (contains(@class,'content') or contains(@class,'entry') or contains(@class,'post'))][1]"
-                )
-                if sib:
-                    target = sib[0]
+                sib_inner = title_node.xpath("following::div[contains(@class,'innerContent')][1]")
+                if sib_inner:
+                    target = sib_inner[0]
                 else:
+                    sib_content = title_node.xpath(
+                        "following::*[(self::div or self::section or self::article) and (contains(@class,'content') or contains(@class,'entry') or contains(@class,'post'))][1]"
+                    )
+                    if sib_content:
+                        target = sib_content[0]
+                if not target:
                     anc = title_node.xpath(
                         "ancestor::*[(self::article or self::div) and (contains(@class,'content') or contains(@class,'entry') or contains(@class,'post'))][1]"
                     )
@@ -157,26 +163,22 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
                         target = anc[0]
             if target is not None:
                 content_container = target
-            else:
-                fallback = response.css('article, main')
-                content_container = fallback[0] if fallback else None
 
         if not content_container:
             self.logger.warning('[Parsing Article] 未找到正文容器，跳过')
             return
 
-        # 过滤掉导航/菜单/侧栏/页脚等文本
+        # 如果 content_container 不是 innerContent，则尽量缩小到其子级 innerContent
+        inner = content_container.xpath('.//div[contains(@class, "innerContent")]')
+        if inner:
+            content_container = inner[0]
+
+        # 仅提取正文常见标签文本，过滤掉面包屑、筛选器、上一页等
         text_nodes = content_container.xpath(
-            './/text()[
-                not(ancestor::nav)
-                and not(ancestor::header)
-                and not(ancestor::footer)
-                and not(ancestor::aside)
-                and not(ancestor::*[contains(@class, "menu") or contains(@class, "navbar") or contains(@class, "breadcrumbs") or contains(@class, "breadcrumb") or contains(@class, "pagination") or contains(@class, "sidebar") or contains(@id, "menu") or contains(@id, "nav")])
-            ]'
+            './/p//text() | .//h2//text() | .//h3//text() | .//li//text() | .//br/preceding-sibling::text()'
         ).getall()
 
-        article_text = ' '.join([t.strip() for t in text_nodes if t.strip()])
+        article_text = ' '.join([t.strip() for t in text_nodes if t and t.strip()])
 
         images = content_container.css('img')
         image_urls = []
