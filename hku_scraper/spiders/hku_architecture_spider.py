@@ -47,13 +47,11 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
             json.dump(self.existing_news, f, ensure_ascii=False, indent=2)
 
     def parse(self, response):
-        """解析建筑学院新闻列表（针对 #events-wrapper eventItem）"""
+        """解析建筑学院新闻列表（只取 #events-wrapper 内的条目）"""
         self.logger.info('[Parse List] 开始解析 HKU Architecture 新闻列表')
 
-        # 优先匹配 #events-wrapper div.eventItem，避免误抓导航
+        # 仅抓取 events-wrapper 下的条目，避免导航/分类区块
         news_items = response.css('#events-wrapper div.eventItem')
-        if not news_items:
-            news_items = response.css('article, li, div.news-item, div.news-article, div.post')
 
         self.logger.info(f'[News Found] 发现 {len(news_items)} 条新闻项')
 
@@ -127,12 +125,19 @@ class HKUArchitectureNewsSpider(scrapy.Spider):
 
         self.logger.info(f'[Parsing Article] {title}')
 
-        # 兼容多种正文容器
+        # 聚焦正文容器，避免侧边栏/导航内容
         content_container = response.css(
-            'div.region-content, div.node-content, article, main, div.page-content, div.content, div.post-content'
+            'div.entry-content, div.post-content, div.postcontent, article .content, div.article-content, div.content-area'
         )
+        if content_container:
+            content_container = content_container[0]
+        else:
+            fallback = response.css('article, main')
+            content_container = fallback[0] if fallback else None
+
         if not content_container:
-            content_container = response.css('body')
+            self.logger.warning('[Parsing Article] 未找到正文容器，跳过')
+            return
 
         article_text = ' '.join(content_container.css('::text').getall())
         article_text = ' '.join(article_text.split())
