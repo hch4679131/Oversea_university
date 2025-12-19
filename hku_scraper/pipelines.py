@@ -37,6 +37,8 @@ class SaveJsonPipeline:
             self.index_file = self.data_dir / "grad_news_index.json"
         elif spider_name == "hku_architecture_news":
             self.index_file = self.data_dir / "architecture_news_index.json"
+        elif spider_name == "hku_medicine_news":
+            self.index_file = self.data_dir / "medicine_news_index.json"
         else:  # hku_arts_news 或其他
             self.index_file = self.data_dir / "news_index.json"
         
@@ -272,6 +274,8 @@ class SaveJsonPipeline:
                 source_label = "🎓 HKU Graduate"
             elif "architecture" in spider.name.lower():
                 source_label = "🏛️ HKU Architecture"
+            elif "medicine" in spider.name.lower():
+                source_label = "⚕️ HKU Medicine"
             
             # 如果没有中文翻译，使用英文原文作为降级方案
             if not full_text:
