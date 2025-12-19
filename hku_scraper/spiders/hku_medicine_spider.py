@@ -75,6 +75,7 @@ class HKUMedicineNewsSpider(scrapy.Spider):
             
             # 规范化链接（相对路径转为绝对路径）
             full_url = urljoin(response.url, news_link.strip())
+            self.logger.info(f'[Debug] Raw link: {news_link}, Full URL: {full_url}')
             
             # 提取标题（从 h4.title 或 p.title）
             news_title = item.css('h4.title::text').get()
