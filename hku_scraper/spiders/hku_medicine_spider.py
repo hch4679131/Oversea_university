@@ -131,8 +131,8 @@ class HKUMedicineNewsSpider(scrapy.Spider):
         
         self.logger.info(f'[Parsing Article] {title}')
         
-        # 提取正文（从 div.main-content 或类似的内容容器）
-        content_container = response.css('div.main-content, div.content, article, div.post-content')
+        # 提取正文（从 div.news-detail 或类似的内容容器）
+        content_container = response.css('div.news-detail, div.main-content, div.content, article, div.post-content')
         
         if not content_container:
             self.logger.warning('[Parsing Article] 未找到正文容器，跳过')
