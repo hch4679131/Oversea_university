@@ -141,12 +141,14 @@ async function verifyIDCard(idCard, name) {
         
         console.log(`[身份证验证] ${name} - ${idCard}，返回: ${JSON.stringify(response.data)}`);
         
-        // 康展API返回格式: { code: 200, charge: true, msg: "成功", result: { res: 1/2 } }
-        // res=1 表示一致，res=2 表示不一致
-        if (response.data.code === 200 && response.data.result && response.data.result.res === 1) {
+        // 康展API返回格式: { code: 200, success: true, msg: "成功", data: { result: 0/1/2, desc: "一致/不一致/..." } }
+        // result=0 表示一致，result=1 表示不一致，result=2 表示无记录
+        if (response.data.code === 200 && response.data.data && response.data.data.result === 0) {
             return { valid: true, message: '身份证验证通过' };
-        } else if (response.data.result && response.data.result.res === 2) {
+        } else if (response.data.data && response.data.data.result === 1) {
             return { valid: false, message: '身份证与姓名不一致' };
+        } else if (response.data.data && response.data.data.result === 2) {
+            return { valid: false, message: '身份证号无记录' };
         } else {
             return { valid: false, message: response.data.msg || '身份证验证失败' };
         }
