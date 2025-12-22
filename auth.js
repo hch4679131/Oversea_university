@@ -113,6 +113,12 @@ async function verifyIDCard(idCard, name) {
         return { valid: false, message: '身份证号码格式不正确' };
     }
     
+    // 检查是否配置了AppCode
+    if (!ALIYUN_CONFIG.idVerifyAppCode) {
+        console.error('[身份证验证] 未配置 ID_VERIFY_APP_CODE');
+        return { valid: false, message: '身份证验证服务未配置，请联系管理员' };
+    }
+    
     try {
         const axios = require('axios');
         const qs = require('querystring');
@@ -146,11 +152,6 @@ async function verifyIDCard(idCard, name) {
         }
     } catch (error) {
         console.error('[身份证验证失败]', error.message);
-        // 开发环境降级：只做格式验证
-        if (process.env.NODE_ENV !== 'production') {
-            console.log(`[开发模式] 跳过真实身份证验证`);
-            return { valid: true, message: '开发模式：格式验证通过' };
-        }
         return { valid: false, message: '身份证验证服务异常，请稍后重试' };
     }
 }
