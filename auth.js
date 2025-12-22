@@ -47,8 +47,8 @@ const ALIYUN_CONFIG = {
     // 短信服务
     accessKeyId: process.env.ALIYUN_ACCESS_KEY_ID || '',
     accessKeySecret: process.env.ALIYUN_ACCESS_KEY_SECRET || '',
-    smsSignName: process.env.SMS_SIGN_NAME || 'HKSD',  // 短信签名（需在阿里云控制台创建）
-    smsTemplateCode: process.env.SMS_TEMPLATE_CODE || 'SMS_123456789',  // 短信模板代码（需在阿里云控制台创建）
+    smsSignName: process.env.SMS_SIGN_NAME || '汇生活深圳文化科技',  // 短信签名
+    smsTemplateCode: process.env.SMS_TEMPLATE_CODE || 'SMS_499170576',  // 短信模板代码
     
     // 身份证实名认证服务
     idVerifyAppCode: process.env.ID_VERIFY_APP_CODE || ''
