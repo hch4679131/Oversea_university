@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="zh-CN" x-data="appData()" x-cloak class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDLV 汇生会 | Global Education & Career Elite</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- 图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { 300: '#E5C975', 400: '#D4AF37', 500: '#B89225' },
+                        obsidian: { 950: '#050505', 900: '#0E121B', 800: '#1A1F2E' },
+                        paper: '#F9F8F4'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        body { background-color: #050505; color: #e5e5e5; overflow-x: hidden; }
+        
+        /* 导航菜单样式 */
+        .nav-item { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
+        .nav-item::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            background-color: #D4AF37; transition: width 0.3s;
+        }
+        .nav-item:hover::after { width: 100%; }
+        
+        .dropdown-menu {
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 60;
+        }
+        .nav-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        /* ================= 核心：原生滚动驱动动画 (Scrubbing) ================= */
+        /* 
+           原理：JS 计算每个元素的可见进度 --p (0.0 ~ 1.0)
+           CSS 使用 calc() 根据 --p 实时改变样式
+           滚轮动 -> --p 变 -> 样式变
+        */
+
+        /* 1. 向上渐变浮现 (跟随滚轮) */
+        .anim-fade-up {
+            /* 进度0时透明，进度0.3开始显现 */
+            opacity: clamp(0, calc((var(--p) - 0.1) * 2), 1);
+            /* 进度0时向下偏移100px，进度1时归位 */
+            transform: translate3d(0, calc(100px * (1 - var(--p))), 0);
+            /* 极短的过渡时间，保证跟手流畅性 */
+            transition: transform 0.05s linear, opacity 0.05s linear; 
+            will-change: transform, opacity;
+        }
+
+        /* 2. 缩放进场 */
+        .anim-scale {
+            transform: translateZ(0) scale(calc(0.8 + 0.2 * var(--p)));
+            opacity: clamp(0, var(--p), 1);
+            transition: transform 0.05s linear, opacity 0.05s linear;
+            will-change: transform, opacity;
+        }
+
+        /* 3. 线条生长 (用于时间轴) */
+        .anim-grow-line {
+            height: calc(100% * var(--p));
+            max-height: 100%;
+            transition: height 0.05s linear;
+        }
+
+        /* 4. 背景视差 (Parallax) */
+        .anim-parallax {
+            /* 背景图移动速度比前景慢 */
+            transform: translateY(calc(var(--scroll-y) * 0.5px));
+            transition: transform 0.05s linear;
+        }
+
+        /* 首页 Hero：轻微视差（只让图片动，遮罩不动；限制最大位移避免“飘”） */
+        .hero-parallax-img {
+            transform: translate3d(0, clamp(-24px, calc(var(--scroll-y) * -0.06px), 0px), 0) scale(1.1);
+            transition: transform 0.05s linear;
+            will-change: transform;
+        }
+
+        /* 地图交互 */
+        .map-line {
+            width: 0; transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+            height: 1px; background: #D4AF37; position: absolute; transform-origin: left center;
+        }
+        .map-active .map-line { width: 120px; }
+        .map-label { opacity: 0; transition: opacity 0.5s ease 0.8s; }
+        .map-active .map-label { opacity: 1; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold-400 selection:text-black">
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full top-0 z-50 bg-obsidian-950/90 backdrop-blur-md border-b border-white/5 h-20">
+        <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" @click="switchPage('home')">
+                <div class="w-10 h-10 border border-gold-400 flex items-center justify-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gold-400 opacity-20 group-hover:opacity-40 transition"></div>
+                    <img src="图片素材//logo（新无底）(1).png" class="relative w-7 h-7 object-contain" alt="SDLV Logo">
+                </div>
+                <div>
+                    <span class="text-xl font-bold text-white tracking-widest">SDLV</span>
+                    <span class="block text-[9px] text-gray-400 tracking-wider" x-text="t[lang].brand_sub"></span>
+                </div>
+            </div>
+
+            <!-- 菜单 -->
+            <div class="hidden md:flex items-center gap-8 h-full text-xs font-medium tracking-[0.15em] uppercase text-gray-400">
+                <!-- 首页入口暂时隐藏：点击 Logo 可返回首页 -->
+                <!--
+                <div class="nav-item group">
+                    <span @click="switchPage('home')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_home"></span>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('home', 'hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_hero"></a>
+                        <a @click.stop="switchPage('home', 'core-business')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_core"></a>
+                    </div>
+                </div>
+                -->
+                <div class="nav-item group">
+                    <span @click="switchPage('about')" :class="page === 'about' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_story"></a>
+                        <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_history"></a>
+                        <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_partners"></a>
+                    </div>
+                </div>
+                <div class="nav-item group">
+                    <span @click="switchPage('study')" :class="page === 'study' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_study"></span>
+                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('study', 'data')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_data"></a>
+                        <a @click.stop="switchPage('study', 'content')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_content"></a>
+                    </div>
+                </div>
+                <div class="nav-item group">
+                    <span @click="switchPage('apartments')" :class="page === 'apartments' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_apt"></span>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('apartments', 'map')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_map"></a>
+                        <a @click.stop="switchPage('apartments', 'showcase')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_showcase"></a>
+                    </div>
+                </div>
+                <div class="nav-item group">
+                    <span @click="switchPage('career')" :class="page === 'career' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
+                </div>
+                <div class="nav-item group">
+                    <a @click="switchPage('contact')" class="px-5 py-2 border border-gold-400/50 text-gold-400 hover:bg-gold-400 hover:text-black transition duration-300" x-text="t[lang].nav_contact"></a>
+                </div>
+            </div>
+
+            <!-- 语言切换 -->
+            <div class="flex items-center gap-3 text-xs font-bold pl-6 border-l border-white/10">
+                <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">简</button>
+                <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">繁</button>
+                <button @click="lang = 'en'" :class="lang==='en' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主容器 -->
+    <main class="pt-20 min-h-screen relative">
+
+        <!-- ================= PAGE 1: 首页 ================= -->
+        <div x-show="page === 'home'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            
+            <!-- Hero Section -->
+            <section id="hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
+                <!-- 背景视差层 -->
+                <div class="absolute inset-0 z-0">
+                    <img src="图片素材/Temp images/Image 2.0 by tirachardz on Freepik.jpg" 
+                         class="hero-parallax-img w-full h-[120%] object-cover opacity-40" style="transform-origin: top;" alt="Students">
+                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/70 to-transparent"></div>
+                </div>
+
+                <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64 grid md:grid-cols-2 gap-12 items-center">
+                    <div class="scrub-item anim-fade-up max-w-2xl">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="h-[1px] w-12 bg-gold-400"></div>
+                            <span class="text-gold-400 text-sm tracking-[0.3em] uppercase">Since 2016</span>
+                        </div>
+                        <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-4">
+                            SDLV <span x-text="t[lang].brand_full"></span><br>
+                            <span class="text-3xl font-light text-gray-300" x-text="t[lang].hero_sub"></span>
+                        </h1>
+                        <p class="text-xl text-gold-400/80 mb-10 tracking-widest" x-text="t[lang].hero_slogan"></p>
+                    </div>
+
+                    <div class="scrub-item anim-fade-up w-full md:justify-self-end max-w-xl">
+                        <div class="grid grid-cols-2 gap-4 md:gap-6">
+                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
+                                        <i data-lucide="calendar" class="w-5 h-5 text-gold-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-white leading-none" x-text="t[lang].stat_years_num"></div>
+                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_years_txt"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
+                                        <i data-lucide="users" class="w-5 h-5 text-gold-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-white leading-none">6W+</div>
+                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_users"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
+                                        <i data-lucide="graduation-cap" class="w-5 h-5 text-gold-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-white leading-none">96.3%</div>
+                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_offer"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
+                                        <i data-lucide="thumbs-up" class="w-5 h-5 text-gold-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-white leading-none">100%</div>
+                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_satisfaction"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition col-span-2">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
+                                        <i data-lucide="home" class="w-5 h-5 text-gold-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold text-white leading-none">500+</div>
+                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_apt"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Business Cards -->
+            <section id="core-business" class="py-32 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-20">
+                        <h2 class="text-3xl md:text-4xl font-serif text-obsidian-950 mb-4" x-text="t[lang].biz_title"></h2>
+                        <div class="w-24 h-1 bg-gold-400 mx-auto"></div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- 每个卡片都带有 scrub-item 和 anim-fade-up，意味着它们会随着滚动独立浮现 -->
+                        <div>
+                            <div @click="switchPage('study')" class="group relative bg-obsidian-950 border border-white/5 p-8 hover:border-gold-400 transition duration-500 cursor-pointer overflow-hidden">
+                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80')] bg-cover opacity-10 group-hover:scale-110 transition duration-700"></div>
+                                <div class="relative z-20">
+                                    <div class="flex gap-2 mb-6 text-gold-400"><i data-lucide="globe" class="w-8 h-8"></i><i data-lucide="graduation-cap" class="w-8 h-8"></i></div>
+                                    <h3 class="text-2xl font-serif text-white mb-2" x-text="t[lang].biz_study_t"></h3>
+                                    <p class="text-xs text-gold-400 uppercase tracking-widest mb-4" x-text="t[lang].biz_study_sub"></p>
+                                    <p class="text-gray-400 text-sm mb-6 border-t border-white/10 pt-4" x-text="t[lang].biz_study_locs"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div @click="switchPage('apartments')" class="group relative bg-obsidian-950 border border-white/5 p-8 hover:border-gold-400 transition duration-500 cursor-pointer overflow-hidden">
+                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80')] bg-cover opacity-10 group-hover:scale-110 transition duration-700"></div>
+                                <div class="relative z-20">
+                                    <div class="mb-6 text-gold-400"><i data-lucide="home" class="w-8 h-8"></i></div>
+                                    <h3 class="text-2xl font-serif text-white mb-2" x-text="t[lang].biz_apt_t"></h3>
+                                    <p class="text-xs text-gold-400 uppercase tracking-widest mb-4" x-text="t[lang].biz_apt_sub"></p>
+                                    <p class="text-gray-400 text-sm mb-6 border-t border-white/10 pt-4" x-text="t[lang].biz_apt_locs"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div @click="switchPage('career')" class="group relative bg-obsidian-950 border border-white/5 p-8 hover:border-gold-400 transition duration-500 cursor-pointer overflow-hidden">
+                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1521791136064-7985c2717883?auto=format&fit=crop&q=80')] bg-cover opacity-10 group-hover:scale-110 transition duration-700"></div>
+                                <div class="relative z-20">
+                                    <div class="flex gap-2 mb-6 text-gold-400"><i data-lucide="trending-up" class="w-8 h-8"></i><i data-lucide="handshake" class="w-8 h-8"></i></div>
+                                    <h3 class="text-2xl font-serif text-white mb-2" x-text="t[lang].biz_career_t"></h3>
+                                    <p class="text-xs text-gold-400 uppercase tracking-widest mb-4" x-text="t[lang].biz_career_sub"></p>
+                                    <p class="text-gray-400 text-sm mb-6 border-t border-white/10 pt-4" x-text="t[lang].biz_career_tags"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Home: About Us (复制自「关于我们」) -->
+            <section id="home-intro" class="py-32 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                    <div class="scrub-item anim-fade-up">
+                        <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
+                            <span x-text="t[lang].about_h1"></span><br>
+                            <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
+                        </h2>
+                        <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
+                        <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
+                    </div>
+                    <div class="relative scrub-item anim-scale">
+                            <img src="图片素材/collect/group-asia-young-creative-people-smart-casual-wear-discussing-business-celebrate-giving-five-after-dealing-feeling-happy-signing-contract-agreement-office-coworker-teamwork-concept.jpg" 
+                                class="rounded-sm shadow-2xl transition duration-700" alt="Team">
+                        <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
+                            <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Home: 企业历程 (复制自「关于我们-企业历程」) -->
+            <section id="home-history" class="py-32 bg-obsidian-950 relative">
+                <div class="max-w-4xl mx-auto px-6">
+                    <h2 class="text-3xl font-serif text-white text-center mb-20" x-text="t[lang].history_title"></h2>
+                    <div class="relative pl-8 md:pl-0">
+                        <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2"></div>
+                        <div class="absolute left-0 md:left-1/2 top-0 w-[2px] bg-gold-400 -translate-x-1/2 z-10 scrub-item anim-grow-line" style="height: 0%; transform-origin: top;"></div>
+
+                        <div class="space-y-24">
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:text-right">
+                                    <span class="text-4xl font-bold text-white block">2015</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2015_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2015_d"></div>
+                            </div>
+                            
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:order-2">
+                                    <span class="text-4xl font-bold text-white block">2017</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2017_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-obsidian-950 border border-gold-400 rounded-full z-20"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2017_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:text-right">
+                                    <span class="text-4xl font-bold text-white block">2019</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2019_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2019_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:order-2">
+                                    <span class="text-4xl font-bold text-white block">2023-24</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2023_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2023_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:text-right">
+                                    <span class="text-4xl font-bold text-white block">2025</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2025_t"></span>
+                                </div>
+                                <div class="absolute left-[-9px] md:left-1/2 md:-ml-[9px] w-5 h-5 bg-gold-400 border-4 border-obsidian-950 rounded-full z-20 animate-pulse"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2025_d"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Home: 免费咨询 (复用联系页文案/表单) -->
+            <section id="home-consult" class="py-24 bg-gold-400 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-black mb-6" x-text="t[lang].cta_title"></h2>
+                    <p class="text-black/70 mb-10 text-lg" x-text="t[lang].cta_desc"></p>
+                    <form class="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto" onsubmit="event.preventDefault(); alert('Success!')">
+                        <input type="text" :placeholder="t[lang].ph_contact" class="px-6 py-4 bg-white border-none rounded-sm text-black focus:outline-none w-full shadow-lg" />
+                        <button class="px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-obsidian-950 transition whitespace-nowrap shadow-xl" x-text="t[lang].btn_submit"></button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 2: 关于我们 ================= -->
+        <div x-show="page === 'about'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <section id="intro" class="py-32 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                    <div class="scrub-item anim-fade-up">
+                        <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
+                            <span x-text="t[lang].about_h1"></span><br>
+                            <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
+                        </h2>
+                        <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
+                        <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
+                    </div>
+                    <div class="relative scrub-item anim-scale">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                class="rounded-sm shadow-2xl transition duration-700" alt="Team">
+                        <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
+                            <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="history" class="py-32 bg-obsidian-950 relative">
+                <div class="max-w-4xl mx-auto px-6">
+                    <h2 class="text-3xl font-serif text-white text-center mb-20" x-text="t[lang].history_title"></h2>
+                    <div class="relative pl-8 md:pl-0">
+                        <!-- 静态背景线 -->
+                        <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2"></div>
+                        <!-- 动态生长线 (Scrubbing) -->
+                        <div class="absolute left-0 md:left-1/2 top-0 w-[2px] bg-gold-400 -translate-x-1/2 z-10 scrub-item anim-grow-line" style="height: 0%; transform-origin: top;"></div>
+
+                        <div class="space-y-24">
+                            <!-- 时间节点：每个都有 anim-fade-up -->
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:text-right">
+                                    <span class="text-4xl font-bold text-white block">2015</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2015_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2015_d"></div>
+                            </div>
+                            
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:order-2">
+                                    <span class="text-4xl font-bold text-white block">2017</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2017_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-obsidian-950 border border-gold-400 rounded-full z-20"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2017_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:text-right">
+                                    <span class="text-4xl font-bold text-white block">2019</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2019_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2019_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:order-2">
+                                    <span class="text-4xl font-bold text-white block">2023-24</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2023_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2023_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:text-right">
+                                    <span class="text-4xl font-bold text-white block">2025</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2025_t"></span>
+                                </div>
+                                <div class="absolute left-[-9px] md:left-1/2 md:-ml-[9px] w-5 h-5 bg-gold-400 border-4 border-obsidian-950 rounded-full z-20 animate-pulse"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2025_d"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="partners" class="py-24 bg-paper text-center text-obsidian-950">
+                <div class="max-w-5xl mx-auto px-6">
+                    <h2 class="text-3xl font-serif text-obsidian-950 mb-2" x-text="t[lang].partner_title"></h2>
+                    <p class="text-gold-400 mb-8" x-text="t[lang].partner_sub"></p>
+                    
+                    <div class="relative w-full h-80 border border-black/10 bg-black/5 mb-10 rounded-sm overflow-hidden scrub-item anim-scale">
+                        <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-20"></div>
+                        <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
+                        <div class="absolute top-[58%] left-[54%] w-1 h-1 bg-black/40 rounded-full"></div> 
+                        <div class="absolute top-[50%] left-[50%] w-1 h-1 bg-black/40 rounded-full"></div> 
+                        <div class="absolute top-[60%] left-[55%] w-20 h-[1px] bg-gradient-to-l from-gold-400 to-transparent transform -rotate-45 origin-left"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 text-left mb-12">
+                        <div class="p-6 bg-black/5 border border-black/10">
+                            <h4 class="text-obsidian-950 font-bold mb-1" x-text="t[lang].pt_val1_t"></h4>
+                            <p class="text-xs text-black/60" x-text="t[lang].pt_val1_d"></p>
+                        </div>
+                        <div class="p-6 bg-black/5 border border-black/10">
+                            <h4 class="text-obsidian-950 font-bold mb-1" x-text="t[lang].pt_val2_t"></h4>
+                            <p class="text-xs text-black/60" x-text="t[lang].pt_val2_d"></p>
+                        </div>
+                        <div class="p-6 bg-black/5 border border-black/10">
+                            <h4 class="text-obsidian-950 font-bold mb-1" x-text="t[lang].pt_val3_t"></h4>
+                            <p class="text-xs text-black/60" x-text="t[lang].pt_val3_d"></p>
+                        </div>
+                    </div>
+                    <button @click="switchPage('contact')" class="px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_join"></button>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 3: 留学服务 ================= -->
+        <div x-show="page === 'study'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <section id="data" class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 text-center scrub-item anim-fade-up">
+                    <h2 class="text-4xl font-serif text-obsidian-950 mb-2" x-text="t[lang].study_hero_t"></h2>
+                    <p class="text-black/60 text-sm mb-12 uppercase tracking-widest" x-text="t[lang].study_hero_sub"></p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div><div class="text-4xl font-bold text-gold-400 mb-1">2786</div><div class="text-xs text-gray-500" x-text="t[lang].st_stat1"></div></div>
+                        <div><div class="text-4xl font-bold text-gold-400 mb-1">100%</div><div class="text-xs text-gray-500" x-text="t[lang].st_stat2"></div></div>
+                        <div><div class="text-4xl font-bold text-gold-400 mb-1">97.8%</div><div class="text-xs text-gray-500" x-text="t[lang].st_stat3"></div></div>
+                        <div><div class="text-4xl font-bold text-gold-400 mb-1">90%</div><div class="text-xs text-gray-500" x-text="t[lang].st_stat4"></div></div>
+                    </div>
+                    <button @click="switchPage('contact')" class="mt-12 px-6 py-2 border border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-black transition uppercase text-xs tracking-widest" x-text="t[lang].btn_eval"></button>
+                </div>
+            </section>
+
+            <section id="content" class="py-24 bg-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+                    <div class="scrub-item anim-fade-up">
+                        <h3 class="text-2xl font-serif text-white mb-8 border-l-4 border-gold-400 pl-4" x-text="t[lang].serv_content_t"></h3>
+                        <ul class="space-y-6">
+                            <li class="bg-white/5 p-4 rounded-sm"><h4 class="text-gold-400 font-bold" x-text="t[lang].serv_1_t"></h4><p class="text-gray-400 text-xs" x-text="t[lang].serv_1_d"></p></li>
+                            <li class="bg-white/5 p-4 rounded-sm"><h4 class="text-gold-400 font-bold" x-text="t[lang].serv_2_t"></h4><p class="text-gray-400 text-xs" x-text="t[lang].serv_2_d"></p></li>
+                            <li class="bg-white/5 p-4 rounded-sm"><h4 class="text-gold-400 font-bold" x-text="t[lang].serv_3_t"></h4><p class="text-gray-400 text-xs" x-text="t[lang].serv_3_d"></p></li>
+                        </ul>
+                    </div>
+                    <div class="scrub-item anim-fade-up">
+                        <h3 class="text-2xl font-serif text-white mb-8" x-text="t[lang].uni_link_t"></h3>
+                        <div class="bg-white/5 p-6 border border-white/10">
+                            <h4 class="text-white font-bold text-lg mb-2">Jesselton University College</h4>
+                            <p class="text-xs text-gold-400 mb-4" x-text="t[lang].uni_sub"></p>
+                            <p class="text-gray-400 text-sm leading-relaxed" x-text="t[lang].uni_desc"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 4: 学生公寓 ================= -->
+        <div x-show="page === 'apartments'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <section id="map" class="py-24 bg-paper text-center text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 mb-10 scrub-item anim-fade-up">
+                    <h2 class="text-4xl font-serif text-obsidian-950 mb-2" x-text="t[lang].apt_map_t"></h2>
+                    <p class="text-gold-400" x-text="t[lang].apt_map_sub"></p>
+                </div>
+
+                <div class="relative w-full max-w-5xl mx-auto h-[500px] bg-paper border border-black/10 rounded-lg shadow-2xl overflow-hidden group" x-data="{ activeLoc: null }">
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1597893323605-2362b5d03606?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20 grayscale"></div>
+                    
+                    <div class="absolute top-[60%] left-[30%] cursor-pointer z-10" @click="activeLoc = 'syp'" :class="activeLoc === 'syp' ? 'map-active' : ''">
+                        <div class="w-4 h-4 bg-gold-400 rounded-full animate-ping absolute"></div>
+                        <div class="w-4 h-4 bg-gold-400 rounded-full relative border-2 border-white"></div>
+                        <div class="map-line" style="transform: rotate(-45deg);"></div>
+                        <div class="absolute -top-16 -left-10 bg-white text-black p-2 rounded text-xs font-bold w-32 map-label">
+                            <span x-text="t[lang].apt_syp"></span><br><span class="text-gold-600 font-normal" x-text="t[lang].apt_dist_hku"></span>
+                        </div>
+                    </div>
+                    <div class="absolute top-[50%] left-[55%] cursor-pointer z-10" @click="activeLoc = 'ymt'" :class="activeLoc === 'ymt' ? 'map-active' : ''">
+                        <div class="w-4 h-4 bg-gold-400 rounded-full animate-ping absolute delay-300"></div>
+                        <div class="w-4 h-4 bg-gold-400 rounded-full relative border-2 border-white"></div>
+                        <div class="map-line" style="transform: rotate(-15deg);"></div>
+                        <div class="absolute -top-16 left-10 bg-white text-black p-2 rounded text-xs font-bold w-32 map-label">
+                            <span x-text="t[lang].apt_ymt"></span><br><span class="text-gold-600 font-normal" x-text="t[lang].apt_dist_poly"></span>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-gray-500 bg-black/50 p-2 rounded" x-text="t[lang].map_hint"></div>
+                </div>
+            </section>
+
+            <section id="showcase" class="py-24 bg-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
+                    <div class="group relative h-96 overflow-hidden rounded-sm scrub-item anim-fade-up">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
+                        <div class="absolute bottom-6 left-6 text-white font-serif text-xl" x-text="t[lang].apt_syp_full"></div>
+                    </div>
+                     <div class="group relative h-96 overflow-hidden rounded-sm scrub-item anim-fade-up cursor-pointer" @click="switchPage('apartment-ymt')">
+                        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <div class="text-white font-serif text-xl" x-text="t[lang].apt_ymt_full"></div>
+                            <div class="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 text-white text-xs tracking-widest uppercase hover:border-gold-400/60 hover:text-gold-400 transition">
+                                <span x-text="t[lang].btn_explore_apt"></span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 4B: 油麻地 · 核心馆（公寓详情） ================= -->
+        <div x-show="page === 'apartment-ymt'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <!-- HERO: 地图 + 馆及大学标示（简化占位版） lg:grid-cols-2-->
+            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start"> <!--lg:grid-cols-2 -->
+                    <div class="scrub-item anim-fade-up">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
+                            <span>公寓頁標籤</span>
+                            <span class="text-black/40">/</span>
+                            <span class="font-bold">滙生會社(油麻地)</span>
+                        </div>
+                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950">滙生會社(油麻地)</h1>
+                        <p class="mt-3 text-black/70 leading-relaxed">油麻地吳松街滙生會社</p>
+                        <img src="图片素材/section/4-2.png" class="w-full">
+                        <div class="mt-8 grid sm:grid-cols-2 gap-4">
+                            
+                            <div class="p-5 bg-black/5 border border-black/10">
+                                
+                                <div class="text-xs tracking-widest uppercase text-black/50">交通樞紐</div>
+                                <div class="mt-2 text-sm text-black/80">油麻地地铁站出口：3分钟</div>
+                                
+                                <div class="mt-1 text-sm text-black/80">佐敦地铁站A出口：5分钟</div>
+                            </div>
+                            <div class="p-5 bg-black/5 border border-black/10">
+                                <div class="text-xs tracking-widest uppercase text-black/50">高铁/巴士</div>
+                                <div class="mt-2 text-sm text-black/80">西九龙站巴士总站：10分钟</div>
+                                <div class="mt-1 text-sm text-black/80">西九龙高铁站：20分钟</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="scrub-item anim-fade-up">
+                        <div class="relative w-full h-[420px] bg-paper border border-black/10 rounded-lg shadow-2xl overflow-hidden">
+                            <div class="absolute inset-0 bg-black/5"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center px-6">
+                                    <div class="text-xs tracking-widest uppercase text-black/50">HERO SECTION</div>
+                                    <div class="mt-2 text-lg font-bold text-obsidian-950">簡化地圖（待接入高德 / 圖片素材）</div>
+                                    <p class="mt-2 text-sm text-black/60">按網站色調，用簡化版地圖標記該大廈及大學（後續補圖與標記）</p>
+                                </div>
+                            </div>
+                            <div class="absolute top-10 left-10">
+                                <div class="inline-flex items-center gap-2 px-3 py-2 bg-white border border-black/10 shadow-sm">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-gold-400"></i>
+                                    <span class="text-sm font-bold text-obsidian-950">滙生會社(油麻地)</span>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-10 right-10">
+                                <div class="inline-flex items-center gap-2 px-3 py-2 bg-white border border-black/10 shadow-sm">
+                                    <i data-lucide="graduation-cap" class="w-4 h-4 text-gold-400"></i>
+                                    <span class="text-sm font-bold text-obsidian-950">周邊大學</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第一部份：交通出行 -->
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up">
+                        
+                        <h2 class="text-3xl font-serif font-bold">第一部份：交通出行</h2>
+                        <p class="mt-2 text-black/60">周邊大學通勤時間 / 主要交通節點</p>
+                    </div>
+                    <img class="mt-4 w-full" src="图片素材/section/4-3.png" >
+                    <div class="mt-10 grid lg:grid-cols-2 gap-6">
+                        <div class="p-6 bg-black/5 border border-black/10 scrub-item anim-fade-up">
+                            <div class="text-sm font-bold text-obsidian-950">周邊大學通勤時間</div>
+                            <div class="mt-4 space-y-2 text-sm text-black/80">
+                                <div>香港理工大学：15分钟</div>
+                                <div>香港公开大学：20分钟</div>
+                                <div>香港城市大学：25分钟</div>
+                                <div>香港浸会大学：25分钟</div>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-black/5 border border-black/10 scrub-item anim-fade-up">
+                            <div class="text-sm font-bold text-obsidian-950">交通節點</div>
+                            <div class="mt-4 space-y-2 text-sm text-black/80">
+                                <div>油麻地地铁站出口：3分钟</div>
+                                <div>佐敦地铁站A出口：5分钟</div>
+                                <div>柯士甸地铁站：5分钟</div>
+                                <div>西九龙站巴士总站：10分钟</div>
+                                <div>西九龙高铁站：20分钟</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二部份：生活配套 -->
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up">
+                        <h2 class="text-3xl font-serif font-bold">第二部份：生活配套</h2>
+                    </div>
+                    <img class="mt-4 w-full" src="图片素材/section/4-4.png">
+                    <div class="mt-10 grid lg:grid-cols-3 gap-6">
+                        <div class="p-6 bg-black/5 border border-black/10 scrub-item anim-fade-up">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="shopping-bag" class="w-5 h-5 text-gold-400"></i>
+                                <div class="text-sm font-bold text-obsidian-950">美食購物（5-20min）</div>
+                            </div>
+                            <div class="mt-4 space-y-2 text-sm text-black/80">
+                                <div>旺角朗豪坊商场</div>
+                                <div>ELEMENTS 园方商场</div>
+                                <div>庙街夜市</div>
+                                <div>弥敦道</div>
+                                <div>信和中心（吃谷人的天堂）</div>
+                                <div>西洋菜南街（美食购物一条街）</div>
+                                <div>荷里活商业中心（美妆饰品）</div>
+                                <div>百老汇电影中心（香港连锁电影院之一）</div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-black/5 border border-black/10 scrub-item anim-fade-up">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="store" class="w-5 h-5 text-gold-400"></i>
+                                <div class="text-sm font-bold text-obsidian-950">生活日用（1-5min）</div>
+                            </div>
+                            <div class="mt-4 space-y-2 text-sm text-black/80">
+                                <div>711便利店</div>
+                                <div>惠康超市</div>
+                                <div>百佳超市</div>
+                                <div>油麻地果栏</div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-black/5 border border-black/10 scrub-item anim-fade-up">
+                            <div class="flex items-center gap-3">
+                                <i data-lucide="building-2" class="w-5 h-5 text-gold-400"></i>
+                                <div class="text-sm font-bold text-obsidian-950">公共設施（5-15min）</div>
+                            </div>
+                            <div class="mt-4 space-y-2 text-sm text-black/80">
+                                <div>油麻地警署</div>
+                                <div>九龙公园</div>
+                                <div>京士柏公園</div>
+                                <div>伊利沙伯医院</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第三部份：互動地圖（高德） -->
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up">
+                        <h2 class="text-3xl font-serif font-bold">第三部份：互動地圖</h2>
+                        <p class="mt-2 text-black/60">高德</p>
+                    </div>
+
+                    <div class="mt-10 bg-paper border border-black/10 rounded-lg overflow-hidden shadow-2xl scrub-item anim-fade-up">
+                        <div class="h-[420px] bg-black/5 flex items-center justify-center text-center px-6">
+                            <div>
+                                <div class="text-sm font-bold text-obsidian-950">高德地圖嵌入區域</div>
+                                <div class="mt-2 text-xs text-black/60">（後續提供連結或嵌入方式後接入）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第四部份：館內設施及服務 -->
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up">
+                        <h2 class="text-3xl font-serif font-bold">第四部份：館內設施及服務</h2>
+                        <p class="mt-2 text-black/60">公寓樓層：5層（含電梯）</p>
+                    </div>
+                    <img src="图片素材/section/4-5.png" class="w-full">
+                    <div class="mt-10 grid lg:grid-cols-2 gap-8">
+                        <div class="scrub-item anim-fade-up">
+                            <div class="text-sm font-bold text-obsidian-950 mb-4">設施</div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="smartphone" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">公共空間（圖：手機）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="desk-lamp" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">工作間（圖：桌椅）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="washer" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">自助洗衣房（圖：洗衣機）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="utensils" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">廚房（圖：鍋）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="dumbbell" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">健身區（圖：啞鈴）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="refrigerator" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">分類冰箱（圖：冰箱）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="sun" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">露天空間（圖：太陽）</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scrub-item anim-fade-up">
+                            <div class="text-sm font-bold text-obsidian-950 mb-4">服務</div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="headset" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">專屬客服（圖：手機）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="wifi" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">高速Wi‑Fi（圖：wifi）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="wrench" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">設備維護（圖：工具）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="brush" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">公區清潔（圖：掃帚）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="elevator" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">電梯維護（圖：電梯）</div>
+                                </div>
+                                <div class="p-4 bg-black/5 border border-black/10 text-center">
+                                    <i data-lucide="fire-extinguisher" class="w-6 h-6 text-gold-400 mx-auto"></i>
+                                    <div class="mt-2 text-xs text-black/80">消防檢查（圖：滅火筒）</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第五部份：戶型圖 -->
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up">
+                        <h2 class="text-3xl font-serif font-bold">第五部份：戶型圖</h2>
+                    </div>
+
+                    <div class="mt-10 grid lg:grid-cols-2 gap-8 items-start">
+                        <img src="图片素材/section/4-7.png" class="w-full ">
+                        <!-- <div class="bg-paper border border-black/10 rounded-lg overflow-hidden shadow-2xl scrub-item anim-fade-up">
+                            <div class="h-[420px] bg-black/5 flex items-center justify-center text-center px-6">
+                                <div>
+                                    
+                                     <div class="text-sm font-bold text-obsidian-950">戶型圖圖片位置</div>
+                                    
+                                    <div class="mt-2 text-xs text-black/60">（後面給圖片，我再放上來）</div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="p-6 bg-black/5 border border-black/10 scrub-item anim-fade-up">
+                            <div class="text-sm font-bold text-obsidian-950">標準配置</div>
+                            <div class="mt-4 grid sm:grid-cols-2 gap-y-2 gap-x-6 text-sm text-black/80">
+                                <div>单人床</div>
+                                <div>床墊</div>
+                                <div>窗簾</div>
+                                <div>冷气机</div>
+                                <div>干濕分離洗浴间</div>
+                                <div>热水器</div>
+                                <div>衣柜</div>
+                                <div>桌椅设施</div>
+                                <div>床下储物空间</div>
+                                <div>标准配置門鎖</div>
+                                <div>浴室鏡</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第六部份：房間設施（1-5號房）+ 訂房按鈕 -->
+            <section class="py-24 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up">
+                        <h2 class="text-3xl font-serif font-bold">第六部份：房間設施（1-5號房）</h2>
+                        <p class="mt-2 text-black/60">先用占位卡片，後續按你提供的圖片與資料逐一完善。</p>
+                    </div>
+
+                    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div class="p-5 bg-black/5 border border-black/10 text-center scrub-item anim-fade-up"><div class="text-sm font-bold">1號房</div><div class="mt-2 text-xs text-black/60">圖片/配置占位</div></div>
+                        <div class="p-5 bg-black/5 border border-black/10 text-center scrub-item anim-fade-up"><div class="text-sm font-bold">2號房</div><div class="mt-2 text-xs text-black/60">圖片/配置占位</div></div>
+                        <div class="p-5 bg-black/5 border border-black/10 text-center scrub-item anim-fade-up"><div class="text-sm font-bold">3號房</div><div class="mt-2 text-xs text-black/60">圖片/配置占位</div></div>
+                        <div class="p-5 bg-black/5 border border-black/10 text-center scrub-item anim-fade-up"><div class="text-sm font-bold">4號房</div><div class="mt-2 text-xs text-black/60">圖片/配置占位</div></div>
+                        <div class="p-5 bg-black/5 border border-black/10 text-center scrub-item anim-fade-up"><div class="text-sm font-bold">5號房</div><div class="mt-2 text-xs text-black/60">圖片/配置占位</div></div>
+                    </div>
+
+                    <div class="mt-12 flex justify-center scrub-item anim-fade-up">
+                        <button class="px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition">抢先以早鸟价格订房</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 5: 职涯规划 ================= -->
+        <div x-show="page === 'career'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <section id="intro" class="py-32 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                    <div class="scrub-item anim-fade-up">
+                        <h2 class="text-4xl font-serif text-obsidian-950 mb-6" x-text="t[lang].car_h1"></h2>
+                        <h3 class="text-xl text-gold-400 mb-6" x-text="t[lang].car_sub"></h3>
+                        <p class="text-black/70 leading-relaxed mb-8" x-text="t[lang].car_desc"></p>
+                        <div class="flex gap-4">
+                             <div class="px-4 py-2 bg-black/5 border border-black/10 text-xs text-black/70" x-text="t[lang].car_tag1"></div>
+                             <div class="px-4 py-2 bg-black/5 border border-black/10 text-xs text-black/70" x-text="t[lang].car_tag2"></div>
+                             <div class="px-4 py-2 bg-black/5 border border-black/10 text-xs text-black/70" x-text="t[lang].car_tag3"></div>
+                        </div>
+                    </div>
+                    <div class="scrub-item anim-scale">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80" class="rounded-sm shadow-2xl opacity-80" alt="Meeting">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 6: 联系我们 ================= -->
+        <div x-show="page === 'contact'" x-transition:enter="transition ease-out duration-500" class="w-full bg-paper text-obsidian-950">
+            <!-- 合作流程全览：垂直时间轴 -->
+            <section class="py-24 bg-paper border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    
+                    <div class="max-w-3xl">
+                        <h1 class="text-4xl md:text-5xl font-serif font-bold text-obsidian-950">合作流程全览 | 从携手到共赢的清晰路径</h1>
+                        <p class="mt-4 text-black/70 leading-relaxed">采用垂直时间轴设计，将每个步骤展开为详细模块，帮助你快速了解合作节奏、节点与交付内容。</p>
+                    </div>
+
+                    <div class="mt-14 relative border-l border-black/10 pl-8 space-y-10">
+                        <!-- 阶段一 -->
+                        <div class="relative">
+                            <span class="absolute -left-[9px] top-2 w-4 h-4 bg-gold-400 rounded-full border-2 border-paper"></span>
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                                    <div class="text-xl font-serif font-bold text-obsidian-950">阶段一：接洽与评估</div>
+                                    <div class="text-xs tracking-widest uppercase text-black/50">第1-7天</div>
+                                </div>
+                                <div class="mt-5 space-y-3 text-sm text-black/80">
+                                    <div><span class="font-bold">步骤1：</span>意向提交：在线填写申请表，初步说明资源与意向。</div>
+                                    <div><span class="font-bold">步骤2：</span>初步沟通：专属合作经理在24小时内联系，了解彼此需求。</div>
+                                    <div><span class="font-bold">步骤3：</span>双向评估：我方评估伙伴资质；伙伴评估我方支持体系。</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 阶段二 -->
+                        <div class="relative">
+                            <span class="absolute -left-[9px] top-2 w-4 h-4 bg-gold-400 rounded-full border-2 border-paper"></span>
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                                    <div class="text-xl font-serif font-bold text-obsidian-950">阶段二：协议与启动</div>
+                                    <div class="text-xs tracking-widest uppercase text-black/50">第8-15天</div>
+                                </div>
+                                <div class="mt-5 space-y-3 text-sm text-black/80">
+                                    <div><span class="font-bold">步骤4：</span>方案定制：根据评估结果，为您定制《合作方案与收益分析》。</div>
+                                    <div><span class="font-bold">步骤5：</span>协议签署：审议并签署正式《合作协议》，明确权责利。</div>
+                                    <div><span class="font-bold">步骤6：</span>启动会议：召开线上/线下启动会，对接关键人员与资源。</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 阶段三 -->
+                        <div class="relative">
+                            <span class="absolute -left-[9px] top-2 w-4 h-4 bg-gold-400 rounded-full border-2 border-paper"></span>
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                                    <div class="text-xl font-serif font-bold text-obsidian-950">阶段三：培训与赋能</div>
+                                    <div class="text-xs tracking-widest uppercase text-black/50">第16-30天</div>
+                                </div>
+                                <div class="mt-5 space-y-3 text-sm text-black/80">
+                                    <div><span class="font-bold">步骤7：</span>系统培训：完成产品知识、系统操作、销售技巧的必修培训。</div>
+                                    <div><span class="font-bold">步骤8：</span>启动资源包：获取品牌资料、市场工具、专属后台账号。</div>
+                                    <div><span class="font-bold">步骤9：</span>试运营支持：首月“陪跑”支持，共同完成首批客户转化。</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 阶段四 -->
+                        <div class="relative">
+                            <span class="absolute -left-[9px] top-2 w-4 h-4 bg-gold-400 rounded-full border-2 border-paper"></span>
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                                    <div class="text-xl font-serif font-bold text-obsidian-950">阶段四：运营与增长</div>
+                                    <div class="text-xs tracking-widest uppercase text-black/50">长期</div>
+                                </div>
+                                <div class="mt-5 space-y-3 text-sm text-black/80">
+                                    <div><span class="font-bold">步骤10：</span>正式运营：独立开展业务，享受区域保护。</div>
+                                    <div><span class="font-bold">步骤11：</span>持续支持：定期更新培训、营销活动支持、疑难问题协助。</div>
+                                    <div><span class="font-bold">步骤12：</span>结算与复盘：按月/季度清晰结算佣金，定期复盘业绩，规划增长。</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 页面底部：FAQ + 再次提交合作申请表单 -->
+            <section class="py-24 bg-paper border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
+                    <div x-data="{ openFaq: 1 }">
+                        <h2 class="text-3xl font-serif font-bold text-obsidian-950">合作常见问题 Q&A</h2>
+                        <p class="mt-3 text-black/60">关于费用、考核、支持与结算等细节，可在这里快速了解。</p>
+
+                        <div class="mt-8 space-y-3">
+                            <div class="bg-white border border-black/10">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 1 ? null : 1" :aria-expanded="openFaq === 1">
+                                    <div class="font-bold text-obsidian-950">费用与门槛是怎样的？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 1 ? 'rotate-180' : ''"></i>
+                                </button>
+                                <div x-show="openFaq === 1" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                    以合作方案为准。我们会在评估后提供《合作方案与收益分析》，清晰说明投入项、支持项与收益结构，避免信息不对称。
+                                </div>
+                            </div>
+
+                            <div class="bg-white border border-black/10">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 2 ? null : 2" :aria-expanded="openFaq === 2">
+                                    <div class="font-bold text-obsidian-950">是否有考核？考核方式是什么？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 2 ? 'rotate-180' : ''"></i>
+                                </button>
+                                <div x-show="openFaq === 2" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                    会有阶段性目标与过程指标，用于确保双方资源匹配并推动落地。具体节奏与目标会在启动会中对齐，并写入合作执行计划。
+                                </div>
+                            </div>
+
+                            <div class="bg-white border border-black/10">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 3 ? null : 3" :aria-expanded="openFaq === 3">
+                                    <div class="font-bold text-obsidian-950">总部能提供哪些持续支持？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 3 ? 'rotate-180' : ''"></i>
+                                </button>
+                                <div x-show="openFaq === 3" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                    包括培训更新、市场物料与活动、系统与后台支持、疑难问题协助、首月陪跑等。具体交付按合作等级与区域策略执行。
+                                </div>
+                            </div>
+
+                            <div class="bg-white border border-black/10">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 4 ? null : 4" :aria-expanded="openFaq === 4">
+                                    <div class="font-bold text-obsidian-950">结算周期与复盘机制是怎样的？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 4 ? 'rotate-180' : ''"></i>
+                                </button>
+                                <div x-show="openFaq === 4" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                    按月或按季度结算佣金，并进行阶段复盘（线索、转化、客诉、交付质量等），共同规划下一阶段增长动作。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-obsidian-950">提交合作申请</h2>
+                        <p class="mt-3 text-black/60">在了解全部细节后，提交你的信息，我们会在24小时内联系你。</p>
+
+                        <form class="mt-8 space-y-4" onsubmit="event.preventDefault(); alert('Success!')">
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <input type="text" placeholder="姓名" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full" />
+                                <input type="text" placeholder="所在城市" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full" />
+                            </div>
+                            <input type="text" placeholder="手机号 / 微信" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full" />
+                            <textarea rows="4" placeholder="资源与合作意向（例如：渠道/社群/学校资源/团队情况等）" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full"></textarea>
+                            <button class="w-full px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition">提交合作申请</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 现有页面保持不变：放在最底部 -->
+            <section class="w-full bg-gold-400 min-h-screen flex items-center justify-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div class="max-w-4xl mx-auto px-6 text-center relative z-10 py-32">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-black mb-6" x-text="t[lang].cta_title"></h2>
+                    <p class="text-black/70 mb-10 text-lg" x-text="t[lang].cta_desc"></p>
+                    <form class="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto" onsubmit="event.preventDefault(); alert('Success!')">
+                        <input type="text" :placeholder="t[lang].ph_contact" class="px-6 py-4 bg-white border-none rounded-sm text-black focus:outline-none w-full shadow-lg" />
+                        <button class="px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-obsidian-950 transition whitespace-nowrap shadow-xl" x-text="t[lang].btn_submit"></button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer x-show="page !== 'contact'" class="bg-black text-gray-500 py-16 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-sm">
+            <div>
+                <div class="text-2xl font-bold text-white tracking-widest mb-4">SDLV</div>
+                <p x-text="t[lang].footer_desc"></p>
+                <p class="mt-4 text-xs text-gray-600" x-text="t[lang].footer_meta"></p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase" x-text="t[lang].footer_contact"></h4>
+                <ul class="space-y-2">
+                    <li x-text="t[lang].addr_hk"></li>
+                    <li x-text="t[lang].addr_sz"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-xs text-center">
+            <span>© 2026 SDLV Group. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function appData() {
+            return {
+                lang: 'sc', // sc, tc, en
+                page: 'home',
+                t: {
+                    sc: {
+                        brand_sub: '汇生会', brand_full: '汇生会',
+                        nav_home: '首页', nav_about: '关于我们', nav_study: '留学服务', nav_apt: '学生公寓', nav_career: '职涯规划', nav_contact: '联系我们',
+                        sub_hero: 'Hero概览', sub_core: '核心业务', sub_story: '品牌故事', sub_history: '企业历程', sub_partners: '城市合伙人', sub_data: '数据亮点', sub_content: '服务内容', sub_map: '交互地图', sub_showcase: '公寓展示',
+                        hero_sub: '扎根香港，更懂香港', hero_slogan: '放眼全球精英之路',
+                        stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累计服务用户', stat_offer: 'Top 100名校录取', stat_satisfaction: '职涯规划满意率', stat_apt: '运营管理香港学生公寓(间)',
+                        biz_title: '核心业务', 
+                        biz_study_t: '一站式留学申请', biz_study_sub: '全球升学规划与陪伴', biz_study_locs: '香港·澳门·新加坡·英国·澳洲',
+                        biz_apt_t: '汇生会学生公寓', biz_apt_sub: '学子在港的第二个家', biz_apt_locs: '长沙湾 · 油麻地 · 尖沙咀 · 西营盘',
+                        biz_career_t: '名企职涯规划', biz_career_sub: '学业到职业的无缝衔接', biz_career_tags: '实习内推·全职计划·求职辅导',
+                        about_h1: '我们始终是学子与家庭', about_h1_sub: '“最坚实的后盾”',
+                        about_p1: '我们是一家立足香港、面向全球的一站式学生成长支持品牌。核心团队由深谙本地教育的港籍成员与熟悉内地及海外体系的成员组成。',
+                        about_p2: '从学业到住宿，从职业到生活，我们提供可信赖、全链条、有温度的陪伴，让每一段成长旅程都走得更有底气、更见光芒。',
+                        about_badge: '10+ 年经验',
+                        history_title: '企业历程',
+                        hist_2015_t: '初心启程', hist_2015_d: '公司成立，确立以学生为核心的服务理念。',
+                        hist_2017_t: '首次跨越', hist_2017_d: '服务版图拓展。',
+                        hist_2019_t: '安居计划启动', hist_2019_d: '服务深化，正式进军留学生公寓领域。',
+                        hist_2023_t: '深化布局', hist_2023_d: '香港总部+内地四城。',
+                        hist_2025_t: '整合与赋能', hist_2025_d: '打造全国性支持体系。',
+                        partner_title: '招募城市合伙人', partner_sub: '一起成为学子身边的“护航者”', city_hk: '香港',
+                        pt_val1_t: '完整赋能', pt_val1_d: '成熟体系、专业培训', pt_val2_t: '本地深耕', pt_val2_d: '发挥你的在地优势', pt_val3_t: '共享成长', pt_val3_d: '共赢市场未来',
+                        btn_join: '加入共创计划',
+                        study_hero_t: '全阶段升学规划与申请支持', study_hero_sub: '— 从副学士学士硕士到博士，覆盖全球主要留学地区 —',
+                        st_stat1: 'Offer 总数', st_stat2: '文书原创度', st_stat3: '学员满意度', st_stat4: 'QS前100录取率',
+                        btn_eval: '免费评估我的录取机率',
+                        serv_content_t: '服务内容详情', serv_1_t: '01 升学规划与定位', serv_1_d: '个性化方案 · 精准定位', serv_2_t: '02 申请材料准备', serv_2_d: '文书精研 · 优势提炼', serv_3_t: '03 院校申请及面试', serv_3_d: '系统填报 · 面试辅导',
+                        uni_link_t: '院校联系', uni_sub: '官方认证指定的招生机构', uni_desc: '“汇生会”与“Jesselton University College 哲士顿大学学院”合作，正积极参与学生招募和发展专业课程。学院获ASIC国际认证。',
+                        apt_map_t: '汇生会公寓地图', apt_map_sub: '不止一个住址，更是你在香港开启学业生活的战略起点',
+                        apt_syp: '西营盘', apt_dist_hku: 'HKU 步行15min', apt_ymt: '油麻地', apt_dist_poly: 'PolyU 地铁2站', map_hint: '* 点击金色光点查看通勤距离',
+                        btn_explore_apt: '探索此公寓', apt_syp_full: '西营盘 · 旗舰店', apt_ymt_full: '油麻地 · 核心馆',
+                        car_h1: '名企职涯规划', car_sub: '学业到职业的无缝衔接', car_desc: '我们提供从简历优化、模拟面试到内推机会的全方位服务。',
+                        car_tag1: '实习内推', car_tag2: '全职计划', car_tag3: '求职辅导',
+                        cta_title: '准备好开启下一站了吗？', cta_desc: '留下您的联系方式，我们的资深顾问将在 24 小时内与您联系。', ph_contact: '电话号码 / 微信 ID', btn_submit: '立即免费咨询',
+                        footer_desc: '全球教育与职业精英服务。\n始于2016。', footer_meta: '业务范围：留学规划 · 学生公寓 · 职涯规划', footer_contact: '联系我们', addr_hk: '香港总部：荃湾', addr_sz: '深圳办事处：西乡'
+                    },
+                    tc: {
+                        brand_sub: '滙生會', brand_full: '滙生會',
+                        nav_home: '首頁', nav_about: '關於我們', nav_study: '留學服務', nav_apt: '學生公寓', nav_career: '職涯規劃', nav_contact: '聯繫我們',
+                        sub_hero: 'Hero概覽', sub_core: '核心業務', sub_story: '品牌故事', sub_history: '企業歷程', sub_partners: '城市合夥人', sub_data: '數據亮點', sub_content: '服務內容', sub_map: '交互地圖', sub_showcase: '公寓展示',
+                        hero_sub: '紮根香港，更懂香港', hero_slogan: '放眼全球精英之路',
+                        stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累計服務用戶', stat_offer: 'Top 100名校錄取', stat_satisfaction: '職涯規劃滿意率', stat_apt: '運營管理香港學生公寓(間)',
+                        biz_title: '核心業務',
+                        biz_study_t: '一站式留學申請', biz_study_sub: '全球升學規劃與陪伴', biz_study_locs: '香港·澳門·新加坡·英國·澳洲',
+                        biz_apt_t: '滙生會學生公寓', biz_apt_sub: '學子在港的第二個家', biz_apt_locs: '長沙灣 · 油麻地 · 尖沙咀 · 西營盤',
+                        biz_career_t: '名企職涯規劃', biz_career_sub: '學業到職業的無縫銜接', biz_career_tags: '實習內推·全職計劃·求職輔導',
+                        about_h1: '我們始終是學子與家庭', about_h1_sub: '“最堅實的後盾”',
+                        about_p1: '我們是一家立足香港、面向全球的一站式學生成長支持品牌。核心團隊由深諳本地教育的港籍成員與熟悉內地及海外體系的成員組成。',
+                        about_p2: '從學業到住宿，從職業到生活，我們提供可信賴、全鏈條、有溫度的陪伴，讓每一段成長旅程都走得更有底氣、更見光芒。',
+                        about_badge: '10+ 年經驗',
+                        history_title: '企業歷程',
+                        hist_2015_t: '初心啟程', hist_2015_d: '公司成立，確立以學生為核心的服務理念。',
+                        hist_2017_t: '首次跨越', hist_2017_d: '服務版圖拓展。',
+                        hist_2019_t: '安居計劃啟動', hist_2019_d: '服務深化，正式進軍留學生公寓領域。',
+                        hist_2023_t: '深化佈局', hist_2023_d: '香港總部+內地四城。',
+                        hist_2025_t: '整合與賦能', hist_2025_d: '打造全國性支持體系。',
+                        partner_title: '招募城市合夥人', partner_sub: '一起成為學子身邊的“護航者”', city_hk: '香港',
+                        pt_val1_t: '完整賦能', pt_val1_d: '成熟體系、專業培訓', pt_val2_t: '本地深耕', pt_val2_d: '發揮你的在地優勢', pt_val3_t: '共享成長', pt_val3_d: '共贏市場未來',
+                        btn_join: '加入共創計劃',
+                        study_hero_t: '全階段升學規劃與申請支持', study_hero_sub: '— 從副學士學士碩士到博士，覆蓋全球主要留學地區 —',
+                        st_stat1: 'Offer 總數', st_stat2: '文書原創度', st_stat3: '學員滿意度', st_stat4: 'QS前100錄取率',
+                        btn_eval: '免費評估我的錄取機率',
+                        serv_content_t: '服務內容詳情', serv_1_t: '01 升學規劃與定位', serv_1_d: '個性化方案 · 精準定位', serv_2_t: '02 申請材料準備', serv_2_d: '文書精研 · 優勢提煉', serv_3_t: '03 院校申請及面試', serv_3_d: '系統填報 · 面試輔導',
+                        uni_link_t: '院校聯繫', uni_sub: '官方認證指定的招生機構', uni_desc: '“滙生會”與“Jesselton University College 哲士頓大學學院”合作，正積極參與學生招募和發展專業課程。學院獲ASIC國際認證。',
+                        apt_map_t: '滙生會公寓地圖', apt_map_sub: '不止一個住址，更是你在香港開啟學業生活的戰略起點',
+                        apt_syp: '西營盤', apt_dist_hku: 'HKU 步行15min', apt_ymt: '油麻地', apt_dist_poly: 'PolyU 地鐵2站', map_hint: '* 點擊金色光點查看通勤距離',
+                        btn_explore_apt: '探索此公寓', apt_syp_full: '西營盤 · 旗艦店', apt_ymt_full: '油麻地 · 核心館',
+                        car_h1: '名企職涯規劃', car_sub: '學業到職業的無縫銜接', car_desc: '我們提供從簡歷優化、模擬面試到內推機會的全方位服務。',
+                        car_tag1: '實習內推', car_tag2: '全職計劃', car_tag3: '求職輔導',
+                        cta_title: '準備好開啟下一站了嗎？', cta_desc: '留下您的聯繫方式，我們的資深顧問將在 24 小時內與您聯繫。', ph_contact: '電話號碼 / 微信 ID', btn_submit: '立即免費咨詢',
+                        footer_desc: '全球教育與職業精英服務。\n始於2016。', footer_meta: '業務範圍：留學規劃 · 學生公寓 · 職涯規劃', footer_contact: '聯繫我們', addr_hk: '香港總部：中環', addr_sz: '深圳辦事處：西鄉'
+                    },
+                    en: {
+                        brand_sub: 'SDLV Group', brand_full: 'Group',
+                        nav_home: 'Home', nav_about: 'About Us', nav_study: 'Education', nav_apt: 'Housing', nav_career: 'Career', nav_contact: 'Contact',
+                        sub_hero: 'Overview', sub_core: 'Core Business', sub_story: 'Our Story', sub_history: 'History', sub_partners: 'Partners', sub_data: 'Highlights', sub_content: 'Services', sub_map: 'Map', sub_showcase: 'Apartments',
+                        hero_sub: 'Rooted in Hong Kong, Experts in HK', hero_slogan: 'Global Elite Pathway',
+                        stat_years_num: '10 Years', stat_years_txt: 'Since 2016', stat_users: 'Users Served', stat_offer: 'Top 100 Offers', stat_satisfaction: 'Satisfaction Rate', stat_apt: 'Rooms Managed',
+                        biz_title: 'Our Core Business',
+                        biz_study_t: 'Global Education', biz_study_sub: 'Planning & Support', biz_study_locs: 'HK · Macau · SG · UK · AUS',
+                        biz_apt_t: 'Student Housing', biz_apt_sub: 'Your 2nd Home in HK', biz_apt_locs: 'Cheung Sha Wan · Yau Ma Tei · TST · SYP',
+                        biz_career_t: 'Career Planning', biz_career_sub: 'School to Work Transition', biz_career_tags: 'Internship · Full-time · Coaching',
+                        about_h1: 'We Are Your Family\'s', about_h1_sub: '"Strongest Support"',
+                        about_p1: 'SDLV is a one-stop student growth support brand based in Hong Kong and facing the world. Our core team consists of HK locals and global experts.',
+                        about_p2: 'From academics to housing, career to life, we provide reliable, full-chain, and warm companionship, empowering every step of your journey.',
+                        about_badge: '10+ Years Exp.',
+                        history_title: 'Our History',
+                        hist_2015_t: 'Inception', hist_2015_d: 'Company founded with a student-centric philosophy.',
+                        hist_2017_t: 'Expansion', hist_2017_d: 'Service coverage expanded.',
+                        hist_2019_t: 'Housing Plan', hist_2019_d: 'Officially entered the student housing sector.',
+                        hist_2023_t: 'Deepening', hist_2023_d: 'HK HQ + 4 Mainland Cities.',
+                        hist_2025_t: 'Integration', hist_2025_d: 'Building a nationwide support system.',
+                        partner_title: 'City Partners', partner_sub: 'Become a Guardian for Students', city_hk: 'HK',
+                        pt_val1_t: 'Empowerment', pt_val1_d: 'Training & Operations', pt_val2_t: 'Localization', pt_val2_d: 'Leverage local advantages', pt_val3_t: 'Growth', pt_val3_d: 'Win the future together',
+                        btn_join: 'Join Us',
+                        study_hero_t: 'Full-Cycle Education Planning', study_hero_sub: '— Associate to PhD, Global Coverage —',
+                        st_stat1: 'Total Offers', st_stat2: 'Original Essays', st_stat3: 'Satisfaction', st_stat4: 'QS Top 100 Rate',
+                        btn_eval: 'Free Evaluation',
+                        serv_content_t: 'Service Details', serv_1_t: '01 Planning', serv_1_d: 'Personalized Strategy', serv_2_t: '02 Application', serv_2_d: 'Essay Polishing', serv_3_t: '03 Submission', serv_3_d: 'System Filing & Interview Prep',
+                        uni_link_t: 'University Partner', uni_sub: 'Official Recruitment Partner', uni_desc: 'SDLV partners with Jesselton University College (ASIC Accredited) for recruitment and course development.',
+                        apt_map_t: 'Apartment Map', apt_map_sub: 'Not just an address, but a strategic start for your life in HK.',
+                        apt_syp: 'Sai Ying Pun', apt_dist_hku: 'HKU 15min Walk', apt_ymt: 'Yau Ma Tei', apt_dist_poly: 'PolyU 2 MTR Stops', map_hint: '* Click dots to see distance',
+                        btn_explore_apt: 'Explore Room', apt_syp_full: 'SYP · Flagship', apt_ymt_full: 'YMT · Core',
+                        car_h1: 'Elite Career Planning', car_sub: 'Seamless Transition', car_desc: 'We provide resume optimization, mock interviews, and referral opportunities.',
+                        car_tag1: 'Internships', car_tag2: 'Full-time', car_tag3: 'Coaching',
+                        cta_title: 'Ready for the next step?', cta_desc: 'Leave your contact, our senior consultant will reach out in 24h.', ph_contact: 'Phone / WeChat ID', btn_submit: 'Free Consultation',
+                        footer_desc: 'Global Education & Career Elite.\nSince 2016.', footer_meta: 'Scope: Education Planning · Student Housing · Career Planning', footer_contact: 'Contact', addr_hk: 'HK HQ: Central', addr_sz: 'SZ Office: Xixiang'
+                    }
+                },
+                
+                switchPage(newPage, anchorId = null) {
+                    this.page = newPage;
+                    window.scrollTo({ top: 0, behavior: 'auto' });
+                    
+                    // 等待页面DOM更新后，重新初始化动画引擎
+                    setTimeout(() => {
+                        initScrollEngine();
+                        if(anchorId) {
+                            const el = document.getElementById(anchorId);
+                            if(el) {
+                                const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+                                window.scrollTo({top: y, behavior: 'smooth'});
+                            }
+                        }
+                    }, 100);
+                }
+            }
+        }
+
+        // ================= Custom Scroll Scrubbing Engine =================
+        let scrubElements = [];
+        let parallaxElements = [];
+
+        function getDocumentTop(el) {
+            let top = 0;
+            let current = el;
+            while (current) {
+                top += current.offsetTop || 0;
+                current = current.offsetParent;
+            }
+            return top;
+        }
+
+        function initScrollEngine() {
+            // 收集所有标记为 scrub-item 的元素
+            scrubElements = Array.from(document.querySelectorAll('.scrub-item'));
+            parallaxElements = Array.from(document.querySelectorAll('.anim-parallax'));
+        }
+
+        function scrollLoop() {
+            const viewportHeight = window.innerHeight;
+            const scrollTop = window.scrollY;
+
+            // 1. 处理通用 Scrubbing 动画
+            scrubElements.forEach(el => {
+                // x-show 会对非当前页设置 display:none，此时跳过（避免 0 高度/NaN 进度污染）
+                if (el.offsetParent === null) return;
+
+                // 用文档流位置计算，避免受 transform 动画影响产生“反馈回路”
+                const elementTop = getDocumentTop(el);
+                const elementHeight = el.offsetHeight;
+
+                // 定义触发区间：
+                // start: 元素顶部刚进入屏幕下方
+                // end: 元素完全进入屏幕并向上移动一段距离
+                let start = elementTop - viewportHeight;
+                let end = elementTop + (elementHeight * 0.2); // 可以调整系数控制动画完成的快慢
+
+                // 计算进度 0.0 -> 1.0
+                let progress = (scrollTop - start) / (end - start);
+                
+                // 限制在 0-1 之间
+                let clampedProgress = Math.min(Math.max(progress, 0), 1);
+                if (!Number.isFinite(clampedProgress)) clampedProgress = 0;
+
+                // 写入 CSS 变量 --p
+                el.style.setProperty('--p', clampedProgress);
+            });
+
+            // 2. 处理视差滚动 (Parallax)
+            // 简单的将 scrollY 传给 --scroll-y
+            document.body.style.setProperty('--scroll-y', scrollTop);
+
+            requestAnimationFrame(scrollLoop);
+        }
+
+        // 启动引擎
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollEngine();
+            scrollLoop();
+        });
+    </script>
+</body>
+</html>

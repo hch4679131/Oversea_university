@@ -21,6 +21,87 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.dirname(__filename)));
 
+// 将 JSON 解析错误转为 400，并给出清晰提示（避免默认 500）
+app.use((err, req, res, next) => {
+    if (err && err.type === 'entity.parse.failed') {
+        return res.status(400).json({
+            success: false,
+            error: 'Invalid JSON body',
+            hint: '请使用有效 JSON 或改用 application/x-www-form-urlencoded',
+            example: { phone: '13800138000', purpose: 'login' }
+        });
+    }
+    next(err);
+});
+
+// ============================================================================
+// SMS 回执存储（内存）
+// ============================================================================
+const smsReceipts = [];
+
+/**
+ * POST /api/sms/receipt
+ * 接收阿里云短信回执回调
+ * 阿里云推送的数据格式（数组）:
+ * [
+ *   {
+ *     "sendTime": 1234567890000,
+ *     "reportTime": 1234567891000,
+ *     "success": true/false,
+ *     "err_code": "0"/"SMS_FAIL",
+ *     "phoneNumber": "18476411288",
+ *     "templateCode": "SMS_499170576",
+ *     "bizId": "xxx"
+ *   }
+ * ]
+ */
+app.post('/api/sms/receipt', (req, res) => {
+    try {
+        const receipts = req.body; // 阿里云推送的是数组
+        if (Array.isArray(receipts)) {
+            receipts.forEach(r => {
+                smsReceipts.push({
+                    ...r,
+                    receivedAt: new Date().toISOString()
+                });
+                console.log(`[SMS回执] 电话: ${r.phoneNumber}, 成功: ${r.success}, 错误码: ${r.err_code}`);
+            });
+        }
+        // 按阿里云文档返回格式
+        res.json({ code: 0, msg: "成功" });
+    } catch (err) {
+        console.error('POST /api/sms/receipt error:', err);
+        res.status(200).json({ code: 0, msg: "成功" }); // 即使错误也返回 200，避免阿里云重试
+    }
+});
+
+/**
+ * GET /api/sms/receipts
+ * 查看已收到的 SMS 回执列表
+ * Query: ?limit=50&phone=18476411288（可选）
+ */
+app.get('/api/sms/receipts', (req, res) => {
+    try {
+        const { limit = 50, phone } = req.query;
+        let filtered = smsReceipts;
+        
+        if (phone) {
+            filtered = filtered.filter(r => r.phoneNumber === phone);
+        }
+        
+        const limited = filtered.slice(-parseInt(limit));
+        res.json({
+            success: true,
+            total: smsReceipts.length,
+            filtered: filtered.length,
+            data: limited
+        });
+    } catch (err) {
+        console.error('GET /api/sms/receipts error:', err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
 // 挂载认证路由
 app.use('/api/auth', authRouter);
 // 挂载 AI 聊天路由
@@ -769,7 +850,7 @@ app.get('/api/health', (req, res) => {
 
 // Serve HTML file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'ai_studio_code (20).html'));
+    res.sendFile(path.join(__dirname, 'ai_studio_code (41).html'));
 });
 
 // Error handling middleware

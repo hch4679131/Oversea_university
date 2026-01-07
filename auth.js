@@ -76,17 +76,18 @@ async function sendSMS(phone, code) {
             return true;
         }
 
-        const Dysmsapi20170525 = require('@alicloud/dysmsapi20170525');
-        const OpenApi = require('@alicloud/openapi-client');
+        const Client = require('@alicloud/dysmsapi20170525').default;
+        const Config = require('@alicloud/openapi-client').Config;
         
-        const config = new OpenApi.Config({
+        const config = new Config({
             accessKeyId: ALIYUN_CONFIG.accessKeyId,
             accessKeySecret: ALIYUN_CONFIG.accessKeySecret,
             endpoint: 'dysmsapi.aliyuncs.com'
         });
         
-        const client = new Dysmsapi20170525(config);
-        const request = new Dysmsapi20170525.SendSmsRequest({
+        const client = new Client(config);
+        const SendSmsRequest = require('@alicloud/dysmsapi20170525').SendSmsRequest;
+        const request = new SendSmsRequest({
             phoneNumbers: phone,
             signName: ALIYUN_CONFIG.smsSignName,
             templateCode: ALIYUN_CONFIG.smsTemplateCode,
@@ -94,11 +95,11 @@ async function sendSMS(phone, code) {
         });
         
         const response = await client.sendSms(request);
-        console.log(`[短信] 发送到 ${phone}，结果: ${response.body.code}，消息: ${response.body.message}`);
+        console.log(`[短信] 发送到 ${phone}，结果代码: ${response.body?.code || 'unknown'}，消息: ${response.body?.message || 'no message'}`);
         
-        return response.body.code === 'OK';
+        return response?.body?.code === 'OK';
     } catch (error) {
-        console.error('[短信发送失败]', error.message);
+        console.error('[短信发送失败]', error.message, error.code || '');
         return false;
     }
 }
@@ -185,8 +186,17 @@ function authenticateToken(req, res, next) {
  * 发送短信验证码
  */
 router.post('/send-code', [
-    body('phone').isMobilePhone('zh-CN').withMessage('请输入正确的手机号'),
-    body('purpose').isIn(['register', 'reset_password', 'login']).withMessage('用途参数错误')
+    // 兼容 +86 / 空格 / 86 前缀，统一为 11 位国内手机号后再校验
+    body('phone')
+        .customSanitizer(v => {
+            const s = String(v || '').replace(/\s+/g, '');
+            return s.replace(/^\+?86/, '');
+        })
+        .isMobilePhone('zh-CN').withMessage('请输入正确的手机号'),
+    // 兼容大小写与多余空格
+    body('purpose')
+        .customSanitizer(v => String(v || '').trim().toLowerCase())
+        .isIn(['register', 'reset_password', 'login']).withMessage('用途参数错误')
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
