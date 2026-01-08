@@ -139,21 +139,15 @@ class SaveJsonPipeline:
             spider.logger.warning("[DeepSeek] 文本为空，跳过翻译/摘要")
             return None
 
-        # 避免正文过长导致输出超出 max_tokens，翻译失败（常见于 staff/FAQ 等页面）
-        max_input_chars = 6000
-        if len(text) > max_input_chars:
-            spider.logger.warning(
-                f"[DeepSeek] 正文过长({len(text)}字)，仅截取前{max_input_chars}字用于翻译/摘要"
-            )
-            text = text[:max_input_chars]
-
         for attempt in range(1, retry + 1):
             try:
                 if attempt > 1:
                     wait_time = 10 * attempt
-                    spider.logger.info(f"[DeepSeek] 第 {attempt}/{retry} 次重试，等待 {wait_time} 秒...")
+                    spider.logger.info(
+                        f"[DeepSeek] 第 {attempt}/{retry} 次重试，等待 {wait_time} 秒..."
+                    )
                     time.sleep(wait_time)
-                    
+
                 spider.logger.info(f"[DeepSeek] 开始翻译 (标题长度: {len(title)}, 正文长度: {len(text)})")
                 
                 prompt = (
