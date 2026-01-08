@@ -139,6 +139,14 @@ class SaveJsonPipeline:
             spider.logger.warning("[DeepSeek] 文本为空，跳过翻译/摘要")
             return None
 
+        # 避免正文过长导致输出超出 max_tokens，翻译失败（常见于 staff/FAQ 等页面）
+        max_input_chars = 6000
+        if len(text) > max_input_chars:
+            spider.logger.warning(
+                f"[DeepSeek] 正文过长({len(text)}字)，仅截取前{max_input_chars}字用于翻译/摘要"
+            )
+            text = text[:max_input_chars]
+
         for attempt in range(1, retry + 1):
             try:
                 if attempt > 1:
@@ -298,6 +306,11 @@ class SaveJsonPipeline:
                 time.sleep(1)
             else:
                 spider.logger.info("[WeChat] 无概述，直接发送全文")
+
+            # 若仅有中文概述但没有全文翻译，则不要降级发送英文原文，避免“爬出来是英文”的体验
+            if summary and not article_data.get("full_text_zh"):
+                spider.logger.info("[WeChat] 无全文翻译，仅发送中文概述并跳过正文")
+                return
             
             # 发送全文（中文翻译或英文原文）
             text = full_text
