@@ -11,6 +11,7 @@ const { scrapeWebsiteToExcel, scrapeMultipleUrls } = require('./scraper');
 const { sendWeChatWebhook, sendWeChatImage } = require('./wechat');
 const authRouter = require('./auth');  // 认证模块
 const chatRouter = require('./chat');  // AI 聊天模块
+const agentRouter = require('./agent'); // 代理人系统模块
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -104,6 +105,8 @@ app.get('/api/sms/receipts', (req, res) => {
 
 // 挂载认证路由
 app.use('/api/auth', authRouter);
+// 挂载代理系统路由
+app.use('/api/agent', agentRouter);
 // 挂载 AI 聊天路由
 app.use('/api', chatRouter);
 
