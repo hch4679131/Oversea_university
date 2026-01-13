@@ -33,7 +33,16 @@
     </script>
     <style>
         [x-cloak] { display: none !important; }
-        body { background-color: #050505; color: #e5e5e5; overflow-x: hidden; }
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.08), transparent 45%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.06), transparent 40%),
+                url('https://www.transparenttextures.com/patterns/stardust.png');
+            background-attachment: fixed;
+        }
         
         /* 导航菜单样式 */
         .nav-item { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
@@ -57,23 +66,37 @@
            滚轮动 -> --p 变 -> 样式变
         */
 
-        /* 1. 向上渐变浮现 (跟随滚轮) */
+        /* 1. 影院级浮现 (跟随滚轮) */
         .anim-fade-up {
-            /* 进度0时透明，进度0.3开始显现 */
-            opacity: clamp(0, calc((var(--p) - 0.1) * 2), 1);
-            /* 进度0时向下偏移100px，进度1时归位 */
-            transform: translate3d(0, calc(100px * (1 - var(--p))), 0);
-            /* 极短的过渡时间，保证跟手流畅性 */
-            transition: transform 0.05s linear, opacity 0.05s linear; 
-            will-change: transform, opacity;
+            opacity: clamp(0, calc((var(--p) - 0.05) * 3), 1);
+            transform:
+                translate3d(0, calc(130px * (1 - var(--p))), 0)
+                scale(calc(0.97 + 0.03 * var(--p)));
+            /* 透明/模糊不要影响阅读：只保留一点点过渡 */
+            filter: blur(calc(0.6px * (1 - var(--p))));
+            transition: transform 0.08s cubic-bezier(0, 0, 0.2, 1), opacity 0.08s cubic-bezier(0, 0, 0.2, 1), filter 0.08s cubic-bezier(0, 0, 0.2, 1);
+            will-change: transform, opacity, filter;
         }
 
-        /* 2. 缩放进场 */
+        /* 1B. 3D 翻转入场 (用于卡片) */
+        .anim-flip-up {
+            opacity: clamp(0, calc((var(--p) - 0.1) * 2), 1);
+            transform:
+                perspective(1000px)
+                translate3d(0, calc(90px * (1 - var(--p))), 0)
+                rotateX(calc(16deg * (1 - var(--p))));
+            filter: blur(calc(0.6px * (1 - var(--p))));
+            transition: transform 0.08s linear, opacity 0.08s linear, filter 0.08s linear;
+            will-change: transform, opacity, filter;
+        }
+
+        /* 2. 缩放聚焦 */
         .anim-scale {
-            transform: translateZ(0) scale(calc(0.8 + 0.2 * var(--p)));
-            opacity: clamp(0, var(--p), 1);
-            transition: transform 0.05s linear, opacity 0.05s linear;
-            will-change: transform, opacity;
+            transform: translateZ(0) scale(calc(1.06 - 0.06 * var(--p)));
+            opacity: clamp(0, calc(var(--p) * 2), 1);
+            filter: brightness(calc(0.7 + 0.3 * var(--p)));
+            transition: transform 0.08s linear, opacity 0.08s linear, filter 0.08s linear;
+            will-change: transform, opacity, filter;
         }
 
         /* 3. 线条生长 (用于时间轴) */
@@ -81,6 +104,7 @@
             height: calc(100% * var(--p));
             max-height: 100%;
             transition: height 0.05s linear;
+            box-shadow: 0 0 10px rgba(212, 175, 55, calc(var(--p) * 0.35));
         }
 
         /* 4. 背景视差 (Parallax) */
@@ -93,18 +117,107 @@
         /* 首页 Hero：轻微视差（只让图片动，遮罩不动；限制最大位移避免“飘”） */
         .hero-parallax-img {
             transform: translate3d(0, clamp(-24px, calc(var(--scroll-y) * -0.06px), 0px), 0) scale(1.1);
+            filter: brightness(0.6);
             transition: transform 0.05s linear;
             will-change: transform;
         }
 
         /* 地图交互 */
-        .map-line {
-            width: 0; transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
-            height: 1px; background: #D4AF37; position: absolute; transform-origin: left center;
+        .map-point-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 9999px;
+            background: rgba(212, 175, 55, 0.4);
+            animation: pulse-glow 2s infinite;
+            pointer-events: none;
         }
-        .map-active .map-line { width: 120px; }
-        .map-label { opacity: 0; transition: opacity 0.5s ease 0.8s; }
-        .map-active .map-label { opacity: 1; }
+        @keyframes pulse-glow {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+
+        .map-line {
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            height: 1px;
+            background: linear-gradient(90deg, #D4AF37, transparent);
+            position: absolute;
+            transform-origin: left center;
+        }
+        .map-active .map-line { width: 140px; }
+        .map-label { opacity: 0; transform: translateY(10px); transition: all 0.6s ease 0.6s; }
+        .map-active .map-label { opacity: 1; transform: translateY(0); }
+
+        /* 悬浮咨询按钮组（参照AI稿） */
+        .float-widget-container {
+            position: fixed;
+            bottom: 28px;
+            right: 22px;
+            z-index: 9999;
+            transform: translate3d(0, clamp(-18px, calc(var(--fab-lag, 0) * 1px), 18px), 0);
+            will-change: transform;
+        }
+        .float-btn-group {
+            position: relative;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        .main-float-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 9999px;
+            background: rgba(5, 5, 5, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: #D4AF37;
+        }
+        .main-float-btn:hover {
+            transform: scale(1.08);
+            border-color: rgba(212, 175, 55, 0.7);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+        }
+
+        .sub-float-btn {
+            opacity: 0;
+            transform: translateY(20px) scale(0.88);
+            pointer-events: none;
+            background: #F9F8F4;
+            color: #050505;
+            padding: 10px 22px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .float-btn-group:hover .sub-float-btn,
+        .float-btn-group.is-open .sub-float-btn {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        .float-btn-group:hover .sub-float-btn:nth-child(2),
+        .float-btn-group.is-open .sub-float-btn:nth-child(2) { transition-delay: 0.05s; }
+        .float-btn-group:hover .sub-float-btn:nth-child(3),
+        .float-btn-group.is-open .sub-float-btn:nth-child(3) { transition-delay: 0.1s; }
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #050505; }
@@ -115,7 +228,7 @@
 <body class="antialiased selection:bg-gold-400 selection:text-black">
 
     <!-- 导航栏 -->
-    <nav class="fixed w-full top-0 z-50 bg-obsidian-950/90 backdrop-blur-md border-b border-white/5 h-20">
+    <nav class="fixed w-full top-0 z-50 bg-gradient-to-b from-black/90 to-black/60 backdrop-blur-sm border-b border-white/5 h-20">
         <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
             <div class="flex items-center gap-3 cursor-pointer" @click="switchPage('home')">
                 <div class="w-10 h-10 border border-gold-400 flex items-center justify-center relative overflow-hidden group">
@@ -140,6 +253,9 @@
                     </div>
                 </div>
                 -->
+                <div class="nav-item group">
+                    <span @click="switchPage('home', 'achievements')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
+                </div>
                 <div class="nav-item group">
                     <span @click="switchPage('about')" :class="page === 'about' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
@@ -190,8 +306,8 @@
                 <!-- 背景视差层 -->
                 <div class="absolute inset-0 z-0">
                     <img src="https://static.sdlvhk.com/图片素材/Temp%20images/Image%202.0%20by%20tirachardz%20on%20Freepik.jpg" 
-                         class="hero-parallax-img w-full h-[120%] object-cover opacity-40" style="transform-origin: top;" alt="Students">
-                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/70 to-transparent"></div>
+                        class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Students">
+                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/55 to-transparent"></div>
                 </div>
 
                 <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64 grid md:grid-cols-2 gap-12 items-center">
@@ -207,65 +323,59 @@
                         <p class="text-xl text-gold-400/80 mb-10 tracking-widest" x-text="t[lang].hero_slogan"></p>
                     </div>
 
-                    <div class="scrub-item anim-fade-up w-full md:justify-self-end max-w-xl">
+                    <div id="achievements" class="scrub-item anim-flip-up w-full md:justify-self-end max-w-xl">
                         <div class="grid grid-cols-2 gap-4 md:gap-6">
-                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
-                                        <i data-lucide="calendar" class="w-5 h-5 text-gold-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-2xl font-bold text-white leading-none" x-text="t[lang].stat_years_num"></div>
-                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_years_txt"></div>
-                                    </div>
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="calendar" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white" x-text="t[lang].stat_years_num"></div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_years_txt"></div>
                                 </div>
                             </div>
 
-                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
-                                        <i data-lucide="users" class="w-5 h-5 text-gold-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-2xl font-bold text-white leading-none">6W+</div>
-                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_users"></div>
-                                    </div>
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="users" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">6W+</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_users"></div>
                                 </div>
                             </div>
 
-                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
-                                        <i data-lucide="graduation-cap" class="w-5 h-5 text-gold-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-2xl font-bold text-white leading-none">96.3%</div>
-                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_offer"></div>
-                                    </div>
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="graduation-cap" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">96.3%</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_offer"></div>
                                 </div>
                             </div>
 
-                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
-                                        <i data-lucide="thumbs-up" class="w-5 h-5 text-gold-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-2xl font-bold text-white leading-none">100%</div>
-                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_satisfaction"></div>
-                                    </div>
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="thumbs-up" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">100%</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_satisfaction"></div>
                                 </div>
                             </div>
 
-                            <div class="group rounded-sm border border-white/10 bg-obsidian-950/60 backdrop-blur-sm p-4 hover:border-gold-400/60 transition col-span-2">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 rounded-sm border border-gold-400/20 bg-gold-400/10 flex items-center justify-center">
-                                        <i data-lucide="home" class="w-5 h-5 text-gold-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-2xl font-bold text-white leading-none">500+</div>
-                                        <div class="text-xs text-gray-500 mt-2" x-text="t[lang].stat_apt"></div>
-                                    </div>
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="home" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">500+</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_apt"></div>
+                                </div>
+                            </div>
+
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="star" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">2k+</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_feedback"></div>
                                 </div>
                             </div>
                         </div>
@@ -274,47 +384,65 @@
             </section>
 
             <!-- Core Business Cards -->
-            <section id="core-business" class="py-32 bg-paper text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center mb-20">
-                        <h2 class="text-3xl md:text-4xl font-serif text-obsidian-950 mb-4" x-text="t[lang].biz_title"></h2>
-                        <div class="w-24 h-1 bg-gold-400 mx-auto"></div>
+            <section id="core-business" class="py-40 bg-paper text-obsidian-950 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/10 to-transparent skew-x-12"></div>
+                <div class="max-w-7xl mx-auto px-6 relative z-10">
+                    <div class="text-center mb-24 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Our Services</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].biz_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                     </div>
-                    
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <!-- 每个卡片都带有 scrub-item 和 anim-fade-up，意味着它们会随着滚动独立浮现 -->
-                        <div>
-                            <div @click="switchPage('study')" class="group relative bg-obsidian-950 border border-white/5 p-8 hover:border-gold-400 transition duration-500 cursor-pointer overflow-hidden">
-                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80')] bg-cover opacity-10 group-hover:scale-110 transition duration-700"></div>
-                                <div class="relative z-20">
-                                    <div class="flex gap-2 mb-6 text-gold-400"><i data-lucide="globe" class="w-8 h-8"></i><i data-lucide="graduation-cap" class="w-8 h-8"></i></div>
-                                    <h3 class="text-2xl font-serif text-white mb-2" x-text="t[lang].biz_study_t"></h3>
-                                    <p class="text-xs text-gold-400 uppercase tracking-widest mb-4" x-text="t[lang].biz_study_sub"></p>
-                                    <p class="text-gray-400 text-sm mb-6 border-t border-white/10 pt-4" x-text="t[lang].biz_study_locs"></p>
+
+                    <div class="grid md:grid-cols-3 gap-10">
+                        <div class="scrub-item anim-fade-up">
+                            <div @click="switchPage('study')" class="group relative h-[500px] bg-obsidian-950 border border-gold-400/20 overflow-hidden cursor-pointer shadow-2xl hover:border-gold-400/60 transition-all duration-500 rounded-none">
+                                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-gold-400/10 via-transparent to-transparent"></div>
+                                <div class="absolute top-6 right-6 text-6xl font-serif text-white/5 select-none">01</div>
+                                <div class="relative h-full p-10 flex flex-col">
+                                    <div class="flex items-center gap-4 mb-10">
+                                        <i data-lucide="graduation-cap" class="w-6 h-6 text-gold-400"></i>
+                                        <div class="h-[1px] flex-1 bg-gold-400/40"></div>
+                                    </div>
+                                    <h3 class="text-3xl font-serif text-white mb-4" x-text="t[lang].biz_study_t"></h3>
+                                    <p class="text-gray-300 text-sm leading-relaxed mb-6" x-text="t[lang].biz_study_sub"></p>
+                                    <div class="mt-auto pt-6 border-t border-white/10">
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div>
-                            <div @click="switchPage('apartments')" class="group relative bg-obsidian-950 border border-white/5 p-8 hover:border-gold-400 transition duration-500 cursor-pointer overflow-hidden">
-                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80')] bg-cover opacity-10 group-hover:scale-110 transition duration-700"></div>
-                                <div class="relative z-20">
-                                    <div class="mb-6 text-gold-400"><i data-lucide="home" class="w-8 h-8"></i></div>
-                                    <h3 class="text-2xl font-serif text-white mb-2" x-text="t[lang].biz_apt_t"></h3>
-                                    <p class="text-xs text-gold-400 uppercase tracking-widest mb-4" x-text="t[lang].biz_apt_sub"></p>
-                                    <p class="text-gray-400 text-sm mb-6 border-t border-white/10 pt-4" x-text="t[lang].biz_apt_locs"></p>
+                        <div class="scrub-item anim-fade-up">
+                            <div @click="switchPage('apartments')" class="group relative h-[500px] bg-white border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
+                                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-black/5 via-transparent to-transparent"></div>
+                                <div class="absolute top-6 right-6 text-6xl font-serif text-black/5 select-none">02</div>
+                                <div class="relative h-full p-10 flex flex-col">
+                                    <div class="flex items-center gap-4 mb-10">
+                                        <i data-lucide="home" class="w-6 h-6 text-obsidian-950"></i>
+                                        <div class="h-[1px] flex-1 bg-black/20"></div>
+                                    </div>
+                                    <h3 class="text-3xl font-serif text-obsidian-950 mb-4" x-text="t[lang].biz_apt_t"></h3>
+                                    <p class="text-black/70 text-sm leading-relaxed" x-text="t[lang].biz_apt_locs"></p>
+                                    <div class="mt-auto pt-6 border-t border-black/10">
+                                        <div class="text-xs text-black/60 uppercase tracking-widest" x-text="t[lang].biz_apt_sub"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div>
-                            <div @click="switchPage('career')" class="group relative bg-obsidian-950 border border-white/5 p-8 hover:border-gold-400 transition duration-500 cursor-pointer overflow-hidden">
-                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1521791136064-7985c2717883?auto=format&fit=crop&q=80')] bg-cover opacity-10 group-hover:scale-110 transition duration-700"></div>
-                                <div class="relative z-20">
-                                    <div class="flex gap-2 mb-6 text-gold-400"><i data-lucide="trending-up" class="w-8 h-8"></i><i data-lucide="handshake" class="w-8 h-8"></i></div>
-                                    <h3 class="text-2xl font-serif text-white mb-2" x-text="t[lang].biz_career_t"></h3>
-                                    <p class="text-xs text-gold-400 uppercase tracking-widest mb-4" x-text="t[lang].biz_career_sub"></p>
-                                    <p class="text-gray-400 text-sm mb-6 border-t border-white/10 pt-4" x-text="t[lang].biz_career_tags"></p>
+                        <div class="scrub-item anim-fade-up">
+                            <div @click="switchPage('career')" class="group relative h-[500px] bg-gold-400 border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
+                                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-black/10 via-transparent to-transparent"></div>
+                                <div class="absolute top-6 right-6 text-6xl font-serif text-black/10 select-none">03</div>
+                                <div class="relative h-full p-10 flex flex-col">
+                                    <div class="flex items-center gap-4 mb-10">
+                                        <i data-lucide="trending-up" class="w-6 h-6 text-black"></i>
+                                        <div class="h-[1px] flex-1 bg-black/25"></div>
+                                    </div>
+                                    <h3 class="text-3xl font-serif text-black mb-4" x-text="t[lang].biz_career_t"></h3>
+                                    <p class="text-black/80 text-sm leading-relaxed" x-text="t[lang].biz_career_tags"></p>
+                                    <div class="mt-auto pt-6 border-t border-black/15">
+                                        <div class="text-xs text-black/60 uppercase tracking-widest" x-text="t[lang].biz_career_sub"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -334,8 +462,9 @@
                         <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
                     </div>
                     <div class="relative scrub-item anim-scale">
-                            <img src="https://static.sdlvhk.com/图片素材/collect/group-asia-young-creative-people-smart-casual-wear-discussing-business-celebrate-giving-five-after-dealing-feeling-happy-signing-contract-agreement-office-coworker-teamwork-concept.jpg" 
-                                class="rounded-sm shadow-2xl transition duration-700" alt="Team">
+                        <div class="absolute -inset-4 bg-gold-400/15 rounded-sm rotate-3"></div>
+                        <img src="https://static.sdlvhk.com/图片素材/collect/group-asia-young-creative-people-smart-casual-wear-discussing-business-celebrate-giving-five-after-dealing-feeling-happy-signing-contract-agreement-office-coworker-teamwork-concept.jpg" 
+                            class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team">
                         <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
                             <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
                         </div>
@@ -354,13 +483,13 @@
                         <div class="space-y-24">
                             <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:text-right">
-                                    <span class="text-4xl font-bold text-white block">2015</span>
-                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2015_t"></span>
+                                    <span class="text-4xl font-bold text-white block">2016</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2016_t"></span>
                                 </div>
                                 <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
-                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2015_d"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2016_d"></div>
                             </div>
-                            
+
                             <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:order-2">
                                     <span class="text-4xl font-bold text-white block">2017</span>
@@ -381,20 +510,47 @@
 
                             <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:order-2">
-                                    <span class="text-4xl font-bold text-white block">2023-24</span>
-                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2023_t"></span>
+                                    <span class="text-4xl font-bold text-white block">2020</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2020_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-obsidian-950 border border-gold-400 rounded-full z-20"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2020_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:text-right">
+                                    <span class="text-4xl font-bold text-white block">2022</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2022_t"></span>
                                 </div>
                                 <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2022_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:order-2">
+                                    <span class="text-4xl font-bold text-white block">2023</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2023_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-obsidian-950 border border-gold-400 rounded-full z-20"></div>
                                 <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2023_d"></div>
                             </div>
 
                             <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:text-right">
-                                    <span class="text-4xl font-bold text-white block">2025</span>
-                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2025_t"></span>
+                                    <span class="text-4xl font-bold text-white block">2024</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2024_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2024_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:order-2">
+                                    <span class="text-4xl font-bold text-white block">2026</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2026_t"></span>
                                 </div>
                                 <div class="absolute left-[-9px] md:left-1/2 md:-ml-[9px] w-5 h-5 bg-gold-400 border-4 border-obsidian-950 rounded-full z-20 animate-pulse"></div>
-                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2025_d"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2026_d"></div>
                             </div>
                         </div>
                     </div>
@@ -428,8 +584,9 @@
                         <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
                     </div>
                     <div class="relative scrub-item anim-scale">
-                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                                class="rounded-sm shadow-2xl transition duration-700" alt="Team">
+                        <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                            class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team">
                         <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
                             <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
                         </div>
@@ -450,11 +607,11 @@
                             <!-- 时间节点：每个都有 anim-fade-up -->
                             <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:text-right">
-                                    <span class="text-4xl font-bold text-white block">2015</span>
-                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2015_t"></span>
+                                    <span class="text-4xl font-bold text-white block">2016</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2016_t"></span>
                                 </div>
                                 <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
-                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2015_d"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2016_d"></div>
                             </div>
                             
                             <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
@@ -477,20 +634,47 @@
 
                             <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:order-2">
-                                    <span class="text-4xl font-bold text-white block">2023-24</span>
-                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2023_t"></span>
+                                    <span class="text-4xl font-bold text-white block">2020</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2020_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-obsidian-950 border border-gold-400 rounded-full z-20"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2020_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:text-right">
+                                    <span class="text-4xl font-bold text-white block">2022</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2022_t"></span>
                                 </div>
                                 <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2022_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:order-2">
+                                    <span class="text-4xl font-bold text-white block">2023</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2023_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-obsidian-950 border border-gold-400 rounded-full z-20"></div>
                                 <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2023_d"></div>
                             </div>
 
                             <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:text-right">
-                                    <span class="text-4xl font-bold text-white block">2025</span>
-                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2025_t"></span>
+                                    <span class="text-4xl font-bold text-white block">2024</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2024_t"></span>
+                                </div>
+                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-gold-400 rounded-full z-20"></div>
+                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2024_d"></div>
+                            </div>
+
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
+                                <div class="md:order-2">
+                                    <span class="text-4xl font-bold text-white block">2026</span>
+                                    <span class="text-gold-400 text-sm uppercase" x-text="t[lang].hist_2026_t"></span>
                                 </div>
                                 <div class="absolute left-[-9px] md:left-1/2 md:-ml-[9px] w-5 h-5 bg-gold-400 border-4 border-obsidian-950 rounded-full z-20 animate-pulse"></div>
-                                <div class="pl-8 md:pl-0 text-gray-400 text-sm" x-text="t[lang].hist_2025_d"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2026_d"></div>
                             </div>
                         </div>
                     </div>
@@ -533,34 +717,61 @@
         <div x-show="page === 'study'" x-transition:enter="transition ease-out duration-500" class="w-full">
             <section id="data" class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 text-center scrub-item anim-fade-up">
-                    <h2 class="text-4xl font-serif text-obsidian-950 mb-2" x-text="t[lang].study_hero_t"></h2>
-                    <p class="text-black/60 text-sm mb-12 uppercase tracking-widest" x-text="t[lang].study_hero_sub"></p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        <div><div class="text-4xl font-bold text-gold-400 mb-1">2786</div><div class="text-xs text-gray-500" x-text="t[lang].st_stat1"></div></div>
-                        <div><div class="text-4xl font-bold text-gold-400 mb-1">100%</div><div class="text-xs text-gray-500" x-text="t[lang].st_stat2"></div></div>
-                        <div><div class="text-4xl font-bold text-gold-400 mb-1">97.8%</div><div class="text-xs text-gray-500" x-text="t[lang].st_stat3"></div></div>
-                        <div><div class="text-4xl font-bold text-gold-400 mb-1">90%</div><div class="text-xs text-gray-500" x-text="t[lang].st_stat4"></div></div>
+                    <h2 class="text-5xl font-serif text-obsidian-950 mb-4" x-text="t[lang].study_hero_t"></h2>
+                    <div class="w-24 h-[1px] bg-gold-400 mx-auto mb-6"></div>
+                    <p class="text-black/50 text-xs font-bold mb-16 uppercase tracking-[0.3em]" x-text="t[lang].study_hero_sub"></p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+                        <div class="p-6 border-r border-black/5 last:border-0">
+                            <div class="text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-br from-gold-400 to-gold-500 mb-2">2786</div>
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest" x-text="t[lang].st_stat1"></div>
+                        </div>
+                        <div class="p-6 border-r border-black/5 last:border-0">
+                            <div class="text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-br from-gold-400 to-gold-500 mb-2">100%</div>
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest" x-text="t[lang].st_stat2"></div>
+                        </div>
+                        <div class="p-6 border-r border-black/5 last:border-0">
+                            <div class="text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-br from-gold-400 to-gold-500 mb-2">97.8%</div>
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest" x-text="t[lang].st_stat3"></div>
+                        </div>
+                        <div class="p-6 border-r border-black/5 last:border-0">
+                            <div class="text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-br from-gold-400 to-gold-500 mb-2">90%</div>
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest" x-text="t[lang].st_stat4"></div>
+                        </div>
                     </div>
-                    <button @click="switchPage('contact')" class="mt-12 px-6 py-2 border border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-black transition uppercase text-xs tracking-widest" x-text="t[lang].btn_eval"></button>
+                    <button @click="switchPage('contact')" class="mt-16 px-8 py-3 border border-gold-400 text-gold-500 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]" x-text="t[lang].btn_eval"></button>
                 </div>
             </section>
 
-            <section id="content" class="py-24 bg-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+            <section id="content" class="py-40 bg-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20">
                     <div class="scrub-item anim-fade-up">
-                        <h3 class="text-2xl font-serif text-white mb-8 border-l-4 border-gold-400 pl-4" x-text="t[lang].serv_content_t"></h3>
+                        <h3 class="text-3xl font-serif text-white mb-10 pl-6 border-l-2 border-gold-400" x-text="t[lang].serv_content_t"></h3>
                         <ul class="space-y-6">
-                            <li class="bg-white/5 p-4 rounded-sm"><h4 class="text-gold-400 font-bold" x-text="t[lang].serv_1_t"></h4><p class="text-gray-400 text-xs" x-text="t[lang].serv_1_d"></p></li>
-                            <li class="bg-white/5 p-4 rounded-sm"><h4 class="text-gold-400 font-bold" x-text="t[lang].serv_2_t"></h4><p class="text-gray-400 text-xs" x-text="t[lang].serv_2_d"></p></li>
-                            <li class="bg-white/5 p-4 rounded-sm"><h4 class="text-gold-400 font-bold" x-text="t[lang].serv_3_t"></h4><p class="text-gray-400 text-xs" x-text="t[lang].serv_3_d"></p></li>
+                            <li class="bg-obsidian-900/85 border border-white/10 p-6 rounded hover:bg-obsidian-900/92 transition duration-300">
+                                <h4 class="text-gold-400 font-bold text-lg mb-1" x-text="t[lang].serv_1_t"></h4>
+                                <p class="text-gray-400 text-sm" x-text="t[lang].serv_1_d"></p>
+                            </li>
+                            <li class="bg-obsidian-900/85 border border-white/10 p-6 rounded hover:bg-obsidian-900/92 transition duration-300">
+                                <h4 class="text-gold-400 font-bold text-lg mb-1" x-text="t[lang].serv_2_t"></h4>
+                                <p class="text-gray-400 text-sm" x-text="t[lang].serv_2_d"></p>
+                            </li>
+                            <li class="bg-obsidian-900/85 border border-white/10 p-6 rounded hover:bg-obsidian-900/92 transition duration-300">
+                                <h4 class="text-gold-400 font-bold text-lg mb-1" x-text="t[lang].serv_3_t"></h4>
+                                <p class="text-gray-400 text-sm" x-text="t[lang].serv_3_d"></p>
+                            </li>
                         </ul>
                     </div>
                     <div class="scrub-item anim-fade-up">
-                        <h3 class="text-2xl font-serif text-white mb-8" x-text="t[lang].uni_link_t"></h3>
-                        <div class="bg-white/5 p-6 border border-white/10">
-                            <h4 class="text-white font-bold text-lg mb-2">Jesselton University College</h4>
-                            <p class="text-xs text-gold-400 mb-4" x-text="t[lang].uni_sub"></p>
-                            <p class="text-gray-400 text-sm leading-relaxed" x-text="t[lang].uni_desc"></p>
+                        <h3 class="text-3xl font-serif text-white mb-10" x-text="t[lang].uni_link_t"></h3>
+                        <div class="bg-gradient-to-br from-obsidian-900/90 to-obsidian-950/40 p-10 border border-white/10 rounded-lg">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                    <i data-lucide="award" class="text-obsidian-950 w-6 h-6"></i>
+                                </div>
+                                <h4 class="text-white font-serif font-bold text-xl">Jesselton University College</h4>
+                            </div>
+                            <p class="text-xs text-gold-400 uppercase tracking-widest mb-6" x-text="t[lang].uni_sub"></p>
+                            <p class="text-gray-300 text-sm leading-relaxed" x-text="t[lang].uni_desc"></p>
                         </div>
                     </div>
                 </div>
@@ -576,19 +787,25 @@
                 </div>
 
                 <div class="relative w-full max-w-5xl mx-auto h-[500px] bg-paper border border-black/10 rounded-lg shadow-2xl overflow-hidden group" x-data="{ activeLoc: null }">
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1597893323605-2362b5d03606?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20 grayscale"></div>
+                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1597893323605-2362b5d03606?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-[0.15]"></div>
                     
-                    <div class="absolute top-[60%] left-[30%] cursor-pointer z-10" @click="activeLoc = 'syp'" :class="activeLoc === 'syp' ? 'map-active' : ''">
-                        <div class="w-4 h-4 bg-gold-400 rounded-full animate-ping absolute"></div>
-                        <div class="w-4 h-4 bg-gold-400 rounded-full relative border-2 border-white"></div>
+                        <div class="absolute top-[60%] left-[30%] cursor-pointer z-10" @click="activeLoc = 'syp'" :class="activeLoc === 'syp' ? 'map-active' : ''">
+                            <div class="relative w-4 h-4">
+                                <div class="map-point-glow"></div>
+                                <div class="w-4 h-4 bg-gold-400 rounded-full animate-ping absolute inset-0"></div>
+                                <div class="w-4 h-4 bg-gold-400 rounded-full relative border-2 border-white"></div>
+                            </div>
                         <div class="map-line" style="transform: rotate(-45deg);"></div>
                         <div class="absolute -top-16 -left-10 bg-white text-black p-2 rounded text-xs font-bold w-32 map-label">
                             <span x-text="t[lang].apt_syp"></span><br><span class="text-gold-600 font-normal" x-text="t[lang].apt_dist_hku"></span>
                         </div>
                     </div>
-                    <div class="absolute top-[50%] left-[55%] cursor-pointer z-10" @click="activeLoc = 'ymt'" :class="activeLoc === 'ymt' ? 'map-active' : ''">
-                        <div class="w-4 h-4 bg-gold-400 rounded-full animate-ping absolute delay-300"></div>
-                        <div class="w-4 h-4 bg-gold-400 rounded-full relative border-2 border-white"></div>
+                        <div class="absolute top-[50%] left-[55%] cursor-pointer z-10" @click="activeLoc = 'ymt'" :class="activeLoc === 'ymt' ? 'map-active' : ''">
+                            <div class="relative w-4 h-4">
+                                <div class="map-point-glow"></div>
+                                <div class="w-4 h-4 bg-gold-400 rounded-full animate-ping absolute inset-0 delay-300"></div>
+                                <div class="w-4 h-4 bg-gold-400 rounded-full relative border-2 border-white"></div>
+                            </div>
                         <div class="map-line" style="transform: rotate(-15deg);"></div>
                         <div class="absolute -top-16 left-10 bg-white text-black p-2 rounded text-xs font-bold w-32 map-label">
                             <span x-text="t[lang].apt_ymt"></span><br><span class="text-gold-600 font-normal" x-text="t[lang].apt_dist_poly"></span>
@@ -606,10 +823,10 @@
                     </div>
                      <div class="group relative h-96 overflow-hidden rounded-sm scrub-item anim-fade-up cursor-pointer" @click="switchPage('apartment-ymt')">
                         <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                         <div class="absolute bottom-6 left-6">
                             <div class="text-white font-serif text-xl" x-text="t[lang].apt_ymt_full"></div>
-                            <div class="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 text-white text-xs tracking-widest uppercase hover:border-gold-400/60 hover:text-gold-400 transition">
+                            <div class="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-black/70 border border-white/25 text-white text-xs tracking-widest uppercase hover:border-gold-400/60 hover:text-gold-400 transition">
                                 <span x-text="t[lang].btn_explore_apt"></span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </div>
@@ -936,8 +1153,9 @@
                              <div class="px-4 py-2 bg-black/5 border border-black/10 text-xs text-black/70" x-text="t[lang].car_tag3"></div>
                         </div>
                     </div>
-                    <div class="scrub-item anim-scale">
-                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80" class="rounded-sm shadow-2xl opacity-80" alt="Meeting">
+                    <div class="scrub-item anim-scale relative">
+                        <div class="absolute -inset-4 bg-gold-400/15 rounded-sm rotate-3"></div>
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80" class="relative z-10 rounded-sm shadow-2xl" alt="Meeting">
                     </div>
                 </div>
             </section>
@@ -946,83 +1164,83 @@
         <!-- ================= PAGE 6: 联系我们 ================= -->
         <div x-show="page === 'contact'" x-transition:enter="transition ease-out duration-500" class="w-full bg-paper text-obsidian-950">
             <!-- 合作流程全览：垂直时间轴 -->
-            <section class="py-24 bg-paper border-b border-black/10">
+            <section class="py-32 bg-paper border-b border-black/5">
                 <div class="max-w-7xl mx-auto px-6">
 
-                    <div class="flex items-start justify-between gap-6">
+                    <div class="flex items-end justify-between gap-10 mb-20 scrub-item anim-fade-up">
                         <div class="max-w-3xl">
-                            <h1 class="text-4xl md:text-5xl font-serif font-bold text-obsidian-950">合作流程全览 | 从携手到共赢的清晰路径</h1>
-                            <p class="mt-4 text-black/70 leading-relaxed">采用垂直时间轴设计，将每个步骤展开为详细模块，帮助你快速了解合作节奏、节点与交付内容。</p>
+                            <h1 class="text-5xl font-serif font-bold text-obsidian-950 mb-4">合作流程全览</h1>
+                            <p class="text-black/60">从携手到共赢的清晰路径</p>
                         </div>
 
                         <button type="button"
                                 @click="goAgentPortal()"
-                                class="shrink-0 px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition">
-                            代理登录
+                                class="shrink-0 px-8 py-3 bg-obsidian-950 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-gold-400 hover:text-black transition shadow-xl">
+                            代理登录 Portal
                         </button>
                     </div>
 
-                    <div class="mt-14 relative border-l border-black/10 pl-8 space-y-10">
+                    <div class="relative border-l border-black/10 pl-10 space-y-16 scrub-item anim-fade-up">
                         <!-- 阶段一 -->
-                        <div class="relative">
-                            <span class="absolute -left-[9px] top-2 w-4 h-4 bg-gold-400 rounded-full border-2 border-paper"></span>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-                                    <div class="text-xl font-serif font-bold text-obsidian-950">阶段一：接洽与评估</div>
-                                    <div class="text-xs tracking-widest uppercase text-black/50">第1-7天</div>
+                        <div class="relative group">
+                            <span class="absolute -left-[45px] top-6 w-3 h-3 bg-paper border-2 border-gold-400 rounded-full group-hover:bg-gold-400 transition-colors"></span>
+                            <div class="p-8 bg-white border border-black/5 shadow-lg rounded hover:shadow-2xl transition duration-500">
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6 border-b border-black/5 pb-4">
+                                    <div class="text-2xl font-serif font-bold text-obsidian-950">阶段一：接洽与评估</div>
+                                    <div class="text-xs tracking-widest uppercase text-gold-500 font-bold">第1-7天</div>
                                 </div>
-                                <div class="mt-5 space-y-3 text-sm text-black/80">
-                                    <div><span class="font-bold">步骤1：</span>意向提交：在线填写申请表，初步说明资源与意向。</div>
-                                    <div><span class="font-bold">步骤2：</span>初步沟通：专属合作经理在24小时内联系，了解彼此需求。</div>
-                                    <div><span class="font-bold">步骤3：</span>双向评估：我方评估伙伴资质；伙伴评估我方支持体系。</div>
+                                <div class="space-y-3 text-sm text-black/70 leading-relaxed">
+                                    <div><span class="font-bold text-black">步骤1：</span>意向提交：在线填写申请表，初步说明资源与意向。</div>
+                                    <div><span class="font-bold text-black">步骤2：</span>初步沟通：专属合作经理在24小时内联系，了解彼此需求。</div>
+                                    <div><span class="font-bold text-black">步骤3：</span>双向评估：我方评估伙伴资质；伙伴评估我方支持体系。</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 阶段二 -->
-                        <div class="relative">
-                            <span class="absolute -left-[9px] top-2 w-4 h-4 bg-gold-400 rounded-full border-2 border-paper"></span>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-                                    <div class="text-xl font-serif font-bold text-obsidian-950">阶段二：协议与启动</div>
-                                    <div class="text-xs tracking-widest uppercase text-black/50">第8-15天</div>
+                        <div class="relative group">
+                            <span class="absolute -left-[45px] top-6 w-3 h-3 bg-paper border-2 border-gold-400 rounded-full group-hover:bg-gold-400 transition-colors"></span>
+                            <div class="p-8 bg-white border border-black/5 shadow-lg rounded hover:shadow-2xl transition duration-500">
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6 border-b border-black/5 pb-4">
+                                    <div class="text-2xl font-serif font-bold text-obsidian-950">阶段二：协议与启动</div>
+                                    <div class="text-xs tracking-widest uppercase text-gold-500 font-bold">第8-15天</div>
                                 </div>
-                                <div class="mt-5 space-y-3 text-sm text-black/80">
-                                    <div><span class="font-bold">步骤4：</span>方案定制：根据评估结果，为您定制《合作方案与收益分析》。</div>
-                                    <div><span class="font-bold">步骤5：</span>协议签署：审议并签署正式《合作协议》，明确权责利。</div>
-                                    <div><span class="font-bold">步骤6：</span>启动会议：召开线上/线下启动会，对接关键人员与资源。</div>
+                                <div class="space-y-3 text-sm text-black/70 leading-relaxed">
+                                    <div><span class="font-bold text-black">步骤4：</span>方案定制：根据评估结果，为您定制《合作方案与收益分析》。</div>
+                                    <div><span class="font-bold text-black">步骤5：</span>协议签署：审议并签署正式《合作协议》，明确权责利。</div>
+                                    <div><span class="font-bold text-black">步骤6：</span>启动会议：召开线上/线下启动会，对接关键人员与资源。</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 阶段三 -->
-                        <div class="relative">
-                            <span class="absolute -left-[9px] top-2 w-4 h-4 bg-gold-400 rounded-full border-2 border-paper"></span>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-                                    <div class="text-xl font-serif font-bold text-obsidian-950">阶段三：培训与赋能</div>
-                                    <div class="text-xs tracking-widest uppercase text-black/50">第16-30天</div>
+                        <div class="relative group">
+                            <span class="absolute -left-[45px] top-6 w-3 h-3 bg-paper border-2 border-gold-400 rounded-full group-hover:bg-gold-400 transition-colors"></span>
+                            <div class="p-8 bg-white border border-black/5 shadow-lg rounded hover:shadow-2xl transition duration-500">
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6 border-b border-black/5 pb-4">
+                                    <div class="text-2xl font-serif font-bold text-obsidian-950">阶段三：培训与赋能</div>
+                                    <div class="text-xs tracking-widest uppercase text-gold-500 font-bold">第16-30天</div>
                                 </div>
-                                <div class="mt-5 space-y-3 text-sm text-black/80">
-                                    <div><span class="font-bold">步骤7：</span>系统培训：完成产品知识、系统操作、销售技巧的必修培训。</div>
-                                    <div><span class="font-bold">步骤8：</span>启动资源包：获取品牌资料、市场工具、专属后台账号。</div>
-                                    <div><span class="font-bold">步骤9：</span>试运营支持：首月“陪跑”支持，共同完成首批客户转化。</div>
+                                <div class="space-y-3 text-sm text-black/70 leading-relaxed">
+                                    <div><span class="font-bold text-black">步骤7：</span>系统培训：完成产品知识、系统操作、销售技巧的必修培训。</div>
+                                    <div><span class="font-bold text-black">步骤8：</span>启动资源包：获取品牌资料、市场工具、专属后台账号。</div>
+                                    <div><span class="font-bold text-black">步骤9：</span>试运营支持：首月“陪跑”支持，共同完成首批客户转化。</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 阶段四 -->
-                        <div class="relative">
-                            <span class="absolute -left-[9px] top-2 w-4 h-4 bg-gold-400 rounded-full border-2 border-paper"></span>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-                                    <div class="text-xl font-serif font-bold text-obsidian-950">阶段四：运营与增长</div>
-                                    <div class="text-xs tracking-widest uppercase text-black/50">长期</div>
+                        <div class="relative group">
+                            <span class="absolute -left-[45px] top-6 w-3 h-3 bg-paper border-2 border-gold-400 rounded-full group-hover:bg-gold-400 transition-colors"></span>
+                            <div class="p-8 bg-white border border-black/5 shadow-lg rounded hover:shadow-2xl transition duration-500">
+                                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6 border-b border-black/5 pb-4">
+                                    <div class="text-2xl font-serif font-bold text-obsidian-950">阶段四：运营与增长</div>
+                                    <div class="text-xs tracking-widest uppercase text-gold-500 font-bold">长期</div>
                                 </div>
-                                <div class="mt-5 space-y-3 text-sm text-black/80">
-                                    <div><span class="font-bold">步骤10：</span>正式运营：独立开展业务，享受区域保护。</div>
-                                    <div><span class="font-bold">步骤11：</span>持续支持：定期更新培训、营销活动支持、疑难问题协助。</div>
-                                    <div><span class="font-bold">步骤12：</span>结算与复盘：按月/季度清晰结算佣金，定期复盘业绩，规划增长。</div>
+                                <div class="space-y-3 text-sm text-black/70 leading-relaxed">
+                                    <div><span class="font-bold text-black">步骤10：</span>正式运营：独立开展业务，享受区域保护。</div>
+                                    <div><span class="font-bold text-black">步骤11：</span>持续支持：定期更新培训、营销活动支持、疑难问题协助。</div>
+                                    <div><span class="font-bold text-black">步骤12：</span>结算与复盘：按月/季度清晰结算佣金，定期复盘业绩，规划增长。</div>
                                 </div>
                             </div>
                         </div>
@@ -1098,139 +1316,150 @@
             </section>
 
             <!-- 现有页面保持不变：放在最底部 -->
-            <section class="w-full bg-gold-400 min-h-screen flex items-center justify-center relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                <div class="max-w-4xl mx-auto px-6 text-center relative z-10 py-32">
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-black mb-6" x-text="t[lang].cta_title"></h2>
-                    <p class="text-black/70 mb-10 text-lg" x-text="t[lang].cta_desc"></p>
+            <section class="w-full bg-obsidian-950 py-32 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
+                <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6" x-text="t[lang].cta_title"></h2>
+                    <p class="text-white/60 mb-10 text-lg" x-text="t[lang].cta_desc"></p>
                     <form class="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto" onsubmit="event.preventDefault(); alert('Success!')">
-                        <input type="text" :placeholder="t[lang].ph_contact" class="px-6 py-4 bg-white border-none rounded-sm text-black focus:outline-none w-full shadow-lg" />
-                        <button class="px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-obsidian-950 transition whitespace-nowrap shadow-xl" x-text="t[lang].btn_submit"></button>
+                        <input type="text" :placeholder="t[lang].ph_contact" class="px-8 py-4 bg-black/70 border border-white/25 rounded-sm text-white focus:outline-none focus:border-gold-400 w-full backdrop-blur" />
+                        <button class="px-8 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-white transition whitespace-nowrap" x-text="t[lang].btn_submit"></button>
                     </form>
                 </div>
             </section>
         </div>
 
         <!-- ================= PAGE 7: 代理登录 ================= -->
-        <div x-show="page === 'agent-login'" x-transition:enter="transition ease-out duration-500" class="w-full bg-paper text-obsidian-950">
-            <section class="py-24 bg-paper border-b border-black/10">
-                <div class="max-w-3xl mx-auto px-6">
-                    <div class="flex items-center justify-between gap-4">
-                        <h1 class="text-4xl md:text-5xl font-serif font-bold text-obsidian-950">代理登录</h1>
-                        <button type="button" @click="switchPage('contact')" class="px-5 py-3 border border-black/20 text-black hover:bg-black hover:text-white transition text-xs tracking-widest uppercase">返回</button>
+        <div x-show="page === 'agent-login'" class="w-full bg-paper min-h-screen pt-28">
+            <section class="pb-24">
+                <div class="max-w-4xl mx-auto px-6">
+                    <div class="relative flex items-center justify-center">
+                        <h1 class="text-3xl md:text-4xl font-serif font-bold text-obsidian-950">代理登录</h1>
+                        <button type="button" @click="switchPage('contact')" class="absolute right-0 px-4 py-2 border border-black/10 text-black/70 hover:bg-black hover:text-white transition text-sm">返回</button>
                     </div>
 
-                    <div class="mt-10 bg-white border border-black/10 p-8">
-                        <div class="flex gap-2">
-                            <button type="button" @click="agentLoginMode = 'password'" :class="agentLoginMode === 'password' ? 'bg-black text-white' : 'bg-black/5 text-black'" class="px-4 py-2 text-xs tracking-widest uppercase border border-black/10">密码登录</button>
-                            <button type="button" @click="agentLoginMode = 'code'" :class="agentLoginMode === 'code' ? 'bg-black text-white' : 'bg-black/5 text-black'" class="px-4 py-2 text-xs tracking-widest uppercase border border-black/10">验证码登录</button>
+                    <div class="mt-10 max-w-xl mx-auto bg-white border border-black/10 shadow-2xl rounded-lg p-8">
+                        <div class="flex gap-2 mb-6">
+                            <button type="button" @click="agentLoginMode = 'password'" :class="agentLoginMode === 'password' ? 'bg-obsidian-950 text-white' : 'bg-gray-100 text-black/60 hover:text-black'" class="px-4 py-2 text-sm font-semibold border border-black/10 rounded transition">密码登录</button>
+                            <button type="button" @click="agentLoginMode = 'code'" :class="agentLoginMode === 'code' ? 'bg-obsidian-950 text-white' : 'bg-gray-100 text-black/60 hover:text-black'" class="px-4 py-2 text-sm font-semibold border border-black/10 rounded transition">短信验证码登录</button>
                         </div>
 
-                        <div class="mt-6 space-y-4">
-                            <input x-model="agentForm.phone" type="text" placeholder="手机号" class="w-full px-5 py-4 bg-white border border-black/10 text-black focus:outline-none" />
+                        <div class="space-y-4">
+                            <input x-model="agentForm.phone" type="text" placeholder="手机号" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
 
                             <template x-if="agentLoginMode === 'password'">
-                                <input x-model="agentForm.password" type="password" placeholder="密码" class="w-full px-5 py-4 bg-white border border-black/10 text-black focus:outline-none" />
+                                <input x-model="agentForm.password" type="password" placeholder="密码" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
                             </template>
 
                             <template x-if="agentLoginMode === 'code'">
-                                <div class="grid sm:grid-cols-[1fr,180px] gap-3">
-                                    <input x-model="agentForm.code" type="text" placeholder="验证码" class="w-full px-5 py-4 bg-white border border-black/10 text-black focus:outline-none" />
-                                    <button type="button" @click="agentSendCode('login')" class="px-6 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition">发送验证码</button>
+                                <div class="grid sm:grid-cols-[1fr,160px] gap-3">
+                                    <input x-model="agentForm.code" type="text" placeholder="验证码" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
+                                    <button type="button" @click="agentSendCode('login')" class="px-4 py-3 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition">获取验证码</button>
                                 </div>
                             </template>
 
-                            <button type="button" @click="agentLogin()" class="w-full px-8 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-black hover:text-white transition" :disabled="agentBusy">登录</button>
+                            <button type="button" @click="agentLogin()" class="w-full py-4 bg-gold-400 text-black font-bold hover:bg-black hover:text-gold-400 transition rounded" :disabled="agentBusy">登录</button>
                         </div>
 
-                        <div class="mt-8 border-t border-black/10 pt-6">
-                            <button type="button" @click="agentShowReset = !agentShowReset" class="text-xs tracking-widest uppercase text-black/70 hover:text-black">忘记密码？</button>
+                        <div class="mt-6">
+                            <button type="button" @click="agentShowReset = !agentShowReset" class="text-sm text-black/50 hover:text-black transition">忘记密码？</button>
+                        </div>
 
-                            <div x-show="agentShowReset" x-transition class="mt-5 space-y-4">
-                                <input x-model="agentResetForm.phone" type="text" placeholder="手机号" class="w-full px-5 py-4 bg-white border border-black/10 text-black focus:outline-none" />
-                                <div class="grid sm:grid-cols-[1fr,180px] gap-3">
-                                    <input x-model="agentResetForm.code" type="text" placeholder="验证码" class="w-full px-5 py-4 bg-white border border-black/10 text-black focus:outline-none" />
-                                    <button type="button" @click="agentSendCode('reset_password')" class="px-6 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition">发送验证码</button>
-                                </div>
-                                <input x-model="agentResetForm.newPassword" type="password" placeholder="新密码（至少6位）" class="w-full px-5 py-4 bg-white border border-black/10 text-black focus:outline-none" />
-                                <button type="button" @click="agentResetPassword()" class="w-full px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition" :disabled="agentBusy">重置密码</button>
+                        <div x-show="agentShowReset" x-transition class="mt-5 space-y-4">
+                            <input x-model="agentResetForm.phone" type="text" placeholder="手机号" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
+                            <div class="grid sm:grid-cols-[1fr,160px] gap-3">
+                                <input x-model="agentResetForm.code" type="text" placeholder="验证码" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
+                                <button type="button" @click="agentSendCode('reset_password')" class="px-4 py-3 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition">发送验证码</button>
                             </div>
+                            <input x-model="agentResetForm.newPassword" type="password" placeholder="新密码（至少6位）" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
+                            <button type="button" @click="agentResetPassword()" class="w-full py-3 bg-black text-white font-semibold rounded hover:bg-gold-400 hover:text-black transition" :disabled="agentBusy">重置密码</button>
                         </div>
 
-                        <div x-show="agentNotice" class="mt-6 px-5 py-4 border" :class="agentNoticeType === 'error' ? 'bg-red-50 border-red-200 text-red-700' : (agentNoticeType === 'success' ? 'bg-green-50 border-green-200 text-green-700' : 'bg-black/5 border-black/10 text-black/80')" x-text="agentNotice"></div>
+                        <div x-show="agentNotice" class="mt-6 px-4 py-3 border rounded" :class="agentNoticeType === 'error' ? 'bg-red-50 border-red-200 text-red-700' : (agentNoticeType === 'success' ? 'bg-green-50 border-green-200 text-green-700' : 'bg-gray-50 border-black/10 text-black/70')" x-text="agentNotice"></div>
                     </div>
                 </div>
             </section>
         </div>
 
         <!-- ================= PAGE 8: 代理监控 ================= -->
-        <div x-show="page === 'agent-dashboard'" x-transition:enter="transition ease-out duration-500" class="w-full bg-paper text-obsidian-950">
-            <section class="py-24 bg-paper border-b border-black/10">
+        <div x-show="page === 'agent-dashboard'" x-transition:enter="transition ease-out duration-500" class="w-full bg-obsidian-950 text-white">
+            <section class="py-24 bg-obsidian-950 border-b border-white/10">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="flex items-start justify-between gap-6">
                         <div>
-                            <h1 class="text-4xl md:text-5xl font-serif font-bold text-obsidian-950">代理监控</h1>
-                            <p class="mt-3 text-black/60">登录后才能注册下级账号。</p>
+                            <h1 class="text-4xl md:text-5xl font-serif font-bold text-white">代理监控</h1>
+                            <p class="mt-3 text-white/60">登录后才能注册下级账号。</p>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button type="button" @click="agentLogout()" class="px-5 py-3 border border-black/20 text-black hover:bg-black hover:text-white transition text-xs tracking-widest uppercase">退出</button>
-                            <button type="button" @click="switchPage('contact')" class="px-5 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition">返回</button>
+                            <button type="button" @click="agentLogout()" class="px-5 py-3 border border-white/15 text-white/80 hover:bg-white hover:text-black transition text-xs tracking-widest uppercase">退出</button>
+                            <button type="button" @click="switchPage('contact')" class="px-5 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition">返回</button>
                         </div>
                     </div>
 
-                    <div x-show="agentNotice" class="mt-8 px-5 py-4 border" :class="agentNoticeType === 'error' ? 'bg-red-50 border-red-200 text-red-700' : (agentNoticeType === 'success' ? 'bg-green-50 border-green-200 text-green-700' : 'bg-black/5 border-black/10 text-black/80')" x-text="agentNotice"></div>
+                    <div x-show="agentNotice" class="mt-8 px-5 py-4 border" :class="agentNoticeType === 'error' ? 'bg-red-950/40 border-red-800/40 text-red-200' : (agentNoticeType === 'success' ? 'bg-green-950/40 border-green-800/40 text-green-200' : 'bg-white/5 border-white/10 text-white/80')" x-text="agentNotice"></div>
 
                     <div class="mt-10 grid lg:grid-cols-3 gap-6">
-                        <div class="bg-white border border-black/10 p-6">
+                        <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
                             <div class="flex items-center justify-between">
-                                <h2 class="text-xl font-serif font-bold text-obsidian-950">我的账号</h2>
-                                <button type="button" @click="agentRefreshDashboard()" class="text-xs tracking-widest uppercase text-black/60 hover:text-black">刷新</button>
+                                <h2 class="text-xl font-serif font-bold text-white">我的账号</h2>
+                                <button type="button" @click="agentRefreshDashboard()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition">刷新</button>
                             </div>
-                            <div class="mt-5 space-y-2 text-sm text-black/80">
+                            <div class="mt-5 space-y-2 text-sm text-white/80">
                                 <div>手机号：<span class="font-bold" x-text="agentUser?.phone || '-'" ></span></div>
                                 <div>角色：<span class="font-bold" x-text="agentUser?.role || '-'" ></span></div>
                                 <div>上级ID：<span class="font-bold" x-text="agentUser?.parentId ?? '-'" ></span></div>
                             </div>
                         </div>
 
-                        <div class="bg-white border border-black/10 p-6 lg:col-span-2">
-                            <h2 class="text-xl font-serif font-bold text-obsidian-950">注册下级账号</h2>
-                            <p class="mt-2 text-xs text-black/60">根据层级规则：admin→顾问→1级→2级→3级→4级。</p>
+                        <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 lg:col-span-2 scrub-item anim-flip-up">
+                            <h2 class="text-xl font-serif font-bold text-white">注册下级账号</h2>
+                            <p class="mt-2 text-xs text-white/60">根据层级规则：admin→顾问→1级→2级→3级→4级。</p>
 
                             <div class="mt-6 grid md:grid-cols-3 gap-4">
-                                <input x-model="agentRegisterForm.phone" type="text" placeholder="下级手机号" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full" />
-                                <input x-model="agentRegisterForm.password" type="password" placeholder="下级密码（≥6位）" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full" />
-                                <select x-model="agentRegisterForm.role" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full">
+                                <input x-model="agentRegisterForm.phone" type="text" placeholder="下级手机号" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                <input x-model="agentRegisterForm.password" type="password" placeholder="下级密码（≥6位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                <select x-model="agentRegisterForm.role" class="px-5 py-4 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
                                     <template x-for="r in agentAllowedChildRoles()" :key="r">
                                         <option :value="r" x-text="r"></option>
                                     </template>
                                 </select>
                             </div>
-                            <button type="button" @click="agentCreateSubaccount()" class="mt-4 w-full px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition" :disabled="agentBusy">创建账号</button>
 
-                            <div class="mt-8 border-t border-black/10 pt-6">
-                                <h3 class="text-sm font-bold text-obsidian-950">我的直接下级</h3>
-                                <div class="mt-4 overflow-x-auto border border-black/10">
+                            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                <input x-model="agentRegisterForm.idCardName" type="text" placeholder="真实姓名（用于二要素验证）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                <input x-model="agentRegisterForm.idCard" type="text" placeholder="身份证号码（18位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                            </div>
+
+                            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                <input x-model="agentRegisterForm.code" type="text" placeholder="短信验证码（6位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                <button type="button" @click="agentSendCode('register')" class="px-5 py-4 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition" :disabled="agentBusy">获取验证码</button>
+                            </div>
+                            <button type="button" @click="agentCreateSubaccount()" class="mt-4 w-full px-8 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">创建账号</button>
+
+                            <div class="mt-8 border-t border-white/10 pt-6">
+                                <h3 class="text-sm font-bold text-white">我的直接下级</h3>
+                                <div class="mt-4 overflow-x-auto border border-white/10">
                                     <table class="min-w-full text-sm">
-                                        <thead class="bg-black/5">
+                                        <thead class="bg-white/5">
                                             <tr>
-                                                <th class="px-4 py-3 text-left font-bold text-black/70">ID</th>
-                                                <th class="px-4 py-3 text-left font-bold text-black/70">手机号</th>
-                                                <th class="px-4 py-3 text-left font-bold text-black/70">角色</th>
-                                                <th class="px-4 py-3 text-left font-bold text-black/70">状态</th>
+                                                <th class="px-4 py-3 text-left font-bold text-white/70">ID</th>
+                                                <th class="px-4 py-3 text-left font-bold text-white/70">手机号</th>
+                                                <th class="px-4 py-3 text-left font-bold text-white/70">角色</th>
+                                                <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <template x-for="u in agentChildren" :key="u.id">
-                                                <tr class="border-t border-black/10">
+                                                <tr class="border-t border-white/10">
                                                     <td class="px-4 py-3" x-text="u.id"></td>
                                                     <td class="px-4 py-3" x-text="u.phone"></td>
                                                     <td class="px-4 py-3" x-text="u.role"></td>
                                                     <td class="px-4 py-3" x-text="u.status"></td>
                                                 </tr>
                                             </template>
-                                            <tr x-show="agentChildren.length === 0" class="border-t border-black/10">
-                                                <td class="px-4 py-3 text-black/50" colspan="4">暂无下级账号</td>
+                                            <tr x-show="agentChildren.length === 0" class="border-t border-white/10">
+                                                <td class="px-4 py-3 text-white/40" colspan="4">暂无下级账号</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1240,48 +1469,48 @@
                     </div>
 
                     <div class="mt-10 grid lg:grid-cols-2 gap-6">
-                        <div class="bg-white border border-black/10 p-6">
-                            <h2 class="text-xl font-serif font-bold text-obsidian-950">我的订单</h2>
-                            <div class="mt-4 overflow-x-auto border border-black/10">
+                        <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
+                            <h2 class="text-xl font-serif font-bold text-white">我的订单</h2>
+                            <div class="mt-4 overflow-x-auto border border-white/10">
                                 <table class="min-w-full text-sm">
-                                    <thead class="bg-black/5">
+                                    <thead class="bg-white/5">
                                         <tr>
-                                            <th class="px-4 py-3 text-left font-bold text-black/70">订单号</th>
-                                            <th class="px-4 py-3 text-left font-bold text-black/70">标题</th>
-                                            <th class="px-4 py-3 text-left font-bold text-black/70">金额</th>
-                                            <th class="px-4 py-3 text-left font-bold text-black/70">状态</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">订单号</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">标题</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">金额</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <template x-for="o in agentOrders" :key="o.id">
-                                            <tr class="border-t border-black/10">
+                                            <tr class="border-t border-white/10">
                                                 <td class="px-4 py-3" x-text="o.orderNo"></td>
                                                 <td class="px-4 py-3" x-text="o.title"></td>
                                                 <td class="px-4 py-3" x-text="o.amount"></td>
                                                 <td class="px-4 py-3" x-text="o.status"></td>
                                             </tr>
                                         </template>
-                                        <tr x-show="agentOrders.length === 0" class="border-t border-black/10">
-                                            <td class="px-4 py-3 text-black/50" colspan="4">暂无订单</td>
+                                        <tr x-show="agentOrders.length === 0" class="border-t border-white/10">
+                                            <td class="px-4 py-3 text-white/40" colspan="4">暂无订单</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <div class="bg-white border border-black/10 p-6">
-                            <h2 class="text-xl font-serif font-bold text-obsidian-950">我的日志</h2>
-                            <div class="mt-4 border border-black/10 divide-y divide-black/10 max-h-[420px] overflow-auto">
+                        <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
+                            <h2 class="text-xl font-serif font-bold text-white">我的日志</h2>
+                            <div class="mt-4 border border-white/10 divide-y divide-white/10 max-h-[420px] overflow-auto">
                                 <template x-for="l in agentLogs" :key="l.id">
                                     <div class="px-4 py-3 text-sm">
                                         <div class="flex items-center justify-between gap-4">
-                                            <div class="font-bold text-black/80" x-text="l.action"></div>
-                                            <div class="text-xs text-black/50" x-text="l.createdAt"></div>
+                                            <div class="font-bold text-white/85" x-text="l.action"></div>
+                                            <div class="text-xs text-white/45" x-text="l.createdAt"></div>
                                         </div>
-                                        <div class="mt-1 text-xs text-black/60 break-words" x-text="l.detail || ''"></div>
+                                        <div class="mt-1 text-xs text-white/55 break-words" x-text="l.detail || ''"></div>
                                     </div>
                                 </template>
-                                <div x-show="agentLogs.length === 0" class="px-4 py-3 text-black/50 text-sm">暂无日志</div>
+                                <div x-show="agentLogs.length === 0" class="px-4 py-3 text-white/40 text-sm">暂无日志</div>
                             </div>
                         </div>
                     </div>
@@ -1290,6 +1519,64 @@
         </div>
 
     </main>
+
+        <!-- 悬浮咨询按钮组（参照AI稿） -->
+        <div class="float-widget-container" @mouseenter="floatFabOpen = true" @mouseleave="floatFabOpen = false">
+            <div class="float-btn-group" :class="floatFabOpen ? 'is-open' : ''">
+                <button type="button" class="sub-float-btn" @click="openWeChatModal()">
+                    <i data-lucide="qr-code" class="w-4 h-4"></i>
+                    <span>微信咨询</span>
+                </button>
+                <button type="button" class="sub-float-btn" @click="switchPage('contact')">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                    <span>免费咨询</span>
+                </button>
+                <button type="button" class="main-float-btn" @click="floatFabOpen = !floatFabOpen" title="咨询">
+                    <i data-lucide="message-circle" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 微信咨询弹窗（模板） -->
+        <div x-show="wechatModalOpen" x-cloak class="fixed inset-0 z-[60]" @keydown.escape.window="closeWeChatModal()">
+            <div class="absolute inset-0 bg-black/60" @click="closeWeChatModal()"></div>
+            <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+                <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 rounded-lg shadow-2xl overflow-hidden" @click.stop>
+                    <div class="px-5 py-4 border-b border-black/10 flex items-center justify-between">
+                        <div>
+                            <div class="text-sm font-bold tracking-widest">微信咨询</div>
+                            <div class="text-xs text-black/60">扫码或复制微信号添加（模板）</div>
+                        </div>
+                        <button type="button" class="text-black/60 hover:text-black transition" @click="closeWeChatModal()">关闭</button>
+                    </div>
+
+                    <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="flex items-center justify-center">
+                            <div class="w-44 h-44 bg-black/5 border border-black/10 rounded flex items-center justify-center text-xs text-black/50 text-center px-4">
+                                二维码占位
+                                <br>（后续替换为真实微信二维码）
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="text-xs tracking-widest uppercase text-black/50">WeChat ID</div>
+                            <div class="mt-2 text-lg font-bold break-all" x-text="wechatId"></div>
+
+                            <button type="button"
+                                    class="mt-4 w-full px-4 py-2 bg-black text-white font-bold hover:bg-gold-400 hover:text-black transition"
+                                    @click="copyWeChatId()"
+                                    x-text="wechatCopied ? '已复制' : '复制微信号'">
+                            </button>
+
+                            <button type="button"
+                                    class="mt-3 w-full px-4 py-2 border border-black/15 text-black font-bold hover:border-gold-400 hover:text-black transition"
+                                    @click="switchPage('contact'); closeWeChatModal()">
+                                去联系页
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- Footer -->
     <footer x-show="page !== 'contact'" class="bg-black text-gray-500 py-16 border-t border-white/5">
@@ -1333,6 +1620,59 @@
                 lang: 'sc', // sc, tc, en
                 page: 'home',
 
+                // ===== WeChat Popup (Template) =====
+                wechatModalOpen: false,
+                wechatId: 'SDLV_Consultant_001',
+                wechatCopied: false,
+
+                // ===== Consult Floating Widget =====
+                floatFabOpen: false,
+
+                openWeChatModal() {
+                    this.wechatCopied = false;
+                    this.wechatModalOpen = true;
+                },
+
+                closeWeChatModal() {
+                    this.wechatModalOpen = false;
+                },
+
+                async copyWeChatId() {
+                    const text = String(this.wechatId || '').trim();
+                    if (!text) return;
+
+                    let ok = false;
+                    try {
+                        if (navigator?.clipboard?.writeText) {
+                            await navigator.clipboard.writeText(text);
+                            ok = true;
+                        }
+                    } catch (e) {
+                        ok = false;
+                    }
+
+                    if (!ok) {
+                        try {
+                            const ta = document.createElement('textarea');
+                            ta.value = text;
+                            ta.style.position = 'fixed';
+                            ta.style.opacity = '0';
+                            document.body.appendChild(ta);
+                            ta.focus();
+                            ta.select();
+                            ok = document.execCommand('copy');
+                            document.body.removeChild(ta);
+                        } catch (e) {
+                            ok = false;
+                        }
+                    }
+
+                    if (ok) {
+                        this.wechatCopied = true;
+                        setTimeout(() => { this.wechatCopied = false; }, 1500);
+                    }
+                },
+
                 // ===== Agent Portal State =====
                 agentToken: '',
                 agentUser: null,
@@ -1343,7 +1683,7 @@
                 agentShowReset: false,
                 agentForm: { phone: '', password: '', code: '' },
                 agentResetForm: { phone: '', code: '', newPassword: '' },
-                agentRegisterForm: { phone: '', password: '', role: 'consultant' },
+                agentRegisterForm: { phone: '', password: '', role: 'consultant', code: '', idCard: '', idCardName: '' },
                 agentChildren: [],
                 agentOrders: [],
                 agentLogs: [],
@@ -1412,7 +1752,10 @@
                 },
 
                 async agentSendCode(purpose) {
-                    const phone = (purpose === 'reset_password' ? this.agentResetForm.phone : this.agentForm.phone).trim();
+                    const phone = (purpose === 'reset_password'
+                        ? this.agentResetForm.phone
+                        : (purpose === 'register' ? this.agentRegisterForm.phone : this.agentForm.phone)
+                    ).trim();
                     if (!phone) {
                         this.agentNotify('请输入手机号', 'error');
                         return;
@@ -1433,10 +1776,24 @@
                     const phone = this.agentForm.phone.trim();
                     try {
                         this.agentBusy = true;
+                        const mode = (this.agentLoginMode === 'code' && (this.agentForm.code || '').trim()) ? 'code' : 'password';
                         let data;
-                        if (this.agentLoginMode === 'password') {
+                        if (!phone) {
+                            this.agentNotify('请输入手机号', 'error');
+                            return;
+                        }
+
+                        if (mode === 'password') {
+                            if (!this.agentForm.password) {
+                                this.agentNotify('请输入密码', 'error');
+                                return;
+                            }
                             data = await this.agentApi('/api/agent/login/password', 'POST', { phone, password: this.agentForm.password }, false);
                         } else {
+                            if (!(this.agentForm.code || '').trim()) {
+                                this.agentNotify('请输入验证码', 'error');
+                                return;
+                            }
                             data = await this.agentApi('/api/agent/login/code', 'POST', { phone, code: this.agentForm.code }, false);
                         }
 
@@ -1496,17 +1853,23 @@
                     const phone = this.agentRegisterForm.phone.trim();
                     const password = this.agentRegisterForm.password;
                     const role = this.agentRegisterForm.role;
-                    if (!phone || !password || !role) {
-                        this.agentNotify('请填写下级手机号/密码/角色', 'error');
+                    const code = (this.agentRegisterForm.code || '').trim();
+                    const idCard = (this.agentRegisterForm.idCard || '').trim();
+                    const idCardName = (this.agentRegisterForm.idCardName || '').trim();
+                    if (!phone || !password || !role || !code || !idCard || !idCardName) {
+                        this.agentNotify('请填写下级手机号/密码/角色/验证码/姓名/身份证号', 'error');
                         return;
                     }
                     try {
                         this.agentBusy = true;
-                        const data = await this.agentApi('/api/agent/register', 'POST', { phone, password, role }, true);
+                        const data = await this.agentApi('/api/agent/register', 'POST', { phone, password, role, code, idCard, idCardName }, true);
                         if (data.success) {
                             this.agentNotify('创建成功', 'success');
                             this.agentRegisterForm.phone = '';
                             this.agentRegisterForm.password = '';
+                            this.agentRegisterForm.code = '';
+                            this.agentRegisterForm.idCard = '';
+                            this.agentRegisterForm.idCardName = '';
                             await this.agentRefreshDashboard();
                         } else {
                             this.agentNotify(data.message || '创建失败', 'error');
@@ -1544,24 +1907,27 @@
                 t: {
                     sc: {
                         brand_sub: '汇生会', brand_full: '汇生会',
-                        nav_home: '首页', nav_about: '关于我们', nav_study: '留学服务', nav_apt: '学生公寓', nav_career: '职涯规划', nav_contact: '联系我们',
+                        nav_home: '首页', nav_achievements: '成就与反馈', nav_about: '关于我们', nav_study: '留学服务', nav_apt: '学生公寓', nav_career: '职涯规划', nav_contact: '商业合作',
                         sub_hero: 'Hero概览', sub_core: '核心业务', sub_story: '品牌故事', sub_history: '企业历程', sub_partners: '城市合伙人', sub_data: '数据亮点', sub_content: '服务内容', sub_map: '交互地图', sub_showcase: '公寓展示',
                         hero_sub: '扎根香港，更懂香港', hero_slogan: '放眼全球精英之路',
-                        stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累计服务用户', stat_offer: 'Top 100名校录取', stat_satisfaction: '职涯规划满意率', stat_apt: '运营管理香港学生公寓(间)',
+                        stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累计服务用户', stat_offer: 'Top 100名校录取', stat_satisfaction: '职涯规划满意率', stat_apt: '运营管理香港学生公寓(间)', stat_feedback: '用户好评反馈',
                         biz_title: '核心业务', 
-                        biz_study_t: '一站式留学申请', biz_study_sub: '全球升学规划与陪伴', biz_study_locs: '香港·澳门·新加坡·英国·澳洲',
-                        biz_apt_t: '汇生会学生公寓', biz_apt_sub: '学子在港的第二个家', biz_apt_locs: '长沙湾 · 油麻地 · 尖沙咀 · 西营盘',
-                        biz_career_t: '名企职涯规划', biz_career_sub: '学业到职业的无缝衔接', biz_career_tags: '实习内推·全职计划·求职辅导',
+                        biz_study_t: '一站式留学申请', biz_study_sub: '探索我们的定制最穩妥的留学方案，精准匹配您的学业与职业目标',
+                        biz_apt_t: '滙生会社', biz_apt_sub: '探索我们遍布全港的学生公寓会社', biz_apt_locs: '我们为您提供便捷可靠的理想居所',
+                        biz_career_t: '职涯规划', biz_career_sub: '告诉我们您的理想规划', biz_career_tags: '我们为您铺就坚实的道路与机遇。',
                         about_h1: '我们始终是学子与家庭', about_h1_sub: '“最坚实的后盾”',
                         about_p1: '我们是一家立足香港、面向全球的一站式学生成长支持品牌。核心团队由深谙本地教育的港籍成员与熟悉内地及海外体系的成员组成。',
                         about_p2: '从学业到住宿，从职业到生活，我们提供可信赖、全链条、有温度的陪伴，让每一段成长旅程都走得更有底气、更见光芒。',
                         about_badge: '10+ 年经验',
                         history_title: '企业历程',
-                        hist_2015_t: '初心启程', hist_2015_d: '公司成立，确立以学生为核心的服务理念。',
-                        hist_2017_t: '首次跨越', hist_2017_d: '服务版图拓展。',
-                        hist_2019_t: '安居计划启动', hist_2019_d: '服务深化，正式进军留学生公寓领域。',
-                        hist_2023_t: '深化布局', hist_2023_d: '香港总部+内地四城。',
-                        hist_2025_t: '整合与赋能', hist_2025_d: '打造全国性支持体系。',
+                        hist_2016_t: '初心启程 | 香港奠基', hist_2016_d: '源于创始人在澳洲亲身经历留学困境，决心创建一家“真正懂学生”的服务机构。在香港成立首个办事处，从英国、澳洲升学咨询起步。',
+                        hist_2017_t: '团队扩张 业务幅射更多国家', hist_2017_d: '吸纳港澳及海外留学背景精英，拓展港澳升学服务，正式确立 “全流程陪伴” 服务模式。',
+                        hist_2019_t: '安居计划 | 突破边界', hist_2019_d: '回应留学生“找房难”痛点，推出“汇生会社”学生公寓，打造 “安全+社群” 居住体验，完成从学业顾问到生活伙伴的角色进化。',
+                        hist_2020_t: '逆势成长 | 服务升级', hist_2020_d: '服务升级，整合升学、住宿、求职三大板块。疫情期间推出线上支持体系，服务学生突破20,000名。',
+                        hist_2022_t: '进军内地 | 权威认证', hist_2022_d: '于贵阳设立首家内地分支机构，服务西南学子。同年，荣获腾讯新闻·教育“2022年度影响力留学服务品牌”，获得市场与媒体双重认可。',
+                        hist_2023_t: '全国织网 | 战略成型', hist_2023_d: '战略落子佛山、武汉、深圳，形成以香港为中枢，四大分公司为支点的全国协同服务网络，升级为全国性一站式成长支持平台。',
+                        hist_2024_t: '实力加冕 | 品牌升华', hist_2024_d: '加入广东省国际教育促进会，融入行业生态。荣膺新浪&微博“2024年度综合实力留学服务品牌”，品牌进入全新阶段。',
+                        hist_2026_t: '整合赋能 | 生态启航', hist_2026_d: '累计服务学子突破50,000名。通过体系化赋能，构建全国性支持生态，让 “成就学子” 的使命在全国扎根生长。',
                         partner_title: '招募城市合伙人', partner_sub: '一起成为学子身边的“护航者”', city_hk: '香港',
                         pt_val1_t: '完整赋能', pt_val1_d: '成熟体系、专业培训', pt_val2_t: '本地深耕', pt_val2_d: '发挥你的在地优势', pt_val3_t: '共享成长', pt_val3_d: '共赢市场未来',
                         btn_join: '加入共创计划',
@@ -1580,24 +1946,27 @@
                     },
                     tc: {
                         brand_sub: '滙生會', brand_full: '滙生會',
-                        nav_home: '首頁', nav_about: '關於我們', nav_study: '留學服務', nav_apt: '學生公寓', nav_career: '職涯規劃', nav_contact: '聯繫我們',
+                        nav_home: '首頁', nav_achievements: '成就與反饋', nav_about: '關於我們', nav_study: '留學服務', nav_apt: '學生公寓', nav_career: '職涯規劃', nav_contact: '商業合作',
                         sub_hero: 'Hero概覽', sub_core: '核心業務', sub_story: '品牌故事', sub_history: '企業歷程', sub_partners: '城市合夥人', sub_data: '數據亮點', sub_content: '服務內容', sub_map: '交互地圖', sub_showcase: '公寓展示',
                         hero_sub: '紮根香港，更懂香港', hero_slogan: '放眼全球精英之路',
-                        stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累計服務用戶', stat_offer: 'Top 100名校錄取', stat_satisfaction: '職涯規劃滿意率', stat_apt: '運營管理香港學生公寓(間)',
+                        stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累計服務用戶', stat_offer: 'Top 100名校錄取', stat_satisfaction: '職涯規劃滿意率', stat_apt: '運營管理香港學生公寓(間)', stat_feedback: '用戶好評反饋',
                         biz_title: '核心業務',
-                        biz_study_t: '一站式留學申請', biz_study_sub: '全球升學規劃與陪伴', biz_study_locs: '香港·澳門·新加坡·英國·澳洲',
-                        biz_apt_t: '滙生會學生公寓', biz_apt_sub: '學子在港的第二個家', biz_apt_locs: '長沙灣 · 油麻地 · 尖沙咀 · 西營盤',
-                        biz_career_t: '名企職涯規劃', biz_career_sub: '學業到職業的無縫銜接', biz_career_tags: '實習內推·全職計劃·求職輔導',
+                        biz_study_t: '一站式留學申請', biz_study_sub: '探索我們的定制最穩妥的留學方案，精准匹配您的學業與職業目標',
+                        biz_apt_t: '滙生会社', biz_apt_sub: '探索我們遍佈全港的學生公寓会社', biz_apt_locs: '我們為您提供便捷可靠的理想居所',
+                        biz_career_t: '職涯規劃', biz_career_sub: '告訴我們您的理想規劃', biz_career_tags: '我們為您鋪就堅實的道路與機遇。',
                         about_h1: '我們始終是學子與家庭', about_h1_sub: '“最堅實的後盾”',
                         about_p1: '我們是一家立足香港、面向全球的一站式學生成長支持品牌。核心團隊由深諳本地教育的港籍成員與熟悉內地及海外體系的成員組成。',
                         about_p2: '從學業到住宿，從職業到生活，我們提供可信賴、全鏈條、有溫度的陪伴，讓每一段成長旅程都走得更有底氣、更見光芒。',
                         about_badge: '10+ 年經驗',
                         history_title: '企業歷程',
-                        hist_2015_t: '初心啟程', hist_2015_d: '公司成立，確立以學生為核心的服務理念。',
-                        hist_2017_t: '首次跨越', hist_2017_d: '服務版圖拓展。',
-                        hist_2019_t: '安居計劃啟動', hist_2019_d: '服務深化，正式進軍留學生公寓領域。',
-                        hist_2023_t: '深化佈局', hist_2023_d: '香港總部+內地四城。',
-                        hist_2025_t: '整合與賦能', hist_2025_d: '打造全國性支持體系。',
+                        hist_2016_t: '初心啟程 | 香港奠基', hist_2016_d: '源於創始人在澳洲親身經歷留學困境，決心創建一家「真正懂學生」的服務機構。在香港成立首個辦事處，從英國、澳洲升學諮詢起步。',
+                        hist_2017_t: '團隊擴張 業務輻射更多國家', hist_2017_d: '吸納港澳及海外留學背景精英，拓展港澳升學服務，正式確立「全流程陪伴」服務模式。',
+                        hist_2019_t: '安居計劃 | 突破邊界', hist_2019_d: '回應留學生「找房難」痛點，推出「滙生会社」學生公寓，打造「安全+社群」居住體驗，完成從學業顧問到生活夥伴的角色進化。',
+                        hist_2020_t: '逆勢成長 | 服務升級', hist_2020_d: '服務升級，整合升學、住宿、求職三大板塊。疫情期間推出線上支持體系，服務學生突破20,000名。',
+                        hist_2022_t: '進軍內地 | 權威認證', hist_2022_d: '於貴陽設立首家內地分支機構，服務西南學子。同年，榮獲騰訊新聞·教育「2022年度影響力留學服務品牌」，獲得市場與媒體雙重認可。',
+                        hist_2023_t: '全國織網 | 戰略成型', hist_2023_d: '戰略落子佛山、武漢、深圳，形成以香港為中樞，四大分公司為支點的全國協同服務網絡，升級為全國性一站式成長支持平台。',
+                        hist_2024_t: '實力加冕 | 品牌昇華', hist_2024_d: '加入廣東省國際教育促進會，融入行業生態。榮膺新浪&微博「2024年度綜合實力留學服務品牌」，品牌進入全新階段。',
+                        hist_2026_t: '整合賦能 | 生態啟航', hist_2026_d: '累計服務學子突破50,000名。通過體系化賦能，構建全國性支持生態，讓「成就學子」的使命在全國扎根生長。',
                         partner_title: '招募城市合夥人', partner_sub: '一起成為學子身邊的“護航者”', city_hk: '香港',
                         pt_val1_t: '完整賦能', pt_val1_d: '成熟體系、專業培訓', pt_val2_t: '本地深耕', pt_val2_d: '發揮你的在地優勢', pt_val3_t: '共享成長', pt_val3_d: '共贏市場未來',
                         btn_join: '加入共創計劃',
@@ -1616,12 +1985,12 @@
                     },
                     en: {
                         brand_sub: 'SDLV Group', brand_full: 'Group',
-                        nav_home: 'Home', nav_about: 'About Us', nav_study: 'Education', nav_apt: 'Housing', nav_career: 'Career', nav_contact: 'Contact',
+                        nav_home: 'Home', nav_achievements: 'Achievements', nav_about: 'About Us', nav_study: 'Education', nav_apt: 'Housing', nav_career: 'Career', nav_contact: 'Partnership',
                         sub_hero: 'Overview', sub_core: 'Core Business', sub_story: 'Our Story', sub_history: 'History', sub_partners: 'Partners', sub_data: 'Highlights', sub_content: 'Services', sub_map: 'Map', sub_showcase: 'Apartments',
                         hero_sub: 'Rooted in Hong Kong, Experts in HK', hero_slogan: 'Global Elite Pathway',
-                        stat_years_num: '10 Years', stat_years_txt: 'Since 2016', stat_users: 'Users Served', stat_offer: 'Top 100 Offers', stat_satisfaction: 'Satisfaction Rate', stat_apt: 'Rooms Managed',
+                        stat_years_num: '10 Years', stat_years_txt: 'Since 2016', stat_users: 'Users Served', stat_offer: 'Top 100 Offers', stat_satisfaction: 'Satisfaction Rate', stat_apt: 'Rooms Managed', stat_feedback: 'Positive Reviews',
                         biz_title: 'Our Core Business',
-                        biz_study_t: 'Global Education', biz_study_sub: 'Planning & Support', biz_study_locs: 'HK · Macau · SG · UK · AUS',
+                        biz_study_t: 'Global Education', biz_study_sub: 'Planning & Support',
                         biz_apt_t: 'Student Housing', biz_apt_sub: 'Your 2nd Home in HK', biz_apt_locs: 'Cheung Sha Wan · Yau Ma Tei · TST · SYP',
                         biz_career_t: 'Career Planning', biz_career_sub: 'School to Work Transition', biz_career_tags: 'Internship · Full-time · Coaching',
                         about_h1: 'We Are Your Family\'s', about_h1_sub: '"Strongest Support"',
@@ -1629,11 +1998,14 @@
                         about_p2: 'From academics to housing, career to life, we provide reliable, full-chain, and warm companionship, empowering every step of your journey.',
                         about_badge: '10+ Years Exp.',
                         history_title: 'Our History',
-                        hist_2015_t: 'Inception', hist_2015_d: 'Company founded with a student-centric philosophy.',
-                        hist_2017_t: 'Expansion', hist_2017_d: 'Service coverage expanded.',
-                        hist_2019_t: 'Housing Plan', hist_2019_d: 'Officially entered the student housing sector.',
-                        hist_2023_t: 'Deepening', hist_2023_d: 'HK HQ + 4 Mainland Cities.',
-                        hist_2025_t: 'Integration', hist_2025_d: 'Building a nationwide support system.',
+                        hist_2016_t: 'First Step | Founded in Hong Kong', hist_2016_d: 'Inspired by the founder\'s own study-abroad challenges in Australia, we set out to build a service that truly understands students. We opened our first office in Hong Kong, starting with UK and Australia admissions consulting.',
+                        hist_2017_t: 'Team Growth | Expanded Destinations', hist_2017_d: 'We brought together experts with Hong Kong/Macau and overseas study backgrounds, expanded HK/Macau admissions services, and established our full-cycle companionship model.',
+                        hist_2019_t: 'Housing Plan | Beyond Academics', hist_2019_d: 'To solve the “hard-to-find housing” pain point, we launched our student housing brand and built a safe, community-driven living experience—evolving from academic advisors to life partners.',
+                        hist_2020_t: 'Resilience | Service Upgrade', hist_2020_d: 'We integrated education, housing, and career services. During the pandemic, we strengthened online support and served more than 20,000 students.',
+                        hist_2022_t: 'Mainland Expansion | Recognition', hist_2022_d: 'We opened our first mainland branch in Guiyang to serve students in Southwest China, and received Tencent News Education\'s 2022 Influential Study Abroad Service Brand award.',
+                        hist_2023_t: 'Nationwide Network | Strategy in Place', hist_2023_d: 'We expanded into Foshan, Wuhan, and Shenzhen, building a collaborative network centered in Hong Kong with four mainland hubs—upgrading into a nationwide one-stop growth support platform.',
+                        hist_2024_t: 'Award-Winning | Brand Elevation', hist_2024_d: 'We joined the Guangdong International Education Promotion Association and earned Sina & Weibo\'s 2024 Comprehensive Strength Study Abroad Service Brand recognition.',
+                        hist_2026_t: 'Ecosystem Launch | Scaled Impact', hist_2026_d: 'We surpassed 50,000 students served. Through systematic enablement, we are building a nationwide support ecosystem—bringing our mission of empowering students to life across China.',
                         partner_title: 'City Partners', partner_sub: 'Become a Guardian for Students', city_hk: 'HK',
                         pt_val1_t: 'Empowerment', pt_val1_d: 'Training & Operations', pt_val2_t: 'Localization', pt_val2_d: 'Leverage local advantages', pt_val3_t: 'Growth', pt_val3_d: 'Win the future together',
                         btn_join: 'Join Us',
@@ -1703,6 +2075,28 @@
         function scrollLoop() {
             const viewportHeight = window.innerHeight;
             const scrollTop = window.scrollY;
+
+            // Floating consult button: lag-follow (smooth + natural, keep slow)
+            const now = performance.now();
+            scrollLoop._t = Number.isFinite(scrollLoop._t) ? scrollLoop._t : now;
+            const dt = Math.min(40, Math.max(8, now - scrollLoop._t)); // ms, clamp for stability
+            scrollLoop._t = now;
+
+            scrollLoop._lastScroll = Number.isFinite(scrollLoop._lastScroll) ? scrollLoop._lastScroll : scrollTop;
+            const rawVel = (scrollTop - scrollLoop._lastScroll) / dt; // px/ms
+            scrollLoop._lastScroll = scrollTop;
+
+            scrollLoop._vel = Number.isFinite(scrollLoop._vel) ? scrollLoop._vel : 0;
+            const velSmooth = 0.10; // smaller = smoother/slower response
+            scrollLoop._vel += (rawVel - scrollLoop._vel) * velSmooth;
+
+            const maxLagPx = 18;
+            const lagTarget = Math.max(-maxLagPx, Math.min(maxLagPx, -scrollLoop._vel * 18));
+
+            scrollLoop._lag = Number.isFinite(scrollLoop._lag) ? scrollLoop._lag : 0;
+            const lagEase = 0.08; // smaller = slower catch-up
+            scrollLoop._lag += (lagTarget - scrollLoop._lag) * lagEase;
+            document.body.style.setProperty('--fab-lag', String(scrollLoop._lag));
 
             // 1. 处理通用 Scrubbing 动画
             scrubElements.forEach(el => {

@@ -22,8 +22,64 @@ const ALIYUN_CONFIG = {
     accessKeyId: process.env.ALIYUN_ACCESS_KEY_ID || '',
     accessKeySecret: process.env.ALIYUN_ACCESS_KEY_SECRET || '',
     smsSignName: process.env.SMS_SIGN_NAME || '汇生活深圳文化科技',
-    smsTemplateCode: process.env.SMS_TEMPLATE_CODE || 'SMS_499170576'
+    smsTemplateCode: process.env.SMS_TEMPLATE_CODE || 'SMS_499170576',
+    // 身份证实名认证服务（阿里云市场 AppCode）
+    idVerifyAppCode: process.env.ID_VERIFY_APP_CODE || ''
 };
+
+async function verifyIDCard(idCard, name) {
+    // 基本格式验证
+    const idCardRegex = /^[1-9]\d{5}(18|19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dXx]$/;
+    if (!idCardRegex.test(String(idCard || ''))) {
+        return { valid: false, message: '身份证号码格式不正确' };
+    }
+
+    if (!name || !String(name).trim()) {
+        return { valid: false, message: '姓名不能为空' };
+    }
+
+    // 检查是否配置了AppCode
+    if (!ALIYUN_CONFIG.idVerifyAppCode) {
+        console.error('[agent][身份证验证] 未配置 ID_VERIFY_APP_CODE');
+        return { valid: false, message: '身份证验证服务未配置，请联系管理员' };
+    }
+
+    try {
+        const axios = require('axios');
+        const qs = require('querystring');
+
+        const response = await axios.post(
+            'https://kzidcardv1.market.alicloudapi.com/api-mall/api/id_card/check',
+            qs.stringify({
+                idcard: String(idCard).trim(),
+                name: String(name).trim()
+            }),
+            {
+                headers: {
+                    'Authorization': `APPCODE ${ALIYUN_CONFIG.idVerifyAppCode}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                timeout: 10000
+            }
+        );
+
+        // result=0 表示一致
+        if (response.data?.code === 200 && response.data?.data?.result === 0) {
+            return { valid: true, message: '身份证验证通过' };
+        }
+
+        if (response.data?.data?.result === 1) {
+            return { valid: false, message: '身份证与姓名不一致' };
+        }
+        if (response.data?.data?.result === 2) {
+            return { valid: false, message: '身份证号无记录' };
+        }
+        return { valid: false, message: response.data?.msg || '身份证验证失败' };
+    } catch (error) {
+        console.error('[agent][身份证验证失败]', error.message);
+        return { valid: false, message: '身份证验证服务异常，请稍后重试' };
+    }
+}
 
 // MySQL 连接池（与 auth.js 保持一致）
 const pool = mysql.createPool({
@@ -80,10 +136,15 @@ function generateVerificationCode() {
 
 async function sendSMS(phone, code) {
     try {
-        const isPlaceholder = !process.env.SMS_TEMPLATE_CODE || ALIYUN_CONFIG.smsTemplateCode === 'SMS_123456789';
-        const isSignMissing = !process.env.SMS_SIGN_NAME || !ALIYUN_CONFIG.smsSignName;
-        if (!IS_PROD || isPlaceholder || isSignMissing) {
-            console.log(`[agent][dev] 跳过真实短信发送 → 手机号: ${maskPhone(phone)} 验证码: ${code}`);
+        // 只要服务器配置了短信 4 项环境变量，就尝试真实发送；否则仅打印验证码（便于开发调试）
+        const hasEnvTemplate = !!(process.env.SMS_TEMPLATE_CODE && String(process.env.SMS_TEMPLATE_CODE).trim());
+        const hasEnvSign = !!(process.env.SMS_SIGN_NAME && String(process.env.SMS_SIGN_NAME).trim());
+        const hasEnvKeyId = !!(process.env.ALIYUN_ACCESS_KEY_ID && String(process.env.ALIYUN_ACCESS_KEY_ID).trim());
+        const hasEnvKeySecret = !!(process.env.ALIYUN_ACCESS_KEY_SECRET && String(process.env.ALIYUN_ACCESS_KEY_SECRET).trim());
+        const isPlaceholder = !hasEnvTemplate || ALIYUN_CONFIG.smsTemplateCode === 'SMS_123456789';
+
+        if (!hasEnvTemplate || !hasEnvSign || !hasEnvKeyId || !hasEnvKeySecret || isPlaceholder) {
+            console.log(`[agent][短信未配置] 跳过真实短信发送 → 手机号: ${maskPhone(phone)} 验证码: ${code}`);
             return true;
         }
 
@@ -244,7 +305,7 @@ router.use((req, res, next) => {
 
 /**
  * POST /api/agent/send-code
- * Body: { phone: string, purpose: 'login'|'reset_password' }
+ * Body: { phone: string, purpose: 'login'|'reset_password'|'register' }
  */
 router.post(
     '/send-code',
@@ -257,7 +318,7 @@ router.post(
             .isMobilePhone('zh-CN').withMessage('请输入正确的手机号'),
         body('purpose')
             .customSanitizer(v => String(v || '').trim().toLowerCase())
-            .isIn(['login', 'reset_password']).withMessage('用途参数错误')
+            .isIn(['login', 'reset_password', 'register']).withMessage('用途参数错误')
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -280,6 +341,14 @@ router.post(
                 const [u] = await pool.execute('SELECT id FROM agent_users WHERE phone = ? AND status = "active" LIMIT 1', [phone]);
                 if (u.length === 0) {
                     return res.status(404).json({ success: false, message: '该手机号未注册代理账号' });
+                }
+            }
+
+            // register must NOT have existing account
+            if (purpose === 'register') {
+                const [u] = await pool.execute('SELECT id FROM agent_users WHERE phone = ? LIMIT 1', [phone]);
+                if (u.length > 0) {
+                    return res.status(400).json({ success: false, message: '该手机号已存在账号' });
                 }
             }
 
@@ -487,7 +556,7 @@ router.get('/me', authenticateAgent, async (req, res) => {
 /**
  * POST /api/agent/register
  * 仅登录后可创建下级账号
- * Body: { phone, password, role }
+ * Body: { phone, password, role, code, idCard, idCardName }
  */
 router.post(
     '/register',
@@ -500,7 +569,11 @@ router.post(
             })
             .isMobilePhone('zh-CN'),
         body('password').isLength({ min: 6 }).withMessage('密码至少 6 位'),
+        body('code').customSanitizer(v => String(v || '').trim()).isLength({ min: 6, max: 6 }).isNumeric().withMessage('验证码格式错误'),
         body('role').customSanitizer(v => String(v || '').trim()).isIn(['consultant', 'agent1', 'agent2', 'agent3', 'agent4'])
+        ,
+        body('idCard').customSanitizer(v => String(v || '').trim()).isLength({ min: 18, max: 18 }).withMessage('身份证号码格式错误'),
+        body('idCardName').customSanitizer(v => String(v || '').trim()).notEmpty().withMessage('姓名不能为空')
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -508,7 +581,7 @@ router.post(
             return res.status(400).json({ success: false, errors: errors.array() });
         }
 
-        const { phone, password, role } = req.body;
+    const { phone, password, role, code, idCard, idCardName } = req.body;
         try {
             const [meRows] = await pool.execute('SELECT id, role, status FROM agent_users WHERE id = ? LIMIT 1', [req.agent.id]);
             if (meRows.length === 0 || meRows[0].status !== 'active') {
@@ -525,11 +598,28 @@ router.post(
                 return res.status(409).json({ success: false, message: '该手机号已存在账号' });
             }
 
+            // 验证短信验证码（发送用途: register -> purpose: agent_register）
+            const [codeRows] = await pool.execute(
+                'SELECT id FROM verification_codes WHERE phone = ? AND code = ? AND purpose = ? AND expires_at > NOW() AND used = FALSE ORDER BY created_at DESC LIMIT 1',
+                [phone, code, 'agent_register']
+            );
+            if (codeRows.length === 0) {
+                return res.status(400).json({ success: false, message: '验证码错误或已过期' });
+            }
+
+            // 身份证二要素验证
+            const idResult = await verifyIDCard(idCard, idCardName);
+            if (!idResult.valid) {
+                return res.status(400).json({ success: false, message: idResult.message || '身份证验证失败' });
+            }
+
             const passwordHash = await bcrypt.hash(password, 10);
             const [result] = await pool.execute(
                 'INSERT INTO agent_users (phone, password_hash, role, parent_id) VALUES (?, ?, ?, ?)',
                 [phone, passwordHash, role, req.agent.id]
             );
+
+            await pool.execute('UPDATE verification_codes SET used = TRUE WHERE id = ?', [codeRows[0].id]);
 
             await logAction({ userId: req.agent.id, action: 'create_subaccount', detail: JSON.stringify({ childRole: role, childPhone: maskPhone(phone) }), ip: req.ip });
             return res.json({ success: true, message: '创建成功', userId: result.insertId });

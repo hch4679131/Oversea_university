@@ -5,6 +5,9 @@
  * Then visit: http://localhost:3000
  */
 
+// Load .env if present (required for SMS/DB secrets)
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const { scrapeWebsiteToExcel, scrapeMultipleUrls } = require('./scraper');

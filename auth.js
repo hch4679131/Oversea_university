@@ -68,11 +68,15 @@ function generateVerificationCode() {
  */
 async function sendSMS(phone, code) {
     try {
-        // 开发/未配置短信模板时，直接打印验证码并返回成功
-        const isPlaceholder = !process.env.SMS_TEMPLATE_CODE || ALIYUN_CONFIG.smsTemplateCode === 'SMS_123456789';
-        const isSignMissing = !process.env.SMS_SIGN_NAME || !ALIYUN_CONFIG.smsSignName;
-        if (!IS_PROD || isPlaceholder || isSignMissing) {
-            console.log(`[开发模式] 跳过真实短信发送 → 手机号: ${maskPhone(phone)} 验证码: ${code}`);
+        // 只要服务器配置了短信 4 项环境变量，就尝试真实发送；否则仅打印验证码（便于开发调试）
+        const hasEnvTemplate = !!(process.env.SMS_TEMPLATE_CODE && String(process.env.SMS_TEMPLATE_CODE).trim());
+        const hasEnvSign = !!(process.env.SMS_SIGN_NAME && String(process.env.SMS_SIGN_NAME).trim());
+        const hasEnvKeyId = !!(process.env.ALIYUN_ACCESS_KEY_ID && String(process.env.ALIYUN_ACCESS_KEY_ID).trim());
+        const hasEnvKeySecret = !!(process.env.ALIYUN_ACCESS_KEY_SECRET && String(process.env.ALIYUN_ACCESS_KEY_SECRET).trim());
+        const isPlaceholder = !hasEnvTemplate || ALIYUN_CONFIG.smsTemplateCode === 'SMS_123456789';
+
+        if (!hasEnvTemplate || !hasEnvSign || !hasEnvKeyId || !hasEnvKeySecret || isPlaceholder) {
+            console.log(`[短信未配置] 跳过真实短信发送 → 手机号: ${maskPhone(phone)} 验证码: ${code}`);
             return true;
         }
 
