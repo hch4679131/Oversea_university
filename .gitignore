@@ -49,3 +49,8 @@ __pycache__/
 .ruff_cache/
 .venv/
 venv/
+
+# Large static assets (deployed to server static dir, not tracked)
+图片素材/企业历程及荣誉奖项及团队个人照/
+图片素材/公司照片/
+图片素材/公司环境/
