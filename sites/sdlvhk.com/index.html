@@ -416,16 +416,16 @@
 
                     <div class="grid md:grid-cols-3 gap-10">
                         <div class="scrub-item anim-fade-up">
-                            <div @click="switchPage('study')" class="group relative h-[500px] bg-obsidian-950 border border-gold-400/20 overflow-hidden cursor-pointer shadow-2xl hover:border-gold-400/60 transition-all duration-500 rounded-none">
+                            <div @click="switchPage('study')" class="group relative h-[320px] bg-obsidian-950 border border-gold-400/20 overflow-hidden cursor-pointer shadow-2xl hover:border-gold-400/60 transition-all duration-500 rounded-none">
                                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-gold-400/10 via-transparent to-transparent"></div>
                                 <div class="absolute top-6 right-6 text-6xl font-serif text-white/5 select-none">01</div>
-                                <div class="relative h-full p-10 flex flex-col">
-                                    <div class="flex items-center gap-4 mb-10">
+                                <div class="relative h-full p-7 flex flex-col">
+                                    <div class="flex items-center gap-4 mb-6">
                                         <i data-lucide="graduation-cap" class="w-6 h-6 text-gold-400"></i>
                                         <div class="h-[1px] flex-1 bg-gold-400/40"></div>
                                     </div>
-                                    <h3 class="text-3xl font-serif text-white mb-4" x-text="t[lang].biz_study_t"></h3>
-                                    <p class="text-gray-300 text-sm leading-relaxed mb-6" x-text="t[lang].biz_study_sub"></p>
+                                    <h3 class="text-3xl font-serif text-white mb-3" x-text="t[lang].biz_study_t"></h3>
+                                    <p class="text-gray-300 text-sm leading-relaxed" x-text="t[lang].biz_study_sub"></p>
                                     <div class="mt-auto pt-6 border-t border-white/10">
                                     </div>
                                 </div>
@@ -433,15 +433,15 @@
                         </div>
 
                         <div class="scrub-item anim-fade-up">
-                            <div @click="switchPage('apartments')" class="group relative h-[500px] bg-white border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
+                            <div @click="switchPage('apartments')" class="group relative h-[320px] bg-white border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
                                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-black/5 via-transparent to-transparent"></div>
                                 <div class="absolute top-6 right-6 text-6xl font-serif text-black/5 select-none">02</div>
-                                <div class="relative h-full p-10 flex flex-col">
-                                    <div class="flex items-center gap-4 mb-10">
+                                <div class="relative h-full p-7 flex flex-col">
+                                    <div class="flex items-center gap-4 mb-6">
                                         <i data-lucide="home" class="w-6 h-6 text-obsidian-950"></i>
                                         <div class="h-[1px] flex-1 bg-black/20"></div>
                                     </div>
-                                    <h3 class="text-3xl font-serif text-obsidian-950 mb-4" x-text="t[lang].biz_apt_t"></h3>
+                                    <h3 class="text-3xl font-serif text-obsidian-950 mb-3" x-text="t[lang].biz_apt_t"></h3>
                                     <p class="text-black/70 text-sm leading-relaxed" x-text="t[lang].biz_apt_locs"></p>
                                     <div class="mt-auto pt-6 border-t border-black/10">
                                         <div class="text-xs text-black/60 uppercase tracking-widest" x-text="t[lang].biz_apt_sub"></div>
@@ -451,15 +451,15 @@
                         </div>
 
                         <div class="scrub-item anim-fade-up">
-                            <div @click="switchPage('career')" class="group relative h-[500px] bg-gold-400 border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
+                            <div @click="switchPage('career')" class="group relative h-[320px] bg-gold-400 border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
                                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-black/10 via-transparent to-transparent"></div>
                                 <div class="absolute top-6 right-6 text-6xl font-serif text-black/10 select-none">03</div>
-                                <div class="relative h-full p-10 flex flex-col">
-                                    <div class="flex items-center gap-4 mb-10">
+                                <div class="relative h-full p-7 flex flex-col">
+                                    <div class="flex items-center gap-4 mb-6">
                                         <i data-lucide="trending-up" class="w-6 h-6 text-black"></i>
                                         <div class="h-[1px] flex-1 bg-black/25"></div>
                                     </div>
-                                    <h3 class="text-3xl font-serif text-black mb-4" x-text="t[lang].biz_career_t"></h3>
+                                    <h3 class="text-3xl font-serif text-black mb-3" x-text="t[lang].biz_career_t"></h3>
                                     <p class="text-black/80 text-sm leading-relaxed" x-text="t[lang].biz_career_tags"></p>
                                     <div class="mt-auto pt-6 border-t border-black/15">
                                         <div class="text-xs text-black/60 uppercase tracking-widest" x-text="t[lang].biz_career_sub"></div>
@@ -644,7 +644,7 @@
                         <div class="absolute top-[60%] left-[55%] w-20 h-[1px] bg-gradient-to-l from-gold-400 to-transparent transform -rotate-45 origin-left"></div>
                     </div>
 
-                    <div class="grid md:grid-cols-3 gap-6 text-left mb-12">
+                    <!-- <div class="grid md:grid-cols-3 gap-6 text-left mb-12">
                         <div class="p-6 bg-black/5 border border-black/10">
                             <h4 class="text-obsidian-950 font-bold mb-1" x-text="t[lang].pt_val1_t"></h4>
                             <p class="text-xs text-black/60" x-text="t[lang].pt_val1_d"></p>
@@ -657,7 +657,7 @@
                             <h4 class="text-obsidian-950 font-bold mb-1" x-text="t[lang].pt_val3_t"></h4>
                             <p class="text-xs text-black/60" x-text="t[lang].pt_val3_d"></p>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- <button @click="switchPage('contact')" class="px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_join"></button> -->
 
