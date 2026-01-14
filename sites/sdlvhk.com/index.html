@@ -876,11 +876,14 @@
             <section id="map" class="py-24 bg-paper text-center text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 mb-10 scrub-item anim-fade-up">
                     <h2 class="text-4xl font-serif text-obsidian-950 mb-2" x-text="t[lang].apt_map_t"></h2>
-                    <p class="text-gold-400" x-text="t[lang].apt_map_sub"></p>
+                    <p class="text-gold-400">
+                        <span x-text="t[lang].apt_map_sub"></span><br>
+                        <span class="text-gold-400/80" x-text="t[lang].apt_map_sub2"></span>
+                    </p>
                 </div>
 
                 <div class="relative w-full max-w-5xl mx-auto h-[500px] bg-paper border border-black/10 rounded-lg shadow-2xl overflow-hidden group" x-data="{ activeLoc: null }">
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1597893323605-2362b5d03606?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-[0.15]"></div>
+                    <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/6_0.png')] bg-cover bg-center opacity-[0.15]"></div>
                     
                         <div class="absolute top-[60%] left-[30%] cursor-pointer z-10" @click="activeLoc = 'syp'" :class="activeLoc === 'syp' ? 'map-active' : ''">
                             <div class="relative w-4 h-4">
@@ -905,6 +908,11 @@
                         </div>
                     </div>
                     <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-gray-500 bg-black/50 p-2 rounded" x-text="t[lang].map_hint"></div>
+                </div>
+
+                <div class="mt-8 max-w-5xl mx-auto px-6">
+                    <div class="text-2xl md:text-3xl font-serif text-obsidian-950" x-text="t[lang].apt_map_caption1"></div>
+                    <div class="mt-2 text-black/60" x-text="t[lang].apt_map_caption2"></div>
                 </div>
             </section>
 
@@ -938,10 +946,10 @@
                         <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
                             <span>公寓頁標籤</span>
                             <span class="text-black/40">/</span>
-                            <span class="font-bold">滙生會社(油麻地)</span>
+                            <span class="font-bold">汇生会社(油麻地)</span>
                         </div>
-                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950">滙生會社(油麻地)</h1>
-                        <p class="mt-3 text-black/70 leading-relaxed">油麻地吳松街滙生會社</p>
+                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950">汇生会社(油麻地)</h1>
+                        <p class="mt-3 text-black/70 leading-relaxed">油麻地吳松街汇生会社</p>
                         <img src="https://static.sdlvhk.com/图片素材/section/4-2.png" class="w-full">
                         <div class="mt-8 grid sm:grid-cols-2 gap-4">
                             
@@ -2038,7 +2046,11 @@
                         btn_eval: '免费评估我的录取机率',
                         serv_content_t: '服务内容详情', serv_1_t: '01 升学规划与定位', serv_1_d: '个性化方案 · 精准定位', serv_2_t: '02 申请材料准备', serv_2_d: '文书精研 · 优势提炼', serv_3_t: '03 院校申请及面试', serv_3_d: '系统填报 · 面试辅导',
                         uni_link_t: '院校联系', uni_sub: '官方认证指定的招生机构', uni_desc: '“汇生会”与“Jesselton University College 哲士顿大学学院”合作，正积极参与学生招募和发展专业课程。学院获ASIC国际认证。',
-                        apt_map_t: '汇生会公寓地图', apt_map_sub: '不止一个住址，更是你在香港开启学业生活的战略起点',
+                        apt_map_t: '学生居社',
+                        apt_map_sub: '探索我们遍布全港的学生居社，为您提供便捷可靠的理想居所',
+                        apt_map_sub2: '城中居社毗连各大学府以及生活娱乐所需',
+                        apt_map_caption1: '汇生会学生公寓，你在香港的第二个家。',
+                        apt_map_caption2: '汇生会公寓：不止一个住址，更是你在香港开启学业生活的战略起点。',
                         apt_syp: '西营盘', apt_dist_hku: 'HKU 步行15min', apt_ymt: '油麻地', apt_dist_poly: 'PolyU 地铁2站', map_hint: '* 点击金色光点查看通勤距离',
                         btn_explore_apt: '探索此公寓', apt_syp_full: '西营盘 · 旗舰店', apt_ymt_full: '油麻地 · 核心馆',
                         car_h1: '名企职涯规划', car_sub: '学业到职业的无缝衔接', car_desc: '我们提供从简历优化、模拟面试到内推机会的全方位服务。',
@@ -2077,7 +2089,11 @@
                         btn_eval: '免費評估我的錄取機率',
                         serv_content_t: '服務內容詳情', serv_1_t: '01 升學規劃與定位', serv_1_d: '個性化方案 · 精準定位', serv_2_t: '02 申請材料準備', serv_2_d: '文書精研 · 優勢提煉', serv_3_t: '03 院校申請及面試', serv_3_d: '系統填報 · 面試輔導',
                         uni_link_t: '院校聯繫', uni_sub: '官方認證指定的招生機構', uni_desc: '“滙生會”與“Jesselton University College 哲士頓大學學院”合作，正積極參與學生招募和發展專業課程。學院獲ASIC國際認證。',
-                        apt_map_t: '滙生會公寓地圖', apt_map_sub: '不止一個住址，更是你在香港開啟學業生活的戰略起點',
+                        apt_map_t: '學生居社',
+                        apt_map_sub: '探索我們遍佈全港的學生居社，為您提供便捷可靠的理想居所',
+                        apt_map_sub2: '城中居社毗連各大學府以及生活娛樂所需',
+                        apt_map_caption1: '滙生會學生公寓，你在香港的第二個家。',
+                        apt_map_caption2: '滙生會公寓：不止一個住址，更是你在香港開啟學業生活的戰略起點。',
                         apt_syp: '西營盤', apt_dist_hku: 'HKU 步行15min', apt_ymt: '油麻地', apt_dist_poly: 'PolyU 地鐵2站', map_hint: '* 點擊金色光點查看通勤距離',
                         btn_explore_apt: '探索此公寓', apt_syp_full: '西營盤 · 旗艦店', apt_ymt_full: '油麻地 · 核心館',
                         car_h1: '名企職涯規劃', car_sub: '學業到職業的無縫銜接', car_desc: '我們提供從簡歷優化、模擬面試到內推機會的全方位服務。',
@@ -2116,7 +2132,11 @@
                         btn_eval: 'Free Evaluation',
                         serv_content_t: 'Service Details', serv_1_t: '01 Planning', serv_1_d: 'Personalized Strategy', serv_2_t: '02 Application', serv_2_d: 'Essay Polishing', serv_3_t: '03 Submission', serv_3_d: 'System Filing & Interview Prep',
                         uni_link_t: 'University Partner', uni_sub: 'Official Recruitment Partner', uni_desc: 'SDLV partners with Jesselton University College (ASIC Accredited) for recruitment and course development.',
-                        apt_map_t: 'Apartment Map', apt_map_sub: 'Not just an address, but a strategic start for your life in HK.',
+                        apt_map_t: 'Student Residences',
+                        apt_map_sub: 'Explore our student residences across Hong Kong for a convenient, reliable place to live.',
+                        apt_map_sub2: 'Each residence is close to major universities and everyday essentials.',
+                        apt_map_caption1: 'Huisenghui Student Residence — your second home in Hong Kong.',
+                        apt_map_caption2: 'More than an address: a strategic starting point for your study-life journey in HK.',
                         apt_syp: 'Sai Ying Pun', apt_dist_hku: 'HKU 15min Walk', apt_ymt: 'Yau Ma Tei', apt_dist_poly: 'PolyU 2 MTR Stops', map_hint: '* Click dots to see distance',
                         btn_explore_apt: 'Explore Room', apt_syp_full: 'SYP · Flagship', apt_ymt_full: 'YMT · Core',
                         car_h1: 'Elite Career Planning', car_sub: 'Seamless Transition', car_desc: 'We provide resume optimization, mock interviews, and referral opportunities.',
