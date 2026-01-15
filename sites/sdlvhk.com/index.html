@@ -282,6 +282,7 @@
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_story"></a>
                         <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_history"></a>
+                        <a @click.stop="switchPage('about', 'team')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_team"></a>
                         <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_partners"></a>
                     </div>
                 </div>
@@ -757,7 +758,7 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-10">
-                        <div class="bg-white border border-black/10 shadow-sm p-8 scrub-item anim-fade-up">
+                        <div class=" shadow-sm p-8 scrub-item anim-fade-up">
                             <div class="flex items-center gap-4 mb-5">
                                 <div class="w-8 h-8 border border-gold-400/60 flex items-center justify-center">
                                     <i data-lucide="shield" class="w-4 h-4 text-gold-400"></i>
@@ -768,7 +769,7 @@
                             <p class="text-black/70 leading-relaxed" x-text="t[lang].about_mission_text"></p>
                         </div>
 
-                        <div class="bg-white border border-black/10 shadow-sm p-8 scrub-item anim-fade-up">
+                        <div class=" shadow-sm p-8 scrub-item anim-fade-up">
                             <div class="flex items-center gap-4 mb-5">
                                 <div class="w-8 h-8 border border-gold-400/60 flex items-center justify-center">
                                     <i data-lucide="sparkles" class="w-4 h-4 text-gold-400"></i>
@@ -943,6 +944,44 @@
                                 <div class="absolute left-[-9px] md:left-1/2 md:-ml-[9px] w-5 h-5 bg-gold-400 border-4 border-obsidian-950 rounded-full z-20 animate-pulse"></div>
                                 <div class="md:text-right pl-8 md:pl-0 text-gray-400 text-sm md:order-1" x-text="t[lang].hist_2026_d"></div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About: Team (企业历程 & 商业合作之间) -->
+            <section id="team" class="py-28 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].team_kicker"></span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].team_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-14 items-start">
+                        <!-- Left: Avatars -->
+                        <div class="scrub-item anim-fade-up">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                <template x-for="(avatar, idx) in t[lang].team_avatars" :key="idx">
+                                    <div class="bg-white border border-black/10 shadow-sm overflow-hidden">
+                                        <img :src="avatar" alt="Team" class="w-full aspect-square object-cover" loading="lazy" decoding="async" />
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Right: Profiles -->
+                        <div class="space-y-6 scrub-item anim-fade-up">
+                            <template x-for="member in t[lang].team_members" :key="member.name + member.role">
+                                <div class="bg-white border border-black/10 shadow-sm p-7">
+                                    <div class="flex items-center gap-4">
+                                        <i data-lucide="user" class="w-5 h-5 text-obsidian-950"></i>
+                                        <div class="h-[1px] flex-1 bg-black/15"></div>
+                                    </div>
+                                    <div class="mt-4 text-xl font-serif text-obsidian-950" x-text="member.name + ' | ' + member.role"></div>
+                                    <div class="mt-3 text-sm text-black/70 leading-relaxed whitespace-pre-line" x-text="member.bio"></div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -2280,7 +2319,7 @@
                     sc: {
                         brand_sub: '汇生会', brand_full: '汇生会', brand_suffix: 'SDLV',
                         nav_home: '首页', nav_achievements: '成就与反馈', nav_about: '关于我们', nav_study: '留学服务', nav_apt: '学生公寓', nav_career: '职涯规划', nav_contact: '商业合作',
-                        sub_hero: 'Hero概览', sub_core: '核心业务', sub_story: '品牌故事', sub_history: '企业历程', sub_partners: '城市合伙人', sub_data: '数据亮点', sub_content: '服务内容', sub_map: '交互地图', sub_showcase: '公寓展示',
+                        sub_hero: 'Hero概览', sub_core: '核心业务', sub_story: '品牌故事', sub_history: '企业历程', sub_team: '团队专材', sub_partners: '城市合伙人', sub_data: '数据亮点', sub_content: '服务内容', sub_map: '交互地图', sub_showcase: '公寓展示',
                         hero_sub: '作为学子成长路上最坚实的后盾，以经验及专业护航，成就学子发挥潜能',
                         hero_slogan: '自2016年-札根香港，连系全球',
                         stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累计服务用户', stat_offer: 'Top 100名校录取', stat_satisfaction: '职涯规划满意率', stat_apt: '运营管理香港学生公寓(间)', stat_feedback: '用户好评反馈',
@@ -2300,6 +2339,65 @@
                         about_mission_text: '作为学子成长路上最坚实的后盾',
                         about_vision_label: '愿景：',
                         about_vision_text: '以经验及专业护航，成就学子发挥潜能',
+                        team_kicker: 'TEAM',
+                        team_title: 'SDLV 团队专材',
+                        team_avatars: [
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/PHOTO.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/84897200a1f5fa00754916af10f1cef7.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a706c10c4394ce7ae2cf183aba144a39.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a9ca703a939675f734419f6154171c25.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/eeb6e6bb11f5654de2f4d76f817d735d.jpg'
+                        ],
+                        team_members: [
+                            {
+                                name: 'A',
+                                role: '联合创始人',
+                                bio: '欧洲大学学院硕士\n曾任职于国际四大会计师事务所\n拥有超过十年的资深物业管理与资产运营经验，擅长构建标准化服务体系与战略规划，主导构建公司标准化运营与服务体系。'
+                            },
+                            {
+                                name: 'B',
+                                role: '联合创始人',
+                                bio: '香港理工大学硕士，澳大利亚迪肯大学学士\n香港青年商會北區2025年度副会长\n香港湾仔中西区工商联会会董\n7年留学规划行业从业经验\n深耕留学规划行业七年，精通国际教育路径与精英人才发展规划，主导公司留学战略与高端资源拓展。'
+                            },
+                            {
+                                name: 'Thomas Leung',
+                                role: '总经理',
+                                bio: '香港都会大学学士\n数十年服務開發及营运经验，曾任国际知名教育機構產品開發部主管。具备丰富的项目运营与市场拓展经验，助力公司拓展全球合作网络。'
+                            },
+                            {
+                                name: 'Lily Wong',
+                                role: '留学业务总监',
+                                bio: '香港浸会大学硕士\n香港浸会大学BM Capstone Project特邀评委\n香港城市大学GBA Outstanding ESG Youth Business Competition荣誉Sponsor\n拥有六年留学规划行业经验，专长于背景提升与高端学术申请'
+                            },
+                            {
+                                name: 'Sloth',
+                                role: '留学事务经理',
+                                bio: '美国约翰霍普金斯大学硕士\n澳洲莫纳什大学学士\n6年澳美两国学习及留学规划工作经验\n兼具澳美两国共六年的学习与工作经验，深谙北美顶尖学府的录取逻辑与文化适应之道。'
+                            },
+                            {
+                                name: 'Andy Chen',
+                                role: '学生公寓营运总监',
+                                bio: '澳洲迪肯大学学士\n凭借十年在澳大利亚的学习、工作与生活经验，为学员提供无缝衔接的本地化支持与职业发展指导。\n全面负责学生公寓的运营与管理。'
+                            },
+                            {
+                                name: 'Winson Huang',
+                                role: '佛山分公司总经理',
+                                bio: '北京师范大学珠海分校\n全面负责佛山分公司的整体运营、市场拓展与团队管理。\n凭借深厚的本地资源与客户服务经验，为大湾区学子提供贴身的留学咨询与境外安家服务。\n擅长跨境资源整合，专注服务体系数字化。'
+                            },
+                            {
+                                name: 'Veto Wong',
+                                role: '业务拓展经理',
+                                bio: '香港都会大学学士\n负责内部流程优化与学生服务体系建设，确保全链条服务的高效与稳定。'
+                            },
+                            {
+                                name: 'UU DU',
+                                role: '高级客户经理',
+                                bio: '香港都会大学学士\n5年留学规划行业从业经验\n专注学生个性化服务与家庭沟通，成为连接学生、家庭与公司的可靠纽带。'
+                            }
+                        ],
                         about_h1: '我们始终是学子与家庭', about_h1_sub: '“最坚实的后盾”',
                         about_p1: 'SDLV 是一个扎根香港逾 10 年、自 2016 开始为学子提供全球一站式专业升学与住宿支持服务的资深品牌。',
                         about_p2: 'SDLV 团队汇聚了香港本地、内地及海外教育背景经验的专才。学子的路我们都走过，真正懂得学生与家长在每一步的焦虑、期待和需要，并提供从学业到生活的全链条支持。',
@@ -2356,7 +2454,7 @@
                     tc: {
                         brand_sub: '滙生會', brand_full: '滙生會', brand_suffix: 'SDLV',
                         nav_home: '首頁', nav_achievements: '成就與反饋', nav_about: '關於我們', nav_study: '留學服務', nav_apt: '學生公寓', nav_career: '職涯規劃', nav_contact: '商業合作',
-                        sub_hero: 'Hero概覽', sub_core: '核心業務', sub_story: '品牌故事', sub_history: '企業歷程', sub_partners: '城市合夥人', sub_data: '數據亮點', sub_content: '服務內容', sub_map: '交互地圖', sub_showcase: '公寓展示',
+                        sub_hero: 'Hero概覽', sub_core: '核心業務', sub_story: '品牌故事', sub_history: '企業歷程', sub_team: '團隊專才', sub_partners: '城市合夥人', sub_data: '數據亮點', sub_content: '服務內容', sub_map: '交互地圖', sub_showcase: '公寓展示',
                         hero_sub: '作為學子成長路上最堅實的後盾，以經驗及專業護航，成就學子發揮潛能',
                         hero_slogan: '自2016年-紮根香港，連繫全球',
                         stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累計服務用戶', stat_offer: 'Top 100名校錄取', stat_satisfaction: '職涯規劃滿意率', stat_apt: '運營管理香港學生公寓(間)', stat_feedback: '用戶好評反饋',
@@ -2376,6 +2474,65 @@
                         about_mission_text: '作为学子成长路上最坚实的后盾',
                         about_vision_label: '願景：',
                         about_vision_text: '以經驗及專業護航，成就學子發揮潛能',
+                        team_kicker: 'TEAM',
+                        team_title: 'SDLV 團隊專才',
+                        team_avatars: [
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/PHOTO.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/84897200a1f5fa00754916af10f1cef7.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a706c10c4394ce7ae2cf183aba144a39.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a9ca703a939675f734419f6154171c25.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/eeb6e6bb11f5654de2f4d76f817d735d.jpg'
+                        ],
+                        team_members: [
+                            {
+                                name: 'A',
+                                role: '聯合創始人',
+                                bio: '歐洲大學學院碩士\n曾任職於國際四大會計師事務所\n擁有超過十年的資深物業管理與資產運營經驗，擅長構建標準化服務體系與戰略規劃，主導構建公司標準化運營與服務體系。'
+                            },
+                            {
+                                name: 'B',
+                                role: '聯合創始人',
+                                bio: '香港理工大學碩士，澳大利亞迪肯大學學士\n香港青年商會北區2025年度副會長\n香港灣仔中西區工商聯會會董\n7年留學規劃行業從業經驗\n深耕留學規劃行業七年，精通國際教育路徑與精英人才發展規劃，主導公司留學戰略與高端資源拓展。'
+                            },
+                            {
+                                name: 'Thomas Leung',
+                                role: '總經理',
+                                bio: '香港都會大學學士\n數十年服務開發及營運經驗，曾任國際知名教育機構產品開發部主管。具備豐富的項目運營與市場拓展經驗，助力公司拓展全球合作網絡。'
+                            },
+                            {
+                                name: 'Lily Wong',
+                                role: '留學業務總監',
+                                bio: '香港浸會大學碩士\n香港浸會大學BM Capstone Project特邀評委\n香港城市大學GBA Outstanding ESG Youth Business Competition榮譽Sponsor\n擁有六年留學規劃行業經驗，專長於背景提升與高端學術申請'
+                            },
+                            {
+                                name: 'Sloth',
+                                role: '留學事務經理',
+                                bio: '美國約翰霍普金斯大學碩士\n澳洲莫納什大學學士\n6年澳美兩國學習及留學規劃工作經驗\n兼具澳美兩國共六年的學習與工作經驗，深諳北美頂尖學府的錄取邏輯與文化適應之道。'
+                            },
+                            {
+                                name: 'Andy Chen',
+                                role: '學生公寓營運總監',
+                                bio: '澳洲迪肯大學學士\n憑藉十年在澳大利亞的學習、工作與生活經驗，為學員提供無縫銜接的本地化支持與職業發展指導。\n全面負責學生公寓的運營與管理。'
+                            },
+                            {
+                                name: 'Winson Huang',
+                                role: '佛山分公司總經理',
+                                bio: '北京師範大學珠海分校\n全面負責佛山分公司的整體運營、市場拓展與團隊管理。\n憑藉深厚的本地資源與客戶服務經驗，為大灣區學子提供貼身的留學諮詢與境外安家服務。\n擅長跨境資源整合，專注服務體系數字化。'
+                            },
+                            {
+                                name: 'Veto Wong',
+                                role: '業務拓展經理',
+                                bio: '香港都會大學學士\n負責內部流程優化與學生服務體系建設，確保全鏈條服務的高效與穩定。'
+                            },
+                            {
+                                name: 'UU DU',
+                                role: '高級客戶經理',
+                                bio: '香港都會大學學士\n5年留學規劃行業從業經驗\n專注學生個性化服務與家庭溝通，成為連接學生、家庭與公司的可靠紐帶。'
+                            }
+                        ],
                         about_h1: '我們始終是學子與家庭', about_h1_sub: '“最堅實的後盾”',
                         about_p1: 'SDLV 是一個扎根香港逾 10 年、自 2016 開始為學子提供全球一站式專業升學與住宿支援服務的資深品牌。',
                         about_p2: 'SDLV 團隊匯聚了香港本地、內地及海外教育背景經驗的專才。學子的路我們都走過，真正懂得學生與家長在每一步的焦慮、期待和需要，並提供從學業到生活的全鏈條支持。',
@@ -2432,7 +2589,7 @@
                     en: {
                         brand_sub: 'SDLV Group', brand_full: 'SDLV Group', brand_suffix: '',
                         nav_home: 'Home', nav_achievements: 'Achievements', nav_about: 'About Us', nav_study: 'Education', nav_apt: 'Housing', nav_career: 'Career', nav_contact: 'Partnership',
-                        sub_hero: 'Overview', sub_core: 'Core Business', sub_story: 'Our Story', sub_history: 'History', sub_partners: 'Partners', sub_data: 'Highlights', sub_content: 'Services', sub_map: 'Map', sub_showcase: 'Apartments',
+                        sub_hero: 'Overview', sub_core: 'Core Business', sub_story: 'Our Story', sub_history: 'History', sub_team: 'Team', sub_partners: 'Partners', sub_data: 'Highlights', sub_content: 'Services', sub_map: 'Map', sub_showcase: 'Apartments',
                         hero_sub: 'A steadfast support on students\' growth journey—guided by experience and expertise to unlock their potential',
                         hero_slogan: 'Since 2016 - Rooted in Hong Kong, Connected Globally',
                         stat_years_num: '10 Years', stat_years_txt: 'Since 2016', stat_users: 'Users Served', stat_offer: 'Top 100 Offers', stat_satisfaction: 'Satisfaction Rate', stat_apt: 'Rooms Managed', stat_feedback: 'Positive Reviews',
@@ -2452,6 +2609,29 @@
                         about_mission_text: 'To be the most steadfast support on every student\'s growth journey',
                         about_vision_label: 'Vision',
                         about_vision_text: 'Guided by experience and expertise, empowering students to unlock their potential',
+                        team_kicker: 'TEAM',
+                        team_title: 'Our Team',
+                        team_avatars: [
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/PHOTO.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/84897200a1f5fa00754916af10f1cef7.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a706c10c4394ce7ae2cf183aba144a39.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a9ca703a939675f734419f6154171c25.jpg',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/eeb6e6bb11f5654de2f4d76f817d735d.jpg'
+                        ],
+                        team_members: [
+                            { name: 'A', role: 'Co-founder', bio: 'Master\nFormer Big 4 accounting firm\n10+ years in property management and asset operations; built standardized operations and service systems.' },
+                            { name: 'B', role: 'Co-founder', bio: 'PolyU Master; Deakin Bachelor\nJCI North District (2025) Vice President\nWanchai & Central/Western Business Association Director\n7 years in study-abroad planning\nLeads study-abroad strategy and high-end resource development.' },
+                            { name: 'Thomas Leung', role: 'General Manager', bio: 'Bachelor\nDecades of product development & operations; former head of product development at an international education institution.' },
+                            { name: 'Lily Wong', role: 'Director, Study Abroad', bio: 'Master\nInvited Judge: HKBU BM Capstone Project\nHonor Sponsor: CityU GBA ESG Youth Business Competition\n6 years of experience; specializes in profile building and high-end applications.' },
+                            { name: 'Sloth', role: 'Study Abroad Operations Manager', bio: 'JHU Master; Monash Bachelor\n6 years AU/US study & planning experience; deeply understands admissions logic and cultural adaptation.' },
+                            { name: 'Andy Chen', role: 'Director, Student Housing Operations', bio: 'Deakin Bachelor\n10 years in Australia; provides localized support and career guidance. Responsible for housing operations and management.' },
+                            { name: 'Winson Huang', role: 'Foshan Branch GM', bio: 'BNU Zhuhai\nLeads branch operations, market expansion, and team management; focuses on cross-border resource integration and digital service systems.' },
+                            { name: 'Veto Wong', role: 'Business Development Manager', bio: 'Bachelor\nOptimizes internal processes and builds student service systems to ensure efficient end-to-end delivery.' },
+                            { name: 'UU DU', role: 'Senior Account Manager', bio: 'Bachelor\n5 years experience; focuses on personalized student support and family communication.' }
+                        ],
                         about_h1: 'We Are Your Family\'s', about_h1_sub: '"Strongest Support"',
                         about_p1: 'SDLV is a one-stop student growth support brand based in Hong Kong and facing the world. Our core team consists of HK locals and global experts.',
                         about_p2: 'From academics to housing, career to life, we provide reliable, full-chain, and warm companionship, empowering every step of your journey.',
