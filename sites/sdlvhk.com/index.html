@@ -966,22 +966,22 @@
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                     </div>
 
-                    <div class="grid lg:grid-cols-2 gap-16 items-start">
-                        <!-- Left: images (无外框/无底色，参照关于我们风格) -->
-                        <div class="scrub-item anim-fade-up">
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                <template x-for="(avatar, idx) in t[lang].team_avatars" :key="idx">
-                                    <div class="overflow-hidden rounded-sm">
-                                        <img :src="avatar" alt="Team" class="w-full aspect-square object-cover" loading="lazy" decoding="async" />
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
+                    <!-- One photo + one text block (第一条预留占位；其余按顺序配图) -->
+                    <div class="space-y-14">
+                        <template x-for="(member, idx) in t[lang].team_members" :key="member.name + member.role">
+                            <div class="grid md:grid-cols-[240px_1fr] gap-10 items-start">
+                                <div class="scrub-item anim-fade-up">
+                                    <template x-if="idx > 0 && t[lang].team_avatars[idx - 1]">
+                                        <img :src="t[lang].team_avatars[idx - 1]" alt="Team" class="w-full aspect-square object-cover rounded-sm" loading="lazy" decoding="async" />
+                                    </template>
+                                    <template x-if="!(idx > 0 && t[lang].team_avatars[idx - 1])">
+                                        <div class="w-full aspect-square rounded-sm bg-black/5 flex items-center justify-center">
+                                            <div class="text-xs font-bold tracking-[0.35em] uppercase text-black/40" x-text="t[lang].team_photo_placeholder"></div>
+                                        </div>
+                                    </template>
+                                </div>
 
-                        <!-- Right: list (一个一个展示，无卡片外框/底色) -->
-                        <div class="scrub-item anim-fade-up divide-y divide-black/10">
-                            <template x-for="member in t[lang].team_members" :key="member.name + member.role">
-                                <div class="py-8 first:pt-0 last:pb-0">
+                                <div class="scrub-item anim-fade-up">
                                     <div class="flex items-center gap-4">
                                         <i data-lucide="user" class="w-5 h-5 text-obsidian-950"></i>
                                         <div class="h-[1px] flex-1 bg-black/15"></div>
@@ -989,8 +989,8 @@
                                     <div class="mt-4 text-xl font-serif text-obsidian-950" x-text="member.name + ' | ' + member.role"></div>
                                     <div class="mt-3 text-sm text-black/70 leading-relaxed whitespace-pre-line" x-text="member.bio"></div>
                                 </div>
-                            </template>
-                        </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </section>
@@ -2349,8 +2349,8 @@
                         about_vision_text: '以经验及专业护航，成就学子发挥潜能',
                         team_kicker: 'TEAM',
                         team_title: 'SDLV 团队专材',
+                        team_photo_placeholder: '照片预留',
                         team_avatars: [
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/PHOTO.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
@@ -2484,8 +2484,8 @@
                         about_vision_text: '以經驗及專業護航，成就學子發揮潛能',
                         team_kicker: 'TEAM',
                         team_title: 'SDLV 團隊專才',
+                        team_photo_placeholder: '照片預留',
                         team_avatars: [
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/PHOTO.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
@@ -2619,8 +2619,8 @@
                         about_vision_text: 'Guided by experience and expertise, empowering students to unlock their potential',
                         team_kicker: 'TEAM',
                         team_title: 'Our Team',
+                        team_photo_placeholder: 'Photo',
                         team_avatars: [
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/PHOTO.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
