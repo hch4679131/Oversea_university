@@ -1065,9 +1065,26 @@
 
         <!-- ================= PAGE 3: 留学服务 ================= -->
         <div x-show="page === 'study'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <!-- Study: Hero -->
+            <section id="study-hero" class="relative min-h-[72vh] flex items-center overflow-hidden">
+                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.0%20by%20Lifestyle%20on%20Freepik.jpg" alt="Study Services" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black/70"></div>
+                <div class="relative z-10 w-full">
+                    <div class="max-w-7xl mx-auto px-6 py-28">
+                        <div class="max-w-3xl scrub-item anim-fade-up">
+                            <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-5 block" x-text="t[lang].nav_study"></span>
+                            <h1 class="text-5xl md:text-6xl font-serif text-white leading-tight" x-text="t[lang].study_hero_t"></h1>
+                            <div class="w-24 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-8"></div>
+                            <p class="mt-8 text-white/85 text-base md:text-lg leading-relaxed" x-text="t[lang].study_hero_p1"></p>
+                            <p class="mt-4 text-white/75 text-sm md:text-base leading-relaxed" x-text="t[lang].study_hero_p2"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section id="data" class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 text-center scrub-item anim-fade-up">
-                    <h2 class="text-5xl font-serif text-obsidian-950 mb-4" x-text="t[lang].study_hero_t"></h2>
+                    <h2 class="text-5xl font-serif text-obsidian-950 mb-4" x-text="t[lang].sub_data"></h2>
                     <div class="w-24 h-[1px] bg-gold-400 mx-auto mb-6"></div>
                     <p class="text-black/50 text-xs font-bold mb-16 uppercase tracking-[0.3em]" x-text="t[lang].study_hero_sub"></p>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
@@ -2439,7 +2456,10 @@
                         btn_join: '加入共创计划',
                         btn_city_partner_inquiry: '城市合伙人查询',
                         btn_agent_inquiry: '代理人查询',
-                        study_hero_t: '全阶段升学规划与申请支持', study_hero_sub: '— 从副学士学士硕士到博士，覆盖全球主要留学地区 —',
+                        study_hero_t: '留学服务',
+                        study_hero_p1: '探索我们的定制留学方案，一站式匹配您的发展目标',
+                        study_hero_p2: '香港、美英澳、新加坡、马来西亚、澳门 · 全科副学士至博士学位',
+                        study_hero_sub: '— 从副学士学士硕士到博士，覆盖全球主要留学地区 —',
                         st_stat1: 'Offer 总数', st_stat2: '文书原创度', st_stat3: '学员满意度', st_stat4: 'QS前100录取率',
                         btn_eval: '免费评估我的录取机率',
                         serv_content_t: '服务内容详情', serv_1_t: '01 升学规划与定位', serv_1_d: '个性化方案 · 精准定位', serv_2_t: '02 申请材料准备', serv_2_d: '文书精研 · 优势提炼', serv_3_t: '03 院校申请及面试', serv_3_d: '系统填报 · 面试辅导',
@@ -2574,7 +2594,10 @@
                         btn_join: '加入共創計劃',
                         btn_city_partner_inquiry: '城市合夥人查詢',
                         btn_agent_inquiry: '代理人查詢',
-                        study_hero_t: '全階段升學規劃與申請支持', study_hero_sub: '— 從副學士學士碩士到博士，覆蓋全球主要留學地區 —',
+                        study_hero_t: '留學服務',
+                        study_hero_p1: '探索我們的定制留學方案，一站式匹配您的發展目標',
+                        study_hero_p2: '香港、美英澳、新加坡、馬來西亞、澳門 · 全科副學士至博士學位',
+                        study_hero_sub: '— 從副學士學士碩士到博士，覆蓋全球主要留學地區 —',
                         st_stat1: 'Offer 總數', st_stat2: '文書原創度', st_stat3: '學員滿意度', st_stat4: 'QS前100錄取率',
                         btn_eval: '免費評估我的錄取機率',
                         serv_content_t: '服務內容詳情', serv_1_t: '01 升學規劃與定位', serv_1_d: '個性化方案 · 精準定位', serv_2_t: '02 申請材料準備', serv_2_d: '文書精研 · 優勢提煉', serv_3_t: '03 院校申請及面試', serv_3_d: '系統填報 · 面試輔導',
@@ -2673,7 +2696,10 @@
                         btn_join: 'Join Us',
                         btn_city_partner_inquiry: 'City Partner Inquiry',
                         btn_agent_inquiry: 'Agent Inquiry',
-                        study_hero_t: 'Full-Cycle Education Planning', study_hero_sub: '— Associate to PhD, Global Coverage —',
+                        study_hero_t: 'Study Abroad Services',
+                        study_hero_p1: 'Explore our tailored study plans—one-stop matching your growth goals',
+                        study_hero_p2: 'Hong Kong · UK · US · Australia · Singapore · Malaysia · Macau · Associate to PhD',
+                        study_hero_sub: '— Associate to PhD, Global Coverage —',
                         st_stat1: 'Total Offers', st_stat2: 'Original Essays', st_stat3: 'Satisfaction', st_stat4: 'QS Top 100 Rate',
                         btn_eval: 'Free Evaluation',
                         serv_content_t: 'Service Details', serv_1_t: '01 Planning', serv_1_d: 'Personalized Strategy', serv_2_t: '02 Application', serv_2_d: 'Essay Polishing', serv_3_t: '03 Submission', serv_3_d: 'System Filing & Interview Prep',
