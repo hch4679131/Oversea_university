@@ -1179,6 +1179,58 @@
                 </div>
             </section>
 
+            <!-- Study: Case Sharing (1×3 carousel; arrow controls) -->
+            <section id="study-cases" class="py-28 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].study_cases_kicker"></span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].study_cases_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="relative">
+                        <button
+                            type="button"
+                            class="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/90 backdrop-blur border border-black/10 shadow hover:bg-white transition items-center justify-center"
+                            @click="$refs.casesScroller.scrollBy({ left: -$refs.casesScroller.clientWidth, behavior: 'smooth' })"
+                            aria-label="Previous"
+                        >
+                            <i data-lucide="chevron-left" class="w-5 h-5 text-obsidian-950"></i>
+                        </button>
+
+                        <button
+                            type="button"
+                            class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/90 backdrop-blur border border-black/10 shadow hover:bg-white transition items-center justify-center"
+                            @click="$refs.casesScroller.scrollBy({ left: $refs.casesScroller.clientWidth, behavior: 'smooth' })"
+                            aria-label="Next"
+                        >
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-obsidian-950"></i>
+                        </button>
+
+                        <div
+                            x-ref="casesScroller"
+                            class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 px-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                        >
+                            <template x-for="(item, idx) in t[lang].study_cases_items" :key="item.img">
+                                <div class="snap-start shrink-0 basis-full sm:basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-2rem)/3)]">
+                                    <div class="relative overflow-hidden rounded-sm shadow-2xl bg-black/5 scrub-item anim-scale">
+                                        <img
+                                            :src="item.img"
+                                            :alt="item.alt"
+                                            class="w-full h-[280px] md:h-[240px] lg:h-[280px] object-contain"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <p class="mt-6 text-center text-xs text-black/50 font-bold uppercase tracking-[0.3em]" x-text="t[lang].study_cases_hint"></p>
+                    </div>
+                </div>
+            </section>
+
             <section id="data" class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 text-center scrub-item anim-fade-up">
                     <h2 class="text-5xl font-serif text-obsidian-950 mb-4" x-text="t[lang].sub_data"></h2>
@@ -2624,6 +2676,17 @@
                                 text: '我们的顾问不仅是专业的教育规划者，更是有留学经历、懂学生心理的同行者。在这里，你得到的不仅是服务，更是理解与共鸣。'
                             }
                         ],
+                        study_cases_kicker: 'CASE SHARING',
+                        study_cases_title: '成功案例分享',
+                        study_cases_hint: '左右滑动查看更多',
+                        study_cases_items: [
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/1.png', alt: 'Offer Letter 1' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/2.png', alt: 'Offer Letter 2' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/3.png', alt: 'Offer Letter 3' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/4.png', alt: 'Offer Letter 4' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/5.png', alt: 'Offer Letter 5' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/6.png', alt: 'Offer Letter 6' }
+                        ],
                         st_stat1: 'Offer 总数', st_stat2: '文书原创度', st_stat3: '学员满意度', st_stat4: 'QS前100录取率',
                         btn_eval: '免费评估我的录取机率',
                         serv_content_t: '服务内容详情', serv_1_t: '01 升学规划与定位', serv_1_d: '个性化方案 · 精准定位', serv_2_t: '02 申请材料准备', serv_2_d: '文书精研 · 优势提炼', serv_3_t: '03 院校申请及面试', serv_3_d: '系统填报 · 面试辅导',
@@ -2822,6 +2885,17 @@
                                 text: '我們的顧問不僅是專業的教育規劃者，更是有留學經歷、懂學生心理的同行者。在這裡，你得到的不僅是服務，更是理解與共鳴。'
                             }
                         ],
+                        study_cases_kicker: 'CASE SHARING',
+                        study_cases_title: '成功案例分享',
+                        study_cases_hint: '左右滑動查看更多',
+                        study_cases_items: [
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/1.png', alt: 'Offer Letter 1' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/2.png', alt: 'Offer Letter 2' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/3.png', alt: 'Offer Letter 3' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/4.png', alt: 'Offer Letter 4' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/5.png', alt: 'Offer Letter 5' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/6.png', alt: 'Offer Letter 6' }
+                        ],
                         st_stat1: 'Offer 總數', st_stat2: '文書原創度', st_stat3: '學員滿意度', st_stat4: 'QS前100錄取率',
                         btn_eval: '免費評估我的錄取機率',
                         serv_content_t: '服務內容詳情', serv_1_t: '01 升學規劃與定位', serv_1_d: '個性化方案 · 精準定位', serv_2_t: '02 申請材料準備', serv_2_d: '文書精研 · 優勢提煉', serv_3_t: '03 院校申請及面試', serv_3_d: '系統填報 · 面試輔導',
@@ -2983,6 +3057,17 @@
                                 title: '5. Warm, Professional Team Support',
                                 text: 'Our consultants are experienced planners and empathetic companions who understand students’ challenges and mindset.'
                             }
+                        ],
+                        study_cases_kicker: 'CASE SHARING',
+                        study_cases_title: 'Success Stories',
+                        study_cases_hint: 'Swipe to view more',
+                        study_cases_items: [
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/1.png', alt: 'Offer Letter 1' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/2.png', alt: 'Offer Letter 2' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/3.png', alt: 'Offer Letter 3' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/4.png', alt: 'Offer Letter 4' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/5.png', alt: 'Offer Letter 5' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/6.png', alt: 'Offer Letter 6' }
                         ],
                         st_stat1: 'Total Offers', st_stat2: 'Original Essays', st_stat3: 'Satisfaction', st_stat4: 'QS Top 100 Rate',
                         btn_eval: 'Free Evaluation',
