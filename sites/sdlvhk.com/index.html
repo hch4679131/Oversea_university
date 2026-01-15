@@ -1207,35 +1207,48 @@
             </section>
 
             <section id="content" class="py-40 bg-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20">
-                    <div class="scrub-item anim-fade-up">
-                        <h3 class="text-3xl font-serif text-white mb-10 pl-6 border-l-2 border-gold-400" x-text="t[lang].serv_content_t"></h3>
-                        <ul class="space-y-6">
-                            <li class="bg-obsidian-900/85 border border-white/10 p-6 rounded hover:bg-obsidian-900/92 transition duration-300">
-                                <h4 class="text-gold-400 font-bold text-lg mb-1" x-text="t[lang].serv_1_t"></h4>
-                                <p class="text-gray-400 text-sm" x-text="t[lang].serv_1_d"></p>
-                            </li>
-                            <li class="bg-obsidian-900/85 border border-white/10 p-6 rounded hover:bg-obsidian-900/92 transition duration-300">
-                                <h4 class="text-gold-400 font-bold text-lg mb-1" x-text="t[lang].serv_2_t"></h4>
-                                <p class="text-gray-400 text-sm" x-text="t[lang].serv_2_d"></p>
-                            </li>
-                            <li class="bg-obsidian-900/85 border border-white/10 p-6 rounded hover:bg-obsidian-900/92 transition duration-300">
-                                <h4 class="text-gold-400 font-bold text-lg mb-1" x-text="t[lang].serv_3_t"></h4>
-                                <p class="text-gray-400 text-sm" x-text="t[lang].serv_3_d"></p>
-                            </li>
-                        </ul>
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].study_uni_kicker"></span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-white" x-text="t[lang].study_uni_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                     </div>
-                    <div class="scrub-item anim-fade-up">
-                        <h3 class="text-3xl font-serif text-white mb-10" x-text="t[lang].uni_link_t"></h3>
-                        <div class="bg-gradient-to-br from-obsidian-900/90 to-obsidian-950/40 p-10 border border-white/10 rounded-lg">
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                                    <i data-lucide="award" class="text-obsidian-950 w-6 h-6"></i>
+
+                    <div class="space-y-20">
+                        <!-- JUC: image left, text right -->
+                        <div class="grid md:grid-cols-2 gap-20 items-center">
+                            <div class="scrub-item anim-scale">
+                                <div class="border border-white/10 bg-obsidian-900/40 overflow-hidden rounded-lg">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%204.5.1%20JUC.png" alt="JUC" class="w-full h-[420px] object-contain bg-black/10" loading="lazy" decoding="async" />
                                 </div>
-                                <h4 class="text-white font-serif font-bold text-xl">Jesselton University College</h4>
                             </div>
-                            <p class="text-xs text-gold-400 uppercase tracking-widest mb-6" x-text="t[lang].uni_sub"></p>
-                            <p class="text-gray-300 text-sm leading-relaxed" x-text="t[lang].uni_desc"></p>
+                            <div class="scrub-item anim-fade-up">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                        <i data-lucide="award" class="text-obsidian-950 w-6 h-6"></i>
+                                    </div>
+                                    <h3 class="text-white font-serif font-bold text-2xl" x-text="t[lang].study_uni_juc_title"></h3>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line" x-text="t[lang].study_uni_juc_text"></p>
+                            </div>
+                        </div>
+
+                        <!-- THEi: text left, image right -->
+                        <div class="grid md:grid-cols-2 gap-20 items-center">
+                            <div class="scrub-item anim-fade-up md:order-1">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                        <i data-lucide="school" class="text-obsidian-950 w-6 h-6"></i>
+                                    </div>
+                                    <h3 class="text-white font-serif font-bold text-2xl" x-text="t[lang].study_uni_thei_title"></h3>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line" x-text="t[lang].study_uni_thei_text"></p>
+                            </div>
+                            <div class="scrub-item anim-scale md:order-2">
+                                <div class="border border-white/10 bg-obsidian-900/40 overflow-hidden rounded-lg">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%204.5.2%20THEi.png" alt="THEi" class="w-full h-[420px] object-contain bg-black/10" loading="lazy" decoding="async" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2615,6 +2628,12 @@
                         btn_eval: '免费评估我的录取机率',
                         serv_content_t: '服务内容详情', serv_1_t: '01 升学规划与定位', serv_1_d: '个性化方案 · 精准定位', serv_2_t: '02 申请材料准备', serv_2_d: '文书精研 · 优势提炼', serv_3_t: '03 院校申请及面试', serv_3_d: '系统填报 · 面试辅导',
                         uni_link_t: '院校联系', uni_sub: '官方认证指定的招生机构', uni_desc: '“汇生会”与“Jesselton University College 哲士顿大学学院”合作，正积极参与学生招募和发展专业课程。学院获ASIC国际认证。',
+                        study_uni_kicker: 'UNIVERSITY PARTNERS',
+                        study_uni_title: '院校联系',
+                        study_uni_juc_title: 'Jesselton University College (JUC)',
+                        study_uni_juc_text: '汇生会 SDLV 与 Jesselton University College 哲士顿大学学院，简称 JUC 合作，作为 JUC 官方认证指定的招生机构，正积极参与学生招募和发展专业课程。JUC 是沙巴领先的私立高等教育机构，专注于灵活和跨学科的培训和教育系统。\n\nJUC 被英国 OTHM Qualification 指定为经批准的学习中心。在全球扩张的这些年里，JUC 成为了商学院和项目认证委员会（ACBSP）、美国高等教育联盟（AHEA）和特许继续教育协会（CACE）的机构成员。为促进教学与研究的卓越发展，JUC 与香港恒生大学 HSUHK 签署学术合作协议。',
+                        study_uni_thei_title: '香港高等教育科技学院（THEi 高科院）',
+                        study_uni_thei_text: '汇生会 SDLV 作为香港高等教育科技学院（THEi 高科院）在中国内地及海外地区的授权合作单位，全面负责本院学位课程的咨询、宣传及学生转介工作。\nTHEi高科院为职业训练局（VTC）机构成员，并提供共20多个以「应用科学为本」的专业学士及硕士学位课程。课程涵盖香港以至亚太地区具增长潜力的行业，确保学生能融会贯通，学以致用。',
                         apt_map_t: '学生居社',
                         apt_map_sub: '探索我们遍布全港的学生居社，为您提供便捷可靠的理想居所',
                         apt_map_sub2: '城中居社毗连各大学府以及生活娱乐所需',
@@ -2807,6 +2826,12 @@
                         btn_eval: '免費評估我的錄取機率',
                         serv_content_t: '服務內容詳情', serv_1_t: '01 升學規劃與定位', serv_1_d: '個性化方案 · 精準定位', serv_2_t: '02 申請材料準備', serv_2_d: '文書精研 · 優勢提煉', serv_3_t: '03 院校申請及面試', serv_3_d: '系統填報 · 面試輔導',
                         uni_link_t: '院校聯繫', uni_sub: '官方認證指定的招生機構', uni_desc: '“滙生會”與“Jesselton University College 哲士頓大學學院”合作，正積極參與學生招募和發展專業課程。學院獲ASIC國際認證。',
+                        study_uni_kicker: 'UNIVERSITY PARTNERS',
+                        study_uni_title: '院校聯繫',
+                        study_uni_juc_title: 'Jesselton University College (JUC)',
+                        study_uni_juc_text: '匯生會 SDLV 與 Jesselton University College 哲士頓大學學院，簡稱 JUC 合作，作為 JUC 官方認證指定的招生機構，正積極參與學生招募和發展專業課程。JUC 是沙巴領先的私立高等教育機構，專注於靈活和跨學科的培訓和教育系統。\n\nJUC 被英國 OTHM Qualification 指定為經批准的學習中心。在全球擴張的這些年裡，JUC 成為了商學院和項目認證委員會（ACBSP）、美國高等教育聯盟（AHEA）和特許繼續教育協會（CACE）的機構成員。為促進教學與研究的卓越發展，JUC 與香港恒生大學 HSUHK 簽署學術合作協議。',
+                        study_uni_thei_title: '香港高等教育科技學院（THEi 高科院）',
+                        study_uni_thei_text: '匯生會 SDLV 作為香港高等教育科技學院（THEi 高科院）在中國內地及海外地區的授權合作單位，全面負責本院學位課程的諮詢、宣傳及學生轉介工作。\nTHEi高科院為職業訓練局（VTC）機構成員，並提供共20多個以「應用科學為本」的專業學士及碩士學位課程。課程涵蓋香港以至亞太地區具增長潛力的行業，確保學生能融會貫通，學以致用。',
                         apt_map_t: '學生居社',
                         apt_map_sub: '探索我們遍佈全港的學生居社，為您提供便捷可靠的理想居所',
                         apt_map_sub2: '城中居社毗連各大學府以及生活娛樂所需',
@@ -2963,6 +2988,12 @@
                         btn_eval: 'Free Evaluation',
                         serv_content_t: 'Service Details', serv_1_t: '01 Planning', serv_1_d: 'Personalized Strategy', serv_2_t: '02 Application', serv_2_d: 'Essay Polishing', serv_3_t: '03 Submission', serv_3_d: 'System Filing & Interview Prep',
                         uni_link_t: 'University Partner', uni_sub: 'Official Recruitment Partner', uni_desc: 'SDLV partners with Jesselton University College (ASIC Accredited) for recruitment and course development.',
+                        study_uni_kicker: 'UNIVERSITY PARTNERS',
+                        study_uni_title: 'University Partners',
+                        study_uni_juc_title: 'Jesselton University College (JUC)',
+                        study_uni_juc_text: 'SDLV partners with Jesselton University College (JUC) as an officially recognized recruitment partner, actively supporting student recruitment and program development. JUC is a leading private higher education institution in Sabah, focused on flexible and interdisciplinary education.\n\nJUC is an approved learning center designated by OTHM Qualification (UK). Over the years of global expansion, JUC became an institutional member of ACBSP, AHEA, and CACE. JUC also signed an academic collaboration agreement with The Hang Seng University of Hong Kong (HSUHK) to promote excellence in teaching and research.',
+                        study_uni_thei_title: 'Technological and Higher Education Institute of Hong Kong (THEi)',
+                        study_uni_thei_text: 'SDLV is an authorized partner of THEi in Mainland China and overseas, responsible for consultation, promotion, and student referrals for its degree programs.\nTHEi is a member institution of the Vocational Training Council (VTC) and offers 20+ practice-oriented bachelor’s and master’s degree programs across high-growth industries in Hong Kong and the Asia-Pacific region.',
                         apt_map_t: 'Student Residences',
                         apt_map_sub: 'Explore our student residences across Hong Kong for a convenient, reliable place to live.',
                         apt_map_sub2: 'Each residence is close to major universities and everyday essentials.',
