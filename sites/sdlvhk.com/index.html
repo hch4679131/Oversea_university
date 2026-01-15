@@ -730,22 +730,47 @@
 
         <!-- ================= PAGE 2: 关于我们 ================= -->
         <div x-show="page === 'about'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section id="intro" class="py-32 bg-paper text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-                    <div class="scrub-item anim-fade-up">
-                        <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
-                            <span x-text="t[lang].about_h1"></span><br>
-                            <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
-                        </h2>
-                        <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
-                        <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
+            <!-- About: Hero (对齐首页风格) -->
+            <section id="about-hero" class="relative min-h-[75vh] flex items-center overflow-hidden parallax-trigger">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://static.sdlvhk.com/图片素材/other/Image%203.0%20WH%20Entrance.jpg"
+                        class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="WH Entrance">
+                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/55 to-transparent"></div>
+                </div>
+
+                <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64">
+                    <div class="scrub-item anim-fade-up max-w-3xl">
+                        <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-6" x-text="t[lang].about_hero_title"></h1>
+                        <p class="text-xl text-gold-400/80 mb-4 tracking-widest" x-text="t[lang].about_hero_p1"></p>
+                        <p class="text-xl text-gold-400/80 tracking-widest" x-text="t[lang].about_hero_p2"></p>
                     </div>
-                    <div class="relative scrub-item anim-scale">
-                        <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                            class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team">
-                        <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
-                            <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
+                </div>
+            </section>
+
+            <section id="intro" class="py-28 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">About Us</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].home_about_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div class="scrub-item anim-fade-up">
+                            <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
+                                <span x-text="t[lang].about_h1"></span><br>
+                                <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
+                            </h2>
+                            <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
+                            <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
+                        </div>
+                        <div class="relative scrub-item anim-scale">
+                            <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team">
+                            <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
+                                <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -753,7 +778,11 @@
 
             <section id="history" class="py-32 bg-obsidian-950 relative">
                 <div class="max-w-4xl mx-auto px-6">
-                    <h2 class="text-3xl font-serif text-white text-center mb-20" x-text="t[lang].history_title"></h2>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Our Journey</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-white" x-text="t[lang].history_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
                     <div class="relative pl-8 md:pl-0">
                         <!-- 静态背景线 -->
                         <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2"></div>
@@ -2227,6 +2256,9 @@
                         biz_apt_t: '滙生会社', biz_apt_sub: '探索我们遍布全港的学生公寓会社', biz_apt_locs: '我们为您提供便捷可靠的理想居所',
                         biz_career_t: '职涯规划', biz_career_sub: '告诉我们您的理想规划', biz_career_tags: '我们为您铺就坚实的道路与机遇',
                         home_about_title: '关于我们',
+                        about_hero_title: '关于 SDLV 汇生会',
+                        about_hero_p1: '汇聚了香港本地、内地及海外的教育专才，学子的路我们都走过，真正懂得学生和家长',
+                        about_hero_p2: '作为学子成长路上最坚实的后盾，成就学子发挥潜能',
                         about_h1: '我们始终是学子与家庭', about_h1_sub: '“最坚实的后盾”',
                         about_p1: 'SDLV 是一个扎根香港逾 10 年、自 2016 开始为学子提供全球一站式专业升学与住宿支持服务的资深品牌。',
                         about_p2: 'SDLV 团队汇聚了香港本地、内地及海外教育背景经验的专才。学子的路我们都走过，真正懂得学生与家长在每一步的焦虑、期待和需要，并提供从学业到生活的全链条支持。',
@@ -2294,6 +2326,9 @@
                         biz_apt_t: '滙生会社', biz_apt_sub: '探索我們遍佈全港的學生公寓会社', biz_apt_locs: '我們為您提供便捷可靠的理想居所',
                         biz_career_t: '職涯規劃', biz_career_sub: '告訴我們您的理想規劃', biz_career_tags: '我們為您鋪就堅實的道路與機遇',
                         home_about_title: '關於我們',
+                        about_hero_title: '關於 SDLV 匯生會',
+                        about_hero_p1: '汇聚了香港本地、内地及海外的教育專才，學子的路我們都走過，真正懂得学生和家长',
+                        about_hero_p2: '作为学子成长路上最坚实的后盾，成就學子發揮潛能',
                         about_h1: '我們始終是學子與家庭', about_h1_sub: '“最堅實的後盾”',
                         about_p1: 'SDLV 是一個扎根香港逾 10 年、自 2016 開始為學子提供全球一站式專業升學與住宿支援服務的資深品牌。',
                         about_p2: 'SDLV 團隊匯聚了香港本地、內地及海外教育背景經驗的專才。學子的路我們都走過，真正懂得學生與家長在每一步的焦慮、期待和需要，並提供從學業到生活的全鏈條支持。',
@@ -2361,6 +2396,9 @@
                         biz_apt_t: 'Student Housing', biz_apt_sub: 'Your 2nd Home in HK', biz_apt_locs: 'Cheung Sha Wan · Yau Ma Tei · TST · SYP',
                         biz_career_t: 'Career Planning', biz_career_sub: 'School to Work Transition', biz_career_tags: 'Internship · Full-time · Coaching',
                         home_about_title: 'About Us',
+                        about_hero_title: 'About SDLV',
+                        about_hero_p1: 'A team of education professionals from Hong Kong, Mainland China, and overseas—who truly understand students and parents',
+                        about_hero_p2: 'A steadfast support on students\' growth journey, empowering them to unlock their potential',
                         about_h1: 'We Are Your Family\'s', about_h1_sub: '"Strongest Support"',
                         about_p1: 'SDLV is a one-stop student growth support brand based in Hong Kong and facing the world. Our core team consists of HK locals and global experts.',
                         about_p2: 'From academics to housing, career to life, we provide reliable, full-chain, and warm companionship, empowering every step of your journey.',
