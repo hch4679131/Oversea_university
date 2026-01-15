@@ -338,7 +338,7 @@
                             <span class="text-gold-400 text-sm tracking-[0.3em] uppercase">Since 2016</span>
                         </div>
                         <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-4">
-                            SDLV <span x-text="t[lang].brand_full"></span><br>
+                            <span x-text="t[lang].brand_full"></span><br>
                             <span class="text-3xl font-light text-gray-300" x-text="t[lang].hero_sub"></span>
                         </h1>
                         <p class="text-xl text-gold-400/80 mb-10 tracking-widest" x-text="t[lang].hero_slogan"></p>
@@ -405,10 +405,10 @@
             </section>
 
             <!-- Core Business Cards -->
-            <section id="core-business" class="py-40 bg-paper text-obsidian-950 relative overflow-hidden">
+            <section id="core-business" class="py-28 bg-paper text-obsidian-950 relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/10 to-transparent skew-x-12"></div>
                 <div class="max-w-7xl mx-auto px-6 relative z-10">
-                    <div class="text-center mb-24 scrub-item anim-fade-up">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
                         <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Our Services</span>
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].biz_title"></h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
@@ -418,7 +418,7 @@
                         <div class="scrub-item anim-fade-up">
                             <div @click="switchPage('study')" class="group relative h-[320px] bg-obsidian-950 border border-gold-400/20 overflow-hidden cursor-pointer shadow-2xl hover:border-gold-400/60 transition-all duration-500 rounded-none">
                                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-gold-400/10 via-transparent to-transparent"></div>
-                                <div class="absolute top-6 right-6 text-6xl font-serif text-white/5 select-none">01</div>
+                                <!-- <div class="absolute top-6 right-6 text-6xl font-serif text-white/5 select-none">01</div> -->
                                 <div class="relative h-full p-7 flex flex-col">
                                     <div class="flex items-center gap-4 mb-6">
                                         <i data-lucide="graduation-cap" class="w-6 h-6 text-gold-400"></i>
@@ -427,6 +427,7 @@
                                     <h3 class="text-3xl font-serif text-white mb-3" x-text="t[lang].biz_study_t"></h3>
                                     <p class="text-gray-300 text-sm leading-relaxed" x-text="t[lang].biz_study_sub"></p>
                                     <div class="mt-auto pt-6 border-t border-white/10">
+                                        <div class="text-xs text-gray-400 uppercase tracking-widest" x-text="t[lang].biz_study_sub2"></div>
                                     </div>
                                 </div>
                             </div>
@@ -435,7 +436,7 @@
                         <div class="scrub-item anim-fade-up">
                             <div @click="switchPage('apartments')" class="group relative h-[320px] bg-white border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
                                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-black/5 via-transparent to-transparent"></div>
-                                <div class="absolute top-6 right-6 text-6xl font-serif text-black/5 select-none">02</div>
+                                <!-- <div class="absolute top-6 right-6 text-6xl font-serif text-black/5 select-none">02</div> -->
                                 <div class="relative h-full p-7 flex flex-col">
                                     <div class="flex items-center gap-4 mb-6">
                                         <i data-lucide="home" class="w-6 h-6 text-obsidian-950"></i>
@@ -453,7 +454,7 @@
                         <div class="scrub-item anim-fade-up">
                             <div @click="switchPage('career')" class="group relative h-[320px] bg-gold-400 border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
                                 <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-black/10 via-transparent to-transparent"></div>
-                                <div class="absolute top-6 right-6 text-6xl font-serif text-black/10 select-none">03</div>
+                                <!-- <div class="absolute top-6 right-6 text-6xl font-serif text-black/10 select-none">03</div> -->
                                 <div class="relative h-full p-7 flex flex-col">
                                     <div class="flex items-center gap-4 mb-6">
                                         <i data-lucide="trending-up" class="w-6 h-6 text-black"></i>
@@ -472,13 +473,16 @@
             </section>
 
             <!-- Home: About Us (复制自「关于我们」) -->
-            <section id="home-intro" class="py-32 bg-paper text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <section id="home-intro" class="py-28 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">About Us</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].home_about_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
                     <div class="scrub-item anim-fade-up">
-                        <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
-                            <span x-text="t[lang].about_h1"></span><br>
-                            <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
-                        </h2>
                         <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
                         <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
                     </div>
@@ -490,13 +494,18 @@
                             <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
                         </div>
                     </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Home: 企业历程 (复制自「关于我们-企业历程」) -->
-            <section id="home-history" class="py-32 bg-obsidian-950 relative">
+            <section id="home-history" class="py-28 bg-obsidian-950 relative">
                 <div class="max-w-4xl mx-auto px-6">
-                    <h2 class="text-3xl font-serif text-white text-center mb-20" x-text="t[lang].history_title"></h2>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Our History</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-white" x-text="t[lang].home_history_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
                     <div class="relative pl-8 md:pl-0">
                         <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2"></div>
                         <div class="absolute left-0 md:left-1/2 top-0 w-[2px] bg-gold-400 -translate-x-1/2 z-10 scrub-item anim-grow-line" style="height: 0%; transform-origin: top;"></div>
@@ -633,7 +642,7 @@
                         <p class="mt-6 text-black/60 text-sm md:text-base" x-text="t[lang].partner_sub"></p>
                     </div>
                     
-                    <div class="relative w-full h-80 border border-black/10 bg-black/5 mb-10 rounded-sm overflow-hidden">
+                    <div class="relative w-full aspect-[16/9] border border-black/10 bg-black/5 mb-10 rounded-sm overflow-hidden">
                         <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-50"></div>
                         <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div>
                         <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
@@ -661,35 +670,35 @@
 
                     <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 text-left mb-10">
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/香港.png" alt="Hong Kong" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/香港.png" alt="Hong Kong" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_hk_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
                             </div>
                         </div>
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/深圳.jpg" alt="Shenzhen" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/深圳.jpg" alt="Shenzhen" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_sz_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
                             </div>
                         </div>
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/佛山.jpg" alt="Foshan" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/佛山.jpg" alt="Foshan" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_fs_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
                             </div>
                         </div>
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/武汉.jpg" alt="Wuhan" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/武汉.jpg" alt="Wuhan" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_wh_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
                             </div>
                         </div>
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/贵阳.jpg" alt="Guiyang" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/贵阳.jpg" alt="Guiyang" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_gy_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
@@ -884,7 +893,7 @@
                         <p class="mt-6 text-black/60 text-sm md:text-base" x-text="t[lang].partner_sub"></p>
                     </div>
                     
-                    <div class="relative w-full h-80 border border-black/10 bg-black/5 mb-10 rounded-sm overflow-hidden">
+                    <div class="relative w-full aspect-[16/9] border border-black/10 bg-black/5 mb-10 rounded-sm overflow-hidden">
                         <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-50"></div>
                         <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div>
                         <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
@@ -899,35 +908,35 @@
 
                     <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 text-left mb-10">
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/香港.png" alt="Hong Kong" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/香港.png" alt="Hong Kong" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_hk_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
                             </div>
                         </div>
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/深圳.jpg" alt="Shenzhen" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/深圳.jpg" alt="Shenzhen" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_sz_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
                             </div>
                         </div>
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/佛山.jpg" alt="Foshan" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/佛山.jpg" alt="Foshan" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_fs_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
                             </div>
                         </div>
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/武汉.jpg" alt="Wuhan" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/武汉.jpg" alt="Wuhan" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_wh_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
                             </div>
                         </div>
                         <div class="bg-white overflow-hidden shadow-sm hover:shadow-lg transition">
-                            <img src="https://static.sdlvhk.com/图片素材/公司照片/贵阳.jpg" alt="Guiyang" class="w-full h-40 object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <img src="https://static.sdlvhk.com/图片素材/公司照片/贵阳.jpg" alt="Guiyang" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
                             <div class="p-4">
                                 <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_gy_title"></div>
                                 <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
@@ -2208,17 +2217,22 @@
                         brand_sub: '汇生会', brand_full: '汇生会',
                         nav_home: '首页', nav_achievements: '成就与反馈', nav_about: '关于我们', nav_study: '留学服务', nav_apt: '学生公寓', nav_career: '职涯规划', nav_contact: '商业合作',
                         sub_hero: 'Hero概览', sub_core: '核心业务', sub_story: '品牌故事', sub_history: '企业历程', sub_partners: '城市合伙人', sub_data: '数据亮点', sub_content: '服务内容', sub_map: '交互地图', sub_showcase: '公寓展示',
-                        hero_sub: '扎根香港，更懂香港', hero_slogan: '放眼全球精英之路',
+                        hero_sub: '札根香港，连系全球',
+                        hero_slogan: '作为学子成长路上最坚实的后盾，以经验及专业护航，成就学子发挥潜能',
                         stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累计服务用户', stat_offer: 'Top 100名校录取', stat_satisfaction: '职涯规划满意率', stat_apt: '运营管理香港学生公寓(间)', stat_feedback: '用户好评反馈',
                         biz_title: '核心业务', 
-                        biz_study_t: '一站式留学申请', biz_study_sub: '探索我们的定制最穩妥的留学方案，精准匹配您的学业与职业目标',
+                        biz_study_t: '留学申请',
+                        biz_study_sub: '我们为您精确匹配学业与发展目标',
+                        biz_study_sub2: '探索我们的定制留学方案',
                         biz_apt_t: '滙生会社', biz_apt_sub: '探索我们遍布全港的学生公寓会社', biz_apt_locs: '我们为您提供便捷可靠的理想居所',
                         biz_career_t: '职涯规划', biz_career_sub: '告诉我们您的理想规划', biz_career_tags: '我们为您铺就坚实的道路与机遇。',
+                        home_about_title: '关于我们',
                         about_h1: '我们始终是学子与家庭', about_h1_sub: '“最坚实的后盾”',
                         about_p1: '我们是一家立足香港、面向全球的一站式学生成长支持品牌。核心团队由深谙本地教育的港籍成员与熟悉内地及海外体系的成员组成。',
                         about_p2: '从学业到住宿，从职业到生活，我们提供可信赖、全链条、有温度的陪伴，让每一段成长旅程都走得更有底气、更见光芒。',
                         about_badge: '10+ 年经验',
                         history_title: '企业历程',
+                        home_history_title: '企业历程',
                         hist_2016_t: '初心启程 | 香港奠基', hist_2016_d: '源于创始人在澳洲亲身经历留学困境，决心创建一家“真正懂学生”的服务机构。在香港成立首个办事处，从英国、澳洲升学咨询起步。',
                         hist_2017_t: '团队扩张 业务幅射更多国家', hist_2017_d: '吸纳港澳及海外留学背景精英，拓展港澳升学服务，正式确立 “全流程陪伴” 服务模式。',
                         hist_2019_t: '安居计划 | 突破边界', hist_2019_d: '回应留学生“找房难”痛点，推出“汇生会社”学生公寓，打造 “安全+社群” 居住体验，完成从学业顾问到生活伙伴的角色进化。',
@@ -2234,12 +2248,12 @@
                         city_hk: '香港',
                         office_hk_line: '香港总部 – 香港荃湾杨屋道如心广场',
                         office_sz_line: '深圳分部 - 深圳宝安区西乡街道前海科创中心',
-                        office_fs_line: '佛山分公司 - 佛山桂城富力国际金融中心',
+                        office_fs_line: '佛山分部 - 佛山桂城富力国际金融中心',
                         office_wh_line: '武汉分部 - 武汉武昌区徐家棚街道前程中心',
                         office_gy_line: '贵阳分部 - 贵阳市南明区花果园中央商务区',
                         office_hk_title: '香港总部', office_hk_addr: '香港荃湾杨屋道如心广场',
                         office_sz_title: '深圳分部', office_sz_addr: '深圳宝安区西乡街道前海科创中心',
-                        office_fs_title: '佛山分公司', office_fs_addr: '佛山桂城富力国际金融中心',
+                        office_fs_title: '佛山分部', office_fs_addr: '佛山桂城富力国际金融中心',
                         office_wh_title: '武汉分部', office_wh_addr: '武汉武昌区徐家棚街道前程中心',
                         office_gy_title: '贵阳分部', office_gy_addr: '贵阳市南明区花果园中央商务区',
                         pt_val1_t: '完整赋能', pt_val1_d: '成熟体系、专业培训', pt_val2_t: '本地深耕', pt_val2_d: '发挥你的在地优势', pt_val3_t: '共享成长', pt_val3_d: '共赢市场未来',
@@ -2270,17 +2284,22 @@
                         brand_sub: '滙生會', brand_full: '滙生會',
                         nav_home: '首頁', nav_achievements: '成就與反饋', nav_about: '關於我們', nav_study: '留學服務', nav_apt: '學生公寓', nav_career: '職涯規劃', nav_contact: '商業合作',
                         sub_hero: 'Hero概覽', sub_core: '核心業務', sub_story: '品牌故事', sub_history: '企業歷程', sub_partners: '城市合夥人', sub_data: '數據亮點', sub_content: '服務內容', sub_map: '交互地圖', sub_showcase: '公寓展示',
-                        hero_sub: '紮根香港，更懂香港', hero_slogan: '放眼全球精英之路',
+                        hero_sub: '紮根香港，連繫全球',
+                        hero_slogan: '作為學子成長路上最堅實的後盾，以經驗及專業護航，成就學子發揮潛能',
                         stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累計服務用戶', stat_offer: 'Top 100名校錄取', stat_satisfaction: '職涯規劃滿意率', stat_apt: '運營管理香港學生公寓(間)', stat_feedback: '用戶好評反饋',
                         biz_title: '核心業務',
-                        biz_study_t: '一站式留學申請', biz_study_sub: '探索我們的定制最穩妥的留學方案，精准匹配您的學業與職業目標',
+                        biz_study_t: '留學申請',
+                        biz_study_sub: '我們為您精確匹配學業與發展目標',
+                        biz_study_sub2: '探索我們的定制留學方案',
                         biz_apt_t: '滙生会社', biz_apt_sub: '探索我們遍佈全港的學生公寓会社', biz_apt_locs: '我們為您提供便捷可靠的理想居所',
                         biz_career_t: '職涯規劃', biz_career_sub: '告訴我們您的理想規劃', biz_career_tags: '我們為您鋪就堅實的道路與機遇。',
+                        home_about_title: '關於我們',
                         about_h1: '我們始終是學子與家庭', about_h1_sub: '“最堅實的後盾”',
                         about_p1: '我們是一家立足香港、面向全球的一站式學生成長支持品牌。核心團隊由深諳本地教育的港籍成員與熟悉內地及海外體系的成員組成。',
                         about_p2: '從學業到住宿，從職業到生活，我們提供可信賴、全鏈條、有溫度的陪伴，讓每一段成長旅程都走得更有底氣、更見光芒。',
                         about_badge: '10+ 年經驗',
                         history_title: '企業歷程',
+                        home_history_title: '企業歷程',
                         hist_2016_t: '初心啟程 | 香港奠基', hist_2016_d: '源於創始人在澳洲親身經歷留學困境，決心創建一家「真正懂學生」的服務機構。在香港成立首個辦事處，從英國、澳洲升學諮詢起步。',
                         hist_2017_t: '團隊擴張 業務輻射更多國家', hist_2017_d: '吸納港澳及海外留學背景精英，拓展港澳升學服務，正式確立「全流程陪伴」服務模式。',
                         hist_2019_t: '安居計劃 | 突破邊界', hist_2019_d: '回應留學生「找房難」痛點，推出「滙生会社」學生公寓，打造「安全+社群」居住體驗，完成從學業顧問到生活夥伴的角色進化。',
@@ -2296,12 +2315,12 @@
                         city_hk: '香港',
                         office_hk_line: '香港總部 – 香港荃灣楊屋道如心廣場',
                         office_sz_line: '深圳分部 - 深圳寶安區西鄉街道前海科創中心',
-                        office_fs_line: '佛山分公司 - 佛山桂城富力國際金融中心',
+                        office_fs_line: '佛山分部 - 佛山桂城富力國際金融中心',
                         office_wh_line: '武漢分部 - 武漢武昌區徐家棚街街道前程中心',
                         office_gy_line: '貴陽分部 - 貴陽市南明區花果園中央商務區',
                         office_hk_title: '香港總部', office_hk_addr: '香港荃灣楊屋道如心廣場',
                         office_sz_title: '深圳分部', office_sz_addr: '深圳寶安區西鄉街道前海科創中心',
-                        office_fs_title: '佛山分公司', office_fs_addr: '佛山桂城富力國際金融中心',
+                        office_fs_title: '佛山分部', office_fs_addr: '佛山桂城富力國際金融中心',
                         office_wh_title: '武漢分部', office_wh_addr: '武漢武昌區徐家棚街街道前程中心',
                         office_gy_title: '貴陽分部', office_gy_addr: '貴陽市南明區花果園中央商務區',
                         pt_val1_t: '完整賦能', pt_val1_d: '成熟體系、專業培訓', pt_val2_t: '本地深耕', pt_val2_d: '發揮你的在地優勢', pt_val3_t: '共享成長', pt_val3_d: '共贏市場未來',
@@ -2329,20 +2348,25 @@
                         footer_desc: '全球教育與職業精英服務。\n始於2016。', footer_meta: '業務範圍：留學規劃 · 學生公寓 · 職涯規劃', footer_contact: '聯繫我們', addr_hk: '香港總部：中環', addr_sz: '深圳辦事處：西鄉'
                     },
                     en: {
-                        brand_sub: 'SDLV Group', brand_full: 'Group',
+                        brand_sub: 'SDLV Group', brand_full: 'SDLV Group',
                         nav_home: 'Home', nav_achievements: 'Achievements', nav_about: 'About Us', nav_study: 'Education', nav_apt: 'Housing', nav_career: 'Career', nav_contact: 'Partnership',
                         sub_hero: 'Overview', sub_core: 'Core Business', sub_story: 'Our Story', sub_history: 'History', sub_partners: 'Partners', sub_data: 'Highlights', sub_content: 'Services', sub_map: 'Map', sub_showcase: 'Apartments',
-                        hero_sub: 'Rooted in Hong Kong, Experts in HK', hero_slogan: 'Global Elite Pathway',
+                        hero_sub: 'Rooted in Hong Kong, Connected Globally',
+                        hero_slogan: 'A steadfast support on students\' growth journey—guided by experience and expertise to unlock their potential',
                         stat_years_num: '10 Years', stat_years_txt: 'Since 2016', stat_users: 'Users Served', stat_offer: 'Top 100 Offers', stat_satisfaction: 'Satisfaction Rate', stat_apt: 'Rooms Managed', stat_feedback: 'Positive Reviews',
                         biz_title: 'Our Core Business',
-                        biz_study_t: 'Global Education', biz_study_sub: 'Planning & Support',
+                        biz_study_t: 'Study Abroad Applications',
+                        biz_study_sub: 'We precisely match your academic and development goals',
+                        biz_study_sub2: 'Explore our tailored study abroad plans',
                         biz_apt_t: 'Student Housing', biz_apt_sub: 'Your 2nd Home in HK', biz_apt_locs: 'Cheung Sha Wan · Yau Ma Tei · TST · SYP',
                         biz_career_t: 'Career Planning', biz_career_sub: 'School to Work Transition', biz_career_tags: 'Internship · Full-time · Coaching',
+                        home_about_title: 'About Us',
                         about_h1: 'We Are Your Family\'s', about_h1_sub: '"Strongest Support"',
                         about_p1: 'SDLV is a one-stop student growth support brand based in Hong Kong and facing the world. Our core team consists of HK locals and global experts.',
                         about_p2: 'From academics to housing, career to life, we provide reliable, full-chain, and warm companionship, empowering every step of your journey.',
                         about_badge: '10+ Years Exp.',
                         history_title: 'Our History',
+                        home_history_title: 'Our History',
                         hist_2016_t: 'First Step | Founded in Hong Kong', hist_2016_d: 'Inspired by the founder\'s own study-abroad challenges in Australia, we set out to build a service that truly understands students. We opened our first office in Hong Kong, starting with UK and Australia admissions consulting.',
                         hist_2017_t: 'Team Growth | Expanded Destinations', hist_2017_d: 'We brought together experts with Hong Kong/Macau and overseas study backgrounds, expanded HK/Macau admissions services, and established our full-cycle companionship model.',
                         hist_2019_t: 'Housing Plan | Beyond Academics', hist_2019_d: 'To solve the “hard-to-find housing” pain point, we launched our student housing brand and built a safe, community-driven living experience—evolving from academic advisors to life partners.',
@@ -2358,12 +2382,12 @@
                         city_hk: 'HK',
                         office_hk_line: 'Hong Kong HQ – Nina Tower, Yeung Uk Road, Tsuen Wan',
                         office_sz_line: 'Shenzhen Branch – Qianhai Sci-Tech Innovation Center, Xixiang, Bao’an District',
-                        office_fs_line: 'Foshan Office – Fuli International Financial Center, Guicheng',
+                        office_fs_line: 'Foshan Branch – Fuli International Financial Center, Guicheng',
                         office_wh_line: 'Wuhan Branch – Qiancheng Center, Xujiapeng, Wuchang District',
                         office_gy_line: 'Guiyang Branch – Huaguoyuan CBD, Nanming District',
                         office_hk_title: 'Hong Kong HQ', office_hk_addr: 'Nina Tower, Yeung Uk Road, Tsuen Wan',
                         office_sz_title: 'Shenzhen Branch', office_sz_addr: 'Qianhai Sci-Tech Innovation Center, Xixiang, Bao’an',
-                        office_fs_title: 'Foshan Office', office_fs_addr: 'Fuli International Financial Center, Guicheng',
+                        office_fs_title: 'Foshan Branch', office_fs_addr: 'Fuli International Financial Center, Guicheng',
                         office_wh_title: 'Wuhan Branch', office_wh_addr: 'Qiancheng Center, Xujiapeng, Wuchang',
                         office_gy_title: 'Guiyang Branch', office_gy_addr: 'Huaguoyuan CBD, Nanming District',
                         pt_val1_t: 'Empowerment', pt_val1_d: 'Training & Operations', pt_val2_t: 'Localization', pt_val2_d: 'Leverage local advantages', pt_val3_t: 'Growth', pt_val3_d: 'Win the future together',
