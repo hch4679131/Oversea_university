@@ -1131,6 +1131,29 @@
                 </div>
             </section>
 
+            <!-- Study: Flow & Support (像公寓页评价区的卡片网格) -->
+            <section id="study-flow" class="py-24 bg-paper border-b border-black/10 text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center scrub-item anim-fade-up">
+                        <h3 class="text-3xl md:text-4xl font-serif text-obsidian-950" x-text="t[lang].study_flow_title"></h3>
+                        <div class="w-16 h-[1px] bg-gold-400 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="mt-14 grid grid-cols-2 lg:grid-cols-3 gap-6">
+                        <template x-for="(item, idx) in t[lang].study_flow_items" :key="idx">
+                            <div class="bg-white border border-black/10 shadow-sm p-7 scrub-item anim-fade-up">
+                                <div class="flex items-center gap-4">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-obsidian-950"></i>
+                                    <div class="h-[1px] flex-1 bg-black/15"></div>
+                                </div>
+                                <div class="mt-4 text-lg font-serif font-bold text-obsidian-950" x-text="item.title"></div>
+                                <div class="mt-3 text-sm text-black/70 leading-relaxed whitespace-pre-line" x-text="item.text"></div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
             <section id="data" class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 text-center scrub-item anim-fade-up">
                     <h2 class="text-5xl font-serif text-obsidian-950 mb-4" x-text="t[lang].sub_data"></h2>
@@ -2515,6 +2538,29 @@
                         study_scope_1_text: '展现留学服务范围：副学士 - 学士 - 硕士 - 博士',
                         study_scope_2_title: 'Global Coverage',
                         study_scope_2_text: '-',
+                        study_flow_title: '留学服务流程及支援项目',
+                        study_flow_items: [
+                            {
+                                title: '1. 升学规划与定位',
+                                text: '结合学生背景、兴趣与职业方向，制定个性化升学路径\n提供院校及专业选择建议，合理规划申请时间轴'
+                            },
+                            {
+                                title: '2. 申请材料准备',
+                                text: '准备个人陈述、推荐信、简历等文书材料，全方位展现学生个人优势。'
+                            },
+                            {
+                                title: '3. 院校申请及面试辅导',
+                                text: '负责申请系统信息填报与材料递交。\n提供笔试面试专业培训。'
+                            },
+                            {
+                                title: '4. 录取与后续服务',
+                                text: '帮助学生处理录取通知及指导缴费。\n协助办理入学手续及申请学生签证\n提供行前指导、住宿对接等安顿服务'
+                            },
+                            {
+                                title: '5. 长期学业与生活支持',
+                                text: '入学后持续提供选课建议、学业辅导、实习与就业资源对接'
+                            }
+                        ],
                         st_stat1: 'Offer 总数', st_stat2: '文书原创度', st_stat3: '学员满意度', st_stat4: 'QS前100录取率',
                         btn_eval: '免费评估我的录取机率',
                         serv_content_t: '服务内容详情', serv_1_t: '01 升学规划与定位', serv_1_d: '个性化方案 · 精准定位', serv_2_t: '02 申请材料准备', serv_2_d: '文书精研 · 优势提炼', serv_3_t: '03 院校申请及面试', serv_3_d: '系统填报 · 面试辅导',
@@ -2659,6 +2705,29 @@
                         study_scope_1_text: '展現留學服務範圍：副學士 - 學士 - 碩士 - 博士',
                         study_scope_2_title: 'Global Coverage',
                         study_scope_2_text: '-',
+                        study_flow_title: '留學服務流程及支援項目',
+                        study_flow_items: [
+                            {
+                                title: '1. 升學規劃與定位',
+                                text: '結合學生背景、興趣與職業方向，制定個性化升學路徑\n提供院校及專業選擇建議，合理規劃申請時間軸'
+                            },
+                            {
+                                title: '2. 申請材料準備',
+                                text: '準備個人陳述、推薦信、履歷等文書材料，全方位展現學生個人優勢。'
+                            },
+                            {
+                                title: '3. 院校申請及面試輔導',
+                                text: '負責申請系統信息填報與材料遞交。\n提供筆試面試專業培訓。'
+                            },
+                            {
+                                title: '4. 錄取與後續服務',
+                                text: '幫助學生處理錄取通知及指導繳費。\n協助辦理入學手續及申請學生簽證\n提供行前指導、住宿對接等安頓服務'
+                            },
+                            {
+                                title: '5. 長期學業與生活支持',
+                                text: '入學後持續提供選課建議、學業輔導、實習與就業資源對接'
+                            }
+                        ],
                         st_stat1: 'Offer 總數', st_stat2: '文書原創度', st_stat3: '學員滿意度', st_stat4: 'QS前100錄取率',
                         btn_eval: '免費評估我的錄取機率',
                         serv_content_t: '服務內容詳情', serv_1_t: '01 升學規劃與定位', serv_1_d: '個性化方案 · 精準定位', serv_2_t: '02 申請材料準備', serv_2_d: '文書精研 · 優勢提煉', serv_3_t: '03 院校申請及面試', serv_3_d: '系統填報 · 面試輔導',
@@ -2767,6 +2836,29 @@
                         study_scope_1_text: 'Associate - Bachelor - Master - PhD',
                         study_scope_2_title: 'Global Coverage',
                         study_scope_2_text: '-',
+                        study_flow_title: 'Study Process & Support',
+                        study_flow_items: [
+                            {
+                                title: '1. Planning & Positioning',
+                                text: 'Build a personalized study path based on background, interests, and career goals.\nRecommend programs and timelines.'
+                            },
+                            {
+                                title: '2. Application Materials',
+                                text: 'Prepare personal statement, recommendation letters, CV, and related documents to showcase strengths.'
+                            },
+                            {
+                                title: '3. Application & Interview Prep',
+                                text: 'Complete online applications and submissions.\nProvide written test & interview coaching.'
+                            },
+                            {
+                                title: '4. Offer & Next Steps',
+                                text: 'Guide offer acceptance and payment.\nAssist with enrollment and student visa.\nProvide pre-departure guidance and housing support.'
+                            },
+                            {
+                                title: '5. Ongoing Academic & Life Support',
+                                text: 'Course selection advice, academic support, internships, and career resource connections after enrollment.'
+                            }
+                        ],
                         st_stat1: 'Total Offers', st_stat2: 'Original Essays', st_stat3: 'Satisfaction', st_stat4: 'QS Top 100 Rate',
                         btn_eval: 'Free Evaluation',
                         serv_content_t: 'Service Details', serv_1_t: '01 Planning', serv_1_d: 'Personalized Strategy', serv_2_t: '02 Application', serv_2_d: 'Essay Polishing', serv_3_t: '03 Submission', serv_3_d: 'System Filing & Interview Prep',
