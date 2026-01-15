@@ -1131,19 +1131,44 @@
                 </div>
             </section>
 
-            <!-- Study: Flow & Support (像公寓页评价区的卡片网格) -->
-            <section id="study-flow" class="py-24 bg-paper border-b border-black/10 text-obsidian-950">
+            <!-- Study: Flow & Support (统一标题风格；无外框/无底色) -->
+            <section id="study-flow" class="py-28 bg-paper text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center scrub-item anim-fade-up">
-                        <h3 class="text-3xl md:text-4xl font-serif text-obsidian-950" x-text="t[lang].study_flow_title"></h3>
-                        <div class="w-16 h-[1px] bg-gold-400 mx-auto mt-6"></div>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].study_flow_kicker"></span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].study_flow_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                     </div>
 
-                    <div class="mt-14 grid grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-10">
                         <template x-for="(item, idx) in t[lang].study_flow_items" :key="idx">
-                            <div class="bg-white border border-black/10 shadow-sm p-7 scrub-item anim-fade-up">
+                            <div class="p-2 scrub-item anim-fade-up">
                                 <div class="flex items-center gap-4">
                                     <i data-lucide="check-circle" class="w-5 h-5 text-obsidian-950"></i>
+                                    <div class="h-[1px] flex-1 bg-black/15"></div>
+                                </div>
+                                <div class="mt-4 text-lg font-serif font-bold text-obsidian-950" x-text="item.title"></div>
+                                <div class="mt-3 text-sm text-black/70 leading-relaxed whitespace-pre-line" x-text="item.text"></div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Study: Advantages (同上：统一标题风格；无外框/无底色) -->
+            <section id="study-advantages" class="py-28 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].study_adv_kicker"></span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].study_adv_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-10">
+                        <template x-for="(item, idx) in t[lang].study_adv_items" :key="idx">
+                            <div class="p-2 scrub-item anim-fade-up">
+                                <div class="flex items-center gap-4">
+                                    <i data-lucide="sparkles" class="w-5 h-5 text-obsidian-950"></i>
                                     <div class="h-[1px] flex-1 bg-black/15"></div>
                                 </div>
                                 <div class="mt-4 text-lg font-serif font-bold text-obsidian-950" x-text="item.title"></div>
@@ -2539,6 +2564,7 @@
                         study_scope_2_title: 'Global Coverage',
                         study_scope_2_text: '-',
                         study_flow_title: '留学服务流程及支援项目',
+                        study_flow_kicker: 'PROCESS',
                         study_flow_items: [
                             {
                                 title: '1. 升学规划与定位',
@@ -2559,6 +2585,30 @@
                             {
                                 title: '5. 长期学业与生活支持',
                                 text: '入学后持续提供选课建议、学业辅导、实习与就业资源对接'
+                            }
+                        ],
+                        study_adv_kicker: 'ADVANTAGES',
+                        study_adv_title: '优势｜为什么选择我们？',
+                        study_adv_items: [
+                            {
+                                title: '1. 真正的“一站式”陪伴',
+                                text: '我们不止步于申请成功，更陪伴学生走过从规划、申请、抵达到学业与生活的全周期，做你留学路上最可靠的后盾。'
+                            },
+                            {
+                                title: '2. 深谙多国教育体系',
+                                text: '团队具有港澳、新加坡、马来西亚、英澳等多国教育背景与申请经验，能精准把握不同院校的录取偏好与流程细节。'
+                            },
+                            {
+                                title: '3. 数据驱动的科学规划',
+                                text: '依托历年申请数据库与院校动态，我们提供基于客观数据的选校定位与策略制定，拒绝盲目申请。'
+                            },
+                            {
+                                title: '4. 本土化与国际化结合',
+                                text: '扎根香港，连接内地与海外，我们既懂本地教育生态，也具备国际视野，能为学生提供真正落地的建议与资源。'
+                            },
+                            {
+                                title: '5. 温暖而专业的团队支持',
+                                text: '我们的顾问不仅是专业的教育规划者，更是有留学经历、懂学生心理的同行者。在这里，你得到的不仅是服务，更是理解与共鸣。'
                             }
                         ],
                         st_stat1: 'Offer 总数', st_stat2: '文书原创度', st_stat3: '学员满意度', st_stat4: 'QS前100录取率',
@@ -2706,6 +2756,7 @@
                         study_scope_2_title: 'Global Coverage',
                         study_scope_2_text: '-',
                         study_flow_title: '留學服務流程及支援項目',
+                        study_flow_kicker: 'PROCESS',
                         study_flow_items: [
                             {
                                 title: '1. 升學規劃與定位',
@@ -2726,6 +2777,30 @@
                             {
                                 title: '5. 長期學業與生活支持',
                                 text: '入學後持續提供選課建議、學業輔導、實習與就業資源對接'
+                            }
+                        ],
+                        study_adv_kicker: 'ADVANTAGES',
+                        study_adv_title: '優勢｜為什麼選擇我們？',
+                        study_adv_items: [
+                            {
+                                title: '1. 真正的「一站式」陪伴',
+                                text: '我們不止步於申請成功，更陪伴學生走過從規劃、申請、抵達到學業與生活的全週期，做你留學路上最可靠的後盾。'
+                            },
+                            {
+                                title: '2. 深諳多國教育體系',
+                                text: '團隊具有港澳、新加坡、馬來西亞、英澳等多國教育背景與申請經驗，能精準把握不同院校的錄取偏好與流程細節。'
+                            },
+                            {
+                                title: '3. 數據驅動的科學規劃',
+                                text: '依託歷年申請資料庫與院校動態，我們提供基於客觀數據的選校定位與策略制定，拒絕盲目申請。'
+                            },
+                            {
+                                title: '4. 本土化與國際化結合',
+                                text: '扎根香港，連接內地與海外，我們既懂本地教育生態，也具備國際視野，能為學生提供真正落地的建議與資源。'
+                            },
+                            {
+                                title: '5. 溫暖而專業的團隊支持',
+                                text: '我們的顧問不僅是專業的教育規劃者，更是有留學經歷、懂學生心理的同行者。在這裡，你得到的不僅是服務，更是理解與共鳴。'
                             }
                         ],
                         st_stat1: 'Offer 總數', st_stat2: '文書原創度', st_stat3: '學員滿意度', st_stat4: 'QS前100錄取率',
@@ -2837,6 +2912,7 @@
                         study_scope_2_title: 'Global Coverage',
                         study_scope_2_text: '-',
                         study_flow_title: 'Study Process & Support',
+                        study_flow_kicker: 'PROCESS',
                         study_flow_items: [
                             {
                                 title: '1. Planning & Positioning',
@@ -2857,6 +2933,30 @@
                             {
                                 title: '5. Ongoing Academic & Life Support',
                                 text: 'Course selection advice, academic support, internships, and career resource connections after enrollment.'
+                            }
+                        ],
+                        study_adv_kicker: 'ADVANTAGES',
+                        study_adv_title: 'Why Choose Us?',
+                        study_adv_items: [
+                            {
+                                title: '1. Truly One-Stop Support',
+                                text: 'We go beyond admissions—supporting students through planning, applications, arrival, and ongoing academic and life needs.'
+                            },
+                            {
+                                title: '2. Multi-Country Expertise',
+                                text: 'Our team has experience across Hong Kong/Macau, Singapore, Malaysia, the UK, and Australia—aligned with different admissions preferences and processes.'
+                            },
+                            {
+                                title: '3. Data-Driven Planning',
+                                text: 'Using historical application data and real-time school updates, we provide objective program targeting and strategy—no guesswork.'
+                            },
+                            {
+                                title: '4. Local + Global Perspective',
+                                text: 'Rooted in Hong Kong and connected globally, we understand local ecosystems while bringing international perspective and resources.'
+                            },
+                            {
+                                title: '5. Warm, Professional Team Support',
+                                text: 'Our consultants are experienced planners and empathetic companions who understand students’ challenges and mindset.'
                             }
                         ],
                         st_stat1: 'Total Offers', st_stat2: 'Original Essays', st_stat3: 'Satisfaction', st_stat4: 'QS Top 100 Rate',
