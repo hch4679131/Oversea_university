@@ -13,6 +13,14 @@ detect_nginx_bin() {
     return 0
   fi
 
+  # Prefer the binary of the currently running nginx master process (if any).
+  local running_bin
+  running_bin="$(ps -ef 2>/dev/null | sed -n 's/.*nginx: master process \([^ ]*nginx\).*/\1/p' | head -n 1)"
+  if [[ -n "$running_bin" && -x "$running_bin" ]]; then
+    echo "$running_bin"
+    return 0
+  fi
+
   if command -v nginx >/dev/null 2>&1; then
     command -v nginx
     return 0
