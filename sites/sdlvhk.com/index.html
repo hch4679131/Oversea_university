@@ -274,9 +274,10 @@
                     </div>
                 </div>
                 -->
-                <div class="nav-item group">
+                <!-- 成就与反馈 -->
+                <!-- <div class="nav-item group">
                     <span @click="switchPage('home', 'achievements')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
-                </div>
+                </div> -->
                 <div class="nav-item group">
                     <span @click="switchPage('about')" :class="page === 'about' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
@@ -304,7 +305,7 @@
                     <span @click="switchPage('career')" :class="page === 'career' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
                 </div>
                 <div class="nav-item group">
-                    <a @click="switchPage('contact')" class="px-5 py-2 border border-gold-400/50 text-gold-400 hover:bg-gold-400 hover:text-black transition duration-300" x-text="t[lang].nav_contact"></a>
+                    <a @click="switchPage('contact')" class="px-5 py-2 bg-gold-400 text-black font-bold hover:bg-gold-300 transition duration-300" x-text="t[lang].nav_contact"></a>
                 </div>
             </div>
 
@@ -340,7 +341,7 @@
                         </div>
                         <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-4">
                             <span x-text="t[lang].brand_full"></span><span class="ml-4" x-show="t[lang].brand_suffix" x-text="t[lang].brand_suffix"></span><br>
-                            <span class="text-3xl font-light text-gray-300" x-text="t[lang].hero_sub"></span>
+                            <span class="block text-3xl font-light text-gray-300 leading-snug" x-text="t[lang].hero_sub"></span>
                         </h1>
                         <p class="text-xl text-gold-400/80 mb-10 tracking-widest" x-text="t[lang].hero_slogan"></p>
                     </div>
@@ -732,7 +733,7 @@
         <!-- ================= PAGE 2: 关于我们 ================= -->
         <div x-show="page === 'about'" x-transition:enter="transition ease-out duration-500" class="w-full">
             <!-- About: Hero (对齐首页风格) -->
-            <section id="about-hero" class="relative min-h-[75vh] flex items-center overflow-hidden parallax-trigger">
+            <section id="about-hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
                 <div class="absolute inset-0 z-0">
                     <img src="https://static.sdlvhk.com/图片素材/other/Image%203.0%20WH%20Entrance.jpg"
                         class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="WH Entrance">
@@ -1005,8 +1006,8 @@
                     </div>
                     
                     <div class="relative w-full aspect-[16/9] border border-black/10 bg-black/5 mb-10 rounded-sm overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-50"></div>
-                        <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div>
+                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-0"></div>
+                        <!-- <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div> -->
                         <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
                         <div class="absolute top-[58%] left-[54%] w-1 h-1 bg-black/40 rounded-full"></div> 
                         <div class="absolute top-[50%] left-[50%] w-1 h-1 bg-black/40 rounded-full"></div> 
@@ -1066,7 +1067,7 @@
         <!-- ================= PAGE 3: 留学服务 ================= -->
         <div x-show="page === 'study'" x-transition:enter="transition ease-out duration-500" class="w-full">
             <!-- Study: Hero (对齐前两个 page 的 Hero 风格) -->
-            <section id="study-hero" class="relative min-h-[75vh] flex items-center overflow-hidden parallax-trigger">
+            <section id="study-hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
                 <div class="absolute inset-0 z-0">
                     <img src="https://static.sdlvhk.com/图片素材/other/Image%204.0%20by%20Lifestyle%20on%20Freepik.jpg"
                         class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Study Services">
