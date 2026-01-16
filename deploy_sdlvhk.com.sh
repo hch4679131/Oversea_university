@@ -5,7 +5,35 @@ BRANCH="${BRANCH:-production}"
 REPO_DIR="${REPO_DIR:-""}"
 SITE_SRC="${SITE_SRC:-""}"
 SITE_DST="${SITE_DST:-/usr/local/nginx/html/sdlvhk.com}"
-NGINX_BIN="${NGINX_BIN:-/usr/local/nginx/sbin/nginx}"
+NGINX_BIN="${NGINX_BIN:-""}"
+
+detect_nginx_bin() {
+  if [[ -n "$NGINX_BIN" ]]; then
+    echo "$NGINX_BIN"
+    return 0
+  fi
+
+  if command -v nginx >/dev/null 2>&1; then
+    command -v nginx
+    return 0
+  fi
+
+  local candidates=(
+    "/usr/local/nginx/sbin/nginx"
+    "/usr/sbin/nginx"
+    "/usr/local/openresty/nginx/sbin/nginx"
+    "/usr/local/tengine/sbin/nginx"
+  )
+
+  for bin in "${candidates[@]}"; do
+    if [[ -x "$bin" ]]; then
+      echo "$bin"
+      return 0
+    fi
+  done
+
+  return 1
+}
 
 if [[ -z "$REPO_DIR" ]]; then
   REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -24,6 +52,15 @@ echo "==> Updating repo ($BRANCH) in: $REPO_DIR"
 cd "$REPO_DIR"
 git fetch origin "$BRANCH"
 git reset --hard "origin/$BRANCH"
+
+NGINX_BIN="$(detect_nginx_bin || true)"
+if [[ -z "$NGINX_BIN" ]]; then
+  echo "ERROR: nginx binary not found. Set NGINX_BIN=/path/to/nginx"
+  exit 1
+fi
+
+echo "==> Using nginx binary: $NGINX_BIN"
+"$NGINX_BIN" -V 2>&1 | head -n 2 || true
 
 echo "==> Deploying site from: $SITE_SRC"
 echo "==> Deploying site to:   $SITE_DST"
