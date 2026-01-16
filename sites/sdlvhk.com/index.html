@@ -9,6 +9,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- 高德地图 AMap 安全配置（需在 AMap JSAPI 之前） -->
+    <script>
+        window._AMapSecurityConfig = {
+            securityJsCode: 'af5610c78fe933452ae97d2debba66d9'
+        };
+    </script>
+    <!-- 高德地图 AMap Web JSAPI -->
+    <script defer src="https://webapi.amap.com/maps?v=2.0&key=cdda4d8bbf5dbefb8fde672e61625ef9&plugin=AMap.ToolBar,AMap.Scale"></script>
     <!-- 图标库 -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- 字体 -->
@@ -711,9 +719,9 @@
                         <p class="mt-6 text-black/60 text-sm md:text-base" x-text="t[lang].partner_sub"></p>
                     </div>
                     
-                    <div class="relative w-full aspect-[16/9] border border-black/10 bg-black/5 mb-10 rounded-sm overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-50"></div>
-                        <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div>
+                    <div class="relative w-full aspect-[16/9] border border-black/10 mb-10 rounded-sm overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-100"></div>
+                        <!-- <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div> -->
                         <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
                         <div class="absolute top-[58%] left-[54%] w-1 h-1 bg-black/40 rounded-full"></div> 
                         <div class="absolute top-[50%] left-[50%] w-1 h-1 bg-black/40 rounded-full"></div> 
@@ -1073,7 +1081,7 @@
                     </div>
                     
                     <div class="relative w-full aspect-[16/9] border border-black/10 mb-10 rounded-sm overflow-hidden">
-                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-0"></div>
+                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-100"></div>
                         <!-- <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div> -->
                         <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
                         <div class="absolute top-[58%] left-[54%] w-1 h-1 bg-black/40 rounded-full"></div> 
@@ -1180,12 +1188,6 @@
 
                         <!-- Row 2 -->
                         <div class="grid md:grid-cols-2 gap-16 items-center">
-                            <div class="relative scrub-item anim-scale">
-                                <div class="absolute -inset-4 bg-gold-400/15 rounded-sm rotate-2"></div>
-                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.2%20Global%20Coverage.png"
-                                    class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5"
-                                    alt="Global Coverage" loading="lazy" decoding="async">
-                            </div>
                             <div class="scrub-item anim-fade-up">
                                 <div class="flex items-center gap-4 mb-4">
                                     <i data-lucide="globe" class="w-5 h-5 text-obsidian-950"></i>
@@ -1194,6 +1196,12 @@
                                 <div class="text-2xl font-serif text-obsidian-950 mb-2" x-text="t[lang].study_scope_2_title"></div>
                                 <p class="text-black/70 leading-relaxed whitespace-pre-line" x-text="t[lang].study_scope_2_text"></p>
                             </div>
+                            <div class="relative scrub-item anim-scale">
+                                <div class="absolute -inset-4 bg-gold-400/15 rounded-sm rotate-2"></div>
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.2%20Global%20Coverage.png"
+                                    class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5"
+                                    alt="Global Coverage" loading="lazy" decoding="async">
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -1638,10 +1646,13 @@
                     </div>
 
                     <div class="mt-10 bg-paper border border-black/10 rounded-lg overflow-hidden shadow-2xl scrub-item anim-fade-up">
-                        <div class="h-[420px] bg-black/5 flex items-center justify-center text-center px-6">
-                            <div>
-                                <div class="text-sm font-bold text-obsidian-950">高德地圖嵌入區域</div>
-                                <div class="mt-2 text-xs text-black/60">（後續提供連結或嵌入方式後接入）</div>
+                        <div class="relative h-[420px] bg-black/5">
+                            <div id="amap-embed" class="absolute inset-0"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-center px-6 pointer-events-none" x-show="!amapEmbedInited">
+                                <div>
+                                    <div class="text-sm font-bold text-obsidian-950">高德地圖載入中...</div>
+                                    <div class="mt-2 text-xs text-black/60">（如長時間未顯示，請檢查網路或瀏覽器攔截）</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1834,9 +1845,9 @@
                         </button>
                     </div>
 
-                    <div class="relative w-full min-h-[95vh] border border-black/10 bg-black/5 mb-16 overflow-hidden scrub-item anim-fade-up">
-                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-cover bg-center opacity-50"></div>
-                        <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div>
+                    <div class="relative w-full min-h-[95vh] border border-black/10 mb-16 overflow-hidden scrub-item anim-fade-up">
+                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-cover bg-center opacity-100"></div>
+                        <!-- <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div> -->
                         <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
                         <div class="absolute top-[58%] left-[54%] w-1 h-1 bg-black/40 rounded-full"></div>
                         <div class="absolute top-[50%] left-[50%] w-1 h-1 bg-black/40 rounded-full"></div>
@@ -2287,6 +2298,78 @@
 
                 // ===== Mobile Nav =====
                 mobileNavOpen: false,
+
+                // ===== AMap Embed (Page 4B reserved map area) =====
+                amapEmbedInited: false,
+                amapEmbedMap: null,
+
+                initAmapEmbed() {
+                    const container = document.getElementById('amap-embed');
+                    if (!container) return;
+
+                    const tryInit = () => {
+                        if (!window.AMap || !window.AMap.Map) return false;
+
+                        if (!this.amapEmbedMap) {
+                            try {
+                                this.amapEmbedMap = new AMap.Map('amap-embed', {
+                                    zoom: 12,
+                                    center: [114.1694, 22.3193],
+                                    viewMode: '2D'
+                                });
+
+                                try {
+                                    this.amapEmbedMap.addControl(new AMap.ToolBar({ position: 'RB' }));
+                                    this.amapEmbedMap.addControl(new AMap.Scale());
+                                } catch (e) {
+                                    // ignore plugin load issues
+                                }
+
+                                // Sample markers (HK)
+                                const markers = [
+                                    { pos: [114.1422, 22.2866], title: this.t[this.lang].apt_syp || '西营盘' },
+                                    { pos: [114.1706, 22.3116], title: this.t[this.lang].apt_ymt || '油麻地' }
+                                ];
+                                markers.forEach(m => {
+                                    new AMap.Marker({
+                                        position: m.pos,
+                                        title: m.title,
+                                        anchor: 'bottom-center',
+                                        map: this.amapEmbedMap
+                                    });
+                                });
+
+                                this.amapEmbedInited = true;
+                            } catch (e) {
+                                return false;
+                            }
+                        }
+
+                        // Ensure correct render after x-show
+                        try {
+                            this.amapEmbedMap && this.amapEmbedMap.resize && this.amapEmbedMap.resize();
+                        } catch (e) {
+                            // ignore
+                        }
+
+                        this.amapEmbedInited = true;
+                        return true;
+                    };
+
+                    if (this.amapEmbedInited && this.amapEmbedMap) {
+                        tryInit();
+                        return;
+                    }
+
+                    // Retry a few times in case JSAPI is still loading
+                    let attempts = 0;
+                    const timer = setInterval(() => {
+                        attempts += 1;
+                        if (tryInit() || attempts >= 20) {
+                            clearInterval(timer);
+                        }
+                    }, 150);
+                },
 
                 // ===== WeChat Popup (Template) =====
                 wechatModalOpen: false,
@@ -3185,6 +3268,9 @@
                     // 等待页面DOM更新后，重新初始化动画引擎
                     setTimeout(() => {
                         initScrollEngine();
+                        if (newPage === 'apartments') {
+                            this.initAmapEmbed();
+                        }
                         if(anchorId) {
                             const el = document.getElementById(anchorId);
                             if(el) {
