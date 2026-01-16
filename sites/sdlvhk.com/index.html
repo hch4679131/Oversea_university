@@ -309,14 +309,81 @@
                 </div>
             </div>
 
-            <!-- 语言切换 -->
-            <div class="flex items-center gap-3 text-xs font-bold pl-6 border-l border-white/10">
-                <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">简</button>
-                <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">繁</button>
-                <button @click="lang = 'en'" :class="lang==='en' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">EN</button>
+            <!-- 语言切换 + 手机菜单 -->
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 text-xs font-bold pl-6 border-l border-white/10">
+                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">简</button>
+                    <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">繁</button>
+                    <button @click="lang = 'en'" :class="lang==='en' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">EN</button>
+                </div>
+
+                <button type="button"
+                    class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-md border border-white/10 bg-black/30 hover:bg-black/50 transition"
+                    @click="mobileNavOpen = !mobileNavOpen"
+                    :aria-expanded="mobileNavOpen"
+                    aria-label="Menu"
+                >
+                    <svg x-show="!mobileNavOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-white">
+                        <line x1="4" y1="6" x2="20" y2="6" />
+                        <line x1="4" y1="12" x2="20" y2="12" />
+                        <line x1="4" y1="18" x2="20" y2="18" />
+                    </svg>
+                    <svg x-show="mobileNavOpen" x-cloak xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-white">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
+
+    <!-- 手机端导航菜单（覆盖层 + 下拉面板） -->
+    <div class="md:hidden" x-show="mobileNavOpen" x-cloak>
+        <div class="fixed inset-0 top-20 bg-black/70 backdrop-blur-sm z-40" @click="mobileNavOpen = false"></div>
+        <div class="fixed top-20 left-0 right-0 z-50 border-b border-white/10 bg-obsidian-950/95 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-3">
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase text-gray-200 hover:text-white"
+                    @click="switchPage('home'); mobileNavOpen = false"
+                    x-text="t[lang].nav_home || '首页'"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'about' ? 'text-gold-400' : 'text-gray-200'"
+                    @click="switchPage('about'); mobileNavOpen = false"
+                    x-text="t[lang].nav_about"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'study' ? 'text-gold-400' : 'text-gray-200'"
+                    @click="switchPage('study'); mobileNavOpen = false"
+                    x-text="t[lang].nav_study"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'apartments' ? 'text-gold-400' : 'text-gray-200'"
+                    @click="switchPage('apartments'); mobileNavOpen = false"
+                    x-text="t[lang].nav_apt"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'career' ? 'text-gold-400' : 'text-gray-200'"
+                    @click="switchPage('career'); mobileNavOpen = false"
+                    x-text="t[lang].nav_career"
+                ></button>
+
+                <button type="button" class="w-full py-3 rounded-md bg-gold-400 text-black font-bold tracking-[0.15em] uppercase hover:bg-gold-300 transition"
+                    @click="switchPage('contact'); mobileNavOpen = false"
+                    x-text="t[lang].nav_contact"
+                ></button>
+
+                <div class="pt-4 border-t border-white/10 flex items-center justify-center gap-6 text-xs font-bold">
+                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-500 hover:text-white'">简</button>
+                    <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-gold-400' : 'text-gray-500 hover:text-white'">繁</button>
+                    <button @click="lang = 'en'" :class="lang==='en' ? 'text-gold-400' : 'text-gray-500 hover:text-white'">EN</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 主容器 -->
     <main class="pt-20 min-h-screen relative">
@@ -340,7 +407,7 @@
                             <!-- <span class="text-gold-400 text-sm tracking-[0.3em] uppercase">Since 2016</span> -->
                         </div>
                         <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-4">
-                            <span x-text="t[lang].brand_full"></span><span class="ml-4" x-show="t[lang].brand_suffix" x-text="t[lang].brand_suffix"></span><br>
+                            <span x-text="t[lang].brand_full"></span><span class="ml-12" x-show="t[lang].brand_suffix" x-text="t[lang].brand_suffix"></span><br>
                             <span class="block text-3xl font-light text-gray-300 leading-snug" x-text="t[lang].hero_sub"></span>
                         </h1>
                         <p class="text-xl text-gold-400/80 mb-10 tracking-widest" x-text="t[lang].hero_slogan"></p>
@@ -1005,7 +1072,7 @@
                         <p class="mt-6 text-black/60 text-sm md:text-base" x-text="t[lang].partner_sub"></p>
                     </div>
                     
-                    <div class="relative w-full aspect-[16/9] border border-black/10 bg-black/5 mb-10 rounded-sm overflow-hidden">
+                    <div class="relative w-full aspect-[16/9] border border-black/10 mb-10 rounded-sm overflow-hidden">
                         <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/2_5.jpg')] bg-contain bg-center bg-no-repeat opacity-0"></div>
                         <!-- <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div> -->
                         <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
@@ -2218,6 +2285,9 @@
                 lang: 'sc', // sc, tc, en
                 page: 'home',
 
+                // ===== Mobile Nav =====
+                mobileNavOpen: false,
+
                 // ===== WeChat Popup (Template) =====
                 wechatModalOpen: false,
                 wechatId: 'SDLV_Consultant_001',
@@ -3106,6 +3176,8 @@
                         setTimeout(() => initScrollEngine(), 100);
                         return;
                     }
+
+                    this.mobileNavOpen = false;
 
                     this.page = newPage;
                     window.scrollTo({ top: 0, behavior: 'auto' });
