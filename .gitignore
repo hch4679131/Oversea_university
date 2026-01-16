@@ -54,3 +54,8 @@ venv/
 图片素材/企业历程及荣誉奖项及团队个人照/
 图片素材/公司照片/
 图片素材/公司环境/
+
+# Additional large/temporary image assets
+图片素材/other/
+图片素材/Temp images/
+图片素材/**/*.zip
