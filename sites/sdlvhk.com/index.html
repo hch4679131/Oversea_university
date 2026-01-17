@@ -76,17 +76,30 @@
                 <div class="nav-item group">
                     <span @click="switchPage('about')" :class="page === 'about' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
-                        <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_story"></a>
-                        <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_history"></a>
-                        <a @click.stop="switchPage('about', 'team')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_team"></a>
-                        <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_partners"></a>
+                        <a @click.stop="switchPage('about', 'about-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_hero_title"></a>
+                        <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].history_title"></a>
+                        <a @click.stop="switchPage('about', 'about-vision')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_vm_title"></a>
+                        <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].home_about_title"></a>
+                        <a @click.stop="switchPage('about', 'team')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].team_title"></a>
+                        <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].partner_title"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
                     <span @click="switchPage('study')" :class="page === 'study' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_study"></span>
                      <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
-                        <a @click.stop="switchPage('study', 'data')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_data"></a>
-                        <a @click.stop="switchPage('study', 'content')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_content"></a>
+                        <a @click.stop="switchPage('study', 'study-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_hero_t"></a>
+                        <a @click.stop="switchPage('study', 'study-scope')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_scope_title"></a>
+                        <a @click.stop="switchPage('study', 'study-flow')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_flow_title"></a>
+                        <a @click.stop="switchPage('study', 'study-advantages')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_adv_title"></a>
+                        <a @click.stop="switchPage('study', 'content')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_uni_title"></a>
+                        <a @click.stop="switchPage('study', 'study-cases')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_cases_title"></a>
+                    </div>
+                </div>
+                <div class="nav-item group">
+                    <span @click="switchPage('career')" :class="page === 'career' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('career', 'career-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].career_hero_t"></a>
+                        <a @click.stop="switchPage('career', 'career-intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].car_h1"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
@@ -97,10 +110,13 @@
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <span @click="switchPage('career')" :class="page === 'career' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
-                </div>
-                <div class="nav-item group">
                     <a @click="switchPage('contact')" class="px-5 py-2 bg-gold-400 text-black font-bold hover:bg-gold-300 transition duration-300" x-text="t[lang].nav_contact"></a>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('contact', 'contact-flow')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_flow_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-faq')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_faq_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-apply')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_apply_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-cta')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_cta_title"></a>
+                    </div>
                 </div>
             </div>
 
@@ -203,7 +219,7 @@
                         </div>
                         <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-4">
                             <span x-text="t[lang].brand_full"></span><span class="ml-12" x-show="t[lang].brand_suffix" x-text="t[lang].brand_suffix"></span><br>
-                            <span class="block text-3xl font-light text-gray-300 leading-snug" x-text="t[lang].hero_sub"></span>
+                            <span class="text-xl text-gold-400/80 mb-4 tracking-widest" x-text="t[lang].hero_sub"></span>
                         </h1>
                         <p class="text-xl text-gold-400/80 mb-10 tracking-widest" x-text="t[lang].hero_slogan"></p>
                     </div>
@@ -352,8 +368,10 @@
                     </div>
                     <div class="relative scrub-item anim-scale">
                         <div class="absolute -inset-4 bg-gold-400/15 rounded-sm rotate-3"></div>
-                        <img src="https://static.sdlvhk.com/图片素材/collect/group-asia-young-creative-people-smart-casual-wear-discussing-business-celebrate-giving-five-after-dealing-feeling-happy-signing-contract-agreement-office-coworker-teamwork-concept.jpg" 
-                            class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team">
+                       <img src="https://static.sdlvhk.com/图片素材/other/Image%202.2%20About%20SDLV%20on%20Frontpage.png"
+                            class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team"> 
+                            <!-- <img src="https://static.sdlvhk.com/图片素材/collect/group-asia-young-creative-people-smart-casual-wear-discussing-business-celebrate-giving-five-after-dealing-feeling-happy-signing-contract-agreement-office-coworker-teamwork-concept.jpg" 
+                            class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team"> -->
                         <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
                             <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
                         </div>
@@ -610,79 +628,6 @@
                     </div>
                 </div>
             </section>
-
-            <!-- About: Vision & Mission (对齐首页标题风格) -->
-            <section id="about-vision" class="py-28 bg-paper text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center mb-16 scrub-item anim-fade-up">
-                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].about_vm_kicker"></span>
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].about_vm_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-16 items-center">
-                        <!-- Left: image slot (对齐关于我们风格) -->
-                        <div class="relative scrub-item anim-scale">
-                            <div class="absolute -inset-4 bg-gold-400/15 rounded-sm rotate-2"></div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.2%20About%20SDLV%20on%20Frontpage.png"
-                                class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5" alt="Vision and Mission">
-                        </div>
-
-                        <!-- Right: text blocks (列表式，无外框) -->
-                        <div class="scrub-item anim-fade-up">
-                            <div class="space-y-10">
-                                <div>
-                                    <div class="flex items-center gap-4 mb-4">
-                                        <i data-lucide="shield" class="w-5 h-5 text-obsidian-950"></i>
-                                        <div class="h-[1px] flex-1 bg-black/15"></div>
-                                    </div>
-                                    <div class="text-2xl font-serif text-obsidian-950 mb-2" x-text="t[lang].about_mission_label"></div>
-                                    <p class="text-black/70 leading-relaxed" x-text="t[lang].about_mission_text"></p>
-                                </div>
-
-                                <div>
-                                    <div class="flex items-center gap-4 mb-4">
-                                        <i data-lucide="sparkles" class="w-5 h-5 text-obsidian-950"></i>
-                                        <div class="h-[1px] flex-1 bg-black/15"></div>
-                                    </div>
-                                    <div class="text-2xl font-serif text-obsidian-950 mb-2" x-text="t[lang].about_vision_label"></div>
-                                    <p class="text-black/70 leading-relaxed" x-text="t[lang].about_vision_text"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="intro" class="py-28 bg-paper text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center mb-16 scrub-item anim-fade-up">
-                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">About Us</span>
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].home_about_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-16 items-center">
-                        <div class="scrub-item anim-fade-up">
-                            <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
-                                <span x-text="t[lang].about_h1"></span><br>
-                                <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
-                            </h2>
-                            <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
-                            <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
-                        </div>
-                        <div class="relative scrub-item anim-scale">
-                            <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
-                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                                class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team">
-                            <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
-                                <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <section id="history" class="py-32 bg-obsidian-950 relative">
                 <div class="max-w-4xl mx-auto px-6">
                     <div class="text-center mb-16 scrub-item anim-fade-up">
@@ -819,6 +764,79 @@
                     </div>
                 </div>
             </section>
+            <!-- About: Vision & Mission (对齐首页标题风格) -->
+            <section id="about-vision" class="py-28 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].about_vm_kicker"></span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].about_vm_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <!-- Left: image slot (对齐关于我们风格) -->
+                        <div class="relative scrub-item anim-scale">
+                            <div class="absolute -inset-4 bg-gold-400/15 rounded-sm rotate-2"></div>
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.2%20About%20SDLV%20on%20Frontpage.png"
+                                class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5" alt="Vision and Mission">
+                        </div>
+
+                        <!-- Right: text blocks (列表式，无外框) -->
+                        <div class="scrub-item anim-fade-up">
+                            <div class="space-y-10">
+                                <div>
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <i data-lucide="shield" class="w-5 h-5 text-obsidian-950"></i>
+                                        <div class="h-[1px] flex-1 bg-black/15"></div>
+                                    </div>
+                                    <div class="text-2xl font-serif text-obsidian-950 mb-2" x-text="t[lang].about_mission_label"></div>
+                                    <p class="text-black/70 leading-relaxed" x-text="t[lang].about_mission_text"></p>
+                                </div>
+
+                                <div>
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <i data-lucide="sparkles" class="w-5 h-5 text-obsidian-950"></i>
+                                        <div class="h-[1px] flex-1 bg-black/15"></div>
+                                    </div>
+                                    <div class="text-2xl font-serif text-obsidian-950 mb-2" x-text="t[lang].about_vision_label"></div>
+                                    <p class="text-black/70 leading-relaxed" x-text="t[lang].about_vision_text"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="intro" class="py-28 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">About Us</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].home_about_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div class="scrub-item anim-fade-up">
+                            <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
+                                <span x-text="t[lang].about_h1"></span><br>
+                                <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
+                            </h2>
+                            <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
+                            <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
+                        </div>
+                        <div class="relative scrub-item anim-scale">
+                            <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                class="relative z-10 rounded-sm shadow-2xl transition duration-700" alt="Team">
+                            <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
+                                <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
 
             <!-- About: Team (企业历程 & 商业合作之间) -->
             <section id="team" class="py-28 bg-paper text-obsidian-950">
@@ -1041,7 +1059,53 @@
                     </div>
                 </div>
             </section>
+            <section id="content" class="py-40 bg-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].study_uni_kicker"></span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-white" x-text="t[lang].study_uni_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
 
+                    <div class="space-y-20">
+                        <!-- JUC: image left, text right -->
+                        <div class="grid md:grid-cols-2 gap-20 items-center">
+                            <div class="relative scrub-item anim-scale">
+                                <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%204.5.1%20JUC.png" alt="JUC" class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5" loading="lazy" decoding="async" />         
+                            </div>
+                            <div class="scrub-item anim-fade-up">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                        <i data-lucide="award" class="text-obsidian-950 w-6 h-6"></i>
+                                    </div>
+                                    <h3 class="text-white font-serif font-bold text-2xl" x-text="t[lang].study_uni_juc_title"></h3>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line" x-text="t[lang].study_uni_juc_text"></p>
+                            </div>
+                        </div>
+
+                        <!-- THEi: text left, image right -->
+                        <div class="grid md:grid-cols-2 gap-20 items-center">
+                            <div class="scrub-item anim-fade-up md:order-1">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                                        <i data-lucide="school" class="text-obsidian-950 w-6 h-6"></i>
+                                    </div>
+                                    <h3 class="text-white font-serif font-bold text-2xl" x-text="t[lang].study_uni_thei_title"></h3>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line" x-text="t[lang].study_uni_thei_text"></p>
+                            </div>
+                            <div class="scrub-item anim-scale md:order-2">
+                                <div class="relative scrub-item anim-scale">
+                                <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%204.5.2%20THEi.png" alt="JUC" class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5" loading="lazy" decoding="async" />
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <!-- Study: Case Sharing (1×3 carousel; arrow controls) -->
             <section id="study-cases" class="py-28 bg-paper text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6">
@@ -1094,7 +1158,7 @@
                 </div>
             </section>
 
-            <section id="data" class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
+            <!-- <section id="data" class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 text-center scrub-item anim-fade-up">
                     <h2 class="text-5xl font-serif text-obsidian-950 mb-4" x-text="t[lang].sub_data"></h2>
                     <div class="w-24 h-[1px] bg-gold-400 mx-auto mb-6"></div>
@@ -1119,55 +1183,9 @@
                     </div>
                     <button @click="switchPage('contact')" class="mt-16 px-8 py-3 border border-gold-400 text-gold-500 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]" x-text="t[lang].btn_eval"></button>
                 </div>
-            </section>
+            </section> -->
 
-            <section id="content" class="py-40 bg-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center mb-16 scrub-item anim-fade-up">
-                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].study_uni_kicker"></span>
-                        <h2 class="text-4xl md:text-5xl font-serif text-white" x-text="t[lang].study_uni_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                    </div>
 
-                    <div class="space-y-20">
-                        <!-- JUC: image left, text right -->
-                        <div class="grid md:grid-cols-2 gap-20 items-center">
-                            <div class="scrub-item anim-scale">
-                                <div class="border border-white/10 bg-obsidian-900/40 overflow-hidden rounded-lg">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%204.5.1%20JUC.png" alt="JUC" class="w-full h-[420px] object-contain bg-black/10" loading="lazy" decoding="async" />
-                                </div>
-                            </div>
-                            <div class="scrub-item anim-fade-up">
-                                <div class="flex items-center gap-4 mb-6">
-                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                                        <i data-lucide="award" class="text-obsidian-950 w-6 h-6"></i>
-                                    </div>
-                                    <h3 class="text-white font-serif font-bold text-2xl" x-text="t[lang].study_uni_juc_title"></h3>
-                                </div>
-                                <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line" x-text="t[lang].study_uni_juc_text"></p>
-                            </div>
-                        </div>
-
-                        <!-- THEi: text left, image right -->
-                        <div class="grid md:grid-cols-2 gap-20 items-center">
-                            <div class="scrub-item anim-fade-up md:order-1">
-                                <div class="flex items-center gap-4 mb-6">
-                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                                        <i data-lucide="school" class="text-obsidian-950 w-6 h-6"></i>
-                                    </div>
-                                    <h3 class="text-white font-serif font-bold text-2xl" x-text="t[lang].study_uni_thei_title"></h3>
-                                </div>
-                                <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line" x-text="t[lang].study_uni_thei_text"></p>
-                            </div>
-                            <div class="scrub-item anim-scale md:order-2">
-                                <div class="border border-white/10 bg-obsidian-900/40 overflow-hidden rounded-lg">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%204.5.2%20THEi.png" alt="THEi" class="w-full h-[420px] object-contain bg-black/10" loading="lazy" decoding="async" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
 
         <!-- ================= PAGE 4: 学生公寓 ================= -->
@@ -1593,7 +1611,24 @@
 
         <!-- ================= PAGE 5: 职涯规划 ================= -->
         <div x-show="page === 'career'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section id="intro" class="py-32 bg-paper text-obsidian-950">
+            <!-- Career: Hero (对齐前几个 page 的 Hero 风格) -->
+            <section id="career-hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://static.sdlvhk.com/图片素材/other/Image%205.0%20Career%20Development%20by%20tirachardz%20on%20Freepik%20-%20Flipped.png"
+                        class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Career Development">
+                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/55 to-transparent"></div>
+                </div>
+
+                <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64">
+                    <div class="scrub-item anim-fade-up max-w-3xl">
+                        <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-6" x-text="t[lang].career_hero_t"></h1>
+                        <p class="text-xl text-gold-400/80 mb-4 tracking-widest" x-text="t[lang].career_hero_p1"></p>
+                        <p class="text-xl text-gold-400/80 tracking-widest" x-text="t[lang].career_hero_p2"></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="career-intro" class="py-32 bg-paper text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
                     <div class="scrub-item anim-fade-up">
                         <h2 class="text-4xl font-serif text-obsidian-950 mb-6" x-text="t[lang].car_h1"></h2>
@@ -1616,7 +1651,7 @@
         <!-- ================= PAGE 6: 联系我们 ================= -->
         <div x-show="page === 'contact'" x-transition:enter="transition ease-out duration-500" class="w-full bg-paper text-obsidian-950">
             <!-- 合作流程全览：垂直时间轴 -->
-            <section class="py-32 bg-paper border-b border-black/5">
+            <section id="contact-flow" class="py-32 bg-paper border-b border-black/5">
                 <div class="max-w-7xl mx-auto px-6">
 
                     <div class="flex items-end justify-between gap-10 mb-20 scrub-item anim-fade-up">
@@ -1710,7 +1745,7 @@
             </section>
 
             <!-- 页面底部：FAQ + 再次提交合作申请表单 -->
-            <section class="py-24 bg-paper border-b border-black/10">
+            <section id="contact-faq" class="py-24 bg-paper border-b border-black/10">
                 <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
                     <div x-data="{ openFaq: 1 }">
                         <h2 class="text-3xl font-serif font-bold text-obsidian-950">合作常见问题 Q&A</h2>
@@ -1760,7 +1795,7 @@
                     </div>
 
                     <div>
-                        <h2 class="text-3xl font-serif font-bold text-obsidian-950">提交合作申请</h2>
+                        <h2 id="contact-apply" class="text-3xl font-serif font-bold text-obsidian-950">提交合作申请</h2>
                         <p class="mt-3 text-black/60">在了解全部细节后，提交你的信息，我们会在24小时内联系你。</p>
 
                         <form class="mt-8 space-y-4" onsubmit="event.preventDefault(); alert('Success!')">
@@ -1777,7 +1812,7 @@
             </section>
 
             <!-- 现有页面保持不变：放在最底部 -->
-            <section class="w-full bg-obsidian-950 py-32 text-center relative overflow-hidden">
+            <section id="contact-cta" class="w-full bg-obsidian-950 py-32 text-center relative overflow-hidden">
                 <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
                 <div class="max-w-4xl mx-auto px-6 text-center relative z-10">

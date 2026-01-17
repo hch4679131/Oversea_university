@@ -1,7 +1,7 @@
 window.SDLV_I18N = {
                     sc: {
                         brand_sub: '汇生会', brand_full: '汇生会', brand_suffix: 'SDLV',
-                        nav_home: '首页', nav_achievements: '成就与反馈', nav_about: '关于我们', nav_study: '留学服务', nav_apt: '学生公寓', nav_career: '职涯规划', nav_contact: '商业合作',
+                        nav_home: '首页', nav_achievements: '成就与反馈', nav_about: '关于我们', nav_study: '留学服务', nav_apt: '学生居所', nav_career: '职涯规划', nav_contact: '商业合作',
                         sub_hero: 'Hero概览', sub_core: '核心业务', sub_story: '品牌故事', sub_history: '企业历程', sub_team: '团队专材', sub_partners: '城市合伙人', sub_data: '数据亮点', sub_content: '服务内容', sub_map: '交互地图', sub_showcase: '公寓展示',
                         hero_sub: '作为学子成长路上最坚实的后盾，以经验及专业护航，成就学子发挥潜能',
                         hero_slogan: '自2016年-札根香港，连系全球',
@@ -10,7 +10,7 @@ window.SDLV_I18N = {
                         biz_study_t: '留学申请',
                         biz_study_sub: '我们为您精确匹配学业与发展目标',
                         biz_study_sub2: '探索我们的定制留学方案',
-                        biz_apt_t: '滙生会社', biz_apt_sub: '探索我们遍布全港的学生公寓会社', biz_apt_locs: '我们为您提供便捷可靠的理想居所',
+                        biz_apt_t: '汇生会社', biz_apt_sub: '探索我们遍布全港的学生居所', biz_apt_locs: '我们为您提供便捷可靠的理想居所',
                         biz_career_t: '职涯规划', biz_career_sub: '告诉我们您的理想规划', biz_career_tags: '我们为您铺就坚实的道路与机遇',
                         home_about_title: '关于我们',
                         about_hero_title: '关于 SDLV 汇生会',
@@ -116,7 +116,7 @@ window.SDLV_I18N = {
                         btn_agent_inquiry: '代理人查询',
                         study_hero_t: '留学服务',
                         study_hero_p1: '探索我们的定制留学方案，一站式匹配您的发展目标',
-                        study_hero_p2: '香港、美英澳、新加坡、马来西亚、澳门 · 全科副学士至博士学位',
+                        study_hero_p2: '香港、澳门、英美澳加、新加坡、马来西亚全科副学士至博士学位',
                         study_hero_sub: '— 从副学士学士硕士到博士，覆盖全球主要留学地区 —',
                         study_scope_kicker: 'SERVICE SCOPE',
                         study_scope_title: '留学服务范围',
@@ -149,7 +149,7 @@ window.SDLV_I18N = {
                             }
                         ],
                         study_adv_kicker: 'ADVANTAGES',
-                        study_adv_title: '优势｜为什么选择我们？',
+                        study_adv_title: '服务优势',
                         study_adv_items: [
                             {
                                 title: '1. 真正的“一站式”陪伴',
@@ -203,8 +203,15 @@ window.SDLV_I18N = {
                         apt_reviews_title: '住户评价',
                         apt_syp: '西营盘', apt_dist_hku: 'HKU 步行15min', apt_ymt: '油麻地', apt_dist_poly: 'PolyU 地铁2站', map_hint: '* 点击金色光点查看通勤距离',
                         btn_explore_apt: '探索此公寓', apt_syp_full: '西营盘 · 旗舰店', apt_ymt_full: '油麻地 · 核心馆',
+                        career_hero_t: '职涯规划',
+                        career_hero_p1: '告诉我们您的理想方向，我们将为您的成功道路上的每一步制造机遇',
+                        career_hero_p2: '与跨行业合作机构提供实践机会，毕业不等于没经验',
                         car_h1: '名企职涯规划', car_sub: '学业到职业的无缝衔接', car_desc: '我们提供从简历优化、模拟面试到内推机会的全方位服务。',
                         car_tag1: '实习内推', car_tag2: '全职计划', car_tag3: '求职辅导',
+                        contact_flow_title: '合作流程全览',
+                        contact_faq_title: '合作常见问题 Q&A',
+                        contact_apply_title: '提交合作申请',
+                        contact_cta_title: '免费咨询',
                         cta_title: '准备好开启下一站了吗？', cta_desc: '请扫码添加微信，我们的资深顾问将在 24 小时内与您联系。', cta_qr_hint: '打开微信扫一扫，添加我们为好友。', ph_contact: '电话号码 / 微信 ID', btn_submit: '立即免费咨询',
                         footer_desc: '全球教育与职业精英服务。\n始于2016。', footer_meta: '业务范围：留学规划 · 学生公寓 · 职涯规划', footer_contact: '联系我们', addr_hk: '香港总部：荃湾', addr_sz: '深圳办事处：西乡'
                     },
@@ -412,8 +419,15 @@ window.SDLV_I18N = {
                         apt_reviews_title: '住戶評價',
                         apt_syp: '西營盤', apt_dist_hku: 'HKU 步行15min', apt_ymt: '油麻地', apt_dist_poly: 'PolyU 地鐵2站', map_hint: '* 點擊金色光點查看通勤距離',
                         btn_explore_apt: '探索此公寓', apt_syp_full: '西營盤 · 旗艦店', apt_ymt_full: '油麻地 · 核心館',
+                        career_hero_t: '職涯規劃',
+                        career_hero_p1: '告訴我們您的理想方向，我們將為您的成功道路上的每一步製造機遇',
+                        career_hero_p2: '與跨行業合作機構提供實踐機會，畢業不等於沒經驗',
                         car_h1: '名企職涯規劃', car_sub: '學業到職業的無縫銜接', car_desc: '我們提供從簡歷優化、模擬面試到內推機會的全方位服務。',
                         car_tag1: '實習內推', car_tag2: '全職計劃', car_tag3: '求職輔導',
+                        contact_flow_title: '合作流程全覽',
+                        contact_faq_title: '合作常見問題 Q&A',
+                        contact_apply_title: '提交合作申請',
+                        contact_cta_title: '免費諮詢',
                         cta_title: '準備好開啟下一站了嗎？', cta_desc: '請掃碼添加微信，我們的資深顧問將在 24 小時內與您聯繫。', cta_qr_hint: '打開微信「掃一掃」，添加我們為好友。', ph_contact: '電話號碼 / 微信 ID', btn_submit: '立即免費咨詢',
                         footer_desc: '全球教育與職業精英服務。\n始於2016。', footer_meta: '業務範圍：留學規劃 · 學生公寓 · 職涯規劃', footer_contact: '聯繫我們', addr_hk: '香港總部：中環', addr_sz: '深圳辦事處：西鄉'
                     },
@@ -585,8 +599,15 @@ window.SDLV_I18N = {
                         apt_reviews_title: 'Resident Reviews',
                         apt_syp: 'Sai Ying Pun', apt_dist_hku: 'HKU 15min Walk', apt_ymt: 'Yau Ma Tei', apt_dist_poly: 'PolyU 2 MTR Stops', map_hint: '* Click dots to see distance',
                         btn_explore_apt: 'Explore Room', apt_syp_full: 'SYP · Flagship', apt_ymt_full: 'YMT · Core',
+                        career_hero_t: 'Career Planning',
+                        career_hero_p1: 'Tell us your direction — we create opportunities at every step of your path to success.',
+                        career_hero_p2: 'Cross-industry partners provide real-world practice — graduation doesn\'t mean no experience.',
                         car_h1: 'Elite Career Planning', car_sub: 'Seamless Transition', car_desc: 'We provide resume optimization, mock interviews, and referral opportunities.',
                         car_tag1: 'Internships', car_tag2: 'Full-time', car_tag3: 'Coaching',
+                        contact_flow_title: 'Partnership Process',
+                        contact_faq_title: 'FAQ',
+                        contact_apply_title: 'Submit Application',
+                        contact_cta_title: 'Free Consultation',
                         cta_title: 'Ready for the next step?', cta_desc: 'Scan the WeChat QR code and add us. Our senior consultant will reach out within 24 hours.', cta_qr_hint: 'Open WeChat and scan the QR code to add us.', ph_contact: 'Phone / WeChat ID', btn_submit: 'Free Consultation',
                         footer_desc: 'Global Education & Career Elite.\nSince 2016.', footer_meta: 'Scope: Education Planning · Student Housing · Career Planning', footer_contact: 'Contact', addr_hk: 'HK HQ: Central', addr_sz: 'SZ Office: Xixiang'
                     }
