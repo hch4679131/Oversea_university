@@ -119,12 +119,12 @@ window.SDLV_I18N = {
                         study_hero_p2: '香港、澳门、英美澳加、新加坡、马来西亚全科副学士至博士学位',
                         study_hero_sub: '— 从副学士学士硕士到博士，覆盖全球主要留学地区 —',
                         study_scope_kicker: 'SERVICE SCOPE',
-                        study_scope_title: '留学服务范围',
+                        study_scope_title: '服务范围',
                         study_scope_1_title: '阶梯式成长路径图',
                         study_scope_1_text: '展现留学服务范围：副学士 - 学士 - 硕士 - 博士',
                         study_scope_2_title: 'Global Coverage',
                         study_scope_2_text: '-',
-                        study_flow_title: '留学服务流程及支援项目',
+                        study_flow_title: '服务流程及支援项目',
                         study_flow_kicker: 'PROCESS',
                         study_flow_items: [
                             {
@@ -173,7 +173,7 @@ window.SDLV_I18N = {
                             }
                         ],
                         study_cases_kicker: 'CASE SHARING',
-                        study_cases_title: '成功案例分享',
+                        study_cases_title: '成功案例',
                         study_cases_hint: '左右滑动查看更多',
                         study_cases_items: [
                             { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/1.png', alt: 'Offer Letter 1' },
