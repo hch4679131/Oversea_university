@@ -35,6 +35,243 @@
                         sans: ['Inter', 'sans-serif'],
                         serif: ['"Noto Serif SC"', 'serif'],
                     }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="/sdlvhk.com/assets/styles.css">
+</head>
+<body class="antialiased selection:bg-gold-400 selection:text-black">
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full top-0 z-50 bg-gradient-to-b from-black/90 to-black/60 backdrop-blur-sm border-b border-white/5 h-20">
+        <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" @click="switchPage('home')">
+                <div class="w-10 h-10 border border-gold-400 flex items-center justify-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gold-400 opacity-20 group-hover:opacity-40 transition"></div>
+                    <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="relative w-7 h-7 object-contain" alt="SDLV Logo">
+                </div>
+                <div>
+                    <span class="text-xl font-bold text-white tracking-widest">SDLV</span>
+                    <span class="block text-[9px] text-gray-400 tracking-wider" x-text="t[lang].brand_sub"></span>
+                </div>
+            </div>
+
+            <!-- 菜单 -->
+            <div class="hidden md:flex items-center gap-8 h-full text-xs font-medium tracking-[0.15em] uppercase text-gray-400">
+                <!-- 首页入口暂时隐藏：点击 Logo 可返回首页 -->
+                <!--
+                <div class="nav-item group">
+                    <span @click="switchPage('home')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_home"></span>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('home', 'hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_hero"></a>
+                        <a @click.stop="switchPage('home', 'core-business')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_core"></a>
+                    </div>
+                </div>
+                -->
+                <!-- 成就与反馈 -->
+                <!-- <div class="nav-item group">
+                    <span @click="switchPage('home', 'achievements')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
+                </div> -->
+                <div class="nav-item group">
+                    <span @click="switchPage('about')" :class="page === 'about' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_story"></a>
+                        <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_history"></a>
+                        <a @click.stop="switchPage('about', 'team')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_team"></a>
+                        <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_partners"></a>
+                    </div>
+                </div>
+                <div class="nav-item group">
+                    <span @click="switchPage('study')" :class="page === 'study' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_study"></span>
+                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('study', 'data')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_data"></a>
+                        <a @click.stop="switchPage('study', 'content')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_content"></a>
+                    </div>
+                </div>
+                <div class="nav-item group">
+                    <span @click="switchPage('apartments')" :class="page === 'apartments' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_apt"></span>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('apartments', 'map')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_map"></a>
+                        <a @click.stop="switchPage('apartments', 'showcase')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_showcase"></a>
+                    </div>
+                </div>
+                <div class="nav-item group">
+                    <span @click="switchPage('career')" :class="page === 'career' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
+                </div>
+                <div class="nav-item group">
+                    <a @click="switchPage('contact')" class="px-5 py-2 bg-gold-400 text-black font-bold hover:bg-gold-300 transition duration-300" x-text="t[lang].nav_contact"></a>
+                </div>
+            </div>
+
+            <!-- 语言切换 + 手机菜单 -->
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 text-xs font-bold pl-6 border-l border-white/10">
+                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">简</button>
+                    <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">繁</button>
+                    <button @click="lang = 'en'" :class="lang==='en' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">EN</button>
+                </div>
+
+                <button type="button"
+                    class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-md border border-white/10 bg-black/30 hover:bg-black/50 transition"
+                    @click="mobileNavOpen = !mobileNavOpen"
+                    :aria-expanded="mobileNavOpen"
+                    aria-label="Menu"
+                >
+                    <svg x-show="!mobileNavOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-white">
+                        <line x1="4" y1="6" x2="20" y2="6" />
+                        <line x1="4" y1="12" x2="20" y2="12" />
+                        <line x1="4" y1="18" x2="20" y2="18" />
+                    </svg>
+                    <svg x-show="mobileNavOpen" x-cloak xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-white">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 手机端导航菜单（覆盖层 + 下拉面板） -->
+    <div class="md:hidden" x-show="mobileNavOpen" x-cloak>
+        <div class="fixed inset-0 top-20 bg-black/70 backdrop-blur-sm z-40" @click="mobileNavOpen = false"></div>
+        <div class="fixed top-20 left-0 right-0 z-50 border-b border-white/10 bg-obsidian-950/95 backdrop-blur-md">
+            <div class="max-w-7xl mx-auto px-6 py-6 space-y-3">
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase text-gray-200 hover:text-white"
+                    @click="switchPage('home'); mobileNavOpen = false"
+                    x-text="t[lang].nav_home || '首页'"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'about' ? 'text-gold-400' : 'text-gray-200'"
+                    @click="switchPage('about'); mobileNavOpen = false"
+                    x-text="t[lang].nav_about"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'study' ? 'text-gold-400' : 'text-gray-200'"
+                    @click="switchPage('study'); mobileNavOpen = false"
+                    x-text="t[lang].nav_study"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'apartments' ? 'text-gold-400' : 'text-gray-200'"
+                    @click="switchPage('apartments'); mobileNavOpen = false"
+                    x-text="t[lang].nav_apt"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'career' ? 'text-gold-400' : 'text-gray-200'"
+                    @click="switchPage('career'); mobileNavOpen = false"
+                    x-text="t[lang].nav_career"
+                ></button>
+
+                <button type="button" class="w-full py-3 rounded-md bg-gold-400 text-black font-bold tracking-[0.15em] uppercase hover:bg-gold-300 transition"
+                    @click="switchPage('contact'); mobileNavOpen = false"
+                    x-text="t[lang].nav_contact"
+                ></button>
+
+                <div class="pt-4 border-t border-white/10 flex items-center justify-center gap-6 text-xs font-bold">
+                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-500 hover:text-white'">简</button>
+                    <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-gold-400' : 'text-gray-500 hover:text-white'">繁</button>
+                    <button @click="lang = 'en'" :class="lang==='en' ? 'text-gold-400' : 'text-gray-500 hover:text-white'">EN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主容器 -->
+    <main class="pt-20 min-h-screen relative">
+
+        <!-- ================= PAGE 1: 首页 ================= -->
+        <div x-show="page === 'home'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            
+            <!-- Hero Section -->
+            <section id="hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
+                <!-- 背景视差层 -->
+                <div class="absolute inset-0 z-0">
+                    <img src="https://static.sdlvhk.com/图片素材/Temp%20images/Image%202.0%20by%20tirachardz%20on%20Freepik.jpg" 
+                        class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Students">
+                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/55 to-transparent"></div>
+                </div>
+
+                <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64 grid md:grid-cols-2 gap-12 items-center">
+                    <div class="scrub-item anim-fade-up max-w-2xl">
+                        <div class="flex items-center gap-4 mb-6">
+                            <!-- <div class="h-[1px] w-12 bg-gold-400"></div> -->
+                            <!-- <span class="text-gold-400 text-sm tracking-[0.3em] uppercase">Since 2016</span> -->
+                        </div>
+                        <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-4">
+                            <span x-text="t[lang].brand_full"></span><span class="ml-12" x-show="t[lang].brand_suffix" x-text="t[lang].brand_suffix"></span><br>
+                            <span class="block text-3xl font-light text-gray-300 leading-snug" x-text="t[lang].hero_sub"></span>
+                        </h1>
+                        <p class="text-xl text-gold-400/80 mb-10 tracking-widest" x-text="t[lang].hero_slogan"></p>
+                    </div>
+
+                    <!-- <div id="achievements" class="scrub-item anim-flip-up w-full md:justify-self-end max-w-xl">
+                        <div class="grid grid-cols-2 gap-4 md:gap-6">
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="calendar" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white" x-text="t[lang].stat_years_num"></div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_years_txt"></div>
+                                </div>
+                            </div>
+
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="users" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">6W+</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_users"></div>
+                                </div>
+                            </div>
+
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="graduation-cap" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">96.3%</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_offer"></div>
+                                </div>
+                            </div>
+
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="thumbs-up" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">100%</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_satisfaction"></div>
+                                </div>
+                            </div>
+
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="home" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">500+</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_apt"></div>
+                                </div>
+                            </div>
+
+                            <div class="group relative rounded-lg border border-white/10 bg-obsidian-950/55 backdrop-blur-sm p-6 hover:border-gold-400/50 hover:bg-obsidian-950/65 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gold-400/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="relative flex flex-col gap-2">
+                                    <i data-lucide="star" class="w-7 h-7 text-gold-400 mb-1"></i>
+                                    <div class="text-3xl font-serif text-white">2k+</div>
+                                    <div class="text-[10px] text-gray-400 uppercase tracking-wider" x-text="t[lang].stat_feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+
+            <!-- Core Business Cards -->
+            <section id="core-business" class="py-28 bg-paper text-obsidian-950 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/10 to-transparent skew-x-12"></div>
+                <div class="max-w-7xl mx-auto px-6 relative z-10">
                     <div class="text-center mb-16 scrub-item anim-fade-up">
                         <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Our Services</span>
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].biz_title"></h2>
