@@ -198,9 +198,79 @@ window.SDLV_I18N = {
                         apt_map_sub2: '城中居社毗连各大学府以及生活娱乐所需',
                         apt_map_caption1: '汇生会学生公寓，你在香港的第二个家。',
                         apt_map_caption2: '汇生会公寓：不止一个住址，更是你在香港开启学业生活的战略起点。',
-                        apt_adv_title: '优势 | 为什么选择我们？',
+                        apt_adv_title: '为什么选择我们？',
                         apt_adv_text: '选择香港汇生会，不止是「住」，更是「省心生活」',
-                        apt_reviews_title: '住户评价',
+                        apt_life_cards: [
+                            {
+                                title: '设施设备',
+                                items: [
+                                    { k: '智能门禁及安保：', v: '安全可靠，出入安心。' },
+                                    { k: '全套家具家电：', v: '轻松拎包入住，享受品质生活。' },
+                                    { k: 'WIFI覆盖：', v: '学习娱乐，网络无忧。' },
+                                    { k: '定期保洁：', v: '提供定期公共区域清洁，生活无忧。' }
+                                ]
+                            },
+                            {
+                                title: '专属服务',
+                                items: [
+                                    { k: '专属管家服务：', v: '快速响应咨询、维修等各类生活需求。' },
+                                    { k: '入住指引：', v: '提供清晰入住指引，让你轻松“回家”。' },
+                                    { k: '快速维修响应：', v: '设施故障，专业师傅及时上门。' }
+                                ]
+                            },
+                            {
+                                title: '社群特色',
+                                items: [
+                                    { k: '定期社群活动：', v: '节日派对、职业分享、探索城市、拓展人脉。' },
+                                    { k: '线上社区互助：', v: '入住即融入，学生、生活、求职信息共享。' },
+                                    { k: '共享学习休闲空间：', v: '部分居社提供共享空间。' }
+                                ]
+                            }
+                        ],
+                        apt_compare_text: '传统学生公寓 vs. 汇生会学生居社 vs. 普通私人住宅',
+                        apt_compare_cards: [
+                            {
+                                title: '其他学生公寓',
+                                bullets: [
+                                    '高昂中介费',
+                                    '高昂租金',
+                                    '隐形成本多',
+                                    '住客人员混杂',
+                                    '设施老旧或不齐全',
+                                    '缺乏维修保障'
+                                ]
+                            },
+                            {
+                                title: '汇生会学生居社',
+                                bullets: [
+                                    '透明合理的定价',
+                                    '早鸟优惠',
+                                    '无隐藏收费',
+                                    '安全保障',
+                                    '设施齐全',
+                                    '地理位置优越',
+                                    '日常维修',
+                                    '定期保洁',
+                                    '学生联谊活动',
+                                    '一站式生活支持服务'
+                                ]
+                            },
+                            {
+                                title: '普通私人住宅',
+                                bullets: [
+                                    '高昂中介费',
+                                    '高昂租金',
+                                    '隐形成本多',
+                                    '住客人员混杂',
+                                    '设施老旧或不齐全',
+                                    '安全隐患多',
+                                    '缺乏维修保障',
+                                    '位置分散',
+                                    '自费WIFI'
+                                ]
+                            }
+                        ],
+                        apt_reviews_title: '住户好评',
                         apt_syp: '西营盘', apt_dist_hku: 'HKU 步行15min', apt_ymt: '油麻地', apt_dist_poly: 'PolyU 地铁2站', map_hint: '* 点击金色光点查看通勤距离',
                         btn_explore_apt: '探索此公寓', apt_syp_full: '西营盘 · 旗舰店', apt_ymt_full: '油麻地 · 核心馆',
                         apt_csw_card_title: '汇生会社（长沙湾）',
@@ -424,6 +494,76 @@ window.SDLV_I18N = {
                         apt_map_caption2: '滙生會公寓：不止一個住址，更是你在香港開啟學業生活的戰略起點。',
                         apt_adv_title: '優勢｜為什麼選擇我們？',
                         apt_adv_text: '選擇香港滙生會，不止是「住」，更是「省心生活」',
+                        apt_life_cards: [
+                            {
+                                title: '設施設備',
+                                items: [
+                                    { k: '智能門禁及安保：', v: '安全可靠，出入安心。' },
+                                    { k: '全套傢俱家電：', v: '輕鬆拎包入住，享受品質生活。' },
+                                    { k: 'WIFI 覆蓋：', v: '學習娛樂，網絡無憂。' },
+                                    { k: '定期保潔：', v: '提供定期公共區域清潔，生活無憂。' }
+                                ]
+                            },
+                            {
+                                title: '專屬服務',
+                                items: [
+                                    { k: '專屬管家服務：', v: '快速響應諮詢、維修等各類生活需求。' },
+                                    { k: '入住指引：', v: '提供清晰入住指引，讓你輕鬆「回家」。' },
+                                    { k: '快速維修響應：', v: '設施故障，專業師傅及時上門。' }
+                                ]
+                            },
+                            {
+                                title: '社群特色',
+                                items: [
+                                    { k: '定期社群活動：', v: '節日派對、職業分享、探索城市、拓展人脈。' },
+                                    { k: '線上社區互助：', v: '入住即融入，學生、生活、求職資訊共享。' },
+                                    { k: '共享學習休閒空間：', v: '部分居社提供共享空間。' }
+                                ]
+                            }
+                        ],
+                        apt_compare_text: '傳統學生公寓 vs. 滙生會學生居社 vs. 普通私人住宅',
+                        apt_compare_cards: [
+                            {
+                                title: '其他學生公寓',
+                                bullets: [
+                                    '高昂中介費',
+                                    '高昂租金',
+                                    '隱形成本多',
+                                    '住客人員混雜',
+                                    '設施老舊或不齊全',
+                                    '缺乏維修保障'
+                                ]
+                            },
+                            {
+                                title: '滙生會學生居社',
+                                bullets: [
+                                    '透明合理的定價',
+                                    '早鳥優惠',
+                                    '無隱藏收費',
+                                    '安全保障',
+                                    '設施齊全',
+                                    '地理位置優越',
+                                    '日常維修',
+                                    '定期保潔',
+                                    '學生聯誼活動',
+                                    '一站式生活支持服務'
+                                ]
+                            },
+                            {
+                                title: '普通私人住宅',
+                                bullets: [
+                                    '高昂中介費',
+                                    '高昂租金',
+                                    '隱形成本多',
+                                    '住客人員混雜',
+                                    '設施老舊或不齊全',
+                                    '安全隱患多',
+                                    '缺乏維修保障',
+                                    '位置分散',
+                                    '自費 WIFI'
+                                ]
+                            }
+                        ],
                         apt_reviews_title: '住戶評價',
                         apt_syp: '西營盤', apt_dist_hku: 'HKU 步行15min', apt_ymt: '油麻地', apt_dist_poly: 'PolyU 地鐵2站', map_hint: '* 點擊金色光點查看通勤距離',
                         btn_explore_apt: '探索此公寓', apt_syp_full: '西營盤 · 旗艦店', apt_ymt_full: '油麻地 · 核心館',
@@ -612,6 +752,76 @@ window.SDLV_I18N = {
                         apt_map_caption2: 'More than an address: a strategic starting point for your study-life journey in HK.',
                         apt_adv_title: 'Why Choose Us?',
                         apt_adv_text: 'Choose Huisenghui in Hong Kong — more than a place to stay, it’s peace of mind.',
+                        apt_life_cards: [
+                            {
+                                title: 'Facilities & Amenities',
+                                items: [
+                                    { k: 'Smart access & security: ', v: 'Reliable and safe entry at all times.' },
+                                    { k: 'Full furniture & appliances: ', v: 'Move in with ease and enjoy quality living.' },
+                                    { k: 'Wi‑Fi coverage: ', v: 'Stay connected for study and entertainment.' },
+                                    { k: 'Regular cleaning: ', v: 'Scheduled cleaning for shared areas, worry-free living.' }
+                                ]
+                            },
+                            {
+                                title: 'Dedicated Services',
+                                items: [
+                                    { k: 'Personal concierge: ', v: 'Fast support for enquiries, repairs, and daily needs.' },
+                                    { k: 'Move‑in guide: ', v: 'Clear instructions so you can settle in like “home”.' },
+                                    { k: 'Rapid maintenance: ', v: 'Professional technicians respond quickly on-site.' }
+                                ]
+                            },
+                            {
+                                title: 'Community',
+                                items: [
+                                    { k: 'Regular events: ', v: 'Holiday parties, career sharing, city explorations, networking.' },
+                                    { k: 'Online community help: ', v: 'Share study, life, and job information from day one.' },
+                                    { k: 'Shared spaces: ', v: 'Some locations offer shared study & lounge areas.' }
+                                ]
+                            }
+                        ],
+                        apt_compare_text: 'Traditional student dorms vs. Huisenghui student co‑living vs. private rentals',
+                        apt_compare_cards: [
+                            {
+                                title: 'Other Student Dorms',
+                                bullets: [
+                                    'High agency fees',
+                                    'High rent',
+                                    'Many hidden costs',
+                                    'Mixed resident profiles',
+                                    'Outdated or incomplete facilities',
+                                    'Limited maintenance support'
+                                ]
+                            },
+                            {
+                                title: 'Huisenghui Student Co‑living',
+                                bullets: [
+                                    'Transparent, reasonable pricing',
+                                    'Early‑bird offers',
+                                    'No hidden fees',
+                                    'Safety and security',
+                                    'Well‑equipped facilities',
+                                    'Prime locations',
+                                    'Daily maintenance',
+                                    'Regular cleaning',
+                                    'Student meetups & social events',
+                                    'One‑stop lifestyle support'
+                                ]
+                            },
+                            {
+                                title: 'Private Rentals',
+                                bullets: [
+                                    'High agency fees',
+                                    'High rent',
+                                    'Many hidden costs',
+                                    'Mixed resident profiles',
+                                    'Outdated or incomplete facilities',
+                                    'More safety risks',
+                                    'Limited maintenance support',
+                                    'Scattered locations',
+                                    'Wi‑Fi at your own expense'
+                                ]
+                            }
+                        ],
                         apt_reviews_title: 'Resident Reviews',
                         apt_syp: 'Sai Ying Pun', apt_dist_hku: 'HKU 15min Walk', apt_ymt: 'Yau Ma Tei', apt_dist_poly: 'PolyU 2 MTR Stops', map_hint: '* Click dots to see distance',
                         btn_explore_apt: 'Explore Room', apt_syp_full: 'SYP · Flagship', apt_ymt_full: 'YMT · Core',
