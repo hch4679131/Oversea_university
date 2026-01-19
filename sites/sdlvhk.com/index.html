@@ -1247,10 +1247,10 @@
                                 <div x-text="t[lang].apt_csw_card_b1"></div>
                                 <div x-text="t[lang].apt_csw_card_b2"></div>
                             </div>
-                            <div class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition">
+                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-csw')">
                                 <span x-text="t[lang].btn_explore_apt"></span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </div>
+                            </button>
                         </div>
                     </div>
 
@@ -1266,10 +1266,10 @@
                                 <div x-text="t[lang].apt_ymt_card_b1"></div>
                                 <div x-text="t[lang].apt_ymt_card_b2"></div>
                             </div>
-                            <div class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition">
+                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-ymt')">
                                 <span x-text="t[lang].btn_explore_apt"></span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>
