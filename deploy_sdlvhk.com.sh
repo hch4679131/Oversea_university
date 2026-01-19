@@ -58,7 +58,7 @@ fi
 
 echo "==> Updating repo ($BRANCH) in: $REPO_DIR"
 cd "$REPO_DIR"
-git fetch origin "$BRANCH"
+git fetch origin "+refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
 git reset --hard "origin/$BRANCH"
 
 NGINX_BIN="$(detect_nginx_bin || true)"
