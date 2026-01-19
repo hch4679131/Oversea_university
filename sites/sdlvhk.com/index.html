@@ -217,11 +217,13 @@
                             <!-- <div class="h-[1px] w-12 bg-gold-400"></div> -->
                             <!-- <span class="text-gold-400 text-sm tracking-[0.3em] uppercase">Since 2016</span> -->
                         </div>
-                        <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-4">
-                            <span x-text="t[lang].brand_full"></span><span class="ml-12" x-show="t[lang].brand_suffix" x-text="t[lang].brand_suffix"></span><br>
-                            <span class="text-xl text-gold-400/80 leading-tight mb-4 tracking-widest" x-text="t[lang].hero_sub"></span>
+                        <h1 class="text-6xl font-serif font-bold text-white leading-tight">
+                            <span x-text="t[lang].brand_full"></span><span class="ml-12" x-show="t[lang].brand_suffix" x-text="t[lang].brand_suffix"></span>
                         </h1>
-                        <p class="text-xl text-gold-400/80 mb-10 tracking-widest" x-text="t[lang].hero_slogan"></p>
+                        <div class="mt-4 mb-10 space-y-2">
+                            <p class="text-xl text-gold-400/80 tracking-widest leading-snug" x-text="t[lang].hero_sub"></p>
+                            <p class="text-xl text-gold-400/80 tracking-widest leading-snug" x-text="t[lang].hero_slogan"></p>
+                        </div>
                     </div>
 
                     <!-- <div id="achievements" class="scrub-item anim-flip-up w-full md:justify-self-end max-w-xl">
