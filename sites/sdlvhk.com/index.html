@@ -598,17 +598,37 @@
                     </div>
                 </div>
             </section>
-            <!-- Home: 免费咨询 (复用联系页文案/表单) -->
-            <section id="home-consult" class="py-24 bg-gold-400 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-black mb-6" x-text="t[lang].cta_title"></h2>
-                    <p class="text-black/70 mb-10 text-lg" x-text="t[lang].cta_desc"></p>
-                    <div class="flex flex-col items-center gap-4 justify-center max-w-xl mx-auto">
-                        <div class="bg-white p-3 shadow-2xl border border-black/10">
-                            <img :src="wechatQrSrc" alt="WeChat QR" class="w-56 h-56 object-contain" loading="lazy" decoding="async" />
+            <!-- Home: Tail Section -->
+            <section id="home-consult" class="py-20 bg-paper border-t border-black/5">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="grid lg:grid-cols-2 gap-12 items-start">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-serif font-bold text-obsidian-950">需要帮助？</h2>
+                            <p class="mt-3 text-sm md:text-base text-black/60">如有任何关于公司或服务的查询，请随时联系我们。</p>
                         </div>
-                        <div class="text-xs text-black/70" x-text="t[lang].cta_qr_hint"></div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div>
+                                <div class="border border-black/10 bg-white overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20留学服务.webp" alt="留学服务" class="w-full aspect-[4/3] object-contain bg-black/5" loading="lazy" decoding="async" />
+                                </div>
+                                <div class="mt-2 text-xs text-black/60 text-center">留学服务</div>
+                            </div>
+
+                            <div>
+                                <div class="border border-black/10 bg-white overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="学生公寓" class="w-full aspect-[4/3] object-contain bg-black/5" loading="lazy" decoding="async" />
+                                </div>
+                                <div class="mt-2 text-xs text-black/60 text-center">学生公寓</div>
+                            </div>
+
+                            <div>
+                                <div class="border border-black/10 bg-white overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20商业合作.webp" alt="商业合作" class="w-full aspect-[4/3] object-contain bg-black/5" loading="lazy" decoding="async" />
+                                </div>
+                                <div class="mt-2 text-xs text-black/60 text-center">商业合作</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -2145,7 +2165,7 @@
                         </button>
                     </div>
 
-                    <div class="mt-14">
+                    <!-- <div class="mt-14">
                         <h2 id="contact-apply" class="text-3xl font-serif font-bold text-obsidian-950">提交合作申请</h2>
                         <p class="mt-3 text-black/60">在了解全部细节后，提交你的信息，我们会在24小时内联系你。</p>
 
@@ -2163,7 +2183,7 @@
                             <textarea rows="4" placeholder="资源与合作意向（例如：渠道/社群/学校资源/团队情况等）" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full"></textarea>
                             <button class="w-full px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition">提交合作申请</button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             </section>
 
@@ -2436,8 +2456,17 @@
     <footer x-show="page !== 'contact'" class="bg-black text-gray-500 py-16 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-sm">
             <div>
-                <div class="text-2xl font-bold text-white tracking-widest mb-4">SDLV</div>
-                <p x-text="t[lang].footer_desc"></p>
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-3">
+                        <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" alt="SDLV Logo" class="w-12 h-12 object-contain" loading="lazy" decoding="async" />
+                        <div class="leading-none">
+                            <div class="text-2xl font-bold text-white tracking-widest leading-none">SDLV</div>
+                            <div class="mt-1 text-base font-bold text-white/90 tracking-[0.35em] leading-none">汇生会</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-white/60">一站式专业升学与住宿支持服务资深品牌</div>
+                </div>
+                <p class="mt-4" x-text="t[lang].footer_desc"></p>
                 <p class="mt-4 text-xs text-gray-600" x-text="t[lang].footer_meta"></p>
             </div>
             <div>
