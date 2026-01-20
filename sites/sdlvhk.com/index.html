@@ -1845,34 +1845,40 @@
                     <div class="flex flex-col md:flex-row md:items-stretch gap-4 scrub-item anim-fade-up">
                         <div class="flex-1 p-6 bg-white border border-black/10 shadow-sm">
                             <div class="flex items-center gap-4">
-                                <div class="text-xl">💬</div>
+                                <i data-lucide="message-circle" class="w-5 h-5 text-obsidian-950"></i>
                                 <div class="h-[1px] flex-1 bg-black/15"></div>
                             </div>
                             <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">沟通</div>
                             <div class="mt-3 text-sm text-black/70 leading-relaxed text-center">提交合作意向，双方初步沟通</div>
                         </div>
-                        <div class="hidden md:flex items-center justify-center px-2 text-black/30 text-2xl select-none">→</div>
+                        <div class="hidden md:flex items-center justify-center px-2 select-none">
+                            <i data-lucide="arrow-right" class="w-6 h-6 text-black/30"></i>
+                        </div>
                         <div class="flex-1 p-6 bg-white border border-black/10 shadow-sm">
                             <div class="flex items-center gap-4">
-                                <div class="text-xl">📝</div>
+                                <i data-lucide="file-text" class="w-5 h-5 text-obsidian-950"></i>
                                 <div class="h-[1px] flex-1 bg-black/15"></div>
                             </div>
                             <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">签约</div>
                             <div class="mt-3 text-sm text-black/70 leading-relaxed text-center">资质审核，签订正式合作协议</div>
                         </div>
-                        <div class="hidden md:flex items-center justify-center px-2 text-black/30 text-2xl select-none">→</div>
+                        <div class="hidden md:flex items-center justify-center px-2 select-none">
+                            <i data-lucide="arrow-right" class="w-6 h-6 text-black/30"></i>
+                        </div>
                         <div class="flex-1 p-6 bg-white border border-black/10 shadow-sm">
                             <div class="flex items-center gap-4">
-                                <div class="text-xl">🎁</div>
+                                <i data-lucide="gift" class="w-5 h-5 text-obsidian-950"></i>
                                 <div class="h-[1px] flex-1 bg-black/15"></div>
                             </div>
                             <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">培训</div>
                             <div class="mt-3 text-sm text-black/70 leading-relaxed text-center">完成系统培训，接收启动资源包</div>
                         </div>
-                        <div class="hidden md:flex items-center justify-center px-2 text-black/30 text-2xl select-none">→</div>
+                        <div class="hidden md:flex items-center justify-center px-2 select-none">
+                            <i data-lucide="arrow-right" class="w-6 h-6 text-black/30"></i>
+                        </div>
                         <div class="flex-1 p-6 bg-white border border-black/10 shadow-sm">
                             <div class="flex items-center gap-4">
-                                <div class="text-xl">⚙️</div>
+                                <i data-lucide="settings" class="w-5 h-5 text-obsidian-950"></i>
                                 <div class="h-[1px] flex-1 bg-black/15"></div>
                             </div>
                             <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">营运</div>
@@ -1891,34 +1897,92 @@
                             <div class="w-16 h-[1px] bg-gold-400 mx-auto mt-6"></div>
                         </div>
 
-                        <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-10">
-                            <div class="p-2">
-                                <div class="flex items-center gap-4">
-                                    <i data-lucide="check-circle" class="w-5 h-5 text-obsidian-950"></i>
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
-                                </div>
-                                <div class="mt-4 text-sm text-black/70 leading-relaxed">提交合作意向，双方初步沟通</div>
+                        <div class="mt-10 flex gap-6 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                            <div class="min-w-[240px] flex-1 p-6 bg-white border border-black/10 shadow-sm">
+                                <div class="text-sm text-black/70 leading-relaxed text-center">提交合作意向，双方初步沟通</div>
                             </div>
-                            <div class="p-2">
-                                <div class="flex items-center gap-4">
-                                    <i data-lucide="check-circle" class="w-5 h-5 text-obsidian-950"></i>
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
-                                </div>
-                                <div class="mt-4 text-sm text-black/70 leading-relaxed">资质审核，签订正式合作协议</div>
+                            <div class="min-w-[240px] flex-1 p-6 bg-white border border-black/10 shadow-sm">
+                                <div class="text-sm text-black/70 leading-relaxed text-center">资质审核，签订正式合作协议</div>
                             </div>
-                            <div class="p-2">
-                                <div class="flex items-center gap-4">
-                                    <i data-lucide="check-circle" class="w-5 h-5 text-obsidian-950"></i>
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
-                                </div>
-                                <div class="mt-4 text-sm text-black/70 leading-relaxed">完成系统培训，接收启动资源包</div>
+                            <div class="min-w-[240px] flex-1 p-6 bg-white border border-black/10 shadow-sm">
+                                <div class="text-sm text-black/70 leading-relaxed text-center">完成系统培训，接收启动资源包</div>
                             </div>
-                            <div class="p-2">
+                            <div class="min-w-[240px] flex-1 p-6 bg-white border border-black/10 shadow-sm">
+                                <div class="text-sm text-black/70 leading-relaxed text-center">正式开展业务，获得持续支持与佣金结算</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-20 text-center scrub-item anim-fade-up">
+                            <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Cooperation Modes</span>
+                            <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">双重合作模式</h2>
+                            <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                            <div class="mt-6 text-black/60 text-sm md:text-base leading-relaxed">
+                                <div>无论您是区域市场的建设者，还是精英圈层的连接者，</div>
+                                <div class="mt-2">都能在这里找到共创价值的路径。</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12 grid md:grid-cols-2 gap-10 scrub-item anim-fade-up">
+                            <div class="p-8 bg-white border border-black/10 shadow-sm">
                                 <div class="flex items-center gap-4">
-                                    <i data-lucide="check-circle" class="w-5 h-5 text-obsidian-950"></i>
+                                    <i data-lucide="building-2" class="w-5 h-5 text-obsidian-950"></i>
                                     <div class="h-[1px] flex-1 bg-black/15"></div>
                                 </div>
-                                <div class="mt-4 text-sm text-black/70 leading-relaxed">正式开展业务，获得持续支持与佣金结算</div>
+                                <div class="mt-4 text-xl font-serif font-bold text-obsidian-950">模式A：城市合作人（机构合作）</div>
+
+                                <div class="mt-5 text-sm text-black/70 leading-relaxed">
+                                    <div class="font-bold text-obsidian-950">对象：</div>
+                                    <div class="mt-1">教育机构、留学公司、拥有本地资源的企业家或创业者</div>
+
+                                    <div class="mt-6 font-bold text-obsidian-950">核心权益：</div>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex gap-3">
+                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
+                                            <span>在授权城市独家或优先运营“汇生会”品牌业务。</span>
+                                        </li>
+                                        <li class="flex gap-3">
+                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
+                                            <span>共享全线产品（留学、公寓、职涯）的完整分项。</span>
+                                        </li>
+                                        <li class="flex gap-3">
+                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
+                                            <span>获得品牌授权、全员系统化培训，共享全国业务资源。</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="p-8 bg-white border border-black/10 shadow-sm">
+                                <div class="flex items-center gap-4">
+                                    <i data-lucide="badge-check" class="w-5 h-5 text-obsidian-950"></i>
+                                    <div class="h-[1px] flex-1 bg-black/15"></div>
+                                </div>
+                                <div class="mt-4 text-xl font-serif font-bold text-obsidian-950">模式B：精英代理人（个人合作）</div>
+
+                                <div class="mt-5 text-sm text-black/70 leading-relaxed">
+                                    <div class="font-bold text-obsidian-950">对象：</div>
+                                    <div class="mt-1">资深教育顾问、校园代理、考虑发展副业的个人</div>
+
+                                    <div class="mt-6 font-bold text-obsidian-950">核心权益：</div>
+                                    <ul class="mt-3 space-y-2">
+                                        <li class="flex gap-3">
+                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
+                                            <span>合作门槛低，灵活无限制。</span>
+                                        </li>
+                                        <li class="flex gap-3">
+                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
+                                            <span>高额推荐佣金，成功签约即享奖励。</span>
+                                        </li>
+                                        <li class="flex gap-3">
+                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
+                                            <span>专属代理人后台，实时跟踪客户进度与佣金。</span>
+                                        </li>
+                                        <li class="flex gap-3">
+                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
+                                            <span>定期产品及技能培训。</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
