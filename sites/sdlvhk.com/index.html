@@ -2086,25 +2086,48 @@
             <!-- 页面底部：FAQ + 再次提交合作申请表单 -->
             <section id="contact-faq" class="py-24 bg-paper border-b border-black/10">
                 <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
-                    <div>
+                    <div x-data="{ openFaq: 1 }">
                         <h2 class="text-3xl font-serif font-bold text-obsidian-950">合作常见问题 Q&A</h2>
 
-                        <div class="mt-8 space-y-4">
-                            <div class="bg-white border border-black/10 p-5">
-                                <div class="font-bold text-obsidian-950">Q1：提交合作意向申请后，工作人员多久会联络我？</div>
-                                <div class="mt-2 text-sm text-black/70 leading-relaxed">A：我们的工作人员在收到你的合作申请后，最快24小时候会与您联络。</div>
+                        <div class="mt-8 space-y-3">
+                            <div class="bg-white border border-black/10">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 1 ? null : 1" :aria-expanded="openFaq === 1">
+                                    <div class="font-bold text-obsidian-950">Q1：提交合作意向申请后，工作人员多久会联络我？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 1 ? 'rotate-180' : ''"></i>
+                                </button>
+                                <div x-show="openFaq === 1" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                    A：我们的工作人员在收到你的合作申请后，最快24小时候会与您联络。
+                                </div>
                             </div>
-                            <div class="bg-white border border-black/10 p-5">
-                                <div class="font-bold text-obsidian-950">Q2：合作的流程是怎样的？一般需要多久启动？</div>
-                                <div class="mt-2 text-sm text-black/70 leading-relaxed">A：我们的合作流程高效清晰：初步洽谈 → 协议签署 → 系统培训 → 正式上线。对于标准合作，最快可在2-3周内完成全部流程并启动。</div>
+
+                            <div class="bg-white border border-black/10">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 2 ? null : 2" :aria-expanded="openFaq === 2">
+                                    <div class="font-bold text-obsidian-950">Q2：合作的流程是怎样的？一般需要多久启动？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 2 ? 'rotate-180' : ''"></i>
+                                </button>
+                                <div x-show="openFaq === 2" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                    A：我们的合作流程高效清晰：初步洽谈 → 协议签署 → 系统培训 → 正式上线。对于标准合作，最快可在2-3周内完成全部流程并启动。
+                                </div>
                             </div>
-                            <div class="bg-white border border-black/10 p-5">
-                                <div class="font-bold text-obsidian-950">Q3：合作的佣金模式是怎样的？结算周期是多久？</div>
-                                <div class="mt-2 text-sm text-black/70 leading-relaxed">A：我们采用透明化的佣金模式。留学申请与公寓预订分别有明确的分成比例，具体会在协议中清晰约定。结算通常按月或按季度进行，款项通过系统对账后准时支付。</div>
+
+                            <div class="bg-white border border-black/10">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 3 ? null : 3" :aria-expanded="openFaq === 3">
+                                    <div class="font-bold text-obsidian-950">Q3：合作的佣金模式是怎样的？结算周期是多久？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 3 ? 'rotate-180' : ''"></i>
+                                </button>
+                                <div x-show="openFaq === 3" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                    A：我们采用透明化的佣金模式。留学申请与公寓预订分别有明确的分成比例，具体会在协议中清晰约定。结算通常按月或按季度进行，款项通过系统对账后准时支付。
+                                </div>
                             </div>
-                            <div class="bg-white border border-black/10 p-5">
-                                <div class="font-bold text-obsidian-950">Q4：我们（合作方）需要承担哪些责任？</div>
-                                <div class="mt-2 text-sm text-black/70 leading-relaxed">A：合作期间，您主要负责前端引流与客户关系维护，而我们则提供系统、流程、签约及主要运营支持，权责清晰。</div>
+
+                            <div class="bg-white border border-black/10">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 4 ? null : 4" :aria-expanded="openFaq === 4">
+                                    <div class="font-bold text-obsidian-950">Q4：我们（合作方）需要承担哪些责任？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 4 ? 'rotate-180' : ''"></i>
+                                </button>
+                                <div x-show="openFaq === 4" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                    A：合作期间，您主要负责前端引流与客户关系维护，而我们则提供系统、流程、签约及主要运营支持，权责清晰。
+                                </div>
                             </div>
                         </div>
                     </div>
