@@ -1883,11 +1883,6 @@
                     </div>
 
                     <div class="mt-16 max-w-5xl mx-auto scrub-item anim-fade-up">
-                        <div class="text-lg font-bold text-obsidian-950">如何运作</div>
-                        <div class="mt-3 text-black/70 leading-relaxed">
-                            <div>我们精准连接两大刚需：学生的“留学梦”与“安居需”。与我们合作，一次性触达这两大核心需求。</div>
-                        </div>
-
                         <div class="mt-20 text-center scrub-item anim-fade-up">
                             <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Cooperation Modes</span>
                             <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">双重合作模式</h2>
@@ -2112,16 +2107,16 @@
                                 <div class="mt-2 text-sm text-black/70 leading-relaxed">A：合作期间，您主要负责前端引流与客户关系维护，而我们则提供系统、流程、签约及主要运营支持，权责清晰。</div>
                             </div>
                         </div>
-
-                        <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                            <button @click="document.getElementById('contact-apply')?.scrollIntoView({behavior:'smooth'})" class="px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_city_partner_inquiry"></button>
-                            <button @click="document.getElementById('contact-apply')?.scrollIntoView({behavior:'smooth'})" class="px-8 py-3 border border-black/20 text-black/80 font-bold uppercase hover:bg-black hover:text-white transition" x-text="t[lang].btn_agent_inquiry"></button>
-                        </div>
                     </div>
 
                     <div>
                         <h2 id="contact-apply" class="text-3xl font-serif font-bold text-obsidian-950">提交合作申请</h2>
                         <p class="mt-3 text-black/60">在了解全部细节后，提交你的信息，我们会在24小时内联系你。</p>
+
+                        <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                            <button type="button" @click="document.getElementById('contact-apply')?.scrollIntoView({behavior:'smooth'})" class="px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_city_partner_inquiry"></button>
+                            <button type="button" @click="document.getElementById('contact-apply')?.scrollIntoView({behavior:'smooth'})" class="px-8 py-3 border border-black/20 text-black/80 font-bold uppercase hover:bg-black hover:text-white transition" x-text="t[lang].btn_agent_inquiry"></button>
+                        </div>
 
                         <form class="mt-8 space-y-4" onsubmit="event.preventDefault(); alert('Success!')">
                             <div class="grid sm:grid-cols-2 gap-4">
