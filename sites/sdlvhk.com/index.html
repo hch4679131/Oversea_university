@@ -867,20 +867,22 @@
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                     </div>
 
-                    <!-- 2-column grid (desktop), no extra frame styling -->
+                    <!-- 2-column grid (desktop), each item keeps original: left image + right text -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
                         <template x-for="(member, idx) in t[lang].team_members.slice(0, 8)" :key="member.name + member.role">
-                            <div class="scrub-item anim-fade-up">
-                                <template x-if="t[lang].team_avatars[idx]">
-                                    <img :src="t[lang].team_avatars[idx]" alt="Team" class="w-full aspect-square object-cover rounded-sm" loading="lazy" decoding="async" />
-                                </template>
-                                <template x-if="!t[lang].team_avatars[idx]">
-                                    <div class="w-full aspect-square rounded-sm bg-black/5 flex items-center justify-center">
-                                        <div class="text-xs font-bold tracking-[0.35em] uppercase text-black/40" x-text="t[lang].team_photo_placeholder"></div>
-                                    </div>
-                                </template>
+                            <div class="grid md:grid-cols-[240px_1fr] gap-10 items-start">
+                                <div class="scrub-item anim-fade-up">
+                                    <template x-if="t[lang].team_avatars[idx]">
+                                        <img :src="t[lang].team_avatars[idx]" alt="Team" class="w-full aspect-square object-cover rounded-sm" loading="lazy" decoding="async" />
+                                    </template>
+                                    <template x-if="!t[lang].team_avatars[idx]">
+                                        <div class="w-full aspect-square rounded-sm bg-black/5 flex items-center justify-center">
+                                            <div class="text-xs font-bold tracking-[0.35em] uppercase text-black/40" x-text="t[lang].team_photo_placeholder"></div>
+                                        </div>
+                                    </template>
+                                </div>
 
-                                <div class="mt-5">
+                                <div class="scrub-item anim-fade-up">
                                     <div class="flex items-center gap-4">
                                         <i data-lucide="user" class="w-5 h-5 text-obsidian-950"></i>
                                         <div class="h-[1px] flex-1 bg-black/15"></div>
