@@ -176,12 +176,12 @@ window.SDLV_I18N = {
                         study_cases_title: '成功案例',
                         study_cases_hint: '左右滑动查看更多',
                         study_cases_items: [
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/1.png', alt: 'Offer Letter 1' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/2.png', alt: 'Offer Letter 2' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/3.png', alt: 'Offer Letter 3' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/4.png', alt: 'Offer Letter 4' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/5.png', alt: 'Offer Letter 5' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/6.png', alt: 'Offer Letter 6' }
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp', alt: 'Offer Letter 1' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp', alt: 'Offer Letter 2' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp', alt: 'Offer Letter 3' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp', alt: 'Offer Letter 4' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.05.webp', alt: 'Offer Letter 5' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.06.webp', alt: 'Offer Letter 6' }
                         ],
                         st_stat1: 'Offer 总数', st_stat2: '文书原创度', st_stat3: '学员满意度', st_stat4: 'QS前100录取率',
                         btn_eval: '免费评估我的录取机率',
@@ -473,12 +473,12 @@ window.SDLV_I18N = {
                         study_cases_title: '成功案例分享',
                         study_cases_hint: '左右滑動查看更多',
                         study_cases_items: [
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/1.png', alt: 'Offer Letter 1' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/2.png', alt: 'Offer Letter 2' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/3.png', alt: 'Offer Letter 3' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/4.png', alt: 'Offer Letter 4' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/5.png', alt: 'Offer Letter 5' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/6.png', alt: 'Offer Letter 6' }
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp', alt: 'Offer Letter 1' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp', alt: 'Offer Letter 2' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp', alt: 'Offer Letter 3' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp', alt: 'Offer Letter 4' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.05.webp', alt: 'Offer Letter 5' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.06.webp', alt: 'Offer Letter 6' }
                         ],
                         st_stat1: 'Offer 總數', st_stat2: '文書原創度', st_stat3: '學員滿意度', st_stat4: 'QS前100錄取率',
                         btn_eval: '免費評估我的錄取機率',
@@ -734,12 +734,12 @@ window.SDLV_I18N = {
                         study_cases_title: 'Success Stories',
                         study_cases_hint: 'Swipe to view more',
                         study_cases_items: [
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/1.png', alt: 'Offer Letter 1' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/2.png', alt: 'Offer Letter 2' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/3.png', alt: 'Offer Letter 3' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/4.png', alt: 'Offer Letter 4' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/5.png', alt: 'Offer Letter 5' },
-                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/6.png', alt: 'Offer Letter 6' }
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp', alt: 'Offer Letter 1' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp', alt: 'Offer Letter 2' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp', alt: 'Offer Letter 3' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp', alt: 'Offer Letter 4' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.05.webp', alt: 'Offer Letter 5' },
+                            { img: 'https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.06.webp', alt: 'Offer Letter 6' }
                         ],
                         st_stat1: 'Total Offers', st_stat2: 'Original Essays', st_stat3: 'Satisfaction', st_stat4: 'QS Top 100 Rate',
                         btn_eval: 'Free Evaluation',
