@@ -105,14 +105,20 @@
                 <div class="nav-item group">
                     <span @click="switchPage('apartments')" :class="page === 'apartments' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_apt"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
-                        <a @click.stop="switchPage('apartments', 'map')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_map"></a>
+                        <a @click.stop="switchPage('apartments', 'map')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_map_t"></a>
                         <a @click.stop="switchPage('apartments', 'showcase')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].sub_showcase"></a>
+                        <a @click.stop="switchPage('apartments', 'apt-why')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_adv_title"></a>
+                        <a @click.stop="switchPage('apartments', 'apt-reviews')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_reviews_title"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
                     <a @click="switchPage('contact')" class="px-5 py-2 bg-gold-400 text-black font-bold hover:bg-gold-300 transition duration-300" x-text="t[lang].nav_contact"></a>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('contact', 'contact-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_hero_t"></a>
                         <a @click.stop="switchPage('contact', 'contact-flow')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_flow_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-modes')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_modes_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-value')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_value_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-network')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_network_title"></a>
                         <a @click.stop="switchPage('contact', 'contact-faq')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_faq_title"></a>
                         <a @click.stop="switchPage('contact', 'contact-apply')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_apply_title"></a>
                         <a @click.stop="switchPage('contact', 'contact-cta')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_cta_title"></a>
@@ -1240,7 +1246,13 @@
             </section>
 
             <section id="showcase" class="py-24 bg-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-12 scrub-item anim-fade-up">
+                        <h2 class="text-4xl md:text-5xl font-serif text-white" x-text="t[lang].sub_showcase"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
                     <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-csw')">
                         <div class="relative h-64 overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
@@ -1277,6 +1289,7 @@
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
                         </div>
+                    </div>
                     </div>
                 </div>
             </section>
@@ -1344,7 +1357,7 @@
 
                     <div class="h-20"></div>
 
-                    <div class="text-center scrub-item anim-fade-up">
+                    <div id="apt-reviews" class="text-center scrub-item anim-fade-up">
                         <h3 class="text-3xl md:text-4xl font-serif text-obsidian-950" x-text="t[lang].apt_reviews_title"></h3>
                         <div class="w-16 h-[1px] bg-gold-400 mx-auto mt-6"></div>
                     </div>
@@ -1836,7 +1849,7 @@
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="text-center mb-16 scrub-item anim-fade-up">
                         <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Business Cooperation</span>
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">合作流程</h2>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].contact_flow_title"></h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                         <div class="mt-6 text-black/60 text-sm md:text-base leading-relaxed">
                             <div>我们精准连接两大刚需：学生的“留学梦”与“安居需”。</div>
@@ -1888,9 +1901,9 @@
                     </div>
 
                     <div class="mt-16 max-w-5xl mx-auto scrub-item anim-fade-up">
-                        <div class="mt-20 text-center scrub-item anim-fade-up">
+                        <div id="contact-modes" class="mt-20 text-center scrub-item anim-fade-up">
                             <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Cooperation Modes</span>
-                            <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">双重合作模式</h2>
+                            <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].contact_modes_title"></h2>
                             <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                             <div class="mt-6 text-black/60 text-sm md:text-base leading-relaxed">
                                 <div>无论您是区域市场的建设者，还是精英圈层的连接者，</div>
@@ -1962,9 +1975,9 @@
                             </div>
                         </div>
 
-                        <div class="mt-20 text-center scrub-item anim-fade-up">
+                        <div id="contact-value" class="mt-20 text-center scrub-item anim-fade-up">
                             <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Cooperation Value</span>
-                            <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">合作价值</h2>
+                            <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].contact_value_title"></h2>
                             <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                             <div class="mt-6 text-black/60 text-sm md:text-base leading-relaxed">共享品牌红利，共拓教育蓝海。</div>
                         </div>
@@ -2026,10 +2039,10 @@
                         </div>
 
                         <!-- Page 2 "商业合作" block (copied) -->
-                        <section id="enterprise-network" class="mt-20">
+                        <section id="contact-network" class="mt-20">
                             <div class="text-center mb-10">
                                 <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Enterprise Network</span>
-                                <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">企业网络</h2>
+                                <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].contact_network_title"></h2>
                                 <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                                 <p class="mt-6 text-black/60 text-sm md:text-base" x-text="t[lang].partner_sub"></p>
                             </div>
@@ -2092,7 +2105,7 @@
             <section id="contact-faq" class="py-24 bg-paper border-b border-black/10">
                 <div class="max-w-7xl mx-auto px-6">
                     <div x-data="{ openFaq: 1 }">
-                        <h2 class="text-3xl font-serif font-bold text-obsidian-950">合作常见问题 Q&A</h2>
+                        <h2 class="text-3xl font-serif font-bold text-obsidian-950" x-text="t[lang].contact_faq_title"></h2>
 
                         <div class="mt-8 space-y-3">
                             <div class="bg-white border border-black/10">
@@ -2149,26 +2162,29 @@
                             加入我们
                         </button>
                     </div>
+                </div>
+            </section>
 
-                    <!-- <div class="mt-14">
-                        <h2 id="contact-apply" class="text-3xl font-serif font-bold text-obsidian-950">提交合作申请</h2>
-                        <p class="mt-3 text-black/60">在了解全部细节后，提交你的信息，我们会在24小时内联系你。</p>
-
-                        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
-                            <button type="button" @click="document.getElementById('contact-apply')?.scrollIntoView({behavior:'smooth'})" class="w-full px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_city_partner_inquiry"></button>
-                            <button type="button" @click="document.getElementById('contact-apply')?.scrollIntoView({behavior:'smooth'})" class="w-full px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_agent_inquiry"></button>
+            <section id="contact-apply" class="py-24 bg-paper border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="max-w-2xl mx-auto">
+                        <div class="text-center scrub-item anim-fade-up">
+                            <h2 class="text-3xl md:text-4xl font-serif font-bold text-obsidian-950" x-text="t[lang].contact_apply_title"></h2>
+                            <div class="w-16 h-[1px] bg-gold-400 mx-auto mt-6"></div>
+                            <p class="mt-4 text-black/60 text-sm md:text-base" x-text="t[lang].contact_apply_sub"></p>
                         </div>
 
-                        <form class="mt-8 space-y-4" onsubmit="event.preventDefault(); alert('Success!')">
+                        <form class="mt-10 space-y-4 scrub-item anim-fade-up" @submit.prevent="openWeChatModal()">
                             <div class="grid sm:grid-cols-2 gap-4">
                                 <input type="text" placeholder="姓名" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full" />
                                 <input type="text" placeholder="所在城市" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full" />
                             </div>
                             <input type="text" placeholder="手机号 / 微信" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full" />
                             <textarea rows="4" placeholder="资源与合作意向（例如：渠道/社群/学校资源/团队情况等）" class="px-5 py-4 bg-white border border-black/10 text-black focus:outline-none w-full"></textarea>
-                            <button class="w-full px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition">提交合作申请</button>
+                            <button type="submit" class="w-full px-8 py-4 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].contact_apply_title"></button>
+                            <div class="text-xs text-black/40 text-center">提交后将引导至微信扫码咨询</div>
                         </form>
-                    </div> -->
+                    </div>
                 </div>
             </section>
 
