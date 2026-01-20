@@ -26,13 +26,14 @@ window.SDLV_I18N = {
                         team_title: 'SDLV 团队专材',
                         team_photo_placeholder: '照片预留',
                         team_avatars: [
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/84897200a1f5fa00754916af10f1cef7.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a706c10c4394ce7ae2cf183aba144a39.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a9ca703a939675f734419f6154171c25.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/eeb6e6bb11f5654de2f4d76f817d735d.jpg'
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Legon.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Ison.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Thomas.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Lily.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Sloth.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Andy.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20UU.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Veto.webp'
                         ],
                         team_members: [
                             {
@@ -339,13 +340,14 @@ window.SDLV_I18N = {
                         team_title: 'SDLV 團隊專才',
                         team_photo_placeholder: '照片預留',
                         team_avatars: [
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/84897200a1f5fa00754916af10f1cef7.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a706c10c4394ce7ae2cf183aba144a39.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a9ca703a939675f734419f6154171c25.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/eeb6e6bb11f5654de2f4d76f817d735d.jpg'
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Legon.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Ison.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Thomas.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Lily.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Sloth.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Andy.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20UU.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Veto.webp'
                         ],
                         team_members: [
                             {
@@ -652,13 +654,14 @@ window.SDLV_I18N = {
                         team_title: 'Our Team',
                         team_photo_placeholder: 'Photo',
                         team_avatars: [
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/081fe92d1f0af179b7cc0a3ea90b8841.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/1c7c4226931a73bbee0fc365e3f74a7d.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/52bc01ce0785269be479dc1721afd77f.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/84897200a1f5fa00754916af10f1cef7.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a706c10c4394ce7ae2cf183aba144a39.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/a9ca703a939675f734419f6154171c25.jpg',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/eeb6e6bb11f5654de2f4d76f817d735d.jpg'
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Legon.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Ison.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Thomas.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Lily.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Sloth.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Andy.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20UU.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Veto.webp'
                         ],
                         team_members: [
                             { name: 'A', role: 'Co-founder', bio: 'Master\nFormer Big 4 accounting firm\n10+ years in property management and asset operations; built standardized operations and service systems.' },
