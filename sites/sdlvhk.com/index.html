@@ -867,8 +867,8 @@
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                     </div>
 
-                    <!-- 4×2 grid (desktop), no extra frame styling -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+                    <!-- 2-column grid (desktop), no extra frame styling -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
                         <template x-for="(member, idx) in t[lang].team_members.slice(0, 8)" :key="member.name + member.role">
                             <div class="scrub-item anim-fade-up">
                                 <template x-if="t[lang].team_avatars[idx]">
