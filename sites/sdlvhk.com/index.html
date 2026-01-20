@@ -1808,15 +1808,29 @@
 
         <!-- ================= PAGE 6: 联系我们 ================= -->
         <div x-show="page === 'contact'" x-transition:enter="transition ease-out duration-500" class="w-full bg-paper text-obsidian-950">
+            <!-- Contact: Hero (对齐前几个 page 的 Hero 风格) -->
+            <section id="contact-hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://static.sdlvhk.com/图片素材/other/WImage%208.0%20Business%20Cooperations.webp"
+                        class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Business Cooperations">
+                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/55 to-transparent"></div>
+                </div>
+
+                <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64">
+                    <div class="scrub-item anim-fade-up max-w-3xl">
+                        <h1 class="text-6xl font-serif font-bold text-white leading-tight mb-6" x-text="t[lang].contact_hero_t"></h1>
+                        <p class="text-xl text-gold-400/80 mb-4 tracking-widest whitespace-pre-line" x-text="t[lang].contact_hero_p1"></p>
+                        <p class="text-xl text-gold-400/80 tracking-widest whitespace-pre-line" x-text="t[lang].contact_hero_p2"></p>
+                    </div>
+                </div>
+            </section>
+
             <!-- 合作流程全览：垂直时间轴 -->
             <section id="contact-flow" class="py-32 bg-paper border-b border-black/5">
                 <div class="max-w-7xl mx-auto px-6">
 
                     <div class="flex items-end justify-between gap-10 mb-20 scrub-item anim-fade-up">
-                        <div class="max-w-3xl">
-                            <h1 class="text-5xl font-serif font-bold text-obsidian-950 mb-4">合作流程全览</h1>
-                            <p class="text-black/60">从携手到共赢的清晰路径</p>
-                        </div>
+
 
                         <button type="button"
                                 @click="goAgentPortal()"
@@ -1833,7 +1847,10 @@
                         <div class="absolute top-[50%] left-[50%] w-1 h-1 bg-black/40 rounded-full"></div>
                         <div class="absolute top-[60%] left-[55%] w-20 h-[1px] bg-gradient-to-l from-gold-400 to-transparent transform -rotate-45 origin-left"></div>
                     </div>
-
+                        <div class="max-w-3xl">
+                            <h1 class="text-5xl font-serif font-bold text-obsidian-950 mb-4">合作流程全览</h1>
+                            <p class="text-black/60">从携手到共赢的清晰路径</p>
+                        </div>
                     <div class="relative border-l border-black/10 pl-10 space-y-16 scrub-item anim-fade-up">
                         <!-- 阶段一 -->
                         <div class="relative group">
