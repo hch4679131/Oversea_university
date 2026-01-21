@@ -210,3 +210,13 @@ body {
     transition: none !important;
     box-shadow: none !important;
 }
+
+/* Footer quick links: prevent wrapping and prevent cross-column overlap */
+.footer-links button,
+.footer-links a {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
