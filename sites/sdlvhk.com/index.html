@@ -849,7 +849,7 @@
                             <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp" 
                                 class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5" alt="Team">
                             <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
-                                <span class="block text-2xl font-bold text-black" x-text="t[lang].about_badge"></span>
+                                <span class="block text-2xl z-[999] font-bold text-black" x-text="t[lang].about_badge"></span>
                             </div>
                         </div>
                     </div>
@@ -1253,38 +1253,38 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-8">
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-csw')">
+                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-ymt')">
                         <div class="relative h-64 overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
                         </div>
                         <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_csw_card_title"></div>
-                            <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_csw_card_loc"></div>
+                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_ymt_card_title"></div>
+                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_ymt_card_loc"></div> -->
                             <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_csw_card_b1"></div>
-                                <div x-text="t[lang].apt_csw_card_b2"></div>
+                                <div x-text="t[lang].apt_ymt_card_b1"></div>
+                                <div x-text="t[lang].apt_ymt_card_b2"></div>
                             </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-csw')">
+                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-ymt')">
                                 <span x-text="t[lang].btn_explore_apt"></span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
                         </div>
                     </div>
 
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-ymt')">
+                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-csw')">
                         <div class="relative h-64 overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
                         </div>
                         <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_ymt_card_title"></div>
-                            <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_ymt_card_loc"></div>
+                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_csw_card_title"></div>
+                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_csw_card_loc"></div> -->
                             <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_ymt_card_b1"></div>
-                                <div x-text="t[lang].apt_ymt_card_b2"></div>
+                                <div x-text="t[lang].apt_csw_card_b1"></div>
+                                <div x-text="t[lang].apt_csw_card_b2"></div>
                             </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-ymt')">
+                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-csw')">
                                 <span x-text="t[lang].btn_explore_apt"></span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
@@ -1298,7 +1298,7 @@
                         </div>
                         <div class="px-6 py-6">
                             <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_tst_card_title"></div>
-                            <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_tst_card_loc"></div>
+                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_tst_card_loc"></div> -->
                             <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
                                 <div x-text="t[lang].apt_tst_card_b1"></div>
                                 <div x-text="t[lang].apt_tst_card_b2"></div>
@@ -1310,14 +1310,71 @@
                         </div>
                     </div>
 
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-syp3')">
+                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-oy')">
                         <div class="relative h-64 overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
                         </div>
                         <div class="px-6 py-6">
+                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_oy_card_title"></div>
+                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_oy_card_loc"></div> -->
+                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
+                                <div x-text="t[lang].apt_oy_card_b1"></div>
+                                <div x-text="t[lang].apt_oy_card_b2"></div>
+                            </div>
+                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-oy')">
+                                <span x-text="t[lang].btn_explore_apt"></span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-syp1')">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="px-6 py-6">
+                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_syp1_card_title"></div>
+                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp1_card_loc"></div> -->
+                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
+                                <div x-text="t[lang].apt_syp1_card_b1"></div>
+                                <div x-text="t[lang].apt_syp1_card_b2"></div>
+                            </div>
+                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-syp1')">
+                                <span x-text="t[lang].btn_explore_apt"></span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-syp2')">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="px-6 py-6">
+                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_syp2_card_title"></div>
+                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp2_card_loc"></div> -->
+                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
+                                <div x-text="t[lang].apt_syp2_card_b1"></div>
+                                <div x-text="t[lang].apt_syp2_card_b2"></div>
+                            </div>
+                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-syp2')">
+                                <span x-text="t[lang].btn_explore_apt"></span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-syp3')">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="px-6 py-6">
                             <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_syp3_card_title"></div>
-                            <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp3_card_loc"></div>
+                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp3_card_loc"></div> -->
                             <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
                                 <div x-text="t[lang].apt_syp3_card_b1"></div>
                                 <div x-text="t[lang].apt_syp3_card_b2"></div>
@@ -1336,64 +1393,7 @@
                         </div>
                         <div class="px-6 py-6">
                             <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_pfl_card_title"></div>
-                            <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_pfl_card_loc"></div>
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_pfl_card_b1"></div>
-                                <div x-text="t[lang].apt_pfl_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-pfl')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-pfl')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_pfl_card_title"></div>
-                            <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_pfl_card_loc"></div>
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_pfl_card_b1"></div>
-                                <div x-text="t[lang].apt_pfl_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-pfl')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-pfl')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_pfl_card_title"></div>
-                            <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_pfl_card_loc"></div>
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_pfl_card_b1"></div>
-                                <div x-text="t[lang].apt_pfl_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-pfl')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-pfl')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_pfl_card_title"></div>
-                            <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_pfl_card_loc"></div>
+                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_pfl_card_loc"></div> -->
                             <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
                                 <div x-text="t[lang].apt_pfl_card_b1"></div>
                                 <div x-text="t[lang].apt_pfl_card_b2"></div>
@@ -1532,7 +1532,7 @@
                         </div>
                         <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950">汇生会社(长沙湾)</h1>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-4 text-black/70 leading-relaxed">长沙湾，九龙</p>
+                        <!-- <p class="mt-4 text-black/70 leading-relaxed">长沙湾，九龙</p> -->
 
                         <div class="mt-10 grid sm:grid-cols-2 gap-6">
                             <div class="p-6 bg-black/5 border border-black/10">
@@ -1574,7 +1574,7 @@
                         </div>
                         <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_tst_card_title"></h1>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_tst_card_loc"></p>
+                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_tst_card_loc"></p> -->
 
                         <div class="mt-10 grid sm:grid-cols-2 gap-6">
                             <div class="p-6 bg-black/5 border border-black/10">
@@ -1619,7 +1619,7 @@
                         </div>
                         <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_syp3_card_title"></h1>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_syp3_card_loc"></p>
+                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_syp3_card_loc"></p> -->
 
                         <div class="mt-10 grid sm:grid-cols-2 gap-6">
                             <div class="p-6 bg-black/5 border border-black/10">
@@ -1661,7 +1661,7 @@
                         </div>
                         <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_pfl_card_title"></h1>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_pfl_card_loc"></p>
+                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_pfl_card_loc"></p> -->
 
                         <div class="mt-10 grid sm:grid-cols-2 gap-6">
                             <div class="p-6 bg-black/5 border border-black/10">
@@ -1674,6 +1674,134 @@
                                 <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
                                 <div class="mt-4 space-y-2 text-sm text-black/80">
                                     <div>🚌 多条巴士线路直达香港大学</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10">
+                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                <span>返回公寓展示</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 4G: 奥运 · 公寓详情（占位版） ================= -->
+        <div x-show="page === 'apartment-oy'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
+                    <div class="scrub-item anim-fade-up">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
+                            <span>公寓頁標籤</span>
+                            <span class="text-black/40">/</span>
+                            <span class="font-bold" x-text="t[lang].apt_oy_card_title"></span>
+                        </div>
+                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_oy_card_title"></h1>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
+                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_oy_card_loc"></p> -->
+
+                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
+                                <div class="mt-4 space-y-2 text-sm text-black/80">
+                                    <div>🎓 香港理工大学</div>
+                                    <div>🎓 香港城市大学</div>
+                                    <div>🎓 香港浸会大学</div>
+                                    <div>🎓 香港都会大学</div>
+                                </div>
+                            </div>
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
+                                <div class="mt-4 space-y-2 text-sm text-black/80">
+                                    <div>🚇 油麻地站</div>
+                                    <div>🚇 柯士甸站</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10">
+                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                <span>返回公寓展示</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 4H: 西营盘一期 · 公寓详情（占位版） ================= -->
+        <div x-show="page === 'apartment-syp1'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
+                    <div class="scrub-item anim-fade-up">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
+                            <span>公寓頁標籤</span>
+                            <span class="text-black/40">/</span>
+                            <span class="font-bold" x-text="t[lang].apt_syp1_card_title"></span>
+                        </div>
+                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_syp1_card_title"></h1>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
+                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_syp1_card_loc"></p> -->
+
+                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
+                                <div class="mt-4 space-y-2 text-sm text-black/80">
+                                    <div>🎓 香港大学</div>
+                                    <div>🎓 香港演艺学院</div>
+                                    <div>🎓 香港树仁大学</div>
+                                </div>
+                            </div>
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
+                                <div class="mt-4 space-y-2 text-sm text-black/80">
+                                    <div>🚇 西营盘站</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10">
+                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                <span>返回公寓展示</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 4I: 西营盘二期 · 公寓详情（占位版） ================= -->
+        <div x-show="page === 'apartment-syp2'" x-transition:enter="transition ease-out duration-500" class="w-full">
+            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
+                    <div class="scrub-item anim-fade-up">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
+                            <span>公寓頁標籤</span>
+                            <span class="text-black/40">/</span>
+                            <span class="font-bold" x-text="t[lang].apt_syp2_card_title"></span>
+                        </div>
+                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_syp2_card_title"></h1>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
+                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_syp2_card_loc"></p> -->
+
+                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
+                                <div class="mt-4 space-y-2 text-sm text-black/80">
+                                    <div>🎓 香港大学</div>
+                                    <div>🎓 香港演艺学院</div>
+                                    <div>🎓 香港树仁大学</div>
+                                </div>
+                            </div>
+                            <div class="p-6 bg-black/5 border border-black/10">
+                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
+                                <div class="mt-4 space-y-2 text-sm text-black/80">
+                                    <div>🚇 西营盘站</div>
                                 </div>
                             </div>
                         </div>
