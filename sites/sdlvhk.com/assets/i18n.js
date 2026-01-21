@@ -229,7 +229,6 @@ window.SDLV_I18N = {
                             }
                         ],
                         apt_compare_text: '传统学生公寓 vs. 汇生会学生居社 vs. 普通私人住宅',
-                        apt_compare_featured_badge: '推荐',
                         apt_compare_cards: [
                             {
                                 title: '其他学生公寓',
@@ -556,7 +555,6 @@ window.SDLV_I18N = {
                             }
                         ],
                         apt_compare_text: '傳統學生公寓 vs. 滙生會學生居社 vs. 普通私人住宅',
-                        apt_compare_featured_badge: '推薦',
                         apt_compare_cards: [
                             {
                                 title: '其他學生公寓',
@@ -847,7 +845,6 @@ window.SDLV_I18N = {
                             }
                         ],
                         apt_compare_text: 'Traditional student dorms vs. Huisenghui student co‑living vs. private rentals',
-                        apt_compare_featured_badge: 'Featured',
                         apt_compare_cards: [
                             {
                                 title: 'Other Student Dorms',
