@@ -2867,7 +2867,7 @@
 
     <!-- Footer -->
     <footer x-show="page !== 'contact'" class="bg-black text-gray-500 py-16 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-sm">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 text-sm">
             <div>
                 <div class="flex flex-col">
                     <div class="flex items-center gap-3">
@@ -2883,27 +2883,76 @@
             </div>
             <div>
                 <h4 class="text-white font-bold mb-4 uppercase" x-text="t[lang].footer_contact"></h4>
-                <ul class="space-y-2">
-                    <li>
-                        <button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('about', 'about-hero')" x-text="t[lang].footer_link_about"></button>
-                    </li>
-                    <li>
-                        <button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('study', 'study-hero')" x-text="t[lang].footer_link_study"></button>
-                    </li>
-                    <li>
-                        <button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('career', 'career-hero')" x-text="t[lang].footer_link_career"></button>
-                    </li>
-                    <li>
-                        <button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartments', 'apartments-hero')" x-text="t[lang].footer_link_apt"></button>
-                    </li>
-                    <li>
-                        <button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-hero')" x-text="t[lang].footer_link_contact"></button>
-                    </li>
-                </ul>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+                    <div>
+                        <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_about"></div>
+                        <ul class="space-y-2">
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('about', 'about-hero')" x-text="t[lang].about_hero_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('about', 'history')" x-text="t[lang].history_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('about', 'about-vision')" x-text="t[lang].about_vm_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('about', 'intro')" x-text="t[lang].home_about_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('about', 'team')" x-text="t[lang].team_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('about', 'partners')" x-text="t[lang].partner_title"></button></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_study"></div>
+                        <ul class="space-y-2">
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('study', 'study-hero')" x-text="t[lang].study_hero_t"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('study', 'study-scope')" x-text="t[lang].study_scope_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('study', 'study-flow')" x-text="t[lang].study_flow_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('study', 'study-advantages')" x-text="t[lang].study_adv_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('study', 'content')" x-text="t[lang].study_uni_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('study', 'study-cases')" x-text="t[lang].study_cases_title"></button></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_career"></div>
+                        <ul class="space-y-2">
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('career', 'career-hero')" x-text="t[lang].career_hero_t"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('career', 'career-intro')" x-text="t[lang].car_h1"></button></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_apt"></div>
+                        <ul class="space-y-2">
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartments', 'apartments-hero')" x-text="t[lang].apt_hero_t"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartments', 'map')" x-text="t[lang].apt_map_t"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartment-csw')">·<span x-text="t[lang].apt_csw_card_title"></span></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartment-ymt')">·<span x-text="t[lang].apt_ymt_card_title"></span></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartment-tst')">·<span x-text="t[lang].apt_tst_card_title"></span></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartment-oy')">·<span x-text="t[lang].apt_oy_card_title"></span></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartment-syp1')">·<span x-text="t[lang].apt_syp1_card_title"></span></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartment-syp2')">·<span x-text="t[lang].apt_syp2_card_title"></span></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartment-syp3')">·<span x-text="t[lang].apt_syp3_card_title"></span></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartment-pfl')">·<span x-text="t[lang].apt_pfl_card_title"></span></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartments', 'apt-why')" x-text="t[lang].apt_adv_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('apartments', 'apt-reviews')" x-text="t[lang].apt_reviews_title"></button></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_contact"></div>
+                        <ul class="space-y-2">
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-hero')" x-text="t[lang].contact_hero_t"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-flow')" x-text="t[lang].contact_flow_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-modes')" x-text="t[lang].contact_modes_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-value')" x-text="t[lang].contact_value_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-network')" x-text="t[lang].contact_network_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-faq')" x-text="t[lang].contact_faq_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-apply')" x-text="t[lang].contact_apply_title"></button></li>
+                            <li><button type="button" class="text-gray-300 hover:text-gold-400 transition whitespace-nowrap" @click="switchPage('contact', 'contact-cta')" x-text="t[lang].contact_cta_title"></button></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-xs flex items-center justify-between gap-6">
-            <span class="text-left">© 2026 SDLV Group. All Rights Reserved.</span>
+            <span class="text-left" x-text="t[lang].footer_copyright"></span>
             <div class="text-right whitespace-nowrap">
                 <a href="#" class="hover:text-white transition" @click.prevent x-text="t[lang].footer_terms"></a>
                 <span class="mx-2 text-white/15">|</span>

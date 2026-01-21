@@ -337,6 +337,7 @@ window.SDLV_I18N = {
                         footer_terms: '使用条款',
                         footer_privacy: '隐私政策',
                         footer_cookie: 'Cookie政策',
+                        footer_copyright: '© 2026 汇生会SDLV 版权所有。',
                         addr_hk: '香港总部：荃湾',
                         addr_sz: '深圳办事处：西乡'
                     },
@@ -677,6 +678,7 @@ window.SDLV_I18N = {
                         footer_terms: '使用條款',
                         footer_privacy: '隱私政策',
                         footer_cookie: 'Cookie 政策',
+                        footer_copyright: '© 2026 滙生會 SDLV 版權所有。',
                         addr_hk: '香港總部：中環',
                         addr_sz: '深圳辦事處：西鄉'
                     },
@@ -981,6 +983,7 @@ window.SDLV_I18N = {
                         footer_terms: 'Terms',
                         footer_privacy: 'Privacy',
                         footer_cookie: 'Cookie Policy',
+                        footer_copyright: '© 2026 SDLV. All rights reserved.',
                         addr_hk: 'HK HQ: Central',
                         addr_sz: 'SZ Office: Xixiang'
                     }
