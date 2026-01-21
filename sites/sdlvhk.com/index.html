@@ -2961,8 +2961,9 @@
             <div>
                 <h4 class="text-white font-bold mb-4 uppercase" x-text="t[lang].footer_contact"></h4>
 
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8">
-                    <div>
+                <div class="lg:flex lg:items-start lg:justify-between lg:gap-14">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 lg:flex-1">
+                        <div>
                         <!-- <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_about"></div> -->
                         <ul class="space-y-2 footer-links">
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('about', 'about-hero')" x-text="t[lang].about_hero_title"></button></li>
@@ -2972,9 +2973,9 @@
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('about', 'team')" x-text="t[lang].team_title"></button></li>
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('about', 'partners')" x-text="t[lang].partner_title"></button></li>
                         </ul>
-                    </div>
+                        </div>
 
-                    <div>
+                        <div>
                         <!-- <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_study"></div> -->
                         <ul class="space-y-2 footer-links">
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('study', 'study-hero')" x-text="t[lang].study_hero_t"></button></li>
@@ -2984,17 +2985,17 @@
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('study', 'content')" x-text="t[lang].study_uni_title"></button></li>
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('study', 'study-cases')" x-text="t[lang].study_cases_title"></button></li>
                         </ul>
-                    </div>
+                        </div>
 
-                    <div>
+                        <div>
                         <!-- <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_career"></div> -->
                         <ul class="space-y-2 footer-links">
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('career', 'career-hero')" x-text="t[lang].career_hero_t"></button></li>
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('career', 'career-intro')" x-text="t[lang].car_h1"></button></li>
                         </ul>
-                    </div>
+                        </div>
 
-                    <div>
+                        <div>
                         <!-- <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_apt"></div> -->
                         <ul class="space-y-2 footer-links">
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('apartments', 'apartments-hero')" x-text="t[lang].apt_hero_t"></button></li>
@@ -3010,9 +3011,10 @@
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('apartments', 'apt-why')" x-text="t[lang].apt_adv_title"></button></li>
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('apartments', 'apt-reviews')" x-text="t[lang].apt_reviews_title"></button></li>
                         </ul>
+                        </div>
                     </div>
 
-                    <div>
+                    <div class="mt-10 lg:mt-0 lg:shrink-0">
                         <!-- <div class="text-white/90 font-bold mb-3 uppercase" x-text="t[lang].nav_contact"></div> -->
                         <ul class="space-y-2 gap-x-6 footer-links">
                             <li><button type="button" class="text-gray-300 hover:text-gold-400 transition" @click="switchPage('contact', 'contact-hero')" x-text="t[lang].contact_hero_t"></button></li>
