@@ -1451,12 +1451,12 @@
 
                     <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         <template x-for="(card, idx) in t[lang].apt_compare_cards" :key="idx">
-                            <div class="p-2 scrub-item anim-fade-up">
+                            <div class="p-2 scrub-item anim-fade-up" :class="idx === 1 ? 'bg-gold-50/60 rounded-2xl ring-1 ring-gold-400/20' : ''">
                                 <div class="flex items-center gap-4">
-                                    <i data-lucide="sparkles" class="w-5 h-5 text-obsidian-950"></i>
+                                    <i data-lucide="sparkles" class="w-5 h-5" :class="idx === 1 ? 'text-gold-500' : 'text-obsidian-950'"></i>
                                     <div class="h-[1px] flex-1 bg-black/15"></div>
                                 </div>
-                                <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center" x-text="card.title"></div>
+                                <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center" :class="idx === 1 ? 'text-xl' : ''" x-text="card.title"></div>
                                 <ul class="mt-4 space-y-2 text-sm text-black/70 leading-relaxed">
                                     <template x-for="(b, bIdx) in card.bullets" :key="bIdx">
                                         <li class="flex gap-3">
