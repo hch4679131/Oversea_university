@@ -197,7 +197,7 @@ window.SDLV_I18N = {
                         apt_map_t: '汇生会社分布',
                         apt_map_sub: '探索我们遍布全港的学生居社，为您提供便捷可靠的理想居所',
                         apt_map_sub2: '城中居社毗连各大学府以及生活娱乐所需',
-                        apt_map_caption1: '汇生会学生公寓，你在香港的第二个家。',
+                        apt_map_caption1: '汇生会社，你在香港的第二个家。',
                         apt_map_caption2: '汇生会公寓：不止一个住址，更是你在香港开启学业生活的战略起点。',
                         apt_adv_title: '为什么选择我们？',
                         apt_adv_text: '选择香港汇生会，不止是「住」，更是「省心生活」',
@@ -229,6 +229,7 @@ window.SDLV_I18N = {
                             }
                         ],
                         apt_compare_text: '传统学生公寓 vs. 汇生会学生居社 vs. 普通私人住宅',
+                        apt_compare_featured_badge: '推荐',
                         apt_compare_cards: [
                             {
                                 title: '其他学生公寓',
@@ -555,6 +556,7 @@ window.SDLV_I18N = {
                             }
                         ],
                         apt_compare_text: '傳統學生公寓 vs. 滙生會學生居社 vs. 普通私人住宅',
+                        apt_compare_featured_badge: '推薦',
                         apt_compare_cards: [
                             {
                                 title: '其他學生公寓',
@@ -845,6 +847,7 @@ window.SDLV_I18N = {
                             }
                         ],
                         apt_compare_text: 'Traditional student dorms vs. Huisenghui student co‑living vs. private rentals',
+                        apt_compare_featured_badge: 'Featured',
                         apt_compare_cards: [
                             {
                                 title: 'Other Student Dorms',
