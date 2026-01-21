@@ -30,56 +30,57 @@ window.SDLV_I18N = {
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Ison.webp',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Thomas.webp',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Lily.webp',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Sloth.webp',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Andy.webp',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20UU.webp',
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Veto.webp'
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Veto.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Sloth.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20UU.webp'       
                         ],
                         team_members: [
                             {
-                                name: 'A',
+                                name: 'Ison Ng',
                                 role: '联合创始人',
-                                bio: '欧洲大学学院硕士\n曾任职于国际四大会计师事务所\n拥有超过十年的资深物业管理与资产运营经验，擅长构建标准化服务体系与战略规划，主导构建公司标准化运营与服务体系。'
+                                bio: '欧洲大学学院硕士\n超过八年的会计和财务管理经验\n曾任职于德勤和教育咨询公司\n资深物业管理与资产运营'
                             },
                             {
-                                name: 'B',
+                                name: 'Legon Ng',
                                 role: '联合创始人',
-                                bio: '香港理工大学硕士，澳大利亚迪肯大学学士\n香港青年商會北區2025年度副会长\n香港湾仔中西区工商联会会董\n7年留学规划行业从业经验\n深耕留学规划行业七年，精通国际教育路径与精英人才发展规划，主导公司留学战略与高端资源拓展。'
+                                bio: '香港理工大学硕士，澳大利亚迪肯大学学士\n香港知名教育补习社负责人\n香港湾仔中西区工商联会会董\n香港青年商會北區2025年度副会长'
                             },
                             {
                                 name: 'Thomas Leung',
                                 role: '总经理',
-                                bio: '香港都会大学学士\n数十年服務開發及营运经验，曾任国际知名教育機構產品開發部主管。具备丰富的项目运营与市场拓展经验，助力公司拓展全球合作网络。'
+                                bio: '香港都会大学学士\n前国际教育机构产品开发主管\n前音乐教育学院总经理\n专研中港IB及DSE升学规划'
                             },
                             {
                                 name: 'Lily Wong',
                                 role: '留学业务总监',
-                                bio: '香港浸会大学硕士\n香港浸会大学BM Capstone Project特邀评委\n香港城市大学GBA Outstanding ESG Youth Business Competition荣誉Sponsor\n拥有六年留学规划行业经验，专长于背景提升与高端学术申请'
+                                bio: '香港浸会大学硕士\n浸大商管 Capstone Project 特邀评委\n城大湾区杰出ESG青年商赛荣誉赞助\n专研留学背景提升及高端学术申请\n专研顶尖学府录取文书面试逻辑策略'
+                            },
+                            {
+                                name: 'Andy Chan',
+                                role: '居社营运总监',
+                                bio: '澳洲迪肯大学学士\n10年澳大利亚学习及工作经历\n统筹学生居社运营管理\n专研留学生活规划指导及支援'
+                            },
+                            {
+                                name: 'Veto Wong',
+                                role: '人力资源总监',
+                                bio: '香港都会大学学士\n曾服职国际猎头机构拥有人力资源全模块管理经验\n专研职业规划及求職战略指导'
                             },
                             {
                                 name: 'Sloth',
                                 role: '留学事务经理',
-                                bio: '美国约翰霍普金斯大学硕士\n澳洲莫纳什大学学士\n6年澳美两国学习及留学规划工作经验\n兼具澳美两国共六年的学习与工作经验，深谙北美顶尖学府的录取逻辑与文化适应之道。'
+                                bio: '美国约翰霍普金斯大学硕士，澳洲墨尔本大学学士\n澳美两国留学规划实战经验\n专研跨文化适应及标的发展规划'
                             },
+                            
                             {
-                                name: 'Andy Chen',
-                                role: '学生公寓营运总监',
-                                bio: '澳洲迪肯大学学士\n凭借十年在澳大利亚的学习、工作与生活经验，为学员提供无缝衔接的本地化支持与职业发展指导。\n全面负责学生公寓的运营与管理。'
+                                name: 'UU Do',
+                                role: '高级客户经理',
+                                bio: '香港都会大学学士\n专研留学住规划及住宿管理经验\n主导「留学+住宿」一体化服务流程\n主导学生个性化服务与家庭沟通'
                             },
-                            {
+                             {
                                 name: 'Winson Huang',
                                 role: '佛山分公司总经理',
                                 bio: '北京师范大学珠海分校\n全面负责佛山分公司的整体运营、市场拓展与团队管理。\n凭借深厚的本地资源与客户服务经验，为大湾区学子提供贴身的留学咨询与境外安家服务。\n擅长跨境资源整合，专注服务体系数字化。'
-                            },
-                            {
-                                name: 'Veto Wong',
-                                role: '业务拓展经理',
-                                bio: '香港都会大学学士\n负责内部流程优化与学生服务体系建设，确保全链条服务的高效与稳定。'
-                            },
-                            {
-                                name: 'UU DU',
-                                role: '高级客户经理',
-                                bio: '香港都会大学学士\n5年留学规划行业从业经验\n专注学生个性化服务与家庭沟通，成为连接学生、家庭与公司的可靠纽带。'
                             }
                         ],
                         about_h1: '我们始终是学子与家庭', about_h1_sub: '“最坚实的后盾”',
@@ -326,7 +327,18 @@ window.SDLV_I18N = {
                         contact_network_title: '企业网络',
                         contact_apply_sub: '在了解全部细节后，提交你的信息，我们会在24小时内联系你。',
                         cta_title: '准备好开启下一站了吗？', cta_desc: '请扫码添加微信，我们的资深顾问将在 24 小时内与您联系。', cta_qr_hint: '打开微信扫一扫，添加我们为好友。', ph_contact: '电话号码 / 微信 ID', btn_submit: '立即免费咨询',
-                        footer_desc: '全球教育与职业精英服务。\n始于2016。', footer_meta: '业务范围：留学规划 · 学生公寓 · 职涯规划', footer_contact: '联系我们', addr_hk: '香港总部：荃湾', addr_sz: '深圳办事处：西乡'
+                        footer_desc: '全球教育与职业精英服务。\n始于2016。',
+                        footer_contact: '快速链接',
+                        footer_link_about: '·关于 SDLV汇生会',
+                        footer_link_study: '·留学服务',
+                        footer_link_career: '·职涯规划',
+                        footer_link_apt: '·学生居社',
+                        footer_link_contact: '·商业合作',
+                        footer_terms: '使用条款',
+                        footer_privacy: '隐私政策',
+                        footer_cookie: 'Cookie政策',
+                        addr_hk: '香港总部：荃湾',
+                        addr_sz: '深圳办事处：西乡'
                     },
                     tc: {
                         brand_sub: '滙生會', brand_full: '滙生會', brand_suffix: 'SDLV',
@@ -355,8 +367,8 @@ window.SDLV_I18N = {
                         team_title: 'SDLV 團隊專才',
                         team_photo_placeholder: '照片預留',
                         team_avatars: [
-                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Legon.webp',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Ison.webp',
+                            'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Legon.webp',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Thomas.webp',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Lily.webp',
                             'https://static.sdlvhk.com/图片素材/other/Image%203.3%20Team/WImage%203.3%20Sloth.webp',
@@ -655,7 +667,18 @@ window.SDLV_I18N = {
                         contact_network_title: '企業網絡',
                         contact_apply_sub: '在了解全部細節後，提交你的資訊，我們會在24小時內聯絡你。',
                         cta_title: '準備好開啟下一站了嗎？', cta_desc: '請掃碼添加微信，我們的資深顧問將在 24 小時內與您聯繫。', cta_qr_hint: '打開微信「掃一掃」，添加我們為好友。', ph_contact: '電話號碼 / 微信 ID', btn_submit: '立即免費咨詢',
-                        footer_desc: '全球教育與職業精英服務。\n始於2016。', footer_meta: '業務範圍：留學規劃 · 學生公寓 · 職涯規劃', footer_contact: '聯繫我們', addr_hk: '香港總部：中環', addr_sz: '深圳辦事處：西鄉'
+                        footer_desc: '全球教育與職業精英服務。\n始於2016。',
+                        footer_contact: '快速連結',
+                        footer_link_about: '·關於 SDLV滙生會',
+                        footer_link_study: '·留學服務',
+                        footer_link_career: '·職涯規劃',
+                        footer_link_apt: '·學生居社',
+                        footer_link_contact: '·商業合作',
+                        footer_terms: '使用條款',
+                        footer_privacy: '隱私政策',
+                        footer_cookie: 'Cookie 政策',
+                        addr_hk: '香港總部：中環',
+                        addr_sz: '深圳辦事處：西鄉'
                     },
                     en: {
                         brand_sub: 'SDLV Group', brand_full: 'SDLV Group', brand_suffix: '',
@@ -948,6 +971,17 @@ window.SDLV_I18N = {
                         contact_network_title: 'Enterprise Network',
                         contact_apply_sub: 'After reviewing the details, leave your information and we will contact you within 24 hours.',
                         cta_title: 'Ready for the next step?', cta_desc: 'Scan the WeChat QR code and add us. Our senior consultant will reach out within 24 hours.', cta_qr_hint: 'Open WeChat and scan the QR code to add us.', ph_contact: 'Phone / WeChat ID', btn_submit: 'Free Consultation',
-                        footer_desc: 'Global Education & Career Elite.\nSince 2016.', footer_meta: 'Scope: Education Planning · Student Housing · Career Planning', footer_contact: 'Contact', addr_hk: 'HK HQ: Central', addr_sz: 'SZ Office: Xixiang'
+                        footer_desc: 'Global Education & Career Elite.\nSince 2016.',
+                        footer_contact: 'Quick Links',
+                        footer_link_about: '·About SDLV',
+                        footer_link_study: '·Education Services',
+                        footer_link_career: '·Career Planning',
+                        footer_link_apt: '·Student Residences',
+                        footer_link_contact: '·Partnership',
+                        footer_terms: 'Terms',
+                        footer_privacy: 'Privacy',
+                        footer_cookie: 'Cookie Policy',
+                        addr_hk: 'HK HQ: Central',
+                        addr_sz: 'SZ Office: Xixiang'
                     }
                 };
