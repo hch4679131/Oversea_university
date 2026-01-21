@@ -78,8 +78,8 @@
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('about', 'about-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_hero_title"></a>
                         <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].history_title"></a>
-                        <a @click.stop="switchPage('about', 'about-vision')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_vm_title"></a>
                         <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].home_about_title"></a>
+                        <a @click.stop="switchPage('about', 'about-vision')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_vm_title"></a>
                         <a @click.stop="switchPage('about', 'team')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].team_title"></a>
                         <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].partner_title"></a>
                     </div>
@@ -107,6 +107,8 @@
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('apartments', 'apartments-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_hero_t"></a>
 
+                        <a @click.stop="switchPage('apartments', 'map')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_map_t"></a>
+
                         <a @click.stop="switchPage('apartment-csw')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_csw_card_title"></span></a>
                         <a @click.stop="switchPage('apartment-ymt')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_ymt_card_title"></span></a>
                         <a @click.stop="switchPage('apartment-tst')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_tst_card_title"></span></a>
@@ -115,6 +117,9 @@
                         <a @click.stop="switchPage('apartment-syp2')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_syp2_card_title"></span></a>
                         <a @click.stop="switchPage('apartment-syp3')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_syp3_card_title"></span></a>
                         <a @click.stop="switchPage('apartment-pfl')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_pfl_card_title"></span></a>
+
+                        <a @click.stop="switchPage('apartments', 'apt-why')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_adv_title"></a>
+                        <a @click.stop="switchPage('apartments', 'apt-reviews')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_reviews_title"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
@@ -799,6 +804,34 @@
                 </div>
             </section>
             <!-- About: Vision & Mission (对齐首页标题风格) -->
+            <section id="intro" class="py-28 bg-paper text-obsidian-950">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">About Us</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].home_about_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div class="scrub-item anim-fade-up">
+                            <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
+                                <span x-text="t[lang].about_h1"></span><br>
+                                <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
+                            </h2>
+                            <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
+                            <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
+                        </div>
+                        <div class="relative scrub-item anim-scale">
+                            <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
+                            <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp" 
+                                class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5" alt="Team">
+                            <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
+                                <span class="block text-2xl z-[999] font-bold text-black" x-text="t[lang].about_badge"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section id="about-vision" class="py-28 bg-paper text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="text-center mb-16 scrub-item anim-fade-up">
@@ -833,34 +866,7 @@
                 </div>
             </section>
 
-            <section id="intro" class="py-28 bg-paper text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center mb-16 scrub-item anim-fade-up">
-                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">About Us</span>
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].home_about_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                    </div>
 
-                    <div class="grid md:grid-cols-2 gap-16 items-center">
-                        <div class="scrub-item anim-fade-up">
-                            <h2 class="text-4xl font-serif text-obsidian-950 mb-6">
-                                <span x-text="t[lang].about_h1"></span><br>
-                                <span class="text-gold-400" x-text="t[lang].about_h1_sub"></span>
-                            </h2>
-                            <p class="text-black/70 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
-                            <p class="text-black/70 leading-relaxed" x-text="t[lang].about_p2"></p>
-                        </div>
-                        <div class="relative scrub-item anim-scale">
-                            <div class="absolute -inset-4 bg-gold-400/15 rounded-sm -rotate-2"></div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp" 
-                                class="relative z-10 rounded-sm shadow-2xl transition duration-700 w-full object-contain bg-black/5" alt="Team">
-                            <div class="absolute -bottom-6 -right-6 bg-gold-400 p-6 hidden md:block">
-                                <span class="block text-2xl z-[999] font-bold text-black" x-text="t[lang].about_badge"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
 
 
