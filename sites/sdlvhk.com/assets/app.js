@@ -5,7 +5,9 @@ function refreshLucideIcons() {
         washer: 'washing-machine',
         dryer: 'wind',
         mirror: 'scan',
-        elevator: 'arrow-up-down'
+        elevator: 'arrow-up-down',
+        hanger: 'shirt',
+        'trash-2': 'trash'
     };
 
     const icons = window.lucide.icons || {};
