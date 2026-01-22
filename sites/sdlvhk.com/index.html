@@ -2064,7 +2064,9 @@
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
                                     <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
                                         <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                        <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="ymtBookingOpen = true">抢先以早鸟价格订房</button>
+                                        <template x-if="item.label !== '公共区域'">
+                                            <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="ymtBookingOpen = true">抢先以早鸟价格订房</button>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
