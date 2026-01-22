@@ -668,29 +668,37 @@
 
         <div class="max-w-3xl mx-auto text-center">
             <!-- Mission (第一行) -->
-            <div class="scrub-item anim-fade-up">
-                <div class="mx-auto w-16 h-16 rounded-full bg-gold-400/10 border border-gold-400/25 flex items-center justify-center">
-                    <i data-lucide="shield" class="w-8 h-8 text-gold-400"></i>
+            <div class="scrub-item anim-fade-up relative">
+                <!-- watermark icon (behind text) -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
+                    <i data-lucide="shield" class="w-40 h-40 md:w-48 md:h-48 text-gold-400/10"></i>
                 </div>
-                <h3 class="mt-8 text-4xl font-serif font-bold text-obsidian-950 relative inline-block">
-                    <span class="relative z-10" x-text="t[lang].about_mission_label"></span>
-                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-3 bg-gold-400/20 -rotate-1"></span>
-                </h3>
-                <p class="mt-6 text-black/70 text-lg leading-relaxed" x-text="t[lang].about_mission_text"></p>
+
+                <div class="relative z-10">
+                    <h3 class="text-4xl font-serif font-bold text-obsidian-950 relative inline-block">
+                        <span class="relative z-10" x-text="t[lang].about_mission_label"></span>
+                        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-3 bg-gold-400/20 -rotate-1"></span>
+                    </h3>
+                    <p class="mt-6 text-black/70 text-lg leading-relaxed" x-text="t[lang].about_mission_text"></p>
+                </div>
             </div>
 
             <div class="my-14 h-px w-24 bg-black/10 mx-auto"></div>
 
             <!-- Vision (第二行) -->
-            <div class="scrub-item anim-fade-up">
-                <div class="mx-auto w-16 h-16 rounded-full bg-gold-400/10 border border-gold-400/25 flex items-center justify-center">
-                    <i data-lucide="sparkles" class="w-8 h-8 text-gold-400"></i>
+            <div class="scrub-item anim-fade-up relative">
+                <!-- watermark icon (behind text) -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
+                    <i data-lucide="sparkles" class="w-40 h-40 md:w-48 md:h-48 text-gold-400/10"></i>
                 </div>
-                <h3 class="mt-8 text-4xl font-serif font-bold text-obsidian-950 relative inline-block">
-                    <span class="relative z-10" x-text="t[lang].about_vision_label"></span>
-                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-3 bg-gold-400/20 rotate-1"></span>
-                </h3>
-                <p class="mt-6 text-black/70 text-lg leading-relaxed" x-text="t[lang].about_vision_text"></p>
+
+                <div class="relative z-10">
+                    <h3 class="text-4xl font-serif font-bold text-obsidian-950 relative inline-block">
+                        <span class="relative z-10" x-text="t[lang].about_vision_label"></span>
+                        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-3 bg-gold-400/20 rotate-1"></span>
+                    </h3>
+                    <p class="mt-6 text-black/70 text-lg leading-relaxed" x-text="t[lang].about_vision_text"></p>
+                </div>
             </div>
         </div>
     </div>
