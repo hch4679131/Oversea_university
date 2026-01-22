@@ -77,9 +77,9 @@
                     <span @click="switchPage('about')" :class="page === 'about' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('about', 'about-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_hero_title"></a>
+                         <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].home_about_title"></a>
                         <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].history_title"></a>
-                        <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].home_about_title"></a>
-                        <a @click.stop="switchPage('about', 'about-vision')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_vm_title"></a>
+                        <!-- <a @click.stop="switchPage('about', 'about-vision')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_vm_title"></a> -->
                         <a @click.stop="switchPage('about', 'team')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].team_title"></a>
                         <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].partner_title"></a>
                     </div>
