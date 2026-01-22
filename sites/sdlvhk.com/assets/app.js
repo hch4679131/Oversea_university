@@ -3,14 +3,23 @@ function refreshLucideIcons() {
 
     const alias = {
         washer: 'washing-machine',
-        dryer: 'wind'
+        dryer: 'wind',
+        mirror: 'scan',
+        elevator: 'arrow-up-down'
     };
+
+    const icons = window.lucide.icons || {};
 
     document.querySelectorAll('[data-lucide]').forEach((el) => {
         const name = el.getAttribute('data-lucide');
-        if (name && alias[name]) {
-            el.setAttribute('data-lucide', alias[name]);
+        if (!name) return;
+
+        let finalName = alias[name] || name;
+        if (finalName && icons && !icons[finalName]) {
+            finalName = icons.circle ? 'circle' : finalName;
         }
+
+        if (finalName !== name) el.setAttribute('data-lucide', finalName);
     });
 
     window.lucide.createIcons();
