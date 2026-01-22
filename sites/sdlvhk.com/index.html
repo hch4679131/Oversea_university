@@ -665,58 +665,37 @@
 <!-- 把原有的 <section id="about-vision"> 替换为以下代码 -->
 <section id="about-vision" class="py-32 bg-paper relative">
     <div class="max-w-6xl mx-auto px-6">
-        
-        <!-- 装饰线 -->
-        <div class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-black/5 -translate-x-1/2 hidden md:block"></div>
 
-        <div class="grid md:grid-cols-2 gap-x-20 gap-y-16 relative z-10">
-            
-            <!-- Mission (左侧) -->
-            <div class="text-right flex flex-col items-end justify-center scrub-item anim-fade-up">
-                <div class="flex items-center gap-4 mb-6">
+        <div class="grid md:grid-cols-2 gap-x-16 gap-y-14 relative z-10 items-start justify-items-center">
+            <!-- Mission -->
+            <div class="relative text-center flex flex-col items-center scrub-item anim-fade-up">
+                <div class="flex items-center justify-center gap-4 mb-6">
+                    <div class="w-12 h-[1px] bg-gold-400"></div>
                     <span class="text-gold-400 text-xs font-bold tracking-[0.3em] uppercase">Core Value</span>
                     <div class="w-12 h-[1px] bg-gold-400"></div>
                 </div>
                 <h3 class="text-4xl font-serif font-bold text-obsidian-950 mb-6 relative inline-block">
                     <span class="relative z-10" x-text="t[lang].about_mission_label"></span>
-                    <span class="absolute -bottom-2 right-0 w-full h-3 bg-gold-400/20 -rotate-1"></span>
+                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-3 bg-gold-400/20 -rotate-1"></span>
                 </h3>
                 <p class="text-black/70 text-lg leading-relaxed max-w-md" x-text="t[lang].about_mission_text"></p>
-                <!-- 图标水印 -->
-                <i data-lucide="shield" class="w-24 h-24 text-black/5 absolute top-0 right-10 -z-10 transform translate-x-1/2 -translate-y-1/4"></i>
+                <i data-lucide="shield" class="w-24 h-24 text-black/5 absolute -top-6 left-1/2 -translate-x-1/2 -z-10"></i>
             </div>
 
-            <!-- 装饰图/空白 (右侧) - 可以放一张小图或者留白保持极简 -->
-            <div class="hidden md:flex items-center scrub-item anim-scale">
-                <div class="w-full h-64 bg-black/5 border border-black/10 flex items-center justify-center relative overflow-hidden group">
-                     <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition duration-700" alt="Mission">
-                     <div class="relative z-10 bg-white/90 px-6 py-2 text-xs font-bold tracking-[0.2em] uppercase">Our Mission</div>
-                </div>
-            </div>
-
-            <!-- Vision (右侧) -->
-            <div class="md:col-start-2 flex flex-col items-start justify-center scrub-item anim-fade-up">
-                <div class="flex items-center gap-4 mb-6">
+            <!-- Vision -->
+            <div class="relative text-center flex flex-col items-center scrub-item anim-fade-up">
+                <div class="flex items-center justify-center gap-4 mb-6">
                     <div class="w-12 h-[1px] bg-gold-400"></div>
                     <span class="text-gold-400 text-xs font-bold tracking-[0.3em] uppercase">Future Goal</span>
+                    <div class="w-12 h-[1px] bg-gold-400"></div>
                 </div>
                 <h3 class="text-4xl font-serif font-bold text-obsidian-950 mb-6 relative inline-block">
                     <span class="relative z-10" x-text="t[lang].about_vision_label"></span>
-                    <span class="absolute -bottom-2 left-0 w-full h-3 bg-gold-400/20 rotate-1"></span>
+                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full h-3 bg-gold-400/20 rotate-1"></span>
                 </h3>
                 <p class="text-black/70 text-lg leading-relaxed max-w-md" x-text="t[lang].about_vision_text"></p>
-                 <!-- 图标水印 -->
-                 <i data-lucide="sparkles" class="w-24 h-24 text-black/5 absolute top-0 left-10 -z-10 transform -translate-x-1/2 -translate-y-1/4"></i>
+                <i data-lucide="sparkles" class="w-24 h-24 text-black/5 absolute -top-6 left-1/2 -translate-x-1/2 -z-10"></i>
             </div>
-
-             <!-- 装饰图/空白 (左侧) -->
-             <div class="md:row-start-2 hidden md:flex items-center justify-end scrub-item anim-scale">
-                <div class="w-full h-64 bg-black/5 border border-black/10 flex items-center justify-center relative overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition duration-700" alt="Vision">
-                    <div class="relative z-10 bg-white/90 px-6 py-2 text-xs font-bold tracking-[0.2em] uppercase">Our Vision</div>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
