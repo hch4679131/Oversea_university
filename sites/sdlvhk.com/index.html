@@ -662,53 +662,64 @@
                     </div>
                 </div>
             </section>
-            <!-- 把原有的 <section id="about-vision"> 替换为以下代码 -->
-            <section id="about-vision" class="py-28 bg-obsidian-950 relative overflow-hidden">
-                <!-- 背景装饰：金色光晕 -->
-                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-400/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold-400/5 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+<!-- 把原有的 <section id="about-vision"> 替换为以下代码 -->
+<section id="about-vision" class="py-32 bg-paper relative">
+    <div class="max-w-6xl mx-auto px-6">
+        
+        <!-- 装饰线 -->
+        <div class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-black/5 -translate-x-1/2 hidden md:block"></div>
+
+        <div class="grid md:grid-cols-2 gap-x-20 gap-y-16 relative z-10">
             
-                <div class="max-w-7xl mx-auto px-6 relative z-10">
-                    <!-- 标题区域 -->
-                    <div class="text-center mb-16 scrub-item anim-fade-up">
-                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Our Culture</span>
-                        <h2 class="text-4xl md:text-5xl font-serif text-white">愿景与使命</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                    </div>
-            
-                    <!-- 卡片区域 -->
-                    <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
-                        <!-- Mission 卡片 -->
-                        <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-sm hover:border-gold-400/50 hover:bg-white/10 transition-all duration-500 scrub-item anim-fade-up">
-                            <!-- 悬浮时的金色边框高亮 -->
-                            <div class="absolute top-0 left-0 w-full h-[1px] bg-gold-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
-                            
-                            <div class="flex flex-col items-center text-center">
-                                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-lg shadow-gold-400/20 mb-8 group-hover:scale-110 transition-transform duration-500">
-                                    <i data-lucide="shield" class="w-8 h-8 text-obsidian-950"></i>
-                                </div>
-                                <h3 class="text-3xl font-serif font-bold text-white mb-6 tracking-wide" x-text="t[lang].about_mission_label"></h3>
-                                <div class="h-[1px] w-12 bg-white/20 mb-6 group-hover:w-24 group-hover:bg-gold-400 transition-all duration-500"></div>
-                                <p class="text-gray-300 text-lg leading-relaxed" x-text="t[lang].about_mission_text"></p>
-                            </div>
-                        </div>
-            
-                        <!-- Vision 卡片 -->
-                        <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-sm hover:border-gold-400/50 hover:bg-white/10 transition-all duration-500 scrub-item anim-fade-up" style="transition-delay: 100ms;">
-                            <div class="absolute top-0 left-0 w-full h-[1px] bg-gold-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-right"></div>
-                            
-                            <div class="flex flex-col items-center text-center">
-                                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-white to-gray-300 flex items-center justify-center shadow-lg mb-8 group-hover:scale-110 transition-transform duration-500">
-                                    <i data-lucide="sparkles" class="w-8 h-8 text-obsidian-950"></i>
-                                </div>
-                                <h3 class="text-3xl font-serif font-bold text-white mb-6 tracking-wide" x-text="t[lang].about_vision_label"></h3>
-                                <div class="h-[1px] w-12 bg-white/20 mb-6 group-hover:w-24 group-hover:bg-gold-400 transition-all duration-500"></div>
-                                <p class="text-gray-300 text-lg leading-relaxed" x-text="t[lang].about_vision_text"></p>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Mission (左侧) -->
+            <div class="text-right flex flex-col items-end justify-center scrub-item anim-fade-up">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-gold-400 text-xs font-bold tracking-[0.3em] uppercase">Core Value</span>
+                    <div class="w-12 h-[1px] bg-gold-400"></div>
                 </div>
-            </section>
+                <h3 class="text-4xl font-serif font-bold text-obsidian-950 mb-6 relative inline-block">
+                    <span class="relative z-10" x-text="t[lang].about_mission_label"></span>
+                    <span class="absolute -bottom-2 right-0 w-full h-3 bg-gold-400/20 -rotate-1"></span>
+                </h3>
+                <p class="text-black/70 text-lg leading-relaxed max-w-md" x-text="t[lang].about_mission_text"></p>
+                <!-- 图标水印 -->
+                <i data-lucide="shield" class="w-24 h-24 text-black/5 absolute top-0 right-10 -z-10 transform translate-x-1/2 -translate-y-1/4"></i>
+            </div>
+
+            <!-- 装饰图/空白 (右侧) - 可以放一张小图或者留白保持极简 -->
+            <div class="hidden md:flex items-center scrub-item anim-scale">
+                <div class="w-full h-64 bg-black/5 border border-black/10 flex items-center justify-center relative overflow-hidden group">
+                     <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition duration-700" alt="Mission">
+                     <div class="relative z-10 bg-white/90 px-6 py-2 text-xs font-bold tracking-[0.2em] uppercase">Our Mission</div>
+                </div>
+            </div>
+
+            <!-- Vision (右侧) -->
+            <div class="md:col-start-2 flex flex-col items-start justify-center scrub-item anim-fade-up">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-[1px] bg-gold-400"></div>
+                    <span class="text-gold-400 text-xs font-bold tracking-[0.3em] uppercase">Future Goal</span>
+                </div>
+                <h3 class="text-4xl font-serif font-bold text-obsidian-950 mb-6 relative inline-block">
+                    <span class="relative z-10" x-text="t[lang].about_vision_label"></span>
+                    <span class="absolute -bottom-2 left-0 w-full h-3 bg-gold-400/20 rotate-1"></span>
+                </h3>
+                <p class="text-black/70 text-lg leading-relaxed max-w-md" x-text="t[lang].about_vision_text"></p>
+                 <!-- 图标水印 -->
+                 <i data-lucide="sparkles" class="w-24 h-24 text-black/5 absolute top-0 left-10 -z-10 transform -translate-x-1/2 -translate-y-1/4"></i>
+            </div>
+
+             <!-- 装饰图/空白 (左侧) -->
+             <div class="md:row-start-2 hidden md:flex items-center justify-end scrub-item anim-scale">
+                <div class="w-full h-64 bg-black/5 border border-black/10 flex items-center justify-center relative overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition duration-700" alt="Vision">
+                    <div class="relative z-10 bg-white/90 px-6 py-2 text-xs font-bold tracking-[0.2em] uppercase">Our Vision</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
             <section id="history" class="py-32 bg-obsidian-950 relative">
                 <div class="max-w-4xl mx-auto px-6">
                     <div class="text-center mb-16 scrub-item anim-fade-up">
