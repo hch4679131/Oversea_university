@@ -650,17 +650,7 @@
                     </div>
                 </div>
             </section>
-
         </div>
-
-        <!-- 全站统一“需要帮助？”底部区块，除 contact 页 -->
-        <section id="help-cta" class="bg-gold-400 py-16 text-center">
-            <div class="max-w-3xl mx-auto px-6">
-                <div class="text-3xl md:text-4xl font-serif font-bold text-black mb-6" x-text="t[lang].help_cta_title">需要帮助？</div>
-                <div class="text-black/70 mb-10 text-lg" x-text="t[lang].help_cta_desc">我们的顾问团队随时为你解答升学与住宿问题</div>
-                <button type="button" class="px-10 py-4 bg-black text-gold-400 font-bold text-lg rounded hover:bg-white hover:text-black transition" @click="switchPage('contact')" x-text="t[lang].help_cta_btn">免费咨询</button>
-            </div>
-        </section>
 
         <!-- ================= PAGE 2: 关于我们 ================= -->
         <div x-show="page === 'about'" x-transition:enter="transition ease-out duration-500" class="w-full">
@@ -2957,7 +2947,7 @@
         </div>
 
     <!-- Footer -->
-    <footer class="bg-black text-gray-500 py-16 border-t border-white/5">
+    <footer x-show="page !== 'contact'" class="bg-black text-gray-500 py-16 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 text-sm">
             <div>
                 <div class="flex flex-col">
