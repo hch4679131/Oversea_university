@@ -1,4 +1,22 @@
-lucide.createIcons();
+function refreshLucideIcons() {
+    if (!window.lucide || typeof window.lucide.createIcons !== 'function') return;
+
+    const alias = {
+        washer: 'washing-machine',
+        dryer: 'wind'
+    };
+
+    document.querySelectorAll('[data-lucide]').forEach((el) => {
+        const name = el.getAttribute('data-lucide');
+        if (name && alias[name]) {
+            el.setAttribute('data-lucide', alias[name]);
+        }
+    });
+
+    window.lucide.createIcons();
+}
+
+refreshLucideIcons();
 
         function appData() {
             return {
@@ -398,6 +416,7 @@ lucide.createIcons();
                     // 等待页面DOM更新后，重新初始化动画引擎
                     setTimeout(() => {
                         initScrollEngine();
+                        refreshLucideIcons();
                         if (newPage === 'apartments') {
                             this.initAmapEmbed();
                         }
