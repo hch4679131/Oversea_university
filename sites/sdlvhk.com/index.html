@@ -663,8 +663,13 @@
                     </div>
                 </div>
             </section>
-            <section id="about-vision" class="pb-28 bg-paper text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6">
+            <section id="about-vision" class="pb-28 bg-paper text-obsidian-950 relative overflow-hidden">
+                <!-- 淡金色背景纹理（不影响其它模块） -->
+                <div class="absolute inset-0 bg-gold-400/5"></div>
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-multiply"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/5"></div>
+
+                <div class="max-w-7xl mx-auto px-6 relative">
                     <!-- <div class="text-center mb-16 scrub-item anim-fade-up">
                         <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].about_vm_kicker"></span>
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].about_vm_title"></h2>
@@ -679,8 +684,8 @@
                                         <!-- <i data-lucide="shield" class="w-5 h-5 text-obsidian-950"></i> -->
                                         <div class="h-[1px] w-24 bg-black/15"></div>
                                     </div>
-                                    <div class="text-2xl font-serif text-obsidian-950 mb-2" x-text="t[lang].about_mission_label"></div>
-                                    <p class="text-black/70 leading-relaxed max-w-xl mx-auto" x-text="t[lang].about_mission_text"></p>
+                                    <div class="text-3xl md:text-4xl font-serif font-bold text-obsidian-950 mb-4 tracking-wide" x-text="t[lang].about_mission_label"></div>
+                                    <p class="text-black/70 text-base md:text-lg leading-relaxed max-w-xl mx-auto" x-text="t[lang].about_mission_text"></p>
                                 </div>
 
                                 <div>
@@ -688,8 +693,8 @@
                                         <!-- <i data-lucide="sparkles" class="w-5 h-5 text-obsidian-950"></i> -->
                                         <div class="h-[1px] w-24 bg-black/15"></div>
                                     </div>
-                                    <div class="text-2xl font-serif text-obsidian-950 mb-2" x-text="t[lang].about_vision_label"></div>
-                                    <p class="text-black/70 leading-relaxed max-w-xl mx-auto" x-text="t[lang].about_vision_text"></p>
+                                    <div class="text-3xl md:text-4xl font-serif font-bold text-obsidian-950 mb-4 tracking-wide" x-text="t[lang].about_vision_label"></div>
+                                    <p class="text-black/70 text-base md:text-lg leading-relaxed max-w-xl mx-auto" x-text="t[lang].about_vision_text"></p>
                                 </div>
                             </div>
                         </div>
