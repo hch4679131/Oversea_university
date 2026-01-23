@@ -131,7 +131,7 @@
                         <a @click.stop="switchPage('contact', 'contact-value')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_value_title"></a>
                         <a @click.stop="switchPage('contact', 'contact-network')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_network_title"></a>
                         <a @click.stop="switchPage('contact', 'contact-faq')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_faq_title"></a>
-                        <a @click.stop="switchPage('contact', 'contact-apply')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_apply_title"></a>
+                        <!-- <a @click.stop="switchPage('contact', 'contact-apply')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_apply_title"></a> -->
                     </div>
                 </div>
             </div>
@@ -2637,7 +2637,7 @@
                             查看详细合作流程
                         </button>
                         <button type="button"
-                                @click="document.getElementById('contact-apply')?.scrollIntoView({behavior:'smooth'})"
+                                @click="openWeChatModal()"
                                 class="w-full px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition">
                             加入我们
                         </button>
@@ -3094,7 +3094,7 @@
                             <li><button type="button" class="hover:text-gold-400 transition text-left" @click="switchPage('contact', 'contact-value')" x-text="t[lang].contact_value_title"></button></li>
                             <li><button type="button" class="hover:text-gold-400 transition text-left" @click="switchPage('contact', 'contact-network')" x-text="t[lang].contact_network_title"></button></li>
                             <li><button type="button" class="hover:text-gold-400 transition text-left" @click="switchPage('contact', 'contact-faq')" x-text="t[lang].contact_faq_title"></button></li>
-                            <li><button type="button" class="hover:text-gold-400 transition text-left" @click="switchPage('contact', 'contact-apply')" x-text="t[lang].contact_apply_title"></button></li>
+                            <!-- <li><button type="button" class="hover:text-gold-400 transition text-left" @click="switchPage('contact', 'contact-apply')" x-text="t[lang].contact_apply_title"></button></li> -->
                         </ul>
                     </div>
                 </div>
