@@ -13,7 +13,7 @@ window.SDLV_I18N = {
                         biz_apt_t: '汇生会社', biz_apt_sub: '探索我们遍布全港的学生居所', biz_apt_locs: '我们为您提供便捷可靠的理想居所',
                         biz_career_t: '职涯规划', biz_career_sub: '告诉我们您的理想规划', biz_career_tags: '我们为您铺就坚实的道路与机遇',
                         home_about_title: '企业介绍',
-                        about_hero_title: '关于 SDLV 汇生会',
+                        about_hero_title: '关于 汇生会 SDLV',
                         about_hero_p1: '汇聚了香港本地、内地及海外的教育专才，学子的路我们都走过，真正懂得学生和家长',
                         about_hero_p2: '作为学子成长路上最坚实的后盾，成就学子发挥潜能',
                         about_vm_kicker: 'Vision and Mission',
