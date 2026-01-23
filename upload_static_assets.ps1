@@ -27,6 +27,19 @@ function Require-LocalFile {
   }
 }
 
+function Invoke-ExternalOrThrow {
+  param(
+    [Parameter(Mandatory = $true)][string]$Exe,
+    [Parameter(Mandatory = $true)][string[]]$Args,
+    [Parameter(Mandatory = $true)][string]$What
+  )
+
+  & $Exe @Args
+  if ($LASTEXITCODE -ne 0) {
+    throw "$What failed with exit code $LASTEXITCODE"
+  }
+}
+
 $repoRoot = $PSScriptRoot
 
 function Decode-StaticRelativePath {
@@ -79,8 +92,8 @@ foreach ($relEncoded in $relativeFilesEncoded) {
   $mkdirCmd = "mkdir -p " + (Quote-BashSingle -Text $remoteDir)
   $sshFull = @('ssh') + $sshArgs + @($Server, $mkdirCmd)
 
-  # Important: wrap remote path in single-quotes (inside the scp argument) to survive spaces.
-  $remoteSpec = "${Server}:'$remoteFile'"
+  # Pass the remote path as-is (single argument). OpenSSH scp handles necessary quoting.
+  $remoteSpec = "${Server}:$remoteFile"
   $scpFull = @('scp') + $scpArgs + @($localPath, $remoteSpec)
 
   if ($DryRun) {
@@ -90,10 +103,10 @@ foreach ($relEncoded in $relativeFilesEncoded) {
   }
 
   Write-Host "==> Ensuring remote dir: $remoteDir"
-  & $sshFull[0] $sshFull[1..($sshFull.Length-1)]
+  Invoke-ExternalOrThrow -Exe $sshFull[0] -Args $sshFull[1..($sshFull.Length-1)] -What "ssh mkdir"
 
   Write-Host "==> Uploading: $rel"
-  & $scpFull[0] $scpFull[1..($scpFull.Length-1)]
+  Invoke-ExternalOrThrow -Exe $scpFull[0] -Args $scpFull[1..($scpFull.Length-1)] -What "scp upload"
 }
 
 Write-Host "OK: static assets uploaded to $RemoteRoot"
