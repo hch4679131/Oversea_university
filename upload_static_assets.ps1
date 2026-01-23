@@ -2,6 +2,8 @@ param(
   [Parameter(Mandatory = $true)]
   [string]$Server,
 
+  [int]$Port = 22,
+
   [string]$RemoteRoot = "/usr/local/nginx/html",
 
   [string]$IdentityFile = "",
@@ -41,6 +43,12 @@ $relativeFiles = @(
 
 $sshArgs = @()
 $scpArgs = @()
+
+if ($Port -ne 22) {
+  $sshArgs += @('-p', "$Port")
+  $scpArgs += @('-P', "$Port")
+}
+
 if ($IdentityFile -ne "") {
   if (-not (Test-Path -LiteralPath $IdentityFile)) {
     throw "IdentityFile not found: $IdentityFile"
