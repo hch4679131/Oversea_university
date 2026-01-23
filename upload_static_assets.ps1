@@ -68,7 +68,7 @@ foreach ($rel in $relativeFiles) {
   $sshFull = @('ssh') + $sshArgs + @($Server, $mkdirCmd)
 
   # Important: wrap remote path in single-quotes (inside the scp argument) to survive spaces.
-  $remoteSpec = "$Server:'$remoteFile'"
+  $remoteSpec = "${Server}:'$remoteFile'"
   $scpFull = @('scp') + $scpArgs + @($localPath, $remoteSpec)
 
   if ($DryRun) {
