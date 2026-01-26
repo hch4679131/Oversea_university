@@ -120,12 +120,13 @@ body {
 
 /* 悬浮咨询按钮组（参照AI稿） */
 .float-widget-container {
-    position: fixed;
-    bottom: 28px;
+    position: absolute;
     right: 22px;
     z-index: 9999;
-    transform: translate3d(0, clamp(-18px, calc(var(--fab-lag, 0) * 1px), 18px), 0);
-    will-change: transform;
+    /* Elastic follow: mimic ai_studio_code (22).html: top = scrollY + viewportHeight - 140 */
+    top: calc(var(--scroll-y, 0) * 1px + 100vh - 140px);
+    transition: top 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    will-change: top;
 }
 .float-btn-group {
     position: relative;

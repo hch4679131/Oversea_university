@@ -2881,7 +2881,7 @@
     </main>
 
         <!-- 悬浮咨询按钮组（参照AI稿） -->
-        <div class="float-widget-container" @mouseenter="floatFabOpen = true" @mouseleave="floatFabOpen = false">
+        <div class="float-widget-container" x-show="!wechatModalOpen">
             <div class="float-btn-group" :class="floatFabOpen ? 'is-open' : ''">
                 <button type="button" class="sub-float-btn" @click="openWeChatModal()">
                     <i data-lucide="qr-code" class="w-4 h-4"></i>
