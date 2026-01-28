@@ -139,10 +139,8 @@
             <div class="flex items-center gap-3">
                 <div class="flex items-center gap-3 text-xs font-bold pl-6 border-l border-white/10">
                     <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">简</button>
-                    <button disabled aria-disabled="true" class="text-gray-600 opacity-50 cursor-not-allowed">繁</button>
-                    <!-- @click="lang = 'tc'" -->
-                    <button disabled aria-disabled="true" class="text-gray-600 opacity-50 cursor-not-allowed">EN</button>
-                    <!-- @click="lang = 'en'" -->
+                    <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">繁</button>
+                    <button @click="lang = 'en'" :class="lang==='en' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">EN</button>
                 </div>
 
                 <button type="button"
