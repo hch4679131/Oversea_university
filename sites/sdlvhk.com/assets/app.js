@@ -427,7 +427,10 @@ refreshLucideIcons();
                     const amount = String(f.amount || '').trim();
                     const studentName = String(f.studentName || '').trim();
                     const studentGender = String(f.studentGender || '').trim();
-                    const studentPhone = String(f.studentPhone || '').trim();
+                    const studentPhoneRaw = String(f.studentPhone || '').trim();
+                    const studentPhone = studentPhoneRaw.replace(/[^\d]/g, '');
+                    const parentPhoneRaw = String(f.parentPhone || '').trim();
+                    const parentPhone = parentPhoneRaw.replace(/[^\d]/g, '');
 
                     if (!serviceName) return this.agentNotify('请选择服务名', 'error');
                     if (!amount) return this.agentNotify('请输入金额', 'error');
@@ -435,6 +438,7 @@ refreshLucideIcons();
                     if (!studentName) return this.agentNotify('请输入学生名字', 'error');
                     if (!studentGender) return this.agentNotify('请选择学生性别', 'error');
                     if (!studentPhone) return this.agentNotify('请输入学生电话', 'error');
+                    if (String(studentPhone).length < 6) return this.agentNotify('学生电话至少 6 位数字', 'error');
 
                     const payload = {
                         bindUserId: f.bindUserId ? Number(f.bindUserId) : undefined,
@@ -443,7 +447,7 @@ refreshLucideIcons();
                         status,
                         parentName: String(f.parentName || '').trim() || undefined,
                         parentGender: String(f.parentGender || '').trim() || undefined,
-                        parentPhone: String(f.parentPhone || '').trim() || undefined,
+                        parentPhone: parentPhone ? parentPhone : undefined,
                         studentName,
                         studentGender,
                         studentPhone,

@@ -852,7 +852,7 @@ router.post(
                 if (!v) return false;
                 return String(v).length >= 6 && String(v).length <= 20;
             })
-            .withMessage('学生电话参数错误'),
+            .withMessage('学生电话需为 6-20 位数字'),
 
         body('extraServiceWeight')
             .optional({ nullable: true })
