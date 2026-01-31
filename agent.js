@@ -865,7 +865,14 @@ router.post(
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ success: false, errors: errors.array() });
+            try {
+                console.warn('[agent] create order validation failed', {
+                    agentId: req.agent?.id,
+                    agentRole: req.agent?.role,
+                    errors: errors.array()
+                });
+            } catch (e) {}
+            return res.status(400).json({ success: false, message: '参数错误', errors: errors.array() });
         }
 
         const {
