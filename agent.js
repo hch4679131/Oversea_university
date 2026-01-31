@@ -95,8 +95,10 @@ const pool = mysql.createPool({
 });
 
 function normalizePhone(v) {
-    const s = String(v || '').replace(/[\s-]/g, '');
-    return s.replace(/^\+?86/, '').replace(/[^\d]/g, '');
+    const s = String(v || '').trim();
+    // keep only digits; strip leading country code 86
+    const digits = s.replace(/[^\d]/g, '');
+    return digits.replace(/^86/, '');
 }
 
 function orderPrefixFromServiceName(serviceName) {
