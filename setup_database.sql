@@ -45,15 +45,35 @@ CREATE TABLE IF NOT EXISTS agent_users (
 
 CREATE TABLE IF NOT EXISTS agent_orders (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT NOT NULL COMMENT '代理账号ID（映射 agent_users.id）',
-    order_no VARCHAR(64) NOT NULL UNIQUE COMMENT '订单号',
-    title VARCHAR(255) NOT NULL COMMENT '订单标题/备注',
-    amount DECIMAL(12,2) NOT NULL DEFAULT 0 COMMENT '金额',
-    status VARCHAR(20) NOT NULL DEFAULT 'pending' COMMENT 'pending/paid/cancelled/etc',
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_id BIGINT NOT NULL COMMENT '绑定账号ID（归属账号，映射 agent_users.id）',
+    created_by_user_id BIGINT NULL COMMENT '创单账号ID（映射 agent_users.id）',
+    order_no VARCHAR(16) NOT NULL UNIQUE COMMENT '订单号（8位：E/A + YY + MM + 3位序号）',
+    title VARCHAR(32) NOT NULL COMMENT '服务名：EAC/AEC/EC/EA/AE/AC/E/A',
+    amount DECIMAL(12,2) NOT NULL COMMENT '金额',
+    status VARCHAR(20) NOT NULL DEFAULT '已创单' COMMENT '已创单/已签单/已完结',
+    parent_name VARCHAR(50) NULL COMMENT '家长名字（可空）',
+    parent_gender VARCHAR(10) NULL COMMENT '家长性别（可空）',
+    parent_phone VARCHAR(20) NULL COMMENT '家长电话（可空）',
+    student_name VARCHAR(50) NOT NULL COMMENT '学生名字（不可空）',
+    student_gender VARCHAR(10) NOT NULL COMMENT '学生性别（不可空）',
+    student_phone VARCHAR(20) NOT NULL COMMENT '学生电话（不可空）',
+    extra_service_weight VARCHAR(10) NULL COMMENT '扩展服务权重排序（可空：ECA/EAC/CEA/CAE/AEC/ACE）',
+    student_id_card VARCHAR(32) NULL COMMENT '学生身份证（可空）',
+    signed_at TIMESTAMP NULL COMMENT '签单时间（可空）',
+    finished_at TIMESTAMP NULL COMMENT '完结时间（可空）',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创单时间（自动获取）',
     INDEX idx_user (user_id),
+    INDEX idx_created_by (created_by_user_id),
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='代理订单表';
+
+CREATE TABLE IF NOT EXISTS agent_order_sequences (
+    prefix CHAR(1) NOT NULL COMMENT 'E/A',
+    yy CHAR(2) NOT NULL COMMENT '两位年份',
+    mm CHAR(2) NOT NULL COMMENT '两位月份',
+    seq INT NOT NULL COMMENT '序号',
+    PRIMARY KEY (prefix, yy, mm)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='订单号序号表（按 E/A + 月份独立计数）';
 
 CREATE TABLE IF NOT EXISTS agent_logs (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,

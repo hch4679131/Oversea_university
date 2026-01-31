@@ -190,6 +190,27 @@ refreshLucideIcons();
                 agentChildren: [],
                 agentOrders: [],
                 agentLogs: [],
+                agentAllUsers: [],
+                agentOrderForm: {
+                    bindUserId: null,
+                    serviceName: 'EAC',
+                    amount: '',
+                    status: '已创单',
+                    parentName: '',
+                    parentGender: '',
+                    parentPhone: '',
+                    studentName: '',
+                    studentGender: '男',
+                    studentPhone: '',
+                    extraServiceWeight: '',
+                    studentIdCard: ''
+                },
+
+                dash(v) {
+                    if (v === null || v === undefined) return '-';
+                    const s = String(v);
+                    return s.trim() ? s : '-';
+                },
 
                 agentNotify(message, type = 'info') {
                     this.agentNotice = message;
@@ -387,6 +408,77 @@ refreshLucideIcons();
                     }
                 },
 
+                async agentCreateOrder() {
+                    if (!this.agentToken) {
+                        this.agentNotify('请先登录', 'error');
+                        this.switchPage('agent-login');
+                        return;
+                    }
+
+                    const role = this.agentUser?.role;
+                    if (role !== 'consultant') {
+                        this.agentNotify('无权限创建订单', 'error');
+                        return;
+                    }
+
+                    const f = this.agentOrderForm;
+                    const serviceName = String(f.serviceName || '').trim().toUpperCase();
+                    const status = String(f.status || '').trim();
+                    const amount = String(f.amount || '').trim();
+                    const studentName = String(f.studentName || '').trim();
+                    const studentGender = String(f.studentGender || '').trim();
+                    const studentPhone = String(f.studentPhone || '').trim();
+
+                    if (!serviceName) return this.agentNotify('请选择服务名', 'error');
+                    if (!amount) return this.agentNotify('请输入金额', 'error');
+                    if (!status) return this.agentNotify('请选择状态', 'error');
+                    if (!studentName) return this.agentNotify('请输入学生名字', 'error');
+                    if (!studentGender) return this.agentNotify('请选择学生性别', 'error');
+                    if (!studentPhone) return this.agentNotify('请输入学生电话', 'error');
+
+                    const payload = {
+                        bindUserId: f.bindUserId ? Number(f.bindUserId) : undefined,
+                        serviceName,
+                        amount: Number(amount),
+                        status,
+                        parentName: String(f.parentName || '').trim() || undefined,
+                        parentGender: String(f.parentGender || '').trim() || undefined,
+                        parentPhone: String(f.parentPhone || '').trim() || undefined,
+                        studentName,
+                        studentGender,
+                        studentPhone,
+                        extraServiceWeight: String(f.extraServiceWeight || '').trim().toUpperCase() || undefined,
+                        studentIdCard: String(f.studentIdCard || '').trim() || undefined
+                    };
+
+                    try {
+                        this.agentBusy = true;
+                        const data = await this.agentApi('/api/agent/orders', 'POST', payload, true);
+                        if (data.success) {
+                            this.agentNotify(`创建成功，订单号：${data.orderNo}`, 'success');
+                            // reset fields (keep bindUserId default)
+                            this.agentOrderForm.serviceName = 'EAC';
+                            this.agentOrderForm.amount = '';
+                            this.agentOrderForm.status = '已创单';
+                            this.agentOrderForm.parentName = '';
+                            this.agentOrderForm.parentGender = '';
+                            this.agentOrderForm.parentPhone = '';
+                            this.agentOrderForm.studentName = '';
+                            this.agentOrderForm.studentGender = '男';
+                            this.agentOrderForm.studentPhone = '';
+                            this.agentOrderForm.extraServiceWeight = '';
+                            this.agentOrderForm.studentIdCard = '';
+                            await this.agentRefreshDashboard();
+                        } else {
+                            this.agentNotify(data.message || '创建失败', 'error');
+                        }
+                    } catch (e) {
+                        this.agentNotify(e.message || '创建失败', 'error');
+                    } finally {
+                        this.agentBusy = false;
+                    }
+                },
+
                 async agentRefreshDashboard() {
                     if (!this.agentToken) {
                         this.agentNotify('请先登录', 'error');
@@ -404,6 +496,23 @@ refreshLucideIcons();
                         this.agentChildren = users.data || [];
                         this.agentOrders = orders.data || [];
                         this.agentLogs = logs.data || [];
+
+                        // For consultant/admin: load all active accounts for order assignment
+                        if (this.agentUser?.role === 'consultant') {
+                            try {
+                                const all = await this.agentApi('/api/agent/users-all', 'GET', null, true);
+                                this.agentAllUsers = all.data || [];
+                            } catch (e) {
+                                this.agentAllUsers = [];
+                            }
+                        } else {
+                            this.agentAllUsers = [];
+                        }
+
+                        // Default binding: self
+                        if (!this.agentOrderForm.bindUserId) {
+                            this.agentOrderForm.bindUserId = this.agentUser?.id || null;
+                        }
                     } catch (e) {
                         this.agentNotify(e.message || '刷新失败', 'error');
                     } finally {

@@ -94,6 +94,57 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
+function normalizePhone(v) {
+    const s = String(v || '').replace(/[\s-]/g, '');
+    return s.replace(/^\+?86/, '').replace(/[^\d]/g, '');
+}
+
+function orderPrefixFromServiceName(serviceName) {
+    const name = String(serviceName || '').trim().toUpperCase();
+    if (!name) return null;
+    const c = name[0];
+    if (c === 'E' || c === 'A') return c;
+    return null;
+}
+
+function twoDigit(n) {
+    const s = String(n);
+    return s.length >= 2 ? s.slice(-2) : `0${s}`;
+}
+
+function threeDigit(n) {
+    const s = String(n);
+    if (s.length >= 3) return s.slice(-3);
+    return s.padStart(3, '0');
+}
+
+async function nextOrderNo({ conn, prefix }) {
+    const now = new Date();
+    const yy = twoDigit(now.getFullYear() % 100);
+    const mm = twoDigit(now.getMonth() + 1);
+
+    const [rows] = await conn.execute(
+        'SELECT seq FROM agent_order_sequences WHERE prefix = ? AND yy = ? AND mm = ? FOR UPDATE',
+        [prefix, yy, mm]
+    );
+
+    let seq = 1;
+    if (rows.length === 0) {
+        await conn.execute(
+            'INSERT INTO agent_order_sequences (prefix, yy, mm, seq) VALUES (?, ?, ?, ?)',
+            [prefix, yy, mm, seq]
+        );
+    } else {
+        seq = Number(rows[0].seq || 0) + 1;
+        await conn.execute(
+            'UPDATE agent_order_sequences SET seq = ? WHERE prefix = ? AND yy = ? AND mm = ?',
+            [seq, prefix, yy, mm]
+        );
+    }
+
+    return `${prefix}${yy}${mm}${threeDigit(seq)}`;
+}
+
 function maskPhone(p) {
     if (!p) return '';
     return String(p).replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2');
@@ -201,14 +252,36 @@ async function ensureSchemaOnce() {
         await pool.execute(`
             CREATE TABLE IF NOT EXISTS agent_orders (
                 id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                user_id BIGINT NOT NULL,
-                order_no VARCHAR(64) NOT NULL UNIQUE,
-                title VARCHAR(255) NOT NULL,
-                amount DECIMAL(12,2) NOT NULL DEFAULT 0,
-                status VARCHAR(20) NOT NULL DEFAULT 'pending',
+                user_id BIGINT NOT NULL COMMENT '绑定账号ID（归属账号）',
+                created_by_user_id BIGINT NULL COMMENT '创单账号ID',
+                order_no VARCHAR(16) NOT NULL UNIQUE COMMENT '订单号（8位：E/A + YY + MM + 3位序号）',
+                title VARCHAR(32) NOT NULL COMMENT '服务名：EAC/AEC/EC/EA/AE/AC/E/A',
+                amount DECIMAL(12,2) NOT NULL,
+                status VARCHAR(20) NOT NULL DEFAULT '已创单' COMMENT '已创单/已签单/已完结',
+                parent_name VARCHAR(50) NULL,
+                parent_gender VARCHAR(10) NULL,
+                parent_phone VARCHAR(20) NULL,
+                student_name VARCHAR(50) NOT NULL,
+                student_gender VARCHAR(10) NOT NULL,
+                student_phone VARCHAR(20) NOT NULL,
+                extra_service_weight VARCHAR(10) NULL COMMENT 'ECA/EAC/CEA/CAE/AEC/ACE',
+                student_id_card VARCHAR(32) NULL,
+                signed_at TIMESTAMP NULL,
+                finished_at TIMESTAMP NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 INDEX idx_user (user_id),
+                INDEX idx_created_by (created_by_user_id),
                 INDEX idx_status (status)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        `);
+
+        await pool.execute(`
+            CREATE TABLE IF NOT EXISTS agent_order_sequences (
+                prefix CHAR(1) NOT NULL,
+                yy CHAR(2) NOT NULL,
+                mm CHAR(2) NOT NULL,
+                seq INT NOT NULL,
+                PRIMARY KEY (prefix, yy, mm)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         `);
 
@@ -255,6 +328,45 @@ async function ensureSchemaOnce() {
             await pool.execute('ALTER TABLE verification_codes MODIFY COLUMN purpose VARCHAR(40) NOT NULL');
         } catch (e) {
             // Ignore if already compatible or lacking privileges.
+        }
+
+        // Schema migrations for older agent_orders
+        const alter = async (sql) => {
+            try {
+                await pool.execute(sql);
+            } catch (e) {
+                // ignore "Duplicate column" etc.
+            }
+        };
+
+        await alter('ALTER TABLE agent_orders MODIFY COLUMN order_no VARCHAR(16) NOT NULL');
+        await alter("ALTER TABLE agent_orders MODIFY COLUMN title VARCHAR(32) NOT NULL");
+        await alter("ALTER TABLE agent_orders MODIFY COLUMN status VARCHAR(20) NOT NULL DEFAULT '已创单'");
+        await alter("ALTER TABLE agent_orders ADD COLUMN created_by_user_id BIGINT NULL COMMENT '创单账号ID'");
+        await alter("ALTER TABLE agent_orders ADD COLUMN parent_name VARCHAR(50) NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN parent_gender VARCHAR(10) NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN parent_phone VARCHAR(20) NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN student_name VARCHAR(50) NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN student_gender VARCHAR(10) NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN student_phone VARCHAR(20) NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN extra_service_weight VARCHAR(10) NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN student_id_card VARCHAR(32) NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN signed_at TIMESTAMP NULL");
+        await alter("ALTER TABLE agent_orders ADD COLUMN finished_at TIMESTAMP NULL");
+
+        try {
+            await pool.execute('UPDATE agent_orders SET created_by_user_id = user_id WHERE created_by_user_id IS NULL');
+        } catch (e) {
+            // ignore
+        }
+
+        // Ensure required student_* columns are non-null on new installs; keep old rows compatible.
+        try {
+            await pool.execute("ALTER TABLE agent_orders MODIFY COLUMN student_name VARCHAR(50) NOT NULL");
+            await pool.execute("ALTER TABLE agent_orders MODIFY COLUMN student_gender VARCHAR(10) NOT NULL");
+            await pool.execute("ALTER TABLE agent_orders MODIFY COLUMN student_phone VARCHAR(20) NOT NULL");
+        } catch (e) {
+            // ignore if table is old and has NULL rows; app validation prevents new NULLs.
         }
     })();
 
@@ -664,28 +776,206 @@ router.get('/users', authenticateAgent, async (req, res) => {
 });
 
 /**
+ * GET /api/agent/users-all
+ * 顾问/管理员：获取所有账号（用于“创单代理人”下拉选择）
+ */
+router.get('/users-all', authenticateAgent, async (req, res) => {
+    try {
+        const role = String(req.agent.role || '');
+        if (role !== 'consultant') {
+            return res.status(403).json({ success: false, message: '无权限查看账号列表' });
+        }
+
+        const [rows] = await pool.execute(
+            'SELECT id, phone, role, parent_id AS parentId, status, created_at AS createdAt FROM agent_users WHERE status = "active" ORDER BY created_at DESC LIMIT 1000'
+        );
+        res.json({ success: true, data: rows });
+    } catch (e) {
+        res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+    }
+});
+
+/**
  * POST /api/agent/orders
- * Body: { title, amount }
+ * 顾问可创单（也允许 admin）
+ * Body: {
+ *   bindUserId?: number,
+ *   serviceName: 'EAC'|'AEC'|'EC'|'EA'|'AE'|'AC'|'E'|'A',
+ *   amount: number,
+ *   status: '已创单'|'已签单'|'已完结',
+ *   parentName?: string,
+ *   parentGender?: '男'|'女',
+ *   parentPhone?: string,
+ *   studentName: string,
+ *   studentGender: '男'|'女',
+ *   studentPhone: string,
+ *   extraServiceWeight?: 'ECA'|'EAC'|'CEA'|'CAE'|'AEC'|'ACE',
+ *   studentIdCard?: string,
+ *   signedAt?: string,
+ *   finishedAt?: string
+ * }
  */
 router.post(
     '/orders',
     authenticateAgent,
-    [body('title').notEmpty().withMessage('请输入订单标题'), body('amount').isFloat({ min: 0 }).withMessage('金额必须为数字')],
+    [
+        body('bindUserId').optional().isInt({ min: 1 }).withMessage('绑定账号参数错误'),
+        body('serviceName')
+            .customSanitizer(v => String(v || '').trim().toUpperCase())
+            .isIn(['EAC', 'AEC', 'EC', 'EA', 'AE', 'AC', 'E', 'A'])
+            .withMessage('服务名参数错误'),
+        body('amount').isFloat({ min: 0 }).withMessage('金额不能为空且必须为数字'),
+        body('status')
+            .customSanitizer(v => String(v || '').trim())
+            .isIn(['已创单', '已签单', '已完结'])
+            .withMessage('状态参数错误'),
+
+        body('parentName').optional({ nullable: true }).customSanitizer(v => String(v || '').trim()),
+        body('parentGender').optional({ nullable: true }).customSanitizer(v => String(v || '').trim()).isIn(['男', '女']).withMessage('家长性别参数错误'),
+        body('parentPhone')
+            .optional({ nullable: true })
+            .customSanitizer(normalizePhone)
+            .custom((v) => {
+                if (!v) return true;
+                // allow non-mobile if needed, but keep length guard
+                return String(v).length >= 6 && String(v).length <= 20;
+            })
+            .withMessage('家长电话参数错误'),
+
+        body('studentName').customSanitizer(v => String(v || '').trim()).notEmpty().withMessage('学生名字不能为空'),
+        body('studentGender').customSanitizer(v => String(v || '').trim()).isIn(['男', '女']).withMessage('学生性别参数错误'),
+        body('studentPhone').customSanitizer(normalizePhone).isMobilePhone('zh-CN').withMessage('学生电话格式错误'),
+
+        body('extraServiceWeight')
+            .optional({ nullable: true })
+            .customSanitizer(v => String(v || '').trim().toUpperCase())
+            .isIn(['ECA', 'EAC', 'CEA', 'CAE', 'AEC', 'ACE'])
+            .withMessage('扩展服务权重参数错误'),
+        body('studentIdCard').optional({ nullable: true }).customSanitizer(v => String(v || '').trim()),
+
+        body('signedAt').optional({ nullable: true }).customSanitizer(v => String(v || '').trim()),
+        body('finishedAt').optional({ nullable: true }).customSanitizer(v => String(v || '').trim())
+    ],
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ success: false, errors: errors.array() });
         }
 
-        const { title, amount } = req.body;
+        const {
+            bindUserId,
+            serviceName,
+            amount,
+            status,
+            parentName,
+            parentGender,
+            parentPhone,
+            studentName,
+            studentGender,
+            studentPhone,
+            extraServiceWeight,
+            studentIdCard,
+            signedAt,
+            finishedAt
+        } = req.body;
+
         try {
-            const orderNo = `AORD-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-            const [result] = await pool.execute(
-                'INSERT INTO agent_orders (user_id, order_no, title, amount) VALUES (?, ?, ?, ?)',
-                [req.agent.id, orderNo, String(title), Number(amount)]
-            );
-            await logAction({ userId: req.agent.id, action: 'create_order', detail: JSON.stringify({ orderNo, title, amount }), ip: req.ip });
-            res.json({ success: true, message: '创建订单成功', orderId: result.insertId, orderNo });
+            const myRole = String(req.agent.role || '');
+            const canCreate = myRole === 'consultant';
+            if (!canCreate) {
+                return res.status(403).json({ success: false, message: '无权限创建订单' });
+            }
+
+            const boundUserId = bindUserId ? Number(bindUserId) : Number(req.agent.id);
+
+            // 按需求：顾问可选择“所有账号”作为创单代理人（即 user_id）
+            const [exists] = await pool.execute('SELECT id FROM agent_users WHERE id = ? AND status = "active" LIMIT 1', [boundUserId]);
+            if (exists.length === 0) {
+                return res.status(404).json({ success: false, message: '创单代理人账号不存在或不可用' });
+            }
+
+            const prefix = orderPrefixFromServiceName(serviceName);
+            if (!prefix) {
+                return res.status(400).json({ success: false, message: '服务名不合法，无法生成订单号' });
+            }
+
+            const signedAtValue = (status === '已签单' || status === '已完结')
+                ? (signedAt ? new Date(String(signedAt)) : new Date())
+                : (signedAt ? new Date(String(signedAt)) : null);
+            const finishedAtValue = (status === '已完结')
+                ? (finishedAt ? new Date(String(finishedAt)) : new Date())
+                : (finishedAt ? new Date(String(finishedAt)) : null);
+
+            const conn = await pool.getConnection();
+            try {
+                await conn.beginTransaction();
+
+                let orderNo = null;
+                for (let i = 0; i < 3; i++) {
+                    orderNo = await nextOrderNo({ conn, prefix });
+                    try {
+                        const [result] = await conn.execute(
+                            `INSERT INTO agent_orders (
+                                user_id,
+                                created_by_user_id,
+                                order_no,
+                                title,
+                                amount,
+                                status,
+                                parent_name,
+                                parent_gender,
+                                parent_phone,
+                                student_name,
+                                student_gender,
+                                student_phone,
+                                extra_service_weight,
+                                student_id_card,
+                                signed_at,
+                                finished_at
+                            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                            [
+                                boundUserId,
+                                req.agent.id,
+                                orderNo,
+                                String(serviceName),
+                                Number(amount),
+                                String(status),
+                                parentName ? String(parentName) : null,
+                                parentGender ? String(parentGender) : null,
+                                parentPhone ? String(parentPhone) : null,
+                                String(studentName),
+                                String(studentGender),
+                                String(studentPhone),
+                                extraServiceWeight ? String(extraServiceWeight) : null,
+                                studentIdCard ? String(studentIdCard) : null,
+                                signedAtValue instanceof Date && !Number.isNaN(signedAtValue.getTime()) ? signedAtValue : null,
+                                finishedAtValue instanceof Date && !Number.isNaN(finishedAtValue.getTime()) ? finishedAtValue : null
+                            ]
+                        );
+
+                        await conn.commit();
+
+                        await logAction({
+                            userId: req.agent.id,
+                            action: 'create_order',
+                            detail: JSON.stringify({ orderNo, serviceName, amount, status, boundUserId }),
+                            ip: req.ip
+                        });
+
+                        return res.json({ success: true, message: '创建订单成功', orderId: result.insertId, orderNo });
+                    } catch (e) {
+                        // Duplicate order_no: retry
+                        if (String(e?.code || '').toUpperCase() === 'ER_DUP_ENTRY') continue;
+                        throw e;
+                    }
+                }
+
+                throw new Error('订单号生成失败，请重试');
+            } finally {
+                try {
+                    conn.release();
+                } catch (e) {}
+            }
         } catch (e) {
             console.error('[agent] create order error:', e);
             res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
@@ -698,8 +988,42 @@ router.post(
  */
 router.get('/orders', authenticateAgent, async (req, res) => {
     try {
+        const role = String(req.agent.role || '');
+        const isConsultant = role === 'consultant';
+        const whereSql = isConsultant
+            ? 'COALESCE(o.created_by_user_id, o.user_id) = ?'
+            : 'o.user_id = ?';
+
         const [rows] = await pool.execute(
-            'SELECT id, order_no AS orderNo, title, amount, status, created_at AS createdAt FROM agent_orders WHERE user_id = ? ORDER BY created_at DESC LIMIT 200',
+            `SELECT
+                o.id,
+                o.order_no AS orderNo,
+                o.title AS serviceName,
+                o.amount,
+                o.status,
+                o.parent_name AS parentName,
+                o.parent_gender AS parentGender,
+                o.parent_phone AS parentPhone,
+                o.student_name AS studentName,
+                o.student_gender AS studentGender,
+                o.student_phone AS studentPhone,
+                o.extra_service_weight AS extraServiceWeight,
+                o.student_id_card AS studentIdCard,
+                o.signed_at AS signedAt,
+                o.finished_at AS finishedAt,
+                o.created_at AS createdAt,
+                o.user_id AS boundUserId,
+                bu.phone AS boundUserPhone,
+                bu.role AS boundUserRole,
+                COALESCE(o.created_by_user_id, o.user_id) AS createdByUserId,
+                cb.phone AS createdByUserPhone,
+                cb.role AS createdByUserRole
+            FROM agent_orders o
+            LEFT JOIN agent_users bu ON bu.id = o.user_id
+            LEFT JOIN agent_users cb ON cb.id = COALESCE(o.created_by_user_id, o.user_id)
+            WHERE ${whereSql}
+            ORDER BY o.created_at DESC
+            LIMIT 200`,
             [req.agent.id]
         );
         res.json({ success: true, data: rows });

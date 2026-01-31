@@ -2829,27 +2829,125 @@
                     <div class="mt-10 grid lg:grid-cols-2 gap-6">
                         <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
                             <h2 class="text-xl font-serif font-bold text-white">我的订单</h2>
+
+                            <div x-show="agentUser && agentUser.role === 'consultant'" class="mt-5 p-4 border border-white/10 bg-black/20">
+                                <div class="text-sm font-bold text-white/80">添加订单</div>
+                                <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <div class="text-xs text-white/60 mb-2">创单代理人</div>
+                                        <select x-model="agentOrderForm.bindUserId" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                            <option :value="agentUser?.id" x-text="'我自己：' + (agentUser?.phone || '-')"></option>
+                                            <template x-for="u in agentAllUsers" :key="u.id">
+                                                <option :value="u.id" x-text="(u.role || '-') + '：' + (u.phone || '-')"></option>
+                                            </template>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-white/60 mb-2">服务名（不可空）</div>
+                                        <select x-model="agentOrderForm.serviceName" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                            <option value="EAC">EAC</option>
+                                            <option value="AEC">AEC</option>
+                                            <option value="EC">EC</option>
+                                            <option value="EA">EA</option>
+                                            <option value="AE">AE</option>
+                                            <option value="AC">AC</option>
+                                            <option value="E">E</option>
+                                            <option value="A">A</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <div class="text-xs text-white/60 mb-2">金额（不可空）</div>
+                                        <input x-model="agentOrderForm.amount" type="number" min="0" step="0.01" placeholder="金额" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-white/60 mb-2">状态（不可空）</div>
+                                        <select x-model="agentOrderForm.status" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                            <option value="已创单">已创单</option>
+                                            <option value="已签单">已签单</option>
+                                            <option value="已完结">已完结</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 grid md:grid-cols-3 gap-4">
+                                    <input x-model="agentOrderForm.studentName" type="text" placeholder="学生名字（不可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                    <select x-model="agentOrderForm.studentGender" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                    <input x-model="agentOrderForm.studentPhone" type="text" placeholder="学生电话（不可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                </div>
+
+                                <div class="mt-4 grid md:grid-cols-3 gap-4">
+                                    <input x-model="agentOrderForm.parentName" type="text" placeholder="家长名字（可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                    <select x-model="agentOrderForm.parentGender" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                        <option value="">家长性别（可空）</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                    <input x-model="agentOrderForm.parentPhone" type="text" placeholder="家长电话（可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                </div>
+
+                                <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                    <select x-model="agentOrderForm.extraServiceWeight" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                        <option value="">扩展服务权重（可空）</option>
+                                        <option value="ECA">ECA</option>
+                                        <option value="EAC">EAC</option>
+                                        <option value="CEA">CEA</option>
+                                        <option value="CAE">CAE</option>
+                                        <option value="AEC">AEC</option>
+                                        <option value="ACE">ACE</option>
+                                    </select>
+                                    <input x-model="agentOrderForm.studentIdCard" type="text" placeholder="学生身份证（可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                </div>
+
+                                <button type="button" @click="agentCreateOrder()" class="mt-4 w-full px-6 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">创建订单（自动生成订单号）</button>
+                            </div>
+
                             <div class="mt-4 overflow-x-auto border border-white/10">
                                 <table class="min-w-full text-sm">
                                     <thead class="bg-white/5">
                                         <tr>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">订单号</th>
-                                            <th class="px-4 py-3 text-left font-bold text-white/70">标题</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">服务名</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">学生</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">学生电话</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">家长</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">家长电话</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">权重</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">身份证</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">金额</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">创单代理人</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">创单时间</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">签单时间</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">完结时间</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <template x-for="o in agentOrders" :key="o.id">
                                             <tr class="border-t border-white/10">
                                                 <td class="px-4 py-3" x-text="o.orderNo"></td>
-                                                <td class="px-4 py-3" x-text="o.title"></td>
-                                                <td class="px-4 py-3" x-text="o.amount"></td>
-                                                <td class="px-4 py-3" x-text="o.status"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.studentName) + ' / ' + dash(o.studentGender)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.parentName) + ' / ' + dash(o.parentGender)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.parentPhone)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.extraServiceWeight)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.studentIdCard)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.amount)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.status)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.createdAt)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.signedAt)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.finishedAt)"></td>
                                             </tr>
                                         </template>
                                         <tr x-show="agentOrders.length === 0" class="border-t border-white/10">
-                                            <td class="px-4 py-3 text-white/40" colspan="4">暂无订单</td>
+                                            <td class="px-4 py-3 text-white/40" colspan="14">暂无订单</td>
                                         </tr>
                                     </tbody>
                                 </table>
