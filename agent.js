@@ -145,7 +145,7 @@ async function sendSMS(phone, code) {
 
         if (!hasEnvTemplate || !hasEnvSign || !hasEnvKeyId || !hasEnvKeySecret || isPlaceholder) {
             console.log(`[agent][短信未配置] 跳过真实短信发送 → 手机号: ${maskPhone(phone)} 验证码: ${code}`);
-            return true;
+            return { ok: true, skipped: true, providerCode: 'SKIPPED', providerMessage: 'SMS not configured' };
         }
 
         const Client = require('@alicloud/dysmsapi20170525').default;
@@ -167,11 +167,15 @@ async function sendSMS(phone, code) {
         });
 
         const response = await client.sendSms(request);
-        console.log(`[agent][短信] 发送到 ${phone}，结果代码: ${response.body?.code || 'unknown'}，消息: ${response.body?.message || 'no message'}`);
-        return response?.body?.code === 'OK';
+        const providerCode = response.body?.code || 'unknown';
+        const providerMessage = response.body?.message || 'no message';
+        console.log(`[agent][短信] 发送到 ${phone}，结果代码: ${providerCode}，消息: ${providerMessage}`);
+        return { ok: providerCode === 'OK', providerCode, providerMessage };
     } catch (error) {
-        console.error('[agent][短信发送失败]', error.message, error.code || '');
-        return false;
+        const providerCode = error?.code || error?.name || 'exception';
+        const providerMessage = error?.message || 'unknown';
+        console.error('[agent][短信发送失败]', providerMessage, providerCode);
+        return { ok: false, providerCode, providerMessage };
     }
 }
 
@@ -312,8 +316,8 @@ router.post(
     [
         body('phone')
             .customSanitizer(v => {
-                const s = String(v || '').replace(/\s+/g, '');
-                return s.replace(/^\+?86/, '');
+                const s = String(v || '').replace(/[^\d]/g, '');
+                return s.replace(/^86/, '');
             })
             .isMobilePhone('zh-CN').withMessage('请输入正确的手机号'),
         body('purpose')
@@ -323,7 +327,7 @@ router.post(
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ success: false, errors: errors.array() });
+            return res.status(400).json({ success: false, message: '参数错误', errors: errors.array() });
         }
 
         const { phone, purpose } = req.body;
@@ -358,10 +362,23 @@ router.post(
                 [phone, code, `agent_${purpose}`]
             );
 
-            const smsSent = await sendSMS(phone, code);
-            if (!smsSent) {
-                await logAction({ action: 'send_code_failed', detail: JSON.stringify({ phone: maskPhone(phone), purpose }), ip: req.ip });
-                return res.status(500).json({ success: false, message: '短信发送失败，请稍后重试' });
+            const sms = await sendSMS(phone, code);
+            if (!sms.ok) {
+                await logAction({
+                    action: 'send_code_failed',
+                    detail: JSON.stringify({ phone: maskPhone(phone), purpose, providerCode: sms.providerCode, providerMessage: sms.providerMessage }),
+                    ip: req.ip
+                });
+
+                if (sms.providerCode === 'isv.BUSINESS_LIMIT_CONTROL') {
+                    return res.status(429).json({
+                        success: false,
+                        message: '短信触发运营商/平台限流（该号码当天发送次数已达上限），请稍后再试或更换手机号',
+                        code: sms.providerCode
+                    });
+                }
+
+                return res.status(500).json({ success: false, message: '短信发送失败，请稍后重试', code: sms.providerCode });
             }
 
             await logAction({ action: 'send_code_ok', detail: JSON.stringify({ phone: maskPhone(phone), purpose }), ip: req.ip });

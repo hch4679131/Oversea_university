@@ -219,7 +219,10 @@ refreshLucideIcons();
                     }
 
                     if (!resp.ok) {
-                        const msg = data?.message || data?.error || '请求失败';
+                        const firstValidationMsg = Array.isArray(data?.errors)
+                            ? (data.errors[0]?.msg || data.errors[0]?.message)
+                            : null;
+                        const msg = data?.message || data?.error || firstValidationMsg || '请求失败';
                         throw new Error(msg);
                     }
                     return data;
@@ -527,4 +530,3 @@ refreshLucideIcons();
             initScrollEngine();
             scrollLoop();
         });
-    

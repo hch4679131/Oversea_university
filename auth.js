@@ -193,8 +193,8 @@ router.post('/send-code', [
     // 兼容 +86 / 空格 / 86 前缀，统一为 11 位国内手机号后再校验
     body('phone')
         .customSanitizer(v => {
-            const s = String(v || '').replace(/\s+/g, '');
-            return s.replace(/^\+?86/, '');
+            const s = String(v || '').replace(/[^\d]/g, '');
+            return s.replace(/^86/, '');
         })
         .isMobilePhone('zh-CN').withMessage('请输入正确的手机号'),
     // 兼容大小写与多余空格
@@ -204,7 +204,7 @@ router.post('/send-code', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ success: false, errors: errors.array() });
+        return res.status(400).json({ success: false, message: '参数错误', errors: errors.array() });
     }
     
     const { phone, purpose } = req.body;
@@ -239,9 +239,10 @@ router.post('/send-code', [
         
         const smsSent = await sendSMS(phone, code);
         console.log(`[发送验证码] 短信发送状态: ${smsSent ? '成功' : '失败'}`);
-        
+
         if (!smsSent) {
-            return res.status(500).json({ success: false, message: '短信发送失败，请稍后重试' });
+            // 这里无法直接拿到阿里云错误码（sendSMS 返回 boolean），先给更友好的提示
+            return res.status(500).json({ success: false, message: '短信发送失败，请稍后重试（可能触发运营商/平台限流）' });
         }
         
         res.json({ success: true, message: '验证码已发送', expiresIn: 300 });
