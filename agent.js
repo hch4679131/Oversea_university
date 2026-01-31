@@ -1048,6 +1048,52 @@ router.get('/orders', authenticateAgent, async (req, res) => {
 });
 
 /**
+ * DELETE /api/agent/orders/:id
+ * 顾问删除自己创建的订单
+ */
+router.delete('/orders/:id', authenticateAgent, async (req, res) => {
+    const role = String(req.agent.role || '');
+    if (role !== 'consultant') {
+        return res.status(403).json({ success: false, message: '无权限删除订单' });
+    }
+
+    const id = Number(req.params.id);
+    if (!Number.isFinite(id) || id <= 0) {
+        return res.status(400).json({ success: false, message: '订单ID参数错误' });
+    }
+
+    try {
+        const [rows] = await pool.execute(
+            'SELECT id, order_no AS orderNo, title AS serviceName, status, COALESCE(created_by_user_id, user_id) AS createdByUserId FROM agent_orders WHERE id = ? LIMIT 1',
+            [id]
+        );
+
+        if (rows.length === 0) {
+            return res.status(404).json({ success: false, message: '订单不存在' });
+        }
+
+        const order = rows[0];
+        if (Number(order.createdByUserId) !== Number(req.agent.id)) {
+            return res.status(403).json({ success: false, message: '无权限删除该订单' });
+        }
+
+        await pool.execute('DELETE FROM agent_orders WHERE id = ? LIMIT 1', [id]);
+
+        await logAction({
+            userId: req.agent.id,
+            action: 'delete_order',
+            detail: JSON.stringify({ orderId: id, orderNo: order.orderNo, serviceName: order.serviceName, status: order.status }),
+            ip: req.ip
+        });
+
+        return res.json({ success: true, message: '删除成功' });
+    } catch (e) {
+        console.error('[agent] delete order error:', e);
+        return res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+    }
+});
+
+/**
  * GET /api/agent/logs
  */
 router.get('/logs', authenticateAgent, async (req, res) => {

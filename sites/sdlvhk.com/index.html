@@ -2832,6 +2832,7 @@
 
                             <div x-show="agentUser && agentUser.role === 'consultant'" class="mt-5 p-4 border border-white/10 bg-black/20">
                                 <div class="text-sm font-bold text-white/80">添加订单</div>
+                                <div x-show="agentNotice" class="mt-4 px-4 py-3 border rounded" :class="agentNoticeType === 'error' ? 'bg-red-950/40 border-red-800/40 text-red-200' : (agentNoticeType === 'success' ? 'bg-green-950/40 border-green-800/40 text-green-200' : 'bg-white/5 border-white/10 text-white/80')" x-text="agentNotice"></div>
                                 <div class="mt-4 grid md:grid-cols-2 gap-4">
                                     <div>
                                         <div class="text-xs text-white/60 mb-2">创单代理人</div>
@@ -2904,7 +2905,7 @@
                                     <input x-model="agentOrderForm.studentIdCard" type="text" placeholder="学生身份证（可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
                                 </div>
 
-                                <button type="button" @click="agentCreateOrder()" class="mt-4 w-full px-6 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">创建订单（自动生成订单号）</button>
+                                <button type="button" @click.prevent="agentCreateOrder()" class="mt-4 w-full px-6 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :class="agentBusy ? 'opacity-60 cursor-not-allowed' : ''" :disabled="agentBusy">创建订单（自动生成订单号）</button>
                             </div>
 
                             <div class="mt-4 overflow-x-auto border border-white/10">
@@ -2925,6 +2926,7 @@
                                             <th class="px-4 py-3 text-left font-bold text-white/70">创单时间</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">签单时间</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">完结时间</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70" x-show="agentUser && agentUser.role === 'consultant'">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -2944,10 +2946,13 @@
                                                 <td class="px-4 py-3" x-text="dash(o.createdAt)"></td>
                                                 <td class="px-4 py-3" x-text="dash(o.signedAt)"></td>
                                                 <td class="px-4 py-3" x-text="dash(o.finishedAt)"></td>
+                                                <td class="px-4 py-3" x-show="agentUser && agentUser.role === 'consultant'">
+                                                    <button type="button" class="px-3 py-1.5 text-xs font-bold border border-red-400/40 text-red-200 hover:bg-red-500/20 transition" @click="agentDeleteOrder(o.id)">删除</button>
+                                                </td>
                                             </tr>
                                         </template>
                                         <tr x-show="agentOrders.length === 0" class="border-t border-white/10">
-                                            <td class="px-4 py-3 text-white/40" colspan="14">暂无订单</td>
+                                            <td class="px-4 py-3 text-white/40" :colspan="(agentUser && agentUser.role === 'consultant') ? 15 : 14">暂无订单</td>
                                         </tr>
                                     </tbody>
                                 </table>

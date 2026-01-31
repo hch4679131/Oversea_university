@@ -421,6 +421,9 @@ refreshLucideIcons();
                         return;
                     }
 
+                    // Immediate feedback so users can tell the click handler ran.
+                    this.agentNotify('正在检查订单信息…', 'info');
+
                     const f = this.agentOrderForm;
                     const serviceName = String(f.serviceName || '').trim().toUpperCase();
                     const status = String(f.status || '').trim();
@@ -478,6 +481,39 @@ refreshLucideIcons();
                         }
                     } catch (e) {
                         this.agentNotify(e.message || '创建失败', 'error');
+                    } finally {
+                        this.agentBusy = false;
+                    }
+                },
+
+                async agentDeleteOrder(orderId) {
+                    if (!this.agentToken) {
+                        this.agentNotify('请先登录', 'error');
+                        this.switchPage('agent-login');
+                        return;
+                    }
+
+                    if (this.agentUser?.role !== 'consultant') {
+                        this.agentNotify('无权限删除订单', 'error');
+                        return;
+                    }
+
+                    const id = Number(orderId);
+                    if (!Number.isFinite(id) || id <= 0) {
+                        this.agentNotify('订单ID不正确', 'error');
+                        return;
+                    }
+
+                    const ok = window.confirm('确认删除该订单？此操作不可恢复。');
+                    if (!ok) return;
+
+                    try {
+                        this.agentBusy = true;
+                        await this.agentApi(`/api/agent/orders/${id}`, 'DELETE', null, true);
+                        this.agentNotify('删除成功', 'success');
+                        await this.agentRefreshDashboard();
+                    } catch (e) {
+                        this.agentNotify(e.message || '删除失败', 'error');
                     } finally {
                         this.agentBusy = false;
                     }
