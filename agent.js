@@ -844,7 +844,13 @@ router.post(
 
         body('studentName').customSanitizer(v => String(v || '').trim()).notEmpty().withMessage('学生名字不能为空'),
         body('studentGender').customSanitizer(v => String(v || '').trim()).isIn(['男', '女']).withMessage('学生性别参数错误'),
-        body('studentPhone').customSanitizer(normalizePhone).isMobilePhone('zh-CN').withMessage('学生电话格式错误'),
+        body('studentPhone')
+            .customSanitizer(normalizePhone)
+            .custom((v) => {
+                if (!v) return false;
+                return String(v).length >= 6 && String(v).length <= 20;
+            })
+            .withMessage('学生电话参数错误'),
 
         body('extraServiceWeight')
             .optional({ nullable: true })
