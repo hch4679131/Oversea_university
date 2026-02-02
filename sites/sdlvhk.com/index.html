@@ -2690,52 +2690,134 @@
 
         <!-- ================= PAGE 7: 代理登录 ================= -->
         <div x-show="page === 'agent-login'" class="w-full bg-paper min-h-screen pt-28">
-            <section class="pb-24">
-                <div class="max-w-4xl mx-auto px-6">
-                    <div class="relative flex items-center justify-center">
-                        <h1 class="text-3xl md:text-4xl font-serif font-bold text-obsidian-950">代理登录</h1>
-                        <button type="button" @click="switchPage('contact')" class="absolute right-0 px-4 py-2 border border-black/10 text-black/70 hover:bg-black hover:text-white transition text-sm">返回</button>
+            <section class="min-h-[80vh] flex items-center justify-center relative overflow-hidden pb-24">
+                <!-- 背景装饰：纹理与光晕 -->
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-400/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+                <div class="w-full max-w-lg mx-auto px-6 relative z-10 scrub-item anim-fade-up">
+                    
+                    <!-- 顶部返回按钮 -->
+                    <div class="absolute -top-16 left-6 md:left-0">
+                         <button type="button" @click="switchPage('contact')" class="group flex items-center gap-2 text-sm text-black/40 hover:text-obsidian-950 transition-colors duration-300">
+                            <i data-lucide="arrow-left" class="w-4 h-4 transition-transform group-hover:-translate-x-1"></i>
+                            <span class="tracking-widest uppercase">返回官网</span>
+                        </button>
                     </div>
 
-                    <div class="mt-10 max-w-xl mx-auto bg-white border border-black/10 shadow-2xl rounded-lg p-8">
-                        <div class="flex gap-2 mb-6">
-                            <button type="button" @click="agentLoginMode = 'password'" :class="agentLoginMode === 'password' ? 'bg-obsidian-950 text-white' : 'bg-gray-100 text-black/60 hover:text-black'" class="px-4 py-2 text-sm font-semibold border border-black/10 rounded transition">密码登录</button>
-                            <button type="button" @click="agentLoginMode = 'code'" :class="agentLoginMode === 'code' ? 'bg-obsidian-950 text-white' : 'bg-gray-100 text-black/60 hover:text-black'" class="px-4 py-2 text-sm font-semibold border border-black/10 rounded transition">短信验证码登录</button>
-                        </div>
-
-                        <div class="space-y-4">
-                            <input x-model="agentForm.phone" type="text" placeholder="手机号" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
-
-                            <template x-if="agentLoginMode === 'password'">
-                                <input x-model="agentForm.password" type="password" placeholder="密码" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
-                            </template>
-
-                            <template x-if="agentLoginMode === 'code'">
-                                <div class="grid sm:grid-cols-[1fr,160px] gap-3">
-                                    <input x-model="agentForm.code" type="text" placeholder="验证码" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
-                                    <button type="button" @click="agentSendCode('login')" class="px-4 py-3 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition">获取验证码</button>
-                                </div>
-                            </template>
-
-                            <button type="button" @click="agentLogin()" class="w-full py-4 bg-gold-400 text-black font-bold hover:bg-black hover:text-gold-400 transition rounded" :disabled="agentBusy">登录</button>
-                        </div>
-
-                        <div class="mt-6">
-                            <button type="button" @click="agentShowReset = !agentShowReset" class="text-sm text-black/50 hover:text-black transition">忘记密码？</button>
-                        </div>
-
-                        <div x-show="agentShowReset" x-transition class="mt-5 space-y-4">
-                            <input x-model="agentResetForm.phone" type="text" placeholder="手机号" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
-                            <div class="grid sm:grid-cols-[1fr,160px] gap-3">
-                                <input x-model="agentResetForm.code" type="text" placeholder="验证码" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
-                                <button type="button" @click="agentSendCode('reset_password')" class="px-4 py-3 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition">发送验证码</button>
+                    <!-- 登录卡片 -->
+                    <div class="bg-white/80 backdrop-blur-xl border border-white/50 shadow-2xl shadow-black/5 rounded-sm overflow-hidden">
+                        
+                        <!-- 卡片头部 -->
+                        <div class="pt-10 pb-8 text-center px-8">
+                            <div class="w-10 h-10 border border-gold-400 flex items-center justify-center mx-auto mb-4">
+                                <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="w-6 h-6 object-contain" alt="SDLV">
                             </div>
-                            <input x-model="agentResetForm.newPassword" type="password" placeholder="新密码（至少6位）" class="w-full px-4 py-3 bg-paper border border-black/10 rounded focus:border-gold-400 focus:outline-none transition" />
-                            <button type="button" @click="agentResetPassword()" class="w-full py-3 bg-black text-white font-semibold rounded hover:bg-gold-400 hover:text-black transition" :disabled="agentBusy">重置密码</button>
+                            <h1 class="text-3xl font-serif font-bold text-obsidian-950">代理登录</h1>
+                            <div class="text-[10px] text-gold-500 uppercase tracking-[0.3em] mt-2">Agent Portal Login</div>
                         </div>
 
-                        <div x-show="agentNotice" class="mt-6 px-4 py-3 border rounded" :class="agentNoticeType === 'error' ? 'bg-red-50 border-red-200 text-red-700' : (agentNoticeType === 'success' ? 'bg-green-50 border-green-200 text-green-700' : 'bg-gray-50 border-black/10 text-black/70')" x-text="agentNotice"></div>
+                        <!-- 登录方式切换 Tab -->
+                        <div class="flex border-b border-black/5 px-8">
+                            <button type="button" 
+                                @click="agentLoginMode = 'password'" 
+                                class="flex-1 py-4 text-sm font-bold tracking-wider transition-all duration-300 border-b-2 relative"
+                                :class="agentLoginMode === 'password' ? 'text-obsidian-950 border-gold-400' : 'text-black/40 border-transparent hover:text-black/70'">
+                                密码登录
+                            </button>
+                            <button type="button" 
+                                @click="agentLoginMode = 'code'" 
+                                class="flex-1 py-4 text-sm font-bold tracking-wider transition-all duration-300 border-b-2 relative"
+                                :class="agentLoginMode === 'code' ? 'text-obsidian-950 border-gold-400' : 'text-black/40 border-transparent hover:text-black/70'">
+                                验证码登录
+                            </button>
+                        </div>
+
+                        <!-- 表单区域 -->
+                        <div class="p-8 space-y-6">
+                            
+                            <!-- 手机号 -->
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-black/40 uppercase tracking-wider">手机号码</label>
+                                <div class="relative">
+                                    <i data-lucide="smartphone" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/30"></i>
+                                    <input x-model="agentForm.phone" type="text" placeholder="请输入手机号" 
+                                        class="w-full pl-10 pr-4 py-3 bg-paper border border-black/10 rounded-sm text-obsidian-950 focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 focus:outline-none transition-all placeholder:text-black/20" />
+                                </div>
+                            </div>
+
+                            <!-- 密码模式 -->
+                            <div x-show="agentLoginMode === 'password'" x-transition:enter="transition ease-out duration-300" class="space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <label class="text-xs font-bold text-black/40 uppercase tracking-wider">登录密码</label>
+                                    <button type="button" @click="agentShowReset = !agentShowReset" class="text-xs text-gold-500 hover:text-gold-600 hover:underline transition">忘记密码？</button>
+                                </div>
+                                <div class="relative">
+                                    <i data-lucide="lock" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/30"></i>
+                                    <input x-model="agentForm.password" type="password" placeholder="请输入密码" 
+                                        class="w-full pl-10 pr-4 py-3 bg-paper border border-black/10 rounded-sm text-obsidian-950 focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 focus:outline-none transition-all placeholder:text-black/20" />
+                                </div>
+                            </div>
+
+                            <!-- 验证码模式 -->
+                            <div x-show="agentLoginMode === 'code'" x-transition:enter="transition ease-out duration-300" class="space-y-1">
+                                <label class="text-xs font-bold text-black/40 uppercase tracking-wider">短信验证码</label>
+                                <div class="flex gap-3">
+                                    <div class="relative flex-1">
+                                        <i data-lucide="shield-check" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/30"></i>
+                                        <input x-model="agentForm.code" type="text" placeholder="6位验证码" 
+                                            class="w-full pl-10 pr-4 py-3 bg-paper border border-black/10 rounded-sm text-obsidian-950 focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 focus:outline-none transition-all placeholder:text-black/20" />
+                                    </div>
+                                    <button type="button" @click="agentSendCode('login')" 
+                                        class="px-4 py-3 bg-black/5 border border-black/10 text-xs font-bold text-black/70 hover:bg-black hover:text-white hover:border-black transition-colors duration-300 whitespace-nowrap rounded-sm">
+                                        获取验证码
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 登录按钮 -->
+                            <button type="button" @click="agentLogin()" 
+                                class="w-full py-4 bg-obsidian-950 text-white font-bold tracking-[0.2em] uppercase hover:bg-gold-400 hover:text-black transition-all duration-300 rounded-sm shadow-lg shadow-black/20" 
+                                :disabled="agentBusy"
+                                :class="agentBusy ? 'opacity-70 cursor-not-allowed' : ''">
+                                <span x-show="!agentBusy">立即登录</span>
+                                <span x-show="agentBusy" class="flex items-center justify-center gap-2">
+                                    <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> 登录中...
+                                </span>
+                            </button>
+
+                            <!-- 状态提示 -->
+                            <div x-show="agentNotice" x-transition 
+                                class="text-xs text-center p-3 rounded-sm border"
+                                :class="agentNoticeType === 'error' ? 'bg-red-50 border-red-100 text-red-600' : (agentNoticeType === 'success' ? 'bg-green-50 border-green-100 text-green-600' : 'bg-gray-50 border-gray-100 text-gray-600')" 
+                                x-text="agentNotice">
+                            </div>
+                        </div>
+
+                        <!-- 重置密码折叠区域 -->
+                        <div x-show="agentShowReset" x-transition:enter="transition ease-out duration-300 transform origin-top" class="bg-paper border-t border-black/5 p-8">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-serif font-bold text-obsidian-950">重置密码</h3>
+                                <button @click="agentShowReset = false" class="text-xs text-black/40 hover:text-black"><i data-lucide="x" class="w-4 h-4"></i></button>
+                            </div>
+                            <div class="space-y-4">
+                                <input x-model="agentResetForm.phone" type="text" placeholder="注册手机号" class="w-full px-4 py-3 bg-white border border-black/10 rounded-sm focus:border-gold-400 focus:outline-none transition-all text-sm" />
+                                <div class="flex gap-3">
+                                    <input x-model="agentResetForm.code" type="text" placeholder="验证码" class="w-full px-4 py-3 bg-white border border-black/10 rounded-sm focus:border-gold-400 focus:outline-none transition-all text-sm" />
+                                    <button type="button" @click="agentSendCode('reset_password')" class="px-4 py-3 bg-white border border-black/10 text-xs font-bold hover:border-gold-400 hover:text-gold-500 transition-colors whitespace-nowrap rounded-sm">发送验证码</button>
+                                </div>
+                                <input x-model="agentResetForm.newPassword" type="password" placeholder="新密码（至少6位）" class="w-full px-4 py-3 bg-white border border-black/10 rounded-sm focus:border-gold-400 focus:outline-none transition-all text-sm" />
+                                <button type="button" @click="agentResetPassword()" class="w-full py-3 bg-gold-400 text-black text-sm font-bold tracking-widest uppercase hover:bg-gold-300 transition rounded-sm" :disabled="agentBusy">确认重置</button>
+                            </div>
+                        </div>
+
                     </div>
+                    
+                    <!-- 底部版权 -->
+                    <div class="mt-8 text-center">
+                        <p class="text-[10px] text-black/30 tracking-widest uppercase">&copy; SDLV Global Education. All Rights Reserved.</p>
+                    </div>
+
                 </div>
             </section>
         </div>
