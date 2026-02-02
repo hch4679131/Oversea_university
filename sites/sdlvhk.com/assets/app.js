@@ -212,6 +212,55 @@ refreshLucideIcons();
                     return s.trim() ? s : '-';
                 },
 
+                parseDateMaybe(v) {
+                    if (v === null || v === undefined) return null;
+                    if (v instanceof Date) return Number.isNaN(v.getTime()) ? null : v;
+                    if (typeof v === 'number') {
+                        const d = new Date(v);
+                        return Number.isNaN(d.getTime()) ? null : d;
+                    }
+
+                    const s0 = String(v).trim();
+                    if (!s0) return null;
+
+                    // MySQL DATETIME like: 2026-01-31 10:06:44
+                    // Treat as UTC to match ISO '...Z' semantics used by API.
+                    if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(s0)) {
+                        const d = new Date(s0.replace(' ', 'T') + 'Z');
+                        return Number.isNaN(d.getTime()) ? null : d;
+                    }
+
+                    const d = new Date(s0);
+                    return Number.isNaN(d.getTime()) ? null : d;
+                },
+
+                fmtCN(v) {
+                    const d = this.parseDateMaybe(v);
+                    if (!d) return '-';
+
+                    try {
+                        const parts = new Intl.DateTimeFormat('zh-CN', {
+                            timeZone: 'Asia/Shanghai',
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            hour12: false
+                        }).formatToParts(d);
+
+                        const map = {};
+                        for (const p of parts) {
+                            if (p.type !== 'literal') map[p.type] = p.value;
+                        }
+                        return `${map.year}-${map.month}-${map.day} ${map.hour}:${map.minute}:${map.second}`;
+                    } catch (e) {
+                        // Fallback: still show something
+                        return d.toISOString();
+                    }
+                },
+
                 agentNotify(message, type = 'info') {
                     this.agentNotice = message;
                     this.agentNoticeType = type;
