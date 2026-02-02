@@ -39,7 +39,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="/sdlvhk.com/assets/styles.css?v=20260131_1808">
+    <link rel="stylesheet" href="/sdlvhk.com/assets/styles.css?v=20260202_0001">
 </head>
 <body class="antialiased selection:bg-gold-400 selection:text-black">
 
@@ -2947,6 +2947,11 @@
                                                 <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
                                                 <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
                                                 <td class="px-4 py-3" x-show="agentUser && agentUser.role === 'consultant'">
+                                                    <button type="button"
+                                                            class="px-3 py-1.5 text-xs font-bold border border-white/20 text-white/80 hover:bg-white/10 transition mr-2"
+                                                            :class="(agentBusy || o.status === '已完结') ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''"
+                                                            :disabled="agentBusy || o.status === '已完结'"
+                                                            @click="agentAdvanceOrder(o.id)">更新</button>
                                                     <button type="button" class="px-3 py-1.5 text-xs font-bold border border-red-400/40 text-red-200 hover:bg-red-500/20 transition" @click="agentDeleteOrder(o.id)">删除</button>
                                                 </td>
                                             </tr>
@@ -3215,8 +3220,8 @@
             </div>
         </div>
     </footer>
-    <script src="/sdlvhk.com/assets/i18n.js?v=20260131_1808"></script>
-    <script src="/sdlvhk.com/assets/app.js?v=20260131_1808"></script>
+    <script src="/sdlvhk.com/assets/i18n.js?v=20260202_0001"></script>
+    <script src="/sdlvhk.com/assets/app.js?v=20260202_0001"></script>
 
     
 </body>

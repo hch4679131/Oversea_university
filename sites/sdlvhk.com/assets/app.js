@@ -568,6 +568,36 @@ refreshLucideIcons();
                     }
                 },
 
+                async agentAdvanceOrder(orderId) {
+                    if (!this.agentToken) {
+                        this.agentNotify('请先登录', 'error');
+                        this.switchPage('agent-login');
+                        return;
+                    }
+
+                    if (this.agentUser?.role !== 'consultant') {
+                        this.agentNotify('无权限更新订单', 'error');
+                        return;
+                    }
+
+                    const id = Number(orderId);
+                    if (!Number.isFinite(id) || id <= 0) {
+                        this.agentNotify('订单ID不正确', 'error');
+                        return;
+                    }
+
+                    try {
+                        this.agentBusy = true;
+                        const data = await this.agentApi(`/api/agent/orders/${id}/advance`, 'POST', {}, true);
+                        this.agentNotify(`更新成功：${data.status || ''}`, 'success');
+                        await this.agentRefreshDashboard();
+                    } catch (e) {
+                        this.agentNotify(e.message || '更新失败', 'error');
+                    } finally {
+                        this.agentBusy = false;
+                    }
+                },
+
                 async agentRefreshDashboard() {
                     if (!this.agentToken) {
                         this.agentNotify('请先登录', 'error');

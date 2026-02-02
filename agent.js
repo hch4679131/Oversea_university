@@ -1094,6 +1094,103 @@ router.delete('/orders/:id', authenticateAgent, async (req, res) => {
 });
 
 /**
+ * POST /api/agent/orders/:id/advance
+ * 顾问：将订单状态推进到下一项，并记录签单/完结时间
+ * - 已创单 -> 已签单 (signed_at = NOW())
+ * - 已签单 -> 已完结 (finished_at = NOW(); 若 signed_at 为空则一并补上)
+ * - 已完结 -> 不允许
+ */
+router.post('/orders/:id/advance', authenticateAgent, async (req, res) => {
+    const role = String(req.agent.role || '');
+    if (role !== 'consultant') {
+        return res.status(403).json({ success: false, message: '无权限更新订单状态' });
+    }
+
+    const id = Number(req.params.id);
+    if (!Number.isFinite(id) || id <= 0) {
+        return res.status(400).json({ success: false, message: '订单ID参数错误' });
+    }
+
+    const conn = await pool.getConnection();
+    try {
+        await conn.beginTransaction();
+
+        const [rows] = await conn.execute(
+            `SELECT
+                id,
+                order_no AS orderNo,
+                title AS serviceName,
+                status,
+                signed_at AS signedAt,
+                finished_at AS finishedAt,
+                COALESCE(created_by_user_id, user_id) AS createdByUserId
+            FROM agent_orders
+            WHERE id = ?
+            FOR UPDATE`,
+            [id]
+        );
+
+        if (rows.length === 0) {
+            await conn.rollback();
+            return res.status(404).json({ success: false, message: '订单不存在' });
+        }
+
+        const order = rows[0];
+        if (Number(order.createdByUserId) !== Number(req.agent.id)) {
+            await conn.rollback();
+            return res.status(403).json({ success: false, message: '无权限更新该订单' });
+        }
+
+        const cur = String(order.status || '');
+        let nextStatus = null;
+        let setSignedAt = false;
+        let setFinishedAt = false;
+
+        if (cur === '已创单') {
+            nextStatus = '已签单';
+            setSignedAt = true;
+        } else if (cur === '已签单') {
+            nextStatus = '已完结';
+            setFinishedAt = true;
+            if (!order.signedAt) setSignedAt = true;
+        } else if (cur === '已完结') {
+            await conn.rollback();
+            return res.status(400).json({ success: false, message: '订单已完结，无法更新' });
+        } else {
+            await conn.rollback();
+            return res.status(400).json({ success: false, message: '订单状态异常，无法更新' });
+        }
+
+        await conn.execute(
+            `UPDATE agent_orders
+             SET status = ?,
+                 signed_at = CASE WHEN ? THEN COALESCE(signed_at, NOW()) ELSE signed_at END,
+                 finished_at = CASE WHEN ? THEN COALESCE(finished_at, NOW()) ELSE finished_at END
+             WHERE id = ?
+             LIMIT 1`,
+            [nextStatus, setSignedAt ? 1 : 0, setFinishedAt ? 1 : 0, id]
+        );
+
+        await conn.commit();
+
+        await logAction({
+            userId: req.agent.id,
+            action: 'advance_order',
+            detail: JSON.stringify({ orderId: id, orderNo: order.orderNo, from: cur, to: nextStatus }),
+            ip: req.ip
+        });
+
+        return res.json({ success: true, message: '更新成功', status: nextStatus });
+    } catch (e) {
+        try { await conn.rollback(); } catch (e2) {}
+        console.error('[agent] advance order error:', e);
+        return res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+    } finally {
+        try { conn.release(); } catch (e) {}
+    }
+});
+
+/**
  * GET /api/agent/logs
  */
 router.get('/logs', authenticateAgent, async (req, res) => {
