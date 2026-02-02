@@ -2948,6 +2948,11 @@
                                                 <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
                                                 <td class="px-4 py-3" x-show="agentUser && agentUser.role === 'consultant'">
                                                     <button type="button"
+                                                            class="px-3 py-1.5 text-xs font-bold border border-gold-400/40 text-gold-200 hover:bg-gold-400/10 transition mr-2"
+                                                            :class="agentBusy ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''"
+                                                            :disabled="agentBusy"
+                                                            @click="agentOpenEditOrder(o)">修改</button>
+                                                    <button type="button"
                                                             class="px-3 py-1.5 text-xs font-bold border border-white/20 text-white/80 hover:bg-white/10 transition mr-2"
                                                             :class="(agentBusy || o.status === '已完结') ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''"
                                                             :disabled="agentBusy || o.status === '已完结'"
@@ -2961,6 +2966,103 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+
+                            <!-- 修改订单弹窗（顾问可见） -->
+                            <div x-show="agentEditOrderOpen" x-cloak class="fixed inset-0 z-[70]" @keydown.escape.window="agentCloseEditOrder()">
+                                <div class="absolute inset-0 bg-black/70" @click="agentCloseEditOrder()"></div>
+                                <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
+                                    <div class="w-full max-w-3xl bg-obsidian-900/95 text-white border border-white/10 rounded-lg shadow-2xl overflow-hidden" @click.stop>
+                                        <div class="px-5 py-4 border-b border-white/10 flex items-center justify-between">
+                                            <div>
+                                                <div class="text-sm font-bold tracking-widest">修改订单</div>
+                                                <div class="text-xs text-white/60">订单号：<span class="font-bold text-white/85" x-text="agentEditOrderNo || '-'" ></span></div>
+                                            </div>
+                                            <button type="button" class="w-10 h-10 rounded-md border border-white/10 bg-black/30 hover:bg-black/50 transition" @click="agentCloseEditOrder()" aria-label="Close">×</button>
+                                        </div>
+
+                                        <div class="p-5">
+                                            <div x-show="agentNotice" class="mb-4 px-4 py-3 border rounded" :class="agentNoticeType === 'error' ? 'bg-red-950/40 border-red-800/40 text-red-200' : (agentNoticeType === 'success' ? 'bg-green-950/40 border-green-800/40 text-green-200' : 'bg-white/5 border-white/10 text-white/80')" x-text="agentNotice"></div>
+
+                                            <div class="grid md:grid-cols-2 gap-4">
+                                                <div>
+                                                    <div class="text-xs text-white/60 mb-2">创单代理人</div>
+                                                    <select x-model="agentEditOrderForm.bindUserId" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                                        <option :value="agentUser?.id" x-text="'我自己：' + (agentUser?.phone || '-')"></option>
+                                                        <template x-for="u in agentAllUsers" :key="u.id">
+                                                            <option :value="u.id" x-text="(u.role || '-') + '：' + (u.phone || '-')"></option>
+                                                        </template>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <div class="text-xs text-white/60 mb-2">服务名（不可空）</div>
+                                                    <select x-model="agentEditOrderForm.serviceName" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                                        <option value="EAC">EAC</option>
+                                                        <option value="AEC">AEC</option>
+                                                        <option value="EC">EC</option>
+                                                        <option value="EA">EA</option>
+                                                        <option value="AE">AE</option>
+                                                        <option value="AC">AC</option>
+                                                        <option value="E">E</option>
+                                                        <option value="A">A</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                                <div>
+                                                    <div class="text-xs text-white/60 mb-2">金额（不可空）</div>
+                                                    <input x-model="agentEditOrderForm.amount" type="number" min="0" step="0.01" placeholder="金额" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                                </div>
+                                                <div>
+                                                    <div class="text-xs text-white/60 mb-2">状态（不可空）</div>
+                                                    <select x-model="agentEditOrderForm.status" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                                        <option value="已创单">已创单</option>
+                                                        <option value="已签单">已签单</option>
+                                                        <option value="已完结">已完结</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-4 grid md:grid-cols-3 gap-4">
+                                                <input x-model="agentEditOrderForm.studentName" type="text" placeholder="学生名字（不可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                                <select x-model="agentEditOrderForm.studentGender" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                                    <option value="男">男</option>
+                                                    <option value="女">女</option>
+                                                </select>
+                                                <input x-model="agentEditOrderForm.studentPhone" type="text" placeholder="学生电话（不可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                            </div>
+
+                                            <div class="mt-4 grid md:grid-cols-3 gap-4">
+                                                <input x-model="agentEditOrderForm.parentName" type="text" placeholder="家长名字（可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                                <select x-model="agentEditOrderForm.parentGender" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                                    <option value="">家长性别（可空）</option>
+                                                    <option value="男">男</option>
+                                                    <option value="女">女</option>
+                                                </select>
+                                                <input x-model="agentEditOrderForm.parentPhone" type="text" placeholder="家长电话（可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                            </div>
+
+                                            <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                                <select x-model="agentEditOrderForm.extraServiceWeight" class="px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                                    <option value="">扩展服务权重（可空）</option>
+                                                    <option value="ECA">ECA</option>
+                                                    <option value="EAC">EAC</option>
+                                                    <option value="CEA">CEA</option>
+                                                    <option value="CAE">CAE</option>
+                                                    <option value="AEC">AEC</option>
+                                                    <option value="ACE">ACE</option>
+                                                </select>
+                                                <input x-model="agentEditOrderForm.studentIdCard" type="text" placeholder="学生身份证（可空）" class="px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                            </div>
+                                        </div>
+
+                                        <div class="px-5 py-4 border-t border-white/10 flex items-center justify-end gap-3">
+                                            <button type="button" class="px-5 py-2 border border-white/20 text-white/80 hover:bg-white/10 transition" @click="agentCloseEditOrder()" :disabled="agentBusy" :class="agentBusy ? 'opacity-50 cursor-not-allowed' : ''">取消</button>
+                                            <button type="button" class="px-5 py-2 bg-gold-400 text-black font-bold hover:bg-gold-300 transition" @click="agentSaveEditOrder()" :disabled="agentBusy" :class="agentBusy ? 'opacity-60 cursor-not-allowed' : ''">保存修改</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -3221,7 +3323,7 @@
         </div>
     </footer>
     <script src="/sdlvhk.com/assets/i18n.js?v=20260202_0001"></script>
-    <script src="/sdlvhk.com/assets/app.js?v=20260202_0001"></script>
+    <script src="/sdlvhk.com/assets/app.js?v=20260202_0002"></script>
 
     
 </body>

@@ -191,6 +191,23 @@ refreshLucideIcons();
                 agentOrders: [],
                 agentLogs: [],
                 agentAllUsers: [],
+                agentEditOrderOpen: false,
+                agentEditOrderId: null,
+                agentEditOrderNo: '',
+                agentEditOrderForm: {
+                    bindUserId: null,
+                    serviceName: 'EAC',
+                    amount: '',
+                    status: '已创单',
+                    parentName: '',
+                    parentGender: '',
+                    parentPhone: '',
+                    studentName: '',
+                    studentGender: '男',
+                    studentPhone: '',
+                    extraServiceWeight: '',
+                    studentIdCard: ''
+                },
                 agentOrderForm: {
                     bindUserId: null,
                     serviceName: 'EAC',
@@ -593,6 +610,104 @@ refreshLucideIcons();
                         await this.agentRefreshDashboard();
                     } catch (e) {
                         this.agentNotify(e.message || '更新失败', 'error');
+                    } finally {
+                        this.agentBusy = false;
+                    }
+                },
+
+                agentOpenEditOrder(order) {
+                    if (this.agentUser?.role !== 'consultant') {
+                        this.agentNotify('无权限修改订单', 'error');
+                        return;
+                    }
+                    if (!order || !order.id) {
+                        this.agentNotify('订单数据异常', 'error');
+                        return;
+                    }
+
+                    this.agentEditOrderId = Number(order.id);
+                    this.agentEditOrderNo = String(order.orderNo || '');
+                    this.agentEditOrderForm.bindUserId = order.boundUserId ? Number(order.boundUserId) : (this.agentUser?.id || null);
+                    this.agentEditOrderForm.serviceName = String(order.serviceName || 'EAC').trim().toUpperCase();
+                    this.agentEditOrderForm.amount = (order.amount === null || order.amount === undefined) ? '' : String(order.amount);
+                    this.agentEditOrderForm.status = String(order.status || '已创单').trim();
+                    this.agentEditOrderForm.parentName = String(order.parentName || '').trim();
+                    this.agentEditOrderForm.parentGender = String(order.parentGender || '').trim();
+                    this.agentEditOrderForm.parentPhone = String(order.parentPhone || '').trim();
+                    this.agentEditOrderForm.studentName = String(order.studentName || '').trim();
+                    this.agentEditOrderForm.studentGender = String(order.studentGender || '男').trim();
+                    this.agentEditOrderForm.studentPhone = String(order.studentPhone || '').trim();
+                    this.agentEditOrderForm.extraServiceWeight = String(order.extraServiceWeight || '').trim().toUpperCase();
+                    this.agentEditOrderForm.studentIdCard = String(order.studentIdCard || '').trim();
+
+                    this.agentEditOrderOpen = true;
+                },
+
+                agentCloseEditOrder() {
+                    this.agentEditOrderOpen = false;
+                    this.agentEditOrderId = null;
+                    this.agentEditOrderNo = '';
+                },
+
+                async agentSaveEditOrder() {
+                    if (!this.agentToken) {
+                        this.agentNotify('请先登录', 'error');
+                        this.switchPage('agent-login');
+                        return;
+                    }
+                    if (this.agentUser?.role !== 'consultant') {
+                        this.agentNotify('无权限修改订单', 'error');
+                        return;
+                    }
+
+                    const id = Number(this.agentEditOrderId);
+                    if (!Number.isFinite(id) || id <= 0) {
+                        this.agentNotify('订单ID不正确', 'error');
+                        return;
+                    }
+
+                    const f = this.agentEditOrderForm;
+                    const serviceName = String(f.serviceName || '').trim().toUpperCase();
+                    const status = String(f.status || '').trim();
+                    const amount = String(f.amount || '').trim();
+                    const studentName = String(f.studentName || '').trim();
+                    const studentGender = String(f.studentGender || '').trim();
+                    const studentPhoneRaw = String(f.studentPhone || '').trim();
+                    const studentPhone = studentPhoneRaw.replace(/[^\d]/g, '');
+                    const parentPhoneRaw = String(f.parentPhone || '').trim();
+                    const parentPhone = parentPhoneRaw.replace(/[^\d]/g, '');
+
+                    if (!serviceName) return this.agentNotify('请选择服务名', 'error');
+                    if (!amount) return this.agentNotify('请输入金额', 'error');
+                    if (!status) return this.agentNotify('请选择状态', 'error');
+                    if (!studentName) return this.agentNotify('请输入学生名字', 'error');
+                    if (!studentGender) return this.agentNotify('请选择学生性别', 'error');
+                    if (!studentPhone) return this.agentNotify('请输入学生电话', 'error');
+                    if (String(studentPhone).length < 6) return this.agentNotify('学生电话至少 6 位数字', 'error');
+
+                    const payload = {
+                        bindUserId: f.bindUserId ? Number(f.bindUserId) : undefined,
+                        serviceName,
+                        amount: Number(amount),
+                        status,
+                        parentName: String(f.parentName || '').trim() || undefined,
+                        parentGender: String(f.parentGender || '').trim() || undefined,
+                        parentPhone: parentPhone ? parentPhone : undefined,
+                        studentName,
+                        studentGender,
+                        studentPhone,
+                        extraServiceWeight: String(f.extraServiceWeight || '').trim().toUpperCase() || undefined,
+                        studentIdCard: String(f.studentIdCard || '').trim() || undefined
+                    };
+
+                    try {
+                        this.agentBusy = true;
+                        await this.agentApi(`/api/agent/orders/${id}`, 'PUT', payload, true);
+                        this.agentNotify('修改成功', 'success');
+                        this.agentEditOrderOpen = false;
+                        await this.agentRefreshDashboard();
+                    } catch (e) {
+                        this.agentNotify(e.message || '修改失败', 'error');
                     } finally {
                         this.agentBusy = false;
                     }

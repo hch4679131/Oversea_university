@@ -1191,6 +1191,202 @@ router.post('/orders/:id/advance', authenticateAgent, async (req, res) => {
 });
 
 /**
+ * PUT /api/agent/orders/:id
+ * 顾问修改订单所有信息（除订单号）。
+ * 规则：当状态变更时，自动清除“未到达阶段”的时间字段。
+ * - 已创单：signed_at/finished_at -> NULL
+ * - 已签单：finished_at -> NULL；signed_at 若为空则补 NOW()
+ * - 已完结：signed_at/finished_at 若为空则补 NOW()
+ */
+router.put(
+    '/orders/:id',
+    authenticateAgent,
+    [
+        body('bindUserId').optional().isInt({ min: 1 }).withMessage('绑定账号参数错误'),
+        body('serviceName')
+            .customSanitizer(v => String(v || '').trim().toUpperCase())
+            .isIn(['EAC', 'AEC', 'EC', 'EA', 'AE', 'AC', 'E', 'A'])
+            .withMessage('服务名参数错误'),
+        body('amount').isFloat({ min: 0 }).withMessage('金额不能为空且必须为数字'),
+        body('status')
+            .customSanitizer(v => String(v || '').trim())
+            .isIn(['已创单', '已签单', '已完结'])
+            .withMessage('状态参数错误'),
+
+        body('parentName').optional({ nullable: true }).customSanitizer(v => String(v || '').trim()),
+        body('parentGender').optional({ nullable: true }).customSanitizer(v => String(v || '').trim()).isIn(['男', '女']).withMessage('家长性别参数错误'),
+        body('parentPhone')
+            .optional({ nullable: true })
+            .customSanitizer(normalizePhone)
+            .custom((v) => {
+                if (!v) return true;
+                return String(v).length >= 6 && String(v).length <= 20;
+            })
+            .withMessage('家长电话参数错误'),
+
+        body('studentName').customSanitizer(v => String(v || '').trim()).notEmpty().withMessage('学生名字不能为空'),
+        body('studentGender').customSanitizer(v => String(v || '').trim()).isIn(['男', '女']).withMessage('学生性别参数错误'),
+        body('studentPhone')
+            .customSanitizer(normalizePhone)
+            .custom((v) => {
+                if (!v) return false;
+                return String(v).length >= 6 && String(v).length <= 20;
+            })
+            .withMessage('学生电话需为 6-20 位数字'),
+
+        body('extraServiceWeight')
+            .optional({ nullable: true })
+            .customSanitizer(v => String(v || '').trim().toUpperCase())
+            .isIn(['ECA', 'EAC', 'CEA', 'CAE', 'AEC', 'ACE'])
+            .withMessage('扩展服务权重参数错误'),
+        body('studentIdCard').optional({ nullable: true }).customSanitizer(v => String(v || '').trim())
+    ],
+    async (req, res) => {
+        const role = String(req.agent.role || '');
+        if (role !== 'consultant') {
+            return res.status(403).json({ success: false, message: '无权限修改订单' });
+        }
+
+        const id = Number(req.params.id);
+        if (!Number.isFinite(id) || id <= 0) {
+            return res.status(400).json({ success: false, message: '订单ID参数错误' });
+        }
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ success: false, message: '参数错误', errors: errors.array() });
+        }
+
+        const {
+            bindUserId,
+            serviceName,
+            amount,
+            status,
+            parentName,
+            parentGender,
+            parentPhone,
+            studentName,
+            studentGender,
+            studentPhone,
+            extraServiceWeight,
+            studentIdCard
+        } = req.body;
+
+        const boundUserId = bindUserId ? Number(bindUserId) : undefined;
+
+        const conn = await pool.getConnection();
+        try {
+            await conn.beginTransaction();
+
+            const [rows] = await conn.execute(
+                `SELECT
+                    id,
+                    order_no AS orderNo,
+                    status,
+                    signed_at AS signedAt,
+                    finished_at AS finishedAt,
+                    user_id AS boundUserId,
+                    COALESCE(created_by_user_id, user_id) AS createdByUserId
+                 FROM agent_orders
+                 WHERE id = ?
+                 FOR UPDATE`,
+                [id]
+            );
+
+            if (rows.length === 0) {
+                await conn.rollback();
+                return res.status(404).json({ success: false, message: '订单不存在' });
+            }
+
+            const curOrder = rows[0];
+            if (Number(curOrder.createdByUserId) !== Number(req.agent.id)) {
+                await conn.rollback();
+                return res.status(403).json({ success: false, message: '无权限修改该订单' });
+            }
+
+            const nextBoundUserId = Number.isFinite(boundUserId) ? boundUserId : Number(curOrder.boundUserId);
+            const [exists] = await conn.execute(
+                'SELECT id FROM agent_users WHERE id = ? AND status = "active" LIMIT 1',
+                [nextBoundUserId]
+            );
+            if (exists.length === 0) {
+                await conn.rollback();
+                return res.status(404).json({ success: false, message: '创单代理人账号不存在或不可用' });
+            }
+
+            // Status -> timestamps normalization
+            let nextSignedAt = curOrder.signedAt;
+            let nextFinishedAt = curOrder.finishedAt;
+            if (status === '已创单') {
+                nextSignedAt = null;
+                nextFinishedAt = null;
+            } else if (status === '已签单') {
+                nextFinishedAt = null;
+                nextSignedAt = nextSignedAt ? nextSignedAt : new Date();
+            } else if (status === '已完结') {
+                nextSignedAt = nextSignedAt ? nextSignedAt : new Date();
+                nextFinishedAt = nextFinishedAt ? nextFinishedAt : new Date();
+            }
+
+            await conn.execute(
+                `UPDATE agent_orders
+                 SET
+                    user_id = ?,
+                    title = ?,
+                    amount = ?,
+                    status = ?,
+                    parent_name = ?,
+                    parent_gender = ?,
+                    parent_phone = ?,
+                    student_name = ?,
+                    student_gender = ?,
+                    student_phone = ?,
+                    extra_service_weight = ?,
+                    student_id_card = ?,
+                    signed_at = ?,
+                    finished_at = ?
+                 WHERE id = ?
+                 LIMIT 1`,
+                [
+                    nextBoundUserId,
+                    String(serviceName),
+                    Number(amount),
+                    String(status),
+                    parentName ? String(parentName) : null,
+                    parentGender ? String(parentGender) : null,
+                    parentPhone ? String(parentPhone) : null,
+                    String(studentName),
+                    String(studentGender),
+                    String(studentPhone),
+                    extraServiceWeight ? String(extraServiceWeight) : null,
+                    studentIdCard ? String(studentIdCard) : null,
+                    nextSignedAt,
+                    nextFinishedAt,
+                    id
+                ]
+            );
+
+            await conn.commit();
+
+            await logAction({
+                userId: req.agent.id,
+                action: 'update_order',
+                detail: JSON.stringify({ orderId: id, orderNo: curOrder.orderNo, status }),
+                ip: req.ip
+            });
+
+            return res.json({ success: true, message: '修改成功' });
+        } catch (e) {
+            try { await conn.rollback(); } catch (e2) {}
+            console.error('[agent] update order error:', e);
+            return res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+        } finally {
+            try { conn.release(); } catch (e) {}
+        }
+    }
+);
+
+/**
  * GET /api/agent/logs
  */
 router.get('/logs', authenticateAgent, async (req, res) => {
