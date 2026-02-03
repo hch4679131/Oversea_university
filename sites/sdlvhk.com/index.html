@@ -3269,10 +3269,16 @@
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">服务名</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">学生</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">学生电话</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">家长</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">家长电话</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">权重</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">金额</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">开单账号</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">创单代理人</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">创建时间</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">签单时间</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">完结时间</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -3282,14 +3288,20 @@
                                                         <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.studentName) + (o.studentGender ? ' / ' + dash(o.studentGender) : '')"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentName) + (o.parentGender ? ' / ' + dash(o.parentGender) : '')"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentPhone)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.extraServiceWeight)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.amount)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.status)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.createdByUserPhone) + (o.createdByUserRole ? ' (' + o.createdByUserRole + ')' : '')"></td>
                                                         <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
                                                     </tr>
                                                 </template>
                                                 <tr x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="border-t border-white/10">
-                                                    <td class="px-4 py-3 text-white/40" colspan="8">暂无下级订单</td>
+                                                    <td class="px-4 py-3 text-white/40" colspan="14">暂无下级订单</td>
                                                 </tr>
                                             </tbody>
                                         </table>
