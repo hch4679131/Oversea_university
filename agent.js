@@ -694,6 +694,54 @@ router.get('/me', authenticateAgent, async (req, res) => {
 });
 
 /**
+ * POST /api/agent/change-password
+ * Body: { oldPassword, newPassword }
+ */
+router.post(
+    '/change-password',
+    authenticateAgent,
+    [
+        body('oldPassword').customSanitizer(v => String(v || '')).isLength({ min: 1 }).withMessage('旧密码不能为空'),
+        body('newPassword').customSanitizer(v => String(v || '')).isLength({ min: 6 }).withMessage('新密码至少 6 位')
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ success: false, message: '参数错误', errors: errors.array() });
+        }
+
+        const oldPassword = String(req.body.oldPassword || '');
+        const newPassword = String(req.body.newPassword || '');
+
+        try {
+            const [rows] = await pool.execute(
+                'SELECT id, password_hash AS passwordHash, status FROM agent_users WHERE id = ? LIMIT 1',
+                [req.agent.id]
+            );
+            if (rows.length === 0) {
+                return res.status(404).json({ success: false, message: '用户不存在' });
+            }
+            if (String(rows[0].status) !== 'active') {
+                return res.status(403).json({ success: false, message: '当前账号不可用' });
+            }
+
+            const ok = await bcrypt.compare(oldPassword, String(rows[0].passwordHash || ''));
+            if (!ok) {
+                return res.status(400).json({ success: false, message: '旧密码不正确' });
+            }
+
+            const passwordHash = await bcrypt.hash(newPassword, 10);
+            await pool.execute('UPDATE agent_users SET password_hash = ? WHERE id = ? LIMIT 1', [passwordHash, req.agent.id]);
+            await logAction({ userId: req.agent.id, action: 'change_password_ok', detail: null, ip: req.ip });
+            return res.json({ success: true, message: '密码修改成功' });
+        } catch (e) {
+            console.error('[agent] change-password error:', e);
+            return res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+        }
+    }
+);
+
+/**
  * POST /api/agent/register
  * 仅登录后可创建下级账号
  * Body: { phone, password, role, code, idCard, idCardName }
@@ -1053,6 +1101,56 @@ router.get('/orders', authenticateAgent, async (req, res) => {
         res.json({ success: true, data: rows });
     } catch (e) {
         res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+    }
+});
+
+/**
+ * GET /api/agent/orders-downline
+ * 返回“我直接下级（agent_users.parent_id = me）”相关订单（按绑定账号 user_id 计算）
+ */
+router.get('/orders-downline', authenticateAgent, async (req, res) => {
+    try {
+        const [childRows] = await pool.execute(
+            'SELECT id FROM agent_users WHERE parent_id = ? AND status = "active" ORDER BY id ASC LIMIT 1000',
+            [req.agent.id]
+        );
+        if (!childRows || childRows.length === 0) {
+            return res.json({ success: true, data: [] });
+        }
+
+        const childIds = childRows.map(r => Number(r.id)).filter(n => Number.isFinite(n) && n > 0);
+        if (childIds.length === 0) {
+            return res.json({ success: true, data: [] });
+        }
+
+        const placeholders = childIds.map(() => '?').join(',');
+        const [rows] = await pool.execute(
+            `SELECT
+                o.id,
+                o.order_no AS orderNo,
+                o.title AS serviceName,
+                o.amount,
+                o.status,
+                o.created_at AS createdAt,
+                o.user_id AS boundUserId,
+                bu.phone AS boundUserPhone,
+                bu.role AS boundUserRole,
+                COALESCE(o.created_by_user_id, o.user_id) AS createdByUserId,
+                cb.phone AS createdByUserPhone,
+                cb.role AS createdByUserRole
+            FROM agent_orders o
+            LEFT JOIN agent_users bu ON bu.id = o.user_id
+            LEFT JOIN agent_users cb ON cb.id = COALESCE(o.created_by_user_id, o.user_id)
+            WHERE o.user_id IN (${placeholders})
+            ORDER BY o.created_at DESC
+            LIMIT 200`,
+            childIds
+        );
+
+        return res.json({ success: true, data: rows });
+    } catch (e) {
+        console.error('[agent] orders-downline error:', e);
+        return res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
     }
 });
 

@@ -2851,7 +2851,27 @@
 
                     <div x-show="agentNotice" class="mt-8 px-5 py-4 border" :class="agentNoticeType === 'error' ? 'bg-red-950/40 border-red-800/40 text-red-200' : (agentNoticeType === 'success' ? 'bg-green-950/40 border-green-800/40 text-green-200' : 'bg-white/5 border-white/10 text-white/80')" x-text="agentNotice"></div>
 
-                    <div class="mt-10 grid lg:grid-cols-3 gap-6">
+                    <div class="mt-10 grid lg:grid-cols-12 gap-8">
+                        <!-- 左侧菜单（GitHub Settings 风格） -->
+                        <aside class="lg:col-span-3">
+                            <div class="sticky top-24">
+                                <div class="text-xs tracking-[0.3em] uppercase text-white/40">设置</div>
+                                <div class="mt-4 space-y-1">
+                                    <button type="button" @click="agentSetDashTab('overview')" class="w-full text-left px-4 py-3 border transition"
+                                        :class="agentDashTab === 'overview' ? 'bg-white text-black border-white' : 'bg-transparent text-white/80 border-white/10 hover:bg-white/10'">总览（概述）</button>
+                                    <button type="button" @click="agentSetDashTab('downline_orders')" class="w-full text-left px-4 py-3 border transition"
+                                        :class="agentDashTab === 'downline_orders' ? 'bg-white text-black border-white' : 'bg-transparent text-white/80 border-white/10 hover:bg-white/10'">下级开单明细</button>
+                                    <button type="button" @click="agentSetDashTab('change_password')" class="w-full text-left px-4 py-3 border transition"
+                                        :class="agentDashTab === 'change_password' ? 'bg-white text-black border-white' : 'bg-transparent text-white/80 border-white/10 hover:bg-white/10'">修改密码</button>
+                                </div>
+                                <button type="button" @click="agentRefreshDashboard()" class="mt-4 w-full px-4 py-3 border border-white/10 text-white/70 hover:text-white hover:bg-white/10 transition text-xs tracking-widest uppercase">刷新数据</button>
+                            </div>
+                        </aside>
+
+                        <!-- 右侧内容区 -->
+                        <div class="lg:col-span-9">
+                            <div x-show="agentDashTab === 'overview'" x-transition>
+                                <div class="grid lg:grid-cols-3 gap-6">
                         <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
                             <div class="flex items-center justify-between">
                                 <h2 class="text-xl font-serif font-bold text-white">我的账号</h2>
@@ -2859,6 +2879,7 @@
                             </div>
                             <div class="mt-5 space-y-2 text-sm text-white/80">
                                 <div>手机号：<span class="font-bold" x-text="agentUser?.phone || '-'" ></span></div>
+                                <div>姓名：<span class="font-bold" x-text="agentUser?.idCardName || '-'" ></span></div>
                                 <div>角色：<span class="font-bold" x-text="agentUser?.role || '-'" ></span></div>
                                 <div>上级ID：<span class="font-bold" x-text="agentUser?.parentId ?? '-'" ></span></div>
                             </div>
@@ -3178,6 +3199,66 @@
                                     </div>
                                 </template>
                                 <div x-show="agentLogs.length === 0" class="px-4 py-3 text-white/40 text-sm">暂无日志</div>
+                            </div>
+                        </div>
+                    </div>
+
+                            </div>
+
+                            <div x-show="agentDashTab === 'downline_orders'" x-transition>
+                                <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
+                                    <div class="flex items-center justify-between gap-6">
+                                        <h2 class="text-xl font-serif font-bold text-white">下级开单明细</h2>
+                                        <div class="text-xs text-white/50">仅显示我直接下级创建的订单</div>
+                                    </div>
+
+                                    <div class="mt-4 overflow-x-auto border border-white/10">
+                                        <table class="min-w-full text-sm">
+                                            <thead class="bg-white/5">
+                                                <tr>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">订单号</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">服务名</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">金额</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">开单账号</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">创建时间</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template x-for="o in agentDownlineOrders" :key="o.id">
+                                                    <tr class="border-t border-white/10">
+                                                        <td class="px-4 py-3" x-text="dash(o.orderNo)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.amount)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.status)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
+                                                    </tr>
+                                                </template>
+                                                <tr x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="border-t border-white/10">
+                                                    <td class="px-4 py-3 text-white/40" colspan="6">暂无下级订单</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div x-show="agentDashTab === 'change_password'" x-transition>
+                                <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
+                                    <h2 class="text-xl font-serif font-bold text-white">修改密码</h2>
+                                    <p class="mt-2 text-xs text-white/60">修改后会自动退出登录，需要重新登录。</p>
+
+                                    <div class="mt-6 grid md:grid-cols-2 gap-4">
+                                        <input x-model="agentChangePasswordForm.oldPassword" type="password" placeholder="旧密码" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                        <input x-model="agentChangePasswordForm.newPassword" type="password" placeholder="新密码（≥6位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                    </div>
+                                    <div class="mt-4">
+                                        <input x-model="agentChangePasswordForm.confirmPassword" type="password" placeholder="确认新密码" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                    </div>
+
+                                    <button type="button" @click="agentChangePassword()" class="mt-4 w-full px-8 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">确认修改</button>
+                                </div>
                             </div>
                         </div>
                     </div>

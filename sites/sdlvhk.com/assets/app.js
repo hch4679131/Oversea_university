@@ -197,8 +197,12 @@ refreshLucideIcons();
 
                 agentChildren: [],
                 agentOrders: [],
+                agentDownlineOrders: [],
                 agentLogs: [],
                 agentAllUsers: [],
+
+                agentDashTab: 'overview', // overview | downline_orders | change_password
+                agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
                 agentEditOrderOpen: false,
                 agentEditOrderId: null,
                 agentEditOrderNo: '',
@@ -383,6 +387,12 @@ refreshLucideIcons();
                     setTimeout(() => {
                         if (this.agentNotice === message) this.agentNotice = '';
                     }, 5000);
+                },
+
+                agentSetDashTab(tab) {
+                    const t = String(tab || '').trim();
+                    const allowed = ['overview', 'downline_orders', 'change_password'];
+                    this.agentDashTab = allowed.includes(t) ? t : 'overview';
                 },
 
                 async agentApi(path, method = 'GET', payload = null, auth = false) {
@@ -837,14 +847,16 @@ refreshLucideIcons();
                     try {
                         this.agentBusy = true;
                         await this.agentFetchMe();
-                        const [users, orders, logs] = await Promise.all([
+                        const [users, orders, logs, downlineOrders] = await Promise.all([
                             this.agentApi('/api/agent/users', 'GET', null, true),
                             this.agentApi('/api/agent/orders', 'GET', null, true),
-                            this.agentApi('/api/agent/logs', 'GET', null, true)
+                            this.agentApi('/api/agent/logs', 'GET', null, true),
+                            this.agentApi('/api/agent/orders-downline', 'GET', null, true).catch(() => ({ success: true, data: [] }))
                         ]);
                         this.agentChildren = users.data || [];
                         this.agentOrders = orders.data || [];
                         this.agentLogs = logs.data || [];
+                        this.agentDownlineOrders = downlineOrders.data || [];
 
                         // For consultant/admin: load all active accounts for order assignment
                         if (this.agentUser?.role === 'consultant') {
@@ -864,6 +876,48 @@ refreshLucideIcons();
                         }
                     } catch (e) {
                         this.agentNotify(e.message || '刷新失败', 'error');
+                    } finally {
+                        this.agentBusy = false;
+                    }
+                },
+
+                async agentChangePassword() {
+                    if (!this.agentToken) {
+                        this.agentNotify('请先登录', 'error');
+                        this.switchPage('agent-login');
+                        return;
+                    }
+
+                    const oldPassword = String(this.agentChangePasswordForm.oldPassword || '');
+                    const newPassword = String(this.agentChangePasswordForm.newPassword || '');
+                    const confirmPassword = String(this.agentChangePasswordForm.confirmPassword || '');
+                    if (!oldPassword || !newPassword) {
+                        this.agentNotify('请输入旧密码和新密码', 'error');
+                        return;
+                    }
+                    if (newPassword.length < 6) {
+                        this.agentNotify('新密码至少 6 位', 'error');
+                        return;
+                    }
+                    if (newPassword !== confirmPassword) {
+                        this.agentNotify('两次输入的新密码不一致', 'error');
+                        return;
+                    }
+
+                    try {
+                        this.agentBusy = true;
+                        const data = await this.agentApi('/api/agent/change-password', 'POST', { oldPassword, newPassword }, true);
+                        if (data.success) {
+                            this.agentNotify('密码修改成功，请重新登录', 'success');
+                            this.agentChangePasswordForm.oldPassword = '';
+                            this.agentChangePasswordForm.newPassword = '';
+                            this.agentChangePasswordForm.confirmPassword = '';
+                            this.agentLogout(false);
+                        } else {
+                            this.agentNotify(data.message || '修改失败', 'error');
+                        }
+                    } catch (e) {
+                        this.agentNotify(e.message || '修改失败', 'error');
                     } finally {
                         this.agentBusy = false;
                     }
