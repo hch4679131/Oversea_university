@@ -421,6 +421,22 @@ refreshLucideIcons();
                     }
                 },
 
+                agentOpenDownlineDatePicker(which) {
+                    const w = String(which || '').trim();
+                    const el = w === 'end' ? this.$refs?.downlineEndDate : this.$refs?.downlineStartDate;
+                    if (!el) return;
+                    try {
+                        if (typeof el.showPicker === 'function') {
+                            el.showPicker();
+                        } else {
+                            el.focus();
+                            el.click();
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+                },
+
                 agentFormatDateYmdShanghai(date) {
                     try {
                         return new Intl.DateTimeFormat('en-CA', {

@@ -3237,17 +3237,23 @@
                                         </div>
                                         <div class="md:col-span-3">
                                             <div class="text-xs text-white/60 mb-2">开始日期</div>
-                                            <input x-model="agentDownlineFilters.startDate" type="date" readonly inputmode="none" autocomplete="off"
+                                            <button type="button" @click="agentOpenDownlineDatePicker('start')"
+                                                class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none text-left">
+                                                <span x-text="agentDownlineFilters.startDate || '请选择开始日期'"></span>
+                                            </button>
+                                            <input x-ref="downlineStartDate" x-model="agentDownlineFilters.startDate" type="date" readonly inputmode="none" autocomplete="off" tabindex="-1"
                                                 @keydown.prevent @paste.prevent @drop.prevent
-                                                @click="$el.showPicker && $el.showPicker()"
-                                                class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none" />
+                                                class="sr-only" />
                                         </div>
                                         <div class="md:col-span-3">
                                             <div class="text-xs text-white/60 mb-2">结束日期</div>
-                                            <input x-model="agentDownlineFilters.endDate" type="date" readonly inputmode="none" autocomplete="off"
+                                            <button type="button" @click="agentOpenDownlineDatePicker('end')"
+                                                class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none text-left">
+                                                <span x-text="agentDownlineFilters.endDate || '请选择结束日期'"></span>
+                                            </button>
+                                            <input x-ref="downlineEndDate" x-model="agentDownlineFilters.endDate" type="date" readonly inputmode="none" autocomplete="off" tabindex="-1"
                                                 @keydown.prevent @paste.prevent @drop.prevent
-                                                @click="$el.showPicker && $el.showPicker()"
-                                                class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none" />
+                                                class="sr-only" />
                                         </div>
                                         <div class="md:col-span-12 flex flex-wrap gap-3">
                                             <button type="button" @click="agentDownlineSearch()" class="px-5 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">查询</button>
