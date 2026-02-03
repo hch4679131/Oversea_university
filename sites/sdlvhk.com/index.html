@@ -3274,7 +3274,6 @@
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">权重</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">金额</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
-                                                    <th class="px-4 py-3 text-left font-bold text-white/70">开单账号</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">创单代理人</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">创建时间</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">签单时间</th>
@@ -3294,14 +3293,13 @@
                                                         <td class="px-4 py-3" x-text="dash(o.amount)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.status)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.createdByUserPhone) + (o.createdByUserRole ? ' (' + o.createdByUserRole + ')' : '')"></td>
                                                         <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
                                                         <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
                                                         <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
                                                     </tr>
                                                 </template>
                                                 <tr x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="border-t border-white/10">
-                                                    <td class="px-4 py-3 text-white/40" colspan="14">暂无下级订单</td>
+                                                    <td class="px-4 py-3 text-white/40" colspan="13">暂无下级订单</td>
                                                 </tr>
                                             </tbody>
                                         </table>

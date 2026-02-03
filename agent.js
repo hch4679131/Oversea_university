@@ -960,7 +960,7 @@ router.post(
 
             const boundUserId = bindUserId ? Number(bindUserId) : Number(req.agent.id);
 
-            // 按需求：顾问可选择“所有账号”作为创单代理人（即 user_id）
+            // 按需求：顾问可选择“所有账号”作为创单代理人（即订单绑定账号 user_id）
             const [exists] = await pool.execute('SELECT id FROM agent_users WHERE id = ? AND status = "active" LIMIT 1', [boundUserId]);
             if (exists.length === 0) {
                 return res.status(404).json({ success: false, message: '创单代理人账号不存在或不可用' });
