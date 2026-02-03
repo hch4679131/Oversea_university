@@ -40,6 +40,7 @@ refreshLucideIcons();
 
                     this.agentInitCooldowns();
                     this.agentApplyDownlineDateDefaults(true);
+                    this.agentApplySalesDefaults(true);
 
                     if (this.agentToken) {
                         this.agentFetchMe().catch(() => {
@@ -201,6 +202,11 @@ refreshLucideIcons();
                 agentDownlineOrders: [],
                 agentLogs: [],
                 agentAllUsers: [],
+
+                // ===== Overview: Sales Pies =====
+                agentSalesMonth: { startDate: '', endDate: '', myAmount: 0, downlineAmount: 0, total: 0 },
+                agentSalesCustom: { startDate: '', endDate: '', myAmount: 0, downlineAmount: 0, total: 0 },
+                agentSalesCustomFilters: { startDate: '', endDate: '' },
 
                 agentDashTab: 'overview', // overview | register_sub | downline_orders | change_password
                 agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
@@ -419,6 +425,162 @@ refreshLucideIcons();
                         this.agentApplyDownlineDateDefaults(false);
                         this.agentFetchDownlineOrders().catch(() => {});
                     }
+
+                    // Ensure overview charts stay fresh when returning to overview.
+                    if (this.agentDashTab === 'overview') {
+                        this.agentApplySalesDefaults(false);
+                        this.agentRefreshSalesPies().catch(() => {});
+                    }
+                },
+
+                agentMoney(v) {
+                    const n = Number(v);
+                    if (!Number.isFinite(n)) return '-';
+                    try {
+                        return new Intl.NumberFormat('zh-CN', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 2
+                        }).format(n);
+                    } catch (e) {
+                        return String(Math.round(n * 100) / 100);
+                    }
+                },
+
+                agentPieStyle(pie) {
+                    const my = Number(pie?.myAmount || 0);
+                    const down = Number(pie?.downlineAmount || 0);
+                    const total = Number(pie?.total || 0);
+                    const t = Number.isFinite(total) && total > 0 ? total : (my + down);
+                    const pct = t > 0 ? Math.max(0, Math.min(100, (my / t) * 100)) : 0;
+                    // Gold = my; light = downline
+                    return `background: conic-gradient(rgba(251,191,36,0.95) 0 ${pct}%, rgba(255,255,255,0.18) ${pct}% 100%);`;
+                },
+
+                agentGetShanghaiYearMonth(date = new Date()) {
+                    try {
+                        const parts = new Intl.DateTimeFormat('en-CA', {
+                            timeZone: 'Asia/Shanghai',
+                            year: 'numeric',
+                            month: '2-digit'
+                        }).formatToParts(date);
+                        const map = {};
+                        for (const p of parts) {
+                            if (p.type !== 'literal') map[p.type] = p.value;
+                        }
+                        return { year: map.year, month: map.month };
+                    } catch (e) {
+                        const d = date instanceof Date ? date : new Date(date);
+                        return { year: String(d.getFullYear()), month: String(d.getMonth() + 1).padStart(2, '0') };
+                    }
+                },
+
+                agentGetThisMonthRangeShanghai() {
+                    const today = new Date();
+                    const { year, month } = this.agentGetShanghaiYearMonth(today);
+                    const startDate = `${year}-${month}-01`;
+                    const endDate = this.agentFormatDateYmdShanghai(today);
+                    return { startDate, endDate };
+                },
+
+                agentApplySalesDefaults(force = false) {
+                    const curStart = String(this.agentSalesCustomFilters?.startDate || '').trim();
+                    const curEnd = String(this.agentSalesCustomFilters?.endDate || '').trim();
+                    if (!force && (curStart || curEnd)) return;
+
+                    const def = this.agentGetThisMonthRangeShanghai();
+                    this.agentSalesCustomFilters = { startDate: def.startDate, endDate: def.endDate };
+                },
+
+                async agentFetchSalesSummary(startDate, endDate) {
+                    const params = new URLSearchParams();
+                    if (startDate) params.set('startDate', String(startDate));
+                    if (endDate) params.set('endDate', String(endDate));
+                    const url = `/api/agent/sales-summary?${params.toString()}`;
+                    const data = await this.agentApi(url, 'GET', null, true);
+                    if (!data.success) throw new Error(data.message || '获取统计失败');
+                    return data;
+                },
+
+                async agentRefreshSalesPies() {
+                    if (!this.agentToken) return;
+
+                    const month = this.agentGetThisMonthRangeShanghai();
+                    const customStart = String(this.agentSalesCustomFilters?.startDate || '').trim();
+                    const customEnd = String(this.agentSalesCustomFilters?.endDate || '').trim();
+                    const custom = {
+                        startDate: customStart || month.startDate,
+                        endDate: customEnd || month.endDate
+                    };
+
+                    const [m, c] = await Promise.all([
+                        this.agentFetchSalesSummary(month.startDate, month.endDate),
+                        this.agentFetchSalesSummary(custom.startDate, custom.endDate)
+                    ]);
+
+                    const mMy = Number(m.myAmount || 0);
+                    const mDown = Number(m.downlineAmount || 0);
+                    this.agentSalesMonth = {
+                        startDate: m.startDate || month.startDate,
+                        endDate: m.endDate || month.endDate,
+                        myAmount: Number.isFinite(mMy) ? mMy : 0,
+                        downlineAmount: Number.isFinite(mDown) ? mDown : 0,
+                        total: (Number.isFinite(mMy) ? mMy : 0) + (Number.isFinite(mDown) ? mDown : 0)
+                    };
+
+                    const cMy = Number(c.myAmount || 0);
+                    const cDown = Number(c.downlineAmount || 0);
+                    this.agentSalesCustom = {
+                        startDate: c.startDate || custom.startDate,
+                        endDate: c.endDate || custom.endDate,
+                        myAmount: Number.isFinite(cMy) ? cMy : 0,
+                        downlineAmount: Number.isFinite(cDown) ? cDown : 0,
+                        total: (Number.isFinite(cMy) ? cMy : 0) + (Number.isFinite(cDown) ? cDown : 0)
+                    };
+                },
+
+                agentSalesCustomSearch() {
+                    const s = String(this.agentSalesCustomFilters?.startDate || '').trim();
+                    const e = String(this.agentSalesCustomFilters?.endDate || '').trim();
+                    if (!s || !e) {
+                        this.agentNotify('请选择开始/结束日期', 'error');
+                        return;
+                    }
+                    this.agentBusy = true;
+                    this.agentFetchSalesSummary(s, e).then((c) => {
+                        const cMy = Number(c.myAmount || 0);
+                        const cDown = Number(c.downlineAmount || 0);
+                        this.agentSalesCustom = {
+                            startDate: c.startDate || s,
+                            endDate: c.endDate || e,
+                            myAmount: Number.isFinite(cMy) ? cMy : 0,
+                            downlineAmount: Number.isFinite(cDown) ? cDown : 0,
+                            total: (Number.isFinite(cMy) ? cMy : 0) + (Number.isFinite(cDown) ? cDown : 0)
+                        };
+                    }).catch((err) => {
+                        this.agentNotify(err?.message || '查询失败', 'error');
+                    }).finally(() => {
+                        this.agentBusy = false;
+                    });
+                },
+
+                agentOpenSalesDatePicker(which) {
+                    const w = String(which || '').trim();
+                    const el = w === 'end' ? this.$refs?.salesEndDate : this.$refs?.salesStartDate;
+                    if (!el) return;
+
+                    try {
+                        if (typeof el.showPicker === 'function') {
+                            el.showPicker();
+                            return;
+                        }
+                    } catch (e) {}
+
+                    try {
+                        el.focus({ preventScroll: true });
+                    } catch (e) {
+                        try { el.focus(); } catch (_) {}
+                    }
+                    try { el.click(); } catch (e) {}
                 },
 
                 agentFormatDateYmdShanghai(date) {
@@ -941,6 +1103,9 @@ refreshLucideIcons();
                         if (!this.agentOrderForm.bindUserId) {
                             this.agentOrderForm.bindUserId = this.agentUser?.id || null;
                         }
+
+                        this.agentApplySalesDefaults(false);
+                        await this.agentRefreshSalesPies();
                     } catch (e) {
                         this.agentNotify(e.message || '刷新失败', 'error');
                     } finally {

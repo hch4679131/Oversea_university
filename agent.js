@@ -1610,4 +1610,138 @@ router.get('/logs', authenticateAgent, async (req, res) => {
     }
 });
 
+/**
+ * GET /api/agent/sales-summary
+ * 汇总“我的销售金额 vs 所有下级销售金额”（按订单绑定账号 user_id）
+ * Query: startDate=YYYY-MM-DD, endDate=YYYY-MM-DD
+ * 时间字段：created_at
+ */
+router.get('/sales-summary', authenticateAgent, async (req, res) => {
+    try {
+        const startDate = String(req.query.startDate || '').trim();
+        const endDate = String(req.query.endDate || '').trim();
+
+        const isYmd = (v) => /^\d{4}-\d{2}-\d{2}$/.test(String(v || ''));
+        if (startDate && !isYmd(startDate)) {
+            return res.status(400).json({ success: false, message: '开始日期格式错误（YYYY-MM-DD）' });
+        }
+        if (endDate && !isYmd(endDate)) {
+            return res.status(400).json({ success: false, message: '结束日期格式错误（YYYY-MM-DD）' });
+        }
+        if (startDate && endDate && startDate > endDate) {
+            return res.status(400).json({ success: false, message: '开始日期不能大于结束日期' });
+        }
+
+        // Default: this month in Asia/Shanghai
+        const getShanghaiYmd = (date) => {
+            try {
+                return new Intl.DateTimeFormat('en-CA', {
+                    timeZone: 'Asia/Shanghai',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                }).format(date);
+            } catch (e) {
+                const d = date instanceof Date ? date : new Date(date);
+                const yyyy = d.getFullYear();
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                return `${yyyy}-${mm}-${dd}`;
+            }
+        };
+        const getShanghaiYearMonth = (date) => {
+            try {
+                const parts = new Intl.DateTimeFormat('en-CA', {
+                    timeZone: 'Asia/Shanghai',
+                    year: 'numeric',
+                    month: '2-digit'
+                }).formatToParts(date);
+                const map = {};
+                for (const p of parts) {
+                    if (p.type !== 'literal') map[p.type] = p.value;
+                }
+                return { year: map.year, month: map.month };
+            } catch (e) {
+                const d = date instanceof Date ? date : new Date(date);
+                return { year: String(d.getFullYear()), month: String(d.getMonth() + 1).padStart(2, '0') };
+            }
+        };
+
+        const now = new Date();
+        const { year, month } = getShanghaiYearMonth(now);
+        const defStart = `${year}-${month}-01`;
+        const defEnd = getShanghaiYmd(now);
+        const s = startDate || defStart;
+        const e = endDate || defEnd;
+
+        // Helpers
+        const makePlaceholders = (arr) => {
+            const values = Array.isArray(arr) ? arr.filter(v => Number.isFinite(Number(v)) && Number(v) > 0).map(v => Number(v)) : [];
+            return {
+                placeholders: values.map(() => '?').join(','),
+                values
+            };
+        };
+
+        // Collect descendants (active) by BFS
+        const visited = new Set([Number(req.agent.id)]);
+        let frontier = [Number(req.agent.id)];
+        const descendantIds = [];
+
+        for (let depth = 0; depth < 10; depth += 1) {
+            if (!frontier.length) break;
+            const { placeholders, values } = makePlaceholders(frontier);
+            if (!placeholders) break;
+
+            const [rows] = await pool.execute(
+                `SELECT id FROM agent_users WHERE parent_id IN (${placeholders}) AND status = "active" ORDER BY id ASC LIMIT 5000`,
+                values
+            );
+
+            if (!rows || rows.length === 0) break;
+            const next = [];
+            for (const r of rows) {
+                const id = Number(r.id);
+                if (!Number.isFinite(id) || id <= 0) continue;
+                if (visited.has(id)) continue;
+                visited.add(id);
+                descendantIds.push(id);
+                next.push(id);
+            }
+            frontier = next;
+        }
+
+        const rangeStart = `${s} 00:00:00`;
+        const rangeEnd = `${e} 23:59:59`;
+
+        const [myRows] = await pool.execute(
+            'SELECT COALESCE(SUM(amount), 0) AS total FROM agent_orders WHERE user_id = ? AND created_at >= ? AND created_at <= ?',
+            [Number(req.agent.id), rangeStart, rangeEnd]
+        );
+        const myAmount = Number(myRows?.[0]?.total || 0) || 0;
+
+        let downlineAmount = 0;
+        if (descendantIds.length > 0) {
+            const { placeholders, values } = makePlaceholders(descendantIds);
+            if (placeholders) {
+                const [downRows] = await pool.execute(
+                    `SELECT COALESCE(SUM(amount), 0) AS total FROM agent_orders WHERE user_id IN (${placeholders}) AND created_at >= ? AND created_at <= ?`,
+                    [...values, rangeStart, rangeEnd]
+                );
+                downlineAmount = Number(downRows?.[0]?.total || 0) || 0;
+            }
+        }
+
+        return res.json({
+            success: true,
+            startDate: s,
+            endDate: e,
+            myAmount,
+            downlineAmount
+        });
+    } catch (e) {
+        res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+    }
+});
+
 module.exports = router;
