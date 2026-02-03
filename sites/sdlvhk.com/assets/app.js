@@ -261,7 +261,7 @@ refreshLucideIcons();
                 },
 
                 agentUserHeaderLabel() {
-                    const name = this.agentUser?.name || this.agentUser?.realName || this.agentRoleLabel(this.agentUser?.role);
+                    const name = String(this.agentUser?.idCardName || '').trim() || this.agentRoleLabel(this.agentUser?.role);
                     const maskedPhone = this.agentMaskPhone(this.agentUser?.phone);
                     return `${name}（${maskedPhone}）`;
                 },

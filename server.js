@@ -12,7 +12,9 @@ const express = require('express');
 const path = require('path');
 const { scrapeWebsiteToExcel, scrapeMultipleUrls } = require('./scraper');
 const { sendWeChatWebhook, sendWeChatImage } = require('./wechat');
-const authRouter = require('./auth');  // 认证模块
+// 认证模块（普通用户体系）：当前部署不使用，且生产库可能已删除 users 表。
+// 如未来要启用普通用户体系，再恢复该路由并确保 users 表存在。
+// const authRouter = require('./auth');  // 认证模块
 const chatRouter = require('./chat');  // AI 聊天模块
 const agentRouter = require('./agent'); // 代理人系统模块
 
@@ -107,7 +109,7 @@ app.get('/api/sms/receipts', (req, res) => {
 });
 
 // 挂载认证路由
-app.use('/api/auth', authRouter);
+// app.use('/api/auth', authRouter);
 // 挂载代理系统路由
 app.use('/api/agent', agentRouter);
 // 挂载 AI 聊天路由

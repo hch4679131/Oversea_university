@@ -241,6 +241,8 @@ async function ensureSchemaOnce() {
                 id BIGINT PRIMARY KEY AUTO_INCREMENT,
                 phone VARCHAR(20) NOT NULL UNIQUE,
                 password_hash VARCHAR(255) NOT NULL,
+                id_card VARCHAR(18) NULL,
+                id_card_name VARCHAR(50) NULL,
                 role VARCHAR(20) NOT NULL,
                 parent_id BIGINT NULL,
                 status VARCHAR(20) NOT NULL DEFAULT 'active',
@@ -340,6 +342,10 @@ async function ensureSchemaOnce() {
                 // ignore "Duplicate column" etc.
             }
         };
+
+        // Schema migrations for older agent_users (store verified ID-card identity)
+        await alter("ALTER TABLE agent_users ADD COLUMN id_card VARCHAR(18) NULL");
+        await alter("ALTER TABLE agent_users ADD COLUMN id_card_name VARCHAR(50) NULL");
 
         await alter('ALTER TABLE agent_orders MODIFY COLUMN order_no VARCHAR(16) NOT NULL');
         await alter("ALTER TABLE agent_orders MODIFY COLUMN title VARCHAR(32) NOT NULL");
@@ -551,7 +557,7 @@ router.post(
                 success: true,
                 message: '登录成功',
                 token,
-                user: { id: user.id, phone: user.phone, role: user.role, parentId: user.parent_id || null }
+                user: { id: user.id, phone: user.phone, role: user.role, parentId: user.parent_id || null, idCardName: user.id_card_name || null }
             });
         } catch (e) {
             console.error('[agent] login/password error:', e);
@@ -612,7 +618,7 @@ router.post(
                 success: true,
                 message: '登录成功',
                 token,
-                user: { id: user.id, phone: user.phone, role: user.role, parentId: user.parent_id || null }
+                user: { id: user.id, phone: user.phone, role: user.role, parentId: user.parent_id || null, idCardName: user.id_card_name || null }
             });
         } catch (e) {
             console.error('[agent] login/code error:', e);
@@ -676,7 +682,10 @@ router.post(
  */
 router.get('/me', authenticateAgent, async (req, res) => {
     try {
-        const [rows] = await pool.execute('SELECT id, phone, role, parent_id AS parentId, status, created_at AS createdAt FROM agent_users WHERE id = ? LIMIT 1', [req.agent.id]);
+        const [rows] = await pool.execute(
+            'SELECT id, phone, role, parent_id AS parentId, status, created_at AS createdAt, id_card_name AS idCardName FROM agent_users WHERE id = ? LIMIT 1',
+            [req.agent.id]
+        );
         if (rows.length === 0) return res.status(404).json({ success: false, message: '用户不存在' });
         res.json({ success: true, user: rows[0] });
     } catch (e) {
@@ -746,8 +755,8 @@ router.post(
 
             const passwordHash = await bcrypt.hash(password, 10);
             const [result] = await pool.execute(
-                'INSERT INTO agent_users (phone, password_hash, role, parent_id) VALUES (?, ?, ?, ?)',
-                [phone, passwordHash, role, req.agent.id]
+                'INSERT INTO agent_users (phone, password_hash, id_card, id_card_name, role, parent_id) VALUES (?, ?, ?, ?, ?, ?)',
+                [phone, passwordHash, String(idCard).trim(), String(idCardName).trim(), role, req.agent.id]
             );
 
             await pool.execute('UPDATE verification_codes SET used = TRUE WHERE id = ?', [codeRows[0].id]);

@@ -3,18 +3,9 @@ CREATE DATABASE IF NOT EXISTS hksd_auth CHARACTER SET utf8mb4 COLLATE utf8mb4_un
 
 USE hksd_auth;
 
--- 用户表
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    phone VARCHAR(20) UNIQUE NOT NULL COMMENT '手机号（唯一登录凭证）',
-    password_hash VARCHAR(255) NOT NULL COMMENT 'bcrypt 加密后的密码',
-    id_card VARCHAR(18) COMMENT '身份证号',
-    id_card_name VARCHAR(50) COMMENT '身份证姓名',
-    verified BOOLEAN DEFAULT FALSE COMMENT '是否通过身份证实名验证',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_phone (phone)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表';
+-- 说明：当前部署未使用 users 表（普通用户体系）。
+-- 如确认不再使用，可直接删除。
+DROP TABLE IF EXISTS users;
 
 -- 验证码表
 CREATE TABLE IF NOT EXISTS verification_codes (
@@ -34,6 +25,8 @@ CREATE TABLE IF NOT EXISTS agent_users (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     phone VARCHAR(20) NOT NULL UNIQUE COMMENT '手机号（代理账号唯一）',
     password_hash VARCHAR(255) NOT NULL COMMENT 'bcrypt 密码',
+    id_card VARCHAR(18) NULL COMMENT '身份证号（实名信息）',
+    id_card_name VARCHAR(50) NULL COMMENT '身份证姓名（实名信息）',
     role VARCHAR(20) NOT NULL COMMENT 'admin/consultant/agent1/agent2/agent3/agent4',
     parent_id BIGINT NULL COMMENT '上级代理ID',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT 'active/disabled',
@@ -91,3 +84,31 @@ CREATE TABLE IF NOT EXISTS agent_config (
     v TEXT NULL,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='代理配置表（备用）';
+
+-- ==================== 种子数据（可选） ====================
+-- 说明：以下为“实名信息”写入示例（身份证号/身份证姓名）。
+-- 若你的线上环境 agent_users 已存在账号，可按 ID 定位后执行 UPDATE。
+-- 注意：顾问账号目前可能不止 1 个，请先确认要写入哪一个。
+
+-- 管理员（服务器当前为 id=1）
+UPDATE agent_users
+SET id_card = '44098219971021537X',
+    id_card_name = CONVERT(UNHEX('e58d8ee8b685e685a7') USING utf8mb4) /* 华超慧 */
+WHERE id = 1;
+
+-- 顾问：二选一（服务器当前 consultant 有 2 个账号，请选择正确的那个）
+-- UPDATE agent_users
+-- SET id_card = '810000199710280062',
+--     id_card_name = CONVERT(UNHEX('e9bb84e4b8bde4bbaa') USING utf8mb4) /* 黄丽仪 */
+-- WHERE id = 2;
+
+UPDATE agent_users
+SET id_card = '810000199710280062',
+    id_card_name = CONVERT(UNHEX('e9bb84e4b8bde4bbaa') USING utf8mb4) /* 黄丽仪 */
+WHERE id = 3;
+
+-- 1级代理（服务器当前为 id=4）
+UPDATE agent_users
+SET id_card = '430124200010264644',
+    id_card_name = CONVERT(UNHEX('e9bb84e4bd91e4bbaa') USING utf8mb4) /* 黄佑仪 */
+WHERE id = 4;
