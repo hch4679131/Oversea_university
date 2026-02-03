@@ -2769,8 +2769,10 @@
                                             class="w-full pl-10 pr-4 py-3 bg-paper border border-black/10 rounded-sm text-obsidian-950 focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 focus:outline-none transition-all placeholder:text-black/20" />
                                     </div>
                                     <button type="button" @click="agentSendCode('login')" 
+                                        :disabled="agentBusy || agentCodeCooldownActive('login')"
+                                        :class="(agentBusy || agentCodeCooldownActive('login')) ? 'opacity-60 cursor-not-allowed' : ''"
                                         class="px-4 py-3 bg-black/5 border border-black/10 text-xs font-bold text-black/70 hover:bg-black hover:text-white hover:border-black transition-colors duration-300 whitespace-nowrap rounded-sm">
-                                        获取验证码
+                                        <span x-text="agentCodeButtonText('login', '获取验证码')"></span>
                                     </button>
                                 </div>
                             </div>
@@ -2804,7 +2806,12 @@
                                 <input x-model="agentResetForm.phone" type="text" placeholder="注册手机号" class="w-full px-4 py-3 bg-white border border-black/10 rounded-sm focus:border-gold-400 focus:outline-none transition-all text-sm" />
                                 <div class="flex gap-3">
                                     <input x-model="agentResetForm.code" type="text" placeholder="验证码" class="w-full px-4 py-3 bg-white border border-black/10 rounded-sm focus:border-gold-400 focus:outline-none transition-all text-sm" />
-                                    <button type="button" @click="agentSendCode('reset_password')" class="px-4 py-3 bg-white border border-black/10 text-xs font-bold hover:border-gold-400 hover:text-gold-500 transition-colors whitespace-nowrap rounded-sm">发送验证码</button>
+                                    <button type="button" @click="agentSendCode('reset_password')"
+                                        :disabled="agentBusy || agentCodeCooldownActive('reset_password')"
+                                        :class="(agentBusy || agentCodeCooldownActive('reset_password')) ? 'opacity-60 cursor-not-allowed' : ''"
+                                        class="px-4 py-3 bg-white border border-black/10 text-xs font-bold hover:border-gold-400 hover:text-gold-500 transition-colors whitespace-nowrap rounded-sm">
+                                        <span x-text="agentCodeButtonText('reset_password', '发送验证码')"></span>
+                                    </button>
                                 </div>
                                 <input x-model="agentResetForm.newPassword" type="password" placeholder="新密码（至少6位）" class="w-full px-4 py-3 bg-white border border-black/10 rounded-sm focus:border-gold-400 focus:outline-none transition-all text-sm" />
                                 <button type="button" @click="agentResetPassword()" class="w-full py-3 bg-gold-400 text-black text-sm font-bold tracking-widest uppercase hover:bg-gold-300 transition rounded-sm" :disabled="agentBusy">确认重置</button>
@@ -2873,7 +2880,12 @@
 
                             <div class="mt-4 grid md:grid-cols-2 gap-4">
                                 <input x-model="agentRegisterForm.code" type="text" placeholder="短信验证码（6位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
-                                <button type="button" @click="agentSendCode('register')" class="px-5 py-4 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition" :disabled="agentBusy">获取验证码</button>
+                                <button type="button" @click="agentSendCode('register')"
+                                    :disabled="agentBusy || agentCodeCooldownActive('register')"
+                                    :class="(agentBusy || agentCodeCooldownActive('register')) ? 'opacity-60 cursor-not-allowed' : ''"
+                                    class="px-5 py-4 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition">
+                                    <span x-text="agentCodeButtonText('register', '获取验证码')"></span>
+                                </button>
                             </div>
                             <button type="button" @click="agentCreateSubaccount()" class="mt-4 w-full px-8 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">创建账号</button>
 
@@ -3405,7 +3417,7 @@
         </div>
     </footer>
     <script src="/sdlvhk.com/assets/i18n.js?v=20260202_0001"></script>
-    <script src="/sdlvhk.com/assets/app.js?v=20260202_0002"></script>
+    <script src="/sdlvhk.com/assets/app.js?v=20260203_0001"></script>
 
     
 </body>

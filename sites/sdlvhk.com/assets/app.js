@@ -38,6 +38,8 @@ refreshLucideIcons();
                         this.agentToken = '';
                     }
 
+                    this.agentInitCooldowns();
+
                     if (this.agentToken) {
                         this.agentFetchMe().catch(() => {
                             this.agentLogout(false);
@@ -187,6 +189,12 @@ refreshLucideIcons();
                 agentForm: { phone: '', password: '', code: '' },
                 agentResetForm: { phone: '', code: '', newPassword: '' },
                 agentRegisterForm: { phone: '', password: '', role: 'consultant', code: '', idCard: '', idCardName: '' },
+
+                // Per-purpose SMS code cooldown (ms epoch). Purposes: login | reset_password | register
+                agentCodeCooldown: { login: 0, reset_password: 0, register: 0 },
+                agentCodeCooldownNow: Date.now(),
+                agentCodeCooldownTimerId: null,
+
                 agentChildren: [],
                 agentOrders: [],
                 agentLogs: [],
@@ -227,6 +235,68 @@ refreshLucideIcons();
                     if (v === null || v === undefined) return '-';
                     const s = String(v);
                     return s.trim() ? s : '-';
+                },
+
+                agentInitCooldowns() {
+                    // Restore cooldowns across refresh
+                    try {
+                        const raw = localStorage.getItem('agent_code_cooldown_v1');
+                        if (raw) {
+                            const parsed = JSON.parse(raw);
+                            if (parsed && typeof parsed === 'object') {
+                                this.agentCodeCooldown = {
+                                    login: Number(parsed.login || 0),
+                                    reset_password: Number(parsed.reset_password || 0),
+                                    register: Number(parsed.register || 0)
+                                };
+                            }
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+
+                    // Kick a ticking value so Alpine refreshes countdown labels
+                    if (!this.agentCodeCooldownTimerId) {
+                        this.agentCodeCooldownNow = Date.now();
+                        this.agentCodeCooldownTimerId = setInterval(() => {
+                            this.agentCodeCooldownNow = Date.now();
+                        }, 1000);
+                    }
+                },
+
+                agentPersistCooldowns() {
+                    try {
+                        localStorage.setItem('agent_code_cooldown_v1', JSON.stringify(this.agentCodeCooldown));
+                    } catch (e) {
+                        // ignore
+                    }
+                },
+
+                agentStartCodeCooldown(purpose, seconds = 60) {
+                    const safePurpose = ['login', 'reset_password', 'register'].includes(purpose) ? purpose : 'login';
+                    const expiresAt = Date.now() + Math.max(1, Number(seconds) || 60) * 1000;
+                    this.agentCodeCooldown[safePurpose] = expiresAt;
+                    this.agentPersistCooldowns();
+                },
+
+                agentCodeCooldownRemaining(purpose) {
+                    const expiresAt = Number(this.agentCodeCooldown?.[purpose] || 0);
+                    const msLeft = expiresAt - Number(this.agentCodeCooldownNow || Date.now());
+                    if (msLeft <= 0) return 0;
+                    return Math.ceil(msLeft / 1000);
+                },
+
+                agentCodeCooldownActive(purpose) {
+                    return this.agentCodeCooldownRemaining(purpose) > 0;
+                },
+
+                agentCodeButtonText(purpose, idleText) {
+                    const s = this.agentCodeCooldownRemaining(purpose);
+                    if (s > 0) {
+                        const base = (String(idleText || '').includes('发送')) ? '重新发送' : '重新获取';
+                        return `${base}(${s}s)`;
+                    }
+                    return idleText;
                 },
 
                 parseDateMaybe(v) {
@@ -345,6 +415,12 @@ refreshLucideIcons();
                 },
 
                 async agentSendCode(purpose) {
+                    const remaining = this.agentCodeCooldownRemaining(purpose);
+                    if (remaining > 0) {
+                        this.agentNotify(`请等待 ${remaining}s 再获取验证码`, 'info');
+                        return;
+                    }
+
                     const phone = (purpose === 'reset_password'
                         ? this.agentResetForm.phone
                         : (purpose === 'register' ? this.agentRegisterForm.phone : this.agentForm.phone)
@@ -356,9 +432,19 @@ refreshLucideIcons();
                     try {
                         this.agentBusy = true;
                         const data = await this.agentApi('/api/agent/send-code', 'POST', { phone, purpose }, false);
-                        if (data.success) this.agentNotify('验证码已发送', 'success');
-                        else this.agentNotify(data.message || '发送失败', 'error');
+                        if (data.success) {
+                            this.agentNotify('验证码已发送', 'success');
+                            this.agentStartCodeCooldown(purpose, 60);
+                        } else {
+                            const msg = data.message || '发送失败';
+                            // If backend says "too frequent", still start a cooldown to match UX
+                            if (/\b60\b|稍后|频繁|过于频繁|重试/.test(msg)) this.agentStartCodeCooldown(purpose, 60);
+                            this.agentNotify(msg, 'error');
+                        }
                     } catch (e) {
+                        if (/\b60\b|稍后|频繁|过于频繁|重试/.test(e.message || '')) {
+                            this.agentStartCodeCooldown(purpose, 60);
+                        }
                         this.agentNotify(e.message, 'error');
                     } finally {
                         this.agentBusy = false;
