@@ -201,8 +201,10 @@ refreshLucideIcons();
                 agentLogs: [],
                 agentAllUsers: [],
 
-                agentDashTab: 'overview', // overview | downline_orders | change_password
+                agentDashTab: 'overview', // overview | register_sub | downline_orders | change_password
                 agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
+
+                agentDownlineFilters: { q: '', status: '', role: '' },
                 agentEditOrderOpen: false,
                 agentEditOrderId: null,
                 agentEditOrderNo: '',
@@ -391,8 +393,13 @@ refreshLucideIcons();
 
                 agentSetDashTab(tab) {
                     const t = String(tab || '').trim();
-                    const allowed = ['overview', 'downline_orders', 'change_password'];
+                    const allowed = ['overview', 'register_sub', 'downline_orders', 'change_password'];
                     this.agentDashTab = allowed.includes(t) ? t : 'overview';
+
+                    // Lazy-load downline orders when entering the tab.
+                    if (this.agentDashTab === 'downline_orders') {
+                        this.agentFetchDownlineOrders().catch(() => {});
+                    }
                 },
 
                 async agentApi(path, method = 'GET', payload = null, auth = false) {
@@ -851,7 +858,7 @@ refreshLucideIcons();
                             this.agentApi('/api/agent/users', 'GET', null, true),
                             this.agentApi('/api/agent/orders', 'GET', null, true),
                             this.agentApi('/api/agent/logs', 'GET', null, true),
-                            this.agentApi('/api/agent/orders-downline', 'GET', null, true).catch(() => ({ success: true, data: [] }))
+                            this.agentFetchDownlineOrders().catch(() => ({ success: true, data: [] }))
                         ]);
                         this.agentChildren = users.data || [];
                         this.agentOrders = orders.data || [];
@@ -879,6 +886,43 @@ refreshLucideIcons();
                     } finally {
                         this.agentBusy = false;
                     }
+                },
+
+                async agentFetchDownlineOrders() {
+                    if (!this.agentToken) {
+                        return { success: true, data: [] };
+                    }
+
+                    const q = String(this.agentDownlineFilters?.q || '').trim();
+                    const status = String(this.agentDownlineFilters?.status || '').trim();
+                    const role = String(this.agentDownlineFilters?.role || '').trim();
+
+                    const params = new URLSearchParams();
+                    if (q) params.set('q', q);
+                    if (status) params.set('status', status);
+                    if (role) params.set('role', role);
+                    params.set('limit', '500');
+
+                    const url = `/api/agent/orders-downline?${params.toString()}`;
+                    const data = await this.agentApi(url, 'GET', null, true);
+                    return data;
+                },
+
+                agentDownlineResetFilters() {
+                    this.agentDownlineFilters = { q: '', status: '', role: '' };
+                    this.agentFetchDownlineOrders().then(d => {
+                        this.agentDownlineOrders = d.data || [];
+                    }).catch(() => {
+                        this.agentDownlineOrders = [];
+                    });
+                },
+
+                agentDownlineSearch() {
+                    this.agentFetchDownlineOrders().then(d => {
+                        this.agentDownlineOrders = d.data || [];
+                    }).catch(e => {
+                        this.agentNotify(e.message || '查询失败', 'error');
+                    });
                 },
 
                 async agentChangePassword() {

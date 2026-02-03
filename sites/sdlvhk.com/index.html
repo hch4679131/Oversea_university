@@ -2859,6 +2859,8 @@
                                 <div class="mt-4 space-y-1">
                                     <button type="button" @click="agentSetDashTab('overview')" class="w-full text-left px-4 py-3 border transition"
                                         :class="agentDashTab === 'overview' ? 'bg-white text-black border-white' : 'bg-transparent text-white/80 border-white/10 hover:bg-white/10'">总览（概述）</button>
+                                    <button type="button" @click="agentSetDashTab('register_sub')" class="w-full text-left px-4 py-3 border transition"
+                                        :class="agentDashTab === 'register_sub' ? 'bg-white text-black border-white' : 'bg-transparent text-white/80 border-white/10 hover:bg-white/10'">注册下级账户</button>
                                     <button type="button" @click="agentSetDashTab('downline_orders')" class="w-full text-left px-4 py-3 border transition"
                                         :class="agentDashTab === 'downline_orders' ? 'bg-white text-black border-white' : 'bg-transparent text-white/80 border-white/10 hover:bg-white/10'">下级开单明细</button>
                                     <button type="button" @click="agentSetDashTab('change_password')" class="w-full text-left px-4 py-3 border transition"
@@ -2882,66 +2884,6 @@
                                 <div>姓名：<span class="font-bold" x-text="agentUser?.idCardName || '-'" ></span></div>
                                 <div>角色：<span class="font-bold" x-text="agentUser?.role || '-'" ></span></div>
                                 <div>上级ID：<span class="font-bold" x-text="agentUser?.parentId ?? '-'" ></span></div>
-                            </div>
-                        </div>
-
-                        <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 lg:col-span-2 scrub-item anim-flip-up">
-                            <h2 class="text-xl font-serif font-bold text-white">注册下级账号</h2>
-                            <p class="mt-2 text-xs text-white/60">根据层级规则：admin→顾问→1级→2级→3级→4级。</p>
-
-                            <div class="mt-6 grid md:grid-cols-3 gap-4">
-                                <input x-model="agentRegisterForm.phone" type="text" placeholder="下级手机号" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
-                                <input x-model="agentRegisterForm.password" type="password" placeholder="下级密码（≥6位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
-                                <select x-model="agentRegisterForm.role" class="px-5 py-4 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
-                                    <template x-for="r in agentAllowedChildRoles()" :key="r">
-                                        <option :value="r" x-text="r"></option>
-                                    </template>
-                                </select>
-                            </div>
-
-                            <div class="mt-4 grid md:grid-cols-2 gap-4">
-                                <input x-model="agentRegisterForm.idCardName" type="text" placeholder="真实姓名（用于二要素验证）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
-                                <input x-model="agentRegisterForm.idCard" type="text" placeholder="身份证号码（18位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
-                            </div>
-
-                            <div class="mt-4 grid md:grid-cols-2 gap-4">
-                                <input x-model="agentRegisterForm.code" type="text" placeholder="短信验证码（6位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
-                                <button type="button" @click="agentSendCode('register')"
-                                    :disabled="agentBusy || agentCodeCooldownActive('register')"
-                                    :class="(agentBusy || agentCodeCooldownActive('register')) ? 'opacity-60 cursor-not-allowed' : ''"
-                                    class="px-5 py-4 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition">
-                                    <span x-text="agentCodeButtonText('register', '获取验证码')"></span>
-                                </button>
-                            </div>
-                            <button type="button" @click="agentCreateSubaccount()" class="mt-4 w-full px-8 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">创建账号</button>
-
-                            <div class="mt-8 border-t border-white/10 pt-6">
-                                <h3 class="text-sm font-bold text-white">我的直接下级</h3>
-                                <div class="mt-4 overflow-x-auto border border-white/10">
-                                    <table class="min-w-full text-sm">
-                                        <thead class="bg-white/5">
-                                            <tr>
-                                                <th class="px-4 py-3 text-left font-bold text-white/70">ID</th>
-                                                <th class="px-4 py-3 text-left font-bold text-white/70">手机号</th>
-                                                <th class="px-4 py-3 text-left font-bold text-white/70">角色</th>
-                                                <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <template x-for="u in agentChildren" :key="u.id">
-                                                <tr class="border-t border-white/10">
-                                                    <td class="px-4 py-3" x-text="u.id"></td>
-                                                    <td class="px-4 py-3" x-text="u.phone"></td>
-                                                    <td class="px-4 py-3" x-text="u.role"></td>
-                                                    <td class="px-4 py-3" x-text="u.status"></td>
-                                                </tr>
-                                            </template>
-                                            <tr x-show="agentChildren.length === 0" class="border-t border-white/10">
-                                                <td class="px-4 py-3 text-white/40" colspan="4">暂无下级账号</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -3026,6 +2968,68 @@
                                 </div>
 
                                 <button type="button" @click.prevent="agentCreateOrder()" class="mt-4 w-full px-6 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :class="agentBusy ? 'opacity-60 cursor-not-allowed' : ''" :disabled="agentBusy">创建订单（自动生成订单号）</button>
+                            </div>
+
+                            <div x-show="agentDashTab === 'register_sub'" x-transition>
+                                <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
+                                    <h2 class="text-xl font-serif font-bold text-white">注册下级账号</h2>
+                                    <p class="mt-2 text-xs text-white/60">根据层级规则：admin→顾问→1级→2级→3级→4级。</p>
+
+                                    <div class="mt-6 grid md:grid-cols-3 gap-4">
+                                        <input x-model="agentRegisterForm.phone" type="text" placeholder="下级手机号" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                        <input x-model="agentRegisterForm.password" type="password" placeholder="下级密码（≥6位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                        <select x-model="agentRegisterForm.role" class="px-5 py-4 bg-black/40 border border-white/10 text-white focus:outline-none w-full">
+                                            <template x-for="r in agentAllowedChildRoles()" :key="r">
+                                                <option :value="r" x-text="r"></option>
+                                            </template>
+                                        </select>
+                                    </div>
+
+                                    <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                        <input x-model="agentRegisterForm.idCardName" type="text" placeholder="真实姓名（用于二要素验证）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                        <input x-model="agentRegisterForm.idCard" type="text" placeholder="身份证号码（18位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                    </div>
+
+                                    <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                        <input x-model="agentRegisterForm.code" type="text" placeholder="短信验证码（6位）" class="px-5 py-4 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60 w-full" />
+                                        <button type="button" @click="agentSendCode('register')"
+                                            :disabled="agentBusy || agentCodeCooldownActive('register')"
+                                            :class="(agentBusy || agentCodeCooldownActive('register')) ? 'opacity-60 cursor-not-allowed' : ''"
+                                            class="px-5 py-4 bg-gold-400 text-black border border-black/10 rounded font-semibold hover:bg-black hover:text-gold-400 transition">
+                                            <span x-text="agentCodeButtonText('register', '获取验证码')"></span>
+                                        </button>
+                                    </div>
+                                    <button type="button" @click="agentCreateSubaccount()" class="mt-4 w-full px-8 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">创建账号</button>
+
+                                    <div class="mt-8 border-t border-white/10 pt-6">
+                                        <h3 class="text-sm font-bold text-white">我的直接下级</h3>
+                                        <div class="mt-4 overflow-x-auto border border-white/10">
+                                            <table class="min-w-full text-sm">
+                                                <thead class="bg-white/5">
+                                                    <tr>
+                                                        <th class="px-4 py-3 text-left font-bold text-white/70">ID</th>
+                                                        <th class="px-4 py-3 text-left font-bold text-white/70">手机号</th>
+                                                        <th class="px-4 py-3 text-left font-bold text-white/70">角色</th>
+                                                        <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template x-for="u in agentChildren" :key="u.id">
+                                                        <tr class="border-t border-white/10">
+                                                            <td class="px-4 py-3" x-text="u.id"></td>
+                                                            <td class="px-4 py-3" x-text="u.phone"></td>
+                                                            <td class="px-4 py-3" x-text="u.role"></td>
+                                                            <td class="px-4 py-3" x-text="u.status"></td>
+                                                        </tr>
+                                                    </template>
+                                                    <tr x-show="agentChildren.length === 0" class="border-t border-white/10">
+                                                        <td class="px-4 py-3 text-white/40" colspan="4">暂无下级账号</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="mt-4 overflow-x-auto border border-white/10">
@@ -3209,7 +3213,35 @@
                                 <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
                                     <div class="flex items-center justify-between gap-6">
                                         <h2 class="text-xl font-serif font-bold text-white">下级开单明细</h2>
-                                        <div class="text-xs text-white/50">仅显示我直接下级创建的订单</div>
+                                        <div class="text-xs text-white/50">展示所有下级（含多级）订单，支持筛选与模糊搜索</div>
+                                    </div>
+
+                                    <div class="mt-5 grid md:grid-cols-12 gap-3">
+                                        <div class="md:col-span-6">
+                                            <input x-model="agentDownlineFilters.q" type="text" placeholder="关键字：订单号/手机号/学生名/服务名/状态…" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60" />
+                                        </div>
+                                        <div class="md:col-span-3">
+                                            <select x-model="agentDownlineFilters.status" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none">
+                                                <option value="">全部状态</option>
+                                                <option value="已创单">已创单</option>
+                                                <option value="已签单">已签单</option>
+                                                <option value="已完结">已完结</option>
+                                            </select>
+                                        </div>
+                                        <div class="md:col-span-3">
+                                            <select x-model="agentDownlineFilters.role" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none">
+                                                <option value="">全部角色</option>
+                                                <option value="consultant">顾问</option>
+                                                <option value="agent1">1级代理</option>
+                                                <option value="agent2">2级代理</option>
+                                                <option value="agent3">3级代理</option>
+                                                <option value="agent4">4级代理</option>
+                                            </select>
+                                        </div>
+                                        <div class="md:col-span-12 flex flex-wrap gap-3">
+                                            <button type="button" @click="agentDownlineSearch()" class="px-5 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">查询</button>
+                                            <button type="button" @click="agentDownlineResetFilters()" class="px-5 py-3 border border-white/15 text-white/80 hover:bg-white hover:text-black transition text-xs tracking-widest uppercase" :disabled="agentBusy">重置</button>
+                                        </div>
                                     </div>
 
                                     <div class="mt-4 overflow-x-auto border border-white/10">
@@ -3218,6 +3250,8 @@
                                                 <tr>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">订单号</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">服务名</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">学生</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">学生电话</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">金额</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">状态</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">开单账号</th>
@@ -3229,6 +3263,8 @@
                                                     <tr class="border-t border-white/10">
                                                         <td class="px-4 py-3" x-text="dash(o.orderNo)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentName) + (o.studentGender ? ' / ' + dash(o.studentGender) : '')"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.amount)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.status)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
@@ -3236,7 +3272,7 @@
                                                     </tr>
                                                 </template>
                                                 <tr x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="border-t border-white/10">
-                                                    <td class="px-4 py-3 text-white/40" colspan="6">暂无下级订单</td>
+                                                    <td class="px-4 py-3 text-white/40" colspan="8">暂无下级订单</td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -1110,20 +1110,90 @@ router.get('/orders', authenticateAgent, async (req, res) => {
  */
 router.get('/orders-downline', authenticateAgent, async (req, res) => {
     try {
-        const [childRows] = await pool.execute(
-            'SELECT id FROM agent_users WHERE parent_id = ? AND status = "active" ORDER BY id ASC LIMIT 1000',
-            [req.agent.id]
-        );
-        if (!childRows || childRows.length === 0) {
+        const q = String(req.query.q || '').trim();
+        const status = String(req.query.status || '').trim();
+        const role = String(req.query.role || '').trim();
+
+        const limitRaw = Number.parseInt(String(req.query.limit || ''), 10);
+        const offsetRaw = Number.parseInt(String(req.query.offset || ''), 10);
+        const limit = Number.isFinite(limitRaw) ? Math.min(Math.max(limitRaw, 1), 1000) : 200;
+        const offset = Number.isFinite(offsetRaw) ? Math.max(offsetRaw, 0) : 0;
+
+        const makePlaceholders = (arr) => {
+            const values = Array.isArray(arr) ? arr.filter(v => Number.isFinite(Number(v)) && Number(v) > 0).map(v => Number(v)) : [];
+            return {
+                placeholders: values.map(() => '?').join(','),
+                values
+            };
+        };
+
+        // Collect all descendants (children, grandchildren, ...) by BFS.
+        const visited = new Set([Number(req.agent.id)]);
+        let frontier = [Number(req.agent.id)];
+        const descendantIds = [];
+
+        for (let depth = 0; depth < 10; depth += 1) {
+            if (!frontier.length) break;
+            const { placeholders, values } = makePlaceholders(frontier);
+            if (!placeholders) break;
+
+            const [rows] = await pool.execute(
+                `SELECT id FROM agent_users WHERE parent_id IN (${placeholders}) AND status = "active" ORDER BY id ASC LIMIT 5000`,
+                values
+            );
+
+            if (!rows || rows.length === 0) break;
+            const next = [];
+            for (const r of rows) {
+                const id = Number(r.id);
+                if (!Number.isFinite(id) || id <= 0) continue;
+                if (visited.has(id)) continue;
+                visited.add(id);
+                descendantIds.push(id);
+                next.push(id);
+            }
+            frontier = next;
+        }
+
+        if (descendantIds.length === 0) {
             return res.json({ success: true, data: [] });
         }
 
-        const childIds = childRows.map(r => Number(r.id)).filter(n => Number.isFinite(n) && n > 0);
-        if (childIds.length === 0) {
+        const { placeholders, values } = makePlaceholders(descendantIds);
+        if (!placeholders) {
             return res.json({ success: true, data: [] });
         }
 
-        const placeholders = childIds.map(() => '?').join(',');
+        const where = [`o.user_id IN (${placeholders})`];
+        const params = [...values];
+
+        if (status) {
+            where.push('o.status = ?');
+            params.push(status);
+        }
+
+        if (role) {
+            where.push('bu.role = ?');
+            params.push(role);
+        }
+
+        if (q) {
+            const like = `%${q}%`;
+            where.push(`(
+                o.order_no LIKE ?
+                OR o.title LIKE ?
+                OR o.status LIKE ?
+                OR IFNULL(o.student_name, "") LIKE ?
+                OR IFNULL(o.student_phone, "") LIKE ?
+                OR IFNULL(o.parent_phone, "") LIKE ?
+                OR IFNULL(bu.phone, "") LIKE ?
+                OR IFNULL(cb.phone, "") LIKE ?
+            )`);
+            params.push(like, like, like, like, like, like, like, like);
+        }
+
+        params.push(limit, offset);
+
         const [rows] = await pool.execute(
             `SELECT
                 o.id,
@@ -1131,6 +1201,10 @@ router.get('/orders-downline', authenticateAgent, async (req, res) => {
                 o.title AS serviceName,
                 o.amount,
                 o.status,
+                o.student_name AS studentName,
+                o.student_gender AS studentGender,
+                o.student_phone AS studentPhone,
+                o.parent_phone AS parentPhone,
                 o.created_at AS createdAt,
                 o.user_id AS boundUserId,
                 bu.phone AS boundUserPhone,
@@ -1141,10 +1215,10 @@ router.get('/orders-downline', authenticateAgent, async (req, res) => {
             FROM agent_orders o
             LEFT JOIN agent_users bu ON bu.id = o.user_id
             LEFT JOIN agent_users cb ON cb.id = COALESCE(o.created_by_user_id, o.user_id)
-            WHERE o.user_id IN (${placeholders})
+            WHERE ${where.join(' AND ')}
             ORDER BY o.created_at DESC
-            LIMIT 200`,
-            childIds
+            LIMIT ? OFFSET ?`,
+            params
         );
 
         return res.json({ success: true, data: rows });
