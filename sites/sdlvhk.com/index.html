@@ -2851,10 +2851,10 @@
 
                     <div x-show="agentNotice" class="mt-8 px-5 py-4 border" :class="agentNoticeType === 'error' ? 'bg-red-950/40 border-red-800/40 text-red-200' : (agentNoticeType === 'success' ? 'bg-green-950/40 border-green-800/40 text-green-200' : 'bg-white/5 border-white/10 text-white/80')" x-text="agentNotice"></div>
 
-                    <div class="mt-10 grid lg:grid-cols-12 gap-8">
+                    <div class="mt-10 flex flex-col lg:flex-row gap-8">
                         <!-- 左侧菜单（GitHub Settings 风格） -->
-                        <aside class="lg:col-span-3">
-                            <div class="sticky top-24">
+                        <aside class="w-full lg:w-72 lg:flex-none">
+                            <div class="w-full lg:fixed lg:top-24 lg:w-72">
                                 <div class="mt-4 space-y-1">
                                     <button type="button" @click="agentSetDashTab('overview')" class="w-full text-left px-4 py-3 border transition"
                                         :class="agentDashTab === 'overview' ? 'bg-white text-black border-white' : 'bg-transparent text-white/80 border-white/10 hover:bg-white/10'">总览（概述）</button>
@@ -2870,23 +2870,23 @@
                         </aside>
 
                         <!-- 右侧内容区 -->
-                        <div class="lg:col-span-9">
+                        <div class="flex-1 min-w-0">
                             <div x-show="agentDashTab === 'overview'" x-transition>
                                 <div class="grid lg:grid-cols-3 gap-6">
 
                                     <!-- 饼图 1：本月对比（固定本月） -->
-                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
-                                        <div class="flex items-center justify-between">
+                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-fade-up">
+                                        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                                             <div>
                                                 <h2 class="text-xl font-serif font-bold text-white">本月销售金额</h2>
-                                                <div class="mt-1 text-xs text-white/50" x-text="(agentSalesMonth?.startDate && agentSalesMonth?.endDate) ? (agentSalesMonth.startDate + ' ~ ' + agentSalesMonth.endDate) : '—'"></div>
+                                                <div class="mt-1 text-xs text-white/50 break-words" x-text="(agentSalesMonth?.startDate && agentSalesMonth?.endDate) ? (agentSalesMonth.startDate + ' ~ ' + agentSalesMonth.endDate) : '—'"></div>
                                             </div>
                                             <button type="button" @click="agentRefreshSalesPies()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition" :disabled="agentBusy">刷新</button>
                                         </div>
 
                                         <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                                             <div class="flex items-center justify-center">
-                                                <div class="w-36 h-36 rounded-full border border-white/10" :style="agentPieStyle(agentSalesMonth)"></div>
+                                                <div class="w-28 h-28 sm:w-36 sm:h-36 aspect-square shrink-0 rounded-full border border-white/10" style="aspect-ratio: 1 / 1;" :style="agentPieStyle(agentSalesMonth)"></div>
                                             </div>
                                             <div class="space-y-2 text-sm text-white/80">
                                                 <div class="flex items-center justify-between">
@@ -2903,22 +2903,22 @@
                                     </div>
 
                                     <!-- 饼图 2：时间段对比（带过滤器） -->
-                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
-                                        <div class="flex items-center justify-between">
+                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-fade-up">
+                                        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                                             <div>
                                                 <h2 class="text-xl font-serif font-bold text-white">销售金额对比</h2>
-                                                <div class="mt-1 text-xs text-white/50" x-text="(agentSalesCustom?.startDate && agentSalesCustom?.endDate) ? (agentSalesCustom.startDate + ' ~ ' + agentSalesCustom.endDate) : '—'"></div>
+                                                <div class="mt-1 text-xs text-white/50 break-words" x-text="(agentSalesCustom?.startDate && agentSalesCustom?.endDate) ? (agentSalesCustom.startDate + ' ~ ' + agentSalesCustom.endDate) : '—'"></div>
                                             </div>
-                                            <div class="flex items-center gap-3">
+                                            <div class="flex flex-wrap items-center gap-3">
                                                 <button type="button" @click="agentSalesCustomSearch()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition" :disabled="agentBusy">查询</button>
                                                 <button type="button" @click="agentSalesCustomReset()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition" :disabled="agentBusy">重置</button>
                                             </div>
                                         </div>
 
-                                        <div class="mt-4 grid grid-cols-2 gap-3">
+                                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                                             <div>
                                                 <div class="text-xs text-white/60 mb-2">开始日期</div>
-                                                <button type="button" @click="agentOpenSalesDatePicker('start')" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none text-left">
+                                                <button type="button" @click="agentOpenSalesDatePicker('start')" class="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-black/40 border border-white/10 text-white focus:outline-none text-left">
                                                     <span x-text="agentSalesCustomFilters.startDate || '请选择开始日期'"></span>
                                                 </button>
                                                 <input x-ref="salesStartDate" x-model="agentSalesCustomFilters.startDate" type="date" inputmode="none" autocomplete="off" tabindex="-1"
@@ -2927,7 +2927,7 @@
                                             </div>
                                             <div>
                                                 <div class="text-xs text-white/60 mb-2">结束日期</div>
-                                                <button type="button" @click="agentOpenSalesDatePicker('end')" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none text-left">
+                                                <button type="button" @click="agentOpenSalesDatePicker('end')" class="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-black/40 border border-white/10 text-white focus:outline-none text-left">
                                                     <span x-text="agentSalesCustomFilters.endDate || '请选择结束日期'"></span>
                                                 </button>
                                                 <input x-ref="salesEndDate" x-model="agentSalesCustomFilters.endDate" type="date" inputmode="none" autocomplete="off" tabindex="-1"
@@ -2938,7 +2938,7 @@
 
                                         <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                                             <div class="flex items-center justify-center">
-                                                <div class="w-36 h-36 rounded-full border border-white/10" :style="agentPieStyle(agentSalesCustom)"></div>
+                                                <div class="w-28 h-28 sm:w-36 sm:h-36 aspect-square shrink-0 rounded-full border border-white/10" style="aspect-ratio: 1 / 1;" :style="agentPieStyle(agentSalesCustom)"></div>
                                             </div>
                                             <div class="space-y-2 text-sm text-white/80">
                                                 <div class="flex items-center justify-between">
@@ -2955,7 +2955,7 @@
                                     </div>
 
                                     <!-- 账号信息 -->
-                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
+                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-fade-up">
                                         <div class="flex items-center justify-between">
                                             <h2 class="text-xl font-serif font-bold text-white">我的账号</h2>
                                             <button type="button" @click="agentRefreshDashboard()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition">刷新</button>
