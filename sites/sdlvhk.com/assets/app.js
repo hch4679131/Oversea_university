@@ -237,6 +237,35 @@ refreshLucideIcons();
                     return s.trim() ? s : '-';
                 },
 
+                agentRoleLabel(role) {
+                    const r = String(role || '').trim();
+                    if (r === 'admin') return '管理员';
+                    if (r === 'consultant') return '顾问';
+                    if (r === 'agent1') return '1级代理';
+                    if (r === 'agent2') return '2级代理';
+                    if (r === 'agent3') return '3级代理';
+                    if (r === 'agent4') return '4级代理';
+                    return '账号';
+                },
+
+                agentMaskPhone(phone) {
+                    const digits = String(phone || '').replace(/\D/g, '');
+                    if (!digits) return '-';
+                    if (digits.length >= 11) return `${digits.slice(0, 3)}****${digits.slice(-4)}`;
+                    if (digits.length >= 7) return `${digits.slice(0, 2)}***${digits.slice(-2)}`;
+                    if (digits.length >= 4) {
+                        const stars = '*'.repeat(Math.max(1, digits.length - 4));
+                        return `${digits.slice(0, 2)}${stars}${digits.slice(-2)}`;
+                    }
+                    return digits;
+                },
+
+                agentUserHeaderLabel() {
+                    const name = this.agentUser?.name || this.agentUser?.realName || this.agentRoleLabel(this.agentUser?.role);
+                    const maskedPhone = this.agentMaskPhone(this.agentUser?.phone);
+                    return `${name}（${maskedPhone}）`;
+                },
+
                 agentInitCooldowns() {
                     // Restore cooldowns across refresh
                     try {
