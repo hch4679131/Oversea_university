@@ -39,6 +39,7 @@ refreshLucideIcons();
                     }
 
                     this.agentInitCooldowns();
+                    this.agentApplyDownlineDateDefaults(true);
 
                     if (this.agentToken) {
                         this.agentFetchMe().catch(() => {
@@ -415,8 +416,50 @@ refreshLucideIcons();
 
                     // Lazy-load downline orders when entering the tab.
                     if (this.agentDashTab === 'downline_orders') {
+                        this.agentApplyDownlineDateDefaults(false);
                         this.agentFetchDownlineOrders().catch(() => {});
                     }
+                },
+
+                agentFormatDateYmdShanghai(date) {
+                    try {
+                        return new Intl.DateTimeFormat('en-CA', {
+                            timeZone: 'Asia/Shanghai',
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        }).format(date);
+                    } catch (e) {
+                        const d = date instanceof Date ? date : new Date(date);
+                        const yyyy = d.getFullYear();
+                        const mm = String(d.getMonth() + 1).padStart(2, '0');
+                        const dd = String(d.getDate()).padStart(2, '0');
+                        return `${yyyy}-${mm}-${dd}`;
+                    }
+                },
+
+                agentGetDefaultDownlineDateRange() {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setMonth(start.getMonth() - 6);
+                    return {
+                        startDate: this.agentFormatDateYmdShanghai(start),
+                        endDate: this.agentFormatDateYmdShanghai(end)
+                    };
+                },
+
+                agentApplyDownlineDateDefaults(force = false) {
+                    const curStart = String(this.agentDownlineFilters?.startDate || '').trim();
+                    const curEnd = String(this.agentDownlineFilters?.endDate || '').trim();
+
+                    if (!force && (curStart || curEnd)) return;
+
+                    const def = this.agentGetDefaultDownlineDateRange();
+                    this.agentDownlineFilters = {
+                        ...(this.agentDownlineFilters || {}),
+                        startDate: def.startDate,
+                        endDate: def.endDate
+                    };
                 },
 
                 async agentApi(path, method = 'GET', payload = null, auth = false) {
@@ -930,7 +973,8 @@ refreshLucideIcons();
                 },
 
                 agentDownlineResetFilters() {
-                    this.agentDownlineFilters = { q: '', status: '', role: '', startDate: '', endDate: '' };
+                    const def = this.agentGetDefaultDownlineDateRange();
+                    this.agentDownlineFilters = { q: '', status: '', role: '', startDate: def.startDate, endDate: def.endDate };
                     this.agentFetchDownlineOrders().then(d => {
                         this.agentDownlineOrders = d.data || [];
                     }).catch(() => {
