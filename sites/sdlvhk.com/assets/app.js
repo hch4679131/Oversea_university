@@ -563,6 +563,12 @@ refreshLucideIcons();
                     });
                 },
 
+                agentSalesCustomReset() {
+                    const def = this.agentGetThisMonthRangeShanghai();
+                    this.agentSalesCustomFilters = { startDate: def.startDate, endDate: def.endDate };
+                    this.agentSalesCustomSearch();
+                },
+
                 agentOpenSalesDatePicker(which) {
                     const w = String(which || '').trim();
                     const el = w === 'end' ? this.$refs?.salesEndDate : this.$refs?.salesStartDate;
