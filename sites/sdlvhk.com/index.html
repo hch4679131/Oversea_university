@@ -2968,6 +2968,79 @@
 
                                 </div>
 
+                                <!-- 折线图：销售金额走势（按日） -->
+                                <div class="mt-6 bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-fade-up">
+                                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                        <div>
+                                            <h2 class="text-xl font-serif font-bold text-white">销售金额走势（按日）</h2>
+                                            <div class="mt-1 text-xs text-white/50 break-words" x-text="(agentSalesTrend?.startDate && agentSalesTrend?.endDate) ? (agentSalesTrend.startDate + ' ~ ' + agentSalesTrend.endDate) : '—'"></div>
+                                        </div>
+                                        <div class="flex flex-wrap items-center gap-3">
+                                            <button type="button" @click="agentSalesTrendSearch()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition" :disabled="agentBusy">查询</button>
+                                            <button type="button" @click="agentSalesTrendReset()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition" :disabled="agentBusy">重置</button>
+                                            <button type="button" @click="agentRefreshSalesTrend()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition" :disabled="agentBusy">刷新</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div>
+                                            <div class="text-xs text-white/60 mb-2">开始日期</div>
+                                            <button type="button" @click="agentOpenSalesTrendDatePicker('start')" class="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-black/40 border border-white/10 text-white focus:outline-none text-left">
+                                                <span x-text="agentSalesTrendFilters.startDate || '请选择开始日期'"></span>
+                                            </button>
+                                            <input x-ref="salesTrendStartDate" x-model="agentSalesTrendFilters.startDate" type="date" inputmode="none" autocomplete="off" tabindex="-1"
+                                                @keydown.prevent @paste.prevent @drop.prevent
+                                                class="sr-only" />
+                                        </div>
+                                        <div>
+                                            <div class="text-xs text-white/60 mb-2">结束日期</div>
+                                            <button type="button" @click="agentOpenSalesTrendDatePicker('end')" class="w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-black/40 border border-white/10 text-white focus:outline-none text-left">
+                                                <span x-text="agentSalesTrendFilters.endDate || '请选择结束日期'"></span>
+                                            </button>
+                                            <input x-ref="salesTrendEndDate" x-model="agentSalesTrendFilters.endDate" type="date" inputmode="none" autocomplete="off" tabindex="-1"
+                                                @keydown.prevent @paste.prevent @drop.prevent
+                                                class="sr-only" />
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-5">
+                                        <div class="flex flex-wrap items-center gap-4 text-xs text-white/70">
+                                            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm bg-gold-400"></span><span>我的</span></div>
+                                            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm bg-white/25"></span><span>所有下级</span></div>
+                                            <div class="text-white/40" x-text="'纵轴：金额 / 横轴：日'"></div>
+                                        </div>
+
+                                        <div class="mt-3 w-full overflow-hidden border border-white/10 bg-black/20">
+                                            <svg class="w-full h-64" :viewBox="agentSalesTrendViewBox()" preserveAspectRatio="xMidYMid meet">
+                                                <g x-show="!agentSalesTrendHasData()">
+                                                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,0.45)" font-size="14">暂无数据</text>
+                                                </g>
+
+                                                <g x-show="agentSalesTrendHasData()">
+                                                    <!-- grid lines -->
+                                                    <template x-for="k in agentSalesTrendGridK()" :key="k">
+                                                        <line :x1="agentSalesTrendPad().l" :x2="agentSalesTrendW() - agentSalesTrendPad().r" :y1="agentSalesTrendGridY(k)" :y2="agentSalesTrendGridY(k)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                                                    </template>
+
+                                                    <!-- y labels -->
+                                                    <template x-for="t in agentSalesTrendYTicks()" :key="t.value">
+                                                        <text :x="agentSalesTrendPad().l - 8" :y="t.y" text-anchor="end" dominant-baseline="middle" fill="rgba(255,255,255,0.45)" font-size="11" x-text="t.label"></text>
+                                                    </template>
+
+                                                    <!-- x labels -->
+                                                    <template x-for="t in agentSalesTrendXTicks()" :key="t.i">
+                                                        <text :x="t.x" :y="agentSalesTrendH() - 12" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-size="11" x-text="t.label"></text>
+                                                    </template>
+
+                                                    <!-- series paths -->
+                                                    <path :d="agentSalesTrendPath('downline')" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" />
+                                                    <path :d="agentSalesTrendPath('my')" fill="none" stroke="rgba(251,191,36,0.95)" stroke-width="2" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
                     <div class="mt-10 grid lg:grid-cols-2 gap-6">
                         <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
                             <h2 class="text-xl font-serif font-bold text-white">我的订单</h2>

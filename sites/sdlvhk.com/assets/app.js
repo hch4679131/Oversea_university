@@ -208,6 +208,10 @@ refreshLucideIcons();
                 agentSalesCustom: { startDate: '', endDate: '', myAmount: 0, downlineAmount: 0, total: 0 },
                 agentSalesCustomFilters: { startDate: '', endDate: '' },
 
+                // ===== Overview: Sales Trend (Line) =====
+                agentSalesTrend: { startDate: '', endDate: '', labels: [], myAmounts: [], downlineAmounts: [] },
+                agentSalesTrendFilters: { startDate: '', endDate: '' },
+
                 agentDashTab: 'overview', // overview | register_sub | downline_orders | change_password
                 agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
 
@@ -429,7 +433,9 @@ refreshLucideIcons();
                     // Ensure overview charts stay fresh when returning to overview.
                     if (this.agentDashTab === 'overview') {
                         this.agentApplySalesDefaults(false);
+                        this.agentApplySalesTrendDefaults(false);
                         this.agentRefreshSalesPies().catch(() => {});
+                        this.agentRefreshSalesTrend().catch(() => {});
                     }
                 },
 
@@ -491,6 +497,15 @@ refreshLucideIcons();
                     this.agentSalesCustomFilters = { startDate: def.startDate, endDate: def.endDate };
                 },
 
+                agentApplySalesTrendDefaults(force = false) {
+                    const curStart = String(this.agentSalesTrendFilters?.startDate || '').trim();
+                    const curEnd = String(this.agentSalesTrendFilters?.endDate || '').trim();
+                    if (!force && (curStart || curEnd)) return;
+
+                    const def = this.agentGetThisMonthRangeShanghai();
+                    this.agentSalesTrendFilters = { startDate: def.startDate, endDate: def.endDate };
+                },
+
                 async agentFetchSalesSummary(startDate, endDate) {
                     const params = new URLSearchParams();
                     if (startDate) params.set('startDate', String(startDate));
@@ -498,6 +513,16 @@ refreshLucideIcons();
                     const url = `/api/agent/sales-summary?${params.toString()}`;
                     const data = await this.agentApi(url, 'GET', null, true);
                     if (!data.success) throw new Error(data.message || '获取统计失败');
+                    return data;
+                },
+
+                async agentFetchSalesTrend(startDate, endDate) {
+                    const params = new URLSearchParams();
+                    if (startDate) params.set('startDate', String(startDate));
+                    if (endDate) params.set('endDate', String(endDate));
+                    const url = `/api/agent/sales-trend?${params.toString()}`;
+                    const data = await this.agentApi(url, 'GET', null, true);
+                    if (!data.success) throw new Error(data.message || '获取走势失败');
                     return data;
                 },
 
@@ -535,6 +560,23 @@ refreshLucideIcons();
                         myAmount: Number.isFinite(cMy) ? cMy : 0,
                         downlineAmount: Number.isFinite(cDown) ? cDown : 0,
                         total: (Number.isFinite(cMy) ? cMy : 0) + (Number.isFinite(cDown) ? cDown : 0)
+                    };
+                },
+
+                async agentRefreshSalesTrend() {
+                    if (!this.agentToken) return;
+
+                    const month = this.agentGetThisMonthRangeShanghai();
+                    const startDate = String(this.agentSalesTrendFilters?.startDate || '').trim() || month.startDate;
+                    const endDate = String(this.agentSalesTrendFilters?.endDate || '').trim() || month.endDate;
+
+                    const data = await this.agentFetchSalesTrend(startDate, endDate);
+                    this.agentSalesTrend = {
+                        startDate: data.startDate || startDate,
+                        endDate: data.endDate || endDate,
+                        labels: Array.isArray(data.labels) ? data.labels : [],
+                        myAmounts: Array.isArray(data.myAmounts) ? data.myAmounts.map((v) => Number(v || 0) || 0) : [],
+                        downlineAmounts: Array.isArray(data.downlineAmounts) ? data.downlineAmounts.map((v) => Number(v || 0) || 0) : []
                     };
                 },
 
@@ -587,6 +629,152 @@ refreshLucideIcons();
                         try { el.focus(); } catch (_) {}
                     }
                     try { el.click(); } catch (e) {}
+                },
+
+                agentOpenSalesTrendDatePicker(which) {
+                    const w = String(which || '').trim();
+                    const el = w === 'end' ? this.$refs?.salesTrendEndDate : this.$refs?.salesTrendStartDate;
+                    if (!el) return;
+
+                    try {
+                        if (typeof el.showPicker === 'function') {
+                            el.showPicker();
+                            return;
+                        }
+                    } catch (e) {}
+
+                    try {
+                        el.focus({ preventScroll: true });
+                    } catch (e) {
+                        try { el.focus(); } catch (_) {}
+                    }
+                    try { el.click(); } catch (e) {}
+                },
+
+                agentSalesTrendSearch() {
+                    const s = String(this.agentSalesTrendFilters?.startDate || '').trim();
+                    const e = String(this.agentSalesTrendFilters?.endDate || '').trim();
+                    if (!s || !e) {
+                        this.agentNotify('请选择开始/结束日期', 'error');
+                        return;
+                    }
+
+                    this.agentBusy = true;
+                    this.agentFetchSalesTrend(s, e).then((d) => {
+                        this.agentSalesTrend = {
+                            startDate: d.startDate || s,
+                            endDate: d.endDate || e,
+                            labels: Array.isArray(d.labels) ? d.labels : [],
+                            myAmounts: Array.isArray(d.myAmounts) ? d.myAmounts.map((v) => Number(v || 0) || 0) : [],
+                            downlineAmounts: Array.isArray(d.downlineAmounts) ? d.downlineAmounts.map((v) => Number(v || 0) || 0) : []
+                        };
+                    }).catch((err) => {
+                        this.agentNotify(err?.message || '查询失败', 'error');
+                    }).finally(() => {
+                        this.agentBusy = false;
+                    });
+                },
+
+                agentSalesTrendReset() {
+                    const def = this.agentGetThisMonthRangeShanghai();
+                    this.agentSalesTrendFilters = { startDate: def.startDate, endDate: def.endDate };
+                    this.agentSalesTrendSearch();
+                },
+
+                agentSalesTrendHasData() {
+                    const n = Array.isArray(this.agentSalesTrend?.labels) ? this.agentSalesTrend.labels.length : 0;
+                    return n >= 2;
+                },
+
+                agentSalesTrendW() { return 700; },
+                agentSalesTrendH() { return 260; },
+                agentSalesTrendPad() { return { l: 52, r: 14, t: 16, b: 34 }; },
+                agentSalesTrendViewBox() { return `0 0 ${this.agentSalesTrendW()} ${this.agentSalesTrendH()}`; },
+
+                agentSalesTrendGridK() { return [0, 1, 2, 3, 4]; },
+
+                agentSalesTrendMax() {
+                    const a = Array.isArray(this.agentSalesTrend?.myAmounts) ? this.agentSalesTrend.myAmounts : [];
+                    const b = Array.isArray(this.agentSalesTrend?.downlineAmounts) ? this.agentSalesTrend.downlineAmounts : [];
+                    let max = 0;
+                    for (const v of a) max = Math.max(max, Number(v || 0) || 0);
+                    for (const v of b) max = Math.max(max, Number(v || 0) || 0);
+                    return max > 0 ? max : 1;
+                },
+
+                agentSalesTrendX(i, n) {
+                    const W = this.agentSalesTrendW();
+                    const pad = this.agentSalesTrendPad();
+                    const plotW = W - pad.l - pad.r;
+                    const denom = Math.max(1, (n - 1));
+                    return pad.l + (plotW * (i / denom));
+                },
+
+                agentSalesTrendY(v) {
+                    const H = this.agentSalesTrendH();
+                    const pad = this.agentSalesTrendPad();
+                    const plotH = H - pad.t - pad.b;
+                    const max = this.agentSalesTrendMax();
+                    const val = Number(v || 0) || 0;
+                    const pct = Math.max(0, Math.min(1, val / max));
+                    return pad.t + (plotH * (1 - pct));
+                },
+
+                agentSalesTrendGridY(k) {
+                    const H = this.agentSalesTrendH();
+                    const pad = this.agentSalesTrendPad();
+                    const plotH = H - pad.t - pad.b;
+                    const kk = Number(k || 0) || 0;
+                    return pad.t + (plotH * (kk / 4));
+                },
+
+                agentSalesTrendPath(which) {
+                    const labels = Array.isArray(this.agentSalesTrend?.labels) ? this.agentSalesTrend.labels : [];
+                    const n = labels.length;
+                    if (n < 2) return '';
+                    const series = which === 'downline'
+                        ? (Array.isArray(this.agentSalesTrend?.downlineAmounts) ? this.agentSalesTrend.downlineAmounts : [])
+                        : (Array.isArray(this.agentSalesTrend?.myAmounts) ? this.agentSalesTrend.myAmounts : []);
+
+                    let d = '';
+                    for (let i = 0; i < n; i += 1) {
+                        const x = this.agentSalesTrendX(i, n);
+                        const y = this.agentSalesTrendY(series[i] || 0);
+                        d += (i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`);
+                    }
+                    return d;
+                },
+
+                agentSalesTrendYTicks() {
+                    const max = this.agentSalesTrendMax();
+                    const ticks = [max, max / 2, 0];
+                    return ticks.map((v) => ({
+                        value: v,
+                        y: this.agentSalesTrendY(v),
+                        label: this.agentMoney(v)
+                    }));
+                },
+
+                agentSalesTrendXTicks() {
+                    const labels = Array.isArray(this.agentSalesTrend?.labels) ? this.agentSalesTrend.labels : [];
+                    const n = labels.length;
+                    if (n < 2) return [];
+
+                    const set = new Set([0, n - 1, Math.floor((n - 1) / 2)]);
+                    if (n > 10) {
+                        for (let i = 0; i < n; i += 7) set.add(i);
+                    }
+
+                    return Array.from(set).sort((a, b) => a - b).map((i) => {
+                        const ymd = String(labels[i] || '');
+                        const dd = ymd.split('-')[2] || '';
+                        const label = dd ? String(Number(dd)) : ymd;
+                        return {
+                            i,
+                            x: this.agentSalesTrendX(i, n),
+                            label
+                        };
+                    });
                 },
 
                 agentFormatDateYmdShanghai(date) {
@@ -1111,7 +1299,11 @@ refreshLucideIcons();
                         }
 
                         this.agentApplySalesDefaults(false);
-                        await this.agentRefreshSalesPies();
+                        this.agentApplySalesTrendDefaults(false);
+                        await Promise.all([
+                            this.agentRefreshSalesPies(),
+                            this.agentRefreshSalesTrend().catch(() => {})
+                        ]);
                     } catch (e) {
                         this.agentNotify(e.message || '刷新失败', 'error');
                     } finally {

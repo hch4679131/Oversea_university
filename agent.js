@@ -1744,4 +1744,181 @@ router.get('/sales-summary', authenticateAgent, async (req, res) => {
     }
 });
 
+/**
+ * GET /api/agent/sales-trend
+ * 按“日”返回销售金额折线图数据（我的 vs 所有下级），按订单绑定账号 user_id
+ * Query: startDate=YYYY-MM-DD, endDate=YYYY-MM-DD
+ * 返回：labels(YYYY-MM-DD[]), myAmounts(number[]), downlineAmounts(number[])
+ */
+router.get('/sales-trend', authenticateAgent, async (req, res) => {
+    try {
+        const startDate = String(req.query.startDate || '').trim();
+        const endDate = String(req.query.endDate || '').trim();
+
+        const isYmd = (v) => /^\d{4}-\d{2}-\d{2}$/.test(String(v || ''));
+        if (startDate && !isYmd(startDate)) {
+            return res.status(400).json({ success: false, message: '开始日期格式错误（YYYY-MM-DD）' });
+        }
+        if (endDate && !isYmd(endDate)) {
+            return res.status(400).json({ success: false, message: '结束日期格式错误（YYYY-MM-DD）' });
+        }
+        if (startDate && endDate && startDate > endDate) {
+            return res.status(400).json({ success: false, message: '开始日期不能大于结束日期' });
+        }
+
+        // Default: this month in Asia/Shanghai
+        const getShanghaiYmd = (date) => {
+            try {
+                return new Intl.DateTimeFormat('en-CA', {
+                    timeZone: 'Asia/Shanghai',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                }).format(date);
+            } catch (e) {
+                const d = date instanceof Date ? date : new Date(date);
+                const yyyy = d.getFullYear();
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                return `${yyyy}-${mm}-${dd}`;
+            }
+        };
+        const getShanghaiYearMonth = (date) => {
+            try {
+                const parts = new Intl.DateTimeFormat('en-CA', {
+                    timeZone: 'Asia/Shanghai',
+                    year: 'numeric',
+                    month: '2-digit'
+                }).formatToParts(date);
+                const map = {};
+                for (const p of parts) {
+                    if (p.type !== 'literal') map[p.type] = p.value;
+                }
+                return { year: map.year, month: map.month };
+            } catch (e) {
+                const d = date instanceof Date ? date : new Date(date);
+                return { year: String(d.getFullYear()), month: String(d.getMonth() + 1).padStart(2, '0') };
+            }
+        };
+
+        const now = new Date();
+        const { year, month } = getShanghaiYearMonth(now);
+        const defStart = `${year}-${month}-01`;
+        const defEnd = getShanghaiYmd(now);
+        const s = startDate || defStart;
+        const e = endDate || defEnd;
+
+        const makePlaceholders = (arr) => {
+            const values = Array.isArray(arr) ? arr.filter(v => Number.isFinite(Number(v)) && Number(v) > 0).map(v => Number(v)) : [];
+            return {
+                placeholders: values.map(() => '?').join(','),
+                values
+            };
+        };
+
+        // Collect descendants (active) by BFS
+        const visited = new Set([Number(req.agent.id)]);
+        let frontier = [Number(req.agent.id)];
+        const descendantIds = [];
+
+        for (let depth = 0; depth < 10; depth += 1) {
+            if (!frontier.length) break;
+            const { placeholders, values } = makePlaceholders(frontier);
+            if (!placeholders) break;
+
+            const [rows] = await pool.execute(
+                `SELECT id FROM agent_users WHERE parent_id IN (${placeholders}) AND status = "active" ORDER BY id ASC LIMIT 5000`,
+                values
+            );
+
+            if (!rows || rows.length === 0) break;
+            const next = [];
+            for (const r of rows) {
+                const id = Number(r.id);
+                if (!Number.isFinite(id) || id <= 0) continue;
+                if (visited.has(id)) continue;
+                visited.add(id);
+                descendantIds.push(id);
+                next.push(id);
+            }
+            frontier = next;
+        }
+
+        const rangeStart = `${s} 00:00:00`;
+        const rangeEnd = `${e} 23:59:59`;
+
+        const [myRows] = await pool.execute(
+            'SELECT DATE(created_at) AS d, COALESCE(SUM(amount), 0) AS total FROM agent_orders WHERE user_id = ? AND created_at >= ? AND created_at <= ? GROUP BY DATE(created_at) ORDER BY d ASC',
+            [Number(req.agent.id), rangeStart, rangeEnd]
+        );
+        const myMap = new Map();
+        for (const r of (myRows || [])) {
+            if (!r) continue;
+            const d = String(r.d || '').slice(0, 10);
+            if (!d) continue;
+            myMap.set(d, Number(r.total || 0) || 0);
+        }
+
+        const downMap = new Map();
+        if (descendantIds.length > 0) {
+            const { placeholders, values } = makePlaceholders(descendantIds);
+            if (placeholders) {
+                const [downRows] = await pool.execute(
+                    `SELECT DATE(created_at) AS d, COALESCE(SUM(amount), 0) AS total FROM agent_orders WHERE user_id IN (${placeholders}) AND created_at >= ? AND created_at <= ? GROUP BY DATE(created_at) ORDER BY d ASC`,
+                    [...values, rangeStart, rangeEnd]
+                );
+                for (const r of (downRows || [])) {
+                    if (!r) continue;
+                    const d = String(r.d || '').slice(0, 10);
+                    if (!d) continue;
+                    downMap.set(d, Number(r.total || 0) || 0);
+                }
+            }
+        }
+
+        const pad2 = (n) => String(n).padStart(2, '0');
+        const parseYmdUtc = (ymd) => {
+            const parts = String(ymd || '').split('-').map((x) => Number(x));
+            const y = parts[0];
+            const m = parts[1];
+            const d = parts[2];
+            if (!Number.isFinite(y) || !Number.isFinite(m) || !Number.isFinite(d)) return null;
+            return new Date(Date.UTC(y, m - 1, d));
+        };
+        const formatYmdUtc = (dt) => {
+            return `${dt.getUTCFullYear()}-${pad2(dt.getUTCMonth() + 1)}-${pad2(dt.getUTCDate())}`;
+        };
+
+        const startDt = parseYmdUtc(s);
+        const endDt = parseYmdUtc(e);
+        if (!startDt || !endDt) {
+            return res.status(400).json({ success: false, message: '日期解析失败' });
+        }
+
+        const labels = [];
+        const myAmounts = [];
+        const downlineAmounts = [];
+
+        const cur = new Date(startDt.getTime());
+        while (cur.getTime() <= endDt.getTime()) {
+            const ymd = formatYmdUtc(cur);
+            labels.push(ymd);
+            myAmounts.push(myMap.get(ymd) || 0);
+            downlineAmounts.push(downMap.get(ymd) || 0);
+            cur.setUTCDate(cur.getUTCDate() + 1);
+        }
+
+        return res.json({
+            success: true,
+            startDate: s,
+            endDate: e,
+            labels,
+            myAmounts,
+            downlineAmounts
+        });
+    } catch (e) {
+        res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+    }
+});
+
 module.exports = router;
