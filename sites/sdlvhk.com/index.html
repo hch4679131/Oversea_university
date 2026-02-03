@@ -2855,7 +2855,6 @@
                         <!-- 左侧菜单（GitHub Settings 风格） -->
                         <aside class="lg:col-span-3">
                             <div class="sticky top-24">
-                                <div class="text-xs tracking-[0.3em] uppercase text-white/40">设置</div>
                                 <div class="mt-4 space-y-1">
                                     <button type="button" @click="agentSetDashTab('overview')" class="w-full text-left px-4 py-3 border transition"
                                         :class="agentDashTab === 'overview' ? 'bg-white text-black border-white' : 'bg-transparent text-white/80 border-white/10 hover:bg-white/10'">总览（概述）</button>
@@ -3217,7 +3216,7 @@
                                     </div>
 
                                     <div class="mt-5 grid md:grid-cols-12 gap-3">
-                                        <div class="md:col-span-6">
+                                        <div class="md:col-span-12">
                                             <input x-model="agentDownlineFilters.q" type="text" placeholder="关键字：订单号/手机号/学生名/服务名/状态…" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-gold-400/60" />
                                         </div>
                                         <div class="md:col-span-3">
@@ -3231,12 +3230,16 @@
                                         <div class="md:col-span-3">
                                             <select x-model="agentDownlineFilters.role" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none">
                                                 <option value="">全部角色</option>
-                                                <option value="consultant">顾问</option>
-                                                <option value="agent1">1级代理</option>
-                                                <option value="agent2">2级代理</option>
-                                                <option value="agent3">3级代理</option>
-                                                <option value="agent4">4级代理</option>
+                                                <template x-for="r in agentDownlineRoleOptions()" :key="r">
+                                                    <option :value="r" x-text="agentRoleLabel(r)"></option>
+                                                </template>
                                             </select>
+                                        </div>
+                                        <div class="md:col-span-3">
+                                            <input x-model="agentDownlineFilters.startDate" type="date" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none" />
+                                        </div>
+                                        <div class="md:col-span-3">
+                                            <input x-model="agentDownlineFilters.endDate" type="date" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white focus:outline-none" />
                                         </div>
                                         <div class="md:col-span-12 flex flex-wrap gap-3">
                                             <button type="button" @click="agentDownlineSearch()" class="px-5 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :disabled="agentBusy">查询</button>

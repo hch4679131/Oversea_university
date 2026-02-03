@@ -204,7 +204,7 @@ refreshLucideIcons();
                 agentDashTab: 'overview', // overview | register_sub | downline_orders | change_password
                 agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
 
-                agentDownlineFilters: { q: '', status: '', role: '' },
+                agentDownlineFilters: { q: '', status: '', role: '', startDate: '', endDate: '' },
                 agentEditOrderOpen: false,
                 agentEditOrderId: null,
                 agentEditOrderNo: '',
@@ -252,6 +252,23 @@ refreshLucideIcons();
                     if (r === 'agent3') return '3级代理';
                     if (r === 'agent4') return '4级代理';
                     return '账号';
+                },
+
+                agentRoleRank(role) {
+                    const r = String(role || '').trim();
+                    if (r === 'admin') return 0;
+                    if (r === 'consultant') return 1;
+                    if (r === 'agent1') return 2;
+                    if (r === 'agent2') return 3;
+                    if (r === 'agent3') return 4;
+                    if (r === 'agent4') return 5;
+                    return 999;
+                },
+
+                agentDownlineRoleOptions() {
+                    const baseRank = this.agentRoleRank(this.agentUser?.role);
+                    const all = ['consultant', 'agent1', 'agent2', 'agent3', 'agent4'];
+                    return all.filter(r => this.agentRoleRank(r) >= baseRank);
                 },
 
                 agentMaskPhone(phone) {
@@ -896,11 +913,15 @@ refreshLucideIcons();
                     const q = String(this.agentDownlineFilters?.q || '').trim();
                     const status = String(this.agentDownlineFilters?.status || '').trim();
                     const role = String(this.agentDownlineFilters?.role || '').trim();
+                    const startDate = String(this.agentDownlineFilters?.startDate || '').trim();
+                    const endDate = String(this.agentDownlineFilters?.endDate || '').trim();
 
                     const params = new URLSearchParams();
                     if (q) params.set('q', q);
                     if (status) params.set('status', status);
                     if (role) params.set('role', role);
+                    if (startDate) params.set('startDate', startDate);
+                    if (endDate) params.set('endDate', endDate);
                     params.set('limit', '500');
 
                     const url = `/api/agent/orders-downline?${params.toString()}`;
@@ -909,7 +930,7 @@ refreshLucideIcons();
                 },
 
                 agentDownlineResetFilters() {
-                    this.agentDownlineFilters = { q: '', status: '', role: '' };
+                    this.agentDownlineFilters = { q: '', status: '', role: '', startDate: '', endDate: '' };
                     this.agentFetchDownlineOrders().then(d => {
                         this.agentDownlineOrders = d.data || [];
                     }).catch(() => {

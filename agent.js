@@ -1113,6 +1113,19 @@ router.get('/orders-downline', authenticateAgent, async (req, res) => {
         const q = String(req.query.q || '').trim();
         const status = String(req.query.status || '').trim();
         const role = String(req.query.role || '').trim();
+        const startDate = String(req.query.startDate || '').trim();
+        const endDate = String(req.query.endDate || '').trim();
+
+        const isYmd = (v) => /^\d{4}-\d{2}-\d{2}$/.test(String(v || ''));
+        if (startDate && !isYmd(startDate)) {
+            return res.status(400).json({ success: false, message: '开始日期格式错误（YYYY-MM-DD）' });
+        }
+        if (endDate && !isYmd(endDate)) {
+            return res.status(400).json({ success: false, message: '结束日期格式错误（YYYY-MM-DD）' });
+        }
+        if (startDate && endDate && startDate > endDate) {
+            return res.status(400).json({ success: false, message: '开始日期不能大于结束日期' });
+        }
 
         const limitRaw = Number.parseInt(String(req.query.limit || ''), 10);
         const offsetRaw = Number.parseInt(String(req.query.offset || ''), 10);
@@ -1175,6 +1188,16 @@ router.get('/orders-downline', authenticateAgent, async (req, res) => {
         if (role) {
             where.push('bu.role = ?');
             params.push(role);
+        }
+
+        if (startDate) {
+            where.push('o.created_at >= ?');
+            params.push(`${startDate} 00:00:00`);
+        }
+
+        if (endDate) {
+            where.push('o.created_at <= ?');
+            params.push(`${endDate} 23:59:59`);
         }
 
         if (q) {
