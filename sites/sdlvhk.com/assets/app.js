@@ -421,22 +421,6 @@ refreshLucideIcons();
                     }
                 },
 
-                agentOpenDownlineDatePicker(which) {
-                    const w = String(which || '').trim();
-                    const el = w === 'end' ? this.$refs?.downlineEndDate : this.$refs?.downlineStartDate;
-                    if (!el) return;
-                    try {
-                        if (typeof el.showPicker === 'function') {
-                            el.showPicker();
-                        } else {
-                            el.focus();
-                            el.click();
-                        }
-                    } catch (e) {
-                        // ignore
-                    }
-                },
-
                 agentFormatDateYmdShanghai(date) {
                     try {
                         return new Intl.DateTimeFormat('en-CA', {
@@ -1004,6 +988,28 @@ refreshLucideIcons();
                     }).catch(e => {
                         this.agentNotify(e.message || '查询失败', 'error');
                     });
+                },
+
+                agentOpenDownlineDatePicker(which) {
+                    const w = String(which || '').trim();
+                    const el = w === 'end' ? this.$refs?.downlineEndDate : this.$refs?.downlineStartDate;
+                    if (!el) return;
+
+                    try {
+                        if (typeof el.showPicker === 'function') {
+                            el.showPicker();
+                            return;
+                        }
+                    } catch (e) {
+                        // ignore and fallback
+                    }
+
+                    try {
+                        el.focus({ preventScroll: true });
+                    } catch (e) {
+                        try { el.focus(); } catch (_) {}
+                    }
+                    try { el.click(); } catch (e) {}
                 },
 
                 async agentChangePassword() {
