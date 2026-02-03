@@ -1848,13 +1848,13 @@ router.get('/sales-trend', authenticateAgent, async (req, res) => {
         const rangeEnd = `${e} 23:59:59`;
 
         const [myRows] = await pool.execute(
-            'SELECT DATE(created_at) AS d, COALESCE(SUM(amount), 0) AS total FROM agent_orders WHERE user_id = ? AND created_at >= ? AND created_at <= ? GROUP BY DATE(created_at) ORDER BY d ASC',
+            "SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS d, COALESCE(SUM(amount), 0) AS total FROM agent_orders WHERE user_id = ? AND created_at >= ? AND created_at <= ? GROUP BY d ORDER BY d ASC",
             [Number(req.agent.id), rangeStart, rangeEnd]
         );
         const myMap = new Map();
         for (const r of (myRows || [])) {
             if (!r) continue;
-            const d = String(r.d || '').slice(0, 10);
+            const d = String(r.d || '').trim();
             if (!d) continue;
             myMap.set(d, Number(r.total || 0) || 0);
         }
@@ -1864,12 +1864,12 @@ router.get('/sales-trend', authenticateAgent, async (req, res) => {
             const { placeholders, values } = makePlaceholders(descendantIds);
             if (placeholders) {
                 const [downRows] = await pool.execute(
-                    `SELECT DATE(created_at) AS d, COALESCE(SUM(amount), 0) AS total FROM agent_orders WHERE user_id IN (${placeholders}) AND created_at >= ? AND created_at <= ? GROUP BY DATE(created_at) ORDER BY d ASC`,
+                    `SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS d, COALESCE(SUM(amount), 0) AS total FROM agent_orders WHERE user_id IN (${placeholders}) AND created_at >= ? AND created_at <= ? GROUP BY d ORDER BY d ASC`,
                     [...values, rangeStart, rangeEnd]
                 );
                 for (const r of (downRows || [])) {
                     if (!r) continue;
-                    const d = String(r.d || '').slice(0, 10);
+                    const d = String(r.d || '').trim();
                     if (!d) continue;
                     downMap.set(d, Number(r.total || 0) || 0);
                 }
