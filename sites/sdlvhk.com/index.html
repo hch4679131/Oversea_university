@@ -3010,8 +3010,15 @@
                                             <div class="text-white/40" x-text="'纵轴：金额 / 横轴：日'"></div>
                                         </div>
 
-                                        <div class="mt-3 w-full overflow-hidden border border-white/10 bg-black/20">
-                                            <svg class="w-full h-64" :viewBox="agentSalesTrendViewBox()" preserveAspectRatio="xMidYMid meet">
+                                        <div class="mt-3 w-full overflow-hidden border border-white/10 bg-black/20 relative">
+                                            <svg class="w-full h-64 select-none touch-none"
+                                                :viewBox="agentSalesTrendViewBox()"
+                                                preserveAspectRatio="xMidYMid meet"
+                                                @mousemove="agentSalesTrendHoverMove($event)"
+                                                @mouseleave="agentSalesTrendHoverClear()"
+                                                @touchstart.prevent="agentSalesTrendHoverMove($event)"
+                                                @touchmove.prevent="agentSalesTrendHoverMove($event)"
+                                                @touchend="agentSalesTrendHoverClear()">
                                                 <g x-show="!agentSalesTrendHasData()">
                                                     <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,0.45)" font-size="14">暂无数据</text>
                                                 </g>
@@ -3020,6 +3027,10 @@
                                                     <!-- grid lines -->
                                                     <template x-for="k in agentSalesTrendGridK()" :key="k">
                                                         <line :x1="agentSalesTrendPad().l" :x2="agentSalesTrendW() - agentSalesTrendPad().r" :y1="agentSalesTrendGridY(k)" :y2="agentSalesTrendGridY(k)" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                                                    </template>
+
+                                                    <template x-for="x in agentSalesTrendVGridXs()" :key="x">
+                                                        <line :x1="x" :x2="x" :y1="agentSalesTrendPad().t" :y2="agentSalesTrendH() - agentSalesTrendPad().b" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
                                                     </template>
 
                                                     <!-- y labels -->
@@ -3033,10 +3044,38 @@
                                                     </template>
 
                                                     <!-- series paths -->
-                                                    <path :d="agentSalesTrendPath('downline')" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" />
-                                                    <path :d="agentSalesTrendPath('my')" fill="none" stroke="rgba(251,191,36,0.95)" stroke-width="2" />
+                                                    <path :d="agentSalesTrendPath('downline')" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path :d="agentSalesTrendPath('my')" fill="none" stroke="rgba(251,191,36,0.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+                                                    <!-- hover crosshair + points -->
+                                                    <g x-show="agentSalesTrendHover.active">
+                                                        <line :x1="agentSalesTrendHoverX()" :x2="agentSalesTrendHoverX()" :y1="agentSalesTrendPad().t" :y2="agentSalesTrendH() - agentSalesTrendPad().b" stroke="rgba(255,255,255,0.22)" stroke-width="1" />
+
+                                                        <circle :cx="agentSalesTrendHoverX()" :cy="agentSalesTrendHoverY('downline')" r="4" fill="rgba(5,5,5,0.95)" stroke="rgba(255,255,255,0.45)" stroke-width="2" />
+                                                        <circle :cx="agentSalesTrendHoverX()" :cy="agentSalesTrendHoverY('my')" r="4" fill="rgba(5,5,5,0.95)" stroke="rgba(251,191,36,0.95)" stroke-width="2" />
+                                                    </g>
                                                 </g>
                                             </svg>
+
+                                            <!-- Tooltip (GitHub Usage style) -->
+                                            <div x-show="agentSalesTrendHover.active && agentSalesTrendHasData()" x-transition
+                                                class="absolute top-3 z-10 pointer-events-none"
+                                                :style="agentSalesTrendTooltipStyle()">
+                                                <div class="bg-paper text-obsidian-950 border border-black/10 shadow-2xl rounded-sm px-4 py-3 min-w-[190px]">
+                                                    <div class="text-xs font-bold text-black/60" x-text="agentSalesTrendHoverTitle()"></div>
+                                                    <div class="mt-2 space-y-1 text-xs">
+                                                        <div class="flex items-center justify-between gap-4">
+                                                            <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-sm bg-gold-400"></span><span class="text-black/60">我的</span></div>
+                                                            <div class="font-bold" x-text="agentMoney(agentSalesTrendHoverValue('my'))"></div>
+                                                        </div>
+                                                        <div class="flex items-center justify-between gap-4">
+                                                            <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-sm bg-black/20"></span><span class="text-black/60">所有下级</span></div>
+                                                            <div class="font-bold" x-text="agentMoney(agentSalesTrendHoverValue('downline'))"></div>
+                                                        </div>
+                                                        <div class="pt-1 text-[11px] text-black/40" x-text="'合计：' + agentMoney(agentSalesTrendHoverValue('total'))"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

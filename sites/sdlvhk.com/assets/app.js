@@ -211,6 +211,7 @@ refreshLucideIcons();
                 // ===== Overview: Sales Trend (Line) =====
                 agentSalesTrend: { startDate: '', endDate: '', labels: [], myAmounts: [], downlineAmounts: [] },
                 agentSalesTrendFilters: { startDate: '', endDate: '' },
+                agentSalesTrendHover: { active: false, i: 0, px: 0, w: 0 },
 
                 agentDashTab: 'overview', // overview | register_sub | downline_orders | change_password
                 agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
@@ -693,6 +694,21 @@ refreshLucideIcons();
 
                 agentSalesTrendGridK() { return [0, 1, 2, 3, 4]; },
 
+                agentSalesTrendVGridXs() {
+                    const labels = Array.isArray(this.agentSalesTrend?.labels) ? this.agentSalesTrend.labels : [];
+                    const n = labels.length;
+                    if (n < 2) return [];
+
+                    const xs = [];
+                    const step = n > 20 ? 7 : (n > 10 ? 5 : 3);
+                    for (let i = 0; i < n; i += step) {
+                        xs.push(this.agentSalesTrendX(i, n));
+                    }
+                    xs.push(this.agentSalesTrendX(n - 1, n));
+                    // De-dupe
+                    return Array.from(new Set(xs.map((v) => Math.round(v * 1000) / 1000))).sort((a, b) => a - b);
+                },
+
                 agentSalesTrendMax() {
                     const a = Array.isArray(this.agentSalesTrend?.myAmounts) ? this.agentSalesTrend.myAmounts : [];
                     const b = Array.isArray(this.agentSalesTrend?.downlineAmounts) ? this.agentSalesTrend.downlineAmounts : [];
@@ -743,6 +759,92 @@ refreshLucideIcons();
                         d += (i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`);
                     }
                     return d;
+                },
+
+                agentSalesTrendHoverClear() {
+                    this.agentSalesTrendHover = { ...(this.agentSalesTrendHover || {}), active: false };
+                },
+
+                agentSalesTrendHoverMove(evt) {
+                    if (!this.agentSalesTrendHasData()) return;
+                    const labels = Array.isArray(this.agentSalesTrend?.labels) ? this.agentSalesTrend.labels : [];
+                    const n = labels.length;
+                    if (n < 2) return;
+
+                    const e = evt && evt.touches && evt.touches[0] ? evt.touches[0] : evt;
+                    const clientX = Number(e?.clientX);
+                    const target = evt?.currentTarget;
+                    if (!Number.isFinite(clientX) || !target || typeof target.getBoundingClientRect !== 'function') return;
+
+                    const rect = target.getBoundingClientRect();
+                    const w = Number(rect?.width || 0);
+                    if (!Number.isFinite(w) || w <= 0) return;
+
+                    const relX = Math.max(0, Math.min(w, clientX - Number(rect.left || 0)));
+                    const xView = (relX / w) * this.agentSalesTrendW();
+
+                    const pad = this.agentSalesTrendPad();
+                    const plotW = this.agentSalesTrendW() - pad.l - pad.r;
+                    const ratio = plotW > 0 ? (xView - pad.l) / plotW : 0;
+                    let i = Math.round(ratio * (n - 1));
+                    i = Math.max(0, Math.min(n - 1, i));
+
+                    this.agentSalesTrendHover = { active: true, i, px: relX, w };
+                },
+
+                agentSalesTrendHoverX() {
+                    const labels = Array.isArray(this.agentSalesTrend?.labels) ? this.agentSalesTrend.labels : [];
+                    const n = labels.length;
+                    const i = Number(this.agentSalesTrendHover?.i || 0);
+                    return this.agentSalesTrendX(Math.max(0, Math.min(n - 1, i)), n);
+                },
+
+                agentSalesTrendHoverY(which) {
+                    const v = this.agentSalesTrendHoverValue(which);
+                    return this.agentSalesTrendY(v);
+                },
+
+                agentSalesTrendHoverValue(which) {
+                    const labels = Array.isArray(this.agentSalesTrend?.labels) ? this.agentSalesTrend.labels : [];
+                    const n = labels.length;
+                    const i = Math.max(0, Math.min(n - 1, Number(this.agentSalesTrendHover?.i || 0)));
+
+                    const my = Array.isArray(this.agentSalesTrend?.myAmounts) ? this.agentSalesTrend.myAmounts : [];
+                    const down = Array.isArray(this.agentSalesTrend?.downlineAmounts) ? this.agentSalesTrend.downlineAmounts : [];
+
+                    const myV = Number(my[i] || 0) || 0;
+                    const downV = Number(down[i] || 0) || 0;
+
+                    if (which === 'downline') return downV;
+                    if (which === 'total') return myV + downV;
+                    return myV;
+                },
+
+                agentSalesTrendHoverTitle() {
+                    const labels = Array.isArray(this.agentSalesTrend?.labels) ? this.agentSalesTrend.labels : [];
+                    const n = labels.length;
+                    if (n < 1) return '日期：—';
+                    const i = Math.max(0, Math.min(n - 1, Number(this.agentSalesTrendHover?.i || 0)));
+                    const ymd = String(labels[i] || '').trim();
+                    if (!ymd) return '日期：—';
+
+                    const dt = new Date(`${ymd}T00:00:00`);
+                    const w = ['日', '一', '二', '三', '四', '五', '六'];
+                    let weekday = '';
+                    if (!Number.isNaN(dt.getTime())) {
+                        weekday = `周${w[dt.getDay()]}`;
+                    }
+
+                    return `日期：${ymd}${weekday ? '（' + weekday + '）' : ''}`;
+                },
+
+                agentSalesTrendTooltipStyle() {
+                    const px = Number(this.agentSalesTrendHover?.px || 0);
+                    const w = Number(this.agentSalesTrendHover?.w || 0);
+                    const min = 95;
+                    const max = w > 0 ? Math.max(min, w - 95) : px;
+                    const left = Math.max(min, Math.min(max, px));
+                    return `left: ${left}px; transform: translateX(-50%);`;
                 },
 
                 agentSalesTrendYTicks() {
