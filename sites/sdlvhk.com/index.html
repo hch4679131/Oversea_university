@@ -2868,12 +2868,12 @@
                         </aside>
 
                         <!-- 右侧内容区 -->
-                        <div class="lg:col-span-9">
+                        <div class="lg:col-span-9 min-w-0">
                             <div x-show="agentDashTab === 'overview'" x-transition>
-                                <div class="grid lg:grid-cols-3 gap-6">
+                                <div class="grid lg:grid-cols-3 gap-6 min-w-0">
 
                                     <!-- 饼图 1：本月对比（固定本月） -->
-                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-fade-up">
+                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-4 sm:p-6 scrub-item anim-fade-up min-w-0">
                                         <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                                             <div>
                                                 <h2 class="text-xl font-serif font-bold text-white">本月销售金额</h2>
@@ -2901,7 +2901,7 @@
                                     </div>
 
                                     <!-- 饼图 2：时间段对比（带过滤器） -->
-                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-fade-up">
+                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-4 sm:p-6 scrub-item anim-fade-up min-w-0">
                                         <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                                             <div>
                                                 <h2 class="text-xl font-serif font-bold text-white">销售金额对比</h2>
@@ -2953,7 +2953,7 @@
                                     </div>
 
                                     <!-- 账号信息 -->
-                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-fade-up">
+                                    <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-4 sm:p-6 scrub-item anim-fade-up min-w-0">
                                         <div class="flex items-center justify-between">
                                             <h2 class="text-xl font-serif font-bold text-white">我的账号</h2>
                                             <button type="button" @click="agentRefreshDashboard()" class="text-xs tracking-widest uppercase text-white/60 hover:text-white transition">刷新</button>
@@ -2969,7 +2969,7 @@
                                 </div>
 
                                 <!-- 折线图：销售金额走势（按日） -->
-                                <div class="mt-6 bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-fade-up">
+                                <div class="mt-6 bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-4 sm:p-6 scrub-item anim-fade-up min-w-0 overflow-x-hidden">
                                     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                                         <div>
                                             <h2 class="text-xl font-serif font-bold text-white">销售金额走势（按日）</h2>
@@ -3010,8 +3010,8 @@
                                             <div class="text-white/40" x-text="'纵轴：金额 / 横轴：日'"></div>
                                         </div>
 
-                                        <div class="mt-3 w-full overflow-hidden border border-white/10 bg-black/20 relative">
-                                            <svg class="w-full h-64 select-none touch-none"
+                                        <div class="mt-3 w-full max-w-full overflow-hidden border border-white/10 bg-black/20 relative">
+                                            <svg class="w-full max-w-full h-64 select-none touch-none"
                                                 :viewBox="agentSalesTrendViewBox()"
                                                 preserveAspectRatio="xMidYMid meet"
                                                 @mousemove="agentSalesTrendHoverMove($event)"
@@ -3061,7 +3061,7 @@
                                             <div x-show="agentSalesTrendHover.active && agentSalesTrendHasData()" x-transition
                                                 class="absolute top-3 z-10 pointer-events-none"
                                                 :style="agentSalesTrendTooltipStyle()">
-                                                <div class="bg-paper text-obsidian-950 border border-black/10 shadow-2xl rounded-sm px-4 py-3 min-w-[190px]">
+                                                <div class="bg-paper text-obsidian-950 border border-black/10 shadow-2xl rounded-sm px-4 py-3 w-56 max-w-[calc(100vw-2rem)]">
                                                     <div class="text-xs font-bold text-black/60" x-text="agentSalesTrendHoverTitle()"></div>
                                                     <div class="mt-2 space-y-1 text-xs">
                                                         <div class="flex items-center justify-between gap-4">
