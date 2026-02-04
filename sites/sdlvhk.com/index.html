@@ -2830,9 +2830,9 @@
         </div>
 
         <!-- ================= PAGE 8: 代理监控 ================= -->
-        <div x-show="page === 'agent-dashboard'" x-transition:enter="transition ease-out duration-500" class="w-full bg-obsidian-950 text-white overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+        <div x-show="page === 'agent-dashboard'" x-transition:enter="transition ease-out duration-500" class="w-full bg-obsidian-950 text-white">
             <section class="py-24 bg-obsidian-950 border-b border-white/10">
-                <div class="w-fit min-w-[1100px] sm:min-w-0 px-6 sm:w-full sm:max-w-7xl sm:mx-auto">
+            <div class="w-full px-6 max-w-7xl mx-auto">
                     <div class="flex items-start justify-between gap-6">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white font-bold">
@@ -3010,8 +3010,9 @@
                                             <div class="text-white/40" x-text="'纵轴：金额 / 横轴：日'"></div>
                                         </div>
 
-                                        <div class="mt-3 w-full max-w-full overflow-hidden border border-white/10 bg-black/20 relative">
-                                            <svg class="w-full max-w-full h-60 sm:h-64 select-none"
+                                        <div class="mt-3 w-full max-w-full overflow-x-auto border border-white/10 bg-black/20" style="-webkit-overflow-scrolling: touch;">
+                                            <div class="min-w-[900px] relative">
+                                            <svg class="w-full h-60 sm:h-64 select-none"
                                                 :viewBox="agentSalesTrendViewBox()"
                                                 preserveAspectRatio="xMidYMid meet"
                                                 @mousemove="agentSalesTrendHoverMove($event)"
@@ -3073,6 +3074,7 @@
                                                         <div class="pt-1 text-[11px] text-black/40" x-text="'合计：' + agentMoney(agentSalesTrendHoverValue('total'))"></div>
                                                     </div>
                                                 </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3160,7 +3162,7 @@
                                 <button type="button" @click.prevent="agentCreateOrder()" class="mt-4 w-full px-6 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :class="agentBusy ? 'opacity-60 cursor-not-allowed' : ''" :disabled="agentBusy">创建订单（自动生成订单号）</button>
                             </div>
 
-                            <div class="mt-4 border border-white/10">
+                            <div class="mt-4 border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
                                 <table class="w-max min-w-full text-sm whitespace-nowrap">
                                     <thead class="bg-white/5">
                                         <tr>
@@ -3370,7 +3372,7 @@
 
                                     <div class="mt-8 border-t border-white/10 pt-6">
                                         <h3 class="text-sm font-bold text-white">我的直接下级</h3>
-                                        <div class="mt-4 border border-white/10">
+                                        <div class="mt-4 border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
                                             <table class="w-max min-w-full text-sm whitespace-nowrap">
                                                 <thead class="bg-white/5">
                                                     <tr>
@@ -3452,7 +3454,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="mt-4 border border-white/10">
+                                    <div class="mt-4 border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
                                         <table class="w-max min-w-full text-sm whitespace-nowrap">
                                             <thead class="bg-white/5">
                                                 <tr>
