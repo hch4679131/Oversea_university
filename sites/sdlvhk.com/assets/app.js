@@ -454,6 +454,26 @@ refreshLucideIcons();
                     }
                 },
 
+                agentMoneyCompact(v) {
+                    const n = Number(v);
+                    if (!Number.isFinite(n)) return '-';
+                    const abs = Math.abs(n);
+                    const sign = n < 0 ? '-' : '';
+
+                    // Keep axis labels short on mobile.
+                    if (abs >= 1e8) return `${sign}${(abs / 1e8).toFixed(abs >= 1e9 ? 0 : 1)}亿`;
+                    if (abs >= 1e4) return `${sign}${(abs / 1e4).toFixed(abs >= 1e5 ? 0 : 1)}万`;
+
+                    try {
+                        return new Intl.NumberFormat('zh-CN', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        }).format(n);
+                    } catch (e) {
+                        return String(Math.round(n));
+                    }
+                },
+
                 agentPieStyle(pie) {
                     const my = Number(pie?.myAmount || 0);
                     const down = Number(pie?.downlineAmount || 0);
@@ -704,9 +724,14 @@ refreshLucideIcons();
                     }
                 },
 
-                agentSalesTrendW() { return 700; },
-                agentSalesTrendH() { return 260; },
-                agentSalesTrendPad() { return { l: 52, r: 14, t: 16, b: 34 }; },
+                // Mobile: use a tighter viewBox (aspect closer to the rendered box)
+                // so the chart scales up and is easier to read.
+                agentSalesTrendW() { return this.agentIsMobileViewport() ? 420 : 700; },
+                agentSalesTrendH() { return this.agentIsMobileViewport() ? 240 : 260; },
+                agentSalesTrendPad() {
+                    if (this.agentIsMobileViewport()) return { l: 40, r: 12, t: 14, b: 30 };
+                    return { l: 52, r: 14, t: 16, b: 34 };
+                },
                 agentSalesTrendViewBox() { return `0 0 ${this.agentSalesTrendW()} ${this.agentSalesTrendH()}`; },
 
                 agentSalesTrendGridK() { return [0, 1, 2, 3, 4]; },
@@ -883,10 +908,11 @@ refreshLucideIcons();
                 agentSalesTrendYTicks() {
                     const max = this.agentSalesTrendMax();
                     const ticks = [max, max / 2, 0];
+                    const isMobile = this.agentIsMobileViewport();
                     return ticks.map((v) => ({
                         value: v,
                         y: this.agentSalesTrendY(v),
-                        label: this.agentMoney(v)
+                        label: isMobile ? this.agentMoneyCompact(v) : this.agentMoney(v)
                     }));
                 },
 
