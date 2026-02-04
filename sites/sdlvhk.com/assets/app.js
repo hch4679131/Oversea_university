@@ -574,12 +574,30 @@ refreshLucideIcons();
                     const endDate = String(this.agentSalesTrendFilters?.endDate || '').trim() || month.endDate;
 
                     const data = await this.agentFetchSalesTrend(startDate, endDate);
+
+                    const labels = Array.isArray(data.labels) ? data.labels : [];
+                    const myDaily = Array.isArray(data.myAmounts) ? data.myAmounts.map((v) => Number(v || 0) || 0) : [];
+                    const downDaily = Array.isArray(data.downlineAmounts) ? data.downlineAmounts.map((v) => Number(v || 0) || 0) : [];
+
+                    // Cumulative (non-decreasing), like GitHub usage charts.
+                    let mySum = 0;
+                    const myCum = myDaily.map((v) => {
+                        mySum += (Number(v) || 0);
+                        return mySum;
+                    });
+
+                    let downSum = 0;
+                    const downCum = downDaily.map((v) => {
+                        downSum += (Number(v) || 0);
+                        return downSum;
+                    });
+
                     this.agentSalesTrend = {
                         startDate: data.startDate || startDate,
                         endDate: data.endDate || endDate,
-                        labels: Array.isArray(data.labels) ? data.labels : [],
-                        myAmounts: Array.isArray(data.myAmounts) ? data.myAmounts.map((v) => Number(v || 0) || 0) : [],
-                        downlineAmounts: Array.isArray(data.downlineAmounts) ? data.downlineAmounts.map((v) => Number(v || 0) || 0) : []
+                        labels,
+                        myAmounts: myCum,
+                        downlineAmounts: downCum
                     };
                 },
 
@@ -664,12 +682,28 @@ refreshLucideIcons();
 
                     this.agentBusy = true;
                     this.agentFetchSalesTrend(s, e).then((d) => {
+                        const labels = Array.isArray(d.labels) ? d.labels : [];
+                        const myDaily = Array.isArray(d.myAmounts) ? d.myAmounts.map((v) => Number(v || 0) || 0) : [];
+                        const downDaily = Array.isArray(d.downlineAmounts) ? d.downlineAmounts.map((v) => Number(v || 0) || 0) : [];
+
+                        let mySum = 0;
+                        const myCum = myDaily.map((v) => {
+                            mySum += (Number(v) || 0);
+                            return mySum;
+                        });
+
+                        let downSum = 0;
+                        const downCum = downDaily.map((v) => {
+                            downSum += (Number(v) || 0);
+                            return downSum;
+                        });
+
                         this.agentSalesTrend = {
                             startDate: d.startDate || s,
                             endDate: d.endDate || e,
-                            labels: Array.isArray(d.labels) ? d.labels : [],
-                            myAmounts: Array.isArray(d.myAmounts) ? d.myAmounts.map((v) => Number(v || 0) || 0) : [],
-                            downlineAmounts: Array.isArray(d.downlineAmounts) ? d.downlineAmounts.map((v) => Number(v || 0) || 0) : []
+                            labels,
+                            myAmounts: myCum,
+                            downlineAmounts: downCum
                         };
                     }).catch((err) => {
                         this.agentNotify(err?.message || '查询失败', 'error');
