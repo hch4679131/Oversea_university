@@ -494,7 +494,8 @@ refreshLucideIcons();
                     const curEnd = String(this.agentSalesCustomFilters?.endDate || '').trim();
                     if (!force && (curStart || curEnd)) return;
 
-                    const def = this.agentGetThisMonthRangeShanghai();
+                    // Keep consistent with "下级开单明细" default: last 6 months (Shanghai TZ)
+                    const def = this.agentGetDefaultDownlineDateRange();
                     this.agentSalesCustomFilters = { startDate: def.startDate, endDate: def.endDate };
                 },
 
@@ -531,11 +532,12 @@ refreshLucideIcons();
                     if (!this.agentToken) return;
 
                     const month = this.agentGetThisMonthRangeShanghai();
+                    const customDef = this.agentGetDefaultDownlineDateRange();
                     const customStart = String(this.agentSalesCustomFilters?.startDate || '').trim();
                     const customEnd = String(this.agentSalesCustomFilters?.endDate || '').trim();
                     const custom = {
-                        startDate: customStart || month.startDate,
-                        endDate: customEnd || month.endDate
+                        startDate: customStart || customDef.startDate,
+                        endDate: customEnd || customDef.endDate
                     };
 
                     const [m, c] = await Promise.all([
@@ -607,7 +609,7 @@ refreshLucideIcons();
                 },
 
                 agentSalesCustomReset() {
-                    const def = this.agentGetThisMonthRangeShanghai();
+                    const def = this.agentGetDefaultDownlineDateRange();
                     this.agentSalesCustomFilters = { startDate: def.startDate, endDate: def.endDate };
                     this.agentSalesCustomSearch();
                 },
