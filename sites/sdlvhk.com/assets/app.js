@@ -212,6 +212,7 @@ refreshLucideIcons();
                 agentSalesTrend: { startDate: '', endDate: '', labels: [], myAmounts: [], downlineAmounts: [] },
                 agentSalesTrendFilters: { startDate: '', endDate: '' },
                 agentSalesTrendHover: { active: false, i: 0, px: 0, w: 0 },
+                agentSalesTrendHoverTimerId: null,
 
                 agentDashTab: 'overview', // overview | register_sub | downline_orders | change_password
                 agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
@@ -687,6 +688,22 @@ refreshLucideIcons();
                     return n >= 2;
                 },
 
+                agentIsMobileViewport() {
+                    try {
+                        if (typeof window !== 'undefined' && window.matchMedia) {
+                            return window.matchMedia('(max-width: 639px)').matches;
+                        }
+                    } catch (e) {}
+
+                    try {
+                        return typeof window !== 'undefined' && Number(window.innerWidth || 0) > 0
+                            ? Number(window.innerWidth || 0) < 640
+                            : false;
+                    } catch (e) {
+                        return false;
+                    }
+                },
+
                 agentSalesTrendW() { return 700; },
                 agentSalesTrendH() { return 260; },
                 agentSalesTrendPad() { return { l: 52, r: 14, t: 16, b: 34 }; },
@@ -762,7 +779,23 @@ refreshLucideIcons();
                 },
 
                 agentSalesTrendHoverClear() {
+                    try {
+                        if (this.agentSalesTrendHoverTimerId) {
+                            clearTimeout(this.agentSalesTrendHoverTimerId);
+                            this.agentSalesTrendHoverTimerId = null;
+                        }
+                    } catch (e) {}
                     this.agentSalesTrendHover = { ...(this.agentSalesTrendHover || {}), active: false };
+                },
+
+                agentSalesTrendHoverTap(evt) {
+                    this.agentSalesTrendHoverMove(evt);
+                    try {
+                        if (this.agentSalesTrendHoverTimerId) clearTimeout(this.agentSalesTrendHoverTimerId);
+                        this.agentSalesTrendHoverTimerId = setTimeout(() => {
+                            this.agentSalesTrendHoverClear();
+                        }, 2400);
+                    } catch (e) {}
                 },
 
                 agentSalesTrendHoverMove(evt) {
@@ -862,9 +895,23 @@ refreshLucideIcons();
                     const n = labels.length;
                     if (n < 2) return [];
 
-                    const set = new Set([0, n - 1, Math.floor((n - 1) / 2)]);
-                    if (n > 10) {
-                        for (let i = 0; i < n; i += 7) set.add(i);
+                    const isMobile = this.agentIsMobileViewport();
+
+                    const set = new Set([0, n - 1]);
+                    // Keep a middle anchor label for readability.
+                    set.add(Math.floor((n - 1) / 2));
+
+                    if (isMobile) {
+                        // Mobile: fewer ticks to avoid crowding.
+                        if (n > 10) {
+                            const step = n > 60 ? 10 : 7;
+                            for (let i = 0; i < n; i += step) set.add(i);
+                        }
+                    } else {
+                        // Desktop: show weekly-ish ticks when there are many points.
+                        if (n > 10) {
+                            for (let i = 0; i < n; i += 7) set.add(i);
+                        }
                     }
 
                     return Array.from(set).sort((a, b) => a - b).map((i) => {
