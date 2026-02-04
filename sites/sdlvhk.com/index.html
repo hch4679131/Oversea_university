@@ -3011,8 +3011,8 @@
                                     <div class="text-white/40" x-text="'纵轴：金额 / 横轴：日'"></div>
                                 </div>
 
-                                <div class="mt-3 w-[360px] max-w-full sm:w-full mx-auto border border-white/10 bg-black/20" :style="'max-width: ' + (agentSalesTrendW() + 20) + 'px;'">
-                                    <div class="relative w-full overflow-hidden">
+                                <div class="mt-3 w-full max-w-full border border-white/10 bg-black/20">
+                                    <div class="relative w-full mx-auto overflow-hidden max-w-[560px]">
                                     <svg class="w-full h-60 sm:h-64 select-none"
                                         :viewBox="agentSalesTrendViewBox()"
                                         preserveAspectRatio="xMidYMid meet"
@@ -3077,6 +3077,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                         </div>
                         <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
