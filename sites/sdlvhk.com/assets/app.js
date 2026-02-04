@@ -1479,11 +1479,15 @@ refreshLucideIcons();
                         this.agentBusy = true;
                         await this.agentFetchMe();
 
+                        const logsPromise = (this.agentUser?.role === 'admin')
+                            ? this.agentApi('/api/agent/logs', 'GET', null, true)
+                            : Promise.resolve({ success: true, data: [] });
+
                         this.agentApplyOrdersDateDefaults(false);
                         const [users, orders, logs, downlineOrders] = await Promise.all([
                             this.agentApi('/api/agent/users', 'GET', null, true),
                             this.agentFetchOrders().catch(() => ({ success: true, data: [] })),
-                            this.agentApi('/api/agent/logs', 'GET', null, true),
+                            logsPromise,
                             this.agentFetchDownlineOrders().catch(() => ({ success: true, data: [] }))
                         ]);
                         this.agentChildren = users.data || [];

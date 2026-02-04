@@ -1742,6 +1742,10 @@ router.put(
  * GET /api/agent/logs
  */
 router.get('/logs', authenticateAgent, async (req, res) => {
+    const role = String(req.agent.role || '');
+    if (role !== 'admin') {
+        return res.status(403).json({ success: false, message: '无权限查看日志' });
+    }
     try {
         const [rows] = await pool.execute(
             'SELECT id, action, detail, ip, created_at AS createdAt FROM agent_logs WHERE user_id = ? OR user_id IS NULL ORDER BY created_at DESC LIMIT 200',

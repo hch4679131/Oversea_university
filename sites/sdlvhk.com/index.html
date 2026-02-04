@@ -3369,7 +3369,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
+                        <div x-show="agentUser?.role === 'admin'" class="bg-obsidian-900/70 border border-gold-400/20 backdrop-blur-sm p-6 scrub-item anim-flip-up">
                             <h2 class="text-xl font-serif font-bold text-white">我的日志</h2>
                             <div class="mt-4 border border-white/10 divide-y divide-white/10 max-h-[420px] overflow-auto">
                                 <template x-for="l in agentLogs" :key="l.id">
