@@ -3168,8 +3168,10 @@
                                             <th class="px-4 py-3 text-left font-bold text-white/70">订单号</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">服务名</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">学生</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">学生性别</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">学生电话</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">家长</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">家长性别</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">家长电话</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">权重</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">身份证</th>
@@ -3178,6 +3180,7 @@
                                             <th class="px-4 py-3 text-left font-bold text-white/70">创单代理人</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">创单时间</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">签单时间</th>
+                                            <th class="px-4 py-3 text-left font-bold text-white/70">分成</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">完结时间</th>
                                             <th class="px-4 py-3 text-left font-bold text-white/70" x-show="agentUser && agentUser.role === 'consultant'">操作</th>
                                         </tr>
@@ -3187,9 +3190,11 @@
                                             <tr class="border-t border-white/10">
                                                 <td class="px-4 py-3" x-text="o.orderNo"></td>
                                                 <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
-                                                <td class="px-4 py-3" x-text="dash(o.studentName) + ' / ' + dash(o.studentGender)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.studentName)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.studentGender)"></td>
                                                 <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
-                                                <td class="px-4 py-3" x-text="dash(o.parentName) + ' / ' + dash(o.parentGender)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.parentName)"></td>
+                                                <td class="px-4 py-3" x-text="dash(o.parentGender)"></td>
                                                 <td class="px-4 py-3" x-text="dash(o.parentPhone)"></td>
                                                 <td class="px-4 py-3" x-text="dash(o.extraServiceWeight)"></td>
                                                 <td class="px-4 py-3" x-text="dash(o.studentIdCard)"></td>
@@ -3198,6 +3203,7 @@
                                                 <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
                                                 <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
                                                 <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
+                                                <td class="px-4 py-3" x-text="agentCommissionText(o)"></td>
                                                 <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
                                                 <td class="px-4 py-3" x-show="agentUser && agentUser.role === 'consultant'">
                                                     <button type="button"
@@ -3214,8 +3220,14 @@
                                                 </td>
                                             </tr>
                                         </template>
+                                        <tr x-show="(agentOrders && agentOrders.length) || (agentDownlineOrders && agentDownlineOrders.length)" class="border-t border-white/10 bg-white/5">
+                                            <td class="px-4 py-3 text-xs text-white/70" :colspan="(agentUser && agentUser.role === 'consultant') ? 18 : 17">
+                                                <span class="font-bold text-white/85">备注：</span>
+                                                <span x-text="'我的分成：' + agentMoney(agentMyOrdersCommissionTotal()) + '  下级分成：' + agentMoney(agentDownlineOrdersCommissionTotal()) + '  总分成：' + agentMoney(agentTotalCommissionTotal())"></span>
+                                            </td>
+                                        </tr>
                                         <tr x-show="agentOrders.length === 0" class="border-t border-white/10">
-                                            <td class="px-4 py-3 text-white/40" :colspan="(agentUser && agentUser.role === 'consultant') ? 15 : 14">暂无订单</td>
+                                            <td class="px-4 py-3 text-white/40" :colspan="(agentUser && agentUser.role === 'consultant') ? 18 : 17">暂无订单</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -3460,8 +3472,10 @@
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">订单号</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">服务名</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">学生</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">学生性别</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">学生电话</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">家长</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">家长性别</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">家长电话</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">权重</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">金额</th>
@@ -3469,6 +3483,7 @@
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">创单代理人</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">创建时间</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">签单时间</th>
+                                                    <th class="px-4 py-3 text-left font-bold text-white/70">分成</th>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">完结时间</th>
                                                 </tr>
                                             </thead>
@@ -3477,9 +3492,11 @@
                                                     <tr class="border-t border-white/10">
                                                         <td class="px-4 py-3" x-text="dash(o.orderNo)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.studentName) + (o.studentGender ? ' / ' + dash(o.studentGender) : '')"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentName)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentGender)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.parentName) + (o.parentGender ? ' / ' + dash(o.parentGender) : '')"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentName)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentGender)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.parentPhone)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.extraServiceWeight)"></td>
                                                         <td class="px-4 py-3" x-text="dash(o.amount)"></td>
@@ -3487,11 +3504,18 @@
                                                         <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
                                                         <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
                                                         <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
+                                                        <td class="px-4 py-3" x-text="agentCommissionText(o)"></td>
                                                         <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
                                                     </tr>
                                                 </template>
+                                                <tr x-show="agentDownlineOrders && agentDownlineOrders.length" class="border-t border-white/10 bg-white/5">
+                                                    <td class="px-4 py-3 text-xs text-white/70" colspan="16">
+                                                        <span class="font-bold text-white/85">备注：</span>
+                                                        <span x-text="'下级分成：' + agentMoney(agentDownlineOrdersCommissionTotal())"></span>
+                                                    </td>
+                                                </tr>
                                                 <tr x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="border-t border-white/10">
-                                                    <td class="px-4 py-3 text-white/40" colspan="13">暂无下级订单</td>
+                                                    <td class="px-4 py-3 text-white/40" colspan="16">暂无下级订单</td>
                                                 </tr>
                                             </tbody>
                                         </table>

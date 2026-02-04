@@ -277,6 +277,15 @@ refreshLucideIcons();
                     return 999;
                 },
 
+                agentRoleLevel(role) {
+                    const r = String(role || '').trim();
+                    if (r === 'agent1') return 1;
+                    if (r === 'agent2') return 2;
+                    if (r === 'agent3') return 3;
+                    if (r === 'agent4') return 4;
+                    return null;
+                },
+
                 agentDownlineRoleOptions() {
                     const baseRank = this.agentRoleRank(this.agentUser?.role);
                     const all = ['consultant', 'agent1', 'agent2', 'agent3', 'agent4'];
@@ -451,6 +460,59 @@ refreshLucideIcons();
                     } catch (e) {
                         return String(Math.round(n * 100) / 100);
                     }
+                },
+
+                agentPct(rate) {
+                    const r = Number(rate);
+                    if (!Number.isFinite(r) || r <= 0) return '';
+                    const pct = r * 100;
+                    const rounded = Math.round(pct * 100) / 100;
+                    const s = String(rounded).replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
+                    return `${s}%`;
+                },
+
+                agentCommissionRateForMe(order) {
+                    const r = Number(order?.commissionRateForMe);
+                    if (Number.isFinite(r)) return r;
+
+                    // Fallback: if API hasn't provided commission fields yet.
+                    const level = this.agentRoleLevel(this.agentUser?.role);
+                    if (level === 1) return 0.13;
+                    if (level === 2 || level === 3 || level === 4) return 0.08;
+                    return 0;
+                },
+
+                agentCommissionForMe(order) {
+                    const v = Number(order?.commissionForMe);
+                    if (Number.isFinite(v)) return v;
+                    const amount = Number(order?.amount || 0);
+                    const rate = this.agentCommissionRateForMe(order);
+                    const n = amount * rate;
+                    return Number.isFinite(n) ? (Math.round(n * 100) / 100) : 0;
+                },
+
+                agentCommissionText(order) {
+                    const amount = Number(order?.amount);
+                    if (!Number.isFinite(amount)) return '-';
+                    const commission = this.agentCommissionForMe(order);
+                    const rate = this.agentCommissionRateForMe(order);
+                    const pct = this.agentPct(rate);
+                    return pct ? `${this.agentMoney(commission)} (${pct})` : this.agentMoney(commission);
+                },
+
+                agentMyOrdersCommissionTotal() {
+                    const arr = Array.isArray(this.agentOrders) ? this.agentOrders : [];
+                    return Math.round(arr.reduce((sum, o) => sum + this.agentCommissionForMe(o), 0) * 100) / 100;
+                },
+
+                agentDownlineOrdersCommissionTotal() {
+                    const arr = Array.isArray(this.agentDownlineOrders) ? this.agentDownlineOrders : [];
+                    return Math.round(arr.reduce((sum, o) => sum + this.agentCommissionForMe(o), 0) * 100) / 100;
+                },
+
+                agentTotalCommissionTotal() {
+                    const n = this.agentMyOrdersCommissionTotal() + this.agentDownlineOrdersCommissionTotal();
+                    return Math.round(n * 100) / 100;
                 },
 
                 agentPieStyle(pie) {

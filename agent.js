@@ -1060,11 +1060,35 @@ router.post(
  */
 router.get('/orders', authenticateAgent, async (req, res) => {
     try {
+        const roleToLevel = (role) => {
+            const r = String(role || '').trim();
+            if (r === 'agent1') return 1;
+            if (r === 'agent2') return 2;
+            if (r === 'agent3') return 3;
+            if (r === 'agent4') return 4;
+            return null;
+        };
+
+        const calcSelfCommissionRate = (level) => {
+            if (level === 1) return 0.13;
+            if (level === 2 || level === 3 || level === 4) return 0.08;
+            return 0;
+        };
+
+        const roundMoney = (v) => {
+            const n = Number(v);
+            if (!Number.isFinite(n)) return 0;
+            return Math.round(n * 100) / 100;
+        };
+
         const role = String(req.agent.role || '');
         const isConsultant = role === 'consultant';
         const whereSql = isConsultant
             ? 'COALESCE(o.created_by_user_id, o.user_id) = ?'
             : 'o.user_id = ?';
+
+        const selfLevel = roleToLevel(req.agent.role);
+        const commissionRateForMe = calcSelfCommissionRate(selfLevel);
 
         const [rows] = await pool.execute(
             `SELECT
@@ -1098,7 +1122,18 @@ router.get('/orders', authenticateAgent, async (req, res) => {
             LIMIT 200`,
             [req.agent.id]
         );
-        res.json({ success: true, data: rows });
+
+        const data = (rows || []).map(r => {
+            const amount = Number(r?.amount || 0);
+            const commissionForMe = roundMoney(amount * commissionRateForMe);
+            return {
+                ...r,
+                commissionRateForMe,
+                commissionForMe
+            };
+        });
+
+        res.json({ success: true, data });
     } catch (e) {
         res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
     }
@@ -1110,6 +1145,46 @@ router.get('/orders', authenticateAgent, async (req, res) => {
  */
 router.get('/orders-downline', authenticateAgent, async (req, res) => {
     try {
+        const roleToLevel = (role) => {
+            const r = String(role || '').trim();
+            if (r === 'agent1') return 1;
+            if (r === 'agent2') return 2;
+            if (r === 'agent3') return 3;
+            if (r === 'agent4') return 4;
+            return null;
+        };
+
+        // Calculate the commission rate for the *current* agent on a descendant order.
+        // Rules (descendant agent level -> upline share):
+        // - level2: parent(level1) gets 5%
+        // - level3: parent(level2) gets 3%, grandparent(level1) gets 2%
+        // - level4: parent(level3) gets 3%, grandparent(level2) gets 2%, great-grandparent(level1) gets 0%
+        const calcUplineCommissionRate = (descendantLevel, distanceToDescendant) => {
+            const d = Number(distanceToDescendant);
+            if (!Number.isFinite(d) || d <= 0) return 0;
+            if (descendantLevel === 2) {
+                return d === 1 ? 0.05 : 0;
+            }
+            if (descendantLevel === 3) {
+                if (d === 1) return 0.03;
+                if (d === 2) return 0.02;
+                return 0;
+            }
+            if (descendantLevel === 4) {
+                if (d === 1) return 0.03;
+                if (d === 2) return 0.02;
+                if (d === 3) return 0;
+                return 0;
+            }
+            return 0;
+        };
+
+        const roundMoney = (v) => {
+            const n = Number(v);
+            if (!Number.isFinite(n)) return 0;
+            return Math.round(n * 100) / 100;
+        };
+
         const q = String(req.query.q || '').trim();
         const status = String(req.query.status || '').trim();
         const role = String(req.query.role || '').trim();
@@ -1144,6 +1219,7 @@ router.get('/orders-downline', authenticateAgent, async (req, res) => {
         const visited = new Set([Number(req.agent.id)]);
         let frontier = [Number(req.agent.id)];
         const descendantIds = [];
+        const depthMap = new Map([[Number(req.agent.id), 0]]);
 
         for (let depth = 0; depth < 10; depth += 1) {
             if (!frontier.length) break;
@@ -1163,6 +1239,7 @@ router.get('/orders-downline', authenticateAgent, async (req, res) => {
                 if (visited.has(id)) continue;
                 visited.add(id);
                 descendantIds.push(id);
+                depthMap.set(id, depth + 1);
                 next.push(id);
             }
             frontier = next;
@@ -1249,7 +1326,21 @@ router.get('/orders-downline', authenticateAgent, async (req, res) => {
             params
         );
 
-        return res.json({ success: true, data: rows });
+        const data = (rows || []).map(r => {
+            const boundUserId = Number(r?.boundUserId);
+            const distance = depthMap.get(boundUserId);
+            const descendantLevel = roleToLevel(r?.boundUserRole);
+            const commissionRateForMe = calcUplineCommissionRate(descendantLevel, distance);
+            const amount = Number(r?.amount || 0);
+            const commissionForMe = roundMoney(amount * commissionRateForMe);
+            return {
+                ...r,
+                commissionRateForMe,
+                commissionForMe
+            };
+        });
+
+        return res.json({ success: true, data });
     } catch (e) {
         console.error('[agent] orders-downline error:', e);
         return res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
