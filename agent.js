@@ -1088,7 +1088,7 @@ router.get('/orders', authenticateAgent, async (req, res) => {
             : 'o.user_id = ?';
 
         const selfLevel = roleToLevel(req.agent.role);
-        const commissionRateForMe = calcSelfCommissionRate(selfLevel);
+        const commissionRateForMe = role === 'consultant' ? 0.02 : calcSelfCommissionRate(selfLevel);
 
         const [rows] = await pool.execute(
             `SELECT
@@ -1330,7 +1330,9 @@ router.get('/orders-downline', authenticateAgent, async (req, res) => {
             const boundUserId = Number(r?.boundUserId);
             const distance = depthMap.get(boundUserId);
             const descendantLevel = roleToLevel(r?.boundUserRole);
-            const commissionRateForMe = calcUplineCommissionRate(descendantLevel, distance);
+            const commissionRateForMe = String(req.agent.role || '').trim() === 'consultant'
+                ? 0.02
+                : calcUplineCommissionRate(descendantLevel, distance);
             const amount = Number(r?.amount || 0);
             const commissionForMe = roundMoney(amount * commissionRateForMe);
             return {

@@ -476,6 +476,8 @@ refreshLucideIcons();
                     if (Number.isFinite(r)) return r;
 
                     // Fallback: if API hasn't provided commission fields yet.
+                    const role = String(this.agentUser?.role || '').trim();
+                    if (role === 'consultant') return 0.02;
                     const level = this.agentRoleLevel(this.agentUser?.role);
                     if (level === 1) return 0.13;
                     if (level === 2 || level === 3 || level === 4) return 0.08;
