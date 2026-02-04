@@ -3011,14 +3011,12 @@
                                     <div class="text-white/40" x-text="'纵轴：金额 / 横轴：日'"></div>
                                 </div>
 
-                                <div class="mt-3 w-full max-w-full overflow-x-auto border border-white/10 bg-black/20" style="-webkit-overflow-scrolling: touch;">
-                                    <div class="min-w-[1100px] relative">
-                                    <svg class="w-full h-60 sm:h-64 select-none"
+                                <div class="mt-3 w-full max-w-full overflow-hidden border border-white/10 bg-black/20 relative">
+                                    <svg class="w-full max-w-full h-60 sm:h-64 select-none"
                                         :viewBox="agentSalesTrendViewBox()"
                                         preserveAspectRatio="xMidYMid meet"
                                         @mousemove="agentSalesTrendHoverMove($event)"
-                                        @mouseleave="agentSalesTrendHoverClear()"
-                                        >
+                                        @mouseleave="agentSalesTrendHoverClear()">
                                         <g x-show="!agentSalesTrendHasData()">
                                             <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,0.45)" font-size="14">暂无数据</text>
                                         </g>
@@ -3054,6 +3052,7 @@
                                                 <circle :cx="agentSalesTrendHoverX()" :cy="agentSalesTrendHoverY('downline')" r="4" fill="rgba(5,5,5,0.95)" stroke="rgba(255,255,255,0.45)" stroke-width="2" />
                                                 <circle :cx="agentSalesTrendHoverX()" :cy="agentSalesTrendHoverY('my')" r="4" fill="rgba(5,5,5,0.95)" stroke="rgba(251,191,36,0.95)" stroke-width="2" />
                                             </g>
+
                                         </g>
                                     </svg>
 
@@ -3075,7 +3074,6 @@
                                                 <div class="pt-1 text-[11px] text-black/40" x-text="'合计：' + agentMoney(agentSalesTrendHoverValue('total'))"></div>
                                             </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -3161,8 +3159,8 @@
                                 <button type="button" @click.prevent="agentCreateOrder()" class="mt-4 w-full px-6 py-3 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition" :class="agentBusy ? 'opacity-60 cursor-not-allowed' : ''" :disabled="agentBusy">创建订单（自动生成订单号）</button>
                             </div>
 
-                            <div class="mt-4 border border-white/10">
-                                <table class="w-full text-sm table-fixed break-all">
+                            <div class="mt-4 border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+                                <table class="w-max min-w-full text-sm whitespace-nowrap">
                                     <thead class="bg-white/5">
                                         <tr>
                                             <th class="px-4 py-3 text-left font-bold text-white/70">订单号</th>
@@ -3371,8 +3369,8 @@
 
                                     <div class="mt-8 border-t border-white/10 pt-6">
                                         <h3 class="text-sm font-bold text-white">我的直接下级</h3>
-                                        <div class="mt-4 border border-white/10">
-                                            <table class="w-full text-sm table-fixed break-all">
+                                        <div class="mt-4 border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+                                            <table class="w-max min-w-full text-sm whitespace-nowrap">
                                                 <thead class="bg-white/5">
                                                     <tr>
                                                         <th class="px-4 py-3 text-left font-bold text-white/70">ID</th>
@@ -3453,8 +3451,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="mt-4 border border-white/10">
-                                        <table class="w-full text-sm table-fixed break-all">
+                                    <div class="mt-4 border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+                                        <table class="w-max min-w-full text-sm whitespace-nowrap">
                                             <thead class="bg-white/5">
                                                 <tr>
                                                     <th class="px-4 py-3 text-left font-bold text-white/70">订单号</th>
