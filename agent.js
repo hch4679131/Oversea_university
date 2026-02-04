@@ -1060,6 +1060,25 @@ router.post(
  */
 router.get('/orders', authenticateAgent, async (req, res) => {
     try {
+        const q = String(req.query.q || '').trim();
+        const status = String(req.query.status || '').trim();
+        const startDate = String(req.query.startDate || '').trim();
+        const endDate = String(req.query.endDate || '').trim();
+
+        const isYmd = (v) => /^\d{4}-\d{2}-\d{2}$/.test(String(v || ''));
+        if (startDate && !isYmd(startDate)) {
+            return res.status(400).json({ success: false, message: '开始日期格式错误（YYYY-MM-DD）' });
+        }
+        if (endDate && !isYmd(endDate)) {
+            return res.status(400).json({ success: false, message: '结束日期格式错误（YYYY-MM-DD）' });
+        }
+        if (startDate && endDate && startDate > endDate) {
+            return res.status(400).json({ success: false, message: '开始日期不能大于结束日期' });
+        }
+
+        const limitRaw = Number.parseInt(String(req.query.limit || ''), 10);
+        const limit = Number.isFinite(limitRaw) ? Math.min(Math.max(limitRaw, 1), 1000) : 200;
+
         const roleToLevel = (role) => {
             const r = String(role || '').trim();
             if (r === 'agent1') return 1;
@@ -1083,9 +1102,40 @@ router.get('/orders', authenticateAgent, async (req, res) => {
 
         const role = String(req.agent.role || '');
         const isConsultant = role === 'consultant';
-        const whereSql = isConsultant
+        const baseWhereSql = isConsultant
             ? 'COALESCE(o.created_by_user_id, o.user_id) = ?'
             : 'o.user_id = ?';
+
+        const where = [baseWhereSql];
+        const params = [req.agent.id];
+
+        if (status) {
+            where.push('o.status = ?');
+            params.push(status);
+        }
+        if (startDate) {
+            where.push('o.created_at >= ?');
+            params.push(`${startDate} 00:00:00`);
+        }
+        if (endDate) {
+            where.push('o.created_at <= ?');
+            params.push(`${endDate} 23:59:59`);
+        }
+
+        if (q) {
+            const like = `%${q}%`;
+            where.push(`(
+                o.order_no LIKE ?
+                OR o.title LIKE ?
+                OR o.status LIKE ?
+                OR IFNULL(o.student_name, "") LIKE ?
+                OR IFNULL(o.student_phone, "") LIKE ?
+                OR IFNULL(o.parent_phone, "") LIKE ?
+                OR IFNULL(bu.phone, "") LIKE ?
+                OR IFNULL(cb.phone, "") LIKE ?
+            )`);
+            params.push(like, like, like, like, like, like, like, like);
+        }
 
         const selfLevel = roleToLevel(req.agent.role);
         const commissionRateForMe = role === 'consultant' ? 0.02 : calcSelfCommissionRate(selfLevel);
@@ -1117,10 +1167,10 @@ router.get('/orders', authenticateAgent, async (req, res) => {
             FROM agent_orders o
             LEFT JOIN agent_users bu ON bu.id = o.user_id
             LEFT JOIN agent_users cb ON cb.id = COALESCE(o.created_by_user_id, o.user_id)
-            WHERE ${whereSql}
+            WHERE ${where.join(' AND ')}
             ORDER BY o.created_at DESC
-            LIMIT 200`,
-            [req.agent.id]
+            LIMIT ?`,
+            [...params, limit]
         );
 
         const data = (rows || []).map(r => {

@@ -40,6 +40,7 @@ refreshLucideIcons();
 
                     this.agentInitCooldowns();
                     this.agentApplyDownlineDateDefaults(true);
+                    this.agentApplyOrdersDateDefaults(true);
                     this.agentApplySalesDefaults(true);
 
                     if (this.agentToken) {
@@ -217,6 +218,7 @@ refreshLucideIcons();
                 agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
 
                 agentDownlineFilters: { q: '', status: '', role: '', startDate: '', endDate: '' },
+                agentOrdersFilters: { q: '', status: '', startDate: '', endDate: '' },
                 agentEditOrderOpen: false,
                 agentEditOrderId: null,
                 agentEditOrderNo: '',
@@ -1476,9 +1478,11 @@ refreshLucideIcons();
                     try {
                         this.agentBusy = true;
                         await this.agentFetchMe();
+
+                        this.agentApplyOrdersDateDefaults(false);
                         const [users, orders, logs, downlineOrders] = await Promise.all([
                             this.agentApi('/api/agent/users', 'GET', null, true),
-                            this.agentApi('/api/agent/orders', 'GET', null, true),
+                            this.agentFetchOrders().catch(() => ({ success: true, data: [] })),
                             this.agentApi('/api/agent/logs', 'GET', null, true),
                             this.agentFetchDownlineOrders().catch(() => ({ success: true, data: [] }))
                         ]);
@@ -1539,6 +1543,80 @@ refreshLucideIcons();
                     const url = `/api/agent/orders-downline?${params.toString()}`;
                     const data = await this.agentApi(url, 'GET', null, true);
                     return data;
+                },
+
+                agentApplyOrdersDateDefaults(force = false) {
+                    const curStart = String(this.agentOrdersFilters?.startDate || '').trim();
+                    const curEnd = String(this.agentOrdersFilters?.endDate || '').trim();
+                    if (!force && (curStart || curEnd)) return;
+
+                    const def = this.agentGetDefaultDownlineDateRange();
+                    this.agentOrdersFilters = {
+                        ...(this.agentOrdersFilters || {}),
+                        startDate: def.startDate,
+                        endDate: def.endDate
+                    };
+                },
+
+                async agentFetchOrders() {
+                    if (!this.agentToken) {
+                        return { success: true, data: [] };
+                    }
+
+                    const q = String(this.agentOrdersFilters?.q || '').trim();
+                    const status = String(this.agentOrdersFilters?.status || '').trim();
+                    const startDate = String(this.agentOrdersFilters?.startDate || '').trim();
+                    const endDate = String(this.agentOrdersFilters?.endDate || '').trim();
+
+                    const params = new URLSearchParams();
+                    if (q) params.set('q', q);
+                    if (status) params.set('status', status);
+                    if (startDate) params.set('startDate', startDate);
+                    if (endDate) params.set('endDate', endDate);
+                    params.set('limit', '500');
+
+                    const url = `/api/agent/orders?${params.toString()}`;
+                    const data = await this.agentApi(url, 'GET', null, true);
+                    return data;
+                },
+
+                agentOrdersResetFilters() {
+                    const def = this.agentGetDefaultDownlineDateRange();
+                    this.agentOrdersFilters = { q: '', status: '', startDate: def.startDate, endDate: def.endDate };
+                    this.agentOrdersSearch();
+                },
+
+                agentOrdersSearch() {
+                    this.agentBusy = true;
+                    this.agentFetchOrders().then(d => {
+                        this.agentOrders = d.data || [];
+                    }).catch((err) => {
+                        this.agentNotify(err?.message || '查询失败', 'error');
+                    }).finally(() => {
+                        this.agentBusy = false;
+                    });
+                },
+
+                agentOpenOrdersDatePicker(which) {
+                    const w = String(which || '').trim();
+                    const el = w === 'end' ? this.$refs?.ordersEndDate : this.$refs?.ordersStartDate;
+                    if (!el) return;
+
+                    try {
+                        if (typeof el.showPicker === 'function') {
+                            el.showPicker();
+                            return;
+                        }
+                    } catch (e) {
+                        // ignore and fallback
+                    }
+
+                    try {
+                        el.focus({ preventScroll: true });
+                    } catch (e) {
+                        try { el.focus(); } catch (_) {}
+                    }
+                    try { el.click(); } catch (e) {}
                 },
 
                 agentDownlineResetFilters() {
