@@ -3011,8 +3011,9 @@
                                     <div class="text-white/40" x-text="'纵轴：金额 / 横轴：日'"></div>
                                 </div>
 
-                                <div class="mt-3 w-full max-w-full overflow-hidden border border-white/10 bg-black/20 relative">
-                                    <svg class="w-full max-w-full h-60 sm:h-64 select-none"
+                                <div class="mt-3 w-full max-w-full border border-white/10 bg-black/20">
+                                    <div class="relative w-full max-w-[900px] mx-auto overflow-hidden">
+                                    <svg class="w-full h-60 sm:h-64 select-none"
                                         :viewBox="agentSalesTrendViewBox()"
                                         preserveAspectRatio="xMidYMid meet"
                                         @mousemove="agentSalesTrendHoverMove($event)"
@@ -3074,6 +3075,7 @@
                                                 <div class="pt-1 text-[11px] text-black/40" x-text="'合计：' + agentMoney(agentSalesTrendHoverValue('total'))"></div>
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
