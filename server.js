@@ -5,11 +5,13 @@
  * Then visit: http://localhost:3000
  */
 
-// Load .env if present (required for SMS/DB secrets)
-require('dotenv').config();
+const path = require('path');
+
+// Load .env from this repo directory (required for SMS/DB secrets)
+// Avoid relying on process.cwd() because the service may be started from another working directory.
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const express = require('express');
-const path = require('path');
 const { scrapeWebsiteToExcel, scrapeMultipleUrls } = require('./scraper');
 const { sendWeChatWebhook, sendWeChatImage } = require('./wechat');
 // 认证模块（普通用户体系）：当前部署不使用，且生产库可能已删除 users 表。

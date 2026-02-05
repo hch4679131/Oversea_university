@@ -198,7 +198,13 @@ async function sendSMS(phone, code) {
 
         if (!hasEnvTemplate || !hasEnvSign || !hasEnvKeyId || !hasEnvKeySecret || isPlaceholder) {
             console.log(`[agent][短信未配置] 跳过真实短信发送 → 手机号: ${maskPhone(phone)} 验证码: ${code}`);
-            return { ok: true, skipped: true, providerCode: 'SKIPPED', providerMessage: 'SMS not configured' };
+            const shouldFail = process.env.NODE_ENV === 'production';
+            return {
+                ok: !shouldFail,
+                skipped: true,
+                providerCode: 'SKIPPED',
+                providerMessage: 'SMS not configured'
+            };
         }
 
         const Client = require('@alicloud/dysmsapi20170525').default;
