@@ -348,107 +348,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- 添加订单（仅顾问可见） -->
-                            <div x-show="agentUser && agentUser.role === 'consultant'" class="mt-8 bg-obsidian-900/60 border border-white/5 p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden">
-                                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-                                    <div>
-                                        <h2 class="text-2xl font-serif font-bold text-white tracking-tight">顾问开单</h2>
-                                        <p class="text-[10px] text-white/30 uppercase tracking-widest mt-1">创建订单将自动生成订单号，并同步到业绩统计</p>
-                                    </div>
-                                    <div class="text-[10px] text-white/30 uppercase tracking-widest">仅顾问可见</div>
-                                </div>
-
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">归属代理人</div>
-                                        <select x-model="agentOrderForm.bindUserId" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400">
-                                            <option :value="agentUser?.id" x-text="'我自己：' + (agentUser?.phone || '-')"></option>
-                                            <template x-for="u in agentAllUsers" :key="u.id">
-                                                <option :value="u.id" x-text="(u.role || '-') + '：' + (u.phone || '-')"></option>
-                                            </template>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">服务名称（必填）</div>
-                                        <select x-model="agentOrderForm.serviceName" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400 font-bold tracking-widest">
-                                            <option value="EAC">EAC</option>
-                                            <option value="AEC">AEC</option>
-                                            <option value="EC">EC</option>
-                                            <option value="EA">EA</option>
-                                            <option value="AE">AE</option>
-                                            <option value="AC">AC</option>
-                                            <option value="E">E</option>
-                                            <option value="A">A</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4 grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">金额（必填）</div>
-                                        <input x-model="agentOrderForm.amount" type="number" min="0" step="0.01" placeholder="金额" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
-                                    </div>
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">状态（必填）</div>
-                                        <select x-model="agentOrderForm.status" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400">
-                                            <option value="已创单">已创单</option>
-                                            <option value="已签单">已签单</option>
-                                            <option value="已完结">已完结</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4 grid md:grid-cols-3 gap-4">
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">学生姓名（必填）</div>
-                                        <input x-model="agentOrderForm.studentName" type="text" placeholder="学生姓名" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
-                                    </div>
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">学生性别（必填）</div>
-                                        <select x-model="agentOrderForm.studentGender" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400">
-                                            <option value="男">男</option>
-                                            <option value="女">女</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">学生手机（必填）</div>
-                                        <input x-model="agentOrderForm.studentPhone" type="text" placeholder="学生手机" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
-                                    </div>
-                                </div>
-
-                                <div class="mt-4 grid md:grid-cols-3 gap-4">
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">家长姓名（可选）</div>
-                                        <input x-model="agentOrderForm.parentName" type="text" placeholder="家长姓名" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
-                                    </div>
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">家长性别（可选）</div>
-                                        <select x-model="agentOrderForm.parentGender" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400">
-                                            <option value="">-</option>
-                                            <option value="男">男</option>
-                                            <option value="女">女</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">家长手机（可选）</div>
-                                        <input x-model="agentOrderForm.parentPhone" type="text" placeholder="家长手机" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
-                                    </div>
-                                </div>
-
-                                <div class="mt-4 grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">额外权重（可选）</div>
-                                        <input x-model="agentOrderForm.extraServiceWeight" type="text" placeholder="例如：ECA / EAC / ..." class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
-                                    </div>
-                                    <div>
-                                        <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">学生身份证（可选）</div>
-                                        <input x-model="agentOrderForm.studentIdCard" type="text" placeholder="学生身份证（可选）" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
-                                    </div>
-                                </div>
-
-                                <button type="button" @click.prevent="agentCreateOrder()" :disabled="agentBusy" class="mt-6 w-full px-6 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition shadow-[0_15px_30px_rgba(212,175,55,0.2)]" :class="agentBusy ? 'opacity-60 cursor-not-allowed' : ''">创建订单（自动生成订单号）</button>
-                            </div>
                         </div>
 
                         <div class="scrub-item anim-fade-up">
@@ -3165,6 +3064,110 @@
                                     </div>
                                 </div>
                             
+                                <!-- 顾问开单（仅顾问可见） -->
+                                <div x-show="agentUser && agentUser.role === 'consultant'" class="mt-8 bg-obsidian-900/60 border border-white/5 backdrop-blur-md p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden relative">
+                                    <div class="absolute top-0 right-0 w-64 h-64 bg-gold-400/5 blur-[100px] -mr-32 -mt-32"></div>
+                                    <div class="relative">
+                                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                                            <div>
+                                                <h2 class="text-2xl font-serif font-bold text-white tracking-tight">顾问开单</h2>
+                                                <p class="text-[10px] text-white/30 uppercase tracking-widest mt-1">创建订单将自动生成订单号，并同步到业绩统计</p>
+                                            </div>
+                                            <div class="text-[10px] text-white/30 uppercase tracking-widest">仅顾问可见</div>
+                                        </div>
+
+                                        <div class="grid md:grid-cols-2 gap-4">
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">归属代理人</div>
+                                                <select x-model="agentOrderForm.bindUserId" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400">
+                                                    <option :value="agentUser?.id" x-text="'我自己：' + (agentUser?.phone || '-')"></option>
+                                                    <template x-for="u in agentAllUsers" :key="u.id">
+                                                        <option :value="u.id" x-text="(u.role || '-') + '：' + (u.phone || '-')"></option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">服务名称（必填）</div>
+                                                <select x-model="agentOrderForm.serviceName" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400 font-bold tracking-widest">
+                                                    <option value="EAC">EAC</option>
+                                                    <option value="AEC">AEC</option>
+                                                    <option value="EC">EC</option>
+                                                    <option value="EA">EA</option>
+                                                    <option value="AE">AE</option>
+                                                    <option value="AC">AC</option>
+                                                    <option value="E">E</option>
+                                                    <option value="A">A</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">金额（必填）</div>
+                                                <input x-model="agentOrderForm.amount" type="number" min="0" step="0.01" placeholder="金额" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
+                                            </div>
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">状态（必填）</div>
+                                                <select x-model="agentOrderForm.status" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400">
+                                                    <option value="已创单">已创单</option>
+                                                    <option value="已签单">已签单</option>
+                                                    <option value="已完结">已完结</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4 grid md:grid-cols-3 gap-4">
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">学生姓名（必填）</div>
+                                                <input x-model="agentOrderForm.studentName" type="text" placeholder="学生姓名" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
+                                            </div>
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">学生性别（必填）</div>
+                                                <select x-model="agentOrderForm.studentGender" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400">
+                                                    <option value="男">男</option>
+                                                    <option value="女">女</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">学生手机（必填）</div>
+                                                <input x-model="agentOrderForm.studentPhone" type="text" placeholder="学生手机" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4 grid md:grid-cols-3 gap-4">
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">家长姓名（可选）</div>
+                                                <input x-model="agentOrderForm.parentName" type="text" placeholder="家长姓名" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
+                                            </div>
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">家长性别（可选）</div>
+                                                <select x-model="agentOrderForm.parentGender" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white text-sm outline-none focus:border-gold-400">
+                                                    <option value="">-</option>
+                                                    <option value="男">男</option>
+                                                    <option value="女">女</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">家长手机（可选）</div>
+                                                <input x-model="agentOrderForm.parentPhone" type="text" placeholder="家长手机" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">额外权重（可选）</div>
+                                                <input x-model="agentOrderForm.extraServiceWeight" type="text" placeholder="例如：ECA / EAC / ..." class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
+                                            </div>
+                                            <div>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">学生身份证（可选）</div>
+                                                <input x-model="agentOrderForm.studentIdCard" type="text" placeholder="学生身份证（可选）" class="w-full px-4 py-3 bg-black/40 border border-white/10 text-white placeholder:text-white/30 text-sm outline-none focus:border-gold-400" />
+                                            </div>
+                                        </div>
+
+                                        <button type="button" @click.prevent="agentCreateOrder()" :disabled="agentBusy" class="mt-6 w-full px-6 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition shadow-[0_15px_30px_rgba(212,175,55,0.2)]" :class="agentBusy ? 'opacity-60 cursor-not-allowed' : ''">创建订单（自动生成订单号）</button>
+                                    </div>
+                                </div>
+
                                 <!-- 订单管理（响应式：PC表格 / Mobile卡片） -->
                                 <div class="mt-8 bg-obsidian-900/60 border border-white/5 p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden">
                                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
