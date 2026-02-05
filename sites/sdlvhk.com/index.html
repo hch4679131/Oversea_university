@@ -330,14 +330,33 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- [功能] 添加订单（仅顾问可见） -->
+                        <div class="scrub-item anim-fade-up">
+                            <div @click="switchPage('apartments')" class="group relative h-[320px] bg-white border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
+                                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-black/5 via-transparent to-transparent"></div>
+                                <!-- <div class="absolute top-6 right-6 text-6xl font-serif text-black/5 select-none">02</div> -->
+                                <div class="relative h-full p-7 flex flex-col">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <i data-lucide="home" class="w-6 h-6 text-obsidian-950"></i>
+                                        <div class="h-[1px] flex-1 bg-black/20"></div>
+                                    </div>
+                                    <h3 class="text-3xl font-serif text-obsidian-950 mb-3" x-text="t[lang].biz_apt_t"></h3>
+                                    <p class="text-black/70 text-sm leading-relaxed" x-text="t[lang].biz_apt_locs"></p>
+                                    <div class="mt-auto pt-6 border-t border-black/10">
+                                        <div class="text-xs text-black/60 uppercase tracking-widest" x-text="t[lang].biz_apt_sub"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 添加订单（仅顾问可见） -->
                             <div x-show="agentUser && agentUser.role === 'consultant'" class="mt-8 bg-obsidian-900/60 border border-white/5 p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden">
                                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
                                     <div>
-                                        <h2 class="text-2xl font-serif font-bold text-white tracking-tight">添加订单</h2>
-                                        <p class="text-[10px] text-white/30 uppercase tracking-widest mt-1">仅顾问账号可创建订单，系统将自动生成订单号</p>
+                                        <h2 class="text-2xl font-serif font-bold text-white tracking-tight">顾问开单</h2>
+                                        <p class="text-[10px] text-white/30 uppercase tracking-widest mt-1">创建订单将自动生成订单号，并同步到业绩统计</p>
                                     </div>
+                                    <div class="text-[10px] text-white/30 uppercase tracking-widest">仅顾问可见</div>
                                 </div>
 
                                 <div class="grid md:grid-cols-2 gap-4">
@@ -429,24 +448,6 @@
                                 </div>
 
                                 <button type="button" @click.prevent="agentCreateOrder()" :disabled="agentBusy" class="mt-6 w-full px-6 py-4 bg-gold-400 text-black font-bold tracking-widest uppercase hover:bg-gold-300 transition shadow-[0_15px_30px_rgba(212,175,55,0.2)]" :class="agentBusy ? 'opacity-60 cursor-not-allowed' : ''">创建订单（自动生成订单号）</button>
-                            </div>
-                        </div>
-
-                        <div class="scrub-item anim-fade-up">
-                            <div @click="switchPage('apartments')" class="group relative h-[320px] bg-white border border-black/10 overflow-hidden cursor-pointer shadow-2xl hover:border-black/30 transition-all duration-500 rounded-none">
-                                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-black/5 via-transparent to-transparent"></div>
-                                <!-- <div class="absolute top-6 right-6 text-6xl font-serif text-black/5 select-none">02</div> -->
-                                <div class="relative h-full p-7 flex flex-col">
-                                    <div class="flex items-center gap-4 mb-6">
-                                        <i data-lucide="home" class="w-6 h-6 text-obsidian-950"></i>
-                                        <div class="h-[1px] flex-1 bg-black/20"></div>
-                                    </div>
-                                    <h3 class="text-3xl font-serif text-obsidian-950 mb-3" x-text="t[lang].biz_apt_t"></h3>
-                                    <p class="text-black/70 text-sm leading-relaxed" x-text="t[lang].biz_apt_locs"></p>
-                                    <div class="mt-auto pt-6 border-t border-black/10">
-                                        <div class="text-xs text-black/60 uppercase tracking-widest" x-text="t[lang].biz_apt_sub"></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -3207,41 +3208,66 @@
                                     </div>
                                 
                                     <!-- PC端表格视图 -->
-                                    <div class="hidden md:block overflow-x-auto -mx-8">
-                                        <table class="w-full text-xs text-left border-collapse min-w-[1400px]">
-                                            <thead>
-                                                <tr class="bg-white/5 text-white/30 uppercase tracking-[0.2em] font-bold border-y border-white/10">
-                                                    <th class="px-8 py-5">订单编号</th>
-                                                    <th class="px-6 py-5">服务名称</th>
-                                                    <th class="px-6 py-5">学生姓名</th>
-                                                    <th class="px-6 py-5">订单状态</th>
-                                                    <th class="px-6 py-5">创单人</th>
-                                                    <th class="px-6 py-5">金额</th>
-                                                    <th class="px-6 py-5">分成详情</th>
-                                                    <th class="px-8 py-5 text-right" x-show="agentUser && agentUser.role === 'consultant'">管控</th>
+                                    <div class="hidden md:block border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+                                        <table class="w-max min-w-full text-xs whitespace-nowrap">
+                                            <thead class="bg-white/5">
+                                                <tr class="text-white/40 uppercase tracking-[0.2em] font-bold text-[10px]">
+                                                    <th class="px-4 py-4 text-left">订单号</th>
+                                                    <th class="px-4 py-4 text-left">服务名</th>
+                                                    <th class="px-4 py-4 text-left">学生</th>
+                                                    <th class="px-4 py-4 text-left">学生性别</th>
+                                                    <th class="px-4 py-4 text-left">学生电话</th>
+                                                    <th class="px-4 py-4 text-left">家长</th>
+                                                    <th class="px-4 py-4 text-left">家长性别</th>
+                                                    <th class="px-4 py-4 text-left">家长电话</th>
+                                                    <th class="px-4 py-4 text-left">权重</th>
+                                                    <th class="px-4 py-4 text-left">身份证</th>
+                                                    <th class="px-4 py-4 text-left">金额</th>
+                                                    <th class="px-4 py-4 text-left">状态</th>
+                                                    <th class="px-4 py-4 text-left">创单代理</th>
+                                                    <th class="px-4 py-4 text-left">创建时间</th>
+                                                    <th class="px-4 py-4 text-left">签单时间</th>
+                                                    <th class="px-4 py-4 text-left">分成</th>
+                                                    <th class="px-4 py-4 text-left">完结时间</th>
+                                                    <th class="px-4 py-4 text-left" x-show="agentUser && agentUser.role === 'consultant'">操作</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="divide-y divide-white/5">
+                                            <tbody>
                                                 <template x-for="o in agentOrders" :key="o.id">
-                                                    <tr class="hover:bg-white/[0.03] transition-all group">
-                                                        <td class="px-8 py-6 font-mono text-white/90" x-text="o.orderNo"></td>
-                                                        <td class="px-6 py-6"><span class="px-2 py-1 bg-white/5 border border-white/10" x-text="o.serviceName"></span></td>
-                                                        <td class="px-6 py-6 font-bold text-white" x-text="o.studentName"></td>
-                                                        <td class="px-6 py-6">
-                                                            <span class="inline-flex items-center gap-2" :class="o.status === '已完结' ? 'text-green-400' : (o.status === '已签单' ? 'text-gold-400' : 'text-blue-400')">
-                                                                <span class="w-1.5 h-1.5 rounded-full bg-current shadow-[0_0_10px_currentColor]"></span>
-                                                                <span x-text="o.status" class="font-bold uppercase tracking-widest text-[10px]"></span>
-                                                            </span>
-                                                        </td>
-                                                        <td class="px-6 py-6 text-white/40 text-[10px] font-mono" x-text="o.boundUserPhone"></td>
-                                                        <td class="px-6 py-6 font-serif font-bold text-gold-400 text-sm" x-text="agentMoney(o.amount)"></td>
-                                                        <td class="px-6 py-6 text-white/60 italic" x-text="agentCommissionText(o)"></td>
-                                                        <td class="px-8 py-6 text-right space-x-2" x-show="agentUser && agentUser.role === 'consultant'">
-                                                            <button @click="agentOpenEditOrder(o)" class="text-gold-400 hover:text-white transition font-bold">修改</button>
-                                                            <button @click="agentAdvanceOrder(o.id)" class="text-white/20 hover:text-white transition" :disabled="o.status === '已完结'">更新</button>
+                                                    <tr class="border-t border-white/10 hover:bg-white/[0.03] transition">
+                                                        <td class="px-4 py-3 font-mono text-white/90" x-text="dash(o.orderNo)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
+                                                        <td class="px-4 py-3 font-bold text-white" x-text="dash(o.studentName)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentGender)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentName)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentGender)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentPhone)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.extraServiceWeight)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentIdCard)"></td>
+                                                        <td class="px-4 py-3 font-serif font-bold text-gold-400" x-text="agentMoney(o.amount)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.status)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
+                                                        <td class="px-4 py-3 text-white/80" x-text="agentCommissionText(o)"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
+                                                        <td class="px-4 py-3" x-show="agentUser && agentUser.role === 'consultant'">
+                                                            <button type="button" class="px-3 py-1.5 text-[10px] font-bold border border-gold-400/30 text-gold-300 hover:bg-gold-400/10 transition mr-2" :class="agentBusy ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''" :disabled="agentBusy" @click="agentOpenEditOrder(o)">修改</button>
+                                                            <button type="button" class="px-3 py-1.5 text-[10px] font-bold border border-white/20 text-white/70 hover:bg-white/10 transition mr-2" :class="(agentBusy || o.status === '已完结') ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''" :disabled="agentBusy || o.status === '已完结'" @click="agentAdvanceOrder(o.id)">更新</button>
+                                                            <button type="button" class="px-3 py-1.5 text-[10px] font-bold border border-red-400/30 text-red-200 hover:bg-red-500/20 transition" :class="agentBusy ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''" :disabled="agentBusy" @click="agentDeleteOrder(o.id)">删除</button>
                                                         </td>
                                                     </tr>
                                                 </template>
+                                                <tr x-show="agentOrders && agentOrders.length" class="border-t border-white/10 bg-black/20">
+                                                    <td class="px-4 py-3 text-[10px] text-white/60 tracking-widest" :colspan="(agentUser && agentUser.role === 'consultant') ? 18 : 17">
+                                                        <span class="font-bold text-white/70">备注：</span>
+                                                        <span x-text="'我的分成：' + agentMoney(agentMyOrdersCommissionTotal()) + '  下级分成：' + agentMoney(agentDownlineOrdersCommissionTotal()) + '  总分成：' + agentMoney(agentTotalCommissionTotal())"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr x-show="agentOrders.length === 0" class="border-t border-white/10">
+                                                    <td class="px-4 py-3 text-white/40" :colspan="(agentUser && agentUser.role === 'consultant') ? 18 : 17">暂无订单</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -3285,26 +3311,6 @@
                                     </div>
                                 
                                     <div x-show="agentOrders.length === 0" class="py-20 text-center text-white/10 italic tracking-[0.3em] uppercase">No Records Available</div>
-                                
-                                    <!-- 汇总汇总备注区 -->
-                                    <div class="mt-8 p-6 bg-white/5 border border-white/10 rounded-sm">
-                                        <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-center justify-center text-center">
-                                            <div>
-                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-1 font-bold">我的总分成</div>
-                                                <div class="text-2xl font-serif font-bold text-gold-400" x-text="agentMoney(agentMyOrdersCommissionTotal())"></div>
-                                            </div>
-                                            <div class="hidden md:block w-px h-8 bg-white/10"></div>
-                                            <div>
-                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-1 font-bold">团队总分成</div>
-                                                <div class="text-2xl font-serif font-bold text-white/80" x-text="agentMoney(agentDownlineOrdersCommissionTotal())"></div>
-                                            </div>
-                                            <div class="hidden md:block w-px h-8 bg-white/10"></div>
-                                            <div class="px-6 py-2 bg-gold-400/10 border border-gold-400/20">
-                                                <div class="text-[10px] text-gold-400/60 uppercase tracking-widest mb-1 font-bold">合并总计</div>
-                                                <div class="text-2xl font-serif font-bold text-gold-400" x-text="agentMoney(agentTotalCommissionTotal())"></div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <!-- 管理员日志（仅管理员可见） -->
                                     <div x-show="agentUser?.role === 'admin'" class="mt-8 bg-black/30 border border-white/10 p-6 rounded-sm">
@@ -3328,91 +3334,90 @@
                                 </div>
                             </div>
                         
-                            <!-- [TAB] 注册下级 -->
-                            <div x-show="agentDashTab === 'register_sub'" x-transition:enter="transition ease-out duration-500">
-                                <div class="bg-obsidian-900/60 border border-white/5 p-6 md:p-10 max-w-3xl mx-auto shadow-2xl relative">
-                                    <div class="absolute top-0 right-0 p-8 opacity-5">
-                                        <i data-lucide="user-plus" class="w-24 h-24"></i>
-                                    </div>
-                                    <h2 class="text-3xl font-serif font-bold text-white mb-2">New Partner Recruitment</h2>
-                                    <p class="text-[10px] text-gold-400/60 uppercase tracking-[0.3em] mb-10 border-b border-white/10 pb-4">创建合作伙伴账户 · 扩展您的分销网络</p>
-                                    
-                                    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
-                                        <div class="space-y-6">
-                                            <div class="space-y-2 group">
-                                                <label class="text-[10px] text-white/40 font-bold uppercase tracking-widest ml-1 group-focus-within:text-gold-400 transition">手机号码 (登录名)</label>
-                                                <input x-model="agentRegisterForm.phone" type="text" class="w-full bg-black/40 border border-white/10 px-5 py-4 text-sm focus:border-gold-400 outline-none transition-all shadow-inner" placeholder="138xxxx8888" />
+                                <!-- [TAB] 注册下级 -->
+                                <div x-show="agentDashTab === 'register_sub'" x-transition:enter="transition ease-out duration-500">
+                                    <div class="bg-obsidian-900/60 border border-white/5 p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden">
+                                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+                                            <div>
+                                                <h2 class="text-2xl font-serif font-bold text-white tracking-tight">注册下级</h2>
+                                                <p class="text-[10px] text-white/30 uppercase tracking-widest mt-1">创建下级合作伙伴账号（系统将记录日志）</p>
                                             </div>
-                                            <div class="space-y-2 group">
-                                                <label class="text-[10px] text-white/40 font-bold uppercase tracking-widest ml-1 group-focus-within:text-gold-400 transition">初始登录密码</label>
-                                                <input x-model="agentRegisterForm.password" type="password" class="w-full bg-black/40 border border-white/10 px-5 py-4 text-sm focus:border-gold-400 outline-none transition-all shadow-inner" placeholder="建议包含字母+数字" />
+                                        </div>
+
+                                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 bg-black/30 p-5 border border-white/5 rounded-sm">
+                                            <div class="md:col-span-4">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">下级手机号</div>
+                                                <input x-model="agentRegisterForm.phone" type="text" placeholder="请输入下级手机号" class="w-full bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition shadow-inner text-white" />
                                             </div>
-                                            <div class="space-y-2 group">
-                                                <label class="text-[10px] text-white/40 font-bold uppercase tracking-widest ml-1 group-focus-within:text-gold-400 transition">合作伙伴层级</label>
-                                                <select x-model="agentRegisterForm.role" class="w-full bg-black/40 border border-white/10 px-5 py-4 text-sm focus:border-gold-400 outline-none transition-all appearance-none cursor-pointer">
+                                            <div class="md:col-span-4">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">登录密码</div>
+                                                <input x-model="agentRegisterForm.password" type="password" placeholder="为下级设置登录密码" class="w-full bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition shadow-inner text-white" />
+                                            </div>
+                                            <div class="md:col-span-4">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">下级角色</div>
+                                                <select x-model="agentRegisterForm.role" class="w-full bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition text-white/80">
+                                                    <option value="">请选择角色</option>
                                                     <template x-for="r in agentAllowedChildRoles()" :key="r">
-                                                        <option :value="r" x-text="r"></option>
+                                                        <option :value="r" x-text="agentRoleLabel(r)"></option>
                                                     </template>
                                                 </select>
                                             </div>
-                                        </div>
-                                    
-                                        <div class="space-y-6">
-                                            <div class="space-y-2 group">
-                                                <label class="text-[10px] text-white/40 font-bold uppercase tracking-widest ml-1 group-focus-within:text-gold-400 transition">真实姓名 (二要素认证)</label>
-                                                <input x-model="agentRegisterForm.idCardName" type="text" class="w-full bg-black/40 border border-white/10 px-5 py-4 text-sm focus:border-gold-400 outline-none transition-all shadow-inner" placeholder="须与身份证一致" />
+
+                                            <div class="md:col-span-4">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">姓名（实名）</div>
+                                                <input x-model="agentRegisterForm.idCardName" type="text" placeholder="下级实名姓名" class="w-full bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition shadow-inner text-white" />
                                             </div>
-                                            <div class="space-y-2 group">
-                                                <label class="text-[10px] text-white/40 font-bold uppercase tracking-widest ml-1 group-focus-within:text-gold-400 transition">身份证号码</label>
-                                                <input x-model="agentRegisterForm.idCard" type="text" class="w-full bg-black/40 border border-white/10 px-5 py-4 text-sm focus:border-gold-400 outline-none transition-all shadow-inner" placeholder="18位中国居民身份证" />
+                                            <div class="md:col-span-4">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">身份证号</div>
+                                                <input x-model="agentRegisterForm.idCard" type="text" placeholder="下级身份证号" class="w-full bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition shadow-inner text-white" />
                                             </div>
-                                            <div class="grid grid-cols-3 gap-3 pt-6">
-                                                <input x-model="agentRegisterForm.code" type="text" class="col-span-2 bg-black/40 border border-white/10 px-5 py-4 text-sm focus:border-gold-400 outline-none transition-all" placeholder="验证码" />
-                                                <button type="button" @click="agentSendCode('register')" :disabled="agentBusy || agentCodeCooldownActive('register')"
-                                                    class="flex items-center justify-center bg-gold-400 text-black text-[10px] font-bold uppercase tracking-widest hover:bg-gold-300 transition shadow-lg">
-                                                    <span x-text="agentCodeButtonText('register', '发送代码')"></span>
-                                                </button>
+                                            <div class="md:col-span-4">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">短信验证码</div>
+                                                <div class="flex gap-2">
+                                                    <input x-model="agentRegisterForm.code" type="text" placeholder="验证码" class="flex-1 bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition shadow-inner text-white" />
+                                                    <button type="button" @click="agentSendCode('register')" :disabled="agentBusy || agentCodeCooldownActive('register')" class="px-4 bg-black/40 border border-white/10 text-white/80 text-[10px] font-bold uppercase tracking-widest hover:border-gold-400/40 transition" :class="(agentBusy || agentCodeCooldownActive('register')) ? 'opacity-60 cursor-not-allowed' : ''" x-text="agentCodeButtonText('register', '发送验证码')"></button>
+                                                </div>
+                                                <div class="mt-2 text-[10px] text-white/25 uppercase tracking-widest">验证码将发送到下级手机号</div>
+                                            </div>
+
+                                            <div class="md:col-span-12">
+                                                <button @click="agentCreateSubaccount()" class="w-full py-4 bg-gold-400 text-black font-bold uppercase tracking-[0.4em] hover:bg-gold-300 shadow-[0_15px_30px_rgba(212,175,55,0.2)] transition-all" :class="agentBusy ? 'opacity-60 cursor-not-allowed hover:bg-gold-400' : ''" :disabled="agentBusy">确认创建合作伙伴账户</button>
+                                                <p class="mt-4 text-[10px] text-white/20 text-center uppercase tracking-widest">请确保您已核实该合作伙伴的资质。所有注册行为将被系统日志记录。</p>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="mt-12 flex flex-col items-center">
-                                        <button @click="agentCreateSubaccount()" class="w-full py-5 bg-gold-400 text-black font-bold uppercase tracking-[0.4em] hover:bg-gold-300 shadow-[0_15px_30px_rgba(212,175,55,0.2)] transition-all">确认创建合作伙伴账户</button>
-                                        <p class="mt-4 text-[10px] text-white/20 text-center uppercase tracking-widest">请确保您已核实该合作伙伴的资质。所有注册行为将被系统日志记录。</p>
-                                    </div>
-                                </div>
-                            
-                                <!-- 下级列表展示 -->
-                                <div class="mt-10 bg-obsidian-900/60 border border-white/5 p-6 md:p-8 shadow-2xl overflow-hidden">
-                                    <h3 class="text-sm font-bold text-white uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
-                                        <i data-lucide="network" class="w-4 h-4 text-gold-400"></i>
-                                        我的直属网络下级
-                                    </h3>
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full text-xs text-left border-collapse min-w-[600px]">
-                                            <thead>
-                                                <tr class="text-white/30 border-b border-white/10 uppercase tracking-widest">
-                                                    <th class="py-4">ID</th>
-                                                    <th class="py-4 font-bold">手机号码</th>
-                                                    <th class="py-4 font-bold">角色</th>
-                                                    <th class="py-4 text-right">账号状态</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="divide-y divide-white/5 font-mono">
-                                                <template x-for="u in agentChildren" :key="u.id">
-                                                    <tr class="hover:bg-white/5 transition-all group">
-                                                        <td class="py-4 text-white/40" x-text="u.id"></td>
-                                                        <td class="py-4 text-white/90" x-text="u.phone"></td>
-                                                        <td class="py-4"><span class="px-2 py-0.5 border border-white/10 text-gold-400/80" x-text="u.role"></span></td>
-                                                        <td class="py-4 text-right"><span class="text-green-500 font-bold uppercase tracking-tighter" x-text="u.status"></span></td>
+
+                                    <!-- 下级列表展示 -->
+                                    <div class="mt-10 bg-obsidian-900/60 border border-white/5 p-6 md:p-8 shadow-2xl overflow-hidden">
+                                        <h3 class="text-sm font-bold text-white uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+                                            <i data-lucide="network" class="w-4 h-4 text-gold-400"></i>
+                                            我的直属网络下级
+                                        </h3>
+                                        <div class="border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+                                            <table class="w-full text-xs text-left border-collapse min-w-[560px]">
+                                                <thead>
+                                                    <tr class="text-white/30 border-b border-white/10 uppercase tracking-widest">
+                                                        <th class="px-4 py-4">ID</th>
+                                                        <th class="px-4 py-4 font-bold">手机号码</th>
+                                                        <th class="px-4 py-4 font-bold">角色</th>
+                                                        <th class="px-4 py-4 text-right">账号状态</th>
                                                     </tr>
-                                                </template>
-                                            </tbody>
-                                        </table>
-                                        <div x-show="agentChildren.length === 0" class="py-10 text-center text-white/10 italic text-xs uppercase tracking-widest">暂无下级记录</div>
+                                                </thead>
+                                                <tbody class="divide-y divide-white/5 font-mono">
+                                                    <template x-for="u in agentChildren" :key="u.id">
+                                                        <tr class="hover:bg-white/5 transition-all group">
+                                                            <td class="px-4 py-4 text-white/40" x-text="u.id"></td>
+                                                            <td class="px-4 py-4 text-white/90" x-text="u.phone"></td>
+                                                            <td class="px-4 py-4"><span class="px-2 py-0.5 border border-white/10 text-gold-400/80" x-text="u.role"></span></td>
+                                                            <td class="px-4 py-4 text-right"><span class="text-green-500 font-bold uppercase tracking-tighter" x-text="u.status"></span></td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                            <div x-show="agentChildren.length === 0" class="py-10 text-center text-white/10 italic text-xs uppercase tracking-widest">暂无下级记录</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         
                             <!-- [TAB] 下级开单明细 -->
                             <div x-show="agentDashTab === 'downline_orders'" x-transition:enter="transition ease-out duration-500">
@@ -3465,54 +3470,110 @@
                                         </div>
                                     </div>
                                 
-                                    <!-- 下级开单表格 (手机端横向滚动优化) -->
-                                    <div class="overflow-x-auto -mx-8">
-                                        <table class="w-full text-xs text-left border-collapse min-w-[1600px]">
-                                            <thead>
-                                                <tr class="bg-white/5 text-white/30 uppercase tracking-[0.2em] font-bold border-y border-white/10">
-                                                    <th class="px-8 py-5">单号</th>
-                                                    <th class="px-6 py-5">创单代理人</th>
-                                                    <th class="px-6 py-5">学生姓名</th>
-                                                    <th class="px-6 py-5">服务项目</th>
-                                                    <th class="px-6 py-5">权重</th>
-                                                    <th class="px-6 py-5">订单金额</th>
-                                                    <th class="px-6 py-5">分成利益</th>
-                                                    <th class="px-6 py-5">订单状态</th>
-                                                    <th class="px-8 py-5 text-right">时间戳</th>
+                                    <!-- Mobile端卡片视图（避免手机端撑宽） -->
+                                    <div class="md:hidden space-y-4">
+                                        <template x-for="o in agentDownlineOrders" :key="o.id">
+                                            <div class="bg-white/5 border border-white/10 p-5 rounded-sm space-y-4">
+                                                <div class="flex justify-between items-start">
+                                                    <div>
+                                                        <div class="text-[10px] text-white/30 uppercase tracking-widest">订单号</div>
+                                                        <div class="text-sm font-mono text-gold-400" x-text="dash(o.orderNo)"></div>
+                                                    </div>
+                                                    <span class="px-2 py-1 text-[10px] font-bold border border-current rounded-full"
+                                                        :class="o.status === '已完结' ? 'text-green-400' : (o.status === '已签单' ? 'text-gold-400' : 'text-blue-400')"
+                                                        x-text="dash(o.status)"></span>
+                                                </div>
+
+                                                <div class="grid grid-cols-2 gap-4 pt-2 border-t border-white/5">
+                                                    <div>
+                                                        <div class="text-[10px] text-white/30 uppercase tracking-widest">学生</div>
+                                                        <div class="text-sm text-white font-bold" x-text="dash(o.studentName)"></div>
+                                                        <div class="text-[10px] text-white/40 font-mono" x-text="dash(o.studentPhone)"></div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-[10px] text-white/30 uppercase tracking-widest">服务</div>
+                                                        <div class="text-sm text-white/80" x-text="dash(o.serviceName)"></div>
+                                                        <div class="text-[10px] text-white/40" x-text="'权重：' + (o.extraServiceWeight || '-')"></div>
+                                                    </div>
+                                                    <div class="col-span-2">
+                                                        <div class="text-[10px] text-white/30 uppercase tracking-widest">创单代理</div>
+                                                        <div class="text-xs text-white/80" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></div>
+                                                    </div>
+                                                    <div class="col-span-2">
+                                                        <div class="text-[10px] text-white/30 uppercase tracking-widest">分成</div>
+                                                        <div class="text-xs text-gold-400 italic" x-text="agentCommissionText(o)"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="pt-4 flex items-center justify-between border-t border-white/5">
+                                                    <div class="text-lg font-serif font-bold text-white" x-text="agentMoney(o.amount)"></div>
+                                                    <div class="text-[10px] text-white/30 font-mono" x-text="fmtCN(o.createdAt)"></div>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                        <div x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="py-20 text-center text-white/10 italic uppercase tracking-[0.3em]">No Downline Activity</div>
+                                        <div x-show="agentDownlineOrders && agentDownlineOrders.length" class="px-4 py-3 bg-black/20 border border-white/10 text-[10px] text-white/60 tracking-widest">
+                                            <span class="font-bold text-white/70">备注：</span>
+                                            <span x-text="'下级分成：' + agentMoney(agentDownlineOrdersCommissionTotal())"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- PC端表格视图（列按旧版完整保留） -->
+                                    <div class="hidden md:block mt-4 border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+                                        <table class="w-max min-w-full text-xs whitespace-nowrap">
+                                            <thead class="bg-white/5">
+                                                <tr class="text-white/40 uppercase tracking-[0.2em] font-bold text-[10px]">
+                                                    <th class="px-4 py-4 text-left">订单号</th>
+                                                    <th class="px-4 py-4 text-left">服务名</th>
+                                                    <th class="px-4 py-4 text-left">学生</th>
+                                                    <th class="px-4 py-4 text-left">学生性别</th>
+                                                    <th class="px-4 py-4 text-left">学生电话</th>
+                                                    <th class="px-4 py-4 text-left">家长</th>
+                                                    <th class="px-4 py-4 text-left">家长性别</th>
+                                                    <th class="px-4 py-4 text-left">家长电话</th>
+                                                    <th class="px-4 py-4 text-left">权重</th>
+                                                    <th class="px-4 py-4 text-left">金额</th>
+                                                    <th class="px-4 py-4 text-left">状态</th>
+                                                    <th class="px-4 py-4 text-left">创单代理</th>
+                                                    <th class="px-4 py-4 text-left">创建时间</th>
+                                                    <th class="px-4 py-4 text-left">签单时间</th>
+                                                    <th class="px-4 py-4 text-left">分成</th>
+                                                    <th class="px-4 py-4 text-left">完结时间</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="divide-y divide-white/5">
+                                            <tbody>
                                                 <template x-for="o in agentDownlineOrders" :key="o.id">
-                                                    <tr class="hover:bg-gold-400/5 transition-all group">
-                                                        <td class="px-8 py-6 font-mono text-white/90" x-text="o.orderNo"></td>
-                                                        <td class="px-6 py-6">
-                                                            <div class="flex flex-col">
-                                                                <span class="text-white font-bold" x-text="o.boundUserPhone"></span>
-                                                                <span class="text-[9px] text-gold-400 uppercase tracking-widest" x-text="o.boundUserRole"></span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="px-6 py-6 font-bold text-white/80" x-text="o.studentName"></td>
-                                                        <td class="px-6 py-6"><span class="px-2 py-0.5 border border-white/5 text-white/40" x-text="o.serviceName"></span></td>
-                                                        <td class="px-6 py-6 font-mono text-white/40" x-text="o.extraServiceWeight || '-'"></td>
-                                                        <td class="px-6 py-6 font-serif font-bold text-white text-sm" x-text="agentMoney(o.amount)"></td>
-                                                        <td class="px-6 py-6 text-gold-400 font-bold" x-text="agentCommissionText(o)"></td>
-                                                        <td class="px-6 py-6">
-                                                            <span class="px-3 py-1 text-[10px] font-bold uppercase rounded-full border border-current" :class="o.status === '已完结' ? 'text-green-500' : 'text-blue-400'" x-text="o.status"></span>
-                                                        </td>
-                                                        <td class="px-8 py-6 text-right text-white/20 font-mono" x-text="fmtCN(o.createdAt)"></td>
+                                                    <tr class="border-t border-white/10 hover:bg-white/[0.03] transition">
+                                                        <td class="px-4 py-3 font-mono text-white/90" x-text="dash(o.orderNo)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
+                                                        <td class="px-4 py-3 font-bold text-white" x-text="dash(o.studentName)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentGender)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentName)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentGender)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.parentPhone)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.extraServiceWeight)"></td>
+                                                        <td class="px-4 py-3 font-serif font-bold text-gold-400" x-text="agentMoney(o.amount)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.status)"></td>
+                                                        <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
+                                                        <td class="px-4 py-3 text-white/80" x-text="agentCommissionText(o)"></td>
+                                                        <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
                                                     </tr>
                                                 </template>
+                                                <tr x-show="agentDownlineOrders && agentDownlineOrders.length" class="border-t border-white/10 bg-black/20">
+                                                    <td class="px-4 py-3 text-[10px] text-white/60 tracking-widest" colspan="16">
+                                                        <span class="font-bold text-white/70">备注：</span>
+                                                        <span x-text="'下级分成：' + agentMoney(agentDownlineOrdersCommissionTotal())"></span>
+                                                    </td>
+                                                </tr>
+                                                <tr x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="border-t border-white/10">
+                                                    <td class="px-4 py-3 text-white/40" colspan="16">暂无下级订单</td>
+                                                </tr>
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <div x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="py-20 text-center text-white/10 italic uppercase tracking-[0.3em]">No Downline Activity</div>
-                                    
-                                    <!-- 分成汇总 -->
-                                    <div class="mt-8 flex justify-end">
-                                        <div class="px-10 py-6 bg-gold-400 text-black shadow-2xl rounded-sm">
-                                            <div class="text-[10px] font-bold uppercase tracking-[0.2em] mb-1 opacity-60">团队分成收益汇总</div>
-                                            <div class="text-3xl font-serif font-bold" x-text="agentMoney(agentDownlineOrdersCommissionTotal())"></div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
