@@ -3211,65 +3211,72 @@
                                     </div>
                                 
                                     <!-- PC端表格视图 -->
-                                    <div class="hidden md:block border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
-                                        <table class="w-max min-w-full text-xs whitespace-nowrap">
-                                            <thead class="bg-white/5">
-                                                <tr class="text-white/40 uppercase tracking-[0.2em] font-bold text-[10px]">
-                                                    <th class="px-4 py-4 text-left">订单号</th>
-                                                    <th class="px-4 py-4 text-left">服务名</th>
-                                                    <th class="px-4 py-4 text-left">学生</th>
-                                                    <th class="px-4 py-4 text-left">学生性别</th>
-                                                    <th class="px-4 py-4 text-left">学生电话</th>
-                                                    <th class="px-4 py-4 text-left">家长</th>
-                                                    <th class="px-4 py-4 text-left">家长性别</th>
-                                                    <th class="px-4 py-4 text-left">家长电话</th>
-                                                    <th class="px-4 py-4 text-left">权重</th>
-                                                    <th class="px-4 py-4 text-left">身份证</th>
-                                                    <th class="px-4 py-4 text-left">金额</th>
-                                                    <th class="px-4 py-4 text-left">状态</th>
-                                                    <th class="px-4 py-4 text-left">创单代理</th>
-                                                    <th class="px-4 py-4 text-left">创建时间</th>
-                                                    <th class="px-4 py-4 text-left">签单时间</th>
-                                                    <th class="px-4 py-4 text-left">分成</th>
-                                                    <th class="px-4 py-4 text-left">完结时间</th>
-                                                    <th class="px-4 py-4 text-left" x-show="agentUser && agentUser.role === 'consultant'">操作</th>
+                                    <div class="hidden md:block border border-white/10 overflow-x-auto bg-black/20" style="-webkit-overflow-scrolling: touch;">
+                                        <table class="w-full text-xs text-left border-collapse whitespace-nowrap min-w-[2200px]">
+                                            <thead>
+                                                <tr class="bg-white/5 text-white/30 uppercase tracking-[0.2em] font-bold border-y border-white/10">
+                                                    <th class="px-6 py-5">订单号</th>
+                                                    <th class="px-6 py-5">服务名</th>
+                                                    <th class="px-6 py-5">学生</th>
+                                                    <th class="px-6 py-5">学生性别</th>
+                                                    <th class="px-6 py-5">学生电话</th>
+                                                    <th class="px-6 py-5">家长</th>
+                                                    <th class="px-6 py-5">家长性别</th>
+                                                    <th class="px-6 py-5">家长电话</th>
+                                                    <th class="px-6 py-5">权重</th>
+                                                    <th class="px-6 py-5">身份证</th>
+                                                    <th class="px-6 py-5">金额</th>
+                                                    <th class="px-6 py-5">状态</th>
+                                                    <th class="px-6 py-5">创单代理</th>
+                                                    <th class="px-6 py-5">创建时间</th>
+                                                    <th class="px-6 py-5">签单时间</th>
+                                                    <th class="px-6 py-5">分成</th>
+                                                    <th class="px-6 py-5">完结时间</th>
+                                                    <th class="px-6 py-5 text-right" x-show="agentUser && agentUser.role === 'consultant'">操作</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="divide-y divide-white/5">
                                                 <template x-for="o in agentOrders" :key="o.id">
-                                                    <tr class="border-t border-white/10 hover:bg-white/[0.03] transition">
-                                                        <td class="px-4 py-3 font-mono text-white/90" x-text="dash(o.orderNo)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
-                                                        <td class="px-4 py-3 font-bold text-white" x-text="dash(o.studentName)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.studentGender)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.parentName)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.parentGender)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.parentPhone)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.extraServiceWeight)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.studentIdCard)"></td>
-                                                        <td class="px-4 py-3 font-serif font-bold text-gold-400" x-text="agentMoney(o.amount)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.status)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
-                                                        <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
-                                                        <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
-                                                        <td class="px-4 py-3 text-white/80" x-text="agentCommissionText(o)"></td>
-                                                        <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
-                                                        <td class="px-4 py-3" x-show="agentUser && agentUser.role === 'consultant'">
-                                                            <button type="button" class="px-3 py-1.5 text-[10px] font-bold border border-gold-400/30 text-gold-300 hover:bg-gold-400/10 transition mr-2" :class="agentBusy ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''" :disabled="agentBusy" @click="agentOpenEditOrder(o)">修改</button>
-                                                            <button type="button" class="px-3 py-1.5 text-[10px] font-bold border border-white/20 text-white/70 hover:bg-white/10 transition mr-2" :class="(agentBusy || o.status === '已完结') ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''" :disabled="agentBusy || o.status === '已完结'" @click="agentAdvanceOrder(o.id)">更新</button>
-                                                            <button type="button" class="px-3 py-1.5 text-[10px] font-bold border border-red-400/30 text-red-200 hover:bg-red-500/20 transition" :class="agentBusy ? 'opacity-50 cursor-not-allowed hover:bg-transparent' : ''" :disabled="agentBusy" @click="agentDeleteOrder(o.id)">删除</button>
+                                                    <tr class="hover:bg-white/[0.03] transition-all group">
+                                                        <td class="px-6 py-5 font-mono text-white/90" x-text="dash(o.orderNo)"></td>
+                                                        <td class="px-6 py-5">
+                                                            <span class="px-2 py-0.5 bg-white/5 border border-white/10 text-white/80" x-text="dash(o.serviceName)"></span>
+                                                        </td>
+                                                        <td class="px-6 py-5 font-bold text-white" x-text="dash(o.studentName)"></td>
+                                                        <td class="px-6 py-5 text-white/70" x-text="dash(o.studentGender)"></td>
+                                                        <td class="px-6 py-5 text-white/70 font-mono" x-text="dash(o.studentPhone)"></td>
+                                                        <td class="px-6 py-5 text-white/70" x-text="dash(o.parentName)"></td>
+                                                        <td class="px-6 py-5 text-white/70" x-text="dash(o.parentGender)"></td>
+                                                        <td class="px-6 py-5 text-white/70 font-mono" x-text="dash(o.parentPhone)"></td>
+                                                        <td class="px-6 py-5 text-white/60 font-mono" x-text="dash(o.extraServiceWeight)"></td>
+                                                        <td class="px-6 py-5 text-white/60 font-mono" x-text="dash(o.studentIdCard)"></td>
+                                                        <td class="px-6 py-5 font-serif font-bold text-gold-400 text-sm" x-text="agentMoney(o.amount)"></td>
+                                                        <td class="px-6 py-5">
+                                                            <span class="inline-flex items-center gap-2" :class="o.status === '已完结' ? 'text-green-400' : (o.status === '已签单' ? 'text-gold-400' : 'text-blue-400')">
+                                                                <span class="w-1.5 h-1.5 rounded-full bg-current shadow-[0_0_10px_currentColor]"></span>
+                                                                <span class="font-bold uppercase tracking-widest text-[10px]" x-text="dash(o.status)"></span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="px-6 py-5 text-white/50 text-[10px] font-mono" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
+                                                        <td class="px-6 py-5 text-white/35 text-[10px] font-mono" x-text="fmtCN(o.createdAt)"></td>
+                                                        <td class="px-6 py-5 text-white/35 text-[10px] font-mono" x-text="fmtCN(o.signedAt)"></td>
+                                                        <td class="px-6 py-5 text-white/70 italic" x-text="agentCommissionText(o)"></td>
+                                                        <td class="px-6 py-5 text-white/35 text-[10px] font-mono" x-text="fmtCN(o.finishedAt)"></td>
+                                                        <td class="px-6 py-5 text-right" x-show="agentUser && agentUser.role === 'consultant'">
+                                                            <button type="button" @click="agentOpenEditOrder(o)" class="text-gold-400 hover:text-white transition font-bold text-xs" :class="agentBusy ? 'opacity-50 cursor-not-allowed' : ''" :disabled="agentBusy">修改</button>
+                                                            <button type="button" @click="agentAdvanceOrder(o.id)" class="ml-3 text-white/30 hover:text-white transition text-xs font-bold" :class="(agentBusy || o.status === '已完结') ? 'opacity-50 cursor-not-allowed' : ''" :disabled="agentBusy || o.status === '已完结'">更新</button>
+                                                            <button type="button" @click="agentDeleteOrder(o.id)" class="ml-3 text-red-300/70 hover:text-red-200 transition text-xs font-bold" :class="agentBusy ? 'opacity-50 cursor-not-allowed' : ''" :disabled="agentBusy">删除</button>
                                                         </td>
                                                     </tr>
                                                 </template>
-                                                <tr x-show="agentOrders && agentOrders.length" class="border-t border-white/10 bg-black/20">
-                                                    <td class="px-4 py-3 text-[10px] text-white/60 tracking-widest" :colspan="(agentUser && agentUser.role === 'consultant') ? 18 : 17">
+                                                <tr x-show="agentOrders && agentOrders.length" class="bg-black/20">
+                                                    <td class="px-6 py-4 text-[10px] text-white/60 tracking-widest" :colspan="(agentUser && agentUser.role === 'consultant') ? 18 : 17">
                                                         <span class="font-bold text-white/70">备注：</span>
                                                         <span x-text="'我的分成：' + agentMoney(agentMyOrdersCommissionTotal()) + '  下级分成：' + agentMoney(agentDownlineOrdersCommissionTotal()) + '  总分成：' + agentMoney(agentTotalCommissionTotal())"></span>
                                                     </td>
                                                 </tr>
-                                                <tr x-show="agentOrders.length === 0" class="border-t border-white/10">
-                                                    <td class="px-4 py-3 text-white/40" :colspan="(agentUser && agentUser.role === 'consultant') ? 18 : 17">暂无订单</td>
+                                                <tr x-show="agentOrders.length === 0">
+                                                    <td class="px-6 py-6 text-white/40" :colspan="(agentUser && agentUser.role === 'consultant') ? 18 : 17">暂无订单</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -3523,57 +3530,64 @@
                                     </div>
 
                                     <!-- PC端表格视图（列按旧版完整保留） -->
-                                    <div class="hidden md:block mt-4 border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
-                                        <table class="w-max min-w-full text-xs whitespace-nowrap">
-                                            <thead class="bg-white/5">
-                                                <tr class="text-white/40 uppercase tracking-[0.2em] font-bold text-[10px]">
-                                                    <th class="px-4 py-4 text-left">订单号</th>
-                                                    <th class="px-4 py-4 text-left">服务名</th>
-                                                    <th class="px-4 py-4 text-left">学生</th>
-                                                    <th class="px-4 py-4 text-left">学生性别</th>
-                                                    <th class="px-4 py-4 text-left">学生电话</th>
-                                                    <th class="px-4 py-4 text-left">家长</th>
-                                                    <th class="px-4 py-4 text-left">家长性别</th>
-                                                    <th class="px-4 py-4 text-left">家长电话</th>
-                                                    <th class="px-4 py-4 text-left">权重</th>
-                                                    <th class="px-4 py-4 text-left">金额</th>
-                                                    <th class="px-4 py-4 text-left">状态</th>
-                                                    <th class="px-4 py-4 text-left">创单代理</th>
-                                                    <th class="px-4 py-4 text-left">创建时间</th>
-                                                    <th class="px-4 py-4 text-left">签单时间</th>
-                                                    <th class="px-4 py-4 text-left">分成</th>
-                                                    <th class="px-4 py-4 text-left">完结时间</th>
+                                    <div class="hidden md:block mt-4 border border-white/10 overflow-x-auto bg-black/20" style="-webkit-overflow-scrolling: touch;">
+                                        <table class="w-full text-xs text-left border-collapse whitespace-nowrap min-w-[1900px]">
+                                            <thead>
+                                                <tr class="bg-white/5 text-white/30 uppercase tracking-[0.2em] font-bold border-y border-white/10">
+                                                    <th class="px-6 py-5">订单号</th>
+                                                    <th class="px-6 py-5">服务名</th>
+                                                    <th class="px-6 py-5">学生</th>
+                                                    <th class="px-6 py-5">学生性别</th>
+                                                    <th class="px-6 py-5">学生电话</th>
+                                                    <th class="px-6 py-5">家长</th>
+                                                    <th class="px-6 py-5">家长性别</th>
+                                                    <th class="px-6 py-5">家长电话</th>
+                                                    <th class="px-6 py-5">权重</th>
+                                                    <th class="px-6 py-5">金额</th>
+                                                    <th class="px-6 py-5">状态</th>
+                                                    <th class="px-6 py-5">创单代理</th>
+                                                    <th class="px-6 py-5">创建时间</th>
+                                                    <th class="px-6 py-5">签单时间</th>
+                                                    <th class="px-6 py-5">分成</th>
+                                                    <th class="px-6 py-5">完结时间</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="divide-y divide-white/5">
                                                 <template x-for="o in agentDownlineOrders" :key="o.id">
-                                                    <tr class="border-t border-white/10 hover:bg-white/[0.03] transition">
-                                                        <td class="px-4 py-3 font-mono text-white/90" x-text="dash(o.orderNo)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.serviceName)"></td>
-                                                        <td class="px-4 py-3 font-bold text-white" x-text="dash(o.studentName)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.studentGender)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.studentPhone)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.parentName)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.parentGender)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.parentPhone)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.extraServiceWeight)"></td>
-                                                        <td class="px-4 py-3 font-serif font-bold text-gold-400" x-text="agentMoney(o.amount)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.status)"></td>
-                                                        <td class="px-4 py-3" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
-                                                        <td class="px-4 py-3" x-text="fmtCN(o.createdAt)"></td>
-                                                        <td class="px-4 py-3" x-text="fmtCN(o.signedAt)"></td>
-                                                        <td class="px-4 py-3 text-white/80" x-text="agentCommissionText(o)"></td>
-                                                        <td class="px-4 py-3" x-text="fmtCN(o.finishedAt)"></td>
+                                                    <tr class="hover:bg-white/[0.03] transition-all group">
+                                                        <td class="px-6 py-5 font-mono text-white/90" x-text="dash(o.orderNo)"></td>
+                                                        <td class="px-6 py-5">
+                                                            <span class="px-2 py-0.5 bg-white/5 border border-white/10 text-white/80" x-text="dash(o.serviceName)"></span>
+                                                        </td>
+                                                        <td class="px-6 py-5 font-bold text-white" x-text="dash(o.studentName)"></td>
+                                                        <td class="px-6 py-5 text-white/70" x-text="dash(o.studentGender)"></td>
+                                                        <td class="px-6 py-5 text-white/70 font-mono" x-text="dash(o.studentPhone)"></td>
+                                                        <td class="px-6 py-5 text-white/70" x-text="dash(o.parentName)"></td>
+                                                        <td class="px-6 py-5 text-white/70" x-text="dash(o.parentGender)"></td>
+                                                        <td class="px-6 py-5 text-white/70 font-mono" x-text="dash(o.parentPhone)"></td>
+                                                        <td class="px-6 py-5 text-white/60 font-mono" x-text="dash(o.extraServiceWeight)"></td>
+                                                        <td class="px-6 py-5 font-serif font-bold text-gold-400 text-sm" x-text="agentMoney(o.amount)"></td>
+                                                        <td class="px-6 py-5">
+                                                            <span class="inline-flex items-center gap-2" :class="o.status === '已完结' ? 'text-green-400' : (o.status === '已签单' ? 'text-gold-400' : 'text-blue-400')">
+                                                                <span class="w-1.5 h-1.5 rounded-full bg-current shadow-[0_0_10px_currentColor]"></span>
+                                                                <span class="font-bold uppercase tracking-widest text-[10px]" x-text="dash(o.status)"></span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="px-6 py-5 text-white/50 text-[10px] font-mono" x-text="dash(o.boundUserPhone) + (o.boundUserRole ? ' (' + o.boundUserRole + ')' : '')"></td>
+                                                        <td class="px-6 py-5 text-white/35 text-[10px] font-mono" x-text="fmtCN(o.createdAt)"></td>
+                                                        <td class="px-6 py-5 text-white/35 text-[10px] font-mono" x-text="fmtCN(o.signedAt)"></td>
+                                                        <td class="px-6 py-5 text-white/70 italic" x-text="agentCommissionText(o)"></td>
+                                                        <td class="px-6 py-5 text-white/35 text-[10px] font-mono" x-text="fmtCN(o.finishedAt)"></td>
                                                     </tr>
                                                 </template>
-                                                <tr x-show="agentDownlineOrders && agentDownlineOrders.length" class="border-t border-white/10 bg-black/20">
-                                                    <td class="px-4 py-3 text-[10px] text-white/60 tracking-widest" colspan="16">
+                                                <tr x-show="agentDownlineOrders && agentDownlineOrders.length" class="bg-black/20">
+                                                    <td class="px-6 py-4 text-[10px] text-white/60 tracking-widest" colspan="16">
                                                         <span class="font-bold text-white/70">备注：</span>
                                                         <span x-text="'下级分成：' + agentMoney(agentDownlineOrdersCommissionTotal())"></span>
                                                     </td>
                                                 </tr>
-                                                <tr x-show="!agentDownlineOrders || agentDownlineOrders.length === 0" class="border-t border-white/10">
-                                                    <td class="px-4 py-3 text-white/40" colspan="16">暂无下级订单</td>
+                                                <tr x-show="!agentDownlineOrders || agentDownlineOrders.length === 0">
+                                                    <td class="px-6 py-6 text-white/40" colspan="16">暂无下级订单</td>
                                                 </tr>
                                             </tbody>
                                         </table>
