@@ -4,7 +4,7 @@ window.SDLV_I18N = {
                         nav_home: '首页', nav_achievements: '成就与反馈', nav_about: '关于我们', nav_study: '留学服务', nav_apt: '学生居社', nav_career: '职涯规划', nav_contact: '商业合作',
                         sub_hero: 'Hero概览', sub_core: '核心业务', sub_story: '品牌故事', sub_history: '企业历程', sub_team: '团队专材', sub_partners: '城市合伙人', sub_data: '数据亮点', sub_content: '服务内容', sub_map: '交互地图', sub_showcase: '公寓展示',
                         hero_sub: '作为学子成长路上最坚实的后盾，以经验及专业护航，成就学子发挥潜能',
-                        hero_slogan: '自2016年-札根香港，连系全球',
+                        hero_slogan: '自2016年-扎根香港，连系全球',
                         stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累计服务用户', stat_offer: 'Top 100名校录取', stat_satisfaction: '职涯规划满意率', stat_apt: '运营管理香港学生公寓(间)', stat_feedback: '用户好评反馈',
                         biz_title: '核心业务', 
                         biz_study_t: '留学申请',
