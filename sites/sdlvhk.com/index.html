@@ -2225,7 +2225,7 @@
                         <template x-for="(item, idx) in ymtFloorPlans" :key="idx">
                             <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white border border-black/10">
                                 <div class="relative h-72 bg-black/5 flex items-center justify-center overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-contain p-4 transition duration-700 group-hover:scale-[1.02]" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <img :src="item.src" class="w-full h-full object-cover" :alt="item.alt || item.label" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-transparent pointer-events-none"></div>
                                     <div class="absolute bottom-4 left-4">
                                         <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
@@ -2237,11 +2237,11 @@
                 </div>
             </section>
 
-            <!-- 第六部份：房間設施（1-5號房）+ 訂房按鈕 -->
+            <!-- 第六部份：房間設施（1-5號房）+ 訂房按鈕（按需求注释） -->
+            <!--
             <section class="py-24 bg-paper text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-center">
-                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Rooms</span> -->
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">房间设施（1-5号房）</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
                         <p class="mt-6 text-black/60">先用占位卡片，后续按提供的图片与资料逐一完善。</p>
@@ -2260,6 +2260,7 @@
                     </div>
                 </div>
             </section>
+            -->
         </div>
 
         <!-- ================= PAGE 5: 职涯规划 ================= -->
