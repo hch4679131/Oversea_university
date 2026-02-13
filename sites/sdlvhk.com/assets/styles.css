@@ -236,6 +236,17 @@ body {
     caret-color: #D4AF37;
 }
 
+[data-agent-ui] input::placeholder,
+[data-agent-ui] textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+    opacity: 1 !important;
+}
+
+[data-agent-ui] input::-ms-input-placeholder,
+[data-agent-ui] textarea::-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
 [data-agent-ui] input:focus,
 [data-agent-ui] select:focus,
 [data-agent-ui] textarea:focus {

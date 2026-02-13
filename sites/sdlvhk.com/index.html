@@ -3038,9 +3038,11 @@
                                                  @mousemove="agentSalesTrendHoverMove($event)" @mouseleave="agentSalesTrendHoverClear()">
                                                 <g x-show="agentSalesTrendHasData()">
                                                     <!-- 背景网格 -->
-                                                    <template x-for="k in agentSalesTrendGridK()">
-                                                        <line :x1="agentSalesTrendPad().l" :x2="agentSalesTrendW() - agentSalesTrendPad().r" :y1="agentSalesTrendGridY(k)" :y2="agentSalesTrendGridY(k)" stroke="rgba(255,255,255,0.05)" />
-                                                    </template>
+                                                    <line :x1="agentSalesTrendPad().l" :x2="agentSalesTrendW() - agentSalesTrendPad().r" :y1="agentSalesTrendGridY(0)" :y2="agentSalesTrendGridY(0)" stroke="rgba(255,255,255,0.05)" />
+                                                    <line :x1="agentSalesTrendPad().l" :x2="agentSalesTrendW() - agentSalesTrendPad().r" :y1="agentSalesTrendGridY(1)" :y2="agentSalesTrendGridY(1)" stroke="rgba(255,255,255,0.05)" />
+                                                    <line :x1="agentSalesTrendPad().l" :x2="agentSalesTrendW() - agentSalesTrendPad().r" :y1="agentSalesTrendGridY(2)" :y2="agentSalesTrendGridY(2)" stroke="rgba(255,255,255,0.05)" />
+                                                    <line :x1="agentSalesTrendPad().l" :x2="agentSalesTrendW() - agentSalesTrendPad().r" :y1="agentSalesTrendGridY(3)" :y2="agentSalesTrendGridY(3)" stroke="rgba(255,255,255,0.05)" />
+                                                    <line :x1="agentSalesTrendPad().l" :x2="agentSalesTrendW() - agentSalesTrendPad().r" :y1="agentSalesTrendGridY(4)" :y2="agentSalesTrendGridY(4)" stroke="rgba(255,255,255,0.05)" />
                                                     <!-- 数据线 -->
                                                     <path :d="agentSalesTrendPath('downline')" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="4" />
                                                     <path :d="agentSalesTrendPath('my')" fill="none" stroke="#D4AF37" stroke-width="3" />
