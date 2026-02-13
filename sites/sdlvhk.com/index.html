@@ -1857,11 +1857,11 @@
             <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start"> <!--lg:grid-cols-2 -->
                     <div class="scrub-item anim-fade-up">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
+                        <!-- <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
                             <span>公寓頁標籤</span>
                             <span class="text-black/40">/</span>
                             <span class="font-bold">汇生会社(油麻地)</span>
-                        </div>
+                        </div> -->
                         <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950">汇生会社(油麻地)</h1>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
                         <p class="mt-4 text-black/70 leading-relaxed">居社地理位置：香港油麻地吴松街1号</p>
@@ -2201,45 +2201,41 @@
                 </div>
             </section>
 
-            <!-- 第五部份：戶型圖 -->
-            <!-- <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+            <!-- 第五部份：户型图（阵列展示，样式对齐“我们的房间”） -->
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ ymtFloorPlans: [
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1楼_结果.webp', label: '1楼', alt: '1楼 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2-5楼_结果.webp', label: '2-5楼', alt: '2-5楼 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1号房_结果.webp', label: '1号房', alt: '1号房 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2号房_结果.webp', label: '2号房', alt: '2号房 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/3号房_结果.webp', label: '3号房', alt: '3号房 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/4号房（2-5楼）_结果.webp', label: '4号房（2-5楼）', alt: '4号房（2-5楼） 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/5号房_结果.webp', label: '5号房', alt: '5号房 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/6号房_结果.webp', label: '6号房', alt: '6号房 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/7号房_结果.webp', label: '7号房', alt: '7号房 户型图' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/8号房_结果.webp', label: '8号房', alt: '8号房 户型图' }
+            ] }">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-center">
-                        <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Room Plan</span>
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">户型图</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                        <p class="mt-6 text-black/60">平面图一览 / 楼层与房型布局</p>
                     </div>
 
-                    <div class="mt-10 grid lg:grid-cols-2 gap-8 items-start">
-                        <img src="https://static.sdlvhk.com/图片素材/section/4-7.png" class="w-full ">
-                        <div class="bg-paper border border-black/10 rounded-lg overflow-hidden shadow-2xl scrub-item anim-fade-up">
-                            <div class="h-[420px] bg-black/5 flex items-center justify-center text-center px-6">
-                                <div>
-                                    <div class="text-sm font-bold text-obsidian-950">户型图图片位置</div>
-                                    <div class="mt-2 text-xs text-black/60">（后面给图片）</div>
+                    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <template x-for="(item, idx) in ymtFloorPlans" :key="idx">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white border border-black/10">
+                                <div class="relative h-72 bg-black/5 flex items-center justify-center overflow-hidden">
+                                    <img :src="item.src" class="w-full h-full object-contain p-4 transition duration-700 group-hover:scale-[1.02]" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="p-6 scrub-item anim-fade-up">
-                            <div class="text-sm font-bold text-obsidian-950">标准配置</div>
-                            <div class="mt-4 grid sm:grid-cols-2 gap-y-2 gap-x-6 text-sm text-black/80">
-                                <div>🛏️ 单人床</div>
-                                <div>🧸 床垫</div>
-                                <div>🪟 窗帘</div>
-                                <div>❄️ 冷气机</div>
-                                <div>🚿 干湿分离洗浴间</div>
-                                <div>♨️ 热水器</div>
-                                <div>👔 衣柜</div>
-                                <div>🪑 桌椅设施</div>
-                                <div>📦 床下储物空间</div>
-                                <div>🔒 标准配置门锁</div>
-                                <div>🪞 浴室镜</div>
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
-            </section> -->
+            </section>
 
             <!-- 第六部份：房間設施（1-5號房）+ 訂房按鈕 -->
             <section class="py-24 bg-paper text-obsidian-950">
