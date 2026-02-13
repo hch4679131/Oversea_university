@@ -220,3 +220,41 @@ body {
     white-space: nowrap;
     text-align: left;
 }
+
+/* Agent dashboard: prevent browser default blue focus/autofill tint */
+[data-agent-ui] {
+    -webkit-tap-highlight-color: transparent;
+}
+
+[data-agent-ui] input,
+[data-agent-ui] select,
+[data-agent-ui] textarea {
+    color-scheme: dark;
+}
+
+[data-agent-ui] input {
+    caret-color: #D4AF37;
+}
+
+[data-agent-ui] input:focus,
+[data-agent-ui] select:focus,
+[data-agent-ui] textarea:focus {
+    outline: none;
+    border-color: rgba(212, 175, 55, 0.75) !important;
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-agent-ui] input:-webkit-autofill,
+[data-agent-ui] input:-webkit-autofill:hover,
+[data-agent-ui] input:-webkit-autofill:focus,
+[data-agent-ui] textarea:-webkit-autofill,
+[data-agent-ui] textarea:-webkit-autofill:hover,
+[data-agent-ui] textarea:-webkit-autofill:focus,
+[data-agent-ui] select:-webkit-autofill,
+[data-agent-ui] select:-webkit-autofill:hover,
+[data-agent-ui] select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff;
+    caret-color: #D4AF37;
+    transition: background-color 9999s ease-out 0s;
+    box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.35) inset !important;
+}
