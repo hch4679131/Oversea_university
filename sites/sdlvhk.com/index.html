@@ -2145,89 +2145,7 @@
                 </div>
             </section>
 
-            <!-- 第二部份：生活配套 -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-left">
-                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Neighborhood</span> -->
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">生活配套</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                    </div>
-                    <!-- <img class="mt-4 w-full" src="https://static.sdlvhk.com/图片素材/section/4-4.png"> -->
-                    <div class="mt-10 grid md:grid-cols-3 gap-10">
-                        <div class="p-2 scrub-item anim-fade-up">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="shopping-bag" class="w-5 h-5 text-obsidian-950"></i>
-                                <div class="h-[1px] flex-1 bg-black/15"></div>
-                            </div>
-                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">美食购物（5-20 分钟）</div>
-                            <div class="mt-4 space-y-2 text-sm text-black/70 leading-relaxed">
-                                <div>庙街夜市</div>
-                                <div>旺角朗豪坊商场</div>
-                                <div>圆方商场</div>
-                                <div>信和中心</div>
-                                <div>西洋菜南街</div>
-                                <div>荷里活商业中心</div>
-                                <div>百老汇电影中心</div>
-                            </div>
-                        </div>
-
-                        <div class="p-2 scrub-item anim-fade-up">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="store" class="w-5 h-5 text-obsidian-950"></i>
-                                <div class="h-[1px] flex-1 bg-black/15"></div>
-                            </div>
-                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">生活日用（1-5 分钟）</div>
-                            <div class="mt-4 space-y-2 text-sm text-black/70 leading-relaxed">
-                                <div>711 便利店</div>
-                                <div>惠康超市</div>
-                                <div>百佳超市</div>
-                                <div>油麻地果栏</div>
-                            </div>
-                        </div>
-
-                        <div class="p-2 scrub-item anim-fade-up">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="building-2" class="w-5 h-5 text-obsidian-950"></i>
-                                <div class="h-[1px] flex-1 bg-black/15"></div>
-                            </div>
-                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">公共设施（5-15 分钟）</div>
-                            <div class="mt-4 space-y-2 text-sm text-black/70 leading-relaxed">
-                                <div>油麻地警署</div>
-                                <div>九龙公园</div>
-                                <div>京士柏公园</div>
-                                <div>伊利沙伯医院</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 第三部份：互動地圖（高德） -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-left">
-                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Map</span> -->
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">地图</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <!-- <p class="mt-6 text-black/60">高德</p> -->
-                    </div>
-
-                    <div class="mt-10 bg-paper border border-black/10 rounded-lg overflow-hidden shadow-2xl scrub-item anim-fade-up">
-                        <div class="relative h-[420px] bg-black/5">
-                            <div id="amap-embed" class="absolute inset-0"></div>
-                            <div class="absolute inset-0 flex items-center justify-center text-center px-6 pointer-events-none" x-show="!amapEmbedInited">
-                                <div>
-                                    <div class="text-sm font-bold text-obsidian-950">高德地图加载中...</div>
-                                    <div class="mt-2 text-xs text-black/60">（如长时间未显示，请检查网络或浏览器拦截）</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 我们的房间（插入在「地图」与「居社设施及服务」之间） -->
+            <!-- 我们的房间 -->
             <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ ymtBookingOpen: false, ymtRoomsPhotos: [
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/1号房/1号房_结果.webp', label: '1号房', alt: '1号房' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房_结果.webp', label: '2号房', alt: '2号房' },
@@ -2293,6 +2211,64 @@
                                         <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-black/5" loading="lazy" decoding="async">
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二部份：生活配套 -->
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up text-left">
+                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Neighborhood</span> -->
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">生活配套</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
+                    </div>
+                    <!-- <img class="mt-4 w-full" src="https://static.sdlvhk.com/图片素材/section/4-4.png"> -->
+                    <div class="mt-10 grid md:grid-cols-3 gap-10">
+                        <div class="p-2 scrub-item anim-fade-up">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="shopping-bag" class="w-5 h-5 text-obsidian-950"></i>
+                                <div class="h-[1px] flex-1 bg-black/15"></div>
+                            </div>
+                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">美食购物（5-20 分钟）</div>
+                            <div class="mt-4 space-y-2 text-sm text-black/70 leading-relaxed">
+                                <div>庙街夜市</div>
+                                <div>旺角朗豪坊商场</div>
+                                <div>圆方商场</div>
+                                <div>信和中心</div>
+                                <div>西洋菜南街</div>
+                                <div>荷里活商业中心</div>
+                                <div>百老汇电影中心</div>
+                            </div>
+                        </div>
+
+                        <div class="p-2 scrub-item anim-fade-up">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="store" class="w-5 h-5 text-obsidian-950"></i>
+                                <div class="h-[1px] flex-1 bg-black/15"></div>
+                            </div>
+                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">生活日用（1-5 分钟）</div>
+                            <div class="mt-4 space-y-2 text-sm text-black/70 leading-relaxed">
+                                <div>711 便利店</div>
+                                <div>惠康超市</div>
+                                <div>百佳超市</div>
+                                <div>油麻地果栏</div>
+                            </div>
+                        </div>
+
+                        <div class="p-2 scrub-item anim-fade-up">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="building-2" class="w-5 h-5 text-obsidian-950"></i>
+                                <div class="h-[1px] flex-1 bg-black/15"></div>
+                            </div>
+                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">公共设施（5-15 分钟）</div>
+                            <div class="mt-4 space-y-2 text-sm text-black/70 leading-relaxed">
+                                <div>油麻地警署</div>
+                                <div>九龙公园</div>
+                                <div>京士柏公园</div>
+                                <div>伊利沙伯医院</div>
                             </div>
                         </div>
                     </div>
@@ -2450,6 +2426,30 @@
                                 </div>
                             </div>
                         </template>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第三部份：互動地圖（高德） -->
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up text-left">
+                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Map</span> -->
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">地图</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
+                        <!-- <p class="mt-6 text-black/60">高德</p> -->
+                    </div>
+
+                    <div class="mt-10 bg-paper border border-black/10 rounded-lg overflow-hidden shadow-2xl scrub-item anim-fade-up">
+                        <div class="relative h-[420px] bg-black/5">
+                            <div id="amap-embed" class="absolute inset-0"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-center px-6 pointer-events-none" x-show="!amapEmbedInited">
+                                <div>
+                                    <div class="text-sm font-bold text-obsidian-950">高德地图加载中...</div>
+                                    <div class="mt-2 text-xs text-black/60">（如长时间未显示，请检查网络或浏览器拦截）</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
