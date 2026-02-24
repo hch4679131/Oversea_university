@@ -20,19 +20,19 @@
     <!-- 图标库 -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- 字体 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Serif+SC:wght@300;400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        // 根据 Logo 提取：深蓝色代表专业稳重，红色代表热情精英
-                        brand: {
-                            navy: '#102A43',
+                        academic: {
+                            navy: '#0F172A',
+                            blue: '#1E40AF',
                             red: '#BE123C',
-                            blue: '#2563EB',
-                            slate: '#F8FAFC'
+                            slate: '#F8FAFC',
+                            gold: '#A59477'
                         },
                         gold: { 300: '#E5C975', 400: '#D4AF37', 500: '#B89225' },
                         obsidian: { 950: '#050505', 900: '#0E121B', 800: '#1A1F2E' },
@@ -40,7 +40,7 @@
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
-                        serif: ['"Noto Serif SC"', 'serif'],
+                        serif: ['"Playfair Display"', '"Noto Serif SC"', 'serif'],
                     }
                 }
             }
@@ -226,215 +226,149 @@
     <!-- 主容器 -->
     <main class="pt-20 min-h-screen relative">
 
-        <!-- ================= PAGE 1: 首页 (简约国际版) ================= -->
-        <div x-show="page === 'home'" x-transition:enter="transition ease-out duration-500" class="w-full bg-white">
+        <!-- ================= PAGE 1: 首页 (顶尖学术国际版) ================= -->
+        <div x-show="page === 'home'" x-transition:enter="transition ease-out duration-700" class="w-full bg-white">
 
-            <!-- Hero Section: 仿 JUC 风格 -->
-            <section id="hero" class="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-brand-navy">
-                <!-- 背景图装饰：右侧半透明大图 -->
-                <div class="absolute inset-0 z-0">
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-transparent z-10"></div>
+            <!-- Hero Section: 极致简约与视觉张力 -->
+            <section id="hero" class="relative min-h-screen flex items-center bg-white pt-20 overflow-hidden">
+                <!-- 背景装饰：极简几何与大图 -->
+                <div class="absolute top-0 right-0 w-full lg:w-3/5 h-full z-0">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white via-white/40 to-transparent z-10"></div>
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.0%20by%20tirachardz%20on%20Freepik%20-%20Flipped%202.webp"
-                        class="absolute right-0 top-0 h-full w-2/3 object-cover opacity-60" alt="Education">
+                        class="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-1000" alt="Education">
                 </div>
 
-                <div class="relative z-20 max-w-7xl mx-auto px-6 md:px-10 w-full grid md:grid-cols-2 gap-12 items-center">
-                    <div class="scrub-item anim-fade-up">
-                        <p class="text-brand-red font-bold tracking-[0.3em] uppercase mb-4 text-sm" x-text="t[lang].hero_sub"></p>
-                        <h1 class="text-5xl md:text-7xl font-serif font-bold text-white leading-tight mb-8">
-                            Your Future,<br>
-                            <span class="text-white/90">Our Dedication.</span>
+                <div class="relative z-20 max-w-7xl mx-auto px-6 w-full">
+                    <div class="max-w-2xl">
+                        <div class="flex items-center gap-3 mb-6 scrub-item anim-fade-up">
+                            <span class="w-10 h-[2px] bg-academic-red"></span>
+                            <span class="text-academic-blue font-bold tracking-[0.4em] uppercase text-xs">Global Excellence Since 2016</span>
+                        </div>
+
+                        <h1 class="text-6xl md:text-8xl font-serif font-black text-academic-navy leading-[1.1] mb-8 scrub-item anim-fade-up">
+                            Inspiring <br>
+                            <span class="text-academic-red">Future</span> Leaders.
                         </h1>
-                        <p class="text-xl text-white/70 max-w-lg mb-10 leading-relaxed font-light" x-text="t[lang].hero_slogan"></p>
 
-                        <div class="flex flex-wrap gap-4">
-                            <button @click="switchPage('study')" class="px-8 py-4 bg-brand-red text-white font-bold hover:bg-red-700 transition-all shadow-xl">
-                                立即开启之旅
+                        <p class="text-xl text-slate-500 max-w-md mb-10 leading-relaxed font-light scrub-item anim-fade-up">
+                            汇生会 SDLV：为您提供从名校申请到品质居社的全方位国际化精英支持服务。
+                        </p>
+
+                        <div class="flex flex-wrap gap-6 scrub-item anim-fade-up">
+                            <button @click="switchPage('study')" class="group relative px-10 py-5 bg-academic-navy text-white overflow-hidden transition-all shadow-2xl hover:shadow-academic-blue/20">
+                                <span class="relative z-10 font-bold tracking-widest">探索升学计划</span>
+                                <div class="absolute inset-0 bg-academic-blue translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                             </button>
-                            <button @click="switchPage('about')" class="px-8 py-4 border border-white/30 text-white font-bold hover:bg-white/10 transition-all">
-                                了解更多
+                            <button @click="switchPage('contact')" class="px-10 py-5 border-2 border-academic-navy text-academic-navy font-bold hover:bg-academic-navy hover:text-white transition-all">
+                                即刻咨询
                             </button>
                         </div>
-                    </div>
-
-                    <div class="hidden md:block">
                     </div>
                 </div>
 
-                <div class="relative z-30 max-w-7xl mx-auto px-6 w-full -mb-32 mt-16 hidden md:block">
-                    <div class="grid grid-cols-3 shadow-2xl">
-                        <div @click="switchPage('study')" class="bg-white p-8 border-r border-gray-100 group cursor-pointer hover:bg-brand-slate transition-colors">
-                            <div class="w-12 h-12 bg-blue-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <i data-lucide="graduation-cap" class="text-brand-blue"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-brand-navy mb-2" x-text="t[lang].biz_study_t"></h3>
-                            <p class="text-gray-500 text-sm" x-text="t[lang].biz_study_sub"></p>
-                        </div>
-
-                        <div @click="switchPage('apartments')" class="bg-white p-8 border-r border-gray-100 group cursor-pointer hover:bg-brand-slate transition-colors">
-                            <div class="w-12 h-12 bg-red-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <i data-lucide="home" class="text-brand-red"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-brand-navy mb-2" x-text="t[lang].biz_apt_t"></h3>
-                            <p class="text-gray-500 text-sm" x-text="t[lang].biz_apt_locs"></p>
-                        </div>
-
-                        <div @click="switchPage('career')" class="bg-brand-red p-8 group cursor-pointer hover:bg-red-800 transition-colors">
-                            <div class="w-12 h-12 bg-white/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <i data-lucide="briefcase" class="text-white"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2" x-text="t[lang].biz_career_t"></h3>
-                            <p class="text-white/80 text-sm" x-text="t[lang].biz_career_sub"></p>
-                        </div>
-                    </div>
+                <div class="absolute bottom-10 left-10 opacity-[0.03] pointer-events-none hidden lg:block">
+                    <span class="text-[15rem] font-serif font-black leading-none uppercase">SDLV</span>
                 </div>
             </section>
 
-            <div class="h-40 hidden md:block"></div>
-
-            <section id="home-intro" class="py-24 bg-white overflow-hidden">
+            <section class="relative z-30 -mt-24 pb-20">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="grid md:grid-cols-2 gap-20 items-center">
-                        <div class="relative">
-                            <div class="absolute -top-10 -left-10 w-40 h-40 bg-gray-50 z-0"></div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp"
-                                class="relative z-10 w-full shadow-2xl" alt="About SDLV">
-                            <div class="absolute -bottom-6 -right-6 bg-brand-navy p-8 text-white hidden lg:block z-20">
-                                <p class="text-3xl font-serif font-bold">10+</p>
-                                <p class="text-xs uppercase tracking-widest text-white/60">Years Excellence</p>
+                    <div class="grid md:grid-cols-3 gap-0 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)]">
+                        <div @click="switchPage('study')" class="group relative bg-white p-12 overflow-hidden cursor-pointer border-r border-slate-100">
+                            <div class="relative z-10">
+                                <div class="text-academic-red mb-8">
+                                    <i data-lucide="graduation-cap" class="w-12 h-12 stroke-[1.5]"></i>
+                                </div>
+                                <h3 class="text-2xl font-serif font-bold text-academic-navy mb-4 group-hover:text-academic-red transition-colors" x-text="t[lang].biz_study_t"></h3>
+                                <p class="text-slate-500 text-sm leading-relaxed" x-text="t[lang].biz_study_sub"></p>
+                            </div>
+                            <div class="absolute bottom-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-opacity">
+                                <i data-lucide="graduation-cap" class="w-32 h-32"></i>
                             </div>
                         </div>
-                        <div class="scrub-item anim-fade-up">
-                            <h2 class="text-sm font-bold text-brand-red tracking-[0.4em] uppercase mb-4" x-text="t[lang].home_about_title"></h2>
-                            <h3 class="text-4xl md:text-5xl font-serif font-bold text-brand-navy mb-8 leading-tight">
-                                专业不仅是服务，<br><span class="text-gray-400">更是对未来的承诺。</span>
-                            </h3>
-                            <p class="text-gray-600 leading-relaxed mb-6" x-text="t[lang].about_p1"></p>
-                            <p class="text-gray-600 leading-relaxed mb-10" x-text="t[lang].about_p2"></p>
-                            <button @click="switchPage('about')" class="inline-flex items-center gap-2 text-brand-navy font-bold hover:text-brand-red transition-colors group">
-                                了解更多关于我们 <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
-                            </button>
+
+                        <div @click="switchPage('apartments')" class="group relative bg-academic-slate p-12 overflow-hidden cursor-pointer border-r border-slate-100">
+                            <div class="relative z-10">
+                                <div class="text-academic-blue mb-8">
+                                    <i data-lucide="home" class="w-12 h-12 stroke-[1.5]"></i>
+                                </div>
+                                <h3 class="text-2xl font-serif font-bold text-academic-navy mb-4 group-hover:text-academic-blue transition-colors" x-text="t[lang].biz_apt_t"></h3>
+                                <p class="text-slate-500 text-sm leading-relaxed" x-text="t[lang].biz_apt_locs"></p>
+                            </div>
+                            <div class="absolute bottom-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-opacity text-academic-blue">
+                                <i data-lucide="home" class="w-32 h-32"></i>
+                            </div>
+                        </div>
+
+                        <div @click="switchPage('career')" class="group relative bg-academic-red p-12 overflow-hidden cursor-pointer">
+                            <div class="relative z-10">
+                                <div class="text-white mb-8">
+                                    <i data-lucide="trending-up" class="w-12 h-12 stroke-[1.5]"></i>
+                                </div>
+                                <h3 class="text-2xl font-serif font-bold text-white mb-4" x-text="t[lang].biz_career_t"></h3>
+                                <p class="text-white/70 text-sm leading-relaxed" x-text="t[lang].biz_career_tags"></p>
+                            </div>
+                            <div class="absolute bottom-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity text-white">
+                                <i data-lucide="trending-up" class="w-32 h-32"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="py-20 bg-brand-slate">
+            <section id="home-intro" class="py-32 bg-white">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-navy">为什么选择 SDLV</h2>
-                        <div class="w-12 h-1 bg-brand-red mx-auto mt-4"></div>
-                    </div>
-                    <div class="grid md:grid-cols-4 gap-8">
-                        <div class="bg-white p-8 text-center hover:shadow-xl transition-shadow">
-                            <div class="text-brand-red mb-4 flex justify-center"><i data-lucide="users" class="w-10 h-10"></i></div>
-                            <h4 class="font-bold text-brand-navy mb-2">精英团队</h4>
-                            <p class="text-gray-500 text-xs">海外名校导师全程指导</p>
+                    <div class="flex flex-col lg:flex-row gap-20 items-center">
+                        <div class="lg:w-1/2 relative">
+                            <div class="relative z-10 w-4/5 shadow-2xl">
+                                <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp" alt="About" class="w-full">
+                            </div>
+                            <div class="absolute -bottom-12 -right-6 z-20 w-3/5 border-[12px] border-white shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1523050853063-bd80e292ce22?auto=format&fit=crop&q=80" alt="Campus" class="w-full">
+                            </div>
                         </div>
-                        <div class="bg-white p-8 text-center hover:shadow-xl transition-shadow">
-                            <div class="text-brand-red mb-4 flex justify-center"><i data-lucide="shield-check" class="w-10 h-10"></i></div>
-                            <h4 class="font-bold text-brand-navy mb-2">官方授权</h4>
-                            <p class="text-gray-500 text-xs">多所高校官方招生合作伙伴</p>
-                        </div>
-                        <div class="bg-white p-8 text-center hover:shadow-xl transition-shadow">
-                            <div class="text-brand-red mb-4 flex justify-center"><i data-lucide="map-pin" class="w-10 h-10"></i></div>
-                            <h4 class="font-bold text-brand-navy mb-2">全港覆盖</h4>
-                            <p class="text-gray-500 text-xs">遍布香港核心区域的居社网络</p>
-                        </div>
-                        <div class="bg-white p-8 text-center hover:shadow-xl transition-shadow">
-                            <div class="text-brand-red mb-4 flex justify-center"><i data-lucide="award" class="w-10 h-10"></i></div>
-                            <h4 class="font-bold text-brand-navy mb-2">高成功率</h4>
-                            <p class="text-gray-500 text-xs">96.3% 的名校录取与满意率</p>
+
+                        <div class="lg:w-1/2 scrub-item anim-fade-up">
+                            <div class="inline-block px-4 py-1 bg-academic-slate text-academic-blue text-[10px] font-bold uppercase tracking-[0.3em] mb-6">Our Philosophy</div>
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy mb-8 leading-tight">
+                                超越咨询的边界，<br>
+                                <span class="text-academic-red italic font-light">重塑教育服务标准。</span>
+                            </h2>
+                            <div class="space-y-6 text-slate-600 leading-loose text-lg">
+                                <p x-text="t[lang].about_p1"></p>
+                                <p class="pl-6 border-l-4 border-academic-red" x-text="t[lang].about_p2"></p>
+                            </div>
+
+                            <div class="mt-12 grid grid-cols-3 gap-8 border-t border-slate-100 pt-10">
+                                <div>
+                                    <div class="text-3xl font-serif font-bold text-academic-navy">96.3%</div>
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Offer Rate</div>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-serif font-bold text-academic-navy">500+</div>
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Properties</div>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-serif font-bold text-academic-navy">100%</div>
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Satisfaction</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="home-history" class="py-24 bg-brand-navy text-white">
-                <div class="max-w-6xl mx-auto px-6">
-                    <div class="text-center mb-14">
-                        <h2 class="text-3xl md:text-5xl font-serif font-bold" x-text="t[lang].home_history_title"></h2>
-                        <div class="w-14 h-1 bg-brand-red mx-auto mt-5"></div>
+            <section class="py-20 border-t border-slate-50 bg-academic-slate/30">
+                <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
+                    <div class="md:w-1/3">
+                        <h3 class="text-2xl font-serif font-bold text-academic-navy">全球化合作网络</h3>
+                        <p class="text-sm text-slate-400 mt-2">与全球顶尖学术机构及各大名校建立深度官方合作关系。</p>
                     </div>
-
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="bg-white/5 border border-white/10 p-6">
-                            <div class="text-3xl font-serif text-white">2016</div>
-                            <div class="text-brand-red text-xs tracking-widest uppercase mt-1" x-text="t[lang].hist_2016_t"></div>
-                            <p class="text-sm text-white/75 mt-4 leading-relaxed" x-text="t[lang].hist_2016_d"></p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-6">
-                            <div class="text-3xl font-serif text-white">2019</div>
-                            <div class="text-brand-red text-xs tracking-widest uppercase mt-1" x-text="t[lang].hist_2019_t"></div>
-                            <p class="text-sm text-white/75 mt-4 leading-relaxed" x-text="t[lang].hist_2019_d"></p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-6">
-                            <div class="text-3xl font-serif text-white">2022</div>
-                            <div class="text-brand-red text-xs tracking-widest uppercase mt-1" x-text="t[lang].hist_2022_t"></div>
-                            <p class="text-sm text-white/75 mt-4 leading-relaxed" x-text="t[lang].hist_2022_d"></p>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 p-6">
-                            <div class="text-3xl font-serif text-white">2026</div>
-                            <div class="text-brand-red text-xs tracking-widest uppercase mt-1" x-text="t[lang].hist_2026_t"></div>
-                            <p class="text-sm text-white/75 mt-4 leading-relaxed" x-text="t[lang].hist_2026_d"></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="home-partners" class="py-24 bg-white text-brand-navy">
-                <div class="max-w-6xl mx-auto px-6">
-                    <div class="text-center mb-10">
-                        <h2 class="text-3xl md:text-5xl font-serif font-bold" x-text="t[lang].partner_title"></h2>
-                        <div class="w-14 h-1 bg-brand-red mx-auto mt-5"></div>
-                        <p class="mt-6 text-gray-600" x-text="t[lang].partner_sub"></p>
-                    </div>
-
-                    <div class="relative w-full aspect-[16/9] border border-slate-200 mb-10 overflow-hidden bg-brand-slate">
-                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp')] bg-contain bg-center bg-no-repeat opacity-100"></div>
-                    </div>
-
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 text-left mb-10">
-                        <div class="bg-white border border-slate-200 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full aspect-[16/9] object-contain bg-brand-slate" loading="lazy" decoding="async" />
-                            <div class="p-4">
-                                <div class="text-base font-serif font-bold text-brand-navy leading-snug" x-text="t[lang].office_hk_title"></div>
-                                <div class="mt-1 text-xs text-gray-500 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
-                            </div>
-                        </div>
-                        <div class="bg-white border border-slate-200 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full aspect-[16/9] object-contain bg-brand-slate" loading="lazy" decoding="async" />
-                            <div class="p-4">
-                                <div class="text-base font-serif font-bold text-brand-navy leading-snug" x-text="t[lang].office_sz_title"></div>
-                                <div class="mt-1 text-xs text-gray-500 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
-                            </div>
-                        </div>
-                        <div class="bg-white border border-slate-200 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full aspect-[16/9] object-contain bg-brand-slate" loading="lazy" decoding="async" />
-                            <div class="p-4">
-                                <div class="text-base font-serif font-bold text-brand-navy leading-snug" x-text="t[lang].office_fs_title"></div>
-                                <div class="mt-1 text-xs text-gray-500 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
-                            </div>
-                        </div>
-                        <div class="bg-white border border-slate-200 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full aspect-[16/9] object-contain bg-brand-slate" loading="lazy" decoding="async" />
-                            <div class="p-4">
-                                <div class="text-base font-serif font-bold text-brand-navy leading-snug" x-text="t[lang].office_wh_title"></div>
-                                <div class="mt-1 text-xs text-gray-500 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
-                            </div>
-                        </div>
-                        <div class="bg-white border border-slate-200 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full aspect-[16/9] object-contain bg-brand-slate" loading="lazy" decoding="async" />
-                            <div class="p-4">
-                                <div class="text-base font-serif font-bold text-brand-navy leading-snug" x-text="t[lang].office_gy_title"></div>
-                                <div class="mt-1 text-xs text-gray-500 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
-                        <button @click="switchPage('contact')" class="w-full px-8 py-3 bg-brand-navy text-white font-bold uppercase hover:bg-brand-red transition" x-text="t[lang].btn_city_partner_inquiry"></button>
-                        <button @click="switchPage('contact')" class="w-full px-8 py-3 bg-brand-red text-white font-bold uppercase hover:bg-red-800 transition" x-text="t[lang].btn_agent_inquiry"></button>
+                    <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40 grayscale hover:grayscale-0 transition-all">
+                        <div class="flex items-center justify-center font-serif font-bold text-xl">HKU Space</div>
+                        <div class="flex items-center justify-center font-serif font-bold text-xl">PolyU JUC</div>
+                        <div class="flex items-center justify-center font-serif font-bold text-xl">THEi HK</div>
+                        <div class="flex items-center justify-center font-serif font-bold text-xl">QS Partner</div>
                     </div>
                 </div>
             </section>
