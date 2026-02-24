@@ -188,8 +188,8 @@ body {
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #050505; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+::-webkit-scrollbar-thumb { background: #003366; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #0A4B8F; }
 
 /* ================= TEMP: Disable scrub animations globally =================
    Purpose: temporarily show all scrubbed elements without scroll-driven reveal.
