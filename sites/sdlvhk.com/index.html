@@ -352,10 +352,10 @@
                 </div>
             </section>
 
-            <!-- 4. 企业历程（保留原始年份与图片内容） -->
-            <section id="home-history" class="py-24 bg-white overflow-hidden">
+            <!-- 4. 企业历程：横向紧凑进程 -->
+            <section id="home-history" class="py-20 bg-white overflow-hidden">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="flex justify-between items-end mb-12 gap-4">
+                    <div class="flex justify-between items-end mb-8 gap-4">
                         <div>
                             <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy" x-text="t[lang].home_history_title"></h2>
                             <p class="text-slate-500 text-sm mt-2">自 2016 年起，深耕香港，服务全球。</p>
@@ -363,55 +363,69 @@
                         <button @click="switchPage('about', 'history')" class="text-academic-red font-bold text-xs uppercase tracking-widest whitespace-nowrap">查看完整版</button>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="p-5 border border-academic-border bg-white hover:shadow-lg transition-all">
-                            <span class="text-3xl font-serif font-bold text-academic-red/35">2016</span>
-                            <h4 class="font-bold text-academic-navy mt-3" x-text="t[lang].hist_2016_t"></h4>
-                            <p class="text-slate-500 text-xs leading-relaxed mt-2" x-text="t[lang].hist_2016_d"></p>
-                        </div>
-                        <div class="p-5 border border-academic-border bg-white hover:shadow-lg transition-all">
-                            <span class="text-3xl font-serif font-bold text-academic-red/35">2017</span>
-                            <h4 class="font-bold text-academic-navy mt-3" x-text="t[lang].hist_2017_t"></h4>
-                            <p class="text-slate-500 text-xs leading-relaxed mt-2" x-text="t[lang].hist_2017_d"></p>
-                        </div>
-                        <div class="p-5 border border-academic-border bg-white hover:shadow-lg transition-all">
-                            <span class="text-3xl font-serif font-bold text-academic-red/35">2019</span>
-                            <h4 class="font-bold text-academic-navy mt-3" x-text="t[lang].hist_2019_t"></h4>
-                            <p class="text-slate-500 text-xs leading-relaxed mt-2 mb-4" x-text="t[lang].hist_2019_d"></p>
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202019.webp" alt="2019" class="w-full h-28 object-cover" />
-                        </div>
-                        <div class="p-5 border border-academic-border bg-white hover:shadow-lg transition-all">
-                            <span class="text-3xl font-serif font-bold text-academic-red/35">2020</span>
-                            <h4 class="font-bold text-academic-navy mt-3" x-text="t[lang].hist_2020_t"></h4>
-                            <p class="text-slate-500 text-xs leading-relaxed mt-2 mb-4" x-text="t[lang].hist_2020_d"></p>
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202020%20服务升级.webp" alt="2020" class="w-full h-28 object-cover" />
-                        </div>
-                        <div class="p-5 border border-academic-border bg-white hover:shadow-lg transition-all">
-                            <span class="text-3xl font-serif font-bold text-academic-red/35">2022</span>
-                            <h4 class="font-bold text-academic-navy mt-3" x-text="t[lang].hist_2022_t"></h4>
-                            <p class="text-slate-500 text-xs leading-relaxed mt-2 mb-4" x-text="t[lang].hist_2022_d"></p>
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202022%20腾讯教育奖项.webp" alt="2022" class="w-full h-28 object-cover" />
-                        </div>
-                        <div class="p-5 border border-academic-border bg-white hover:shadow-lg transition-all">
-                            <span class="text-3xl font-serif font-bold text-academic-red/35">2023</span>
-                            <h4 class="font-bold text-academic-navy mt-3" x-text="t[lang].hist_2023_t"></h4>
-                            <p class="text-slate-500 text-xs leading-relaxed mt-2 mb-4" x-text="t[lang].hist_2023_d"></p>
-                            <div class="grid grid-cols-3 gap-2">
-                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.1.webp" alt="2023-1" class="w-full h-20 object-cover" />
-                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.2.webp" alt="2023-2" class="w-full h-20 object-cover" />
-                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.3.webp" alt="2023-3" class="w-full h-20 object-cover" />
+                    <div class="relative overflow-x-auto pb-2">
+                        <div class="absolute left-0 right-0 top-7 h-px bg-academic-border"></div>
+
+                        <div class="relative min-w-[980px] grid grid-cols-8 gap-3">
+                            <div class="pt-0">
+                                <div class="w-3 h-3 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-2 text-lg font-serif font-bold text-academic-navy">2016</div>
+                                <div class="mt-1 text-[11px] font-bold text-academic-navy" x-text="t[lang].hist_2016_t"></div>
+                                <div class="mt-1 text-[10px] text-slate-500 leading-relaxed" x-text="t[lang].hist_2016_d"></div>
                             </div>
-                        </div>
-                        <div class="p-5 border border-academic-border bg-white hover:shadow-lg transition-all">
-                            <span class="text-3xl font-serif font-bold text-academic-red/35">2024</span>
-                            <h4 class="font-bold text-academic-navy mt-3" x-text="t[lang].hist_2024_t"></h4>
-                            <p class="text-slate-500 text-xs leading-relaxed mt-2 mb-4" x-text="t[lang].hist_2024_d"></p>
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202024%20新浪教育奖.webp" alt="2024" class="w-full h-28 object-cover" />
-                        </div>
-                        <div class="p-5 border border-academic-border bg-white hover:shadow-lg transition-all">
-                            <span class="text-3xl font-serif font-bold text-academic-red/35">2026</span>
-                            <h4 class="font-bold text-academic-navy mt-3" x-text="t[lang].hist_2026_t"></h4>
-                            <p class="text-slate-500 text-xs leading-relaxed mt-2" x-text="t[lang].hist_2026_d"></p>
+
+                            <div class="pt-0">
+                                <div class="w-3 h-3 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-2 text-lg font-serif font-bold text-academic-navy">2017</div>
+                                <div class="mt-1 text-[11px] font-bold text-academic-navy" x-text="t[lang].hist_2017_t"></div>
+                                <div class="mt-1 text-[10px] text-slate-500 leading-relaxed" x-text="t[lang].hist_2017_d"></div>
+                            </div>
+
+                            <div class="pt-0">
+                                <div class="w-3 h-3 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-2 text-lg font-serif font-bold text-academic-navy">2019</div>
+                                <div class="mt-1 text-[11px] font-bold text-academic-navy" x-text="t[lang].hist_2019_t"></div>
+                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202019.webp" alt="2019" class="mt-2 w-full h-16 object-cover" />
+                            </div>
+
+                            <div class="pt-0">
+                                <div class="w-3 h-3 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-2 text-lg font-serif font-bold text-academic-navy">2020</div>
+                                <div class="mt-1 text-[11px] font-bold text-academic-navy" x-text="t[lang].hist_2020_t"></div>
+                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202020%20服务升级.webp" alt="2020" class="mt-2 w-full h-16 object-cover" />
+                            </div>
+
+                            <div class="pt-0">
+                                <div class="w-3 h-3 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-2 text-lg font-serif font-bold text-academic-navy">2022</div>
+                                <div class="mt-1 text-[11px] font-bold text-academic-navy" x-text="t[lang].hist_2022_t"></div>
+                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202022%20腾讯教育奖项.webp" alt="2022" class="mt-2 w-full h-16 object-cover" />
+                            </div>
+
+                            <div class="pt-0">
+                                <div class="w-3 h-3 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-2 text-lg font-serif font-bold text-academic-navy">2023</div>
+                                <div class="mt-1 text-[11px] font-bold text-academic-navy" x-text="t[lang].hist_2023_t"></div>
+                                <div class="mt-2 grid grid-cols-3 gap-1">
+                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.1.webp" alt="2023-1" class="w-full h-16 object-cover" />
+                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.2.webp" alt="2023-2" class="w-full h-16 object-cover" />
+                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.3.webp" alt="2023-3" class="w-full h-16 object-cover" />
+                                </div>
+                            </div>
+
+                            <div class="pt-0">
+                                <div class="w-3 h-3 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-2 text-lg font-serif font-bold text-academic-navy">2024</div>
+                                <div class="mt-1 text-[11px] font-bold text-academic-navy" x-text="t[lang].hist_2024_t"></div>
+                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202024%20新浪教育奖.webp" alt="2024" class="mt-2 w-full h-16 object-cover" />
+                            </div>
+
+                            <div class="pt-0">
+                                <div class="w-3 h-3 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-2 text-lg font-serif font-bold text-academic-navy">2026</div>
+                                <div class="mt-1 text-[11px] font-bold text-academic-navy" x-text="t[lang].hist_2026_t"></div>
+                                <div class="mt-1 text-[10px] text-slate-500 leading-relaxed" x-text="t[lang].hist_2026_d"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
