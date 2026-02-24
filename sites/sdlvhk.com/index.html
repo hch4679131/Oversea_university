@@ -47,14 +47,19 @@
     </script>
     <style>
         [x-cloak] { display: none !important; }
+        #hero-planner-bar,
         #core-business,
         #core-business > div,
+        #core-business > div > div,
         #core-business .group {
+            overflow: hidden !important;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
+        #hero-planner-bar::-webkit-scrollbar,
         #core-business::-webkit-scrollbar,
         #core-business > div::-webkit-scrollbar,
+        #core-business > div > div::-webkit-scrollbar,
         #core-business .group::-webkit-scrollbar {
             display: none;
         }
@@ -244,12 +249,12 @@
                 <div class="absolute inset-0 z-0">
                     <div class="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/10 lg:via-white/60 z-10"></div>
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.0%20by%20tirachardz%20on%20Freepik%20-%20Flipped%202.webp"
-                        class="absolute right-0 top-0 h-full w-full lg:w-3/4 object-cover object-center transition-transform duration-[16000ms] hover:scale-105" alt="Global Education">
+                        class="absolute left-1/2 -translate-x-1/2 top-0 h-full w-full lg:w-3/4 object-cover object-center transition-transform duration-[16000ms] hover:scale-105" alt="Global Education">
                 </div>
 
                 <div class="relative z-20 max-w-7xl mx-auto px-6 w-full pt-12">
-                    <div class="max-w-3xl scrub-item anim-fade-up mx-auto text-center">
-                        <div class="flex items-center justify-center gap-4 mb-8">
+                    <div class="max-w-3xl scrub-item anim-fade-up">
+                        <div class="flex items-center gap-4 mb-8">
                             <div class="flex -space-x-2">
                                 <span class="w-3 h-3 rounded-full bg-academic-red shadow-sm"></span>
                                 <span class="w-3 h-3 rounded-full bg-academic-navy shadow-sm"></span>
@@ -262,11 +267,11 @@
                             <span class="text-academic-red">Our Priority.</span>
                         </h1>
 
-                        <p class="text-xl text-slate-600 max-w-xl mx-auto mb-12 leading-relaxed font-light">
+                        <p class="text-xl text-slate-600 max-w-xl mb-12 leading-relaxed font-light">
                             汇生会 SDLV 致力于为全球学子提供从名校申请到品质居社的一站式精英支持服务。我们不仅是咨询者，更是您未来的见证者。
                         </p>
 
-                        <div class="hidden md:flex items-center bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] border border-slate-100 p-2 max-w-2xl mx-auto group hover:border-academic-navy/30 transition-all">
+                        <div id="hero-planner-bar" class="hidden md:flex items-center bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] border border-slate-100 p-2 max-w-2xl group hover:border-academic-navy/30 transition-all">
                             <div class="flex-1 px-6 border-r border-slate-100">
                                 <span class="block text-[10px] uppercase text-slate-400 font-bold tracking-widest mb-1">您的意向</span>
                                 <span class="text-sm font-bold text-academic-navy" x-text="t[lang].biz_study_t"></span>
