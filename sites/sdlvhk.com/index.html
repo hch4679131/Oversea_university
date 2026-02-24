@@ -1419,7 +1419,7 @@
 
                     <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-syp1')">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E8%A5%BF%E8%90%A5%E7%9B%98%E4%B8%80%E6%9C%9F%EF%BC%89%E5%85%86%E5%AE%89%E5%A4%A7%E5%8E%A6/RoomD/RoomD_%E7%BB%93%E6%9E%9C.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
+                            <img src="/assets/apartments/syp1/room-d-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
                         </div>
                         <div class="px-6 py-6">
@@ -1928,6 +1928,97 @@
                 </div>
             </section>
 
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ syp3RoomsPhotos: [
+                { src: '/assets/apartments/syp3/room-1-01.webp', label: '1号房', alt: '1号房 01' },
+                { src: '/assets/apartments/syp3/room-1-02.webp', label: '1号房', alt: '1号房 02' },
+                { src: '/assets/apartments/syp3/room-1-03.webp', label: '1号房', alt: '1号房 03' },
+                { src: '/assets/apartments/syp3/room-2-01.webp', label: '2号房', alt: '2号房 01' },
+                { src: '/assets/apartments/syp3/room-2-02.webp', label: '2号房', alt: '2号房 02' },
+                { src: '/assets/apartments/syp3/room-2-03.webp', label: '2号房', alt: '2号房 03' },
+                { src: '/assets/apartments/syp3/room-3-01.webp', label: '3号房', alt: '3号房 01' },
+                { src: '/assets/apartments/syp3/room-3-02.webp', label: '3号房', alt: '3号房 02' },
+                { src: '/assets/apartments/syp3/room-3-03.webp', label: '3号房', alt: '3号房 03' },
+                { src: '/assets/apartments/syp3/room-4-01.webp', label: '4号房', alt: '4号房 01' },
+                { src: '/assets/apartments/syp3/room-4-02.webp', label: '4号房', alt: '4号房 02' },
+                { src: '/assets/apartments/syp3/room-4-03.webp', label: '4号房', alt: '4号房 03' },
+                { src: '/assets/apartments/syp3/room-g02-01.webp', label: 'G02房', alt: 'G02房 01' },
+                { src: '/assets/apartments/syp3/room-g02-02.webp', label: 'G02房', alt: 'G02房 02' },
+                { src: '/assets/apartments/syp3/room-g03-01.webp', label: 'G03房', alt: 'G03房 01' },
+                { src: '/assets/apartments/syp3/room-g03-02.webp', label: 'G03房', alt: 'G03房 02' },
+                { src: '/assets/apartments/syp3/public-kitchen-01.webp', label: '公共区域', alt: '公共区域 厨房' },
+                { src: '/assets/apartments/syp3/public-kitchen-02.webp', label: '公共区域', alt: '公共区域 厨房2' },
+                { src: '/assets/apartments/syp3/public-wc-01.webp', label: '公共区域', alt: '公共区域 洗手间' },
+                { src: '/assets/apartments/syp3/public-wc-panorama-01.webp', label: '公共区域', alt: '公共区域 洗手间全景' },
+                { src: '/assets/apartments/syp3/public-bathroom-01.webp', label: '公共区域', alt: '公共区域 浴室' },
+                { src: '/assets/apartments/syp3/public-corridor-01.webp', label: '公共区域', alt: '公共区域 走廊' }
+            ], groupedSyp3Rooms: [], syp3PublicPhotos: [], syp3Slides: {}, init() {
+                const buckets = {};
+                this.syp3PublicPhotos = this.syp3RoomsPhotos.filter((photo) => photo.label === '公共区域');
+                this.syp3RoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedSyp3Rooms = Object.values(buckets);
+                this.groupedSyp3Rooms.forEach((_, idx) => { this.syp3Slides[idx] = 0; });
+            }, prevSyp3Slide(idx) {
+                const total = this.groupedSyp3Rooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.syp3Slides[idx] = (this.syp3Slides[idx] - 1 + total) % total;
+            }, nextSyp3Slide(idx) {
+                const total = this.groupedSyp3Rooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.syp3Slides[idx] = (this.syp3Slides[idx] + 1) % total;
+            } }">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up text-left">
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
+                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in groupedSyp3Rooms" :key="item.label">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.photos[syp3Slides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[syp3Slides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevSyp3Slide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextSyp3Slide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="mt-12 border-t border-black/15"></div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in syp3PublicPhotos" :key="'syp3-public-' + idx">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
         <!-- ================= PAGE 4F: 薄扶林 · 公寓详情（占位版） ================= -->
@@ -1965,6 +2056,90 @@
                                 <span>返回公寓展示</span>
                             </button>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ pflRoomsPhotos: [
+                { src: '/assets/apartments/pfl/room-1-01.webp', label: '1号房', alt: '1号房 01' },
+                { src: '/assets/apartments/pfl/room-1-02.webp', label: '1号房', alt: '1号房 02' },
+                { src: '/assets/apartments/pfl/room-2-01.webp', label: '2号房', alt: '2号房 01' },
+                { src: '/assets/apartments/pfl/room-3-01.webp', label: '3号房', alt: '3号房 01' },
+                { src: '/assets/apartments/pfl/room-3-02.webp', label: '3号房', alt: '3号房 02' },
+                { src: '/assets/apartments/pfl/room-4-01.webp', label: '4号房', alt: '4号房 01' },
+                { src: '/assets/apartments/pfl/room-4-02.webp', label: '4号房', alt: '4号房 02' },
+                { src: '/assets/apartments/pfl/public-lobby-01.webp', label: '公共区域', alt: '公共区域 一楼大堂' },
+                { src: '/assets/apartments/pfl/public-building-panorama-01.webp', label: '公共区域', alt: '公共区域 单元楼全景' },
+                { src: '/assets/apartments/pfl/public-kitchen-01.webp', label: '公共区域', alt: '公共区域 厨房' },
+                { src: '/assets/apartments/pfl/public-living-room-01.webp', label: '公共区域', alt: '公共区域 客厅' },
+                { src: '/assets/apartments/pfl/public-wc-01.webp', label: '公共区域', alt: '公共区域 洗手间' },
+                { src: '/assets/apartments/pfl/public-elevator-01.webp', label: '公共区域', alt: '公共区域 电梯' },
+                { src: '/assets/apartments/pfl/public-estate-map-01.webp', label: '公共区域', alt: '公共区域 置富花园小区图' },
+                { src: '/assets/apartments/pfl/public-location-map-01.webp', label: '公共区域', alt: '公共区域 置富花园地图' }
+            ], groupedPflRooms: [], pflPublicPhotos: [], pflSlides: {}, init() {
+                const buckets = {};
+                this.pflPublicPhotos = this.pflRoomsPhotos.filter((photo) => photo.label === '公共区域');
+                this.pflRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedPflRooms = Object.values(buckets);
+                this.groupedPflRooms.forEach((_, idx) => { this.pflSlides[idx] = 0; });
+            }, prevPflSlide(idx) {
+                const total = this.groupedPflRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.pflSlides[idx] = (this.pflSlides[idx] - 1 + total) % total;
+            }, nextPflSlide(idx) {
+                const total = this.groupedPflRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.pflSlides[idx] = (this.pflSlides[idx] + 1) % total;
+            } }">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up text-left">
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
+                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in groupedPflRooms" :key="item.label">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.photos[pflSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[pflSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevPflSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextPflSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="mt-12 border-t border-black/15"></div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in pflPublicPhotos" :key="'pfl-public-' + idx">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </section>
@@ -2159,11 +2334,11 @@
 
             <!-- 我们的房间 -->
             <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ syp1BookingOpen: false, syp1RoomsPhotos: [
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（西营盘一期）兆安大厦/RoomA-RoomC/RoomA-RoomC_结果_结果.webp', label: 'RoomA-RoomC', alt: 'RoomA-RoomC' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（西营盘一期）兆安大厦/RoomA-RoomC/RoomA-RoomC%2002_结果_结果.webp', label: 'RoomA-RoomC', alt: 'RoomA-RoomC 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（西营盘一期）兆安大厦/RoomD/RoomD_结果.webp', label: 'RoomD', alt: 'RoomD' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（西营盘一期）兆安大厦/RoomE/RoomE_结果_结果.webp', label: 'RoomE', alt: 'RoomE' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（西营盘一期）兆安大厦/RoomE/RoomE%2002_结果_结果.webp', label: 'RoomE', alt: 'RoomE 02' }
+                { src: '/assets/apartments/syp1/room-a-room-c-01.webp', label: 'RoomA-RoomC', alt: 'RoomA-RoomC' },
+                { src: '/assets/apartments/syp1/room-a-room-c-02.webp', label: 'RoomA-RoomC', alt: 'RoomA-RoomC 02' },
+                { src: '/assets/apartments/syp1/room-d-01.webp', label: 'RoomD', alt: 'RoomD' },
+                { src: '/assets/apartments/syp1/room-e-01.webp', label: 'RoomE', alt: 'RoomE' },
+                { src: '/assets/apartments/syp1/room-e-02.webp', label: 'RoomE', alt: 'RoomE 02' }
             ], groupedSyp1Rooms: [], syp1RoomSlides: {}, init() {
                 const buckets = {};
                 this.syp1RoomsPhotos.forEach((photo) => {
@@ -2236,43 +2411,79 @@
             </section>
         </div>
 
-        <!-- ================= PAGE 4I: 西营盘二期 · 公寓详情（占位版） ================= -->
+        <!-- ================= PAGE 4I: 西营盘二期 · 公寓详情 ================= -->
         <div x-show="page === 'apartment-syp2'" x-transition:enter="transition ease-out duration-500" class="w-full">
             <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
                     <div class="scrub-item anim-fade-up">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
-                            <span>公寓頁標籤</span>
-                            <span class="text-black/40">/</span>
-                            <span class="font-bold" x-text="t[lang].apt_syp2_card_title"></span>
-                        </div>
                         <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_syp2_card_title"></h1>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_syp2_card_loc"></p> -->
-
-                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🎓 香港大学</div>
-                                    <div>🎓 香港演艺学院</div>
-                                    <div>🎓 香港树仁大学</div>
-                                </div>
-                            </div>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🚇 西营盘站</div>
-                                </div>
-                            </div>
-                        </div>
-
+                        <p class="mt-6 text-black/70 leading-relaxed">居社地理位置：香港西营盘高升大厦</p>
                         <div class="mt-10">
                             <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
                                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
                                 <span>返回公寓展示</span>
                             </button>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ syp2RoomsPhotos: [
+                { src: '/assets/apartments/syp2/dining-room-01.webp', label: 'Dining Room', alt: 'Dining Room 01' },
+                { src: '/assets/apartments/syp2/dining-room-02.webp', label: 'Dining Room', alt: 'Dining Room 02' },
+                { src: '/assets/apartments/syp2/dining-room-03.webp', label: 'Dining Room', alt: 'Dining Room 03' },
+                { src: '/assets/apartments/syp2/dining-room-04.webp', label: 'Dining Room', alt: 'Dining Room 04' },
+                { src: '/assets/apartments/syp2/wc-01.webp', label: 'WC', alt: 'WC' },
+                { src: '/assets/apartments/syp2/balcony-01.webp', label: '阳台', alt: '阳台' }
+            ], groupedSyp2Rooms: [], syp2Slides: {}, init() {
+                const buckets = {};
+                this.syp2RoomsPhotos.forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedSyp2Rooms = Object.values(buckets);
+                this.groupedSyp2Rooms.forEach((_, idx) => { this.syp2Slides[idx] = 0; });
+            }, prevSyp2Slide(idx) {
+                const total = this.groupedSyp2Rooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.syp2Slides[idx] = (this.syp2Slides[idx] - 1 + total) % total;
+            }, nextSyp2Slide(idx) {
+                const total = this.groupedSyp2Rooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.syp2Slides[idx] = (this.syp2Slides[idx] + 1) % total;
+            } }">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up text-left">
+                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
+                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in groupedSyp2Rooms" :key="item.label">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.photos[syp2Slides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[syp2Slides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevSyp2Slide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextSyp2Slide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </section>
@@ -3056,46 +3267,46 @@
             <!-- 页面底部：FAQ + 再次提交合作申请表单 -->
             <section id="contact-faq" class="py-24 bg-paper border-b border-black/10">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div x-data="{ openFaq: 1 }">
+                    <div x-data="{ openFaq: { 1: true, 2: false, 3: false, 4: false } }">
                         <h2 class="text-3xl font-serif font-bold text-obsidian-950" x-text="t[lang].contact_faq_title"></h2>
 
                         <div class="mt-8 space-y-3">
                             <div class="bg-white border border-black/10">
-                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 1 ? null : 1" :aria-expanded="openFaq === 1">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq[1] = !openFaq[1]" :aria-expanded="!!openFaq[1]">
                                     <div class="font-bold text-obsidian-950">Q1：提交合作意向申请后，工作人员多久会联络我？</div>
-                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 1 ? 'rotate-180' : ''"></i>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq[1] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq === 1" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                <div x-show="openFaq[1]" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
                                     A：我们的工作人员在收到你的合作申请后，最快24小时候会与您联络。
                                 </div>
                             </div>
 
                             <div class="bg-white border border-black/10">
-                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 2 ? null : 2" :aria-expanded="openFaq === 2">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq[2] = !openFaq[2]" :aria-expanded="!!openFaq[2]">
                                     <div class="font-bold text-obsidian-950">Q2：合作的流程是怎样的？一般需要多久启动？</div>
-                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 2 ? 'rotate-180' : ''"></i>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq[2] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq === 2" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                <div x-show="openFaq[2]" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
                                     A：我们的合作流程高效清晰：初步洽谈 → 协议签署 → 系统培训 → 正式上线。对于标准合作，最快可在2-3周内完成全部流程并启动。
                                 </div>
                             </div>
 
                             <div class="bg-white border border-black/10">
-                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 3 ? null : 3" :aria-expanded="openFaq === 3">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq[3] = !openFaq[3]" :aria-expanded="!!openFaq[3]">
                                     <div class="font-bold text-obsidian-950">Q3：合作的佣金模式是怎样的？结算周期是多久？</div>
-                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 3 ? 'rotate-180' : ''"></i>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq[3] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq === 3" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                <div x-show="openFaq[3]" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
                                     A：我们采用透明化的佣金模式。留学申请与公寓预订分别有明确的分成比例，具体会在协议中清晰约定。结算通常按月或按季度进行，款项通过系统对账后准时支付。
                                 </div>
                             </div>
 
                             <div class="bg-white border border-black/10">
-                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq = openFaq === 4 ? null : 4" :aria-expanded="openFaq === 4">
+                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq[4] = !openFaq[4]" :aria-expanded="!!openFaq[4]">
                                     <div class="font-bold text-obsidian-950">Q4：我们（合作方）需要承担哪些责任？</div>
-                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq === 4 ? 'rotate-180' : ''"></i>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq[4] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq === 4" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                <div x-show="openFaq[4]" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
                                     A：合作期间，您主要负责前端引流与客户关系维护，而我们则提供系统、流程、签约及主要运营支持，权责清晰。
                                 </div>
                             </div>
@@ -3342,12 +3553,7 @@
                         <aside class="lg:col-span-3">
                             <div class="sticky top-24">
                                 <div class="flex lg:flex-col overflow-x-auto lg:overflow-x-visible no-scrollbar border-b lg:border-b-0 border-white/10 mb-4 lg:mb-0 gap-2 p-1">
-                                    <template x-for="tab in [
-                                        {id:'overview', label:'数据总览', icon:'layout-dashboard'},
-                                        {id:'register_sub', label:'注册下级', icon:'user-plus'},
-                                        {id:'downline_orders', label:'下级开单', icon:'users'},
-                                        {id:'change_password', label:'安全设置', icon:'lock'}
-                                    ]">
+                                    <template x-for="tab in agentDashTabs()">
                                         <button type="button" @click="agentSetDashTab(tab.id)" 
                                             class="whitespace-nowrap flex items-center gap-3 px-6 lg:px-5 py-4 transition-all duration-300 border text-sm font-bold tracking-widest"
                                             :class="agentDashTab === tab.id ? 'bg-gold-400 text-black border-gold-400 shadow-lg' : 'bg-white/5 text-white/40 border-transparent hover:bg-white/10 hover:text-white'">
@@ -3818,7 +4024,7 @@
                             </div>
                         
                                 <!-- [TAB] 注册下级 -->
-                                <div x-show="agentDashTab === 'register_sub'" x-transition:enter="transition ease-out duration-500">
+                                <div x-show="agentDashTab === 'register_sub' && agentUser && agentUser.role === 'consultant'" x-transition:enter="transition ease-out duration-500">
                                     <div class="bg-obsidian-950/60 border border-white/5 p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden">
                                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
                                             <div>
@@ -3837,13 +4043,17 @@
                                                 <input x-model="agentRegisterForm.password" type="password" placeholder="为下级设置登录密码" class="w-full bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition shadow-inner text-white" />
                                             </div>
                                             <div class="md:col-span-4">
-                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">下级角色</div>
-                                                <select x-model="agentRegisterForm.role" class="w-full bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition text-white/80">
-                                                    <option value="">请选择角色</option>
-                                                    <template x-for="r in agentAllowedChildRoles()" :key="r">
-                                                        <option :value="r" x-text="agentRoleLabel(r)"></option>
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">所属上级（必选）</div>
+                                                <select x-model="agentRegisterForm.parentUserId" @change="agentResolveRegisterRole()" class="w-full bg-black/40 border border-white/10 px-5 py-3 text-sm focus:border-gold-400 outline-none transition text-white/80">
+                                                    <template x-for="u in agentRegisterParentOptions()" :key="u.id">
+                                                        <option :value="String(u.id)" x-text="agentRoleLabel(u.role) + '：' + (u.phone || '-')"></option>
                                                     </template>
                                                 </select>
+                                            </div>
+
+                                            <div class="md:col-span-4">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">所属角色</div>
+                                                <input type="text" :value="agentRoleLabel(agentRegisterForm.role)" readonly class="w-full bg-black/30 border border-white/10 px-5 py-3 text-sm outline-none transition text-gold-300 cursor-not-allowed" />
                                             </div>
 
                                             <div class="md:col-span-4">
@@ -3870,36 +4080,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- 下级列表展示 -->
-                                    <div class="mt-10 bg-obsidian-950/60 border border-white/5 p-6 md:p-8 shadow-2xl overflow-hidden">
-                                        <h3 class="text-sm font-bold text-white uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
-                                            <i data-lucide="network" class="w-4 h-4 text-gold-400"></i>
-                                            我的直属网络下级
-                                        </h3>
-                                        <div class="border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
-                                            <table class="w-full text-xs text-left border-collapse min-w-[560px]">
-                                                <thead>
-                                                    <tr class="text-white/30 border-b border-white/10 uppercase tracking-widest">
-                                                        <th class="px-4 py-4">ID</th>
-                                                        <th class="px-4 py-4 font-bold">手机号码</th>
-                                                        <th class="px-4 py-4 font-bold">角色</th>
-                                                        <th class="px-4 py-4 text-right">账号状态</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="divide-y divide-white/5 font-mono">
-                                                    <template x-for="u in agentChildren" :key="u.id">
-                                                        <tr class="hover:bg-white/5 transition-all group">
-                                                            <td class="px-4 py-4 text-white/40" x-text="u.id"></td>
-                                                            <td class="px-4 py-4 text-white/90" x-text="u.phone"></td>
-                                                            <td class="px-4 py-4"><span class="px-2 py-0.5 border border-white/10 text-gold-400/80" x-text="u.role"></span></td>
-                                                            <td class="px-4 py-4 text-right"><span class="text-green-500 font-bold uppercase tracking-tighter" x-text="u.status"></span></td>
-                                                        </tr>
-                                                    </template>
-                                                </tbody>
-                                            </table>
-                                            <div x-show="agentChildren.length === 0" class="py-10 text-center text-white/10 italic text-xs uppercase tracking-widest">暂无下级记录</div>
-                                        </div>
-                                    </div>
                                 </div>
                         
                             <!-- [TAB] 下级开单明细 -->
@@ -4064,6 +4244,37 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+
+                                    <!-- 我的直属网络下级（移动到下级开单页） -->
+                                    <div class="mt-10 bg-obsidian-950/60 border border-white/5 p-6 md:p-8 shadow-2xl overflow-hidden">
+                                        <h3 class="text-sm font-bold text-white uppercase tracking-[0.2em] mb-6 flex items-center gap-3">
+                                            <i data-lucide="network" class="w-4 h-4 text-gold-400"></i>
+                                            我的直属网络下级
+                                        </h3>
+                                        <div class="border border-white/10 overflow-x-auto" style="-webkit-overflow-scrolling: touch;">
+                                            <table class="w-full text-xs text-left border-collapse min-w-[560px]">
+                                                <thead>
+                                                    <tr class="text-white/30 border-b border-white/10 uppercase tracking-widest">
+                                                        <th class="px-4 py-4">ID</th>
+                                                        <th class="px-4 py-4 font-bold">手机号码</th>
+                                                        <th class="px-4 py-4 font-bold">角色</th>
+                                                        <th class="px-4 py-4 text-right">账号状态</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-white/5 font-mono">
+                                                    <template x-for="u in agentChildren" :key="u.id">
+                                                        <tr class="hover:bg-white/5 transition-all group">
+                                                            <td class="px-4 py-4 text-white/40" x-text="u.id"></td>
+                                                            <td class="px-4 py-4 text-white/90" x-text="u.phone"></td>
+                                                            <td class="px-4 py-4"><span class="px-2 py-0.5 border border-white/10 text-gold-400/80" x-text="u.role"></span></td>
+                                                            <td class="px-4 py-4 text-right"><span class="text-green-500 font-bold uppercase tracking-tighter" x-text="u.status"></span></td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                            <div x-show="agentChildren.length === 0" class="py-10 text-center text-white/10 italic text-xs uppercase tracking-widest">暂无下级记录</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

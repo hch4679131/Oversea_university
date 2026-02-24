@@ -191,7 +191,7 @@ refreshLucideIcons();
                 agentShowReset: false,
                 agentForm: { phone: '', password: '', code: '' },
                 agentResetForm: { phone: '', code: '', newPassword: '' },
-                agentRegisterForm: { phone: '', password: '', role: 'consultant', code: '', idCard: '', idCardName: '' },
+                agentRegisterForm: { phone: '', password: '', parentUserId: '', role: '', code: '', idCard: '', idCardName: '' },
 
                 // Per-purpose SMS code cooldown (ms epoch). Purposes: login | reset_password | register
                 agentCodeCooldown: { login: 0, reset_password: 0, register: 0 },
@@ -292,6 +292,45 @@ refreshLucideIcons();
                     const baseRank = this.agentRoleRank(this.agentUser?.role);
                     const all = ['consultant', 'agent1', 'agent2', 'agent3', 'agent4'];
                     return all.filter(r => this.agentRoleRank(r) >= baseRank);
+                },
+
+                agentDashTabs() {
+                    const tabs = [
+                        { id: 'overview', label: '数据总览', icon: 'layout-dashboard' },
+                        { id: 'register_sub', label: '注册下级', icon: 'user-plus' },
+                        { id: 'downline_orders', label: '下级开单', icon: 'users' },
+                        { id: 'change_password', label: '安全设置', icon: 'lock' }
+                    ];
+                    if (String(this.agentUser?.role || '').trim() !== 'consultant') {
+                        return tabs.filter((t) => t.id !== 'register_sub');
+                    }
+                    return tabs;
+                },
+
+                agentRegisterParentOptions() {
+                    const all = Array.isArray(this.agentAllUsers) ? this.agentAllUsers : [];
+                    return all.filter((u) => String(u?.role || '').trim() !== 'agent4');
+                },
+
+                agentNextChildRoleByParentRole(parentRole) {
+                    const role = String(parentRole || '').trim();
+                    if (role === 'admin') return 'consultant';
+                    if (role === 'consultant') return 'agent1';
+                    if (role === 'agent1') return 'agent2';
+                    if (role === 'agent2') return 'agent3';
+                    if (role === 'agent3') return 'agent4';
+                    return '';
+                },
+
+                agentResolveRegisterRole() {
+                    const selectedParentId = String(this.agentRegisterForm?.parentUserId || '').trim();
+                    if (!selectedParentId) {
+                        this.agentRegisterForm.role = '';
+                        return;
+                    }
+
+                    const parent = this.agentRegisterParentOptions().find((u) => String(u?.id || '') === selectedParentId);
+                    this.agentRegisterForm.role = this.agentNextChildRoleByParentRole(parent?.role);
                 },
 
                 agentMaskPhone(phone) {
@@ -435,6 +474,10 @@ refreshLucideIcons();
                     const t = String(tab || '').trim();
                     const allowed = ['overview', 'register_sub', 'downline_orders', 'change_password'];
                     this.agentDashTab = allowed.includes(t) ? t : 'overview';
+
+                    if (this.agentDashTab === 'register_sub' && String(this.agentUser?.role || '').trim() !== 'consultant') {
+                        this.agentDashTab = 'overview';
+                    }
 
                     // Lazy-load downline orders when entering the tab.
                     if (this.agentDashTab === 'downline_orders') {
@@ -1059,9 +1102,10 @@ refreshLucideIcons();
                     const data = await this.agentApi('/api/agent/me', 'GET', null, true);
                     if (!data.success) throw new Error(data.message || '获取用户失败');
                     this.agentUser = data.user;
-                    // default next role
-                    const opts = this.agentAllowedChildRoles();
-                    if (opts.length > 0) this.agentRegisterForm.role = opts[0];
+
+                    if (String(this.agentUser?.role || '').trim() !== 'consultant' && this.agentDashTab === 'register_sub') {
+                        this.agentDashTab = 'overview';
+                    }
                 },
 
                 goAgentPortal() {
@@ -1201,21 +1245,42 @@ refreshLucideIcons();
                 async agentCreateSubaccount() {
                     const phone = this.agentRegisterForm.phone.trim();
                     const password = this.agentRegisterForm.password;
+                    if (String(this.agentUser?.role || '').trim() !== 'consultant') {
+                        this.agentNotify('仅顾问可注册下级账号', 'error');
+                        return;
+                    }
+
+                    const parentUserId = String(this.agentRegisterForm.parentUserId || '').trim();
+                    if (!parentUserId) {
+                        this.agentNotify('请选择所属上级', 'error');
+                        return;
+                    }
+
+                    this.agentResolveRegisterRole();
                     const role = this.agentRegisterForm.role;
                     const code = (this.agentRegisterForm.code || '').trim();
                     const idCard = (this.agentRegisterForm.idCard || '').trim();
                     const idCardName = (this.agentRegisterForm.idCardName || '').trim();
                     if (!phone || !password || !role || !code || !idCard || !idCardName) {
-                        this.agentNotify('请填写下级手机号/密码/角色/验证码/姓名/身份证号', 'error');
+                        this.agentNotify('请填写下级手机号/密码/验证码/姓名/身份证号', 'error');
                         return;
                     }
                     try {
                         this.agentBusy = true;
-                        const data = await this.agentApi('/api/agent/register', 'POST', { phone, password, role, code, idCard, idCardName }, true);
+                        const data = await this.agentApi('/api/agent/register', 'POST', {
+                            phone,
+                            password,
+                            role,
+                            parentUserId: parentUserId ? Number(parentUserId) : null,
+                            code,
+                            idCard,
+                            idCardName
+                        }, true);
                         if (data.success) {
                             this.agentNotify('创建成功', 'success');
                             this.agentRegisterForm.phone = '';
                             this.agentRegisterForm.password = '';
+                            this.agentRegisterForm.role = '';
                             this.agentRegisterForm.code = '';
                             this.agentRegisterForm.idCard = '';
                             this.agentRegisterForm.idCardName = '';
@@ -1498,10 +1563,17 @@ refreshLucideIcons();
                         // For consultant/admin: load all active accounts for order assignment
                         if (this.agentUser?.role === 'consultant') {
                             try {
-                                const all = await this.agentApi('/api/agent/users-all', 'GET', null, true);
+                                const all = await this.agentApi('/api/agent/users-all?purpose=order', 'GET', null, true);
                                 this.agentAllUsers = all.data || [];
+                                const options = this.agentRegisterParentOptions();
+                                if (options.length > 0 && !String(this.agentRegisterForm.parentUserId || '').trim()) {
+                                    this.agentRegisterForm.parentUserId = String(options[0].id);
+                                }
+                                this.agentResolveRegisterRole();
                             } catch (e) {
                                 this.agentAllUsers = [];
+                                this.agentRegisterForm.parentUserId = '';
+                                this.agentResolveRegisterRole();
                             }
                         } else {
                             this.agentAllUsers = [];

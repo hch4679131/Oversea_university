@@ -183,6 +183,16 @@ function canCreateChild(parentRole, childRole) {
     return false;
 }
 
+function nextRoleByParentRole(parentRole) {
+    const role = String(parentRole || '').trim();
+    if (role === 'admin') return 'consultant';
+    if (role === 'consultant') return 'agent1';
+    if (role === 'agent1') return 'agent2';
+    if (role === 'agent2') return 'agent3';
+    if (role === 'agent3') return 'agent4';
+    return null;
+}
+
 function generateVerificationCode() {
     return Math.floor(100000 + Math.random() * 900000).toString();
 }
@@ -750,7 +760,7 @@ router.post(
 /**
  * POST /api/agent/register
  * 仅登录后可创建下级账号
- * Body: { phone, password, role, code, idCard, idCardName }
+ * Body: { phone, password, role, parentUserId, code, idCard, idCardName }
  */
 router.post(
     '/register',
@@ -764,8 +774,8 @@ router.post(
             .isMobilePhone('zh-CN'),
         body('password').isLength({ min: 6 }).withMessage('密码至少 6 位'),
         body('code').customSanitizer(v => String(v || '').trim()).isLength({ min: 6, max: 6 }).isNumeric().withMessage('验证码格式错误'),
-        body('role').customSanitizer(v => String(v || '').trim()).isIn(['consultant', 'agent1', 'agent2', 'agent3', 'agent4'])
-        ,
+        body('role').optional({ nullable: true }).customSanitizer(v => String(v || '').trim()).isIn(['consultant', 'agent1', 'agent2', 'agent3', 'agent4']),
+        body('parentUserId').toInt().isInt({ min: 1 }).withMessage('所属上级参数错误'),
         body('idCard').customSanitizer(v => String(v || '').trim()).isLength({ min: 18, max: 18 }).withMessage('身份证号码格式错误'),
         body('idCardName').customSanitizer(v => String(v || '').trim()).notEmpty().withMessage('姓名不能为空')
     ],
@@ -775,7 +785,8 @@ router.post(
             return res.status(400).json({ success: false, errors: errors.array() });
         }
 
-    const { phone, password, role, code, idCard, idCardName } = req.body;
+        const { phone, password, code, idCard, idCardName } = req.body;
+        const rawParentUserId = req.body.parentUserId;
         try {
             const [meRows] = await pool.execute('SELECT id, role, status FROM agent_users WHERE id = ? LIMIT 1', [req.agent.id]);
             if (meRows.length === 0 || meRows[0].status !== 'active') {
@@ -783,9 +794,40 @@ router.post(
             }
 
             const myRole = meRows[0].role;
-            if (!canCreateChild(myRole, role)) {
-                return res.status(403).json({ success: false, message: '无权限创建该级别账号' });
+            if (myRole !== 'consultant') {
+                return res.status(403).json({ success: false, message: '仅顾问可注册下级账号' });
             }
+
+            const parentUserId = Number(rawParentUserId || 0);
+            if (!Number.isFinite(parentUserId) || parentUserId <= 0) {
+                return res.status(400).json({ success: false, message: '所属上级参数错误' });
+            }
+
+            if (parentUserId === Number(req.agent.id)) {
+                return res.status(400).json({ success: false, message: '所属上级不能选择当前账号' });
+            }
+
+            const [parentRows] = await pool.execute(
+                'SELECT id, role, status FROM agent_users WHERE id = ? LIMIT 1',
+                [parentUserId]
+            );
+
+            if (parentRows.length === 0 || String(parentRows[0].status) !== 'active') {
+                return res.status(400).json({ success: false, message: '所属上级不存在或不可用' });
+            }
+
+            const parentRole = String(parentRows[0].role || '').trim();
+            if (parentRole === 'agent4') {
+                return res.status(400).json({ success: false, message: '4级代理不能作为上级' });
+            }
+
+            const autoRole = nextRoleByParentRole(parentRole);
+            if (!autoRole) {
+                return res.status(400).json({ success: false, message: '所属上级角色不支持创建下级' });
+            }
+
+            const role = autoRole;
+            const targetParentId = parentUserId;
 
             const [exists] = await pool.execute('SELECT id FROM agent_users WHERE phone = ? LIMIT 1', [phone]);
             if (exists.length > 0) {
@@ -810,12 +852,12 @@ router.post(
             const passwordHash = await bcrypt.hash(password, 10);
             const [result] = await pool.execute(
                 'INSERT INTO agent_users (phone, password_hash, id_card, id_card_name, role, parent_id) VALUES (?, ?, ?, ?, ?, ?)',
-                [phone, passwordHash, String(idCard).trim(), String(idCardName).trim(), role, req.agent.id]
+                [phone, passwordHash, String(idCard).trim(), String(idCardName).trim(), role, targetParentId]
             );
 
             await pool.execute('UPDATE verification_codes SET used = TRUE WHERE id = ?', [codeRows[0].id]);
 
-            await logAction({ userId: req.agent.id, action: 'create_subaccount', detail: JSON.stringify({ childRole: role, childPhone: maskPhone(phone) }), ip: req.ip });
+            await logAction({ userId: req.agent.id, action: 'create_subaccount', detail: JSON.stringify({ childRole: role, childPhone: maskPhone(phone), parentUserId: targetParentId }), ip: req.ip });
             return res.json({ success: true, message: '创建成功', userId: result.insertId });
         } catch (e) {
             console.error('[agent] register error:', e);
@@ -842,7 +884,7 @@ router.get('/users', authenticateAgent, async (req, res) => {
 
 /**
  * GET /api/agent/users-all
- * 顾问/管理员：获取所有账号（用于“创单代理人”下拉选择）
+ * 顾问：获取账号列表（创单用途可含4级；默认排除4级用于选择上级）
  */
 router.get('/users-all', authenticateAgent, async (req, res) => {
     try {
@@ -851,9 +893,14 @@ router.get('/users-all', authenticateAgent, async (req, res) => {
             return res.status(403).json({ success: false, message: '无权限查看账号列表' });
         }
 
-        const [rows] = await pool.execute(
-            'SELECT id, phone, role, parent_id AS parentId, status, created_at AS createdAt FROM agent_users WHERE status = "active" ORDER BY created_at DESC LIMIT 1000'
-        );
+        const purpose = String(req.query.purpose || '').trim().toLowerCase();
+        const includeLevel4 = purpose === 'order';
+
+        const sql = includeLevel4
+            ? 'SELECT id, phone, role, parent_id AS parentId, status, created_at AS createdAt FROM agent_users WHERE status = "active" ORDER BY created_at DESC LIMIT 1000'
+            : 'SELECT id, phone, role, parent_id AS parentId, status, created_at AS createdAt FROM agent_users WHERE status = "active" AND role <> "agent4" ORDER BY created_at DESC LIMIT 1000';
+
+        const [rows] = await pool.execute(sql);
         res.json({ success: true, data: rows });
     } catch (e) {
         res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
