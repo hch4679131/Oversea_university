@@ -1628,9 +1628,10 @@
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房.webp', label: '公共区域', alt: '公共区域 厨房' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20天台休息区.webp', label: '公共区域', alt: '公共区域 天台休息区' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20洗衣房.webp', label: '公共区域', alt: '公共区域 洗衣房' }
-            ], groupedCswRooms: [], cswRoomSlides: {}, init() {
+            ], groupedCswRooms: [], cswPublicPhotos: [], cswRoomSlides: {}, init() {
                 const buckets = {};
-                this.cswRoomsPhotos.forEach((photo) => {
+                this.cswPublicPhotos = this.cswRoomsPhotos.filter((photo) => photo.label === '公共区域');
+                this.cswRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
                     if (!buckets[photo.label]) {
                         buckets[photo.label] = { label: photo.label, photos: [] };
                     }
@@ -1675,6 +1676,21 @@
                                         <template x-if="item.label !== '公共区域'">
                                             <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="cswBookingOpen = true">抢先以早鸟价格订房</button>
                                         </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="mt-12 border-t border-black/15"></div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in cswPublicPhotos" :key="'csw-public-' + idx">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1782,9 +1798,10 @@
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/楼下门口%20_结果.webp', label: '公共区域', alt: '公共区域 楼下门口' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/洗衣房_结果.webp', label: '公共区域', alt: '公共区域 洗衣房' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/自修室_结果.webp', label: '公共区域', alt: '公共区域 自修室' }
-            ], groupedTstRooms: [], tstRoomSlides: {}, init() {
+            ], groupedTstRooms: [], tstPublicPhotos: [], tstRoomSlides: {}, init() {
                 const buckets = {};
-                this.tstRoomsPhotos.forEach((photo) => {
+                this.tstPublicPhotos = this.tstRoomsPhotos.filter((photo) => photo.label === '公共区域');
+                this.tstRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
                     if (!buckets[photo.label]) {
                         buckets[photo.label] = { label: photo.label, photos: [] };
                     }
@@ -1828,6 +1845,21 @@
                                         <template x-if="item.label !== '公共区域'">
                                             <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="tstBookingOpen = true">抢先以早鸟价格订房</button>
                                         </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="mt-12 border-t border-black/15"></div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in tstPublicPhotos" :key="'tst-public-' + idx">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1996,9 +2028,10 @@
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂_结果.webp', label: '公共区域', alt: '公共区域 大堂' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂%2002_结果.webp', label: '公共区域', alt: '公共区域 大堂 02' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/酒店外围_结果.webp', label: '公共区域', alt: '公共区域 酒店外围' }
-            ], groupedOyRooms: [], oyRoomSlides: {}, init() {
+            ], groupedOyRooms: [], oyPublicPhotos: [], oyRoomSlides: {}, init() {
                 const buckets = {};
-                this.oyRoomsPhotos.forEach((photo) => {
+                this.oyPublicPhotos = this.oyRoomsPhotos.filter((photo) => photo.label === '公共区域');
+                this.oyRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
                     if (!buckets[photo.label]) {
                         buckets[photo.label] = { label: photo.label, photos: [] };
                     }
@@ -2042,6 +2075,21 @@
                                         <template x-if="item.label !== '公共区域'">
                                             <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="oyBookingOpen = true">抢先以早鸟价格订房</button>
                                         </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="mt-12 border-t border-black/15"></div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in oyPublicPhotos" :key="'oy-public-' + idx">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                     </div>
                                 </div>
                             </div>
@@ -2250,9 +2298,10 @@
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/电梯_结果.webp', label: '公共区域', alt: '公共区域 电梯' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/洗衣区_结果.webp', label: '公共区域', alt: '公共区域 洗衣区' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/走廊_结果.webp', label: '公共区域', alt: '公共区域 走廊' }
-            ], groupedRooms: [], roomSlides: {}, init() {
+            ], groupedRooms: [], ymtPublicPhotos: [], roomSlides: {}, init() {
                 const buckets = {};
-                this.ymtRoomsPhotos.forEach((photo) => {
+                this.ymtPublicPhotos = this.ymtRoomsPhotos.filter((photo) => photo.label === '公共区域');
+                this.ymtRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
                     if (!buckets[photo.label]) {
                         buckets[photo.label] = { label: photo.label, photos: [] };
                     }
@@ -2298,6 +2347,21 @@
                                         <template x-if="item.label !== '公共区域'">
                                             <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="ymtBookingOpen = true">抢先以早鸟价格订房</button>
                                         </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="mt-12 border-t border-black/15"></div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in ymtPublicPhotos" :key="'ymt-public-' + idx">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                     </div>
                                 </div>
                             </div>
