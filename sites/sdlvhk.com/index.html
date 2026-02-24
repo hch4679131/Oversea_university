@@ -1628,7 +1628,25 @@
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房.webp', label: '公共区域', alt: '公共区域 厨房' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20天台休息区.webp', label: '公共区域', alt: '公共区域 天台休息区' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20洗衣房.webp', label: '公共区域', alt: '公共区域 洗衣房' }
-            ] }">
+            ], groupedCswRooms: [], cswRoomSlides: {}, init() {
+                const buckets = {};
+                this.cswRoomsPhotos.forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedCswRooms = Object.values(buckets);
+                this.groupedCswRooms.forEach((_, idx) => { this.cswRoomSlides[idx] = 0; });
+            }, prevCswSlide(idx) {
+                const total = this.groupedCswRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.cswRoomSlides[idx] = (this.cswRoomSlides[idx] - 1 + total) % total;
+            }, nextCswSlide(idx) {
+                const total = this.groupedCswRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.cswRoomSlides[idx] = (this.cswRoomSlides[idx] + 1) % total;
+            } }">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-center">
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
@@ -1637,11 +1655,21 @@
                     </div>
 
                     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in cswRoomsPhotos" :key="idx">
+                        <template x-for="(item, idx) in groupedCswRooms" :key="item.label">
                             <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
                                 <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <img :src="item.photos[cswRoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[cswRoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevCswSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextCswSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
                                     <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
                                         <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                         <template x-if="item.label !== '公共区域'">
@@ -1754,7 +1782,25 @@
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/楼下门口%20_结果.webp', label: '公共区域', alt: '公共区域 楼下门口' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/洗衣房_结果.webp', label: '公共区域', alt: '公共区域 洗衣房' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/自修室_结果.webp', label: '公共区域', alt: '公共区域 自修室' }
-            ] }">
+            ], groupedTstRooms: [], tstRoomSlides: {}, init() {
+                const buckets = {};
+                this.tstRoomsPhotos.forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedTstRooms = Object.values(buckets);
+                this.groupedTstRooms.forEach((_, idx) => { this.tstRoomSlides[idx] = 0; });
+            }, prevTstSlide(idx) {
+                const total = this.groupedTstRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.tstRoomSlides[idx] = (this.tstRoomSlides[idx] - 1 + total) % total;
+            }, nextTstSlide(idx) {
+                const total = this.groupedTstRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.tstRoomSlides[idx] = (this.tstRoomSlides[idx] + 1) % total;
+            } }">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-center">
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
@@ -1762,11 +1808,21 @@
                         <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
                     </div>
                     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in tstRoomsPhotos" :key="idx">
+                        <template x-for="(item, idx) in groupedTstRooms" :key="item.label">
                             <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
                                 <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <img :src="item.photos[tstRoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[tstRoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevTstSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextTstSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
                                     <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
                                         <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                         <template x-if="item.label !== '公共区域'">
@@ -1940,7 +1996,25 @@
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂_结果.webp', label: '公共区域', alt: '公共区域 大堂' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂%2002_结果.webp', label: '公共区域', alt: '公共区域 大堂 02' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/酒店外围_结果.webp', label: '公共区域', alt: '公共区域 酒店外围' }
-            ] }">
+            ], groupedOyRooms: [], oyRoomSlides: {}, init() {
+                const buckets = {};
+                this.oyRoomsPhotos.forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedOyRooms = Object.values(buckets);
+                this.groupedOyRooms.forEach((_, idx) => { this.oyRoomSlides[idx] = 0; });
+            }, prevOySlide(idx) {
+                const total = this.groupedOyRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.oyRoomSlides[idx] = (this.oyRoomSlides[idx] - 1 + total) % total;
+            }, nextOySlide(idx) {
+                const total = this.groupedOyRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.oyRoomSlides[idx] = (this.oyRoomSlides[idx] + 1) % total;
+            } }">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-center">
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
@@ -1948,11 +2022,21 @@
                         <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
                     </div>
                     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in oyRoomsPhotos" :key="idx">
+                        <template x-for="(item, idx) in groupedOyRooms" :key="item.label">
                             <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
                                 <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <img :src="item.photos[oyRoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[oyRoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevOySlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextOySlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
                                     <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
                                         <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                         <template x-if="item.label !== '公共区域'">
@@ -2166,7 +2250,25 @@
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/电梯_结果.webp', label: '公共区域', alt: '公共区域 电梯' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/洗衣区_结果.webp', label: '公共区域', alt: '公共区域 洗衣区' },
                 { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/走廊_结果.webp', label: '公共区域', alt: '公共区域 走廊' }
-            ] }">
+            ], groupedRooms: [], roomSlides: {}, init() {
+                const buckets = {};
+                this.ymtRoomsPhotos.forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedRooms = Object.values(buckets);
+                this.groupedRooms.forEach((_, idx) => { this.roomSlides[idx] = 0; });
+            }, prevSlide(idx) {
+                const total = this.groupedRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.roomSlides[idx] = (this.roomSlides[idx] - 1 + total) % total;
+            }, nextSlide(idx) {
+                const total = this.groupedRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.roomSlides[idx] = (this.roomSlides[idx] + 1) % total;
+            } }">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left">
                         <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Rooms</span> -->
@@ -2176,11 +2278,21 @@
                     </div>
 
                     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in ymtRoomsPhotos" :key="idx">
+                        <template x-for="(item, idx) in groupedRooms" :key="item.label">
                             <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
                                 <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <img :src="item.photos[roomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[roomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
                                     <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
                                         <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                         <template x-if="item.label !== '公共区域'">
