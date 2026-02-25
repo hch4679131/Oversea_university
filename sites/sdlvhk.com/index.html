@@ -4537,6 +4537,7 @@
 
                 let maxShift = 0;
                 let currentShift = 0;
+                let wheelLocked = false;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -4559,26 +4560,50 @@
                     return Math.abs(sectionCenterY - screenCenterY) <= tolerance;
                 };
 
+                const isSectionInView = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    return rect.bottom > viewportHeight * 0.08 && rect.top < viewportHeight * 0.92;
+                };
+
                 const onWheel = (event) => {
                     if (maxShift <= 0) {
-                        return;
-                    }
-
-                    if (!isSectionCentered()) {
+                        wheelLocked = false;
                         return;
                     }
 
                     const delta = event.deltaY;
-                    const canMoveRight = delta > 0 && currentShift < maxShift - 0.5;
-                    const canMoveLeft = delta < 0 && currentShift > 0.5;
+                    const atStart = currentShift <= 0.5;
+                    const atEnd = currentShift >= maxShift - 0.5;
+                    const canMoveRight = delta > 0 && !atEnd;
+                    const canMoveLeft = delta < 0 && !atStart;
+
+                    if (!wheelLocked) {
+                        if (!isSectionCentered()) {
+                            return;
+                        }
+                        wheelLocked = true;
+                    }
+
+                    if (!isSectionInView()) {
+                        wheelLocked = false;
+                        return;
+                    }
 
                     if (!canMoveRight && !canMoveLeft) {
+                        wheelLocked = false;
                         return;
                     }
 
                     event.preventDefault();
                     currentShift = clamp(currentShift + delta * 1.35, 0, maxShift);
                     applyShift();
+
+                    if (currentShift <= 0.5 || currentShift >= maxShift - 0.5) {
+                        if ((delta < 0 && currentShift <= 0.5) || (delta > 0 && currentShift >= maxShift - 0.5)) {
+                            wheelLocked = false;
+                        }
+                    }
                 };
 
                 recalcBounds();
