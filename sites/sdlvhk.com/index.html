@@ -4538,11 +4538,27 @@
                 let maxShift = 0;
                 let currentShift = 0;
                 let wheelLocked = false;
+                let releaseTimer = null;
+                const RELEASE_DELAY_MS = 120;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
                 const applyShift = () => {
                     track.style.transform = `translate3d(${-currentShift}px,0,0)`;
+                };
+
+                const clearReleaseTimer = () => {
+                    if (!releaseTimer) return;
+                    clearTimeout(releaseTimer);
+                    releaseTimer = null;
+                };
+
+                const scheduleUnlock = () => {
+                    clearReleaseTimer();
+                    releaseTimer = setTimeout(() => {
+                        wheelLocked = false;
+                        releaseTimer = null;
+                    }, RELEASE_DELAY_MS);
                 };
 
                 const recalcBounds = () => {
@@ -4568,6 +4584,7 @@
 
                 const onWheel = (event) => {
                     if (maxShift <= 0) {
+                        clearReleaseTimer();
                         wheelLocked = false;
                         return;
                     }
@@ -4582,26 +4599,30 @@
                         if (!isSectionCentered()) {
                             return;
                         }
+                        clearReleaseTimer();
                         wheelLocked = true;
                     }
 
                     if (!isSectionInView()) {
+                        clearReleaseTimer();
                         wheelLocked = false;
                         return;
                     }
 
                     if (!canMoveRight && !canMoveLeft) {
-                        wheelLocked = false;
+                        event.preventDefault();
+                        scheduleUnlock();
                         return;
                     }
 
+                    clearReleaseTimer();
                     event.preventDefault();
                     currentShift = clamp(currentShift + delta * 1.35, 0, maxShift);
                     applyShift();
 
                     if (currentShift <= 0.5 || currentShift >= maxShift - 0.5) {
                         if ((delta < 0 && currentShift <= 0.5) || (delta > 0 && currentShift >= maxShift - 0.5)) {
-                            wheelLocked = false;
+                            scheduleUnlock();
                         }
                     }
                 };
