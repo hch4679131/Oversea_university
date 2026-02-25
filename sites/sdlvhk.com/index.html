@@ -4540,9 +4540,7 @@
                 let maxShift = 0;
                 let currentShift = 0;
                 let wheelLocked = false;
-                let releaseTimer = null;
-                const RELEASE_DELAY_MS = 140;
-                let releasePending = false;
+                let lockDirection = 0;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -4554,24 +4552,7 @@
                     let delta = event.deltaY;
                     if (event.deltaMode === 1) delta *= 16;
                     if (event.deltaMode === 2) delta *= window.innerHeight;
-                    return clamp(delta, -120, 120);
-                };
-
-                const clearReleaseTimer = () => {
-                    if (!releaseTimer) return;
-                    clearTimeout(releaseTimer);
-                    releaseTimer = null;
-                    releasePending = false;
-                };
-
-                const scheduleUnlock = () => {
-                    if (releasePending) return;
-                    releasePending = true;
-                    releaseTimer = setTimeout(() => {
-                        wheelLocked = false;
-                        releaseTimer = null;
-                        releasePending = false;
-                    }, RELEASE_DELAY_MS);
+                    return clamp(delta, -100, 100);
                 };
 
                 const recalcBounds = () => {
@@ -4585,62 +4566,73 @@
                     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
                     const sectionCenterY = rect.top + rect.height / 2;
                     const screenCenterY = viewportHeight / 2;
-                    const tolerance = Math.min(140, viewportHeight * 0.18);
+                    const tolerance = Math.min(180, viewportHeight * 0.24);
                     return Math.abs(sectionCenterY - screenCenterY) <= tolerance;
                 };
 
                 const isSectionInView = () => {
                     const rect = section.getBoundingClientRect();
                     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-                    return rect.bottom > viewportHeight * 0.08 && rect.top < viewportHeight * 0.92;
+                    return rect.bottom > viewportHeight * 0.02 && rect.top < viewportHeight * 0.98;
                 };
 
                 const onWheel = (event) => {
                     if (maxShift <= 0) {
-                        clearReleaseTimer();
                         wheelLocked = false;
+                        lockDirection = 0;
                         return;
                     }
 
                     const delta = normalizeDelta(event);
+                    if (Math.abs(delta) < 1) return;
+
+                    const direction = delta > 0 ? 1 : -1;
                     const atStart = currentShift <= 0.5;
                     const atEnd = currentShift >= maxShift - 0.5;
-                    const canMoveRight = delta > 0 && !atEnd;
-                    const canMoveLeft = delta < 0 && !atStart;
+                    const canMove = direction > 0 ? !atEnd : !atStart;
+                    const step = clamp(delta * 0.85, -70, 70);
 
-                    if (!wheelLocked) {
-                        if (!isSectionCentered()) {
+                    if (wheelLocked) {
+                        if (!isSectionInView()) {
+                            wheelLocked = false;
+                            lockDirection = 0;
                             return;
                         }
-                        clearReleaseTimer();
-                        wheelLocked = true;
-                    }
 
-                    if (!isSectionInView()) {
-                        clearReleaseTimer();
-                        wheelLocked = false;
-                        return;
-                    }
-
-                    if (!canMoveRight && !canMoveLeft) {
-                        if (!releasePending) {
+                        if (canMove) {
                             event.preventDefault();
-                            scheduleUnlock();
+                            currentShift = clamp(currentShift + step, 0, maxShift);
+                            applyShift();
+                            lockDirection = direction;
+                            return;
                         }
+
+                        if (lockDirection === direction) {
+                            wheelLocked = false;
+                            lockDirection = 0;
+                            return;
+                        }
+
+                        event.preventDefault();
+                        currentShift = clamp(currentShift + step, 0, maxShift);
+                        applyShift();
+                        lockDirection = direction;
                         return;
                     }
 
-                    clearReleaseTimer();
+                    if (!isSectionCentered()) {
+                        return;
+                    }
+
+                    if (!canMove) {
+                        return;
+                    }
+
+                    wheelLocked = true;
+                    lockDirection = direction;
                     event.preventDefault();
-                    const step = clamp(delta * 0.95, -90, 90);
                     currentShift = clamp(currentShift + step, 0, maxShift);
                     applyShift();
-
-                    if (currentShift <= 0.5 || currentShift >= maxShift - 0.5) {
-                        if ((delta < 0 && currentShift <= 0.5) || (delta > 0 && currentShift >= maxShift - 0.5)) {
-                            scheduleUnlock();
-                        }
-                    }
                 };
 
                 recalcBounds();
