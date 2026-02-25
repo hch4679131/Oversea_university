@@ -4539,9 +4539,11 @@
 
                 let maxShift = 0;
                 let currentShift = 0;
-                let stickyTop = 0;
-                let stickStartY = 0;
-                const sectionBasePaddingBottom = parseFloat(window.getComputedStyle(section).paddingBottom) || 0;
+                let wheelLocked = false;
+                let lockDirection = 0;
+                let releaseIntentDir = 0;
+                let releaseIntentCount = 0;
+                const RELEASE_INTENT_THRESHOLD = 2;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -4549,50 +4551,116 @@
                     track.style.transform = `translate3d(${-currentShift}px,0,0)`;
                 };
 
+                const normalizeDelta = (event) => {
+                    let delta = event.deltaY;
+                    if (event.deltaMode === 1) delta *= 16;
+                    if (event.deltaMode === 2) delta *= window.innerHeight;
+                    return clamp(delta, -100, 100);
+                };
+
                 const recalcBounds = () => {
-                    const viewportHeight = viewport.offsetHeight || 0;
-                    const windowHeight = window.innerHeight || document.documentElement.clientHeight || 900;
-
-                    stickyTop = Math.max(24, Math.round((windowHeight - viewportHeight) / 2));
-                    viewport.style.position = 'sticky';
-                    viewport.style.top = `${stickyTop}px`;
-
                     maxShift = Math.max(0, track.scrollWidth - viewport.clientWidth);
-
-                    section.style.paddingBottom = `${sectionBasePaddingBottom}px`;
-                    const viewportOffsetTop = viewport.offsetTop;
-                    const availableTravel = Math.max(0, section.offsetHeight - windowHeight - viewportOffsetTop + stickyTop);
-                    const extraPadding = Math.max(0, maxShift - availableTravel);
-                    section.style.paddingBottom = `${Math.round(sectionBasePaddingBottom + extraPadding)}px`;
-
-                    const sectionTopY = section.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
-                    stickStartY = sectionTopY + viewport.offsetTop - stickyTop;
-
                     currentShift = clamp(currentShift, 0, maxShift);
                     applyShift();
                 };
 
-                const onScroll = () => {
+                const isSectionCentered = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    const sectionCenterY = rect.top + rect.height / 2;
+                    const screenCenterY = viewportHeight / 2;
+                    const tolerance = Math.min(180, viewportHeight * 0.24);
+                    return Math.abs(sectionCenterY - screenCenterY) <= tolerance;
+                };
+
+                const isSectionInView = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    return rect.bottom > viewportHeight * 0.02 && rect.top < viewportHeight * 0.98;
+                };
+
+                const isInActiveZone = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    return rect.top < viewportHeight * 0.78 && rect.bottom > viewportHeight * 0.22;
+                };
+
+                const resetReleaseIntent = () => {
+                    releaseIntentDir = 0;
+                    releaseIntentCount = 0;
+                };
+
+                const onWheel = (event) => {
                     if (maxShift <= 0) {
-                        if (currentShift !== 0) {
-                            currentShift = 0;
-                            applyShift();
-                        }
+                        wheelLocked = false;
+                        lockDirection = 0;
+                        resetReleaseIntent();
                         return;
                     }
 
-                    const scrollY = window.scrollY || window.pageYOffset || 0;
-                    const nextShift = clamp(scrollY - stickStartY, 0, maxShift);
-                    if (Math.abs(nextShift - currentShift) > 0.2) {
-                        currentShift = nextShift;
-                        applyShift();
+                    const delta = normalizeDelta(event);
+                    if (Math.abs(delta) < 1) return;
+
+                    const direction = delta > 0 ? 1 : -1;
+                    const atStart = currentShift <= 0.5;
+                    const atEnd = currentShift >= maxShift - 0.5;
+                    const canMove = direction > 0 ? !atEnd : !atStart;
+                    const step = clamp(delta * 0.85, -70, 70);
+
+                    if (wheelLocked) {
+                        if (!isSectionInView()) {
+                            wheelLocked = false;
+                            lockDirection = 0;
+                            resetReleaseIntent();
+                            return;
+                        }
+
+                        if (canMove) {
+                            event.preventDefault();
+                            currentShift = clamp(currentShift + step, 0, maxShift);
+                            applyShift();
+                            lockDirection = direction;
+                            resetReleaseIntent();
+                            return;
+                        }
+
+                        if (releaseIntentDir === direction) {
+                            releaseIntentCount += 1;
+                        } else {
+                            releaseIntentDir = direction;
+                            releaseIntentCount = 1;
+                        }
+
+                        if (releaseIntentCount < RELEASE_INTENT_THRESHOLD) {
+                            event.preventDefault();
+                            return;
+                        }
+
+                        wheelLocked = false;
+                        lockDirection = 0;
+                        resetReleaseIntent();
+                        return;
                     }
+
+                    if (!isInActiveZone() && !isSectionCentered()) {
+                        return;
+                    }
+
+                    if (!canMove) {
+                        return;
+                    }
+
+                    wheelLocked = true;
+                    lockDirection = direction;
+                    resetReleaseIntent();
+                    event.preventDefault();
+                    currentShift = clamp(currentShift + step, 0, maxShift);
+                    applyShift();
                 };
 
                 recalcBounds();
-                onScroll();
                 window.addEventListener('resize', recalcBounds);
-                window.addEventListener('scroll', onScroll, { passive: true });
+                window.addEventListener('wheel', onWheel, { passive: false });
             }
 
             if (document.readyState === 'loading') {
