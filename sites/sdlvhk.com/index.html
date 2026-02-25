@@ -47,10 +47,14 @@
     </script>
     <style>
         [x-cloak] { display: none !important; }
-        #hero-planner-bar,
         #core-business,
         #core-business > div,
-        #core-business > div > div,
+        #core-business > div > div {
+            overflow: visible !important;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        #hero-planner-bar,
         #core-business .group {
             overflow: hidden !important;
             scrollbar-width: none;
@@ -74,8 +78,14 @@
             height: 0;
             display: none;
         }
+        #hero {
+            overflow: visible !important;
+        }
+        #hero-bg {
+            overflow: hidden;
+        }
     </style>
-    <link rel="stylesheet" href="/sdlvhk.com/assets/styles.css?v=20260213_0001">
+    <link rel="stylesheet" href="/sdlvhk.com/assets/styles.css?v=20260225_0002">
 </head>
 <body class="antialiased selection:bg-academic-navy selection:text-white">
 
@@ -257,7 +267,7 @@
 
             <!-- 1. Hero Section -->
             <section id="hero" class="relative min-h-[88vh] lg:min-h-[94vh] flex items-center bg-white overflow-x-clip overflow-y-visible pt-20 pb-14 lg:pb-20">
-                <div class="absolute inset-0 z-0 overflow-hidden">
+                <div id="hero-bg" class="absolute inset-0 z-0 overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/10 lg:via-white/60 z-10"></div>
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.0%20by%20tirachardz%20on%20Freepik%20-%20Flipped%202.webp"
                     class="absolute left-1/2 -translate-x-1/2 top-0 h-full w-full lg:w-3/4 object-cover object-center transition-transform duration-[16000ms]" alt="Global Education">
