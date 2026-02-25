@@ -4540,6 +4540,7 @@
                 let maxShift = 0;
                 let currentShift = 0;
                 let wheelLocked = false;
+                let lockDirection = 0;
                 let releaseIntentDir = 0;
                 let releaseIntentCount = 0;
                 const RELEASE_INTENT_THRESHOLD = 2;
@@ -4563,19 +4564,25 @@
                     applyShift();
                 };
 
-                const isViewportCentered = () => {
-                    const rect = viewport.getBoundingClientRect();
+                const isSectionCentered = () => {
+                    const rect = section.getBoundingClientRect();
                     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
                     const sectionCenterY = rect.top + rect.height / 2;
                     const screenCenterY = viewportHeight / 2;
-                    const tolerance = Math.min(72, viewportHeight * 0.1);
+                    const tolerance = Math.min(180, viewportHeight * 0.24);
                     return Math.abs(sectionCenterY - screenCenterY) <= tolerance;
                 };
 
-                const isViewportInView = () => {
-                    const rect = viewport.getBoundingClientRect();
+                const isSectionInView = () => {
+                    const rect = section.getBoundingClientRect();
                     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-                    return rect.bottom > viewportHeight * 0.12 && rect.top < viewportHeight * 0.88;
+                    return rect.bottom > viewportHeight * 0.02 && rect.top < viewportHeight * 0.98;
+                };
+
+                const isInActiveZone = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    return rect.top < viewportHeight * 0.78 && rect.bottom > viewportHeight * 0.22;
                 };
 
                 const resetReleaseIntent = () => {
@@ -4586,6 +4593,7 @@
                 const onWheel = (event) => {
                     if (maxShift <= 0) {
                         wheelLocked = false;
+                        lockDirection = 0;
                         resetReleaseIntent();
                         return;
                     }
@@ -4600,8 +4608,9 @@
                     const step = clamp(delta * 0.85, -70, 70);
 
                     if (wheelLocked) {
-                        if (!isViewportInView()) {
+                        if (!isSectionInView()) {
                             wheelLocked = false;
+                            lockDirection = 0;
                             resetReleaseIntent();
                             return;
                         }
@@ -4610,6 +4619,7 @@
                             event.preventDefault();
                             currentShift = clamp(currentShift + step, 0, maxShift);
                             applyShift();
+                            lockDirection = direction;
                             resetReleaseIntent();
                             return;
                         }
@@ -4627,11 +4637,12 @@
                         }
 
                         wheelLocked = false;
+                        lockDirection = 0;
                         resetReleaseIntent();
                         return;
                     }
 
-                    if (!isViewportCentered()) {
+                    if (!isInActiveZone() && !isSectionCentered()) {
                         return;
                     }
 
@@ -4640,6 +4651,7 @@
                     }
 
                     wheelLocked = true;
+                    lockDirection = direction;
                     resetReleaseIntent();
                     event.preventDefault();
                     currentShift = clamp(currentShift + step, 0, maxShift);
