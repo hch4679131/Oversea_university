@@ -4540,6 +4540,7 @@
                 let wheelLocked = false;
                 let releaseTimer = null;
                 const RELEASE_DELAY_MS = 120;
+                let releasePending = false;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -4551,13 +4552,16 @@
                     if (!releaseTimer) return;
                     clearTimeout(releaseTimer);
                     releaseTimer = null;
+                    releasePending = false;
                 };
 
                 const scheduleUnlock = () => {
-                    clearReleaseTimer();
+                    if (releasePending) return;
+                    releasePending = true;
                     releaseTimer = setTimeout(() => {
                         wheelLocked = false;
                         releaseTimer = null;
+                        releasePending = false;
                     }, RELEASE_DELAY_MS);
                 };
 
@@ -4610,8 +4614,10 @@
                     }
 
                     if (!canMoveRight && !canMoveLeft) {
-                        event.preventDefault();
-                        scheduleUnlock();
+                        if (!releasePending) {
+                            event.preventDefault();
+                            scheduleUnlock();
+                        }
                         return;
                     }
 
