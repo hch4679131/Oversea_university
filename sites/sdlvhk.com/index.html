@@ -373,69 +373,69 @@
                         <button @click="switchPage('about', 'history')" class="text-academic-red font-bold text-xs uppercase tracking-widest whitespace-nowrap">查看完整版</button>
                     </div>
 
-                    <div id="home-history-scroll" class="relative overflow-x-auto pb-4 scroll-smooth">
-                        <div class="absolute left-0 right-0 top-9 h-px bg-academic-border"></div>
-                        <div class="mb-3 text-[11px] font-bold tracking-[0.18em] uppercase text-academic-red/70 whitespace-nowrap">向下滚轮可左右浏览时间轴</div>
+                    <div id="home-history-viewport" class="relative overflow-hidden pb-6">
+                        <div class="absolute left-0 right-0 top-11 h-px bg-academic-border"></div>
+                        <div class="mb-4 text-xs font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">跟随页面上下滚动，时间轴将自动左右移动</div>
 
-                        <div class="relative min-w-[1580px] grid grid-cols-8 gap-8">
+                        <div id="home-history-track" class="relative min-w-[1980px] grid grid-cols-8 gap-10 will-change-transform transition-transform duration-150">
                             <div class="pt-0">
-                                <div class="w-5 h-5 rounded-full bg-academic-red border-2 border-white"></div>
-                                <div class="mt-3 text-3xl font-serif font-bold text-academic-navy">2016</div>
-                                <div class="mt-1 text-sm font-bold text-academic-navy" x-text="t[lang].hist_2016_t"></div>
-                                <div class="mt-2 text-xs text-slate-500 leading-relaxed" x-text="t[lang].hist_2016_d"></div>
+                                <div class="w-6 h-6 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-3 text-4xl font-serif font-bold text-academic-navy">2016</div>
+                                <div class="mt-1 text-base font-bold text-academic-navy" x-text="t[lang].hist_2016_t"></div>
+                                <div class="mt-2 text-sm text-slate-500 leading-relaxed" x-text="t[lang].hist_2016_d"></div>
                             </div>
 
                             <div class="pt-0">
-                                <div class="w-5 h-5 rounded-full bg-academic-red border-2 border-white"></div>
-                                <div class="mt-3 text-3xl font-serif font-bold text-academic-navy">2017</div>
-                                <div class="mt-1 text-sm font-bold text-academic-navy" x-text="t[lang].hist_2017_t"></div>
-                                <div class="mt-2 text-xs text-slate-500 leading-relaxed" x-text="t[lang].hist_2017_d"></div>
+                                <div class="w-6 h-6 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-3 text-4xl font-serif font-bold text-academic-navy">2017</div>
+                                <div class="mt-1 text-base font-bold text-academic-navy" x-text="t[lang].hist_2017_t"></div>
+                                <div class="mt-2 text-sm text-slate-500 leading-relaxed" x-text="t[lang].hist_2017_d"></div>
                             </div>
 
                             <div class="pt-0">
-                                <div class="w-5 h-5 rounded-full bg-academic-red border-2 border-white"></div>
-                                <div class="mt-3 text-3xl font-serif font-bold text-academic-navy">2019</div>
-                                <div class="mt-1 text-sm font-bold text-academic-navy" x-text="t[lang].hist_2019_t"></div>
-                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202019.webp" alt="2019" class="mt-3 w-full h-32 object-cover" />
+                                <div class="w-6 h-6 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-3 text-4xl font-serif font-bold text-academic-navy">2019</div>
+                                <div class="mt-1 text-base font-bold text-academic-navy" x-text="t[lang].hist_2019_t"></div>
+                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202019.webp" alt="2019" class="mt-3 w-full h-40 object-cover" />
                             </div>
 
                             <div class="pt-0">
-                                <div class="w-5 h-5 rounded-full bg-academic-red border-2 border-white"></div>
-                                <div class="mt-3 text-3xl font-serif font-bold text-academic-navy">2020</div>
-                                <div class="mt-1 text-sm font-bold text-academic-navy" x-text="t[lang].hist_2020_t"></div>
-                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202020%20服务升级.webp" alt="2020" class="mt-3 w-full h-32 object-cover" />
+                                <div class="w-6 h-6 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-3 text-4xl font-serif font-bold text-academic-navy">2020</div>
+                                <div class="mt-1 text-base font-bold text-academic-navy" x-text="t[lang].hist_2020_t"></div>
+                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202020%20服务升级.webp" alt="2020" class="mt-3 w-full h-40 object-cover" />
                             </div>
 
                             <div class="pt-0">
-                                <div class="w-5 h-5 rounded-full bg-academic-red border-2 border-white"></div>
-                                <div class="mt-3 text-3xl font-serif font-bold text-academic-navy">2022</div>
-                                <div class="mt-1 text-sm font-bold text-academic-navy" x-text="t[lang].hist_2022_t"></div>
-                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202022%20腾讯教育奖项.webp" alt="2022" class="mt-3 w-full h-32 object-cover" />
+                                <div class="w-6 h-6 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-3 text-4xl font-serif font-bold text-academic-navy">2022</div>
+                                <div class="mt-1 text-base font-bold text-academic-navy" x-text="t[lang].hist_2022_t"></div>
+                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202022%20腾讯教育奖项.webp" alt="2022" class="mt-3 w-full h-40 object-cover" />
                             </div>
 
                             <div class="pt-0">
-                                <div class="w-5 h-5 rounded-full bg-academic-red border-2 border-white"></div>
-                                <div class="mt-3 text-3xl font-serif font-bold text-academic-navy">2023</div>
-                                <div class="mt-1 text-sm font-bold text-academic-navy" x-text="t[lang].hist_2023_t"></div>
+                                <div class="w-6 h-6 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-3 text-4xl font-serif font-bold text-academic-navy">2023</div>
+                                <div class="mt-1 text-base font-bold text-academic-navy" x-text="t[lang].hist_2023_t"></div>
                                 <div class="mt-3 grid grid-cols-3 gap-2">
-                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.1.webp" alt="2023-1" class="w-full h-32 object-cover" />
-                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.2.webp" alt="2023-2" class="w-full h-32 object-cover" />
-                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.3.webp" alt="2023-3" class="w-full h-32 object-cover" />
+                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.1.webp" alt="2023-1" class="w-full h-40 object-cover" />
+                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.2.webp" alt="2023-2" class="w-full h-40 object-cover" />
+                                    <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.3.webp" alt="2023-3" class="w-full h-40 object-cover" />
                                 </div>
                             </div>
 
                             <div class="pt-0">
-                                <div class="w-5 h-5 rounded-full bg-academic-red border-2 border-white"></div>
-                                <div class="mt-3 text-3xl font-serif font-bold text-academic-navy">2024</div>
-                                <div class="mt-1 text-sm font-bold text-academic-navy" x-text="t[lang].hist_2024_t"></div>
-                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202024%20新浪教育奖.webp" alt="2024" class="mt-3 w-full h-32 object-cover" />
+                                <div class="w-6 h-6 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-3 text-4xl font-serif font-bold text-academic-navy">2024</div>
+                                <div class="mt-1 text-base font-bold text-academic-navy" x-text="t[lang].hist_2024_t"></div>
+                                <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202024%20新浪教育奖.webp" alt="2024" class="mt-3 w-full h-40 object-cover" />
                             </div>
 
                             <div class="pt-0">
-                                <div class="w-5 h-5 rounded-full bg-academic-red border-2 border-white"></div>
-                                <div class="mt-3 text-3xl font-serif font-bold text-academic-navy">2026</div>
-                                <div class="mt-1 text-sm font-bold text-academic-navy" x-text="t[lang].hist_2026_t"></div>
-                                <div class="mt-2 text-xs text-slate-500 leading-relaxed" x-text="t[lang].hist_2026_d"></div>
+                                <div class="w-6 h-6 rounded-full bg-academic-red border-2 border-white"></div>
+                                <div class="mt-3 text-4xl font-serif font-bold text-academic-navy">2026</div>
+                                <div class="mt-1 text-base font-bold text-academic-navy" x-text="t[lang].hist_2026_t"></div>
+                                <div class="mt-2 text-sm text-slate-500 leading-relaxed" x-text="t[lang].hist_2026_d"></div>
                             </div>
                         </div>
                     </div>
@@ -4529,26 +4529,48 @@
     <script src="/sdlvhk.com/assets/app.js?v=20260203_0002"></script>
     <script>
         (function () {
-            function bindHomeHistoryWheelScroll() {
-                const el = document.getElementById('home-history-scroll');
-                if (!el || el.dataset.wheelBound === '1') return;
-                el.dataset.wheelBound = '1';
+            function bindHomeHistoryPageScroll() {
+                const section = document.getElementById('home-history');
+                const viewport = document.getElementById('home-history-viewport');
+                const track = document.getElementById('home-history-track');
+                if (!section || !viewport || !track) return;
 
-                el.addEventListener('wheel', function (event) {
-                    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-                    if (el.scrollWidth <= el.clientWidth) return;
+                let ticking = false;
 
-                    const atStart = el.scrollLeft <= 0;
-                    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
-                    if ((event.deltaY < 0 && atStart) || (event.deltaY > 0 && atEnd)) return;
+                const updateTrack = () => {
+                    const maxShift = Math.max(0, track.scrollWidth - viewport.clientWidth);
+                    if (maxShift <= 0) {
+                        track.style.transform = 'translate3d(0,0,0)';
+                        return;
+                    }
 
-                    event.preventDefault();
-                    el.scrollLeft += event.deltaY * 2.2;
-                }, { passive: false });
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    const rect = section.getBoundingClientRect();
+                    const start = viewportHeight * 0.9;
+                    const end = -section.offsetHeight * 0.35;
+
+                    let progress = (start - rect.top) / (start - end);
+                    progress = Math.max(0, Math.min(1, progress));
+
+                    track.style.transform = `translate3d(${-maxShift * progress}px,0,0)`;
+                };
+
+                const onScroll = () => {
+                    if (ticking) return;
+                    ticking = true;
+                    requestAnimationFrame(() => {
+                        updateTrack();
+                        ticking = false;
+                    });
+                };
+
+                window.addEventListener('scroll', onScroll, { passive: true });
+                window.addEventListener('resize', onScroll);
+                updateTrack();
             }
 
-            document.addEventListener('DOMContentLoaded', bindHomeHistoryWheelScroll);
-            window.addEventListener('load', bindHomeHistoryWheelScroll);
+            document.addEventListener('DOMContentLoaded', bindHomeHistoryPageScroll);
+            window.addEventListener('load', bindHomeHistoryPageScroll);
         })();
     </script>
 
