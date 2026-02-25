@@ -375,7 +375,7 @@
 
                     <div id="home-history-viewport" class="relative overflow-hidden pb-6">
                         <div class="absolute left-0 right-0 top-11 h-px bg-academic-border"></div>
-                        <div class="mb-4 text-xs font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">跟随页面上下滚动，时间轴将自动左右移动</div>
+                        <div class="mb-4 text-xs font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">时间轴到屏幕中间后，滚轮将优先控制左右浏览</div>
 
                         <div id="home-history-track" class="relative min-w-[1980px] grid grid-cols-8 gap-10 will-change-transform transition-transform duration-150">
                             <div class="pt-0">
@@ -4535,38 +4535,55 @@
                 const track = document.getElementById('home-history-track');
                 if (!section || !viewport || !track) return;
 
-                let ticking = false;
+                let maxShift = 0;
+                let currentShift = 0;
 
-                const updateTrack = () => {
-                    const maxShift = Math.max(0, track.scrollWidth - viewport.clientWidth);
+                const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+                const applyShift = () => {
+                    track.style.transform = `translate3d(${-currentShift}px,0,0)`;
+                };
+
+                const recalcBounds = () => {
+                    maxShift = Math.max(0, track.scrollWidth - viewport.clientWidth);
+                    currentShift = clamp(currentShift, 0, maxShift);
+                    applyShift();
+                };
+
+                const isSectionCentered = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    const sectionCenterY = rect.top + rect.height / 2;
+                    const screenCenterY = viewportHeight / 2;
+                    const tolerance = Math.min(140, viewportHeight * 0.18);
+                    return Math.abs(sectionCenterY - screenCenterY) <= tolerance;
+                };
+
+                const onWheel = (event) => {
                     if (maxShift <= 0) {
-                        track.style.transform = 'translate3d(0,0,0)';
                         return;
                     }
 
-                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-                    const rect = section.getBoundingClientRect();
-                    const start = viewportHeight * 0.9;
-                    const end = -section.offsetHeight * 0.35;
+                    if (!isSectionCentered()) {
+                        return;
+                    }
 
-                    let progress = (start - rect.top) / (start - end);
-                    progress = Math.max(0, Math.min(1, progress));
+                    const delta = event.deltaY;
+                    const canMoveRight = delta > 0 && currentShift < maxShift - 0.5;
+                    const canMoveLeft = delta < 0 && currentShift > 0.5;
 
-                    track.style.transform = `translate3d(${-maxShift * progress}px,0,0)`;
+                    if (!canMoveRight && !canMoveLeft) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    currentShift = clamp(currentShift + delta * 1.35, 0, maxShift);
+                    applyShift();
                 };
 
-                const onScroll = () => {
-                    if (ticking) return;
-                    ticking = true;
-                    requestAnimationFrame(() => {
-                        updateTrack();
-                        ticking = false;
-                    });
-                };
-
-                window.addEventListener('scroll', onScroll, { passive: true });
-                window.addEventListener('resize', onScroll);
-                updateTrack();
+                recalcBounds();
+                window.addEventListener('resize', recalcBounds);
+                window.addEventListener('wheel', onWheel, { passive: false });
             }
 
             document.addEventListener('DOMContentLoaded', bindHomeHistoryPageScroll);
