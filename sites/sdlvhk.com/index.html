@@ -557,25 +557,25 @@
                 <!-- ================= PAGE 2: 关于我们 (极简国际风 | 纯色无渐变 | 紧凑排版) ================= -->
         <div x-show="page === 'about'" x-transition:enter="transition ease-out duration-500" class="w-full bg-white font-sans text-slate-800">
             
-            <!-- 1. About: Hero (纯粹红底叠加，拒绝渐变，极简有力) -->
+            <!-- 1. About: Hero (保留背景原图，去除红色遮罩) -->
             <section id="about-hero" class="relative min-h-[50vh] md:min-h-[60vh] flex flex-col justify-center overflow-hidden parallax-trigger">
-                <!-- 纯正大红覆盖层，无渐变 -->
-                <div class="absolute inset-0 z-0 bg-[#A81C22]">
+                <div class="absolute inset-0 z-0">
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%203.0%20WH%20Entrance.webp"
-                        class="hero-parallax-img w-full h-[120%] object-cover grayscale opacity-20 mix-blend-luminosity" style="transform-origin: top;" alt="WH Entrance">
+                        class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="WH Entrance">
+                    <div class="absolute inset-0 bg-black/35"></div>
                 </div>
 
                 <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-12">
                     <div class="scrub-item anim-fade-up max-w-4xl flex flex-col justify-start">
                         <!-- 蓝色小点缀 -->
                         <div class="flex items-center gap-4 mb-6">
-                            <div class="w-12 h-[2px] bg-[#0A1E3F]"></div>
-                            <span class="text-white font-bold tracking-[0.35em] uppercase text-xs">SDLV Global Education</span>
+                            <div class="w-12 h-[2px] bg-[#A81C22]"></div>
+                            <span class="text-[#F8FAFC] font-bold tracking-[0.35em] uppercase text-xs">SDLV Global Education</span>
                         </div>
-                        <h1 class="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] tracking-tight" x-text="t[lang].about_hero_title"></h1>
-                        <div class="mt-8 md:w-2/3 border-l-2 border-[#0A1E3F] pl-6 space-y-2">
-                            <p class="text-lg text-white/90 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_p1"></p>
-                            <p class="text-lg text-white/90 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_p2"></p>
+                        <h1 class="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] tracking-tight drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]" x-text="t[lang].about_hero_title"></h1>
+                        <div class="mt-8 md:w-2/3 border-l-2 border-white/70 pl-6 space-y-2">
+                            <p class="text-lg text-slate-100 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_p1"></p>
+                            <p class="text-lg text-slate-200 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_p2"></p>
                         </div>
                     </div>
                 </div>
