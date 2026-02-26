@@ -554,267 +554,201 @@
 
         </div>
 
-        <!-- ================= PAGE 2: 关于我们 (至尊精美版) ================= -->
-        <div x-show="page === 'about'" x-transition:enter="transition ease-out duration-700" class="w-full bg-paper font-sans">
+        <!-- ================= PAGE 2: 关于我们 ================= -->
+        <div x-show="page === 'about'" x-transition:enter="transition ease-out duration-500" class="w-full bg-paper font-sans">
             
-            <!-- About: Hero (高定光影画册风) -->
-            <section id="about-hero" class="relative min-h-[70vh] md:min-h-[85vh] flex flex-col justify-center overflow-hidden parallax-trigger">
-                <div class="absolute inset-0 z-0 bg-academic-navy">
+            <!-- About: Hero (经典红蓝混色高定风格) -->
+            <section id="about-hero" class="relative min-h-[65vh] md:min-h-[75vh] flex flex-col justify-center overflow-hidden parallax-trigger">
+                <div class="absolute inset-0 z-0 bg-black">
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%203.0%20WH%20Entrance.webp"
-                        class="hero-parallax-img w-full h-[120%] object-cover opacity-60 mix-blend-luminosity grayscale-[30%]" style="transform-origin: top;" alt="WH Entrance">
-                    <div class="absolute inset-0 bg-gradient-to-r from-academic-navy/90 via-academic-navy/60 to-transparent z-10"></div>
-                    <div class="absolute -bottom-32 -left-32 w-[600px] h-[600px] bg-academic-red/40 rounded-full blur-[120px] mix-blend-screen z-10 pointer-events-none"></div>
+                        class="hero-parallax-img w-full h-[120%] object-cover grayscale-[20%]" style="transform-origin: top;" alt="WH Entrance">
+                    <div class="absolute inset-0 bg-gradient-to-r from-academic-red/90 via-academic-red/75 to-academic-navy/70 mix-blend-multiply"></div>
                 </div>
 
-                <div class="absolute inset-6 md:inset-10 border border-white/10 z-20 pointer-events-none hidden md:block">
-                    <div class="absolute top-0 left-10 w-px h-full bg-white/10"></div>
-                </div>
-
-                <div class="relative z-30 w-full max-w-7xl mx-auto px-6 md:px-20 pt-20">
+                <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-20">
                     <div class="scrub-item anim-fade-up max-w-3xl flex flex-col justify-start">
-                        <div class="flex items-center gap-4 mb-8">
-                            <div class="w-8 h-8 rounded-full border border-academic-red flex items-center justify-center bg-academic-red/10">
-                                <div class="w-2 h-2 bg-academic-red rounded-full"></div>
-                            </div>
-                            <span class="text-white/70 font-bold tracking-[0.4em] uppercase text-[10px] letter-spacing">Global Elite Education</span>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-1 bg-white/70"></div>
+                            <span class="text-white/80 font-bold tracking-[0.35em] uppercase text-[10px]">SDLV Global Education</span>
                         </div>
-
-                        <h1 class="text-5xl md:text-6xl lg:text-[5.5rem] font-serif font-bold text-white leading-[1.1] tracking-tight drop-shadow-2xl">
-                            Shaping the <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-academic-red/80 italic font-light">Future Elite.</span>
-                        </h1>
-
-                        <div class="mt-10 md:ml-12 pl-6 border-l border-academic-red/50 space-y-4 max-w-xl">
-                            <p class="text-lg md:text-xl text-white/90 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_title"></p>
-                            <p class="text-sm md:text-base text-white/60 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_p1"></p>
-                            <p class="text-sm md:text-base text-white/60 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_p2"></p>
+                        <h1 class="text-5xl md:text-7xl font-serif font-bold text-white leading-tight tracking-tight drop-shadow-lg" x-text="t[lang].about_hero_title"></h1>
+                        <div class="mt-8 border-l-2 border-white/40 pl-6 space-y-3">
+                            <p class="text-lg md:text-xl text-white/95 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_p1"></p>
+                            <p class="text-lg md:text-xl text-white/95 font-light tracking-wide leading-relaxed" x-text="t[lang].about_hero_p2"></p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- About: Intro (错层与水印质感排版) -->
-            <section id="intro" class="py-32 bg-paper text-academic-navy relative overflow-hidden">
-                <div class="absolute top-10 left-10 text-[20rem] font-serif font-bold text-academic-navy/[0.02] leading-none pointer-events-none select-none">S</div>
-                <div class="absolute bottom-0 right-10 text-[20rem] font-serif font-bold text-academic-red/[0.02] leading-none pointer-events-none select-none">E</div>
+            <!-- About: Intro (红蓝碰撞排版) -->
+            <section id="intro" class="py-24 bg-paper text-academic-navy">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <h2 class="text-xs font-bold tracking-[0.3em] text-academic-navy/50 uppercase" x-text="t[lang].home_about_title"></h2>
+                        <div class="w-1 h-8 bg-academic-red mx-auto mt-4"></div>
+                    </div>
 
-                <div class="max-w-7xl mx-auto px-6 relative z-10">
-                    <div class="flex flex-col md:flex-row gap-16 lg:gap-24 items-center">
-                        <div class="md:w-1/2 scrub-item anim-fade-up">
-                            <div class="flex items-center gap-3 mb-6">
-                                <div class="w-12 h-px bg-academic-red"></div>
-                                <h2 class="text-[10px] font-bold tracking-[0.3em] text-academic-red uppercase" x-text="t[lang].home_about_title"></h2>
-                            </div>
-
-                            <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy mb-10 leading-[1.2]">
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div class="scrub-item anim-fade-up">
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-red mb-8 leading-tight">
                                 <span x-text="t[lang].about_h1"></span><br>
-                                <span class="text-academic-red italic font-light" x-text="t[lang].about_h1_sub"></span>
-                            </h3>
-
-                            <div class="space-y-6 text-slate-500 text-base md:text-lg leading-loose font-light">
+                                <span class="text-academic-navy italic" x-text="t[lang].about_h1_sub"></span>
+                            </h2>
+                            <div class="space-y-6 text-slate-600 text-lg leading-relaxed font-light">
                                 <p x-text="t[lang].about_p1"></p>
                                 <p x-text="t[lang].about_p2"></p>
                             </div>
-
-                            <div class="mt-12 flex items-center gap-6">
-                                <div class="w-16 h-16 rounded-full border-2 border-academic-navy/10 flex items-center justify-center p-3">
-                                    <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" alt="Logo" class="w-full h-full object-contain opacity-40 grayscale">
-                                </div>
-                                <div class="text-xs tracking-widest text-academic-navy/40 uppercase font-bold">SDLV Premium Services</div>
-                            </div>
                         </div>
-
-                        <div class="md:w-1/2 relative scrub-item anim-scale w-full mt-10 md:mt-0">
-                            <div class="absolute -top-6 -right-6 w-full h-full border border-academic-red z-0 hidden md:block"></div>
-                            <div class="absolute top-6 right-6 w-full h-full bg-academic-navy/5 z-0 hidden md:block"></div>
-
+                        <div class="relative scrub-item anim-scale">
+                            <div class="absolute top-6 -right-6 w-full h-full bg-academic-red/10 z-0 hidden md:block border border-academic-red/20"></div>
                             <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp" 
-                                class="relative z-10 w-full object-cover shadow-[0_20px_50px_rgba(0,0,0,0.1)] grayscale-[10%]" alt="Team">
-
-                            <div class="absolute -bottom-8 -left-8 bg-white p-6 md:p-8 z-20 shadow-2xl border-t-4 border-academic-red flex items-center gap-4 group hover:-translate-y-2 transition-transform duration-500">
-                                <i data-lucide="award" class="w-8 h-8 text-academic-navy group-hover:text-academic-red transition-colors"></i>
-                                <div>
-                                    <span class="block text-xl font-serif font-bold text-academic-navy tracking-widest" x-text="t[lang].about_badge"></span>
-                                    <span class="text-[10px] text-slate-400 uppercase tracking-widest mt-1 block">Since 2016</span>
-                                </div>
+                                class="relative z-10 w-full object-cover shadow-2xl bg-white" alt="Team">
+                            <div class="absolute -bottom-6 -left-6 bg-academic-navy px-10 py-6 hidden md:block z-20 shadow-xl border-l-4 border-academic-red">
+                                <span class="block text-xl font-serif font-bold text-white tracking-widest" x-text="t[lang].about_badge"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- About: Vision & Mission (极简悬浮卡片) -->
-            <section id="about-vision" class="relative z-20 -mt-10 max-w-7xl mx-auto px-6 mb-32">
-                <div class="grid md:grid-cols-2 gap-6 lg:gap-10 scrub-item anim-fade-up">
-                    <div class="relative bg-academic-red p-12 md:p-16 overflow-hidden group shadow-2xl hover:shadow-[0_20px_40px_rgba(200,16,46,0.3)] transition-all duration-700 hover:-translate-y-2">
-                        <div class="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 group-hover:scale-150 transition-transform duration-700"></div>
-                        <div class="relative z-10">
-                            <div class="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mb-8 backdrop-blur-md">
-                                <i data-lucide="target" class="w-6 h-6 text-white"></i>
-                            </div>
-                            <h3 class="text-3xl font-serif font-bold text-white mb-6 tracking-wide" x-text="t[lang].about_mission_label"></h3>
-                            <p class="text-white/80 text-lg leading-relaxed font-light" x-text="t[lang].about_mission_text"></p>
+            <!-- About: Vision & Mission (红蓝对称结构) -->
+            <section id="about-vision" class="relative z-20 -mt-10 max-w-7xl mx-auto px-6 mb-24">
+                <div class="grid md:grid-cols-2 shadow-2xl scrub-item anim-fade-up bg-white">
+                    <div class="bg-academic-red p-12 md:p-16 flex flex-col justify-center text-white transition-transform hover:-translate-y-1 duration-500">
+                        <div class="flex items-center gap-4 mb-8">
+                            <i data-lucide="shield-check" class="w-10 h-10 text-white/80"></i>
+                            <h3 class="text-3xl font-serif font-bold text-white m-0" x-text="t[lang].about_mission_label"></h3>
                         </div>
+                        <p class="text-white/90 text-lg leading-relaxed font-light" x-text="t[lang].about_mission_text"></p>
                     </div>
-
-                    <div class="relative bg-white p-12 md:p-16 overflow-hidden border border-slate-100 shadow-xl group hover:shadow-2xl transition-all duration-700 hover:-translate-y-2">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-academic-navy origin-left scale-x-50 group-hover:scale-x-100 transition-transform duration-700"></div>
-                        <div class="absolute bottom-0 right-0 w-48 h-48 bg-academic-navy/5 rounded-full blur-3xl translate-y-1/4 group-hover:scale-150 transition-transform duration-700"></div>
-
-                        <div class="relative z-10">
-                            <div class="w-14 h-14 rounded-full bg-academic-navy/5 border border-academic-navy/10 flex items-center justify-center mb-8">
-                                <i data-lucide="globe-2" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors duration-500"></i>
-                            </div>
-                            <h3 class="text-3xl font-serif font-bold text-academic-navy mb-6 tracking-wide" x-text="t[lang].about_vision_label"></h3>
-                            <p class="text-slate-600 text-lg leading-relaxed font-light" x-text="t[lang].about_vision_text"></p>
+                    <div class="p-12 md:p-16 border-t-4 border-academic-navy flex flex-col justify-center transition-colors hover:bg-slate-50 duration-500">
+                        <div class="flex items-center gap-4 mb-8">
+                            <i data-lucide="globe-2" class="w-10 h-10 text-academic-navy"></i>
+                            <h3 class="text-3xl font-serif font-bold text-academic-navy m-0" x-text="t[lang].about_vision_label"></h3>
                         </div>
+                        <p class="text-slate-600 text-lg leading-relaxed font-light" x-text="t[lang].about_vision_text"></p>
                     </div>
                 </div>
             </section>
-            <section id="history" class="py-32 bg-slate-50 border-y border-slate-200 relative overflow-hidden">
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
-
-                <div class="max-w-6xl mx-auto px-6 relative z-10">
-                    <div class="text-center mb-24 scrub-item anim-fade-up">
-                        <h2 class="text-xs font-bold tracking-[0.4em] text-academic-red uppercase mb-4">Corporate Journey</h2>
-                        <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].history_title"></h3>
-                        <div class="w-px h-12 bg-academic-red mx-auto mt-8"></div>
+            <section id="history" class="py-24 bg-white relative">
+                <div class="max-w-5xl mx-auto px-6">
+                    <div class="text-center mb-20 scrub-item anim-fade-up">
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-red" x-text="t[lang].history_title"></h2>
+                        <div class="w-20 h-px bg-academic-navy mx-auto mt-6"></div>
                     </div>
-
+                    
                     <div class="relative pl-8 md:pl-0">
-                        <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-slate-300 -translate-x-1/2"></div>
-                        <div class="absolute left-0 md:left-1/2 top-0 w-[2px] bg-academic-red -translate-x-1/2 z-10 scrub-item anim-grow-line shadow-[0_0_10px_rgba(200,16,46,0.5)]" style="height: 0%; transform-origin: top;"></div>
+                        <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-academic-navy/10 -translate-x-1/2"></div>
+                        <div class="absolute left-0 md:left-1/2 top-0 w-[2px] bg-academic-red -translate-x-1/2 z-10 scrub-item anim-grow-line" style="height: 0%; transform-origin: top;"></div>
 
-                        <div class="flex flex-col-reverse gap-16 md:gap-24">
-                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up group">
+                        <div class="flex flex-col-reverse gap-24">
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:text-right">
-                                    <span class="text-5xl md:text-6xl font-serif font-bold text-academic-navy/20 group-hover:text-academic-navy transition-colors duration-500 block leading-none">2016</span>
+                                    <span class="text-5xl font-serif font-bold text-academic-navy block">2016</span>
+                                    <span class="text-academic-red text-sm font-bold tracking-widest uppercase mt-2 block" x-text="t[lang].hist_2016_t"></span>
                                 </div>
-                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-white border-2 border-academic-red rounded-full z-20 group-hover:bg-academic-red transition-colors duration-300 shadow-[0_0_0_4px_rgba(255,255,255,1)]"></div>
-                                <div class="pl-8 md:pl-0">
-                                    <div class="bg-white p-6 shadow-md border border-slate-100 group-hover:shadow-xl group-hover:border-academic-red/20 transition-all duration-500 rounded-sm relative">
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-academic-red origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
-                                        <h4 class="text-academic-red text-sm font-bold tracking-widest uppercase mb-3" x-text="t[lang].hist_2016_t"></h4>
-                                        <p class="text-slate-600 text-sm leading-relaxed font-light" x-text="t[lang].hist_2016_d"></p>
-                                    </div>
+                                <div class="absolute left-[-6px] md:left-1/2 md:-ml-[6px] w-3.5 h-3.5 bg-academic-red rounded-full z-20 border-2 border-white shadow-md"></div>
+                                <div class="pl-8 md:pl-0 text-slate-600 text-base leading-relaxed font-light">
+                                    <p x-text="t[lang].hist_2016_d"></p>
                                 </div>
                             </div>
-
-                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up group">
+                            
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:order-2">
-                                    <span class="text-5xl md:text-6xl font-serif font-bold text-academic-navy/20 group-hover:text-academic-navy transition-colors duration-500 block leading-none">2017</span>
+                                    <span class="text-5xl font-serif font-bold text-academic-navy block">2017</span>
+                                    <span class="text-academic-red text-sm font-bold tracking-widest uppercase mt-2 block" x-text="t[lang].hist_2017_t"></span>
                                 </div>
-                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-white border-2 border-academic-navy rounded-full z-20 group-hover:bg-academic-navy transition-colors duration-300 shadow-[0_0_0_4px_rgba(255,255,255,1)]"></div>
-                                <div class="md:text-right pl-8 md:pl-0 md:order-1">
-                                    <div class="bg-white p-6 shadow-md border border-slate-100 group-hover:shadow-xl group-hover:border-academic-navy/20 transition-all duration-500 rounded-sm relative text-left md:text-right">
-                                        <div class="absolute top-0 right-0 w-1 h-full bg-academic-navy origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 hidden md:block"></div>
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 md:hidden"></div>
-                                        <h4 class="text-academic-navy text-sm font-bold tracking-widest uppercase mb-3" x-text="t[lang].hist_2017_t"></h4>
-                                        <p class="text-slate-600 text-sm leading-relaxed font-light" x-text="t[lang].hist_2017_d"></p>
-                                    </div>
+                                <div class="absolute left-[-6px] md:left-1/2 md:-ml-[6px] w-3.5 h-3.5 bg-white border-2 border-academic-navy rounded-full z-20 shadow-md"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-slate-600 text-base leading-relaxed font-light md:order-1">
+                                    <p x-text="t[lang].hist_2017_d"></p>
                                 </div>
                             </div>
 
-                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up group">
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:text-right">
-                                    <span class="text-5xl md:text-6xl font-serif font-bold text-academic-navy/20 group-hover:text-academic-navy transition-colors duration-500 block leading-none">2019</span>
+                                    <span class="text-5xl font-serif font-bold text-academic-navy block">2019</span>
+                                    <span class="text-academic-red text-sm font-bold tracking-widest uppercase mt-2 block" x-text="t[lang].hist_2019_t"></span>
                                 </div>
-                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-white border-2 border-academic-red rounded-full z-20 group-hover:bg-academic-red transition-colors duration-300 shadow-[0_0_0_4px_rgba(255,255,255,1)]"></div>
-                                <div class="pl-8 md:pl-0">
-                                    <div class="bg-white p-6 shadow-md border border-slate-100 group-hover:shadow-xl group-hover:border-academic-red/20 transition-all duration-500 rounded-sm relative">
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-academic-red origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
-                                        <h4 class="text-academic-red text-sm font-bold tracking-widest uppercase mb-3" x-text="t[lang].hist_2019_t"></h4>
-                                        <p class="text-slate-600 text-sm leading-relaxed font-light mb-4" x-text="t[lang].hist_2019_d"></p>
-                                        <div class="overflow-hidden rounded-sm">
-                                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202019.webp" alt="2019" class="w-full h-32 object-cover group-hover:scale-105 transition duration-700" />
-                                        </div>
+                                <div class="absolute left-[-6px] md:left-1/2 md:-ml-[6px] w-3.5 h-3.5 bg-academic-red rounded-full z-20 border-2 border-white shadow-md"></div>
+                                <div class="pl-8 md:pl-0 text-slate-600 text-base leading-relaxed font-light">
+                                    <p x-text="t[lang].hist_2019_d"></p>
+                                    <div class="mt-6 border border-slate-200 overflow-hidden shadow-lg p-1 bg-white">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202019.webp" alt="2019" class="w-full h-48 object-cover hover:scale-105 transition duration-700" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up group">
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:order-2">
-                                    <span class="text-5xl md:text-6xl font-serif font-bold text-academic-navy/20 group-hover:text-academic-navy transition-colors duration-500 block leading-none">2020</span>
+                                    <span class="text-5xl font-serif font-bold text-academic-navy block">2020</span>
+                                    <span class="text-academic-red text-sm font-bold tracking-widest uppercase mt-2 block" x-text="t[lang].hist_2020_t"></span>
                                 </div>
-                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-white border-2 border-academic-navy rounded-full z-20 group-hover:bg-academic-navy transition-colors duration-300 shadow-[0_0_0_4px_rgba(255,255,255,1)]"></div>
-                                <div class="md:text-right pl-8 md:pl-0 md:order-1">
-                                    <div class="bg-white p-6 shadow-md border border-slate-100 group-hover:shadow-xl group-hover:border-academic-navy/20 transition-all duration-500 rounded-sm relative text-left md:text-right">
-                                        <div class="absolute top-0 right-0 w-1 h-full bg-academic-navy origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 hidden md:block"></div>
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 md:hidden"></div>
-                                        <h4 class="text-academic-navy text-sm font-bold tracking-widest uppercase mb-3" x-text="t[lang].hist_2020_t"></h4>
-                                        <p class="text-slate-600 text-sm leading-relaxed font-light mb-4" x-text="t[lang].hist_2020_d"></p>
-                                        <div class="overflow-hidden rounded-sm">
-                                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202020%20服务升级.webp" alt="2020" class="w-full h-32 object-cover group-hover:scale-105 transition duration-700" />
-                                        </div>
+                                <div class="absolute left-[-6px] md:left-1/2 md:-ml-[6px] w-3.5 h-3.5 bg-white border-2 border-academic-navy rounded-full z-20 shadow-md"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-slate-600 text-base leading-relaxed font-light md:order-1">
+                                    <p x-text="t[lang].hist_2020_d"></p>
+                                    <div class="mt-6 border border-slate-200 overflow-hidden shadow-lg p-1 bg-white ml-0 md:ml-auto">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202020%20服务升级.webp" alt="2020" class="w-full h-48 object-cover hover:scale-105 transition duration-700" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up group">
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:text-right">
-                                    <span class="text-5xl md:text-6xl font-serif font-bold text-academic-navy/20 group-hover:text-academic-navy transition-colors duration-500 block leading-none">2022</span>
+                                    <span class="text-5xl font-serif font-bold text-academic-navy block">2022</span>
+                                    <span class="text-academic-red text-sm font-bold tracking-widest uppercase mt-2 block" x-text="t[lang].hist_2022_t"></span>
                                 </div>
-                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-white border-2 border-academic-red rounded-full z-20 group-hover:bg-academic-red transition-colors duration-300 shadow-[0_0_0_4px_rgba(255,255,255,1)]"></div>
-                                <div class="pl-8 md:pl-0">
-                                    <div class="bg-white p-6 shadow-md border border-slate-100 group-hover:shadow-xl group-hover:border-academic-red/20 transition-all duration-500 rounded-sm relative">
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-academic-red origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
-                                        <h4 class="text-academic-red text-sm font-bold tracking-widest uppercase mb-3" x-text="t[lang].hist_2022_t"></h4>
-                                        <p class="text-slate-600 text-sm leading-relaxed font-light mb-4" x-text="t[lang].hist_2022_d"></p>
-                                        <div class="overflow-hidden rounded-sm">
-                                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202022%20腾讯教育奖项.webp" alt="2022" class="w-full h-32 object-cover group-hover:scale-105 transition duration-700" />
-                                        </div>
+                                <div class="absolute left-[-6px] md:left-1/2 md:-ml-[6px] w-3.5 h-3.5 bg-academic-red rounded-full z-20 border-2 border-white shadow-md"></div>
+                                <div class="pl-8 md:pl-0 text-slate-600 text-base leading-relaxed font-light">
+                                    <p x-text="t[lang].hist_2022_d"></p>
+                                    <div class="mt-6 border border-slate-200 overflow-hidden shadow-lg p-1 bg-white">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202022%20腾讯教育奖项.webp" alt="2022" class="w-full h-48 object-cover hover:scale-105 transition duration-700" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up group">
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:order-2">
-                                    <span class="text-5xl md:text-6xl font-serif font-bold text-academic-navy/20 group-hover:text-academic-navy transition-colors duration-500 block leading-none">2023</span>
+                                    <span class="text-5xl font-serif font-bold text-academic-navy block">2023</span>
+                                    <span class="text-academic-red text-sm font-bold tracking-widest uppercase mt-2 block" x-text="t[lang].hist_2023_t"></span>
                                 </div>
-                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-white border-2 border-academic-navy rounded-full z-20 group-hover:bg-academic-navy transition-colors duration-300 shadow-[0_0_0_4px_rgba(255,255,255,1)]"></div>
-                                <div class="md:text-right pl-8 md:pl-0 md:order-1">
-                                    <div class="bg-white p-6 shadow-md border border-slate-100 group-hover:shadow-xl group-hover:border-academic-navy/20 transition-all duration-500 rounded-sm relative text-left md:text-right">
-                                        <div class="absolute top-0 right-0 w-1 h-full bg-academic-navy origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 hidden md:block"></div>
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 md:hidden"></div>
-                                        <h4 class="text-academic-navy text-sm font-bold tracking-widest uppercase mb-3" x-text="t[lang].hist_2023_t"></h4>
-                                        <p class="text-slate-600 text-sm leading-relaxed font-light mb-4" x-text="t[lang].hist_2023_d"></p>
-                                        <div class="grid grid-cols-3 gap-2">
-                                            <div class="overflow-hidden rounded-sm"><img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.1.webp" alt="2023" class="w-full h-20 object-cover group-hover:scale-110 transition duration-700" /></div>
-                                            <div class="overflow-hidden rounded-sm"><img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.2.webp" alt="2023" class="w-full h-20 object-cover group-hover:scale-110 transition duration-700" /></div>
-                                            <div class="overflow-hidden rounded-sm"><img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.3.webp" alt="2023" class="w-full h-20 object-cover group-hover:scale-110 transition duration-700" /></div>
+                                <div class="absolute left-[-6px] md:left-1/2 md:-ml-[6px] w-3.5 h-3.5 bg-white border-2 border-academic-navy rounded-full z-20 shadow-md"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-slate-600 text-base leading-relaxed font-light md:order-1">
+                                    <p x-text="t[lang].hist_2023_d"></p>
+                                    <div class="mt-6 grid grid-cols-2 lg:grid-cols-3 gap-3 ml-0 md:ml-auto">
+                                        <div class="border border-slate-200 overflow-hidden shadow-md p-0.5 bg-white">
+                                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.1.webp" alt="2023-1" class="w-full h-24 object-cover hover:scale-105 transition duration-700" />
+                                        </div>
+                                        <div class="border border-slate-200 overflow-hidden shadow-md p-0.5 bg-white">
+                                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.2.webp" alt="2023-2" class="w-full h-24 object-cover hover:scale-105 transition duration-700" />
+                                        </div>
+                                        <div class="border border-slate-200 overflow-hidden shadow-md p-0.5 bg-white">
+                                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.3.webp" alt="2023-3" class="w-full h-24 object-cover hover:scale-105 transition duration-700" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up group">
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:text-right">
-                                    <span class="text-5xl md:text-6xl font-serif font-bold text-academic-navy/20 group-hover:text-academic-navy transition-colors duration-500 block leading-none">2024</span>
+                                    <span class="text-5xl font-serif font-bold text-academic-navy block">2024</span>
+                                    <span class="text-academic-red text-sm font-bold tracking-widest uppercase mt-2 block" x-text="t[lang].hist_2024_t"></span>
                                 </div>
-                                <div class="absolute left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 bg-white border-2 border-academic-red rounded-full z-20 group-hover:bg-academic-red transition-colors duration-300 shadow-[0_0_0_4px_rgba(255,255,255,1)]"></div>
-                                <div class="pl-8 md:pl-0">
-                                    <div class="bg-white p-6 shadow-md border border-slate-100 group-hover:shadow-xl group-hover:border-academic-red/20 transition-all duration-500 rounded-sm relative">
-                                        <div class="absolute top-0 left-0 w-1 h-full bg-academic-red origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
-                                        <h4 class="text-academic-red text-sm font-bold tracking-widest uppercase mb-3" x-text="t[lang].hist_2024_t"></h4>
-                                        <p class="text-slate-600 text-sm leading-relaxed font-light mb-4" x-text="t[lang].hist_2024_d"></p>
-                                        <div class="overflow-hidden rounded-sm">
-                                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202024%20新浪教育奖.webp" alt="2024" class="w-full h-32 object-cover group-hover:scale-105 transition duration-700" />
-                                        </div>
+                                <div class="absolute left-[-6px] md:left-1/2 md:-ml-[6px] w-3.5 h-3.5 bg-academic-red rounded-full z-20 border-2 border-white shadow-md"></div>
+                                <div class="pl-8 md:pl-0 text-slate-600 text-base leading-relaxed font-light">
+                                    <p x-text="t[lang].hist_2024_d"></p>
+                                    <div class="mt-6 border border-slate-200 overflow-hidden shadow-lg p-1 bg-white">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202024%20新浪教育奖.webp" alt="2024" class="w-full h-48 object-cover hover:scale-105 transition duration-700" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up group">
+                            <div class="relative md:grid md:grid-cols-2 gap-12 items-center scrub-item anim-fade-up">
                                 <div class="md:order-2">
-                                    <span class="text-5xl md:text-6xl font-serif font-bold text-academic-red block leading-none">2026</span>
+                                    <span class="text-5xl font-serif font-bold text-academic-navy block">2026</span>
+                                    <span class="text-academic-red text-sm font-bold tracking-widest uppercase mt-2 block" x-text="t[lang].hist_2026_t"></span>
                                 </div>
-                                <div class="absolute left-[-9px] md:left-1/2 md:-ml-[9px] w-5 h-5 bg-academic-red border-[3px] border-white rounded-full z-20 shadow-[0_0_15px_rgba(200,16,46,0.6)] animate-pulse"></div>
-                                <div class="md:text-right pl-8 md:pl-0 md:order-1">
-                                    <div class="bg-academic-navy p-6 shadow-xl rounded-sm relative text-left md:text-right">
-                                        <h4 class="text-gold-400 text-sm font-bold tracking-widest uppercase mb-2" x-text="t[lang].hist_2026_t"></h4>
-                                        <p class="text-white/80 text-sm leading-relaxed font-light" x-text="t[lang].hist_2026_d"></p>
-                                    </div>
-                                </div>
+                                <div class="absolute left-[-10px] md:left-1/2 md:-ml-[10px] w-5 h-5 bg-academic-red border-4 border-white rounded-full z-20 shadow-lg animate-pulse"></div>
+                                <div class="md:text-right pl-8 md:pl-0 text-slate-600 text-base leading-relaxed font-light md:order-1" x-text="t[lang].hist_2026_d"></div>
                             </div>
                         </div>
                     </div>
@@ -826,38 +760,37 @@
 
 
 
-            <!-- About: Team (优雅教职档案卡片风) -->
-            <section id="team" class="py-32 bg-white relative">
+            <!-- About: Team (企业历程 & 商业合作之间) -->
+            <section id="team" class="py-24 bg-[#f8f9fa] border-t border-gray-200 text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center mb-24 scrub-item anim-fade-up">
-                        <h2 class="text-xs font-bold tracking-[0.4em] text-academic-red uppercase mb-4">Leadership & Experts</h2>
-                        <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].team_title"></h3>
-                        <div class="w-16 h-px bg-academic-red mx-auto mt-8"></div>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].team_kicker"></span> -->
+                        <h2 class="text-4xl md:text-5xl font-bold text-[#0A1E3F]" x-text="t[lang].team_title"></h2>
+                        <div class="w-16 h-1 bg-[#A81C22] mx-auto mt-6"></div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+                    <!-- 2-column grid (desktop), each item keeps original: left image + right text -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
                         <template x-for="(member, idx) in t[lang].team_members.slice(0, 8)" :key="member.name + member.role">
-                            <div class="flex flex-col sm:flex-row gap-8 group">
-                                <div class="w-full sm:w-48 shrink-0 scrub-item anim-scale relative overflow-hidden rounded-sm border border-slate-100 shadow-sm group-hover:shadow-xl transition-all duration-500">
-                                    <div class="absolute inset-0 bg-academic-red/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                            <div class="grid md:grid-cols-[240px_1fr] gap-10 items-start">
+                                <div class="scrub-item anim-fade-up">
                                     <template x-if="t[lang].team_avatars[idx]">
-                                        <img :src="t[lang].team_avatars[idx]" alt="Team" class="w-full aspect-[4/5] object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
+                                        <img :src="t[lang].team_avatars[idx]" alt="Team" class="w-full aspect-square object-cover rounded-sm" loading="lazy" decoding="async" />
                                     </template>
                                     <template x-if="!t[lang].team_avatars[idx]">
-                                        <div class="w-full aspect-[4/5] bg-slate-50 flex items-center justify-center">
-                                            <div class="text-[10px] font-bold tracking-[0.35em] uppercase text-slate-300" x-text="t[lang].team_photo_placeholder"></div>
+                                        <div class="w-full aspect-square rounded-sm bg-black/5 flex items-center justify-center">
+                                            <div class="text-xs font-bold tracking-[0.35em] uppercase text-black/40" x-text="t[lang].team_photo_placeholder"></div>
                                         </div>
                                     </template>
                                 </div>
 
-                                <div class="flex flex-col justify-center scrub-item anim-fade-up">
-                                    <div class="flex items-center gap-3 mb-4">
-                                        <div class="w-2 h-2 bg-academic-red rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
-                                        <h4 class="text-2xl font-serif font-bold text-academic-navy group-hover:text-academic-red transition-colors duration-300" x-text="member.name"></h4>
+                                <div class="scrub-item anim-fade-up">
+                                    <div class="flex items-center gap-4">
+                                        <i data-lucide="user" class="w-5 h-5 text-obsidian-950"></i>
+                                        <div class="h-[1px] flex-1 bg-black/15"></div>
                                     </div>
-                                    <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4" x-text="member.role"></div>
-                                    <div class="h-px w-12 bg-slate-200 mb-4 group-hover:w-full transition-all duration-700"></div>
-                                    <p class="text-sm text-slate-500 leading-relaxed font-light whitespace-pre-line line-clamp-4 group-hover:line-clamp-none transition-all duration-500" x-text="member.bio"></p>
+                                    <div class="mt-4 text-xl font-serif text-obsidian-950" x-text="member.name + ' | ' + member.role"></div>
+                                    <div class="mt-3 text-sm text-black/70 leading-relaxed whitespace-pre-line" x-text="member.bio"></div>
                                 </div>
                             </div>
                         </template>
@@ -865,59 +798,69 @@
                 </div>
             </section>
 
-            <!-- About: Partners (深海蓝背景 + 红光全息网络 + 黑透玻璃卡片) -->
-            <section id="partners" class="py-32 bg-obsidian-950 text-white relative overflow-hidden border-t border-white/5">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-academic-red/20 rounded-full blur-[150px] pointer-events-none"></div>
-
-                <div class="max-w-7xl mx-auto px-6 relative z-10">
-                    <div class="text-center mb-16 scrub-item anim-fade-up">
-                        <h2 class="text-xs font-bold tracking-[0.4em] text-academic-red uppercase mb-4">Global Network</h2>
-                        <h3 class="text-4xl md:text-5xl font-serif font-bold text-white drop-shadow-md" x-text="t[lang].partner_title"></h3>
-                        <p class="mt-6 text-white/50 text-lg font-light max-w-2xl mx-auto leading-relaxed" x-text="t[lang].partner_sub"></p>
+            <section id="partners" class="py-24 bg-white text-center text-obsidian-950">
+                <div class="max-w-5xl mx-auto px-6">
+                    <div class="text-center mb-10">
+                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block" x-text="t[lang].partner_kicker"></span> -->
+                        <h2 class="text-4xl md:text-5xl font-bold text-[#0A1E3F]" x-text="t[lang].partner_title"></h2>
+                        <div class="w-16 h-1 bg-[#A81C22] mx-auto mt-6"></div>
+                        <p class="mt-6 text-gray-500 text-lg max-w-2xl mx-auto" x-text="t[lang].partner_sub"></p>
+                    </div>
+                    
+                    <div class="relative w-full aspect-[16/9] border border-black/10 mb-10 rounded-sm overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp')] bg-contain bg-center bg-no-repeat opacity-100"></div>
+                        <!-- <div class="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_1936.svg/1024px-China_blank_map_1936.svg.png')] bg-contain bg-center bg-no-repeat opacity-15"></div> -->
+                        <!-- <div class="absolute top-[60%] left-[55%] w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_10px_#D4AF37]"><span class="absolute -top-4 left-2 text-[10px] text-obsidian-950" x-text="t[lang].city_hk"></span></div>
+                        <div class="absolute top-[58%] left-[54%] w-1 h-1 bg-black/40 rounded-full"></div> 
+                        <div class="absolute top-[50%] left-[50%] w-1 h-1 bg-black/40 rounded-full"></div> 
+                        <div class="absolute top-[60%] left-[55%] w-20 h-[1px] bg-gradient-to-l from-gold-400 to-transparent transform -rotate-45 origin-left"></div> -->
                     </div>
 
-                    <div class="relative w-full aspect-[21/9] md:aspect-[24/9] mb-20 rounded-xl overflow-hidden scrub-item anim-scale">
-                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp')] bg-contain bg-center bg-no-repeat opacity-60 mix-blend-screen transition-transform duration-1000 hover:scale-[1.02]"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent"></div>
-                        <div class="absolute inset-0 bg-gradient-to-b from-obsidian-950/50 via-transparent to-transparent"></div>
-                    </div>
+                    <!-- (removed) value cards under partners -->
 
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 scrub-item anim-fade-up">
+                    <!-- <button @click="switchPage('contact')" class="px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_join"></button> -->
 
-                        <template x-for="(office, idx) in[
-                            { title: t[lang].office_hk_title, addr: t[lang].office_hk_addr, img: 'https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp' },
-                            { title: t[lang].office_sz_title, addr: t[lang].office_sz_addr, img: 'https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp' },
-                            { title: t[lang].office_fs_title, addr: t[lang].office_fs_addr, img: 'https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp' },
-                            { title: t[lang].office_wh_title, addr: t[lang].office_wh_addr, img: 'https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp' },
-                            { title: t[lang].office_gy_title, addr: t[lang].office_gy_addr, img: 'https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp' }
-                        ]" :key="idx">
-                            <div class="group bg-white/[0.03] backdrop-blur-sm border border-white/10 p-5 rounded-sm hover:bg-white hover:border-white transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] cursor-pointer flex flex-col justify-between">
-                                <div>
-                                    <div class="relative overflow-hidden mb-5 rounded-sm bg-black/40 aspect-[16/9] border border-white/5 group-hover:border-slate-200 transition-colors">
-                                        <img :src="office.img" :alt="office.title" class="w-full h-full object-contain opacity-50 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
-                                    </div>
-                                    <div class="flex items-start gap-3">
-                                        <i data-lucide="map-pin" class="w-4 h-4 text-white/30 group-hover:text-academic-red shrink-0 mt-0.5 transition-colors duration-500"></i>
-                                        <div>
-                                            <div class="text-base font-serif font-bold text-white/90 group-hover:text-academic-navy transition-colors duration-500 leading-snug" x-text="office.title"></div>
-                                            <div class="mt-1.5 text-xs text-white/40 group-hover:text-slate-500 transition-colors duration-500 leading-relaxed" x-text="office.addr"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-6 h-[2px] w-0 bg-academic-red group-hover:w-full transition-all duration-500"></div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 text-left mb-10">
+                        <div class="overflow-hidden">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <div class="p-4">
+                                <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_hk_title"></div>
+                                <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
                             </div>
-                        </template>
-
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <div class="p-4">
+                                <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_sz_title"></div>
+                                <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <div class="p-4">
+                                <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_fs_title"></div>
+                                <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <div class="p-4">
+                                <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_wh_title"></div>
+                                <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
+                            <div class="p-4">
+                                <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_gy_title"></div>
+                                <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mt-20 flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto scrub-item anim-fade-up">
-                        <button @click="switchPage('contact')" class="w-full px-8 py-4 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-700 transition-colors shadow-[0_10px_30px_rgba(200,16,46,0.3)] flex items-center justify-center gap-3">
-                            <span x-text="t[lang].btn_city_partner_inquiry"></span>
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
-                        <button @click="switchPage('contact')" class="w-full px-8 py-4 border border-white/20 text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-academic-navy transition-colors">
-                            <span x-text="t[lang].btn_agent_inquiry"></span>
-                        </button>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+                        <button @click="switchPage('contact')" class="w-full px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_city_partner_inquiry"></button>
+                        <button @click="switchPage('contact')" class="w-full px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition" x-text="t[lang].btn_agent_inquiry"></button>
                     </div>
                 </div>
             </section>
