@@ -373,13 +373,11 @@
                         <button @click="switchPage('about', 'history')" class="text-academic-red font-bold text-xs uppercase tracking-widest whitespace-nowrap">查看完整版</button>
                     </div>
 
-                    <div id="home-history-scroll" class="relative">
-                        <div id="home-history-viewport" class="sticky top-20 h-[calc(100vh-5rem)] overflow-hidden flex items-center">
-                            <div class="w-full pb-8">
-                                <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-academic-border"></div>
-                                <div class="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">滚轮、触控板、键盘或右侧滚动条都可驱动左右浏览</div>
+                    <div id="home-history-viewport" class="relative overflow-hidden pb-8">
+                        <div class="absolute left-0 right-0 top-14 h-px bg-academic-border"></div>
+                        <div class="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">时间轴到屏幕中间后，滚轮将优先控制左右浏览</div>
 
-                                <div id="home-history-track" class="relative min-w-[2360px] grid grid-cols-8 gap-12 will-change-transform">
+                        <div id="home-history-track" class="relative min-w-[2360px] grid grid-cols-8 gap-12 will-change-transform transition-transform duration-150">
                             <div class="pt-0">
                                 <div class="w-7 h-7 rounded-full bg-academic-red border-2 border-white"></div>
                                 <div class="mt-4 text-5xl font-serif font-bold text-academic-navy">2016</div>
@@ -438,8 +436,6 @@
                                 <div class="mt-4 text-5xl font-serif font-bold text-academic-navy">2026</div>
                                 <div class="mt-1 text-lg font-bold text-academic-navy" x-text="t[lang].hist_2026_t"></div>
                                 <div class="mt-2 text-base text-slate-500 leading-relaxed" x-text="t[lang].hist_2026_d"></div>
-                            </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -4563,52 +4559,137 @@
     <script>
         (function () {
             function bindHomeHistoryPageScroll() {
-                if (window.__homeHistoryScrollBound) return;
-                const scrollArea = document.getElementById('home-history-scroll');
+                if (window.__homeHistoryWheelBound) return;
+                const section = document.getElementById('home-history');
                 const viewport = document.getElementById('home-history-viewport');
                 const track = document.getElementById('home-history-track');
-                if (!scrollArea || !viewport || !track) return;
-                window.__homeHistoryScrollBound = true;
+                if (!section || !viewport || !track) return;
+                window.__homeHistoryWheelBound = true;
 
                 let maxShift = 0;
-                let scrollStart = 0;
-                let scrollDistance = 1;
-                let headerOffset = 0;
+                let currentShift = 0;
+                let wheelLocked = false;
+                let lockDirection = 0;
+                let releaseIntentDir = 0;
+                let releaseIntentCount = 0;
+                const RELEASE_INTENT_THRESHOLD = 2;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
-                const applyShift = (shift) => {
-                    track.style.transform = `translate3d(${-shift}px,0,0)`;
+                const applyShift = () => {
+                    track.style.transform = `translate3d(${-currentShift}px,0,0)`;
                 };
 
-                const updateFromScroll = () => {
-                    if (maxShift <= 0) {
-                        applyShift(0);
-                        return;
-                    }
-
-                    const y = window.scrollY || window.pageYOffset || 0;
-                    const progress = clamp((y - scrollStart + headerOffset) / scrollDistance, 0, 1);
-                    applyShift(maxShift * progress);
+                const normalizeDelta = (event) => {
+                    let delta = event.deltaY;
+                    if (event.deltaMode === 1) delta *= 16;
+                    if (event.deltaMode === 2) delta *= window.innerHeight;
+                    return clamp(delta, -100, 100);
                 };
 
                 const recalcBounds = () => {
                     maxShift = Math.max(0, track.scrollWidth - viewport.clientWidth);
-                    const stickyHeight = viewport.clientHeight;
-                    headerOffset = Math.max(0, window.innerHeight - stickyHeight);
-                    const travel = Math.max(1, maxShift);
-                    scrollArea.style.height = `${stickyHeight + travel}px`;
+                    currentShift = clamp(currentShift, 0, maxShift);
+                    applyShift();
+                };
 
-                    const areaTop = scrollArea.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
-                    scrollStart = areaTop;
-                    scrollDistance = Math.max(1, travel);
+                const isSectionCentered = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    const sectionCenterY = rect.top + rect.height / 2;
+                    const screenCenterY = viewportHeight / 2;
+                    const tolerance = Math.min(180, viewportHeight * 0.24);
+                    return Math.abs(sectionCenterY - screenCenterY) <= tolerance;
+                };
 
-                    updateFromScroll();
+                const isSectionInView = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    return rect.bottom > viewportHeight * 0.02 && rect.top < viewportHeight * 0.98;
+                };
+
+                const isInActiveZone = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    return rect.top < viewportHeight * 0.78 && rect.bottom > viewportHeight * 0.22;
+                };
+
+                const resetReleaseIntent = () => {
+                    releaseIntentDir = 0;
+                    releaseIntentCount = 0;
+                };
+
+                const onWheel = (event) => {
+                    if (maxShift <= 0) {
+                        wheelLocked = false;
+                        lockDirection = 0;
+                        resetReleaseIntent();
+                        return;
+                    }
+
+                    const delta = normalizeDelta(event);
+                    if (Math.abs(delta) < 1) return;
+
+                    const direction = delta > 0 ? 1 : -1;
+                    const atStart = currentShift <= 0.5;
+                    const atEnd = currentShift >= maxShift - 0.5;
+                    const canMove = direction > 0 ? !atEnd : !atStart;
+                    const step = clamp(delta * 0.85, -70, 70);
+
+                    if (wheelLocked) {
+                        if (!isSectionInView()) {
+                            wheelLocked = false;
+                            lockDirection = 0;
+                            resetReleaseIntent();
+                            return;
+                        }
+
+                        if (canMove) {
+                            event.preventDefault();
+                            currentShift = clamp(currentShift + step, 0, maxShift);
+                            applyShift();
+                            lockDirection = direction;
+                            resetReleaseIntent();
+                            return;
+                        }
+
+                        if (releaseIntentDir === direction) {
+                            releaseIntentCount += 1;
+                        } else {
+                            releaseIntentDir = direction;
+                            releaseIntentCount = 1;
+                        }
+
+                        if (releaseIntentCount < RELEASE_INTENT_THRESHOLD) {
+                            event.preventDefault();
+                            return;
+                        }
+
+                        wheelLocked = false;
+                        lockDirection = 0;
+                        resetReleaseIntent();
+                        return;
+                    }
+
+                    if (!isInActiveZone() && !isSectionCentered()) {
+                        return;
+                    }
+
+                    if (!canMove) {
+                        return;
+                    }
+
+                    wheelLocked = true;
+                    lockDirection = direction;
+                    resetReleaseIntent();
+                    event.preventDefault();
+                    currentShift = clamp(currentShift + step, 0, maxShift);
+                    applyShift();
                 };
 
                 recalcBounds();
-                window.addEventListener('scroll', updateFromScroll, { passive: true });
                 window.addEventListener('resize', recalcBounds);
+                window.addEventListener('wheel', onWheel, { passive: false });
             }
 
             if (document.readyState === 'loading') {
