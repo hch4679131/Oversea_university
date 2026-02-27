@@ -373,11 +373,12 @@
                         <button @click="switchPage('about', 'history')" class="text-academic-red font-bold text-xs uppercase tracking-widest whitespace-nowrap">查看完整版</button>
                     </div>
 
-                    <div id="home-history-viewport" class="relative overflow-hidden pb-8">
-                        <div class="absolute left-0 right-0 top-14 h-px bg-academic-border"></div>
-                        <div class="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">滚动页面时，时间轴将在中段自动横向浏览</div>
+                    <div id="home-history-scroll" class="relative">
+                        <div id="home-history-viewport" class="sticky top-20 h-[calc(100vh-5rem)] overflow-hidden pb-8">
+                            <div class="absolute left-0 right-0 top-14 h-px bg-academic-border"></div>
+                            <div class="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">进入中段后内容固定，仅左右浏览</div>
 
-                        <div id="home-history-track" class="relative min-w-[2360px] grid grid-cols-8 gap-12 will-change-transform transition-transform duration-150">
+                            <div id="home-history-track" class="relative min-w-[2360px] grid grid-cols-8 gap-12 will-change-transform transition-transform duration-150">
                             <div class="pt-0">
                                 <div class="w-7 h-7 rounded-full bg-academic-red border-2 border-white"></div>
                                 <div class="mt-4 text-5xl font-serif font-bold text-academic-navy">2016</div>
@@ -436,6 +437,7 @@
                                 <div class="mt-4 text-5xl font-serif font-bold text-academic-navy">2026</div>
                                 <div class="mt-1 text-lg font-bold text-academic-navy" x-text="t[lang].hist_2026_t"></div>
                                 <div class="mt-2 text-base text-slate-500 leading-relaxed" x-text="t[lang].hist_2026_d"></div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -4559,15 +4561,16 @@
     <script>
         (function () {
             function bindHomeHistoryPageScroll() {
-                if (window.__homeHistoryScrollBound) return;
-                const section = document.getElementById('home-history');
+                if (window.__homeHistoryPinBound) return;
+                const scrollArea = document.getElementById('home-history-scroll');
                 const viewport = document.getElementById('home-history-viewport');
                 const track = document.getElementById('home-history-track');
-                if (!section || !viewport || !track) return;
-                window.__homeHistoryScrollBound = true;
+                if (!scrollArea || !viewport || !track) return;
+                window.__homeHistoryPinBound = true;
 
                 let maxShift = 0;
-                let rafId = 0;
+                let startY = 0;
+                let travelY = 1;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -4575,38 +4578,23 @@
                     track.style.transform = `translate3d(${-shift}px,0,0)`;
                 };
 
-                const getProgress = () => {
-                    const rect = section.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-                    const scrollY = window.scrollY || window.pageYOffset || 0;
-
-                    const start = scrollY + rect.top - viewportHeight * 0.55;
-                    const end = scrollY + rect.bottom - viewportHeight * 0.45;
-                    const distance = Math.max(1, end - start);
-
-                    return clamp((scrollY - start) / distance, 0, 1);
-                };
-
                 const updateFromScroll = () => {
-                    const progress = getProgress();
+                    const y = window.scrollY || window.pageYOffset || 0;
+                    const progress = clamp((y - startY) / travelY, 0, 1);
                     applyShift(maxShift * progress);
-                };
-
-                const requestUpdate = () => {
-                    if (rafId) return;
-                    rafId = window.requestAnimationFrame(() => {
-                        rafId = 0;
-                        updateFromScroll();
-                    });
                 };
 
                 const recalcBounds = () => {
                     maxShift = Math.max(0, track.scrollWidth - viewport.clientWidth);
+                    const stickyHeight = viewport.clientHeight;
+                    travelY = Math.max(1, maxShift);
+                    scrollArea.style.height = `${stickyHeight + travelY}px`;
+                    startY = (window.scrollY || window.pageYOffset || 0) + scrollArea.getBoundingClientRect().top;
                     updateFromScroll();
                 };
 
                 recalcBounds();
-                window.addEventListener('scroll', requestUpdate, { passive: true });
+                window.addEventListener('scroll', updateFromScroll, { passive: true });
                 window.addEventListener('resize', recalcBounds);
             }
 
