@@ -374,7 +374,7 @@
                     </div>
 
                     <div id="home-history-scroll" class="relative">
-                        <div id="home-history-viewport" class="sticky top-0 h-screen overflow-hidden flex items-center">
+                        <div id="home-history-viewport" class="sticky top-20 h-[calc(100vh-5rem)] overflow-hidden flex items-center">
                             <div class="w-full pb-8">
                                 <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-academic-border"></div>
                                 <div class="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">滚轮、触控板、键盘或右侧滚动条都可驱动左右浏览</div>
@@ -4573,6 +4573,7 @@
                 let maxShift = 0;
                 let scrollStart = 0;
                 let scrollDistance = 1;
+                let headerOffset = 0;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -4587,19 +4588,20 @@
                     }
 
                     const y = window.scrollY || window.pageYOffset || 0;
-                    const progress = clamp((y - scrollStart) / scrollDistance, 0, 1);
+                    const progress = clamp((y - scrollStart + headerOffset) / scrollDistance, 0, 1);
                     applyShift(maxShift * progress);
                 };
 
                 const recalcBounds = () => {
                     maxShift = Math.max(0, track.scrollWidth - viewport.clientWidth);
                     const stickyHeight = viewport.clientHeight;
-                    const travel = maxShift + Math.max(stickyHeight * 0.6, 280);
+                    headerOffset = Math.max(0, window.innerHeight - stickyHeight);
+                    const travel = Math.max(1, maxShift);
                     scrollArea.style.height = `${stickyHeight + travel}px`;
 
                     const areaTop = scrollArea.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0);
                     scrollStart = areaTop;
-                    scrollDistance = Math.max(1, scrollArea.offsetHeight - stickyHeight);
+                    scrollDistance = Math.max(1, travel);
 
                     updateFromScroll();
                 };
