@@ -375,7 +375,7 @@
 
                     <div id="home-history-viewport" class="relative overflow-hidden pb-8">
                         <div class="absolute left-0 right-0 top-14 h-px bg-academic-border"></div>
-                        <div class="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">时间轴到屏幕中间后，滚轮将优先控制左右浏览</div>
+                        <div class="mb-5 text-sm font-bold tracking-[0.2em] uppercase text-academic-red/70 whitespace-nowrap">滚动页面时，时间轴将在中段自动横向浏览</div>
 
                         <div id="home-history-track" class="relative min-w-[2360px] grid grid-cols-8 gap-12 will-change-transform transition-transform duration-150">
                             <div class="pt-0">
@@ -4559,137 +4559,55 @@
     <script>
         (function () {
             function bindHomeHistoryPageScroll() {
-                if (window.__homeHistoryWheelBound) return;
+                if (window.__homeHistoryScrollBound) return;
                 const section = document.getElementById('home-history');
                 const viewport = document.getElementById('home-history-viewport');
                 const track = document.getElementById('home-history-track');
                 if (!section || !viewport || !track) return;
-                window.__homeHistoryWheelBound = true;
+                window.__homeHistoryScrollBound = true;
 
                 let maxShift = 0;
-                let currentShift = 0;
-                let wheelLocked = false;
-                let lockDirection = 0;
-                let releaseIntentDir = 0;
-                let releaseIntentCount = 0;
-                const RELEASE_INTENT_THRESHOLD = 2;
+                let rafId = 0;
 
                 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
-                const applyShift = () => {
-                    track.style.transform = `translate3d(${-currentShift}px,0,0)`;
+                const applyShift = (shift) => {
+                    track.style.transform = `translate3d(${-shift}px,0,0)`;
                 };
 
-                const normalizeDelta = (event) => {
-                    let delta = event.deltaY;
-                    if (event.deltaMode === 1) delta *= 16;
-                    if (event.deltaMode === 2) delta *= window.innerHeight;
-                    return clamp(delta, -100, 100);
+                const getProgress = () => {
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    const scrollY = window.scrollY || window.pageYOffset || 0;
+
+                    const start = scrollY + rect.top - viewportHeight * 0.55;
+                    const end = scrollY + rect.bottom - viewportHeight * 0.45;
+                    const distance = Math.max(1, end - start);
+
+                    return clamp((scrollY - start) / distance, 0, 1);
+                };
+
+                const updateFromScroll = () => {
+                    const progress = getProgress();
+                    applyShift(maxShift * progress);
+                };
+
+                const requestUpdate = () => {
+                    if (rafId) return;
+                    rafId = window.requestAnimationFrame(() => {
+                        rafId = 0;
+                        updateFromScroll();
+                    });
                 };
 
                 const recalcBounds = () => {
                     maxShift = Math.max(0, track.scrollWidth - viewport.clientWidth);
-                    currentShift = clamp(currentShift, 0, maxShift);
-                    applyShift();
-                };
-
-                const isSectionCentered = () => {
-                    const rect = section.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-                    const sectionCenterY = rect.top + rect.height / 2;
-                    const screenCenterY = viewportHeight / 2;
-                    const tolerance = Math.min(180, viewportHeight * 0.24);
-                    return Math.abs(sectionCenterY - screenCenterY) <= tolerance;
-                };
-
-                const isSectionInView = () => {
-                    const rect = section.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-                    return rect.bottom > viewportHeight * 0.02 && rect.top < viewportHeight * 0.98;
-                };
-
-                const isInActiveZone = () => {
-                    const rect = section.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-                    return rect.top < viewportHeight * 0.78 && rect.bottom > viewportHeight * 0.22;
-                };
-
-                const resetReleaseIntent = () => {
-                    releaseIntentDir = 0;
-                    releaseIntentCount = 0;
-                };
-
-                const onWheel = (event) => {
-                    if (maxShift <= 0) {
-                        wheelLocked = false;
-                        lockDirection = 0;
-                        resetReleaseIntent();
-                        return;
-                    }
-
-                    const delta = normalizeDelta(event);
-                    if (Math.abs(delta) < 1) return;
-
-                    const direction = delta > 0 ? 1 : -1;
-                    const atStart = currentShift <= 0.5;
-                    const atEnd = currentShift >= maxShift - 0.5;
-                    const canMove = direction > 0 ? !atEnd : !atStart;
-                    const step = clamp(delta * 0.85, -70, 70);
-
-                    if (wheelLocked) {
-                        if (!isSectionInView()) {
-                            wheelLocked = false;
-                            lockDirection = 0;
-                            resetReleaseIntent();
-                            return;
-                        }
-
-                        if (canMove) {
-                            event.preventDefault();
-                            currentShift = clamp(currentShift + step, 0, maxShift);
-                            applyShift();
-                            lockDirection = direction;
-                            resetReleaseIntent();
-                            return;
-                        }
-
-                        if (releaseIntentDir === direction) {
-                            releaseIntentCount += 1;
-                        } else {
-                            releaseIntentDir = direction;
-                            releaseIntentCount = 1;
-                        }
-
-                        if (releaseIntentCount < RELEASE_INTENT_THRESHOLD) {
-                            event.preventDefault();
-                            return;
-                        }
-
-                        wheelLocked = false;
-                        lockDirection = 0;
-                        resetReleaseIntent();
-                        return;
-                    }
-
-                    if (!isInActiveZone() && !isSectionCentered()) {
-                        return;
-                    }
-
-                    if (!canMove) {
-                        return;
-                    }
-
-                    wheelLocked = true;
-                    lockDirection = direction;
-                    resetReleaseIntent();
-                    event.preventDefault();
-                    currentShift = clamp(currentShift + step, 0, maxShift);
-                    applyShift();
+                    updateFromScroll();
                 };
 
                 recalcBounds();
+                window.addEventListener('scroll', requestUpdate, { passive: true });
                 window.addEventListener('resize', recalcBounds);
-                window.addEventListener('wheel', onWheel, { passive: false });
             }
 
             if (document.readyState === 'loading') {
