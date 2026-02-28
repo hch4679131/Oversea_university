@@ -369,30 +369,40 @@
                 x-data="{
                     progress: 0,
                     maxTranslate: 0,
-                    updateScroll() {
-                        const rect = $el.getBoundingClientRect();
-                        const vh = window.innerHeight;
-                        const top = rect.top;
-                        const scrollableHeight = rect.height - vh;
-
-                        if (top > 0) {
-                            this.progress = 0;
-                        } else if (-top > scrollableHeight) {
-                            this.progress = this.maxTranslate;
-                        } else {
-                            const ratio = -top / scrollableHeight;
-                            this.progress = ratio * this.maxTranslate;
+                    trackWidth: 0,
+                    clamp(value, min, max) {
+                        return Math.max(min, Math.min(max, value));
+                    },
+                    updateMetrics() {
+                        if (!$refs.track) return;
+                        const width = $refs.track.scrollWidth;
+                        if (width !== this.trackWidth) {
+                            this.trackWidth = width;
+                            this.maxTranslate = Math.max(0, width - window.innerWidth + 300);
                         }
                     },
+                    updateScroll() {
+                        this.updateMetrics();
+                        const rect = $el.getBoundingClientRect();
+                        const vh = window.innerHeight;
+                        const scrollableHeight = Math.max(1, rect.height - vh);
+                        const traveled = this.clamp(-rect.top, 0, scrollableHeight);
+                        const ratio = traveled / scrollableHeight;
+                        this.progress = ratio * this.maxTranslate;
+                    },
                     initScroll() {
-                        if ($refs.track) {
-                            this.maxTranslate = Math.max(0, $refs.track.scrollWidth - window.innerWidth + 300);
-                        }
-                        this.updateScroll();
+                        this.$nextTick(() => {
+                            this.updateMetrics();
+                            this.updateScroll();
+                            requestAnimationFrame(() => this.updateScroll());
+                            setTimeout(() => this.updateScroll(), 260);
+                        });
                     }
                 }"
-                x-init="initScroll(); window.addEventListener('resize', () => initScroll());"
+                x-init="initScroll()"
                 @scroll.window.passive="updateScroll()"
+                @resize.window.passive="initScroll()"
+                @load.window.passive="initScroll()"
             >
                 <div class="sticky top-0 left-0 w-full h-screen flex flex-col justify-center overflow-hidden">
                     <div class="absolute inset-0 z-0 pointer-events-none">
