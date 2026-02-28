@@ -90,16 +90,16 @@
 <body class="antialiased selection:bg-academic-navy selection:text-white">
 
     <!-- 导航栏 -->
-    <nav class="fixed w-full top-0 z-50 bg-gradient-to-b from-black/90 to-black/60 backdrop-blur-sm border-b border-white/5 h-20">
+    <nav class="fixed w-full top-0 z-50 bg-gradient-to-b from-academic-navy/95 to-academic-navy/80 backdrop-blur-sm border-b border-academic-red/20 h-20">
         <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
             <div class="flex items-center gap-3 cursor-pointer" @click="switchPage('home')">
-                <div class="w-10 h-10 border border-gold-400 flex items-center justify-center relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-gold-400 opacity-20 group-hover:opacity-40 transition"></div>
+                <div class="w-10 h-10 border border-academic-red/70 flex items-center justify-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-academic-red opacity-20 group-hover:opacity-35 transition"></div>
                     <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="relative w-7 h-7 object-contain" alt="SDLV Logo">
                 </div>
                 <div>
                     <span class="text-xl font-bold text-white tracking-widest">SDLV</span>
-                    <span class="block text-[9px] text-gray-400 tracking-wider" x-text="t[lang].brand_sub"></span>
+                    <span class="block text-[9px] text-slate-300/80 tracking-wider" x-text="t[lang].brand_sub"></span>
                 </div>
             </div>
 
@@ -120,62 +120,62 @@
                     <span @click="switchPage('home', 'achievements')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
                 </div> -->
                 <div class="nav-item group">
-                    <span @click="switchPage('about')" :class="page === 'about' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
+                    <span @click="switchPage('about')" :class="page === 'about' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
-                        <a @click.stop="switchPage('about', 'about-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_hero_title"></a>
-                         <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].home_about_title"></a>
-                        <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].history_title"></a>
+                        <a @click.stop="switchPage('about', 'about-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].about_hero_title"></a>
+                         <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].home_about_title"></a>
+                        <a @click.stop="switchPage('about', 'history')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].history_title"></a>
                         <!-- <a @click.stop="switchPage('about', 'about-vision')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].about_vm_title"></a> -->
-                        <a @click.stop="switchPage('about', 'team')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].team_title"></a>
-                        <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].partner_title"></a>
+                        <a @click.stop="switchPage('about', 'team')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].team_title"></a>
+                        <a @click.stop="switchPage('about', 'partners')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].partner_title"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <span @click="switchPage('study')" :class="page === 'study' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_study"></span>
+                    <span @click="switchPage('study')" :class="page === 'study' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_study"></span>
                      <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
-                        <a @click.stop="switchPage('study', 'study-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_hero_t"></a>
-                        <a @click.stop="switchPage('study', 'study-scope')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_scope_title"></a>
-                        <a @click.stop="switchPage('study', 'study-flow')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_flow_title"></a>
-                        <a @click.stop="switchPage('study', 'study-advantages')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_adv_title"></a>
-                        <a @click.stop="switchPage('study', 'content')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_uni_title"></a>
-                        <a @click.stop="switchPage('study', 'study-cases')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].study_cases_title"></a>
+                        <a @click.stop="switchPage('study', 'study-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].study_hero_t"></a>
+                        <a @click.stop="switchPage('study', 'study-scope')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].study_scope_title"></a>
+                        <a @click.stop="switchPage('study', 'study-flow')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].study_flow_title"></a>
+                        <a @click.stop="switchPage('study', 'study-advantages')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].study_adv_title"></a>
+                        <a @click.stop="switchPage('study', 'content')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].study_uni_title"></a>
+                        <a @click.stop="switchPage('study', 'study-cases')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].study_cases_title"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <span @click="switchPage('career')" :class="page === 'career' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
+                    <span @click="switchPage('career')" :class="page === 'career' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
-                        <a @click.stop="switchPage('career', 'career-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].career_hero_t"></a>
-                        <a @click.stop="switchPage('career', 'career-intro')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].car_h1"></a>
+                        <a @click.stop="switchPage('career', 'career-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_hero_t"></a>
+                        <a @click.stop="switchPage('career', 'career-intro')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].car_h1"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <span @click="switchPage('apartments', 'apartments-hero')" :class="page === 'apartments' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_apt"></span>
+                    <span @click="switchPage('apartments', 'apartments-hero')" :class="page === 'apartments' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_apt"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
-                        <a @click.stop="switchPage('apartments', 'apartments-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_hero_t"></a>
+                        <a @click.stop="switchPage('apartments', 'apartments-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].apt_hero_t"></a>
 
-                        <a @click.stop="switchPage('apartments', 'apt-why')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_adv_title"></a>
-                        <a @click.stop="switchPage('apartments', 'map')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_map_t"></a>
-                        <a @click.stop="switchPage('apartment-ymt')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_ymt_card_title"></span></a>
-                        <a @click.stop="switchPage('apartment-csw')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_csw_card_title"></span></a>
-                        <a @click.stop="switchPage('apartment-tst')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_tst_card_title"></span></a>
-                        <a @click.stop="switchPage('apartment-oy')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_oy_card_title"></span></a>
-                        <a @click.stop="switchPage('apartment-syp1')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_syp1_card_title"></span></a>
-                        <a @click.stop="switchPage('apartment-syp2')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_syp2_card_title"></span></a>
-                        <a @click.stop="switchPage('apartment-syp3')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_syp3_card_title"></span></a>
-                        <a @click.stop="switchPage('apartment-pfl')" class="block py-2 hover:text-gold-400 whitespace-nowrap">·<span x-text="t[lang].apt_pfl_card_title"></span></a>
+                        <a @click.stop="switchPage('apartments', 'apt-why')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].apt_adv_title"></a>
+                        <a @click.stop="switchPage('apartments', 'map')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].apt_map_t"></a>
+                        <a @click.stop="switchPage('apartment-ymt')" class="block py-2 hover:text-academic-red whitespace-nowrap">·<span x-text="t[lang].apt_ymt_card_title"></span></a>
+                        <a @click.stop="switchPage('apartment-csw')" class="block py-2 hover:text-academic-red whitespace-nowrap">·<span x-text="t[lang].apt_csw_card_title"></span></a>
+                        <a @click.stop="switchPage('apartment-tst')" class="block py-2 hover:text-academic-red whitespace-nowrap">·<span x-text="t[lang].apt_tst_card_title"></span></a>
+                        <a @click.stop="switchPage('apartment-oy')" class="block py-2 hover:text-academic-red whitespace-nowrap">·<span x-text="t[lang].apt_oy_card_title"></span></a>
+                        <a @click.stop="switchPage('apartment-syp1')" class="block py-2 hover:text-academic-red whitespace-nowrap">·<span x-text="t[lang].apt_syp1_card_title"></span></a>
+                        <a @click.stop="switchPage('apartment-syp2')" class="block py-2 hover:text-academic-red whitespace-nowrap">·<span x-text="t[lang].apt_syp2_card_title"></span></a>
+                        <a @click.stop="switchPage('apartment-syp3')" class="block py-2 hover:text-academic-red whitespace-nowrap">·<span x-text="t[lang].apt_syp3_card_title"></span></a>
+                        <a @click.stop="switchPage('apartment-pfl')" class="block py-2 hover:text-academic-red whitespace-nowrap">·<span x-text="t[lang].apt_pfl_card_title"></span></a>
 
-                        <a @click.stop="switchPage('apartments', 'apt-reviews')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].apt_reviews_title"></a>
+                        <a @click.stop="switchPage('apartments', 'apt-reviews')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].apt_reviews_title"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <a @click="switchPage('contact')" class="px-5 py-2 bg-gold-400 text-black font-bold hover:bg-gold-300 transition duration-300" x-text="t[lang].nav_contact"></a>
+                    <a @click="switchPage('contact')" class="px-5 py-2 bg-academic-red text-white font-bold hover:bg-red-700 transition duration-300" x-text="t[lang].nav_contact"></a>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
-                        <a @click.stop="switchPage('contact', 'contact-hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_hero_t"></a>
-                        <a @click.stop="switchPage('contact', 'contact-flow')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_flow_title"></a>
-                        <a @click.stop="switchPage('contact', 'contact-modes')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_modes_title"></a>
-                        <a @click.stop="switchPage('contact', 'contact-value')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_value_title"></a>
-                        <a @click.stop="switchPage('contact', 'contact-network')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_network_title"></a>
-                        <a @click.stop="switchPage('contact', 'contact-faq')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_faq_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].contact_hero_t"></a>
+                        <a @click.stop="switchPage('contact', 'contact-flow')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].contact_flow_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-modes')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].contact_modes_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-value')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].contact_value_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-network')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].contact_network_title"></a>
+                        <a @click.stop="switchPage('contact', 'contact-faq')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].contact_faq_title"></a>
                         <!-- <a @click.stop="switchPage('contact', 'contact-apply')" class="block py-2 hover:text-gold-400 whitespace-nowrap" x-text="t[lang].contact_apply_title"></a> -->
                     </div>
                 </div>
@@ -184,9 +184,9 @@
             <!-- 语言切换 + 手机菜单 -->
             <div class="flex items-center gap-3">
                 <div class="flex items-center gap-3 text-xs font-bold pl-6 border-l border-white/10">
-                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">简</button>
-                    <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">繁</button>
-                    <button @click="lang = 'en'" :class="lang==='en' ? 'text-gold-400' : 'text-gray-600 hover:text-white'">EN</button>
+                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">简</button>
+                    <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">繁</button>
+                    <button @click="lang = 'en'" :class="lang==='en' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">EN</button>
                 </div>
 
                 <button type="button"
@@ -212,7 +212,7 @@
     <!-- 手机端导航菜单（覆盖层 + 下拉面板） -->
     <div class="md:hidden" x-show="mobileNavOpen" x-cloak>
         <div class="fixed inset-0 top-20 bg-black/70 backdrop-blur-sm z-40" @click="mobileNavOpen = false"></div>
-        <div class="fixed top-20 left-0 right-0 z-50 border-b border-white/10 bg-obsidian-950/95 backdrop-blur-md">
+        <div class="fixed top-20 left-0 right-0 z-50 border-b border-academic-red/20 bg-academic-navy/95 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-6 py-6 space-y-3">
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase text-gray-200 hover:text-white"
                     @click="switchPage('home'); mobileNavOpen = false"
@@ -220,36 +220,36 @@
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'about' ? 'text-gold-400' : 'text-gray-200'"
+                    :class="page === 'about' ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('about'); mobileNavOpen = false"
                     x-text="t[lang].nav_about"
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'study' ? 'text-gold-400' : 'text-gray-200'"
+                    :class="page === 'study' ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('study'); mobileNavOpen = false"
                     x-text="t[lang].nav_study"
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'career' ? 'text-gold-400' : 'text-gray-200'"
+                    :class="page === 'career' ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('career'); mobileNavOpen = false"
                     x-text="t[lang].nav_career"
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'apartments' ? 'text-gold-400' : 'text-gray-200'"
+                    :class="page === 'apartments' ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('apartments', 'apartments-hero'); mobileNavOpen = false"
                     x-text="t[lang].nav_apt"
                 ></button>
 
-                <button type="button" class="w-full py-3 rounded-md bg-gold-400 text-black font-bold tracking-[0.15em] uppercase hover:bg-gold-300 transition"
+                <button type="button" class="w-full py-3 rounded-md bg-academic-red text-white font-bold tracking-[0.15em] uppercase hover:bg-red-700 transition"
                     @click="switchPage('contact'); mobileNavOpen = false"
                     x-text="t[lang].nav_contact"
                 ></button>
 
                 <div class="pt-4 border-t border-white/10 flex items-center justify-center gap-6 text-xs font-bold">
-                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-gold-400' : 'text-gray-500 hover:text-white'">简</button>
+                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">简</button>
                     <button disabled aria-disabled="true" class="text-gray-500 opacity-50 cursor-not-allowed">繁</button>
                     <!-- @click="lang = 'tc'" -->
                     <button disabled aria-disabled="true" class="text-gray-500 opacity-50 cursor-not-allowed">EN</button>
