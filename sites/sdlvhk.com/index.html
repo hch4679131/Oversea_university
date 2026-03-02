@@ -266,16 +266,16 @@
         <div x-show="page === 'home'" x-transition:enter="transition ease-out duration-700" class="w-full bg-white text-slate-900 font-sans">
 
             <!-- 1. Hero Section -->
-            <section id="hero" class="relative min-h-[70vh] md:min-h-[80vh] lg:min-h-[85vh] flex items-center bg-white overflow-x-clip overflow-y-visible pt-16 lg:pt-20 pb-10 lg:pb-16">
+            <section id="hero" class="relative min-h-[88vh] lg:min-h-[94vh] flex items-center bg-white overflow-x-clip overflow-y-visible pt-20 pb-14 lg:pb-20">
                 <div id="hero-bg" class="absolute inset-0 z-0 overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/10 lg:via-white/60 z-10"></div>
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.0%20by%20tirachardz%20on%20Freepik%20-%20Flipped%202.webp"
                     class="absolute left-1/2 -translate-x-1/2 top-0 h-full w-full lg:w-3/4 object-cover object-center transition-transform duration-[16000ms]" alt="Global Education">
                 </div>
 
-                <div class="relative z-20 max-w-7xl mx-auto px-6 w-full pt-10 lg:pt-12">
+                <div class="relative z-20 max-w-7xl mx-auto px-6 w-full pt-12">
                     <div class="max-w-3xl scrub-item anim-fade-up">
-                        <div class="flex items-center gap-3 mb-5 md:mb-6">
+                        <div class="flex items-center gap-4 mb-8">
                             <div class="flex -space-x-2">
                                 <span class="w-3 h-3 rounded-full bg-academic-red shadow-sm"></span>
                                 <span class="w-3 h-3 rounded-full bg-academic-navy shadow-sm"></span>
@@ -283,25 +283,25 @@
                             <span class="text-academic-navy font-bold tracking-[0.35em] uppercase text-[10px] border-b border-academic-red/30 pb-1">SDLV Global Education Elite</span>
                         </div>
 
-                        <h1 class="text-4xl md:text-6xl lg:text-[4.8rem] font-serif font-extrabold text-academic-navy leading-[1.1] mb-5 md:mb-6">
+                        <h1 class="text-5xl md:text-[5.2rem] font-serif font-extrabold text-academic-navy leading-[1.05] mb-8">
                             Your Achievement,<br>
                             <span class="text-academic-red">Our Priority.</span>
                         </h1>
 
-                        <p class="text-lg md:text-xl text-slate-600 max-w-xl mb-8 md:mb-10 leading-relaxed font-light">
+                        <p class="text-xl text-slate-600 max-w-xl mb-12 leading-relaxed font-light">
                             汇生会 SDLV 致力于为全球学子提供从名校申请到品质居社的一站式精英支持服务。我们不仅是咨询者，更是您未来的见证者。
                         </p>
 
-                        <div id="hero-planner-bar" class="hidden md:flex items-center bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] border border-slate-100 p-1.5 max-w-2xl group hover:border-academic-navy/30 transition-all">
-                            <div class="flex-1 px-5 border-r border-slate-100">
+                        <div id="hero-planner-bar" class="hidden md:flex items-center bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] border border-slate-100 p-2 max-w-2xl group hover:border-academic-navy/30 transition-all">
+                            <div class="flex-1 px-6 border-r border-slate-100">
                                 <span class="block text-[10px] uppercase text-slate-400 font-bold tracking-widest mb-1">您的意向</span>
                                 <span class="text-sm font-bold text-academic-navy" x-text="t[lang].biz_study_t"></span>
                             </div>
-                            <div class="flex-1 px-5 border-r border-slate-100">
+                            <div class="flex-1 px-6 border-r border-slate-100">
                                 <span class="block text-[10px] uppercase text-slate-400 font-bold tracking-widest mb-1">目标地区</span>
                                 <span class="text-sm font-bold text-academic-navy" x-text="t[lang].biz_apt_locs"></span>
                             </div>
-                            <button @click="switchPage('contact')" class="bg-academic-navy text-white px-6 py-3 md:px-8 md:py-3.5 font-bold hover:bg-academic-red transition-colors flex items-center gap-3">
+                            <button @click="switchPage('contact')" class="bg-academic-navy text-white px-8 py-4 font-bold hover:bg-academic-red transition-colors flex items-center gap-3">
                                 开始规划 <i data-lucide="search" class="w-4 h-4"></i>
                             </button>
                         </div>
@@ -312,19 +312,19 @@
                 <div id="core-business" class="absolute bottom-0 left-0 right-0 z-30 transform translate-y-1/2 hidden lg:block overflow-visible">
                     <div class="max-w-7xl mx-auto px-6">
                         <div class="grid grid-cols-3 overflow-visible">
-                            <div @click="switchPage('study')" class="group bg-academic-navy p-6 lg:p-8 border-r border-slate-100 cursor-pointer shadow-2xl hover:bg-red-800 transition-all overflow-hidden">
-                                <div class="w-10 h-1 bg-white/40 mb-4 lg:mb-5 group-hover:w-16 transition-all duration-500"></div>
-                                <h3 class="text-lg lg:text-xl font-bold text-white mb-2" x-text="t[lang].biz_study_t"></h3>
+                            <div @click="switchPage('study')" class="group bg-academic-navy p-10 border-r border-slate-100 cursor-pointer shadow-2xl hover:bg-red-800 transition-all overflow-hidden">
+                                <div class="w-12 h-1 bg-white/40 mb-6 group-hover:w-20 transition-all duration-500"></div>
+                                <h3 class="text-xl font-bold text-white mb-3" x-text="t[lang].biz_study_t"></h3>
                                 <p class="text-white/80 text-xs leading-relaxed" x-text="t[lang].biz_study_sub"></p>
                             </div>
-                            <div @click="switchPage('apartments')" class="group bg-white p-6 lg:p-8 border-r border-slate-100 cursor-pointer shadow-xl hover:bg-slate-50 transition-all overflow-hidden">
-                                <div class="w-10 h-1 bg-academic-red mb-4 lg:mb-5 group-hover:w-16 transition-all duration-500"></div>
-                                <h3 class="text-lg lg:text-xl font-bold text-academic-navy mb-2" x-text="t[lang].biz_apt_t"></h3>
+                            <div @click="switchPage('apartments')" class="group bg-white p-10 border-r border-slate-100 cursor-pointer shadow-xl hover:bg-slate-50 transition-all overflow-hidden">
+                                <div class="w-12 h-1 bg-academic-red mb-6 group-hover:w-20 transition-all duration-500"></div>
+                                <h3 class="text-xl font-bold text-academic-navy mb-3" x-text="t[lang].biz_apt_t"></h3>
                                 <p class="text-slate-500 text-xs leading-relaxed" x-text="t[lang].biz_apt_locs"></p>
                             </div>
-                            <div @click="switchPage('career')" class="group bg-white p-6 lg:p-8 cursor-pointer shadow-xl hover:bg-slate-50 transition-all overflow-hidden">
-                                <div class="w-10 h-1 bg-academic-navy mb-4 lg:mb-5 group-hover:w-16 transition-all duration-500"></div>
-                                <h3 class="text-lg lg:text-xl font-bold text-academic-navy mb-2" x-text="t[lang].biz_career_t"></h3>
+                            <div @click="switchPage('career')" class="group bg-white p-10 cursor-pointer shadow-xl hover:bg-slate-50 transition-all overflow-hidden">
+                                <div class="w-12 h-1 bg-academic-navy mb-6 group-hover:w-20 transition-all duration-500"></div>
+                                <h3 class="text-xl font-bold text-academic-navy mb-3" x-text="t[lang].biz_career_t"></h3>
                                 <p class="text-slate-500 text-xs leading-relaxed" x-text="t[lang].biz_career_sub"></p>
                             </div>
                         </div>
@@ -332,28 +332,28 @@
                 </div>
             </section>
 
-            <div class="h-16 lg:h-24"></div>
+            <div class="h-32 lg:h-56"></div>
 
             <!-- 3. 品牌简介 -->
-            <section id="home-intro" class="py-16 lg:py-20 bg-academic-slate/30">
+            <section id="home-intro" class="py-24 bg-academic-slate/30">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 items-center">
+                    <div class="flex flex-col lg:flex-row gap-20 items-center">
                         <div class="lg:w-1/2 relative scrub-item anim-scale">
                             <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp"
                                 class="w-full shadow-2xl rounded-sm transition-transform duration-700 hover:scale-[1.02]" alt="SDLV Team">
-                            <div class="absolute -top-4 -left-4 md:-top-6 md:-left-6 w-16 h-16 md:w-24 md:h-24 bg-academic-red/10 -z-10"></div>
+                            <div class="absolute -top-6 -left-6 w-24 h-24 bg-academic-red/10 -z-10"></div>
                         </div>
                         <div class="lg:w-1/2 scrub-item anim-fade-up">
-                            <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-academic-navy mb-5 lg:mb-6 leading-tight">
+                            <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy mb-8 leading-tight">
                                 专业不仅是服务，<br><span class="text-academic-red italic">更是对未来的承诺。</span>
                             </h3>
-                            <div class="space-y-4 text-slate-600 text-base md:text-lg leading-relaxed font-light">
+                            <div class="space-y-6 text-slate-600 text-lg leading-relaxed font-light">
                                 <p x-text="t[lang].about_p1"></p>
                                 <p x-text="t[lang].about_p2"></p>
                             </div>
-                            <div class="mt-6 lg:mt-8 flex gap-6 items-center border-t border-slate-200 pt-6">
-                                <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="h-10 md:h-12 opacity-50" alt="Logo">
-                                <p class="text-[10px] md:text-xs text-slate-400 max-w-xs uppercase tracking-widest leading-relaxed">
+                            <div class="mt-10 flex gap-8 items-center border-t border-slate-200 pt-8">
+                                <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="h-12 opacity-50" alt="Logo">
+                                <p class="text-xs text-slate-400 max-w-xs uppercase tracking-widest leading-relaxed">
                                     Established in Hong Kong, SDLV serves international students with premium academic and living support.
                                 </p>
                             </div>
@@ -409,18 +409,18 @@
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
                     </div>
 
-                    <div class="relative z-20 max-w-7xl mx-auto px-6 w-full mb-6 md:mb-10 shrink-0">
+                    <div class="relative z-20 max-w-7xl mx-auto px-6 w-full mb-12 shrink-0">
                         <div class="flex justify-between items-end gap-4">
                             <div>
-                                <h2 class="text-3xl md:text-5xl font-serif font-bold text-academic-navy tracking-tight" x-text="t[lang].home_history_title"></h2>
-                                <p class="text-slate-500 text-sm md:text-base mt-2 md:mt-3 flex items-center gap-2">
+                                <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy tracking-tight" x-text="t[lang].home_history_title"></h2>
+                                <p class="text-slate-500 text-base mt-3 flex items-center gap-2">
                                     <span>自 2016 年起，深耕香港，服务全球。</span>
-                                    <span class="text-academic-red/70 text-xs md:text-sm font-bold tracking-widest uppercase ml-2 md:ml-4 hidden md:inline-block">滑动滚轮探索 <i data-lucide="arrow-right" class="inline w-3 h-3 md:w-4 md:h-4 mb-0.5"></i></span>
+                                    <span class="text-academic-red/70 text-sm font-bold tracking-widest uppercase ml-4 hidden md:inline-block">滑动滚轮探索 <i data-lucide="arrow-right" class="inline w-4 h-4 mb-0.5"></i></span>
                                 </p>
                             </div>
-                            <button @click="switchPage('about', 'history')" class="group flex items-center gap-2 text-academic-red font-bold text-[10px] md:text-xs uppercase tracking-widest whitespace-nowrap hover:text-red-800 transition-colors">
+                            <button @click="switchPage('about', 'history')" class="group flex items-center gap-2 text-academic-red font-bold text-xs uppercase tracking-widest whitespace-nowrap hover:text-red-800 transition-colors">
                                 查看完整版
-                                <div class="w-6 md:w-8 h-[1px] bg-academic-red group-hover:w-10 md:group-hover:w-12 transition-all duration-300"></div>
+                                <div class="w-8 h-[1px] bg-academic-red group-hover:w-12 transition-all duration-300"></div>
                             </button>
                         </div>
                     </div>
@@ -429,88 +429,87 @@
                         <div class="absolute left-0 right-0 top-[22px] h-[2px] bg-slate-200/60 z-0"></div>
 
                         <div x-ref="track"
-                             class="relative flex items-start gap-8 md:gap-12 lg:gap-16 px-6 md:px-[max(24px,calc((100vw-1280px)/2+24px))] w-max will-change-transform ease-out duration-75"
+                             class="relative flex items-start gap-12 md:gap-20 px-6 md:px-[max(24px,calc((100vw-1280px)/2+24px))] w-max will-change-transform ease-out duration-75"
                              :style="`transform: translate3d(-${progress}px, 0, 0)`">
-
-                            <div class="w-[280px] md:w-[300px] shrink-0 relative z-10 group">
+                            <div class="w-[320px] shrink-0 relative z-10 group">
                                 <div class="w-12 h-12 rounded-full bg-white border-[3px] border-academic-red flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
                                     <div class="w-3 h-3 rounded-full bg-academic-red"></div>
                                 </div>
-                                <div class="mt-6 text-5xl md:text-6xl font-serif font-black text-academic-navy/10 absolute -top-4 -left-4 pointer-events-none group-hover:text-academic-navy/20 transition-colors duration-500">2016</div>
-                                <div class="mt-6 text-3xl md:text-4xl font-serif font-bold text-academic-navy relative z-10">2016</div>
-                                <div class="mt-1 md:mt-2 text-lg md:text-xl font-bold text-academic-red" x-text="t[lang].hist_2016_t"></div>
-                                <div class="mt-2 md:mt-3 text-sm md:text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2016_d"></div>
+                                <div class="mt-8 text-6xl font-serif font-black text-academic-navy/10 absolute -top-4 -left-4 pointer-events-none group-hover:text-academic-navy/20 transition-colors duration-500">2016</div>
+                                <div class="mt-8 text-4xl font-serif font-bold text-academic-navy relative z-10">2016</div>
+                                <div class="mt-2 text-xl font-bold text-academic-red" x-text="t[lang].hist_2016_t"></div>
+                                <div class="mt-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2016_d"></div>
                             </div>
 
-                            <div class="w-[280px] md:w-[300px] shrink-0 relative z-10 group">
+                            <div class="w-[320px] shrink-0 relative z-10 group">
                                 <div class="w-12 h-12 rounded-full bg-white border-[3px] border-slate-300 flex items-center justify-center shadow-sm group-hover:border-academic-navy transition-colors duration-500"></div>
-                                <div class="mt-6 text-5xl md:text-6xl font-serif font-black text-academic-navy/10 absolute -top-4 -left-4 pointer-events-none group-hover:text-academic-navy/20 transition-colors duration-500">2017</div>
-                                <div class="mt-6 text-3xl md:text-4xl font-serif font-bold text-academic-navy relative z-10">2017</div>
-                                <div class="mt-1 md:mt-2 text-lg md:text-xl font-bold text-academic-navy" x-text="t[lang].hist_2017_t"></div>
-                                <div class="mt-2 md:mt-3 text-sm md:text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2017_d"></div>
+                                <div class="mt-8 text-6xl font-serif font-black text-academic-navy/10 absolute -top-4 -left-4 pointer-events-none group-hover:text-academic-navy/20 transition-colors duration-500">2017</div>
+                                <div class="mt-8 text-4xl font-serif font-bold text-academic-navy relative z-10">2017</div>
+                                <div class="mt-2 text-xl font-bold text-academic-navy" x-text="t[lang].hist_2017_t"></div>
+                                <div class="mt-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2017_d"></div>
                             </div>
 
-                            <div class="w-[380px] md:w-[420px] shrink-0 relative z-10 group">
+                            <div class="w-[450px] shrink-0 relative z-10 group">
                                 <div class="w-12 h-12 rounded-full bg-white border-[3px] border-slate-300 flex items-center justify-center shadow-sm group-hover:border-academic-navy transition-colors duration-500"></div>
-                                <div class="mt-6 text-3xl md:text-4xl font-serif font-bold text-academic-navy">2019</div>
-                                <div class="mt-1 md:mt-2 text-lg md:text-xl font-bold text-academic-navy mb-3 md:mb-4" x-text="t[lang].hist_2019_t"></div>
-                                <div class="-mt-1 md:-mt-2 mb-3 text-sm md:text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2019_d"></div>
-                                <div class="overflow-hidden rounded-lg shadow-xl border border-slate-100 bg-white p-1.5 md:p-2">
+                                <div class="mt-8 text-4xl font-serif font-bold text-academic-navy">2019</div>
+                                <div class="mt-2 text-xl font-bold text-academic-navy mb-6" x-text="t[lang].hist_2019_t"></div>
+                                <div class="-mt-3 mb-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2019_d"></div>
+                                <div class="overflow-hidden rounded-lg shadow-xl border border-slate-100 bg-white p-2">
                                     <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202019.webp" alt="2019" class="w-full aspect-[16/9] object-cover rounded shadow-inner group-hover:scale-105 transition-transform duration-700" />
                                 </div>
                             </div>
 
-                            <div class="w-[380px] md:w-[420px] shrink-0 relative z-10 group">
+                            <div class="w-[450px] shrink-0 relative z-10 group">
                                 <div class="w-12 h-12 rounded-full bg-white border-[3px] border-slate-300 flex items-center justify-center shadow-sm group-hover:border-academic-navy transition-colors duration-500"></div>
-                                <div class="mt-6 text-3xl md:text-4xl font-serif font-bold text-academic-navy">2020</div>
-                                <div class="mt-1 md:mt-2 text-lg md:text-xl font-bold text-academic-navy mb-3 md:mb-4" x-text="t[lang].hist_2020_t"></div>
-                                <div class="-mt-1 md:-mt-2 mb-3 text-sm md:text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2020_d"></div>
-                                <div class="overflow-hidden rounded-lg shadow-xl border border-slate-100 bg-white p-1.5 md:p-2">
+                                <div class="mt-8 text-4xl font-serif font-bold text-academic-navy">2020</div>
+                                <div class="mt-2 text-xl font-bold text-academic-navy mb-6" x-text="t[lang].hist_2020_t"></div>
+                                <div class="-mt-3 mb-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2020_d"></div>
+                                <div class="overflow-hidden rounded-lg shadow-xl border border-slate-100 bg-white p-2">
                                     <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202020%20服务升级.webp" alt="2020" class="w-full aspect-[16/9] object-cover rounded shadow-inner group-hover:scale-105 transition-transform duration-700" />
                                 </div>
                             </div>
 
-                            <div class="w-[380px] md:w-[420px] shrink-0 relative z-10 group">
+                            <div class="w-[450px] shrink-0 relative z-10 group">
                                 <div class="w-12 h-12 rounded-full bg-white border-[3px] border-slate-300 flex items-center justify-center shadow-sm group-hover:border-academic-navy transition-colors duration-500"></div>
-                                <div class="mt-6 text-3xl md:text-4xl font-serif font-bold text-academic-navy">2022</div>
-                                <div class="mt-1 md:mt-2 text-lg md:text-xl font-bold text-academic-navy mb-3 md:mb-4" x-text="t[lang].hist_2022_t"></div>
-                                <div class="-mt-1 md:-mt-2 mb-3 text-sm md:text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2022_d"></div>
-                                <div class="overflow-hidden rounded-lg shadow-xl border border-slate-100 bg-white p-1.5 md:p-2">
+                                <div class="mt-8 text-4xl font-serif font-bold text-academic-navy">2022</div>
+                                <div class="mt-2 text-xl font-bold text-academic-navy mb-6" x-text="t[lang].hist_2022_t"></div>
+                                <div class="-mt-3 mb-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2022_d"></div>
+                                <div class="overflow-hidden rounded-lg shadow-xl border border-slate-100 bg-white p-2">
                                     <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202022%20腾讯教育奖项.webp" alt="2022" class="w-full aspect-[16/9] object-cover rounded shadow-inner group-hover:scale-105 transition-transform duration-700" />
                                 </div>
                             </div>
 
-                            <div class="w-[480px] md:w-[540px] shrink-0 relative z-10 group">
+                            <div class="w-[600px] shrink-0 relative z-10 group">
                                 <div class="w-12 h-12 rounded-full bg-white border-[3px] border-academic-red flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
                                     <div class="w-3 h-3 rounded-full bg-academic-red"></div>
                                 </div>
-                                <div class="mt-6 text-3xl md:text-4xl font-serif font-bold text-academic-navy">2023</div>
-                                <div class="mt-1 md:mt-2 text-lg md:text-xl font-bold text-academic-red mb-3 md:mb-4" x-text="t[lang].hist_2023_t"></div>
-                                <div class="-mt-1 md:-mt-2 mb-3 text-sm md:text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2023_d"></div>
-                                <div class="grid grid-cols-3 gap-2 md:gap-3 bg-white p-1.5 md:p-2 rounded-lg shadow-xl border border-slate-100">
+                                <div class="mt-8 text-4xl font-serif font-bold text-academic-navy">2023</div>
+                                <div class="mt-2 text-xl font-bold text-academic-red mb-6" x-text="t[lang].hist_2023_t"></div>
+                                <div class="-mt-3 mb-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2023_d"></div>
+                                <div class="grid grid-cols-3 gap-3 bg-white p-2 rounded-lg shadow-xl border border-slate-100">
                                     <div class="overflow-hidden rounded"><img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.1.webp" alt="2023-1" class="w-full aspect-[16/9] object-cover group-hover:scale-110 transition-transform duration-700 delay-100" /></div>
                                     <div class="overflow-hidden rounded"><img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.2.webp" alt="2023-2" class="w-full aspect-[16/9] object-cover group-hover:scale-110 transition-transform duration-700 delay-200" /></div>
                                     <div class="overflow-hidden rounded"><img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202023.3.webp" alt="2023-3" class="w-full aspect-[16/9] object-cover group-hover:scale-110 transition-transform duration-700 delay-300" /></div>
                                 </div>
                             </div>
 
-                            <div class="w-[380px] md:w-[420px] shrink-0 relative z-10 group">
+                            <div class="w-[450px] shrink-0 relative z-10 group">
                                 <div class="w-12 h-12 rounded-full bg-white border-[3px] border-slate-300 flex items-center justify-center shadow-sm group-hover:border-academic-navy transition-colors duration-500"></div>
-                                <div class="mt-6 text-3xl md:text-4xl font-serif font-bold text-academic-navy">2024</div>
-                                <div class="mt-1 md:mt-2 text-lg md:text-xl font-bold text-academic-navy mb-3 md:mb-4" x-text="t[lang].hist_2024_t"></div>
-                                <div class="-mt-1 md:-mt-2 mb-3 text-sm md:text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2024_d"></div>
-                                <div class="overflow-hidden rounded-lg shadow-xl border border-slate-100 bg-white p-1.5 md:p-2">
+                                <div class="mt-8 text-4xl font-serif font-bold text-academic-navy">2024</div>
+                                <div class="mt-2 text-xl font-bold text-academic-navy mb-6" x-text="t[lang].hist_2024_t"></div>
+                                <div class="-mt-3 mb-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2024_d"></div>
+                                <div class="overflow-hidden rounded-lg shadow-xl border border-slate-100 bg-white p-2">
                                     <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%203.2%20Corporate%20Timeline/WImage%203.2%202024%20新浪教育奖.webp" alt="2024" class="w-full aspect-[16/9] object-cover rounded shadow-inner group-hover:scale-105 transition-transform duration-700" />
                                 </div>
                             </div>
 
-                            <div class="w-[280px] md:w-[300px] shrink-0 relative z-10 group mr-[20vw]">
+                            <div class="w-[320px] shrink-0 relative z-10 group mr-[20vw]">
                                 <div class="w-12 h-12 rounded-full bg-academic-navy flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500 ring-4 ring-academic-navy/20">
                                     <div class="w-3 h-3 rounded-full bg-white animate-pulse"></div>
                                 </div>
-                                <div class="mt-6 text-3xl md:text-4xl font-serif font-bold text-academic-navy relative z-10">2026+</div>
-                                <div class="mt-1 md:mt-2 text-lg md:text-xl font-bold text-academic-navy" x-text="t[lang].hist_2026_t"></div>
-                                <div class="mt-2 md:mt-3 text-sm md:text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2026_d"></div>
+                                <div class="mt-8 text-4xl font-serif font-bold text-academic-navy relative z-10">2026+</div>
+                                <div class="mt-2 text-xl font-bold text-academic-navy" x-text="t[lang].hist_2026_t"></div>
+                                <div class="mt-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2026_d"></div>
                             </div>
                         </div>
                     </div>
@@ -518,108 +517,108 @@
             </section>
 
             <!-- 5. 商业合作（升级高级精美版） -->
-            <section id="home-partners" class="py-16 md:py-24 bg-academic-navy text-white relative overflow-hidden">
+            <section id="home-partners" class="py-32 bg-academic-navy text-white relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
                 <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-academic-red/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
 
                 <div class="max-w-7xl mx-auto px-6 relative z-10">
-                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-10 md:mb-12 scrub-item anim-fade-up">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16 scrub-item anim-fade-up">
                         <div class="max-w-2xl">
-                            <div class="flex items-center gap-3 mb-4 md:mb-5">
+                            <div class="flex items-center gap-4 mb-6">
                                 <div class="flex -space-x-2">
                                     <span class="w-3 h-3 rounded-full bg-academic-red shadow-sm"></span>
                                     <span class="w-3 h-3 rounded-full bg-white/40 shadow-sm"></span>
                                 </div>
                                 <span class="text-white/60 font-bold tracking-[0.35em] uppercase text-[10px] border-b border-white/20 pb-1">Global & Local Network</span>
                             </div>
-                            <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white leading-tight" x-text="t[lang].partner_title"></h2>
-                            <p class="mt-4 md:mt-5 text-white/60 text-base md:text-lg font-light leading-relaxed" x-text="t[lang].partner_sub"></p>
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white leading-tight" x-text="t[lang].partner_title"></h2>
+                            <p class="mt-6 text-white/60 text-lg font-light leading-relaxed" x-text="t[lang].partner_sub"></p>
                         </div>
                         <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto pb-2">
-                            <button @click="switchPage('contact')" class="px-6 py-3 md:px-8 md:py-4 bg-academic-red text-white text-[10px] md:text-xs font-bold tracking-widest uppercase hover:bg-red-700 transition-colors shadow-[0_10px_30px_rgba(200,16,46,0.2)] flex items-center justify-center gap-3">
+                            <button @click="switchPage('contact')" class="px-8 py-4 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-700 transition-colors shadow-[0_10px_30px_rgba(200,16,46,0.2)] flex items-center justify-center gap-3">
                                 <span x-text="t[lang].btn_city_partner_inquiry"></span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
-                            <button @click="switchPage('contact')" class="px-6 py-3 md:px-8 md:py-4 border border-white/20 text-white text-[10px] md:text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-academic-navy transition-colors flex items-center justify-center gap-2">
+                            <button @click="switchPage('contact')" class="px-8 py-4 border border-white/20 text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-academic-navy transition-colors flex items-center justify-center gap-2">
                                 <span x-text="t[lang].btn_agent_inquiry"></span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="relative w-full aspect-[21/9] md:aspect-[24/9] mb-12 md:mb-16 rounded-xl overflow-hidden scrub-item anim-scale">
+                    <div class="relative w-full aspect-[21/9] md:aspect-[24/9] mb-20 rounded-xl overflow-hidden scrub-item anim-scale">
                         <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp')] bg-contain bg-center bg-no-repeat opacity-80 mix-blend-screen transition-transform duration-1000 hover:scale-[1.03]"></div>
                         <div class="absolute inset-0 bg-gradient-to-t from-academic-navy via-transparent to-transparent"></div>
                         <div class="absolute inset-0 bg-gradient-to-b from-academic-navy/60 via-transparent to-transparent"></div>
                         <div class="absolute inset-0 bg-gradient-to-r from-academic-navy via-transparent to-academic-navy"></div>
                     </div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-x-4 md:gap-x-6 gap-y-8 border-t border-white/10 pt-10 md:pt-12 scrub-item anim-fade-up">
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-10 border-t border-white/10 pt-16 scrub-item anim-fade-up">
                         <div class="group cursor-pointer">
-                            <div class="relative overflow-hidden mb-3 md:mb-4 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
+                            <div class="relative overflow-hidden mb-5 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
                                 <div class="absolute inset-0 bg-academic-navy/30 group-hover:bg-transparent transition-colors duration-500"></div>
                             </div>
-                            <div class="flex items-start gap-2 md:gap-3">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5 md:w-4 md:h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
                                 <div>
-                                    <div class="text-sm md:text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_hk_title"></div>
-                                    <div class="mt-1 md:mt-1.5 text-[10px] md:text-xs text-white/50 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
+                                    <div class="text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_hk_title"></div>
+                                    <div class="mt-1.5 text-xs text-white/50 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="group cursor-pointer">
-                            <div class="relative overflow-hidden mb-3 md:mb-4 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
+                            <div class="relative overflow-hidden mb-5 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
                                 <div class="absolute inset-0 bg-academic-navy/30 group-hover:bg-transparent transition-colors duration-500"></div>
                             </div>
-                            <div class="flex items-start gap-2 md:gap-3">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5 md:w-4 md:h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
                                 <div>
-                                    <div class="text-sm md:text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_sz_title"></div>
-                                    <div class="mt-1 md:mt-1.5 text-[10px] md:text-xs text-white/50 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
+                                    <div class="text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_sz_title"></div>
+                                    <div class="mt-1.5 text-xs text-white/50 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="group cursor-pointer">
-                            <div class="relative overflow-hidden mb-3 md:mb-4 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
+                            <div class="relative overflow-hidden mb-5 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
                                 <div class="absolute inset-0 bg-academic-navy/30 group-hover:bg-transparent transition-colors duration-500"></div>
                             </div>
-                            <div class="flex items-start gap-2 md:gap-3">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5 md:w-4 md:h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
                                 <div>
-                                    <div class="text-sm md:text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_fs_title"></div>
-                                    <div class="mt-1 md:mt-1.5 text-[10px] md:text-xs text-white/50 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
+                                    <div class="text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_fs_title"></div>
+                                    <div class="mt-1.5 text-xs text-white/50 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="group cursor-pointer">
-                            <div class="relative overflow-hidden mb-3 md:mb-4 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
+                            <div class="relative overflow-hidden mb-5 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
                                 <div class="absolute inset-0 bg-academic-navy/30 group-hover:bg-transparent transition-colors duration-500"></div>
                             </div>
-                            <div class="flex items-start gap-2 md:gap-3">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5 md:w-4 md:h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
                                 <div>
-                                    <div class="text-sm md:text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_wh_title"></div>
-                                    <div class="mt-1 md:mt-1.5 text-[10px] md:text-xs text-white/50 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
+                                    <div class="text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_wh_title"></div>
+                                    <div class="mt-1.5 text-xs text-white/50 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="group cursor-pointer">
-                            <div class="relative overflow-hidden mb-3 md:mb-4 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
+                            <div class="relative overflow-hidden mb-5 border border-white/5 rounded-sm bg-black/20 aspect-[16/9]">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" loading="lazy" decoding="async" />
                                 <div class="absolute inset-0 bg-academic-navy/30 group-hover:bg-transparent transition-colors duration-500"></div>
                             </div>
-                            <div class="flex items-start gap-2 md:gap-3">
-                                <i data-lucide="map-pin" class="w-3.5 h-3.5 md:w-4 md:h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-1 opacity-80"></i>
                                 <div>
-                                    <div class="text-sm md:text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_gy_title"></div>
-                                    <div class="mt-1 md:mt-1.5 text-[10px] md:text-xs text-white/50 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
+                                    <div class="text-base font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-snug" x-text="t[lang].office_gy_title"></div>
+                                    <div class="mt-1.5 text-xs text-white/50 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
                                 </div>
                             </div>
                         </div>
