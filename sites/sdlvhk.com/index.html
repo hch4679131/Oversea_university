@@ -145,6 +145,7 @@
                     <span @click="switchPage('career')" :class="page === 'career' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('career', 'career-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_hero_t"></a>
+                        <a @click.stop="switchPage('career', 'career-internships')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_intern_nav"></a>
                         <a @click.stop="switchPage('career', 'career-intro')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].car_h1"></a>
                     </div>
                 </div>
@@ -2954,55 +2955,55 @@
                 </div>
             </section>
 
-            <section id="career-internships" class="py-20 bg-academic-slate/30 border-b border-academic-border/60 text-slate-900">
+            <section id="career-internships" class="py-20 bg-gradient-to-b from-academic-slate to-white border-b border-academic-border/60 text-slate-900">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up mb-12">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Career Acceleration</span>
-                        <h2 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight">名企實習機會：為你的簡歷鍍金</h2>
+                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].career_intern_kicker"></span>
+                        <h2 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_intern_title"></h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
                     </div>
 
                     <div class="space-y-8">
                         <article class="scrub-item anim-fade-up bg-white border border-academic-border/70 shadow-xl p-8 md:p-10">
                             <div class="flex flex-wrap items-center justify-between gap-4">
-                                <h3 class="text-3xl font-serif font-bold text-academic-navy">遠程實習</h3>
+                                <h3 class="text-3xl font-serif font-bold text-academic-navy" x-text="t[lang].career_remote_title"></h3>
                                 <div class="flex flex-wrap gap-2 text-[11px] font-bold tracking-wider uppercase">
-                                    <span class="px-3 py-1 bg-academic-navy text-white">高效提升</span>
-                                    <span class="px-3 py-1 bg-academic-red text-white">靈活安排</span>
-                                    <span class="px-3 py-1 bg-academic-navy text-white">快速見效</span>
+                                    <span class="px-3 py-1 bg-academic-navy text-white" x-text="t[lang].career_remote_tag1"></span>
+                                    <span class="px-3 py-1 bg-academic-red text-white" x-text="t[lang].career_remote_tag2"></span>
+                                    <span class="px-3 py-1 bg-academic-navy text-white" x-text="t[lang].career_remote_tag3"></span>
                                 </div>
                             </div>
                             <div class="mt-6 space-y-4 text-slate-700 leading-relaxed">
-                                <p><span class="font-bold text-academic-navy">目標人群：</span>大一至大三學生、需短期背景提升的留學申請者。</p>
-                                <p><span class="font-bold text-academic-navy">周期短：</span>4-8周，時間地點靈活。</p>
-                                <p><span class="font-bold text-academic-navy">實戰性：</span>名企導師遠程帶隊，完成真實工作任務。</p>
-                                <p><span class="font-bold text-academic-navy">成果：</span>獲得名企實習證明及推薦信，助力升學求職。</p>
+                                <p><span class="font-bold text-academic-navy" x-text="t[lang].career_remote_audience_label"></span><span x-text="t[lang].career_remote_audience"></span></p>
+                                <p><span class="font-bold text-academic-navy" x-text="t[lang].career_remote_cycle_label"></span><span x-text="t[lang].career_remote_cycle"></span></p>
+                                <p><span class="font-bold text-academic-navy" x-text="t[lang].career_remote_practice_label"></span><span x-text="t[lang].career_remote_practice"></span></p>
+                                <p><span class="font-bold text-academic-navy" x-text="t[lang].career_remote_result_label"></span><span x-text="t[lang].career_remote_result"></span></p>
                             </div>
                             <div class="mt-8">
-                                <button type="button" class="px-7 py-3 bg-academic-navy text-white text-xs font-bold tracking-widest uppercase hover:bg-academic-red transition-colors">了解項目實習詳情</button>
+                                <button type="button" class="px-7 py-3 bg-academic-navy text-white text-xs font-bold tracking-widest uppercase hover:bg-academic-red transition-colors" x-text="t[lang].career_remote_cta"></button>
                             </div>
                         </article>
 
                         <article class="scrub-item anim-fade-up bg-academic-navy text-white border border-academic-navy shadow-xl p-8 md:p-10">
                             <div class="flex flex-wrap items-center justify-between gap-4">
-                                <h3 class="text-3xl font-serif font-bold">實地實習</h3>
+                                <h3 class="text-3xl font-serif font-bold" x-text="t[lang].career_onsite_title"></h3>
                                 <div class="flex flex-wrap gap-2 text-[11px] font-bold tracking-wider uppercase">
-                                    <span class="px-3 py-1 bg-white text-academic-navy">高含金量</span>
-                                    <span class="px-3 py-1 bg-academic-red text-white">親身體驗</span>
-                                    <span class="px-3 py-1 bg-white text-academic-navy">爭取留用</span>
+                                    <span class="px-3 py-1 bg-white text-academic-navy" x-text="t[lang].career_onsite_tag1"></span>
+                                    <span class="px-3 py-1 bg-academic-red text-white" x-text="t[lang].career_onsite_tag2"></span>
+                                    <span class="px-3 py-1 bg-white text-academic-navy" x-text="t[lang].career_onsite_tag3"></span>
                                 </div>
                             </div>
                             <div class="mt-6 space-y-4 text-white/85 leading-relaxed">
-                                <p><span class="font-bold text-white">目標人群：</span>大四/研究生、已有基礎實習經歷、尋求留用機會的學生。</p>
-                                <p class="font-bold text-white">核心賣點：</p>
+                                <p><span class="font-bold text-white" x-text="t[lang].career_onsite_audience_label"></span><span x-text="t[lang].career_onsite_audience"></span></p>
+                                <p class="font-bold text-white" x-text="t[lang].career_onsite_core"></p>
                                 <ul class="space-y-2 pl-1">
-                                    <li><span class="font-bold text-white">沉浸體驗：</span>進入行業上游企業，親身體驗真實職場。</li>
-                                    <li><span class="font-bold text-white">系統配套：</span>高價值崗前培訓 + 1v1面試輔導。</li>
-                                    <li><span class="font-bold text-white">長遠價值：</span>擴展職場人脈，爭取寶貴留用機會。</li>
+                                    <li><span class="font-bold text-white" x-text="t[lang].career_onsite_immersion_label"></span><span x-text="t[lang].career_onsite_immersion"></span></li>
+                                    <li><span class="font-bold text-white" x-text="t[lang].career_onsite_training_label"></span><span x-text="t[lang].career_onsite_training"></span></li>
+                                    <li><span class="font-bold text-white" x-text="t[lang].career_onsite_value_label"></span><span x-text="t[lang].career_onsite_value"></span></li>
                                 </ul>
                             </div>
                             <div class="mt-8">
-                                <button type="button" class="px-7 py-3 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-700 transition-colors">查看實地實習崗位</button>
+                                <button type="button" class="px-7 py-3 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-700 transition-colors" x-text="t[lang].career_onsite_cta"></button>
                             </div>
                         </article>
                     </div>
@@ -4629,9 +4630,10 @@
 
                         <!-- Career -->
                         <div>
-                            <div class="text-slate-300/60 text-xs font-bold mb-4 uppercase tracking-widest whitespace-nowrap">Career Planning</div>
+                            <div class="text-slate-300/60 text-xs font-bold mb-4 uppercase tracking-widest whitespace-nowrap" x-text="t[lang].nav_career"></div>
                             <ul class="space-y-3 footer-links text-white/90">
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-hero')" x-text="t[lang].career_hero_t"></button></li>
+                                <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-internships')" x-text="t[lang].career_intern_nav"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-intro')" x-text="t[lang].car_h1"></button></li>
                             </ul>
                         </div>
