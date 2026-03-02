@@ -176,6 +176,7 @@
                         <a @click.stop="switchPage('achievements', 'achievements-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].ach_title"></a>
                         <a @click.stop="switchPage('achievements', 'achievements-offer-gallery')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].ach_gallery_title"></a>
                         <a @click.stop="switchPage('achievements', 'achievements-feedback')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].ach_feedback_title"></a>
+                        <a @click.stop="switchPage('achievements', 'achievements-brand-honors')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].ach_honor_title"></a>
                     </div>
                 </div>
                 <div class="nav-item group">
@@ -736,6 +737,42 @@
                                         <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145511_17_3%281%29%281%29%281%29.webp" alt="Feedback 8" class="w-full h-32 object-contain bg-white border border-black/10" />
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="achievements-brand-honors" class="py-20 bg-academic-slate/25 border-b border-academic-border/60 text-slate-900">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up mb-10">
+                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].ach_honor_kicker"></span>
+                        <h3 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].ach_honor_title"></h3>
+                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-[1fr_1.25fr] gap-6">
+                        <div class="bg-white border border-academic-border/70 p-6 scrub-item anim-fade-up">
+                            <ul class="space-y-3 text-slate-700 leading-relaxed text-sm md:text-base">
+                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item1"></span></li>
+                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item2"></span></li>
+                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item3"></span></li>
+                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item4"></span></li>
+                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item5"></span></li>
+                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item6"></span></li>
+                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item7"></span></li>
+                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item8"></span></li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border border-academic-border/70 p-4 scrub-item anim-fade-up">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/1.png" alt="Brand Honor 1" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/2.png" alt="Brand Honor 2" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/3.png" alt="Brand Honor 3" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/4.png" alt="Brand Honor 4" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/5.png" alt="Brand Honor 5" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/微信圖片_20230613194944.jpg" alt="Brand Honor 6" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -5016,6 +5053,7 @@
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('achievements', 'achievements-hero')" x-text="t[lang].ach_title"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('achievements', 'achievements-offer-gallery')" x-text="t[lang].ach_gallery_title"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('achievements', 'achievements-feedback')" x-text="t[lang].ach_feedback_title"></button></li>
+                                <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('achievements', 'achievements-brand-honors')" x-text="t[lang].ach_honor_title"></button></li>
                             </ul>
                         </div>
                     </div>
