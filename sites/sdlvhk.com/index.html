@@ -147,6 +147,7 @@
                         <a @click.stop="switchPage('career', 'career-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_hero_t"></a>
                         <a @click.stop="switchPage('career', 'career-internships')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_intern_nav"></a>
                         <a @click.stop="switchPage('career', 'career-training')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_training_nav"></a>
+                        <a @click.stop="switchPage('career', 'career-results')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_results_nav"></a>
                         <a @click.stop="switchPage('career', 'career-intro')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].car_h1"></a>
                     </div>
                 </div>
@@ -3066,6 +3067,68 @@
                 </div>
             </section>
 
+            <section id="career-results" class="py-20 bg-academic-slate/25 border-b border-academic-border/60 text-slate-900">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="scrub-item anim-fade-up mb-12">
+                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].career_results_kicker"></span>
+                        <h2 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_results_title"></h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 scrub-item anim-fade-up">
+                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
+                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Ogilvy</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_consulting"></span>
+                            </div>
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp" alt="Ogilvy Internship Proof" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
+                        </article>
+
+                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
+                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">PwC</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_finance"></span>
+                            </div>
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp" alt="PwC Recommendation Letter" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
+                        </article>
+
+                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
+                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Accenture</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_consulting"></span>
+                            </div>
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp" alt="Accenture Internship Certificate" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
+                        </article>
+
+                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
+                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Unilever</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_fmcg"></span>
+                            </div>
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp" alt="Unilever Offer Proof" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
+                        </article>
+
+                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
+                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Tencent</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_internet"></span>
+                            </div>
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.05.webp" alt="Internet Industry Internship Proof" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
+                        </article>
+
+                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
+                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">HSBC</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_finance"></span>
+                            </div>
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.06.webp" alt="Finance Offer Letter" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
+                        </article>
+                    </div>
+
+                    <p class="mt-10 text-lg md:text-xl text-academic-navy font-semibold leading-relaxed scrub-item anim-fade-up" x-text="t[lang].career_results_summary"></p>
+                </div>
+            </section>
+
             <section id="career-intro" class="py-32 bg-paper text-obsidian-950">
                 <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
                     <div class="scrub-item anim-fade-up">
@@ -4691,6 +4754,7 @@
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-hero')" x-text="t[lang].career_hero_t"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-internships')" x-text="t[lang].career_intern_nav"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-training')" x-text="t[lang].career_training_nav"></button></li>
+                                <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-results')" x-text="t[lang].career_results_nav"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-intro')" x-text="t[lang].car_h1"></button></li>
                             </ul>
                         </div>
