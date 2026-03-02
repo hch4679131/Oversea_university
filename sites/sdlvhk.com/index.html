@@ -171,6 +171,9 @@
                     </div>
                 </div>
                 <div class="nav-item group">
+                    <span @click="switchPage('achievements')" :class="page === 'achievements' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
+                </div>
+                <div class="nav-item group">
                     <a @click="switchPage('contact')" class="px-5 py-2 bg-academic-red text-white font-bold hover:bg-red-700 transition duration-300" x-text="t[lang].nav_contact"></a>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('contact', 'contact-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].contact_hero_t"></a>
@@ -244,6 +247,12 @@
                     :class="page === 'apartments' ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('apartments', 'apartments-hero'); mobileNavOpen = false"
                     x-text="t[lang].nav_apt"
+                ></button>
+
+                <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
+                    :class="page === 'achievements' ? 'text-academic-red' : 'text-gray-200'"
+                    @click="switchPage('achievements'); mobileNavOpen = false"
+                    x-text="t[lang].nav_achievements"
                 ></button>
 
                 <button type="button" class="w-full py-3 rounded-md bg-academic-red text-white font-bold tracking-[0.15em] uppercase hover:bg-red-700 transition"
@@ -629,6 +638,47 @@
                 </div>
             </section>
 
+        </div>
+
+        <!-- ================= PAGE 1B: 成就与反馈 ================= -->
+        <div x-show="page === 'achievements'" x-transition:enter="transition ease-out duration-500" class="w-full bg-white text-slate-900 font-sans">
+            <section id="achievements-hero" class="relative min-h-[76vh] lg:min-h-[84vh] flex items-center overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.0%20by%20tirachardz%20on%20Freepik%20-%20Flipped%202.webp"
+                        class="w-full h-full object-cover" alt="Achievements">
+                    <div class="absolute inset-0 bg-gradient-to-r from-academic-navy/95 via-academic-navy/75 to-academic-navy/30"></div>
+                </div>
+
+                <div class="relative z-10 max-w-7xl mx-auto px-6 w-full py-24">
+                    <div class="max-w-5xl scrub-item anim-fade-up">
+                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].ach_kicker"></span>
+                        <h1 class="mt-5 text-4xl md:text-6xl font-serif font-bold text-white leading-tight" x-text="t[lang].ach_title"></h1>
+
+                        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                            <div class="bg-white/95 border border-white/30 p-5">
+                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat1_num"></div>
+                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat1_label"></div>
+                            </div>
+                            <div class="bg-white/95 border border-white/30 p-5">
+                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat2_num"></div>
+                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat2_label"></div>
+                            </div>
+                            <div class="bg-white/95 border border-white/30 p-5">
+                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat3_num"></div>
+                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat3_label"></div>
+                            </div>
+                            <div class="bg-white/95 border border-white/30 p-5">
+                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat4_num"></div>
+                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat4_label"></div>
+                            </div>
+                            <div class="bg-white/95 border border-white/30 p-5">
+                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat5_num"></div>
+                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat5_label"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
                 <!-- ================= PAGE 2: 关于我们 (极简国际风 | 纯色无渐变 | 紧凑排版) ================= -->
