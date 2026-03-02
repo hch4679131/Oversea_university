@@ -172,6 +172,10 @@
                 </div>
                 <div class="nav-item group">
                     <span @click="switchPage('achievements')" :class="page === 'achievements' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
+                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[180px] shadow-2xl rounded-sm">
+                        <a @click.stop="switchPage('achievements', 'achievements-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].ach_title"></a>
+                        <a @click.stop="switchPage('achievements', 'achievements-offer-gallery')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].ach_gallery_title"></a>
+                    </div>
                 </div>
                 <div class="nav-item group">
                     <a @click="switchPage('contact')" class="px-5 py-2 bg-academic-red text-white font-bold hover:bg-red-700 transition duration-300" x-text="t[lang].nav_contact"></a>
@@ -4933,6 +4937,7 @@
                         <div>
                             <div class="text-slate-300/60 text-xs font-bold mb-4 uppercase tracking-widest whitespace-nowrap" x-text="t[lang].nav_career"></div>
                             <ul class="space-y-3 footer-links text-white/90">
+                                <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('achievements', 'achievements-hero')" x-text="t[lang].nav_achievements"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-hero')" x-text="t[lang].career_hero_t"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-internships')" x-text="t[lang].career_intern_nav"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-training')" x-text="t[lang].career_training_nav"></button></li>
