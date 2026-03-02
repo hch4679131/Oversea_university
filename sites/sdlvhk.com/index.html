@@ -4906,7 +4906,7 @@
                 </div>
 
                 <div class="lg:flex lg:items-start lg:justify-between lg:gap-8">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 lg:flex-1">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-10 lg:flex-1">
                         <!-- About -->
                         <div>
                             <div class="text-slate-300/60 text-xs font-bold mb-4 uppercase tracking-widest">About</div>
@@ -4933,11 +4933,19 @@
                             </ul>
                         </div>
 
+                        <!-- Achievements -->
+                        <div>
+                            <div class="text-slate-300/60 text-xs font-bold mb-4 uppercase tracking-widest whitespace-nowrap">Achievements</div>
+                            <ul class="space-y-3 footer-links text-white/90">
+                                <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('achievements', 'achievements-hero')" x-text="t[lang].ach_title"></button></li>
+                                <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('achievements', 'achievements-offer-gallery')" x-text="t[lang].ach_gallery_title"></button></li>
+                            </ul>
+                        </div>
+
                         <!-- Career -->
                         <div>
-                            <div class="text-slate-300/60 text-xs font-bold mb-4 uppercase tracking-widest whitespace-nowrap" x-text="t[lang].nav_career"></div>
+                            <div class="text-slate-300/60 text-xs font-bold mb-4 uppercase tracking-widest whitespace-nowrap">Career Planning</div>
                             <ul class="space-y-3 footer-links text-white/90">
-                                <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('achievements', 'achievements-hero')" x-text="t[lang].nav_achievements"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-hero')" x-text="t[lang].career_hero_t"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-internships')" x-text="t[lang].career_intern_nav"></button></li>
                                 <li><button type="button" class="hover:text-academic-red transition text-left" @click="switchPage('career', 'career-training')" x-text="t[lang].career_training_nav"></button></li>
