@@ -649,96 +649,134 @@
 
         <!-- ================= PAGE 1B: 成就与反馈 ================= -->
         <div x-show="page === 'achievements'" x-transition:enter="transition ease-out duration-500" class="w-full bg-white text-slate-900 font-sans">
-            <section id="achievements-hero" class="relative min-h-[76vh] lg:min-h-[84vh] flex items-center overflow-hidden">
-                <div class="absolute inset-0 z-0">
+            <section id="achievements-hero" class="relative min-h-[68vh] lg:min-h-[76vh] flex items-center bg-white overflow-hidden pt-10 pb-8 lg:pb-10">
+                <div class="absolute inset-0 z-0 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/10 lg:via-white/60 z-10"></div>
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.0%20by%20tirachardz%20on%20Freepik%20-%20Flipped%202.webp"
-                        class="w-full h-full object-cover" alt="Achievements">
-                    <div class="absolute inset-0 bg-gradient-to-r from-academic-navy/95 via-academic-navy/75 to-academic-navy/30"></div>
+                        class="absolute left-1/2 -translate-x-1/2 top-0 h-full w-full lg:w-3/4 object-cover object-center" alt="Achievements">
                 </div>
 
-                <div class="relative z-10 max-w-7xl mx-auto px-6 w-full py-24">
-                    <div class="max-w-5xl scrub-item anim-fade-up">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].ach_kicker"></span>
-                        <h1 class="mt-5 text-4xl md:text-6xl font-serif font-bold text-white leading-tight" x-text="t[lang].ach_title"></h1>
-                        <div class="mt-8 md:w-2/3 border-l-2 border-academic-red/80 pl-6">
-                            <p class="text-lg text-white/95 font-light tracking-wide leading-relaxed whitespace-pre-line" x-text="t[lang].ach_hero_sub"></p>
+                <div class="relative z-20 max-w-7xl mx-auto px-6 w-full pt-5">
+                    <div class="max-w-3xl scrub-item anim-fade-up">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="flex -space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-academic-red shadow-sm"></span>
+                                <span class="w-3 h-3 rounded-full bg-academic-navy shadow-sm"></span>
+                            </div>
+                            <span class="text-academic-navy font-bold tracking-[0.35em] uppercase text-[10px] border-b border-academic-red/30 pb-1" x-text="t[lang].ach_kicker"></span>
                         </div>
 
-                        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                            <div class="bg-white/95 border border-white/30 p-5">
-                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat1_num"></div>
-                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat1_label"></div>
+                        <h1 class="text-5xl md:text-6xl font-serif font-extrabold text-academic-navy leading-[1.05] mb-8" x-text="t[lang].ach_title"></h1>
+
+                        <p class="text-xl text-slate-600 max-w-xl mb-12 leading-relaxed font-light whitespace-pre-line" x-text="t[lang].ach_hero_sub"></p>
+
+                        <div class="mt-10 grid grid-cols-2 lg:grid-cols-5 gap-4">
+                            <div class="bg-white shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-5 group hover:border-academic-navy/30 transition-all">
+                                <div class="text-3xl font-serif font-black text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].ach_stat1_num"></div>
+                                <div class="mt-2 text-[10px] text-slate-400 font-bold tracking-widest uppercase" x-text="t[lang].ach_stat1_label"></div>
                             </div>
-                            <div class="bg-white/95 border border-white/30 p-5">
-                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat2_num"></div>
-                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat2_label"></div>
+                            <div class="bg-white shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-5 group hover:border-academic-navy/30 transition-all">
+                                <div class="text-3xl font-serif font-black text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].ach_stat2_num"></div>
+                                <div class="mt-2 text-[10px] text-slate-400 font-bold tracking-widest uppercase" x-text="t[lang].ach_stat2_label"></div>
                             </div>
-                            <div class="bg-white/95 border border-white/30 p-5">
-                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat3_num"></div>
-                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat3_label"></div>
+                            <div class="bg-white shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-5 group hover:border-academic-navy/30 transition-all">
+                                <div class="text-3xl font-serif font-black text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].ach_stat3_num"></div>
+                                <div class="mt-2 text-[10px] text-slate-400 font-bold tracking-widest uppercase" x-text="t[lang].ach_stat3_label"></div>
                             </div>
-                            <div class="bg-white/95 border border-white/30 p-5">
-                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat4_num"></div>
-                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat4_label"></div>
+                            <div class="bg-white shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-5 group hover:border-academic-navy/30 transition-all">
+                                <div class="text-3xl font-serif font-black text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].ach_stat4_num"></div>
+                                <div class="mt-2 text-[10px] text-slate-400 font-bold tracking-widest uppercase" x-text="t[lang].ach_stat4_label"></div>
                             </div>
-                            <div class="bg-white/95 border border-white/30 p-5">
-                                <div class="text-3xl font-serif font-black text-academic-navy" x-text="t[lang].ach_stat5_num"></div>
-                                <div class="mt-2 text-xs text-slate-600 tracking-widest uppercase" x-text="t[lang].ach_stat5_label"></div>
+                            <div class="bg-white shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-5 group hover:border-academic-navy/30 transition-all">
+                                <div class="text-3xl font-serif font-black text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].ach_stat5_num"></div>
+                                <div class="mt-2 text-[10px] text-slate-400 font-bold tracking-widest uppercase" x-text="t[lang].ach_stat5_label"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="achievements-offer-gallery" class="py-16 bg-white border-b border-academic-border/60">
+            <section id="achievements-offer-gallery" class="py-20 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="bg-academic-navy text-white border border-academic-red/30 p-8 scrub-item anim-fade-up">
-                        <h3 class="text-2xl md:text-3xl font-serif font-bold" x-text="t[lang].ach_gallery_title"></h3>
-                        <p class="mt-3 text-white/80 leading-relaxed" x-text="t[lang].ach_gallery_desc"></p>
-                        <div class="mt-6 bg-white/95 p-3 border border-white/30 grid grid-cols-1 md:grid-cols-4 gap-3">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp" alt="Offer Gallery 1" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" />
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp" alt="Offer Gallery 2" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" />
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp" alt="Offer Gallery 3" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" />
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp" alt="Offer Gallery 4" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" />
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-12 scrub-item anim-fade-up">
+                        <div class="max-w-2xl">
+                            <h3 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].ach_gallery_title"></h3>
+                            <p class="mt-4 text-slate-500 text-lg font-light leading-relaxed" x-text="t[lang].ach_gallery_desc"></p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 scrub-item anim-fade-up">
+                        <div class="overflow-hidden rounded-sm shadow-xl bg-white p-2 group hover:-translate-y-2 transition-transform duration-500">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp" alt="Offer Gallery 1" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="overflow-hidden rounded-sm shadow-xl bg-white p-2 group hover:-translate-y-2 transition-transform duration-500">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp" alt="Offer Gallery 2" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="overflow-hidden rounded-sm shadow-xl bg-white p-2 group hover:-translate-y-2 transition-transform duration-500">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp" alt="Offer Gallery 3" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="overflow-hidden rounded-sm shadow-xl bg-white p-2 group hover:-translate-y-2 transition-transform duration-500">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp" alt="Offer Gallery 4" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="achievements-feedback" class="py-20 bg-white border-b border-academic-border/60 text-slate-900">
+            <section id="achievements-feedback" class="py-24 bg-white border-b border-slate-200/60 text-slate-900">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center scrub-item anim-fade-up">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].ach_feedback_kicker"></span>
-                        <h3 class="mt-4 text-3xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].ach_feedback_title"></h3>
-                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-academic-red/60 mx-auto mt-6"></div>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].ach_feedback_kicker"></span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].ach_feedback_title"></h3>
                     </div>
 
-                    <div class="mt-12 grid lg:grid-cols-[280px_1fr] gap-6 items-start">
-                        <div class="bg-academic-navy text-white border border-academic-red/30 p-7 scrub-item anim-fade-up">
-                            <p class="text-white/90 leading-relaxed whitespace-pre-line" x-text="t[lang].ach_feedback_desc"></p>
+                    <div class="grid lg:grid-cols-[1fr_2fr] gap-12 items-start">
+                        <div class="scrub-item anim-fade-up sticky top-28">
+                            <h4 class="text-2xl font-serif font-bold text-academic-navy mb-6">真实反馈，<br><span class="text-academic-red italic">见证品质服务。</span></h4>
+                            <p class="text-slate-600 leading-relaxed font-light whitespace-pre-line" x-text="t[lang].ach_feedback_desc"></p>
                         </div>
 
-                        <div class="space-y-4">
-                            <div class="bg-academic-slate/25 border border-academic-border/60 p-4 scrub-item anim-fade-up">
-                                <div class="grid md:grid-cols-[120px_1fr] gap-4 items-center">
-                                    <div class="text-academic-navy/70 text-xs font-bold tracking-[0.2em] uppercase whitespace-pre-line" x-text="t[lang].ach_feedback_group1"></div>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/方便干净%20服务满意_结果.webp" alt="Feedback 1" class="w-full h-32 object-contain bg-white border border-black/10" />
-                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/朋友转介%20%20服务真诚_结果.webp" alt="Feedback 2" class="w-full h-32 object-contain bg-white border border-black/10" />
-                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/服务满意%20二次推荐%20%282%29_结果.webp" alt="Feedback 3" class="w-full h-32 object-contain bg-white border border-black/10" />
-                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/服务满意%20二次推荐_结果.webp" alt="Feedback 4" class="w-full h-32 object-contain bg-white border border-black/10" />
+                        <div class="space-y-12">
+                            <div class="scrub-item anim-fade-up">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <span class="w-2 h-2 rounded-full bg-academic-navy"></span>
+                                    <h5 class="text-sm font-bold tracking-[0.2em] text-academic-navy uppercase whitespace-pre-line" x-text="t[lang].ach_feedback_group1"></h5>
+                                </div>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <div class="bg-white p-2 shadow-lg border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/方便干净%20服务满意_结果.webp" alt="Feedback 1" class="w-full h-32 object-contain" />
+                                    </div>
+                                    <div class="bg-white p-2 shadow-lg border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/朋友转介%20%20服务真诚_结果.webp" alt="Feedback 2" class="w-full h-32 object-contain" />
+                                    </div>
+                                    <div class="bg-white p-2 shadow-lg border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/服务满意%20二次推荐%20%282%29_结果.webp" alt="Feedback 3" class="w-full h-32 object-contain" />
+                                    </div>
+                                    <div class="bg-white p-2 shadow-lg border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/服务满意%20二次推荐_结果.webp" alt="Feedback 4" class="w-full h-32 object-contain" />
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="bg-academic-slate/25 border border-academic-border/60 p-4 scrub-item anim-fade-up">
-                                <div class="grid md:grid-cols-[120px_1fr] gap-4 items-center">
-                                    <div class="text-academic-navy/70 text-xs font-bold tracking-[0.2em] uppercase whitespace-pre-line" x-text="t[lang].ach_feedback_group2"></div>
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/爆灯好评_结果.webp" alt="Feedback 5" class="w-full h-32 object-contain bg-white border border-black/10" />
-                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/美好祝愿_结果.webp" alt="Feedback 6" class="w-full h-32 object-contain bg-white border border-black/10" />
-                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145509_16_3%281%29%281%29.webp" alt="Feedback 7" class="w-full h-32 object-contain bg-white border border-black/10" />
-                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145511_17_3%281%29%281%29%281%29.webp" alt="Feedback 8" class="w-full h-32 object-contain bg-white border border-black/10" />
+                            <div class="scrub-item anim-fade-up">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <span class="w-2 h-2 rounded-full bg-academic-navy"></span>
+                                    <h5 class="text-sm font-bold tracking-[0.2em] text-academic-navy uppercase whitespace-pre-line" x-text="t[lang].ach_feedback_group2"></h5>
+                                </div>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <div class="bg-white p-2 shadow-lg border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/爆灯好评_结果.webp" alt="Feedback 5" class="w-full h-32 object-contain" />
+                                    </div>
+                                    <div class="bg-white p-2 shadow-lg border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/美好祝愿_结果.webp" alt="Feedback 6" class="w-full h-32 object-contain" />
+                                    </div>
+                                    <div class="bg-white p-2 shadow-lg border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145509_16_3%281%29%281%29.webp" alt="Feedback 7" class="w-full h-32 object-contain" />
+                                    </div>
+                                    <div class="bg-white p-2 shadow-lg border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                        <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145511_17_3%281%29%281%29%281%29.webp" alt="Feedback 8" class="w-full h-32 object-contain" />
                                     </div>
                                 </div>
                             </div>
@@ -747,92 +785,117 @@
                 </div>
             </section>
 
-            <section id="achievements-brand-honors" class="py-20 bg-academic-slate/25 border-b border-academic-border/60 text-slate-900">
+            <section id="achievements-brand-honors" class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up mb-10">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].ach_honor_kicker"></span>
-                        <h3 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].ach_honor_title"></h3>
-                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-16 scrub-item anim-fade-up">
+                        <div class="max-w-2xl">
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase block mb-4" x-text="t[lang].ach_honor_kicker"></span>
+                            <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].ach_honor_title"></h3>
+                        </div>
                     </div>
 
-                    <div class="grid lg:grid-cols-[1fr_1.25fr] gap-6">
-                        <div class="bg-white border border-academic-border/70 p-6 scrub-item anim-fade-up">
-                            <ul class="space-y-3 text-slate-700 leading-relaxed text-sm md:text-base">
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item1"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item2"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item3"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item4"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item5"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item6"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item7"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_honor_item8"></span></li>
-                            </ul>
+                    <div class="grid lg:grid-cols-[1fr_1.5fr] gap-12 items-center">
+                        <div class="scrub-item anim-fade-up">
+                            <div class="bg-white p-8 md:p-10 shadow-xl border border-slate-100 rounded-sm relative overflow-hidden">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-academic-red/5 rounded-full blur-3xl"></div>
+                                <ul class="space-y-4 text-slate-600 leading-relaxed font-light text-sm md:text-base relative z-10">
+                                    <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].ach_honor_item1"></span></li>
+                                    <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].ach_honor_item2"></span></li>
+                                    <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].ach_honor_item3"></span></li>
+                                    <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].ach_honor_item4"></span></li>
+                                    <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].ach_honor_item5"></span></li>
+                                    <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].ach_honor_item6"></span></li>
+                                    <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].ach_honor_item7"></span></li>
+                                    <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].ach_honor_item8"></span></li>
+                                </ul>
+                            </div>
                         </div>
 
-                        <div class="bg-white border border-academic-border/70 p-4 scrub-item anim-fade-up">
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/1.png" alt="Brand Honor 1" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
-                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/2.png" alt="Brand Honor 2" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
-                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/3.png" alt="Brand Honor 3" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
-                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/4.png" alt="Brand Honor 4" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
-                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/5.png" alt="Brand Honor 5" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
-                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/微信圖片_20230613194944.jpg" alt="Brand Honor 6" class="w-full aspect-[4/3] object-cover border border-academic-border/60" loading="lazy" decoding="async" />
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 scrub-item anim-fade-up">
+                            <div class="bg-white p-3 shadow-lg border border-slate-100 rounded-sm group hover:border-academic-navy/30 transition-colors">
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/1.png" alt="Brand Honor 1" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="bg-white p-3 shadow-lg border border-slate-100 rounded-sm group hover:border-academic-navy/30 transition-colors">
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/2.png" alt="Brand Honor 2" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="bg-white p-3 shadow-lg border border-slate-100 rounded-sm group hover:border-academic-navy/30 transition-colors">
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/3.png" alt="Brand Honor 3" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="bg-white p-3 shadow-lg border border-slate-100 rounded-sm group hover:border-academic-navy/30 transition-colors">
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/4.png" alt="Brand Honor 4" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="bg-white p-3 shadow-lg border border-slate-100 rounded-sm group hover:border-academic-navy/30 transition-colors">
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/5.png" alt="Brand Honor 5" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="bg-white p-3 shadow-lg border border-slate-100 rounded-sm group hover:border-academic-navy/30 transition-colors">
+                                <img src="https://static.sdlvhk.com/图片素材/荣誉奖项/微信圖片_20230613194944.jpg" alt="Brand Honor 6" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="achievements-policy-coop" class="py-20 bg-white border-b border-academic-border/60 text-slate-900">
+            <section id="achievements-policy-coop" class="py-24 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up mb-10">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].ach_policy_kicker"></span>
-                        <h3 class="mt-4 text-3xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].ach_policy_title"></h3>
-                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].ach_policy_kicker"></span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].ach_policy_title"></h3>
                     </div>
 
-                    <div class="space-y-8">
-                        <div class="bg-academic-slate/25 border border-academic-border/70 p-6 scrub-item anim-fade-up">
-                            <div class="flex items-center justify-between gap-3 mb-5">
+                    <div class="space-y-12">
+                        <!-- Part 1 -->
+                        <div class="bg-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] border border-slate-100 p-8 md:p-10 rounded-sm scrub-item anim-fade-up">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-6 mb-8">
                                 <h4 class="text-2xl font-serif font-bold text-academic-navy" x-text="t[lang].ach_policy_part1_title"></h4>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider">AUTHORIZATION</span>
+                                <span class="text-[10px] text-academic-red font-bold uppercase tracking-widest bg-academic-red/10 px-3 py-1 rounded-sm">AUTHORIZATION</span>
                             </div>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div class="bg-white border border-academic-border/70 p-4">
-                                    <div class="text-sm font-semibold text-academic-navy mb-3" x-text="t[lang].ach_policy_juc_auth"></div>
-                                    <img src="https://static.sdlvhk.com/图片素材/院校联系/JUC2.png" alt="JUC Authorization" class="w-full h-56 object-contain bg-white border border-academic-border/60" loading="lazy" decoding="async" />
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div class="group">
+                                    <div class="text-sm font-bold text-academic-navy mb-4" x-text="t[lang].ach_policy_juc_auth"></div>
+                                    <div class="bg-academic-slate/30 p-4 rounded-sm border border-slate-100 group-hover:bg-white group-hover:shadow-lg transition-all">
+                                        <img src="https://static.sdlvhk.com/图片素材/院校联系/JUC2.png" alt="JUC Authorization" class="w-full h-56 object-contain mix-blend-multiply" loading="lazy" decoding="async" />
+                                    </div>
                                 </div>
-                                <div class="bg-white border border-academic-border/70 p-4">
-                                    <div class="text-sm font-semibold text-academic-navy mb-3" x-text="t[lang].ach_policy_thei_auth"></div>
-                                    <img src="https://static.sdlvhk.com/图片素材/院校联系/THEI1.png" alt="THEi Authorization" class="w-full h-56 object-contain bg-white border border-academic-border/60" loading="lazy" decoding="async" />
+                                <div class="group">
+                                    <div class="text-sm font-bold text-academic-navy mb-4" x-text="t[lang].ach_policy_thei_auth"></div>
+                                    <div class="bg-academic-slate/30 p-4 rounded-sm border border-slate-100 group-hover:bg-white group-hover:shadow-lg transition-all">
+                                        <img src="https://static.sdlvhk.com/图片素材/院校联系/THEI1.png" alt="THEi Authorization" class="w-full h-56 object-contain mix-blend-multiply" loading="lazy" decoding="async" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-academic-slate/25 border border-academic-border/70 p-6 scrub-item anim-fade-up">
-                            <div class="flex items-center justify-between gap-3 mb-5">
+                        <!-- Part 2 -->
+                        <div class="bg-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] border border-slate-100 p-8 md:p-10 rounded-sm scrub-item anim-fade-up">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-6 mb-8">
                                 <h4 class="text-2xl font-serif font-bold text-academic-navy" x-text="t[lang].ach_policy_part2_title"></h4>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider">UNIVERSITY LOGOS</span>
+                                <span class="text-[10px] text-academic-red font-bold uppercase tracking-widest bg-academic-red/10 px-3 py-1 rounded-sm">UNIVERSITY LOGOS</span>
                             </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-                                <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/hku.hk" alt="HKU" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                                <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/polyu.edu.hk" alt="PolyU" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                                <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/cityu.edu.hk" alt="CityU" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                                <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/hkbu.edu.hk" alt="HKBU" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                                <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/hsu.edu.hk" alt="HSUHK" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                                <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/thei.edu.hk" alt="THEi" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
+                                <div class="h-20 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-shadow rounded-sm"><img src="https://logo.clearbit.com/hku.hk" alt="HKU" class="max-h-10 object-contain grayscale hover:grayscale-0 transition-all" loading="lazy" decoding="async" /></div>
+                                <div class="h-20 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-shadow rounded-sm"><img src="https://logo.clearbit.com/polyu.edu.hk" alt="PolyU" class="max-h-10 object-contain grayscale hover:grayscale-0 transition-all" loading="lazy" decoding="async" /></div>
+                                <div class="h-20 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-shadow rounded-sm"><img src="https://logo.clearbit.com/cityu.edu.hk" alt="CityU" class="max-h-10 object-contain grayscale hover:grayscale-0 transition-all" loading="lazy" decoding="async" /></div>
+                                <div class="h-20 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-shadow rounded-sm"><img src="https://logo.clearbit.com/hkbu.edu.hk" alt="HKBU" class="max-h-10 object-contain grayscale hover:grayscale-0 transition-all" loading="lazy" decoding="async" /></div>
+                                <div class="h-20 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-shadow rounded-sm"><img src="https://logo.clearbit.com/hsu.edu.hk" alt="HSUHK" class="max-h-10 object-contain grayscale hover:grayscale-0 transition-all" loading="lazy" decoding="async" /></div>
+                                <div class="h-20 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-shadow rounded-sm"><img src="https://logo.clearbit.com/thei.edu.hk" alt="THEi" class="max-h-10 object-contain grayscale hover:grayscale-0 transition-all" loading="lazy" decoding="async" /></div>
                             </div>
                         </div>
 
-                        <div class="bg-academic-navy text-white border border-academic-red/40 p-6 scrub-item anim-fade-up">
-                            <div class="flex items-center justify-between gap-3 mb-5">
-                                <h4 class="text-2xl font-serif font-bold" x-text="t[lang].ach_policy_part3_title"></h4>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider">GOV & INSTITUTION</span>
+                        <!-- Part 3 -->
+                        <div class="bg-academic-navy shadow-2xl p-8 md:p-10 rounded-sm scrub-item anim-fade-up relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-64 h-64 bg-academic-red/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                            <div class="flex items-center justify-between border-b border-white/10 pb-6 mb-8 relative z-10">
+                                <h4 class="text-2xl font-serif font-bold text-white" x-text="t[lang].ach_policy_part3_title"></h4>
+                                <span class="text-[10px] text-white font-bold uppercase tracking-widest bg-academic-red px-3 py-1 rounded-sm shadow-md">GOV & INSTITUTION</span>
                             </div>
-                            <ul class="space-y-3 text-white/90 leading-relaxed">
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_policy_gov_item1"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_policy_gov_item2"></span></li>
-                                <li class="flex items-start gap-2"><span class="text-academic-red mt-1">◆</span><span x-text="t[lang].ach_policy_gov_item3"></span></li>
+                            <ul class="space-y-4 text-white/80 leading-relaxed font-light relative z-10">
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span><span x-text="t[lang].ach_policy_gov_item1"></span></li>
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span><span x-text="t[lang].ach_policy_gov_item2"></span></li>
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span><span x-text="t[lang].ach_policy_gov_item3"></span></li>
                             </ul>
                         </div>
                     </div>
