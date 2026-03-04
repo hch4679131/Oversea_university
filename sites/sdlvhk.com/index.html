@@ -3209,333 +3209,390 @@
         </div>
 
         <!-- ================= PAGE 5: 职涯规划 ================= -->
-        <div x-show="page === 'career'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <!-- Career: Hero (对齐前几个 page 的 Hero 风格) -->
-            <section id="career-hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
-                <div class="absolute inset-0 z-0">
+        <div x-show="page === 'career'" x-transition:enter="transition ease-out duration-500" class="w-full bg-white text-slate-900 font-sans">
+            <section id="career-hero" class="relative min-h-[68vh] lg:min-h-[76vh] flex items-center bg-white overflow-hidden pt-10 pb-8 lg:pb-10">
+                <div class="absolute inset-0 z-0 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/10 lg:via-white/60 z-10"></div>
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%205.0%20Career%20Development%20by%20tirachardz%20on%20Freepik%20-%20Flipped.webp"
-                        class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Career Development">
-                    <div class="absolute inset-0 bg-gradient-to-r from-academic-navy/95 via-academic-navy/70 to-academic-navy/15"></div>
+                        class="absolute left-1/2 -translate-x-1/2 top-0 h-full w-full lg:w-3/4 object-cover object-center" alt="Career Development">
                 </div>
 
-                <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64">
-                    <div class="scrub-item anim-fade-up max-w-3xl min-h-[320px] md:min-h-[360px] flex flex-col justify-start">
-                        <h1 class="text-6xl font-serif font-bold text-white leading-tight" x-text="t[lang].career_hero_t"></h1>
-                        <div class="mt-12 space-y-2">
-                            <p class="text-xl text-white/85 tracking-widest leading-snug" x-text="t[lang].career_hero_p1"></p>
-                            <p class="text-xl text-white/85 tracking-widest leading-snug" x-text="t[lang].career_hero_p2"></p>
+                <div class="relative z-20 max-w-7xl mx-auto px-6 w-full pt-5">
+                    <div class="max-w-3xl scrub-item anim-fade-up">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="flex -space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-academic-red shadow-sm"></span>
+                                <span class="w-3 h-3 rounded-full bg-academic-navy shadow-sm"></span>
+                            </div>
+                            <span class="text-academic-navy font-bold tracking-[0.35em] uppercase text-[10px] border-b border-academic-red/30 pb-1">Career Development</span>
+                        </div>
+
+                        <h1 class="text-5xl md:text-6xl font-serif font-extrabold text-academic-navy leading-[1.05] mb-8" x-text="t[lang].career_hero_t"></h1>
+
+                        <div class="space-y-4 text-xl text-slate-600 max-w-xl mb-12 leading-relaxed font-light">
+                            <p x-text="t[lang].career_hero_p1"></p>
+                            <p x-text="t[lang].career_hero_p2"></p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="career-internships" class="py-20 bg-gradient-to-b from-academic-slate to-white border-b border-academic-border/60 text-slate-900">
+            <section id="career-internships" class="py-24 bg-academic-slate/30 border-b border-slate-200/60 text-slate-900">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up mb-12">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].career_intern_kicker"></span>
-                        <h2 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_intern_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-16 scrub-item anim-fade-up">
+                        <div class="max-w-2xl">
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase block mb-4" x-text="t[lang].career_intern_kicker"></span>
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_intern_title"></h2>
+                        </div>
                     </div>
 
-                    <div class="space-y-8">
-                        <article class="scrub-item anim-fade-up bg-white border border-academic-border/70 shadow-xl p-8 md:p-10">
-                            <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+                        <article class="scrub-item anim-fade-up bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy group-hover:w-2 transition-all duration-300"></div>
+                            
+                            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
                                 <h3 class="text-3xl font-serif font-bold text-academic-navy" x-text="t[lang].career_remote_title"></h3>
-                                <div class="flex flex-wrap gap-2 text-[11px] font-bold tracking-wider uppercase">
-                                    <span class="px-3 py-1 bg-academic-navy text-white" x-text="t[lang].career_remote_tag1"></span>
-                                    <span class="px-3 py-1 bg-academic-red text-white" x-text="t[lang].career_remote_tag2"></span>
-                                    <span class="px-3 py-1 bg-academic-navy text-white" x-text="t[lang].career_remote_tag3"></span>
+                                <div class="flex flex-wrap gap-2 text-[10px] font-bold tracking-widest uppercase">
+                                    <span class="px-3 py-1 bg-academic-slate text-academic-navy rounded-sm" x-text="t[lang].career_remote_tag1"></span>
+                                    <span class="px-3 py-1 bg-academic-red/10 text-academic-red rounded-sm" x-text="t[lang].career_remote_tag2"></span>
+                                    <span class="px-3 py-1 bg-academic-navy/10 text-academic-navy rounded-sm" x-text="t[lang].career_remote_tag3"></span>
                                 </div>
                             </div>
-                            <div class="mt-6 space-y-4 text-slate-700 leading-relaxed">
-                                <p><span class="font-bold text-academic-navy" x-text="t[lang].career_remote_audience_label"></span><span x-text="t[lang].career_remote_audience"></span></p>
-                                <p><span class="font-bold text-academic-navy" x-text="t[lang].career_remote_cycle_label"></span><span x-text="t[lang].career_remote_cycle"></span></p>
-                                <p><span class="font-bold text-academic-navy" x-text="t[lang].career_remote_practice_label"></span><span x-text="t[lang].career_remote_practice"></span></p>
-                                <p><span class="font-bold text-academic-navy" x-text="t[lang].career_remote_result_label"></span><span x-text="t[lang].career_remote_result"></span></p>
+                            
+                            <div class="space-y-6 text-slate-600 font-light leading-relaxed">
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-1" x-text="t[lang].career_remote_audience_label"></div>
+                                    <div x-text="t[lang].career_remote_audience"></div>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-1" x-text="t[lang].career_remote_cycle_label"></div>
+                                    <div x-text="t[lang].career_remote_cycle"></div>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-1" x-text="t[lang].career_remote_practice_label"></div>
+                                    <div x-text="t[lang].career_remote_practice"></div>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-1" x-text="t[lang].career_remote_result_label"></div>
+                                    <div x-text="t[lang].career_remote_result"></div>
+                                </div>
                             </div>
-                            <div class="mt-8">
-                                <button type="button" class="px-7 py-3 bg-academic-navy text-white text-xs font-bold tracking-widest uppercase hover:bg-academic-red transition-colors" x-text="t[lang].career_remote_cta"></button>
+                            
+                            <div class="mt-8 pt-6 border-t border-slate-100">
+                                <button type="button" class="w-full md:w-auto px-8 py-3 bg-academic-navy text-white text-xs font-bold tracking-widest uppercase hover:bg-academic-red transition-colors shadow-md rounded-sm" x-text="t[lang].career_remote_cta"></button>
                             </div>
                         </article>
 
-                        <article class="scrub-item anim-fade-up bg-academic-navy text-white border border-academic-navy shadow-xl p-8 md:p-10">
-                            <div class="flex flex-wrap items-center justify-between gap-4">
-                                <h3 class="text-3xl font-serif font-bold" x-text="t[lang].career_onsite_title"></h3>
-                                <div class="flex flex-wrap gap-2 text-[11px] font-bold tracking-wider uppercase">
-                                    <span class="px-3 py-1 bg-white text-academic-navy" x-text="t[lang].career_onsite_tag1"></span>
-                                    <span class="px-3 py-1 bg-academic-red text-white" x-text="t[lang].career_onsite_tag2"></span>
-                                    <span class="px-3 py-1 bg-white text-academic-navy" x-text="t[lang].career_onsite_tag3"></span>
+                        <article class="scrub-item anim-fade-up bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-academic-red group-hover:w-2 transition-all duration-300"></div>
+                            
+                            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
+                                <h3 class="text-3xl font-serif font-bold text-academic-navy" x-text="t[lang].career_onsite_title"></h3>
+                                <div class="flex flex-wrap gap-2 text-[10px] font-bold tracking-widest uppercase">
+                                    <span class="px-3 py-1 bg-academic-navy text-white rounded-sm shadow-sm" x-text="t[lang].career_onsite_tag1"></span>
+                                    <span class="px-3 py-1 bg-academic-red text-white rounded-sm shadow-sm" x-text="t[lang].career_onsite_tag2"></span>
+                                    <span class="px-3 py-1 bg-slate-100 text-academic-navy rounded-sm shadow-sm" x-text="t[lang].career_onsite_tag3"></span>
                                 </div>
                             </div>
-                            <div class="mt-6 space-y-4 text-white/85 leading-relaxed">
-                                <p><span class="font-bold text-white" x-text="t[lang].career_onsite_audience_label"></span><span x-text="t[lang].career_onsite_audience"></span></p>
-                                <p class="font-bold text-white" x-text="t[lang].career_onsite_core"></p>
-                                <ul class="space-y-2 pl-1">
-                                    <li><span class="font-bold text-white" x-text="t[lang].career_onsite_immersion_label"></span><span x-text="t[lang].career_onsite_immersion"></span></li>
-                                    <li><span class="font-bold text-white" x-text="t[lang].career_onsite_training_label"></span><span x-text="t[lang].career_onsite_training"></span></li>
-                                    <li><span class="font-bold text-white" x-text="t[lang].career_onsite_value_label"></span><span x-text="t[lang].career_onsite_value"></span></li>
-                                </ul>
+                            
+                            <div class="space-y-6 text-slate-600 font-light leading-relaxed">
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-1" x-text="t[lang].career_onsite_audience_label"></div>
+                                    <div x-text="t[lang].career_onsite_audience"></div>
+                                </div>
+                                
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-2" x-text="t[lang].career_onsite_core"></div>
+                                    <ul class="space-y-4">
+                                        <li class="flex items-start gap-3">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span>
+                                            <div><span class="font-semibold text-slate-800" x-text="t[lang].career_onsite_immersion_label"></span> <span x-text="t[lang].career_onsite_immersion"></span></div>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span>
+                                            <div><span class="font-semibold text-slate-800" x-text="t[lang].career_onsite_training_label"></span> <span x-text="t[lang].career_onsite_training"></span></div>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span>
+                                            <div><span class="font-semibold text-slate-800" x-text="t[lang].career_onsite_value_label"></span> <span x-text="t[lang].career_onsite_value"></span></div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="mt-8">
-                                <button type="button" class="px-7 py-3 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-700 transition-colors" x-text="t[lang].career_onsite_cta"></button>
+                            
+                            <div class="mt-8 pt-6 border-t border-slate-100">
+                                <button type="button" class="w-full md:w-auto px-8 py-3 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-800 transition-colors shadow-md rounded-sm" x-text="t[lang].career_onsite_cta"></button>
                             </div>
                         </article>
                     </div>
                 </div>
             </section>
 
-            <section id="career-training" class="py-20 bg-white border-b border-academic-border/60 text-slate-900">
+            <section id="career-training" class="py-24 bg-white border-b border-slate-200/60 text-slate-900">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up mb-12">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].career_training_kicker"></span>
-                        <h2 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_training_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].career_training_kicker"></span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_training_title"></h2>
                     </div>
 
-                    <div class="scrub-item anim-fade-up bg-academic-slate/35 border border-academic-border/70 p-8 md:p-10 shadow-lg">
-                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-academic-navy whitespace-pre-line" x-text="t[lang].career_training_sub"></h3>
-                        <p class="mt-4 text-slate-700 leading-relaxed" x-text="t[lang].career_training_core_desc"></p>
+                    <div class="max-w-4xl mx-auto text-center mb-16 scrub-item anim-fade-up">
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-academic-navy mb-4" x-text="t[lang].career_training_sub"></h3>
+                        <p class="text-slate-500 font-light leading-relaxed text-lg" x-text="t[lang].career_training_core_desc"></p>
+                    </div>
 
-                        <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-                            <div class="bg-white border border-academic-border p-5">
-                                <div class="text-[10px] uppercase tracking-widest text-academic-red font-bold">01</div>
-                                <h4 class="mt-2 text-lg font-bold text-academic-navy" x-text="t[lang].career_training_step1_title"></h4>
-                                <p class="mt-2 text-sm text-slate-600 leading-relaxed" x-text="t[lang].career_training_step1_desc"></p>
-                            </div>
-                            <div class="bg-white border border-academic-border p-5">
-                                <div class="text-[10px] uppercase tracking-widest text-academic-red font-bold">02</div>
-                                <h4 class="mt-2 text-lg font-bold text-academic-navy" x-text="t[lang].career_training_step2_title"></h4>
-                                <p class="mt-2 text-sm text-slate-600 leading-relaxed" x-text="t[lang].career_training_step2_desc"></p>
-                            </div>
-                            <div class="bg-white border border-academic-border p-5">
-                                <div class="text-[10px] uppercase tracking-widest text-academic-red font-bold">03</div>
-                                <h4 class="mt-2 text-lg font-bold text-academic-navy" x-text="t[lang].career_training_step3_title"></h4>
-                                <p class="mt-2 text-sm text-slate-600 leading-relaxed" x-text="t[lang].career_training_step3_desc"></p>
-                            </div>
-                            <div class="bg-white border border-academic-border p-5">
-                                <div class="text-[10px] uppercase tracking-widest text-academic-red font-bold">04</div>
-                                <h4 class="mt-2 text-lg font-bold text-academic-navy" x-text="t[lang].career_training_step4_title"></h4>
-                                <p class="mt-2 text-sm text-slate-600 leading-relaxed" x-text="t[lang].career_training_step4_desc"></p>
-                            </div>
-                            <div class="bg-academic-navy border border-academic-navy p-5">
-                                <div class="text-[10px] uppercase tracking-widest text-academic-red font-bold">05</div>
-                                <h4 class="mt-2 text-lg font-bold text-white" x-text="t[lang].career_training_step5_title"></h4>
-                                <p class="mt-2 text-sm text-white/80 leading-relaxed" x-text="t[lang].career_training_step5_desc"></p>
-                            </div>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 scrub-item anim-fade-up">
+                        <div class="bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] p-6 relative group hover:border-academic-navy/30 transition-colors">
+                            <div class="text-4xl font-serif font-black text-slate-100 absolute top-4 right-4 group-hover:text-academic-red/10 transition-colors">01</div>
+                            <div class="w-8 h-1 bg-academic-red mb-6"></div>
+                            <h4 class="text-lg font-bold text-academic-navy relative z-10" x-text="t[lang].career_training_step1_title"></h4>
+                            <p class="mt-3 text-sm text-slate-500 leading-relaxed font-light relative z-10" x-text="t[lang].career_training_step1_desc"></p>
                         </div>
+                        <div class="bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] p-6 relative group hover:border-academic-navy/30 transition-colors">
+                            <div class="text-4xl font-serif font-black text-slate-100 absolute top-4 right-4 group-hover:text-academic-red/10 transition-colors">02</div>
+                            <div class="w-8 h-1 bg-academic-red mb-6"></div>
+                            <h4 class="text-lg font-bold text-academic-navy relative z-10" x-text="t[lang].career_training_step2_title"></h4>
+                            <p class="mt-3 text-sm text-slate-500 leading-relaxed font-light relative z-10" x-text="t[lang].career_training_step2_desc"></p>
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] p-6 relative group hover:border-academic-navy/30 transition-colors">
+                            <div class="text-4xl font-serif font-black text-slate-100 absolute top-4 right-4 group-hover:text-academic-red/10 transition-colors">03</div>
+                            <div class="w-8 h-1 bg-academic-red mb-6"></div>
+                            <h4 class="text-lg font-bold text-academic-navy relative z-10" x-text="t[lang].career_training_step3_title"></h4>
+                            <p class="mt-3 text-sm text-slate-500 leading-relaxed font-light relative z-10" x-text="t[lang].career_training_step3_desc"></p>
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] p-6 relative group hover:border-academic-navy/30 transition-colors">
+                            <div class="text-4xl font-serif font-black text-slate-100 absolute top-4 right-4 group-hover:text-academic-red/10 transition-colors">04</div>
+                            <div class="w-8 h-1 bg-academic-red mb-6"></div>
+                            <h4 class="text-lg font-bold text-academic-navy relative z-10" x-text="t[lang].career_training_step4_title"></h4>
+                            <p class="mt-3 text-sm text-slate-500 leading-relaxed font-light relative z-10" x-text="t[lang].career_training_step4_desc"></p>
+                        </div>
+                        <div class="bg-academic-navy shadow-2xl p-6 relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-academic-red/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                            <div class="text-4xl font-serif font-black text-white/10 absolute top-4 right-4">05</div>
+                            <div class="w-8 h-1 bg-academic-red mb-6 relative z-10"></div>
+                            <h4 class="text-lg font-bold text-white relative z-10" x-text="t[lang].career_training_step5_title"></h4>
+                            <p class="mt-3 text-sm text-white/80 leading-relaxed font-light relative z-10" x-text="t[lang].career_training_step5_desc"></p>
+                        </div>
+                    </div>
 
-                        <div class="mt-10 pt-8 border-t border-academic-border/80">
-                            <h4 class="text-2xl md:text-3xl font-serif font-bold text-academic-navy" x-text="t[lang].career_training_audience_title"></h4>
-                            <ul class="mt-4 space-y-2 text-slate-700 leading-relaxed">
-                                <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span x-text="t[lang].career_training_audience_1"></span></li>
-                                <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span x-text="t[lang].career_training_audience_2"></span></li>
+                    <div class="mt-16 bg-academic-slate/30 border border-slate-100 p-8 rounded-sm flex flex-col md:flex-row justify-between items-center gap-8 scrub-item anim-fade-up">
+                        <div>
+                            <h4 class="text-xl md:text-2xl font-serif font-bold text-academic-navy mb-4" x-text="t[lang].career_training_audience_title"></h4>
+                            <ul class="space-y-2 text-slate-600 font-light">
+                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span x-text="t[lang].career_training_audience_1"></span></li>
+                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span x-text="t[lang].career_training_audience_2"></span></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="px-8 py-4 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-800 transition-colors shadow-lg rounded-sm whitespace-nowrap" x-text="t[lang].career_training_cta"></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="career-results" class="py-24 bg-academic-slate/30 border-b border-slate-200/60 text-slate-900">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-16 scrub-item anim-fade-up">
+                        <div class="max-w-3xl">
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase block mb-4" x-text="t[lang].career_results_kicker"></span>
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_results_title"></h2>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 scrub-item anim-fade-up">
+                        <article class="bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden group hover:-translate-y-2 transition-transform duration-500">
+                            <div class="p-4 border-b border-slate-100 flex items-center justify-between gap-2 bg-slate-50">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Ogilvy</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red/10 text-academic-red font-bold uppercase tracking-wider rounded-sm" x-text="t[lang].career_industry_consulting"></span>
+                            </div>
+                            <div class="p-3">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp" alt="Ogilvy" class="w-full aspect-[4/3] object-cover rounded-sm group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden group hover:-translate-y-2 transition-transform duration-500">
+                            <div class="p-4 border-b border-slate-100 flex items-center justify-between gap-2 bg-slate-50">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">PwC</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red/10 text-academic-red font-bold uppercase tracking-wider rounded-sm" x-text="t[lang].career_industry_finance"></span>
+                            </div>
+                            <div class="p-3">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp" alt="PwC" class="w-full aspect-[4/3] object-cover rounded-sm group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden group hover:-translate-y-2 transition-transform duration-500">
+                            <div class="p-4 border-b border-slate-100 flex items-center justify-between gap-2 bg-slate-50">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Accenture</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red/10 text-academic-red font-bold uppercase tracking-wider rounded-sm" x-text="t[lang].career_industry_consulting"></span>
+                            </div>
+                            <div class="p-3">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp" alt="Accenture" class="w-full aspect-[4/3] object-cover rounded-sm group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden group hover:-translate-y-2 transition-transform duration-500">
+                            <div class="p-4 border-b border-slate-100 flex items-center justify-between gap-2 bg-slate-50">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Unilever</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red/10 text-academic-red font-bold uppercase tracking-wider rounded-sm" x-text="t[lang].career_industry_fmcg"></span>
+                            </div>
+                            <div class="p-3">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp" alt="Unilever" class="w-full aspect-[4/3] object-cover rounded-sm group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden group hover:-translate-y-2 transition-transform duration-500">
+                            <div class="p-4 border-b border-slate-100 flex items-center justify-between gap-2 bg-slate-50">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Tencent</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red/10 text-academic-red font-bold uppercase tracking-wider rounded-sm" x-text="t[lang].career_industry_internet"></span>
+                            </div>
+                            <div class="p-3">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.05.webp" alt="Tencent" class="w-full aspect-[4/3] object-cover rounded-sm group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                            </div>
+                        </article>
+                        
+                        <article class="bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden group hover:-translate-y-2 transition-transform duration-500">
+                            <div class="p-4 border-b border-slate-100 flex items-center justify-between gap-2 bg-slate-50">
+                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">HSBC</span>
+                                <span class="text-[10px] px-2 py-1 bg-academic-red/10 text-academic-red font-bold uppercase tracking-wider rounded-sm" x-text="t[lang].career_industry_finance"></span>
+                            </div>
+                            <div class="p-3">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.06.webp" alt="HSBC" class="w-full aspect-[4/3] object-cover rounded-sm group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="mt-16 text-center scrub-item anim-fade-up">
+                        <p class="text-xl md:text-2xl text-academic-navy font-serif font-bold leading-relaxed" x-text="t[lang].career_results_summary"></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="career-partners-wall" class="py-24 bg-white border-b border-slate-200/60 text-slate-900">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].career_partners_kicker"></span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].career_partners_title"></h2>
+                        <p class="mt-6 text-slate-500 font-light leading-relaxed text-lg max-w-3xl mx-auto" x-text="t[lang].career_partners_summary"></p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 scrub-item anim-fade-up">
+                        <div class="bg-white shadow-xl border border-slate-100 p-8 rounded-sm hover:shadow-2xl transition-shadow">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                                <h3 class="text-xl font-serif font-bold text-academic-navy" x-text="t[lang].career_partners_finance"></h3>
+                                <i data-lucide="building" class="w-5 h-5 text-academic-red/50"></i>
+                            </div>
+                            <ul class="grid grid-cols-2 gap-y-4 text-sm text-slate-600 font-medium">
+                                <li>中金公司</li><li>Morgan Stanley</li>
+                                <li>HSBC</li><li>华泰证券</li>
+                                <li>Goldman Sachs</li><li>Citibank</li>
                             </ul>
                         </div>
 
-                        <div class="mt-8">
-                            <button type="button" class="px-8 py-3 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-700 transition-colors" x-text="t[lang].career_training_cta"></button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="career-results" class="py-20 bg-academic-slate/25 border-b border-academic-border/60 text-slate-900">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up mb-12">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].career_results_kicker"></span>
-                        <h2 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_results_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
-                    </div>
-
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 scrub-item anim-fade-up">
-                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
-                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
-                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Ogilvy</span>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_consulting"></span>
-                            </div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp" alt="Ogilvy Internship Proof" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
-                        </article>
-
-                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
-                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
-                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">PwC</span>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_finance"></span>
-                            </div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp" alt="PwC Recommendation Letter" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
-                        </article>
-
-                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
-                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
-                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Accenture</span>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_consulting"></span>
-                            </div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp" alt="Accenture Internship Certificate" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
-                        </article>
-
-                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
-                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
-                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Unilever</span>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_fmcg"></span>
-                            </div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp" alt="Unilever Offer Proof" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
-                        </article>
-
-                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
-                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
-                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">Tencent</span>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_internet"></span>
-                            </div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.05.webp" alt="Internet Industry Internship Proof" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
-                        </article>
-
-                        <article class="bg-white border border-academic-border/80 shadow-lg overflow-hidden">
-                            <div class="p-4 border-b border-academic-border/70 flex items-center justify-between gap-2">
-                                <span class="text-academic-navy font-bold tracking-wider uppercase text-xs">HSBC</span>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider" x-text="t[lang].career_industry_finance"></span>
-                            </div>
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.06.webp" alt="Finance Offer Letter" class="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
-                        </article>
-                    </div>
-
-                    <p class="mt-10 text-lg md:text-xl text-academic-navy font-semibold leading-relaxed scrub-item anim-fade-up" x-text="t[lang].career_results_summary"></p>
-                </div>
-            </section>
-
-            <section id="career-partners-wall" class="py-20 bg-white border-b border-academic-border/60 text-slate-900">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up mb-10">
-                        <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="t[lang].career_partners_kicker"></span>
-                        <h2 class="mt-4 text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].career_partners_title"></h2>
-                        <p class="mt-6 text-lg md:text-xl text-academic-navy font-semibold leading-relaxed" x-text="t[lang].career_partners_summary"></p>
-                        <div class="w-20 h-1 bg-gradient-to-r from-academic-red to-transparent mt-6"></div>
-                    </div>
-
-                    <div class="space-y-6 scrub-item anim-fade-up">
-                        <div class="bg-academic-slate/40 border border-academic-border/70 p-5 md:p-6">
-                            <div class="flex items-center justify-between gap-3 mb-4">
-                                <h3 class="text-xl font-serif font-bold text-academic-navy" x-text="t[lang].career_partners_finance"></h3>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider">Finance</span>
-                            </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">中金公司</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Morgan Stanley</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">HSBC</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">华泰证券</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Goldman Sachs</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Citibank</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-academic-slate/40 border border-academic-border/70 p-5 md:p-6">
-                            <div class="flex items-center justify-between gap-3 mb-4">
+                        <div class="bg-white shadow-xl border border-slate-100 p-8 rounded-sm hover:shadow-2xl transition-shadow">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
                                 <h3 class="text-xl font-serif font-bold text-academic-navy" x-text="t[lang].career_partners_consulting"></h3>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider">Consulting</span>
+                                <i data-lucide="briefcase" class="w-5 h-5 text-academic-red/50"></i>
                             </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">McKinsey</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Bain</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Roland Berger</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">PwC</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Deloitte</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Accenture</div>
-                            </div>
+                            <ul class="grid grid-cols-2 gap-y-4 text-sm text-slate-600 font-medium">
+                                <li>McKinsey</li><li>Bain</li>
+                                <li>Roland Berger</li><li>PwC</li>
+                                <li>Deloitte</li><li>Accenture</li>
+                            </ul>
                         </div>
 
-                        <div class="bg-academic-slate/40 border border-academic-border/70 p-5 md:p-6">
-                            <div class="flex items-center justify-between gap-3 mb-4">
+                        <div class="bg-white shadow-xl border border-slate-100 p-8 rounded-sm hover:shadow-2xl transition-shadow">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
                                 <h3 class="text-xl font-serif font-bold text-academic-navy" x-text="t[lang].career_partners_tech"></h3>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider">Tech</span>
+                                <i data-lucide="cpu" class="w-5 h-5 text-academic-red/50"></i>
                             </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">腾讯</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">字节跳动</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">百度</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">网易</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">IBM</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Siemens</div>
-                            </div>
+                            <ul class="grid grid-cols-2 gap-y-4 text-sm text-slate-600 font-medium">
+                                <li>腾讯</li><li>字节跳动</li>
+                                <li>百度</li><li>网易</li>
+                                <li>IBM</li><li>Siemens</li>
+                            </ul>
                         </div>
 
-                        <div class="bg-academic-slate/40 border border-academic-border/70 p-5 md:p-6">
-                            <div class="flex items-center justify-between gap-3 mb-4">
+                        <div class="bg-white shadow-xl border border-slate-100 p-8 rounded-sm hover:shadow-2xl transition-shadow">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
                                 <h3 class="text-xl font-serif font-bold text-academic-navy" x-text="t[lang].career_partners_fmcg_luxury"></h3>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider">FMCG & Luxury</span>
+                                <i data-lucide="gem" class="w-5 h-5 text-academic-red/50"></i>
                             </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">P&amp;G</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">L'Oréal</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">LVMH</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Dior</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Unilever</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Vogue</div>
-                            </div>
+                            <ul class="grid grid-cols-2 gap-y-4 text-sm text-slate-600 font-medium">
+                                <li>P&amp;G</li><li>L'Oréal</li>
+                                <li>LVMH</li><li>Dior</li>
+                                <li>Unilever</li><li>Vogue</li>
+                            </ul>
                         </div>
 
-                        <div class="bg-academic-slate/40 border border-academic-border/70 p-5 md:p-6">
-                            <div class="flex items-center justify-between gap-3 mb-4">
+                        <div class="bg-white shadow-xl border border-slate-100 p-8 rounded-sm hover:shadow-2xl transition-shadow md:col-span-2 lg:col-span-1">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
                                 <h3 class="text-xl font-serif font-bold text-academic-navy" x-text="t[lang].career_partners_media_other"></h3>
-                                <span class="text-[10px] px-2 py-1 bg-academic-red text-white uppercase tracking-wider">Media & Other</span>
+                                <i data-lucide="globe" class="w-5 h-5 text-academic-red/50"></i>
                             </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">Ogilvy</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">GroupM</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">UNESCO</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">TIME</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">AT Kearney</div>
-                                <div class="bg-white border border-academic-border px-3 py-3 text-center text-sm font-semibold text-academic-navy">EY</div>
-                            </div>
+                            <ul class="grid grid-cols-2 gap-y-4 text-sm text-slate-600 font-medium">
+                                <li>Ogilvy</li><li>GroupM</li>
+                                <li>UNESCO</li><li>TIME</li>
+                                <li>AT Kearney</li><li>EY</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="mt-10 bg-[#f7fbff] border border-[#d6e9f8] p-6 md:p-8 scrub-item anim-fade-up">
-                        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6 border-b border-[#c9e2f6] pb-4">
-                            <h3 class="text-4xl md:text-6xl font-serif font-bold text-[#b7daf2] leading-none" x-text="t[lang].career_partners_wall_title"></h3>
-                            <div class="text-[#b7daf2] text-xl md:text-3xl font-bold tracking-wide" x-text="t[lang].career_partners_wall_sub"></div>
+                    <div class="mt-20 bg-academic-slate/30 border border-slate-100 p-8 md:p-12 rounded-sm scrub-item anim-fade-up">
+                        <div class="text-center mb-10">
+                            <h3 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy mb-4" x-text="t[lang].career_partners_wall_title"></h3>
+                            <p class="text-slate-500 font-light" x-text="t[lang].career_partners_wall_sub"></p>
                         </div>
 
-                        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 md:gap-4">
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/morganstanley.com" alt="Morgan Stanley" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/hsbc.com" alt="HSBC" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/goldmansachs.com" alt="Goldman Sachs" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/citi.com" alt="Citibank" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/pwc.com" alt="PwC" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/deloitte.com" alt="Deloitte" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/accenture.com" alt="Accenture" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/mckinsey.com" alt="McKinsey" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/morganstanley.com" alt="Morgan Stanley" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/hsbc.com" alt="HSBC" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/goldmansachs.com" alt="Goldman Sachs" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/citi.com" alt="Citibank" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/pwc.com" alt="PwC" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/deloitte.com" alt="Deloitte" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/accenture.com" alt="Accenture" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/mckinsey.com" alt="McKinsey" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
 
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/tencent.com" alt="Tencent" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/bytedance.com" alt="ByteDance" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/baidu.com" alt="Baidu" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/163.com" alt="NetEase" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/ibm.com" alt="IBM" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/siemens.com" alt="Siemens" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/unilever.com" alt="Unilever" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/pg.com" alt="P&G" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/tencent.com" alt="Tencent" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/bytedance.com" alt="ByteDance" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/baidu.com" alt="Baidu" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/163.com" alt="NetEase" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/ibm.com" alt="IBM" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/siemens.com" alt="Siemens" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/unilever.com" alt="Unilever" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/pg.com" alt="P&G" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
 
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/loreal.com" alt="L'Oréal" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/lvmh.com" alt="LVMH" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/dior.com" alt="Dior" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/ogilvy.com" alt="Ogilvy" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/groupm.com" alt="GroupM" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/unesco.org" alt="UNESCO" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center"><img src="https://logo.clearbit.com/vogue.com" alt="Vogue" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
-                            <div class="bg-white border border-academic-border/70 h-16 px-2 flex items-center justify-center text-academic-navy/70 text-lg font-serif">......</div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/loreal.com" alt="L'Oréal" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/lvmh.com" alt="LVMH" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/dior.com" alt="Dior" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/ogilvy.com" alt="Ogilvy" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/groupm.com" alt="GroupM" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/unesco.org" alt="UNESCO" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm hover:shadow-md transition-shadow grayscale hover:grayscale-0"><img src="https://logo.clearbit.com/vogue.com" alt="Vogue" class="max-h-8 object-contain" loading="lazy" decoding="async" /></div>
+                            <div class="h-16 bg-white border border-slate-100 shadow-sm flex items-center justify-center p-3 rounded-sm text-slate-400 text-lg font-serif tracking-widest">......</div>
                         </div>
                     </div>
 
-                    <div class="mt-10 bg-academic-navy text-white border border-academic-red/30 p-8 scrub-item anim-fade-up">
-                        <h3 class="text-2xl md:text-3xl font-serif font-bold" x-text="t[lang].career_hk_poster_title"></h3>
-                        <p class="mt-3 text-white/80 leading-relaxed" x-text="t[lang].career_hk_poster_desc"></p>
-                        <div class="mt-6 bg-white/95 p-3 border border-white/30 grid grid-cols-1 md:grid-cols-4 gap-3">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp" alt="Student Outcome 1" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" />
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp" alt="Student Outcome 2" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" />
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp" alt="Student Outcome 3" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" />
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp" alt="Student Outcome 4" class="w-full aspect-[3/4] object-cover" loading="lazy" decoding="async" />
+                    <div class="mt-20 bg-academic-navy shadow-2xl p-8 md:p-12 rounded-sm scrub-item anim-fade-up relative overflow-hidden text-center">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-3xl md:text-4xl font-serif font-bold text-white mb-6" x-text="t[lang].career_hk_poster_title"></h3>
+                            <p class="text-white/80 leading-relaxed font-light text-lg max-w-2xl mx-auto mb-10" x-text="t[lang].career_hk_poster_desc"></p>
+                            <div class="bg-white/5 p-4 border border-white/10 rounded-sm grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.01.webp" alt="Outcome 1" class="w-full aspect-[3/4] object-cover rounded-sm shadow-md" loading="lazy" decoding="async" />
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.02.webp" alt="Outcome 2" class="w-full aspect-[3/4] object-cover rounded-sm shadow-md" loading="lazy" decoding="async" />
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.03.webp" alt="Outcome 3" class="w-full aspect-[3/4] object-cover rounded-sm shadow-md" loading="lazy" decoding="async" />
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%204.6%20Offer%20Letters/WImage%204.6.04.webp" alt="Outcome 4" class="w-full aspect-[3/4] object-cover rounded-sm shadow-md" loading="lazy" decoding="async" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-
         </div>
 
         <!-- ================= PAGE 6: 联系我们 ================= -->
