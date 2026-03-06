@@ -1133,74 +1133,88 @@
                 </div>
             </section>
 
-            <!-- 5. 商业网络 (大红色块沉浸体验，蓝字点缀) -->
-            <section id="partners" class="py-16 bg-academic-navy text-white overflow-hidden">
+            <!-- 5. 商业网络 (极简国际风白底版) -->
+            <section id="partners" class="py-16 bg-white border-t border-slate-100 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="md:flex justify-between items-end mb-10 scrub-item anim-fade-up">
                         <div class="max-w-xl">
-                            <h2 class="text-3xl md:text-5xl font-serif font-bold text-white leading-tight" x-text="t[lang].partner_title"></h2>
-                            <p class="mt-4 text-white/80 text-sm leading-relaxed font-light" x-text="t[lang].partner_sub"></p>
+                            <h2 class="text-3xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].partner_title"></h2>
+                            <p class="mt-4 text-slate-500 text-sm leading-relaxed font-light" x-text="t[lang].partner_sub"></p>
                         </div>
                         <div class="mt-6 md:mt-0 flex gap-4">
-                            <!-- 按钮设计：纯白底与深蓝字的碰撞 -->
-                            <button @click="switchPage('contact')" class="px-6 py-3 bg-academic-red text-white text-xs font-bold uppercase tracking-widest hover:bg-red-700 transition-colors">
+                            <button @click="switchPage('contact')" class="px-6 py-3 bg-academic-red text-white text-xs font-bold uppercase tracking-widest hover:bg-red-800 shadow-md hover:shadow-lg transition-all">
                                 <span x-text="t[lang].btn_city_partner_inquiry"></span>
                             </button>
-                            <button @click="switchPage('contact')" class="px-6 py-3 border border-white/30 text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-academic-navy transition-colors">
+                            <button @click="switchPage('contact')" class="px-6 py-3 border border-slate-200 text-academic-navy text-xs font-bold uppercase tracking-widest hover:border-academic-navy hover:bg-academic-navy hover:text-white transition-all">
                                 <span x-text="t[lang].btn_agent_inquiry"></span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="relative w-full aspect-[16/9] border border-white/30 mb-10 rounded-sm overflow-hidden scrub-item anim-scale">
-                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp')] bg-contain bg-center bg-no-repeat opacity-100"></div>
+                    <div class="relative w-full aspect-[16/9] border border-slate-100 bg-slate-50 mb-10 rounded-sm overflow-hidden scrub-item anim-scale shadow-sm">
+                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp')] bg-contain bg-center bg-no-repeat opacity-50 invert grayscale"></div>
                     </div>
                     
                     <!-- 紧凑的办事处图片网格 -->
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-px bg-white/20 border border-white/20 scrub-item anim-fade-up">
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-px bg-slate-200 border border-slate-200 rounded-sm overflow-hidden shadow-sm scrub-item anim-fade-up">
                         <!-- HK -->
-                        <div class="bg-academic-navy/80 p-2 group cursor-pointer relative overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full aspect-[4/3] object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" />
-                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all m-2 pointer-events-none"></div>
-                            <div class="pt-3 pb-1 px-1">
-                                <div class="text-sm font-serif font-bold text-white group-hover:text-academic-red transition-colors" x-text="t[lang].office_hk_title"></div>
-                                <div class="text-[10px] text-white/60 mt-1 line-clamp-1" x-text="t[lang].office_hk_addr"></div>
+                        <div class="bg-white group cursor-pointer relative overflow-hidden flex flex-col h-full">
+                            <div class="relative overflow-hidden">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full aspect-[4/3] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" loading="lazy" />
+                                <div class="absolute inset-0 bg-academic-navy/5 group-hover:bg-transparent transition-colors duration-500"></div>
+                            </div>
+                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all pointer-events-none z-10"></div>
+                            <div class="p-4 bg-white group-hover:bg-slate-50 transition-colors duration-300 flex-1">
+                                <div class="text-sm font-serif font-bold text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].office_hk_title"></div>
+                                <div class="text-[10px] text-slate-500 mt-1.5 line-clamp-1" x-text="t[lang].office_hk_addr"></div>
                             </div>
                         </div>
                         <!-- SZ -->
-                        <div class="bg-academic-navy/80 p-2 group cursor-pointer relative overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full aspect-[4/3] object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" />
-                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all m-2 pointer-events-none"></div>
-                            <div class="pt-3 pb-1 px-1">
-                                <div class="text-sm font-serif font-bold text-white group-hover:text-academic-red transition-colors" x-text="t[lang].office_sz_title"></div>
-                                <div class="text-[10px] text-white/60 mt-1 line-clamp-1" x-text="t[lang].office_sz_addr"></div>
+                        <div class="bg-white group cursor-pointer relative overflow-hidden flex flex-col h-full">
+                            <div class="relative overflow-hidden">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full aspect-[4/3] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" loading="lazy" />
+                                <div class="absolute inset-0 bg-academic-navy/5 group-hover:bg-transparent transition-colors duration-500"></div>
+                            </div>
+                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all pointer-events-none z-10"></div>
+                            <div class="p-4 bg-white group-hover:bg-slate-50 transition-colors duration-300 flex-1">
+                                <div class="text-sm font-serif font-bold text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].office_sz_title"></div>
+                                <div class="text-[10px] text-slate-500 mt-1.5 line-clamp-1" x-text="t[lang].office_sz_addr"></div>
                             </div>
                         </div>
                         <!-- FS -->
-                        <div class="bg-academic-navy/80 p-2 group cursor-pointer relative overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full aspect-[4/3] object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" />
-                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all m-2 pointer-events-none"></div>
-                            <div class="pt-3 pb-1 px-1">
-                                <div class="text-sm font-serif font-bold text-white group-hover:text-academic-red transition-colors" x-text="t[lang].office_fs_title"></div>
-                                <div class="text-[10px] text-white/60 mt-1 line-clamp-1" x-text="t[lang].office_fs_addr"></div>
+                        <div class="bg-white group cursor-pointer relative overflow-hidden flex flex-col h-full">
+                            <div class="relative overflow-hidden">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full aspect-[4/3] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" loading="lazy" />
+                                <div class="absolute inset-0 bg-academic-navy/5 group-hover:bg-transparent transition-colors duration-500"></div>
+                            </div>
+                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all pointer-events-none z-10"></div>
+                            <div class="p-4 bg-white group-hover:bg-slate-50 transition-colors duration-300 flex-1">
+                                <div class="text-sm font-serif font-bold text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].office_fs_title"></div>
+                                <div class="text-[10px] text-slate-500 mt-1.5 line-clamp-1" x-text="t[lang].office_fs_addr"></div>
                             </div>
                         </div>
                         <!-- WH -->
-                        <div class="bg-academic-navy/80 p-2 group cursor-pointer relative overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full aspect-[4/3] object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" />
-                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all m-2 pointer-events-none"></div>
-                            <div class="pt-3 pb-1 px-1">
-                                <div class="text-sm font-serif font-bold text-white group-hover:text-academic-red transition-colors" x-text="t[lang].office_wh_title"></div>
-                                <div class="text-[10px] text-white/60 mt-1 line-clamp-1" x-text="t[lang].office_wh_addr"></div>
+                        <div class="bg-white group cursor-pointer relative overflow-hidden flex flex-col h-full">
+                            <div class="relative overflow-hidden">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full aspect-[4/3] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" loading="lazy" />
+                                <div class="absolute inset-0 bg-academic-navy/5 group-hover:bg-transparent transition-colors duration-500"></div>
+                            </div>
+                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all pointer-events-none z-10"></div>
+                            <div class="p-4 bg-white group-hover:bg-slate-50 transition-colors duration-300 flex-1">
+                                <div class="text-sm font-serif font-bold text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].office_wh_title"></div>
+                                <div class="text-[10px] text-slate-500 mt-1.5 line-clamp-1" x-text="t[lang].office_wh_addr"></div>
                             </div>
                         </div>
                         <!-- GY -->
-                        <div class="bg-academic-navy/80 p-2 group cursor-pointer relative overflow-hidden">
-                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full aspect-[4/3] object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" />
-                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all m-2 pointer-events-none"></div>
-                            <div class="pt-3 pb-1 px-1">
-                                <div class="text-sm font-serif font-bold text-white group-hover:text-academic-red transition-colors" x-text="t[lang].office_gy_title"></div>
-                                <div class="text-[10px] text-white/60 mt-1 line-clamp-1" x-text="t[lang].office_gy_addr"></div>
+                        <div class="bg-white group cursor-pointer relative overflow-hidden flex flex-col h-full">
+                            <div class="relative overflow-hidden">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full aspect-[4/3] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" loading="lazy" />
+                                <div class="absolute inset-0 bg-academic-navy/5 group-hover:bg-transparent transition-colors duration-500"></div>
+                            </div>
+                            <div class="absolute inset-0 border-[3px] border-transparent group-hover:border-academic-red transition-all pointer-events-none z-10"></div>
+                            <div class="p-4 bg-white group-hover:bg-slate-50 transition-colors duration-300 flex-1">
+                                <div class="text-sm font-serif font-bold text-academic-navy group-hover:text-academic-red transition-colors" x-text="t[lang].office_gy_title"></div>
+                                <div class="text-[10px] text-slate-500 mt-1.5 line-clamp-1" x-text="t[lang].office_gy_addr"></div>
                             </div>
                         </div>
                     </div>
