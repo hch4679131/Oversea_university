@@ -461,7 +461,7 @@ window.SDLV_I18N = {
                         hero_title_line1: '滙生會 SDLV',
                         hero_title_line2: 'Our Priority.',
                         hero_sub: '作為學子成長路上最堅實的後盾，以經驗及專業護航，成就學子發揮潛能',
-                        hero_slogan: '自2016年-扎根香港，連繫全球',
+                        hero_slogan: '自2016年 - 扎根香港，連繫全球',
                         stat_years_num: '10年', stat_years_txt: '成立 (2016-2026)', stat_users: '累計服務用戶', stat_offer: 'Top 100名校錄取', stat_satisfaction: '職涯規劃滿意率', stat_apt: '運營管理香港學生公寓(間)', stat_feedback: '用戶好評反饋',
                         ach_kicker: 'Achievements & Feedback',
                         ach_title: '成就與反饋',
