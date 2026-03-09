@@ -357,8 +357,20 @@
                     introHeight: 0,
                     historyReleaseOffset: 0,
                     partnerOffset: 0,
+                    mobileBreakpoint: 768,
+                    activeDurationVh: 145,
+                    stickyHeightVh: 50,
                     clamp(value, min, max) {
                         return Math.max(min, Math.min(max, value));
+                    },
+                    isMobileStage() {
+                        return window.innerWidth < this.mobileBreakpoint;
+                    },
+                    stickyTopVh() {
+                        return this.isMobileStage() ? 20 : 45;
+                    },
+                    historyHeightVh() {
+                        return this.stickyTopVh() + this.stickyHeightVh + this.activeDurationVh;
                     },
                     updateMetrics() {
                         if ($refs.introSection) {
@@ -376,8 +388,8 @@
                         if (!$refs.historySection) return;
                         const rect = $refs.historySection.getBoundingClientRect();
                         const vh = window.innerHeight;
-                        const stickyTop = vh * 0.45;
-                        const stickyHeight = vh * 0.5;
+                        const stickyTop = vh * (this.stickyTopVh() / 100);
+                        const stickyHeight = vh * (this.stickyHeightVh / 100);
                         const scrollableHeight = Math.max(1, rect.height - stickyTop - stickyHeight);
                         const actualScrolled = stickyTop - rect.top;
                         const traveled = this.clamp(actualScrolled, 0, scrollableHeight);
@@ -434,10 +446,10 @@
             <section id="home-history"
                 x-ref="historySection"
                 class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
-                style="height: 240vh;"
+                :style="`height: ${historyHeightVh()}vh;`"
             >
-                <div class="sticky top-[45vh] left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden"
-                    :style="`transform: translate3d(0, -${historyReleaseOffset}px, 0)`">
+                <div class="sticky left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden"
+                    :style="`top: ${stickyTopVh()}vh; transform: translate3d(0, -${historyReleaseOffset}px, 0)`">
                     <div class="absolute inset-0 z-0 pointer-events-none">
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
                     </div>
