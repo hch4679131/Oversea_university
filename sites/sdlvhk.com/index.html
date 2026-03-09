@@ -373,9 +373,12 @@
                     stickyTopVh() {
                         return this.isMobileStage() ? 0 : 45;
                     },
+                    stickyHeightVhValue() {
+                        return this.isMobileStage() ? 100 : 50;
+                    },
                     historyHeightVh() {
                         if (this.isMobileStage()) return 220;
-                        return this.stickyTopVh() + this.stickyHeightVh + this.activeDurationVh;
+                        return this.stickyTopVh() + this.stickyHeightVhValue() + this.activeDurationVh;
                     },
                     wrapperStyle() {
                         return this.sharedStageEnabled() ? `padding-bottom: ${this.activeDurationVh}vh;` : '';
@@ -385,7 +388,7 @@
                         return `transform: translate3d(0, ${offset}px, 0)`;
                     },
                     historyStickyStyle() {
-                        return `top: ${this.stickyTopVh()}vh; transform: translate3d(0, -${this.historyReleaseOffset}px, 0)`;
+                        return `top: ${this.stickyTopVh()}vh; height: ${this.stickyHeightVhValue()}vh; transform: translate3d(0, -${this.historyReleaseOffset}px, 0)`;
                     },
                     partnersStyle() {
                         if (!this.sharedStageEnabled()) return '';
@@ -408,7 +411,7 @@
                         const rect = $refs.historySection.getBoundingClientRect();
                         const vh = window.innerHeight;
                         const stickyTop = vh * (this.stickyTopVh() / 100);
-                        const stickyHeight = vh * (this.stickyHeightVh / 100);
+                        const stickyHeight = vh * (this.stickyHeightVhValue() / 100);
                         const scrollableHeight = Math.max(1, rect.height - stickyTop - stickyHeight);
                         const actualScrolled = stickyTop - rect.top;
                         const traveled = this.clamp(actualScrolled, 0, scrollableHeight);
@@ -467,7 +470,7 @@
                 class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
                 :style="`height: ${historyHeightVh()}vh;`"
             >
-                <div class="sticky left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden"
+                <div class="sticky left-0 w-full flex flex-col justify-start pt-4 overflow-hidden"
                     :style="historyStickyStyle()">
                     <div class="absolute inset-0 z-0 pointer-events-none">
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
