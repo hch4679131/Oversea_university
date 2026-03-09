@@ -377,15 +377,12 @@
             </section>
 
             <!-- 4-5. 企业历程 + 商业合作：共享重叠滚动容器 -->
-            <div class="relative">
-            <!-- 4. 企业历程：沉浸式横向滚动 (Sticky Horizontal Scroll) -->
-            <section id="home-history"
-                class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
-                style="height: 220vh;"
+            <div class="relative"
                 x-data="{
                     progress: 0,
                     maxTranslate: 0,
                     trackWidth: 0,
+                    partnerOffset: 0,
                     clamp(value, min, max) {
                         return Math.max(min, Math.min(max, value));
                     },
@@ -399,12 +396,14 @@
                     },
                     updateScroll() {
                         this.updateMetrics();
-                        const rect = $el.getBoundingClientRect();
+                        if (!$refs.historySection) return;
+                        const rect = $refs.historySection.getBoundingClientRect();
                         const vh = window.innerHeight;
                         const scrollableHeight = Math.max(1, rect.height - vh);
                         const traveled = this.clamp(-rect.top, 0, scrollableHeight);
                         const ratio = traveled / scrollableHeight;
                         this.progress = ratio * this.maxTranslate;
+                        this.partnerOffset = traveled;
                     },
                     initScroll() {
                         this.$nextTick(() => {
@@ -419,6 +418,12 @@
                 @scroll.window.passive="updateScroll()"
                 @resize.window.passive="initScroll()"
                 @load.window.passive="initScroll()"
+            >
+            <!-- 4. 企业历程：沉浸式横向滚动 (Sticky Horizontal Scroll) -->
+            <section id="home-history"
+                x-ref="historySection"
+                class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
+                style="height: 220vh;"
             >
                 <div class="sticky top-0 left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden">
                     <div class="absolute inset-0 z-0 pointer-events-none">
@@ -527,7 +532,8 @@
             </section>
 
             <!-- 5. 商业合作（升级高级精美版） -->
-            <section id="home-partners" class="sticky top-[50vh] -mt-[170vh] py-16 bg-academic-navy text-white relative z-20 overflow-hidden">
+            <section id="home-partners" class="-mt-[170vh] py-16 bg-academic-navy text-white relative z-20 overflow-hidden"
+                :style="`transform: translate3d(0, ${partnerOffset}px, 0)`">
                 <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
                 <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-academic-red/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
 
