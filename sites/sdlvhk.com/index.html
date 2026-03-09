@@ -348,37 +348,7 @@
 
             <div class="h-32 lg:h-44"></div>
 
-            <!-- 3. 品牌简介 -->
-            <section id="home-intro" class="relative bg-academic-slate/30" style="height: 140vh;">
-                <div class="sticky top-[40vh] py-16">
-                    <div class="max-w-7xl mx-auto px-6">
-                        <div class="flex flex-col lg:flex-row gap-14 items-center">
-                            <div class="lg:w-1/2 relative scrub-item anim-scale">
-                                <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp"
-                                    class="w-full shadow-2xl rounded-sm transition-transform duration-700 hover:scale-[1.02]" alt="SDLV Team">
-                                <div class="absolute -top-6 -left-6 w-24 h-24 bg-academic-red/10 -z-10"></div>
-                            </div>
-                            <div class="lg:w-1/2 scrub-item anim-fade-up">
-                                <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy mb-8 leading-tight">
-                                    专业不仅是服务，<br><span class="text-academic-red italic">更是对未来的承诺。</span>
-                                </h3>
-                                <div class="space-y-6 text-slate-600 text-lg leading-relaxed font-light">
-                                    <p x-text="t[lang].about_p1"></p>
-                                    <p x-text="t[lang].about_p2"></p>
-                                </div>
-                                <div class="mt-8 flex gap-8 items-center border-t border-slate-200 pt-6">
-                                    <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="h-12 opacity-50" alt="Logo">
-                                    <p class="text-xs text-slate-400 max-w-xs uppercase tracking-widest leading-relaxed">
-                                        Established in Hong Kong, SDLV serves international students with premium academic and living support.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 4-5. 企业历程 + 商业合作：共享重叠滚动容器 -->
+            <!-- 3-5. 品牌简介 + 企业历程 + 商业合作：共享滚动舞台 -->
             <div class="relative pb-[145vh]"
                 x-data="{
                     progress: 0,
@@ -423,6 +393,36 @@
                 @resize.window.passive="initScroll()"
                 @load.window.passive="initScroll()"
             >
+            <!-- 3. 品牌简介 -->
+            <section id="home-intro" class="py-16 bg-academic-slate/30 relative z-30 overflow-hidden"
+                :style="`transform: translate3d(0, ${partnerOffset}px, 0)`">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="flex flex-col lg:flex-row gap-14 items-center">
+                        <div class="lg:w-1/2 relative scrub-item anim-scale">
+                            <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp"
+                                class="w-full shadow-2xl rounded-sm transition-transform duration-700 hover:scale-[1.02]" alt="SDLV Team">
+                            <div class="absolute -top-6 -left-6 w-24 h-24 bg-academic-red/10 -z-10"></div>
+                        </div>
+                        <div class="lg:w-1/2 scrub-item anim-fade-up">
+                            <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy mb-8 leading-tight">
+                                专业不仅是服务，<br><span class="text-academic-red italic">更是对未来的承诺。</span>
+                            </h3>
+                            <div class="space-y-6 text-slate-600 text-lg leading-relaxed font-light">
+                                <p x-text="t[lang].about_p1"></p>
+                                <p x-text="t[lang].about_p2"></p>
+                            </div>
+                            <div class="mt-8 flex gap-8 items-center border-t border-slate-200 pt-6">
+                                <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="h-12 opacity-50" alt="Logo">
+                                <p class="text-xs text-slate-400 max-w-xs uppercase tracking-widest leading-relaxed">
+                                    Established in Hong Kong, SDLV serves international students with premium academic and living support.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4-5. 企业历程 + 商业合作：共享重叠滚动容器 -->
             <!-- 4. 企业历程：沉浸式横向滚动 (Sticky Horizontal Scroll) -->
             <section id="home-history"
                 x-ref="historySection"
