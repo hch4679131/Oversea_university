@@ -349,27 +349,29 @@
             <div class="h-32 lg:h-44"></div>
 
             <!-- 3. 品牌简介 -->
-            <section id="home-intro" class="py-16 bg-academic-slate/30">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="flex flex-col lg:flex-row gap-14 items-center">
-                        <div class="lg:w-1/2 relative scrub-item anim-scale">
-                            <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp"
-                                class="w-full shadow-2xl rounded-sm transition-transform duration-700 hover:scale-[1.02]" alt="SDLV Team">
-                            <div class="absolute -top-6 -left-6 w-24 h-24 bg-academic-red/10 -z-10"></div>
-                        </div>
-                        <div class="lg:w-1/2 scrub-item anim-fade-up">
-                            <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy mb-8 leading-tight">
-                                专业不仅是服务，<br><span class="text-academic-red italic">更是对未来的承诺。</span>
-                            </h3>
-                            <div class="space-y-6 text-slate-600 text-lg leading-relaxed font-light">
-                                <p x-text="t[lang].about_p1"></p>
-                                <p x-text="t[lang].about_p2"></p>
+            <section id="home-intro" class="relative bg-academic-slate/30" style="height: 140vh;">
+                <div class="sticky top-[40vh] py-16">
+                    <div class="max-w-7xl mx-auto px-6">
+                        <div class="flex flex-col lg:flex-row gap-14 items-center">
+                            <div class="lg:w-1/2 relative scrub-item anim-scale">
+                                <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp"
+                                    class="w-full shadow-2xl rounded-sm transition-transform duration-700 hover:scale-[1.02]" alt="SDLV Team">
+                                <div class="absolute -top-6 -left-6 w-24 h-24 bg-academic-red/10 -z-10"></div>
                             </div>
-                            <div class="mt-8 flex gap-8 items-center border-t border-slate-200 pt-6">
-                                <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="h-12 opacity-50" alt="Logo">
-                                <p class="text-xs text-slate-400 max-w-xs uppercase tracking-widest leading-relaxed">
-                                    Established in Hong Kong, SDLV serves international students with premium academic and living support.
-                                </p>
+                            <div class="lg:w-1/2 scrub-item anim-fade-up">
+                                <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy mb-8 leading-tight">
+                                    专业不仅是服务，<br><span class="text-academic-red italic">更是对未来的承诺。</span>
+                                </h3>
+                                <div class="space-y-6 text-slate-600 text-lg leading-relaxed font-light">
+                                    <p x-text="t[lang].about_p1"></p>
+                                    <p x-text="t[lang].about_p2"></p>
+                                </div>
+                                <div class="mt-8 flex gap-8 items-center border-t border-slate-200 pt-6">
+                                    <img src="https://static.sdlvhk.com/图片素材/logo（新无底）(1).png" class="h-12 opacity-50" alt="Logo">
+                                    <p class="text-xs text-slate-400 max-w-xs uppercase tracking-widest leading-relaxed">
+                                        Established in Hong Kong, SDLV serves international students with premium academic and living support.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -399,7 +401,7 @@
                         if (!$refs.historySection) return;
                         const rect = $refs.historySection.getBoundingClientRect();
                         const vh = window.innerHeight;
-                        const stickyTop = vh * 0.5;
+                        const stickyTop = vh * 0.4;
                         const stickyHeight = vh * 0.5;
                         const scrollableHeight = Math.max(1, rect.height - stickyTop - stickyHeight);
                         const traveled = this.clamp(stickyTop - rect.top, 0, scrollableHeight);
@@ -425,9 +427,9 @@
             <section id="home-history"
                 x-ref="historySection"
                 class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
-                style="height: 245vh;"
+                style="height: 235vh;"
             >
-                <div class="sticky top-[50vh] left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden">
+                <div class="sticky top-[40vh] left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden">
                     <div class="absolute inset-0 z-0 pointer-events-none">
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
                     </div>
