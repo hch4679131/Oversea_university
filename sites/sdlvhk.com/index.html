@@ -354,11 +354,15 @@
                     progress: 0,
                     maxTranslate: 0,
                     trackWidth: 0,
+                    introHeight: 0,
                     partnerOffset: 0,
                     clamp(value, min, max) {
                         return Math.max(min, Math.min(max, value));
                     },
                     updateMetrics() {
+                        if ($refs.introSection) {
+                            this.introHeight = $refs.introSection.offsetHeight || 0;
+                        }
                         if (!$refs.track) return;
                         const width = $refs.track.scrollWidth;
                         if (width !== this.trackWidth) {
@@ -394,7 +398,7 @@
                 @load.window.passive="initScroll()"
             >
             <!-- 3. 品牌简介 -->
-            <section id="home-intro" class="py-16 bg-academic-slate/30 relative z-30 overflow-hidden"
+            <section id="home-intro" x-ref="introSection" class="py-16 bg-academic-slate/30 relative z-30 overflow-hidden"
                 :style="`transform: translate3d(0, ${partnerOffset}px, 0)`">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="flex flex-col lg:flex-row gap-14 items-center">
@@ -536,8 +540,8 @@
             </section>
 
             <!-- 5. 商业合作（升级高级精美版） -->
-            <section id="home-partners" class="-mt-[145vh] py-16 bg-academic-navy text-white relative z-20 overflow-hidden"
-                :style="`transform: translate3d(0, ${partnerOffset}px, 0)`">
+            <section id="home-partners" class="py-16 bg-academic-navy text-white relative z-20 overflow-hidden"
+                :style="`margin-top: calc(-145vh - ${introHeight}px); transform: translate3d(0, ${partnerOffset}px, 0)`">
                 <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
                 <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-academic-red/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
 
