@@ -379,7 +379,7 @@
             <!-- 4. 企业历程：沉浸式横向滚动 (Sticky Horizontal Scroll) -->
             <section id="home-history"
                 class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
-                style="height: 280vh;"
+                style="height: 220vh;"
                 x-data="{
                     progress: 0,
                     maxTranslate: 0,
@@ -418,12 +418,12 @@
                 @resize.window.passive="initScroll()"
                 @load.window.passive="initScroll()"
             >
-                <div class="sticky top-0 left-0 w-full h-[88vh] flex flex-col justify-start pt-6 overflow-hidden">
+                <div class="sticky top-0 left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden">
                     <div class="absolute inset-0 z-0 pointer-events-none">
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
                     </div>
 
-                    <div class="relative z-20 max-w-7xl mx-auto px-6 w-full mb-6 shrink-0">
+                    <div class="relative z-20 max-w-7xl mx-auto px-6 w-full mb-4 shrink-0">
                         <div class="flex justify-between items-end gap-4">
                             <div>
                                 <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy tracking-tight" x-text="t[lang].home_history_title"></h2>
@@ -439,7 +439,7 @@
                         </div>
                     </div>
 
-                    <div class="relative w-full z-10 flex-1 flex flex-col justify-start pt-2">
+                    <div class="relative w-full z-10 flex-1 flex flex-col justify-start pt-0">
                         <div class="absolute left-0 right-0 top-[22px] h-[2px] bg-slate-200/60 z-0"></div>
 
                         <div x-ref="track"
@@ -525,7 +525,7 @@
             </section>
 
             <!-- 5. 商业合作（升级高级精美版） -->
-            <section id="home-partners" class="py-24 bg-academic-navy text-white relative overflow-hidden">
+            <section id="home-partners" class="py-16 bg-academic-navy text-white relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
                 <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-academic-red/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
 
