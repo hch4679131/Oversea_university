@@ -399,7 +399,7 @@
                         if (!$refs.historySection) return;
                         const rect = $refs.historySection.getBoundingClientRect();
                         const vh = window.innerHeight;
-                        const stickyTop = vh * 0.25;
+                        const stickyTop = vh * 0.5;
                         const stickyHeight = vh * 0.5;
                         const scrollableHeight = Math.max(1, rect.height - stickyTop - stickyHeight);
                         const traveled = this.clamp(stickyTop - rect.top, 0, scrollableHeight);
@@ -425,9 +425,9 @@
             <section id="home-history"
                 x-ref="historySection"
                 class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
-                style="height: 220vh;"
+                style="height: 245vh;"
             >
-                <div class="sticky top-[25vh] left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden">
+                <div class="sticky top-[50vh] left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden">
                     <div class="absolute inset-0 z-0 pointer-events-none">
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
                     </div>
