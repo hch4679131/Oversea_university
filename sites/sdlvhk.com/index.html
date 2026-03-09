@@ -377,7 +377,7 @@
             </section>
 
             <!-- 4-5. 企业历程 + 商业合作：共享重叠滚动容器 -->
-            <div class="relative pb-[120vh]"
+            <div class="relative pb-[145vh]"
                 x-data="{
                     progress: 0,
                     maxTranslate: 0,
@@ -399,8 +399,10 @@
                         if (!$refs.historySection) return;
                         const rect = $refs.historySection.getBoundingClientRect();
                         const vh = window.innerHeight;
-                        const scrollableHeight = Math.max(1, rect.height - vh);
-                        const traveled = this.clamp(-rect.top, 0, scrollableHeight);
+                        const stickyTop = vh * 0.25;
+                        const stickyHeight = vh * 0.5;
+                        const scrollableHeight = Math.max(1, rect.height - stickyTop - stickyHeight);
+                        const traveled = this.clamp(stickyTop - rect.top, 0, scrollableHeight);
                         const ratio = traveled / scrollableHeight;
                         this.progress = ratio * this.maxTranslate;
                         this.partnerOffset = traveled;
