@@ -349,7 +349,8 @@
             <div class="h-32 lg:h-44"></div>
 
             <!-- 3-5. 品牌简介 + 企业历程 + 商业合作：共享滚动舞台 -->
-            <div class="relative pb-[145vh]"
+            <div class="relative"
+                :style="wrapperStyle()"
                 x-data="{
                     progress: 0,
                     maxTranslate: 0,
@@ -366,11 +367,29 @@
                     isMobileStage() {
                         return window.innerWidth < this.mobileBreakpoint;
                     },
+                    sharedStageEnabled() {
+                        return !this.isMobileStage();
+                    },
                     stickyTopVh() {
-                        return this.isMobileStage() ? 20 : 45;
+                        return this.isMobileStage() ? 0 : 45;
                     },
                     historyHeightVh() {
+                        if (this.isMobileStage()) return 220;
                         return this.stickyTopVh() + this.stickyHeightVh + this.activeDurationVh;
+                    },
+                    wrapperStyle() {
+                        return this.sharedStageEnabled() ? `padding-bottom: ${this.activeDurationVh}vh;` : '';
+                    },
+                    introStyle() {
+                        const offset = this.sharedStageEnabled() ? this.partnerOffset : 0;
+                        return `transform: translate3d(0, ${offset}px, 0)`;
+                    },
+                    historyStickyStyle() {
+                        return `top: ${this.stickyTopVh()}vh; transform: translate3d(0, -${this.historyReleaseOffset}px, 0)`;
+                    },
+                    partnersStyle() {
+                        if (!this.sharedStageEnabled()) return '';
+                        return `margin-top: calc(-${this.activeDurationVh}vh - ${this.introHeight}px); transform: translate3d(0, ${this.partnerOffset}px, 0)`;
                     },
                     updateMetrics() {
                         if ($refs.introSection) {
@@ -395,8 +414,8 @@
                         const traveled = this.clamp(actualScrolled, 0, scrollableHeight);
                         const ratio = traveled / scrollableHeight;
                         this.progress = ratio * this.maxTranslate;
-                        this.historyReleaseOffset = Math.max(0, actualScrolled - scrollableHeight);
-                        this.partnerOffset = traveled;
+                        this.historyReleaseOffset = this.sharedStageEnabled() ? Math.max(0, actualScrolled - scrollableHeight) : 0;
+                        this.partnerOffset = this.sharedStageEnabled() ? traveled : 0;
                     },
                     initScroll() {
                         this.$nextTick(() => {
@@ -414,7 +433,7 @@
             >
             <!-- 3. 品牌简介 -->
             <section id="home-intro" x-ref="introSection" class="py-16 bg-academic-slate/30 relative z-30 overflow-hidden"
-                :style="`transform: translate3d(0, ${partnerOffset}px, 0)`">
+                :style="introStyle()">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="flex flex-col lg:flex-row gap-14 items-center">
                         <div class="lg:w-1/2 relative scrub-item anim-scale">
@@ -449,7 +468,7 @@
                 :style="`height: ${historyHeightVh()}vh;`"
             >
                 <div class="sticky left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden"
-                    :style="`top: ${stickyTopVh()}vh; transform: translate3d(0, -${historyReleaseOffset}px, 0)`">
+                    :style="historyStickyStyle()">
                     <div class="absolute inset-0 z-0 pointer-events-none">
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
                     </div>
@@ -557,7 +576,7 @@
 
             <!-- 5. 商业合作（升级高级精美版） -->
             <section id="home-partners" class="py-16 bg-academic-navy text-white relative z-20 overflow-hidden"
-                :style="`margin-top: calc(-145vh - ${introHeight}px); transform: translate3d(0, ${partnerOffset}px, 0)`">
+                :style="partnersStyle()">
                 <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
                 <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-academic-red/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
 
