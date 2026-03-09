@@ -355,6 +355,7 @@
                     maxTranslate: 0,
                     trackWidth: 0,
                     introHeight: 0,
+                    historyReleaseOffset: 0,
                     partnerOffset: 0,
                     clamp(value, min, max) {
                         return Math.max(min, Math.min(max, value));
@@ -378,9 +379,11 @@
                         const stickyTop = vh * 0.45;
                         const stickyHeight = vh * 0.5;
                         const scrollableHeight = Math.max(1, rect.height - stickyTop - stickyHeight);
-                        const traveled = this.clamp(stickyTop - rect.top, 0, scrollableHeight);
+                        const actualScrolled = stickyTop - rect.top;
+                        const traveled = this.clamp(actualScrolled, 0, scrollableHeight);
                         const ratio = traveled / scrollableHeight;
                         this.progress = ratio * this.maxTranslate;
+                        this.historyReleaseOffset = Math.max(0, actualScrolled - scrollableHeight);
                         this.partnerOffset = traveled;
                     },
                     initScroll() {
@@ -433,7 +436,8 @@
                 class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
                 style="height: 240vh;"
             >
-                <div class="sticky top-[45vh] left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden">
+                <div class="sticky top-[45vh] left-0 w-full h-[50vh] flex flex-col justify-start pt-4 overflow-hidden"
+                    :style="`transform: translate3d(0, -${historyReleaseOffset}px, 0)`">
                     <div class="absolute inset-0 z-0 pointer-events-none">
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
                     </div>
