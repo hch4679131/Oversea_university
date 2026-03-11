@@ -573,12 +573,12 @@
                 </div>
             </section>
 
-            <!-- 5. 商业合作（原图边缘定位版） -->
+            <!-- 5. 商业合作（蓝底 / 无Hover / 边缘定位版） -->
             <section id="home-partners" class="py-24 bg-academic-navy text-white relative z-20 overflow-visible"
                 :style="partnersStyle()">
 
                 <div class="max-w-7xl mx-auto px-6 relative z-10">
-                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16 scrub-item anim-fade-up">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
                         <div class="max-w-2xl">
                             <div class="flex items-center gap-4 mb-6">
                                 <div class="flex -space-x-2">
@@ -591,133 +591,133 @@
                             <p class="mt-6 text-white/60 text-lg font-light leading-relaxed" x-text="t[lang].partner_sub"></p>
                         </div>
                         <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto pb-2">
-                            <button @click="switchPage('contact')" class="px-8 py-4 bg-academic-red text-white text-xs font-bold tracking-widest uppercase shadow-[0_10px_30px_rgba(200,16,46,0.2)] flex items-center justify-center gap-3">
+                            <button @click="switchPage('contact')" class="px-8 py-4 bg-academic-red text-white text-xs font-bold tracking-widest uppercase hover:bg-red-700 transition-colors shadow-[0_10px_30px_rgba(200,16,46,0.2)] flex items-center justify-center gap-3">
                                 <span x-text="t[lang].btn_city_partner_inquiry"></span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
-                            <button @click="switchPage('contact')" class="px-8 py-4 border-2 border-white/20 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2">
+                            <button @click="switchPage('contact')" class="px-8 py-4 border border-white/20 text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-academic-navy transition-colors flex items-center justify-center gap-2">
                                 <span x-text="t[lang].btn_agent_inquiry"></span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="hidden lg:block relative w-full max-w-3xl mx-auto mt-16 mb-40 scrub-item anim-fade-up overflow-visible">
-                        <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp" class="w-full h-auto object-contain block" alt="PRC Network">
+                    <div class="hidden lg:block relative w-full max-w-3xl mx-auto mt-20 mb-40 overflow-visible">
+                        <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp" class="w-full h-auto object-contain block relative z-0" alt="PRC Network">
 
-                        <div class="absolute top-[10%] left-0 -translate-x-1/2 -translate-y-1/2 w-60 bg-white p-2 rounded-sm shadow-xl border border-slate-100 z-10">
-                            <div class="relative overflow-hidden aspect-[16/9] mb-3 bg-slate-50">
+                        <div class="absolute top-[15%] left-0 -translate-x-1/2 -translate-y-1/2 w-64 bg-black/40 backdrop-blur-md p-2 rounded-sm shadow-2xl border border-white/10 z-10 cursor-pointer" @click="switchPage('contact')">
+                            <div class="relative aspect-[16/9] mb-3 bg-white/5">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
-                            <div class="flex items-start gap-2 px-1 pb-1">
+                            <div class="flex items-start gap-2 px-1 pb-2">
                                 <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-serif font-bold text-academic-navy leading-snug" x-text="t[lang].office_hk_title"></div>
-                                    <div class="mt-1 text-[10px] text-slate-500 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
+                                    <div class="text-sm font-serif font-bold text-white leading-snug" x-text="t[lang].office_hk_title"></div>
+                                    <div class="mt-1.5 text-[11px] text-white/60 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="absolute top-[50%] left-0 -translate-x-1/2 -translate-y-1/2 w-60 bg-white p-2 rounded-sm shadow-xl border border-slate-100 z-10">
-                            <div class="relative overflow-hidden aspect-[16/9] mb-3 bg-slate-50">
+                        <div class="absolute top-[50%] left-0 -translate-x-1/2 -translate-y-1/2 w-64 bg-black/40 backdrop-blur-md p-2 rounded-sm shadow-2xl border border-white/10 z-10 cursor-pointer" @click="switchPage('contact')">
+                            <div class="relative aspect-[16/9] mb-3 bg-white/5">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
-                            <div class="flex items-start gap-2 px-1 pb-1">
+                            <div class="flex items-start gap-2 px-1 pb-2">
                                 <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-serif font-bold text-academic-navy leading-snug" x-text="t[lang].office_sz_title"></div>
-                                    <div class="mt-1 text-[10px] text-slate-500 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
+                                    <div class="text-sm font-serif font-bold text-white leading-snug" x-text="t[lang].office_sz_title"></div>
+                                    <div class="mt-1.5 text-[11px] text-white/60 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="absolute top-[90%] left-0 -translate-x-1/2 -translate-y-1/2 w-60 bg-white p-2 rounded-sm shadow-xl border border-slate-100 z-10">
-                            <div class="relative overflow-hidden aspect-[16/9] mb-3 bg-slate-50">
+                        <div class="absolute top-[85%] left-0 -translate-x-1/2 -translate-y-1/2 w-64 bg-black/40 backdrop-blur-md p-2 rounded-sm shadow-2xl border border-white/10 z-10 cursor-pointer" @click="switchPage('contact')">
+                            <div class="relative aspect-[16/9] mb-3 bg-white/5">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
-                            <div class="flex items-start gap-2 px-1 pb-1">
+                            <div class="flex items-start gap-2 px-1 pb-2">
                                 <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-serif font-bold text-academic-navy leading-snug" x-text="t[lang].office_fs_title"></div>
-                                    <div class="mt-1 text-[10px] text-slate-500 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
+                                    <div class="text-sm font-serif font-bold text-white leading-snug" x-text="t[lang].office_fs_title"></div>
+                                    <div class="mt-1.5 text-[11px] text-white/60 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="absolute top-[10%] right-0 translate-x-1/2 -translate-y-1/2 w-60 bg-white p-2 rounded-sm shadow-xl border border-slate-100 z-10">
-                            <div class="relative overflow-hidden aspect-[16/9] mb-3 bg-slate-50">
+                        <div class="absolute top-[15%] right-0 translate-x-1/2 -translate-y-1/2 w-64 bg-black/40 backdrop-blur-md p-2 rounded-sm shadow-2xl border border-white/10 z-10 cursor-pointer" @click="switchPage('contact')">
+                            <div class="relative aspect-[16/9] mb-3 bg-white/5">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
-                            <div class="flex items-start gap-2 px-1 pb-1">
+                            <div class="flex items-start gap-2 px-1 pb-2">
                                 <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-serif font-bold text-academic-navy leading-snug" x-text="t[lang].office_wh_title"></div>
-                                    <div class="mt-1 text-[10px] text-slate-500 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
+                                    <div class="text-sm font-serif font-bold text-white leading-snug" x-text="t[lang].office_wh_title"></div>
+                                    <div class="mt-1.5 text-[11px] text-white/60 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="absolute top-[50%] right-0 translate-x-1/2 -translate-y-1/2 w-60 bg-white p-2 rounded-sm shadow-xl border border-slate-100 z-10">
-                            <div class="relative overflow-hidden aspect-[16/9] mb-3 bg-slate-50">
+                        <div class="absolute top-[50%] right-0 translate-x-1/2 -translate-y-1/2 w-64 bg-black/40 backdrop-blur-md p-2 rounded-sm shadow-2xl border border-white/10 z-10 cursor-pointer" @click="switchPage('contact')">
+                            <div class="relative aspect-[16/9] mb-3 bg-white/5">
                                 <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
-                            <div class="flex items-start gap-2 px-1 pb-1">
+                            <div class="flex items-start gap-2 px-1 pb-2">
                                 <i data-lucide="map-pin" class="w-4 h-4 text-academic-red shrink-0 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-serif font-bold text-academic-navy leading-snug" x-text="t[lang].office_gy_title"></div>
-                                    <div class="mt-1 text-[10px] text-slate-500 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
+                                    <div class="text-sm font-serif font-bold text-white leading-snug" x-text="t[lang].office_gy_title"></div>
+                                    <div class="mt-1.5 text-[11px] text-white/60 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="absolute top-[90%] right-0 translate-x-1/2 -translate-y-1/2 w-60 bg-slate-50 p-2 rounded-sm shadow-lg border border-dashed border-slate-300 z-10 cursor-pointer" @click="switchPage('contact')">
-                            <div class="relative overflow-hidden aspect-[16/9] mb-3 bg-slate-100/50 flex items-center justify-center border border-slate-200">
-                                <i data-lucide="plus-circle" class="w-8 h-8 text-slate-300"></i>
+                        <div class="absolute top-[85%] right-0 translate-x-1/2 -translate-y-1/2 w-64 bg-white/5 backdrop-blur-md p-2 rounded-sm shadow-2xl border border-dashed border-white/30 z-10 cursor-pointer" @click="switchPage('contact')">
+                            <div class="relative aspect-[16/9] mb-3 bg-black/20 flex items-center justify-center">
+                                <i data-lucide="plus-circle" class="w-8 h-8 text-white/40"></i>
                             </div>
-                            <div class="flex items-start gap-2 px-1 pb-1">
-                                <i data-lucide="map-pin" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+                            <div class="flex items-start gap-2 px-1 pb-2">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-white/40 shrink-0 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-serif font-bold text-slate-600 leading-snug">敬候加入</div>
-                                    <div class="mt-1 text-[10px] text-slate-400 leading-relaxed">期待与您共拓教育蓝海</div>
+                                    <div class="text-sm font-serif font-bold text-white leading-snug">敬候加入</div>
+                                    <div class="mt-1.5 text-[11px] text-white/50 leading-relaxed">期待与您共拓教育蓝海</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="lg:hidden mt-10 space-y-8 scrub-item anim-fade-up">
-                        <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp" class="w-full h-auto object-contain bg-slate-50 rounded-sm p-4 border border-slate-100" alt="PRC Network">
+                    <div class="lg:hidden mt-10 space-y-8">
+                        <img src="https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp" class="w-full h-auto object-contain bg-white/5 rounded-sm p-4 border border-white/10" alt="PRC Network">
 
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white p-2 rounded-sm shadow-md border border-slate-100">
-                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full aspect-[16/9] object-cover mb-2 bg-slate-50" />
-                                <div class="text-sm font-bold text-academic-navy leading-snug" x-text="t[lang].office_hk_title"></div>
-                                <div class="text-[10px] text-slate-500 mt-1 line-clamp-1" x-text="t[lang].office_hk_addr"></div>
+                            <div class="bg-black/20 p-2 rounded-sm border border-white/10">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full aspect-[16/9] object-cover mb-3 bg-white/5" />
+                                <div class="text-sm font-bold text-white leading-snug px-1" x-text="t[lang].office_hk_title"></div>
+                                <div class="text-[10px] text-white/60 mt-1.5 px-1 pb-1" x-text="t[lang].office_hk_addr"></div>
                             </div>
-                            <div class="bg-white p-2 rounded-sm shadow-md border border-slate-100">
-                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full aspect-[16/9] object-cover mb-2 bg-slate-50" />
-                                <div class="text-sm font-bold text-academic-navy leading-snug" x-text="t[lang].office_sz_title"></div>
-                                <div class="text-[10px] text-slate-500 mt-1 line-clamp-1" x-text="t[lang].office_sz_addr"></div>
+                            <div class="bg-black/20 p-2 rounded-sm border border-white/10">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full aspect-[16/9] object-cover mb-3 bg-white/5" />
+                                <div class="text-sm font-bold text-white leading-snug px-1" x-text="t[lang].office_sz_title"></div>
+                                <div class="text-[10px] text-white/60 mt-1.5 px-1 pb-1" x-text="t[lang].office_sz_addr"></div>
                             </div>
-                            <div class="bg-white p-2 rounded-sm shadow-md border border-slate-100">
-                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full aspect-[16/9] object-cover mb-2 bg-slate-50" />
-                                <div class="text-sm font-bold text-academic-navy leading-snug" x-text="t[lang].office_fs_title"></div>
-                                <div class="text-[10px] text-slate-500 mt-1 line-clamp-1" x-text="t[lang].office_fs_addr"></div>
+                            <div class="bg-black/20 p-2 rounded-sm border border-white/10">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full aspect-[16/9] object-cover mb-3 bg-white/5" />
+                                <div class="text-sm font-bold text-white leading-snug px-1" x-text="t[lang].office_fs_title"></div>
+                                <div class="text-[10px] text-white/60 mt-1.5 px-1 pb-1" x-text="t[lang].office_fs_addr"></div>
                             </div>
-                            <div class="bg-white p-2 rounded-sm shadow-md border border-slate-100">
-                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full aspect-[16/9] object-cover mb-2 bg-slate-50" />
-                                <div class="text-sm font-bold text-academic-navy leading-snug" x-text="t[lang].office_wh_title"></div>
-                                <div class="text-[10px] text-slate-500 mt-1 line-clamp-1" x-text="t[lang].office_wh_addr"></div>
+                            <div class="bg-black/20 p-2 rounded-sm border border-white/10">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full aspect-[16/9] object-cover mb-3 bg-white/5" />
+                                <div class="text-sm font-bold text-white leading-snug px-1" x-text="t[lang].office_wh_title"></div>
+                                <div class="text-[10px] text-white/60 mt-1.5 px-1 pb-1" x-text="t[lang].office_wh_addr"></div>
                             </div>
-                            <div class="bg-white p-2 rounded-sm shadow-md border border-slate-100">
-                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full aspect-[16/9] object-cover mb-2 bg-slate-50" />
-                                <div class="text-sm font-bold text-academic-navy leading-snug" x-text="t[lang].office_gy_title"></div>
-                                <div class="text-[10px] text-slate-500 mt-1 line-clamp-1" x-text="t[lang].office_gy_addr"></div>
+                            <div class="bg-black/20 p-2 rounded-sm border border-white/10">
+                                <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full aspect-[16/9] object-cover mb-3 bg-white/5" />
+                                <div class="text-sm font-bold text-white leading-snug px-1" x-text="t[lang].office_gy_title"></div>
+                                <div class="text-[10px] text-white/60 mt-1.5 px-1 pb-1" x-text="t[lang].office_gy_addr"></div>
                             </div>
-                            <div class="bg-slate-50 p-2 rounded-sm shadow-sm border border-dashed border-slate-300 flex flex-col justify-center cursor-pointer" @click="switchPage('contact')">
-                                <div class="flex-1 flex items-center justify-center mb-2">
-                                    <i data-lucide="plus-circle" class="w-6 h-6 text-slate-400"></i>
+                            <div class="bg-white/5 p-2 rounded-sm border border-dashed border-white/30 flex flex-col justify-center cursor-pointer pb-2" @click="switchPage('contact')">
+                                <div class="flex-1 flex items-center justify-center mb-3 aspect-[16/9] bg-black/20">
+                                    <i data-lucide="plus-circle" class="w-6 h-6 text-white/40"></i>
                                 </div>
-                                <div class="text-sm font-bold text-slate-600 leading-snug text-center">敬候加入</div>
-                                <div class="text-[10px] text-slate-400 mt-1 text-center">期待与您共拓教育蓝海</div>
+                                <div class="text-sm font-bold text-white leading-snug text-center px-1">敬候加入</div>
+                                <div class="text-[10px] text-white/50 mt-1.5 text-center px-1">期待与您共拓教育蓝海</div>
                             </div>
                         </div>
                     </div>
