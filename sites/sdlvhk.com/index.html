@@ -1545,363 +1545,413 @@
 
         </div>
 
-        <!-- ================= PAGE 4: 学生公寓 ================= -->
-        <div x-show="page === 'apartments'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <!-- Apartments: Hero (对齐其他 page 的 Hero 风格) -->
-            <section id="apartments-hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
-                <div class="absolute inset-0 z-0">
+        <!-- ================= PAGE 4: 学生公寓 (优化：贴合高级学术风) ================= -->
+        <div x-show="page === 'apartments'" x-transition:enter="transition ease-out duration-500" class="w-full bg-white text-slate-900 font-sans">
+            
+            <!-- Apartments: Hero -->
+            <section id="apartments-hero" class="relative min-h-[68vh] lg:min-h-[76vh] flex items-center bg-white overflow-hidden pt-10 pb-8 lg:pb-10">
+                <div class="absolute inset-0 z-0 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/10 lg:via-white/60 z-10"></div>
                     <img src="https://static.sdlvhk.com/图片素材/other/WImage%206.0%20Accommdation%20by%20tirachardz%20on%20Freepik%20-%20Flipped.webp"
-                         class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Student Residences">
-                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/55 to-transparent"></div>
+                         class="absolute left-1/2 -translate-x-1/2 top-0 h-full w-full lg:w-3/4 object-cover object-center" alt="Student Residences">
                 </div>
-                <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64">
-                    <div class="max-w-3xl min-h-[320px] md:min-h-[360px] flex flex-col justify-start">
-                        <h1 class="text-6xl font-serif font-bold text-white leading-tight" x-text="t[lang].apt_hero_t"></h1>
-                        <div class="mt-12 space-y-2">
-                            <p class="text-xl text-gold-400/80 tracking-widest whitespace-pre-line leading-snug" x-text="t[lang].apt_hero_p1"></p>
-                            <p class="text-xl text-gold-400/80 tracking-widest whitespace-pre-line leading-snug" x-text="t[lang].apt_hero_p2"></p>
+                <div class="relative z-20 max-w-7xl mx-auto px-6 w-full pt-5">
+                    <div class="max-w-3xl scrub-item anim-fade-up">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="flex -space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-academic-red shadow-sm"></span>
+                                <span class="w-3 h-3 rounded-full bg-academic-navy shadow-sm"></span>
+                            </div>
+                            <span class="text-academic-navy font-bold tracking-[0.35em] uppercase text-[10px] border-b border-academic-red/30 pb-1">Premium Accommodation</span>
+                        </div>
+
+                        <h1 class="text-5xl md:text-6xl lg:text-7xl font-serif font-extrabold text-academic-navy leading-[1.05] mb-8" x-text="t[lang].apt_hero_t"></h1>
+                        
+                        <div class="mt-8 md:w-4/5 border-l-2 border-academic-red/80 pl-6 space-y-4 mb-12">
+                            <p class="text-xl text-slate-600 font-light leading-relaxed whitespace-pre-line" x-text="t[lang].apt_hero_p1"></p>
+                            <p class="text-xl text-slate-600 font-light leading-relaxed whitespace-pre-line" x-text="t[lang].apt_hero_p2"></p>
+                        </div>
+
+                        <div class="mt-4 flex gap-4">
+                            <button type="button" @click="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})" 
+                                    class="px-8 py-4 bg-academic-navy text-white text-xs font-bold tracking-widest uppercase hover:bg-academic-red shadow-[0_10px_30px_rgba(0,51,102,0.2)] transition-colors flex items-center gap-3">
+                                浏览居社 <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="apt-why" class="py-32 bg-paper text-obsidian-950">
+            <!-- Advantages & Service Scope -->
+            <section id="apt-why" class="py-24 bg-academic-slate/30 border-y border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center scrub-item anim-fade-up">
-                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Our Advantages</span> -->
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].apt_adv_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Our Advantages</span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].apt_adv_title"></h2>
                     </div>
 
-                    <div class="h-10 md:h-14"></div>
-
-                    <div class="max-w-4xl mx-auto text-center scrub-item anim-fade-up">
-                        <p class="text-2xl md:text-3xl font-serif text-obsidian-950 leading-snug" x-text="t[lang].apt_adv_text"></p>
+                    <div class="max-w-4xl mx-auto text-center scrub-item anim-fade-up mb-14">
+                        <p class="text-2xl md:text-3xl font-serif text-slate-800 leading-snug" x-text="t[lang].apt_adv_text"></p>
                     </div>
 
-                    <!-- Apartments: life support cards (same style as Study -> Flow & Support) -->
-                    <div class="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Life support cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 scrub-item anim-fade-up">
                         <template x-for="(card, idx) in t[lang].apt_life_cards" :key="idx">
-                            <div class="p-2 scrub-item anim-fade-up">
-                                <div class="flex items-center gap-4">
-                                    <!-- <i data-lucide="check-circle" class="w-5 h-5 text-obsidian-950"></i> -->
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
+                            <div class="bg-white border border-slate-100 shadow-xl p-8 relative group hover:-translate-y-2 transition-transform duration-500">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-slate-200 group-hover:bg-academic-red transition-colors"></div>
+                                
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-10 h-10 rounded-full bg-academic-navy/5 flex items-center justify-center text-academic-navy group-hover:text-academic-red transition-colors">
+                                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                    </div>
                                 </div>
-                                <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center" x-text="card.title"></div>
-                                <div class="mt-3 space-y-2 text-sm text-black/70 leading-relaxed">
+                                
+                                <h4 class="text-xl font-serif font-bold text-academic-navy mb-4" x-text="card.title"></h4>
+                                <ul class="space-y-3 text-sm text-slate-500 leading-relaxed font-light">
                                     <template x-for="(row, rIdx) in card.items" :key="rIdx">
-                                        <div>
-                                            <span class="font-bold text-obsidian-950" x-text="row.k"></span>
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800" x-text="row.k"></span>
                                             <span x-text="row.v"></span>
-                                        </div>
+                                        </li>
                                     </template>
-                                </div>
+                                </ul>
                             </div>
                         </template>
                     </div>
 
-                    <div class="h-16"></div>
+                    <div class="h-20 border-b border-slate-200/60 mb-20 w-1/2 mx-auto"></div>
 
-                    <div class="max-w-5xl mx-auto text-center scrub-item anim-fade-up">
-                        <p class="text-2xl md:text-3xl font-serif text-obsidian-950 leading-snug" x-text="t[lang].apt_compare_text"></p>
+                    <!-- Comparison Section -->
+                    <div class="max-w-5xl mx-auto text-center scrub-item anim-fade-up mb-14">
+                        <p class="text-2xl md:text-3xl font-serif text-academic-navy font-bold leading-snug" x-text="t[lang].apt_compare_text"></p>
                     </div>
 
-                    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
                         <template x-for="(card, idx) in t[lang].apt_compare_cards" :key="idx">
-                            <div class="p-2 scrub-item anim-fade-up">
-                                <div class="relative p-2" :class="idx === 1 ? 'rounded-2xl shadow-[0_18px_45px_-25px_rgba(0,0,0,0.45)] overflow-hidden' : ''">
-                                    <div x-show="idx === 1" class="absolute inset-0 pointer-events-none">
-                                        <div class="absolute inset-0 bg-gradient-to-br from-gold-50 via-white to-white"></div>
-                                        <div class="absolute -top-24 -right-24 w-[520px] h-[520px] rounded-full bg-gold-200/30 blur-3xl"></div>
-                                        <div class="absolute -bottom-28 -left-28 w-[560px] h-[560px] rounded-full bg-gold-100/50 blur-3xl"></div>
-                                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(212,175,55,0.25),transparent_55%)] opacity-60"></div>
-                                    </div>
-
+                            <div class="scrub-item anim-fade-up flex">
+                                <!-- 高亮主推卡片 (SDLV) -->
+                                <div x-show="idx === 1" class="w-full bg-academic-navy text-white p-8 md:p-10 shadow-2xl relative overflow-hidden group transform lg:-translate-y-4 rounded-sm">
+                                    <div class="absolute top-0 right-0 w-48 h-48 bg-academic-red/20 rounded-full blur-[60px] -mr-10 -mt-10 pointer-events-none"></div>
                                     <div class="relative z-10">
-                                        <div class="flex items-center gap-4">
-                                            <i data-lucide="sparkles" class="w-5 h-5" :class="idx === 1 ? 'text-gold-600' : 'text-obsidian-950'"></i>
-                                            <div class="h-[1px] flex-1" :class="idx === 1 ? 'bg-gold-400/40' : 'bg-black/15'"></div>
+                                        <div class="flex items-center gap-3 mb-6">
+                                            <i data-lucide="sparkles" class="w-6 h-6 text-academic-red"></i>
+                                            <div class="h-[1px] flex-1 bg-white/20"></div>
                                         </div>
-
-                                        <div class="mt-4 font-serif font-bold text-obsidian-950 text-center" :class="idx === 1 ? 'text-2xl md:text-3xl' : 'text-lg'" x-text="card.title"></div>
-
-                                        <ul class="mt-4 space-y-2 leading-relaxed" :class="idx === 1 ? 'text-base text-black/80' : 'text-sm text-black/70'">
+                                        <h4 class="text-2xl md:text-3xl font-serif font-bold text-white mb-8" x-text="card.title"></h4>
+                                        <ul class="space-y-4 text-base text-white/80 font-light leading-relaxed">
                                             <template x-for="(b, bIdx) in card.bullets" :key="bIdx">
-                                                <li class="flex gap-3">
-                                                    <span class="mt-2 rounded-full shrink-0" :class="idx === 1 ? 'w-2 h-2 bg-gold-500' : 'w-1.5 h-1.5 bg-gold-400'"></span>
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
                                                     <span x-text="b"></span>
                                                 </li>
                                             </template>
                                         </ul>
                                     </div>
                                 </div>
+
+                                <!-- 普通对比卡片 -->
+                                <div x-show="idx !== 1" class="w-full bg-white border border-slate-100 shadow-lg p-8 md:p-10 rounded-sm">
+                                    <div class="flex items-center gap-3 mb-6 opacity-50">
+                                        <i data-lucide="box" class="w-5 h-5 text-slate-400"></i>
+                                        <div class="h-[1px] flex-1 bg-slate-200"></div>
+                                    </div>
+                                    <h4 class="text-xl font-serif font-bold text-slate-400 mb-8" x-text="card.title"></h4>
+                                    <ul class="space-y-4 text-sm text-slate-500 font-light leading-relaxed">
+                                        <template x-for="(b, bIdx) in card.bullets" :key="bIdx">
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span x-text="b"></span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
                             </div>
                         </template>
                     </div>
-
                 </div>
             </section>
 
-            <section id="map" class="py-24 bg-paper text-center text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 mb-10 scrub-item anim-fade-up">
-                    <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Distribution</span> -->
-                    <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].apt_map_t"></h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                    <p class="text-gold-400 mt-2">
-                        <span x-text="t[lang].apt_map_sub"></span><br>
-                        <!-- <span class="text-gold-400/80" x-text="t[lang].apt_map_sub2"></span> -->
+            <!-- Map Section -->
+            <section id="map" class="py-24 bg-white border-b border-slate-200/60">
+                <div class="max-w-7xl mx-auto px-6 mb-12 text-center scrub-item anim-fade-up">
+                    <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase block mb-4">Locations</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].apt_map_t"></h2>
+                    <p class="mt-4 text-slate-500 text-lg font-light max-w-2xl mx-auto">
+                        <span x-text="t[lang].apt_map_sub"></span>
                     </p>
+                    <!-- <p class="mt-2 text-slate-400 text-sm"><span x-text="t[lang].apt_map_sub2"></span></p> -->
                 </div>
 
-                <div class="relative w-full max-w-5xl mx-auto h-[500px] bg-paper border border-black/10 rounded-lg shadow-2xl overflow-hidden group" x-data="{ activeLoc: null }">
-                    <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%206.1%20HK%20Distribution%20on%20Map.webp')] bg-cover bg-center opacity-100"></div>
-                    
+                <div class="relative w-full max-w-5xl mx-auto p-4 bg-slate-50 border border-slate-100 rounded-sm shadow-2xl scrub-item anim-scale" x-data="{ activeLoc: null }">
+                    <div class="relative w-full h-[300px] md:h-[500px] overflow-hidden bg-white border border-slate-200">
+                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%206.1%20HK%20Distribution%20on%20Map.webp')] bg-cover bg-center"></div>
                         <!-- <div class="absolute top-[60%] left-[30%] cursor-pointer z-10" @click="activeLoc = 'syp'" :class="activeLoc === 'syp' ? 'map-active' : ''">
                             <div class="relative w-4 h-4">
                                 <div class="map-point-glow"></div>
                                 <div class="w-4 h-4 bg-gold-400 rounded-full animate-ping absolute inset-0"></div>
                                 <div class="w-4 h-4 bg-gold-400 rounded-full relative border-2 border-white"></div>
                             </div>
-                        <div class="map-line" style="transform: rotate(-45deg);"></div>
-                        <div class="absolute -top-16 -left-10 bg-white text-black p-2 rounded text-xs font-bold w-32 map-label">
-                            <span x-text="t[lang].apt_syp"></span><br><span class="text-gold-600 font-normal" x-text="t[lang].apt_dist_hku"></span>
+                            <div class="map-line" style="transform: rotate(-45deg);"></div>
+                            <div class="absolute -top-16 -left-10 bg-white text-black p-2 rounded text-xs font-bold w-32 map-label">
+                                <span x-text="t[lang].apt_syp"></span><br><span class="text-gold-600 font-normal" x-text="t[lang].apt_dist_hku"></span>
+                            </div>
                         </div>
-                    </div>
                         <div class="absolute top-[50%] left-[55%] cursor-pointer z-10" @click="activeLoc = 'ymt'" :class="activeLoc === 'ymt' ? 'map-active' : ''">
                             <div class="relative w-4 h-4">
                                 <div class="map-point-glow"></div>
                                 <div class="w-4 h-4 bg-gold-400 rounded-full animate-ping absolute inset-0 delay-300"></div>
                                 <div class="w-4 h-4 bg-gold-400 rounded-full relative border-2 border-white"></div>
                             </div>
-                        <div class="map-line" style="transform: rotate(-15deg);"></div>
-                        <div class="absolute -top-16 left-10 bg-white text-black p-2 rounded text-xs font-bold w-32 map-label">
-                            <span x-text="t[lang].apt_ymt"></span><br><span class="text-gold-600 font-normal" x-text="t[lang].apt_dist_poly"></span>
+                            <div class="map-line" style="transform: rotate(-15deg);"></div>
+                            <div class="absolute -top-16 left-10 bg-white text-black p-2 rounded text-xs font-bold w-32 map-label">
+                                <span x-text="t[lang].apt_ymt"></span><br><span class="text-gold-600 font-normal" x-text="t[lang].apt_dist_poly"></span>
+                            </div>
                         </div> -->
-                    <!-- <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-gray-500 bg-black/50 p-2 rounded" x-text="t[lang].map_hint"></div> -->
-                     <!-- </div> -->
+                        <!-- <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs text-gray-500 bg-black/50 p-2 rounded" x-text="t[lang].map_hint"></div> -->
+                    </div>
                 </div>
 
-                <div class="mt-8 max-w-5xl mx-auto px-6">
-                    <div class="text-gold-400/80" x-text="t[lang].apt_map_caption1"></div>
-                    <!-- <div class="text-gold-400/80" x-text="t[lang].apt_map_caption2"></div> -->
-                </div>
-            </section>
-
-            <section id="showcase" class="py-24 bg-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center mb-12 scrub-item anim-fade-up">
-                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Showcase</span> -->
-                        <h2 class="text-4xl md:text-5xl font-serif text-white">居社展示</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                    </div>
-
-                    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-ymt')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E6%B2%B9%E9%BA%BB%E5%9C%B0%EF%BC%89/%E6%B2%B9%E9%BA%BB%E5%9C%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/2%E5%8F%B7%E6%88%BF/2%E5%8F%B7%E6%88%BF_%E7%BB%93%E6%9E%9C.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_ymt_card_title"></div>
-                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_ymt_card_loc"></div> -->
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_ymt_card_b1"></div>
-                                <div x-text="t[lang].apt_ymt_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-ymt')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-csw')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E9%95%BF%E6%B2%99%E6%B9%BE%EF%BC%89/%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87%E2%80%94%E2%80%94%E4%B9%9D%E6%B1%9F%E8%A1%97/%E5%85%AC%E5%85%B1%E5%8C%BA%E5%9F%9F/%E5%89%8D%E5%8F%B0/W%E4%B8%80%E6%A5%BC%E5%89%8D%E5%8F%B0%E5%8C%BA%E5%9F%9F02.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_csw_card_title"></div>
-                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_csw_card_loc"></div> -->
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_csw_card_b1"></div>
-                                <div x-text="t[lang].apt_csw_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-csw')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-tst')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E5%B0%96%E6%B2%99%E5%92%80%EF%BC%89/%E5%B0%96%E6%B2%99%E5%92%80%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E5%B0%96%E6%B2%99%E5%92%80%20%E5%A4%96%E5%9B%B4%E9%97%A8%E7%89%8C%E5%9B%BE%E7%89%87_%E7%BB%93%E6%9E%9C.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_tst_card_title"></div>
-                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_tst_card_loc"></div> -->
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_tst_card_b1"></div>
-                                <div x-text="t[lang].apt_tst_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-tst')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-oy')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%E9%9D%92%E5%B9%B4%E5%85%AC%E5%AF%93%EF%BC%88%E5%9F%8E%E6%B1%87%E5%A5%A5%E8%BF%90%EF%BC%89/%E5%85%AC%E5%85%B1%E5%8C%BA%E5%9F%9F/%E5%A4%A7%E5%A0%82_%E7%BB%93%E6%9E%9C.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_oy_card_title"></div>
-                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_oy_card_loc"></div> -->
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_oy_card_b1"></div>
-                                <div x-text="t[lang].apt_oy_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-oy')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-syp1')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="/assets/apartments/syp1/room-d-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_syp1_card_title"></div>
-                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp1_card_loc"></div> -->
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_syp1_card_b1"></div>
-                                <div x-text="t[lang].apt_syp1_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-syp1')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-syp2')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E8%A5%BF%E8%90%A5%E7%9B%98%E4%BA%8C%E6%9C%9F%EF%BC%89%E9%AB%98%E5%8D%87%E5%A4%A7%E5%8E%A6/%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/dinning%20room%204_%E7%BB%93%E6%9E%9C.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_syp2_card_title"></div>
-                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp2_card_loc"></div> -->
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_syp2_card_b1"></div>
-                                <div x-text="t[lang].apt_syp2_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-syp2')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-syp3')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E8%A5%BF%E8%90%A5%E7%9B%98%E4%B8%89%E6%9C%9F%EF%BC%89%E6%96%B0%E8%A1%97/%E6%96%B0%E8%A1%97%20%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/3%E5%8F%B7%E6%88%BF/3%E5%8F%B7%E6%88%BF%2002_%E7%BB%93%E6%9E%9C.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_syp3_card_title"></div>
-                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp3_card_loc"></div> -->
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_syp3_card_b1"></div>
-                                <div x-text="t[lang].apt_syp3_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-syp3')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white cursor-pointer" @click="switchPage('apartment-pfl')">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E8%96%84%E6%89%B6%E6%9E%97%EF%BC%89%E7%BD%AE%E5%AF%8C%E8%8A%B1%E5%9B%AD/%E5%85%AC%E5%85%B1%E5%8C%BA%E5%9F%9F/%E5%8D%95%E5%85%83%E6%A5%BC%E5%85%A8%E6%99%AF_%E7%BB%93%E6%9E%9C.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Room">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="px-6 py-6">
-                            <div class="text-obsidian-950 font-serif text-2xl" x-text="t[lang].apt_pfl_card_title"></div>
-                            <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_pfl_card_loc"></div> -->
-                            <div class="mt-4 space-y-2 text-sm text-black/80 leading-relaxed">
-                                <div x-text="t[lang].apt_pfl_card_b1"></div>
-                                <div x-text="t[lang].apt_pfl_card_b2"></div>
-                            </div>
-                            <button type="button" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gold-400 text-black text-xs tracking-widest uppercase font-bold rounded-full hover:bg-gold-300 transition" @click.stop="switchPage('apartment-pfl')">
-                                <span x-text="t[lang].btn_explore_apt"></span>
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-                    </div>
+                <div class="mt-8 max-w-5xl mx-auto px-6 text-center">
+                    <div class="text-slate-400 text-sm tracking-widest uppercase" x-text="t[lang].apt_map_caption1"></div>
+                    <!-- <div class="text-slate-400 text-sm tracking-widest uppercase" x-text="t[lang].apt_map_caption2"></div> -->
                 </div>
             </section>
 
-            <section id="apt-reviews" class="py-32 bg-paper text-obsidian-950">
+            <!-- Showcase Gallery -->
+            <section id="showcase" class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="text-center scrub-item anim-fade-up">
-                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Reviews</span> -->
-                        <h3 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].apt_reviews_title"></h3>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Showcase</span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy">居社展示</h2>
                     </div>
 
-                    <div class="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/方便干净%20服务满意_结果.webp" alt="Review 1" class="w-full h-64 object-contain bg-white" />
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- YMT -->
+                        <div class="group bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden scrub-item anim-fade-up cursor-pointer hover:shadow-2xl transition-all duration-300" @click="switchPage('apartment-ymt')">
+                            <div class="relative h-56 overflow-hidden bg-slate-100">
+                                <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E6%B2%B9%E9%BA%BB%E5%9C%B0%EF%BC%89/%E6%B2%B9%E9%BA%BB%E5%9C%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/2%E5%8F%B7%E6%88%BF/2%E5%8F%B7%E6%88%BF_%E7%BB%93%E6%9E%9C.webp" 
+                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Room">
+                            </div>
+                            <div class="p-6">
+                                <div class="text-academic-navy font-serif text-xl font-bold mb-4" x-text="t[lang].apt_ymt_card_title"></div>
+                                <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_ymt_card_loc"></div> -->
+                                <div class="space-y-2 text-sm text-slate-500 font-light leading-relaxed min-h-[60px]">
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_ymt_card_b1"></span></div>
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_ymt_card_b2"></span></div>
+                                </div>
+                                <button type="button" class="mt-6 flex items-center gap-2 text-academic-navy font-bold text-xs uppercase tracking-widest group-hover:text-academic-red transition-colors">
+                                    <span x-text="t[lang].btn_explore_apt"></span>
+                                    <div class="w-6 h-[1px] bg-academic-navy group-hover:bg-academic-red group-hover:w-10 transition-all duration-300"></div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/朋友转介%20%20服务真诚_结果.webp" alt="Review 2" class="w-full h-64 object-contain bg-white" />
+
+                        <!-- CSW -->
+                        <div class="group bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden scrub-item anim-fade-up cursor-pointer hover:shadow-2xl transition-all duration-300" @click="switchPage('apartment-csw')">
+                            <div class="relative h-56 overflow-hidden bg-slate-100">
+                                <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E9%95%BF%E6%B2%99%E6%B9%BE%EF%BC%89/%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87%E2%80%94%E2%80%94%E4%B9%9D%E6%B1%9F%E8%A1%97/%E5%85%AC%E5%85%B1%E5%8C%BA%E5%9F%9F/%E5%89%8D%E5%8F%B0/W%E4%B8%80%E6%A5%BC%E5%89%8D%E5%8F%B0%E5%8C%BA%E5%9F%9F02.webp" 
+                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Room">
+                            </div>
+                            <div class="p-6">
+                                <div class="text-academic-navy font-serif text-xl font-bold mb-4" x-text="t[lang].apt_csw_card_title"></div>
+                                <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_csw_card_loc"></div> -->
+                                <div class="space-y-2 text-sm text-slate-500 font-light leading-relaxed min-h-[60px]">
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_csw_card_b1"></span></div>
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_csw_card_b2"></span></div>
+                                </div>
+                                <button type="button" class="mt-6 flex items-center gap-2 text-academic-navy font-bold text-xs uppercase tracking-widest group-hover:text-academic-red transition-colors">
+                                    <span x-text="t[lang].btn_explore_apt"></span>
+                                    <div class="w-6 h-[1px] bg-academic-navy group-hover:bg-academic-red group-hover:w-10 transition-all duration-300"></div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/服务满意%20二次推荐%20%282%29_结果.webp" alt="Review 3" class="w-full h-64 object-contain bg-white" />
+
+                        <!-- TST -->
+                        <div class="group bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden scrub-item anim-fade-up cursor-pointer hover:shadow-2xl transition-all duration-300" @click="switchPage('apartment-tst')">
+                            <div class="relative h-56 overflow-hidden bg-slate-100">
+                                <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E5%B0%96%E6%B2%99%E5%92%80%EF%BC%89/%E5%B0%96%E6%B2%99%E5%92%80%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E5%B0%96%E6%B2%99%E5%92%80%20%E5%A4%96%E5%9B%B4%E9%97%A8%E7%89%8C%E5%9B%BE%E7%89%87_%E7%BB%93%E6%9E%9C.webp" 
+                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Room">
+                            </div>
+                            <div class="p-6">
+                                <div class="text-academic-navy font-serif text-xl font-bold mb-4" x-text="t[lang].apt_tst_card_title"></div>
+                                <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_tst_card_loc"></div> -->
+                                <div class="space-y-2 text-sm text-slate-500 font-light leading-relaxed min-h-[60px]">
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_tst_card_b1"></span></div>
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_tst_card_b2"></span></div>
+                                </div>
+                                <button type="button" class="mt-6 flex items-center gap-2 text-academic-navy font-bold text-xs uppercase tracking-widest group-hover:text-academic-red transition-colors">
+                                    <span x-text="t[lang].btn_explore_apt"></span>
+                                    <div class="w-6 h-[1px] bg-academic-navy group-hover:bg-academic-red group-hover:w-10 transition-all duration-300"></div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/服务满意%20二次推荐_结果.webp" alt="Review 4" class="w-full h-64 object-contain bg-white" />
+
+                        <!-- OY -->
+                        <div class="group bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden scrub-item anim-fade-up cursor-pointer hover:shadow-2xl transition-all duration-300" @click="switchPage('apartment-oy')">
+                            <div class="relative h-56 overflow-hidden bg-slate-100">
+                                <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%E9%9D%92%E5%B9%B4%E5%85%AC%E5%AF%93%EF%BC%88%E5%9F%8E%E6%B1%87%E5%A5%A5%E8%BF%90%EF%BC%89/%E5%85%AC%E5%85%B1%E5%8C%BA%E5%9F%9F/%E5%A4%A7%E5%A0%82_%E7%BB%93%E6%9E%9C.webp" 
+                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Room">
+                            </div>
+                            <div class="p-6">
+                                <div class="text-academic-navy font-serif text-xl font-bold mb-4" x-text="t[lang].apt_oy_card_title"></div>
+                                <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_oy_card_loc"></div> -->
+                                <div class="space-y-2 text-sm text-slate-500 font-light leading-relaxed min-h-[60px]">
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_oy_card_b1"></span></div>
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_oy_card_b2"></span></div>
+                                </div>
+                                <button type="button" class="mt-6 flex items-center gap-2 text-academic-navy font-bold text-xs uppercase tracking-widest group-hover:text-academic-red transition-colors">
+                                    <span x-text="t[lang].btn_explore_apt"></span>
+                                    <div class="w-6 h-[1px] bg-academic-navy group-hover:bg-academic-red group-hover:w-10 transition-all duration-300"></div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/爆灯好评_结果.webp" alt="Review 5" class="w-full h-64 object-contain bg-white" />
+
+                        <!-- SYP1 -->
+                        <div class="group bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden scrub-item anim-fade-up cursor-pointer hover:shadow-2xl transition-all duration-300" @click="switchPage('apartment-syp1')">
+                            <div class="relative h-56 overflow-hidden bg-slate-100">
+                                <img src="/assets/apartments/syp1/room-d-01.webp" 
+                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Room">
+                            </div>
+                            <div class="p-6">
+                                <div class="text-academic-navy font-serif text-xl font-bold mb-4" x-text="t[lang].apt_syp1_card_title"></div>
+                                <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp1_card_loc"></div> -->
+                                <div class="space-y-2 text-sm text-slate-500 font-light leading-relaxed min-h-[60px]">
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_syp1_card_b1"></span></div>
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_syp1_card_b2"></span></div>
+                                </div>
+                                <button type="button" class="mt-6 flex items-center gap-2 text-academic-navy font-bold text-xs uppercase tracking-widest group-hover:text-academic-red transition-colors">
+                                    <span x-text="t[lang].btn_explore_apt"></span>
+                                    <div class="w-6 h-[1px] bg-academic-navy group-hover:bg-academic-red group-hover:w-10 transition-all duration-300"></div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/美好祝愿_结果.webp" alt="Review 6" class="w-full h-64 object-contain bg-white" />
+
+                        <!-- SYP2 -->
+                        <div class="group bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden scrub-item anim-fade-up cursor-pointer hover:shadow-2xl transition-all duration-300" @click="switchPage('apartment-syp2')">
+                            <div class="relative h-56 overflow-hidden bg-slate-100">
+                                <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E8%A5%BF%E8%90%A5%E7%9B%98%E4%BA%8C%E6%9C%9F%EF%BC%89%E9%AB%98%E5%8D%87%E5%A4%A7%E5%8E%A6/%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/dinning%20room%204_%E7%BB%93%E6%9E%9C.webp" 
+                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Room">
+                            </div>
+                            <div class="p-6">
+                                <div class="text-academic-navy font-serif text-xl font-bold mb-4" x-text="t[lang].apt_syp2_card_title"></div>
+                                <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp2_card_loc"></div> -->
+                                <div class="space-y-2 text-sm text-slate-500 font-light leading-relaxed min-h-[60px]">
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_syp2_card_b1"></span></div>
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_syp2_card_b2"></span></div>
+                                </div>
+                                <button type="button" class="mt-6 flex items-center gap-2 text-academic-navy font-bold text-xs uppercase tracking-widest group-hover:text-academic-red transition-colors">
+                                    <span x-text="t[lang].btn_explore_apt"></span>
+                                    <div class="w-6 h-[1px] bg-academic-navy group-hover:bg-academic-red group-hover:w-10 transition-all duration-300"></div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145509_16_3%281%29%281%29.webp" alt="Review 7" class="w-full h-64 object-contain bg-white" />
+
+                        <!-- SYP3 -->
+                        <div class="group bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden scrub-item anim-fade-up cursor-pointer hover:shadow-2xl transition-all duration-300" @click="switchPage('apartment-syp3')">
+                            <div class="relative h-56 overflow-hidden bg-slate-100">
+                                <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E8%A5%BF%E8%90%A5%E7%9B%98%E4%B8%89%E6%9C%9F%EF%BC%89%E6%96%B0%E8%A1%97/%E6%96%B0%E8%A1%97%20%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/3%E5%8F%B7%E6%88%BF/3%E5%8F%B7%E6%88%BF%2002_%E7%BB%93%E6%9E%9C.webp" 
+                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Room">
+                            </div>
+                            <div class="p-6">
+                                <div class="text-academic-navy font-serif text-xl font-bold mb-4" x-text="t[lang].apt_syp3_card_title"></div>
+                                <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_syp3_card_loc"></div> -->
+                                <div class="space-y-2 text-sm text-slate-500 font-light leading-relaxed min-h-[60px]">
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_syp3_card_b1"></span></div>
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_syp3_card_b2"></span></div>
+                                </div>
+                                <button type="button" class="mt-6 flex items-center gap-2 text-academic-navy font-bold text-xs uppercase tracking-widest group-hover:text-academic-red transition-colors">
+                                    <span x-text="t[lang].btn_explore_apt"></span>
+                                    <div class="w-6 h-[1px] bg-academic-navy group-hover:bg-academic-red group-hover:w-10 transition-all duration-300"></div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145511_17_3%281%29%281%29%281%29.webp" alt="Review 8" class="w-full h-64 object-contain bg-white" />
+
+                        <!-- PFL -->
+                        <div class="group bg-white border border-slate-100 shadow-xl rounded-sm overflow-hidden scrub-item anim-fade-up cursor-pointer hover:shadow-2xl transition-all duration-300" @click="switchPage('apartment-pfl')">
+                            <div class="relative h-56 overflow-hidden bg-slate-100">
+                                <img src="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/Image%206.2%20%E5%AD%A6%E7%94%9F%E5%B1%85%E7%A4%BE/2026%20%E6%9C%80%E6%96%B0%E5%85%AC%E5%AF%93%E7%85%A7%E7%89%87/%E6%B1%87%E7%94%9F%E4%BC%9A%E7%A4%BE%EF%BC%88%E8%96%84%E6%89%B6%E6%9E%97%EF%BC%89%E7%BD%AE%E5%AF%8C%E8%8A%B1%E5%9B%AD/%E5%85%AC%E5%85%B1%E5%8C%BA%E5%9F%9F/%E5%8D%95%E5%85%83%E6%A5%BC%E5%85%A8%E6%99%AF_%E7%BB%93%E6%9E%9C.webp" 
+                                     class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Room">
+                            </div>
+                            <div class="p-6">
+                                <div class="text-academic-navy font-serif text-xl font-bold mb-4" x-text="t[lang].apt_pfl_card_title"></div>
+                                <!-- <div class="mt-1 text-sm text-black/60" x-text="t[lang].apt_pfl_card_loc"></div> -->
+                                <div class="space-y-2 text-sm text-slate-500 font-light leading-relaxed min-h-[60px]">
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_pfl_card_b1"></span></div>
+                                    <div class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-academic-red mt-2 shrink-0"></span><span x-text="t[lang].apt_pfl_card_b2"></span></div>
+                                </div>
+                                <button type="button" class="mt-6 flex items-center gap-2 text-academic-navy font-bold text-xs uppercase tracking-widest group-hover:text-academic-red transition-colors">
+                                    <span x-text="t[lang].btn_explore_apt"></span>
+                                    <div class="w-6 h-[1px] bg-academic-navy group-hover:bg-academic-red group-hover:w-10 transition-all duration-300"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reviews -->
+            <section id="apt-reviews" class="py-24 bg-white border-b border-slate-200/60">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Reviews</span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].apt_reviews_title"></h3>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/方便干净%20服务满意_结果.webp" alt="Review 1" class="w-full h-64 object-contain bg-slate-50" />
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/朋友转介%20%20服务真诚_结果.webp" alt="Review 2" class="w-full h-64 object-contain bg-slate-50" />
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/服务满意%20二次推荐%20%282%29_结果.webp" alt="Review 3" class="w-full h-64 object-contain bg-slate-50" />
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/服务满意%20二次推荐_结果.webp" alt="Review 4" class="w-full h-64 object-contain bg-slate-50" />
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/爆灯好评_结果.webp" alt="Review 5" class="w-full h-64 object-contain bg-slate-50" />
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/美好祝愿_结果.webp" alt="Review 6" class="w-full h-64 object-contain bg-slate-50" />
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145509_16_3%281%29%281%29.webp" alt="Review 7" class="w-full h-64 object-contain bg-slate-50" />
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/学生好评/微信图片_20260113145511_17_3%281%29%281%29%281%29.webp" alt="Review 8" class="w-full h-64 object-contain bg-slate-50" />
                         </div>
                         <!--
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/7.png" alt="Review 7" class="w-full h-64 object-contain bg-white" />
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/7.png" alt="Review 7" class="w-full h-64 object-contain bg-slate-50" />
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/8.png" alt="Review 8" class="w-full h-64 object-contain bg-white" />
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/8.png" alt="Review 8" class="w-full h-64 object-contain bg-slate-50" />
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/9.png" alt="Review 9" class="w-full h-64 object-contain bg-white" />
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/9.png" alt="Review 9" class="w-full h-64 object-contain bg-slate-50" />
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/10.png" alt="Review 10" class="w-full h-64 object-contain bg-white" />
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/10.png" alt="Review 10" class="w-full h-64 object-contain bg-slate-50" />
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/11.png" alt="Review 11" class="w-full h-64 object-contain bg-white" />
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/11.png" alt="Review 11" class="w-full h-64 object-contain bg-slate-50" />
                         </div>
-                        <div class="bg-white border border-black/10 shadow-sm overflow-hidden scrub-item anim-fade-up">
-                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/12.png" alt="Review 12" class="w-full h-64 object-contain bg-white" />
+                        <div class="bg-white border border-slate-100 shadow-xl p-2 rounded-sm overflow-hidden scrub-item anim-fade-up hover:-translate-y-1 transition-transform duration-300">
+                            <img loading="lazy" decoding="async" src="https://static.sdlvhk.com/图片素材/好评反馈/12.png" alt="Review 12" class="w-full h-64 object-contain bg-slate-50" />
                         </div>
                         -->
                     </div>
