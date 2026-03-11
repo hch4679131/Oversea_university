@@ -306,14 +306,10 @@
 
                         <p class="text-xl text-slate-600 max-w-xl mb-12 leading-relaxed font-light" x-text="t[lang].hero_sub"></p>
 
-                        <div id="hero-planner-bar" class="hidden md:flex items-center bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] border border-slate-100 p-2 max-w-2xl group hover:border-academic-navy/30 transition-all">
-                            <div class="flex-1 px-6 border-r border-slate-100">
+                        <div id="hero-planner-bar" class="hidden md:flex items-center bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] border border-slate-100 p-2 max-w-lg group hover:border-academic-navy/30 transition-all">
+                            <div class="flex-1 px-8">
                                 <span class="block text-[10px] uppercase text-slate-400 font-bold tracking-widest mb-1">您的意向</span>
-                                <span class="text-sm font-bold text-academic-navy" x-text="t[lang].biz_study_t"></span>
-                            </div>
-                            <div class="flex-1 px-6 border-r border-slate-100">
-                                <span class="block text-[10px] uppercase text-slate-400 font-bold tracking-widest mb-1">目标地区</span>
-                                <span class="text-sm font-bold text-academic-navy" x-text="t[lang].biz_apt_locs"></span>
+                                <span class="text-base font-bold text-academic-navy" x-text="t[lang].biz_study_t"></span>
                             </div>
                             <button @click="switchPage('study', 'study-hero')" class="bg-academic-navy text-white px-8 py-4 font-bold hover:bg-academic-red transition-colors flex items-center gap-3">
                                 开始规划 <i data-lucide="search" class="w-4 h-4"></i>
