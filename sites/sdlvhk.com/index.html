@@ -320,21 +320,21 @@
 
                 <!-- 2. 核心功能卡片组 -->
                 <div id="core-business" class="absolute bottom-0 left-0 right-0 z-30 transform translate-y-1/2 hidden lg:block overflow-visible">
-                    <div class="max-w-7xl mx-auto px-6">
+                    <div class="max-w-6xl mx-auto px-6">
                         <div class="grid grid-cols-3 overflow-visible">
-                            <div @click="switchPage('study')" class="group bg-academic-navy p-7 border-r border-slate-100 cursor-pointer shadow-2xl hover:bg-red-800 transition-all overflow-hidden">
-                                <div class="w-10 h-1 bg-white/40 mb-4 group-hover:w-16 transition-all duration-500"></div>
-                                <h3 class="text-lg font-bold text-white mb-2" x-text="t[lang].biz_study_t"></h3>
+                            <div @click="switchPage('study')" class="group bg-academic-navy px-7 py-10 border-r border-slate-100 cursor-pointer shadow-2xl hover:bg-red-800 transition-all overflow-hidden">
+                                <div class="w-12 h-1 bg-white/40 mb-6 group-hover:w-20 transition-all duration-500"></div>
+                                <h3 class="text-xl font-bold text-white mb-3" x-text="t[lang].biz_study_t"></h3>
                                 <p class="text-white/80 text-xs leading-relaxed" x-text="t[lang].biz_study_sub + '，' + t[lang].biz_study_sub2"></p>
                             </div>
-                            <div @click="switchPage('apartments')" class="group bg-white p-7 border-r border-slate-100 cursor-pointer shadow-xl hover:bg-red-800 transition-all overflow-hidden">
-                                <div class="w-10 h-1 bg-academic-navy group-hover:bg-white/40 mb-4 group-hover:w-16 transition-all duration-500"></div>
-                                <h3 class="text-lg font-bold text-academic-navy group-hover:text-white transition-colors mb-2" x-text="t[lang].biz_apt_t"></h3>
+                            <div @click="switchPage('apartments')" class="group bg-white px-7 py-10 border-r border-slate-100 cursor-pointer shadow-xl hover:bg-red-800 transition-all overflow-hidden">
+                                <div class="w-12 h-1 bg-academic-navy group-hover:bg-white/40 mb-6 group-hover:w-20 transition-all duration-500"></div>
+                                <h3 class="text-xl font-bold text-academic-navy group-hover:text-white transition-colors mb-3" x-text="t[lang].biz_apt_t"></h3>
                                 <p class="text-academic-navy/80 group-hover:text-white/80 transition-colors text-xs leading-relaxed" x-text="t[lang].biz_apt_sub + '，' + t[lang].biz_apt_locs"></p>
                             </div>
-                            <div @click="switchPage('career')" class="group bg-white p-7 cursor-pointer shadow-xl hover:bg-red-800 transition-all overflow-hidden">
-                                <div class="w-10 h-1 bg-academic-navy group-hover:bg-white/40 mb-4 group-hover:w-16 transition-all duration-500"></div>
-                                <h3 class="text-lg font-bold text-academic-navy group-hover:text-white transition-colors mb-2" x-text="t[lang].biz_career_t"></h3>
+                            <div @click="switchPage('career')" class="group bg-white px-7 py-10 cursor-pointer shadow-xl hover:bg-red-800 transition-all overflow-hidden">
+                                <div class="w-12 h-1 bg-academic-navy group-hover:bg-white/40 mb-6 group-hover:w-20 transition-all duration-500"></div>
+                                <h3 class="text-xl font-bold text-academic-navy group-hover:text-white transition-colors mb-3" x-text="t[lang].biz_career_t"></h3>
                                 <p class="text-slate-500 group-hover:text-white/80 transition-colors text-xs leading-relaxed" x-text="t[lang].biz_career_sub + '，' + t[lang].biz_career_tags"></p>
                             </div>
                         </div>
