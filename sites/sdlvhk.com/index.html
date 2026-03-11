@@ -3013,7 +3013,6 @@
                             <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
                                 <div class="relative h-72 overflow-hidden bg-slate-50">
                                     <img :src="item.photos[roomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="item.photos[roomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-academic-navy/70 via-transparent to-transparent pointer-events-none"></div>
                                     
                                     <template x-if="item.photos.length > 1">
                                         <div>
@@ -3029,7 +3028,7 @@
                                     <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                                         <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.label"></div>
                                         <template x-if="item.label !== '公共区域'">
-                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="ymtBookingOpen = true">订房</button>
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="ymtBookingOpen = true">以早鸟价格订房</button>
                                         </template>
                                     </div>
                                 </div>
@@ -3047,7 +3046,6 @@
                             <div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up group">
                                 <div class="relative h-56 overflow-hidden bg-slate-50">
                                     <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-academic-navy/60 via-transparent to-transparent pointer-events-none"></div>
                                     <div class="absolute bottom-3 left-3">
                                         <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.alt || item.label"></div>
                                     </div>
