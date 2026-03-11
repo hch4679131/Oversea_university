@@ -3684,343 +3684,332 @@
         </div>
 
         <!-- ================= PAGE 6: 联系我们 ================= -->
-        <div x-show="page === 'contact'" x-transition:enter="transition ease-out duration-500" class="w-full bg-paper text-obsidian-950">
-            <!-- Contact: Hero (对齐前几个 page 的 Hero 风格) -->
-            <section id="contact-hero" class="relative min-h-[95vh] flex items-center overflow-hidden parallax-trigger">
+        <div x-show="page === 'contact'" x-transition:enter="transition ease-out duration-500" class="w-full bg-white text-slate-900 font-sans">
+            <section id="contact-hero" class="relative min-h-[68vh] lg:min-h-[76vh] flex items-center overflow-hidden parallax-trigger">
                 <div class="absolute inset-0 z-0">
-                    <img src="https://static.sdlvhk.com/图片素材/other/WImage%208.0%20Business%20Cooperations.webp?v=20260120"
-                        class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Business Cooperations">
-                    <div class="absolute inset-0 bg-gradient-to-r from-obsidian-950 via-obsidian-950/55 to-transparent"></div>
+                    <img src="https://static.sdlvhk.com/图片素材/other/WImage%208.0%20Business%20Cooperations.webp?v=20260120" class="hero-parallax-img w-full h-[120%] object-cover" style="transform-origin: top;" alt="Business Cooperations">
+                    <div class="absolute inset-0 bg-gradient-to-r from-academic-navy/95 via-academic-navy/70 to-transparent"></div>
                 </div>
 
-                <div class="relative z-10 w-full px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-64">
-                    <div class="scrub-item anim-fade-up max-w-3xl min-h-[320px] md:min-h-[360px] flex flex-col justify-start">
-                        <h1 class="text-6xl font-serif font-bold text-white leading-tight" x-text="t[lang].contact_hero_t"></h1>
-                        <div class="mt-12 space-y-2">
-                            <p class="text-xl text-gold-400/80 tracking-widest whitespace-pre-line leading-snug" x-text="t[lang].contact_hero_p1"></p>
-                            <p class="text-xl text-gold-400/80 tracking-widest whitespace-pre-line leading-snug" x-text="t[lang].contact_hero_p2"></p>
+                <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-5">
+                    <div class="max-w-3xl scrub-item anim-fade-up">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="flex -space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-academic-red shadow-sm"></span>
+                                <span class="w-3 h-3 rounded-full bg-white/50 shadow-sm"></span>
+                            </div>
+                            <span class="text-white/80 font-bold tracking-[0.35em] uppercase text-[10px] border-b border-academic-red/50 pb-1">Business Cooperation</span>
+                        </div>
+
+                        <h1 class="text-5xl md:text-6xl lg:text-7xl font-serif font-extrabold text-white leading-[1.05] mb-8" x-text="t[lang].contact_hero_t"></h1>
+
+                        <div class="mt-8 md:w-4/5 border-l-2 border-academic-red/80 pl-6 space-y-4 mb-12">
+                            <p class="text-xl text-white/90 font-light leading-relaxed whitespace-pre-line" x-text="t[lang].contact_hero_p1"></p>
+                            <p class="text-xl text-white/90 font-light leading-relaxed whitespace-pre-line" x-text="t[lang].contact_hero_p2"></p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 商业合作：合作流程（对齐「留学服务」版式） -->
-            <section id="contact-flow" class="py-32 bg-paper border-b border-black/5">
+            <section id="contact-flow" class="py-24 bg-academic-slate/30 border-y border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="text-center mb-16 scrub-item anim-fade-up">
-                        <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Business Cooperation</span> -->
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].contact_flow_title"></h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                        <div class="mt-6 text-black/60 text-sm md:text-base leading-relaxed">
-                            <div>我们精准连接两大刚需：学生的“留学梦”与“安居需”。</div>
-                            <div class="mt-2">与我们合作，一次性触达这两大核心需求。</div>
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Cooperation Process</span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].contact_flow_title"></h2>
+                        <div class="mt-6 text-slate-500 text-lg font-light leading-relaxed max-w-2xl mx-auto">
+                            我们精准连接两大刚需：学生的“留学梦”与“安居需”。<br>与我们合作，一次性触达这两大核心需求。
                         </div>
                     </div>
 
-                    <div class="text-center mb-10 scrub-item anim-fade-up">
-                        <h3 class="text-2xl md:text-3xl font-serif font-semibold text-obsidian-950">四步开启合作，我们全程护航</h3>
-                        <div class="w-16 h-[1px] bg-gold-400 mx-auto mt-6"></div>
+                    <div class="text-center mb-12 scrub-item anim-fade-up">
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-academic-navy">四步开启合作，我们全程护航</h3>
                     </div>
 
-                    <div class="flex flex-col md:flex-row md:items-stretch gap-4 scrub-item anim-fade-up">
-                        <div class="flex-1 p-6 bg-white border border-black/10 shadow-sm">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="message-circle" class="w-5 h-5 text-obsidian-950"></i>
-                                <div class="h-[1px] flex-1 bg-black/15"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 scrub-item anim-fade-up">
+                        <div class="bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] p-8 relative group hover:border-academic-navy/30 transition-colors">
+                            <div class="text-5xl font-serif font-black text-slate-100 absolute top-6 right-6 group-hover:text-academic-red/10 transition-colors">01</div>
+                            <div class="w-8 h-1 bg-academic-red mb-8"></div>
+                            <div class="flex items-center gap-3 mb-4 relative z-10">
+                                <i data-lucide="message-circle" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                <h4 class="text-xl font-serif font-bold text-academic-navy">沟通</h4>
                             </div>
-                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">沟通</div>
-                            <div class="mt-3 text-sm text-black/70 leading-relaxed text-center">提交合作意向，双方初步沟通</div>
+                            <p class="text-sm text-slate-500 leading-relaxed font-light relative z-10">提交合作意向，双方初步沟通</p>
                         </div>
-                        <div class="hidden md:flex items-center justify-center px-2 text-black/30 text-2xl select-none">→</div>
-                        <div class="flex-1 p-6 bg-white border border-black/10 shadow-sm">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="file-text" class="w-5 h-5 text-obsidian-950"></i>
-                                <div class="h-[1px] flex-1 bg-black/15"></div>
+
+                        <div class="bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] p-8 relative group hover:border-academic-navy/30 transition-colors">
+                            <div class="text-5xl font-serif font-black text-slate-100 absolute top-6 right-6 group-hover:text-academic-red/10 transition-colors">02</div>
+                            <div class="w-8 h-1 bg-academic-red mb-8"></div>
+                            <div class="flex items-center gap-3 mb-4 relative z-10">
+                                <i data-lucide="file-text" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                <h4 class="text-xl font-serif font-bold text-academic-navy">签约</h4>
                             </div>
-                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">签约</div>
-                            <div class="mt-3 text-sm text-black/70 leading-relaxed text-center">资质审核，签订正式合作协议</div>
+                            <p class="text-sm text-slate-500 leading-relaxed font-light relative z-10">资质审核，签订正式合作协议</p>
                         </div>
-                        <div class="hidden md:flex items-center justify-center px-2 text-black/30 text-2xl select-none">→</div>
-                        <div class="flex-1 p-6 bg-white border border-black/10 shadow-sm">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="gift" class="w-5 h-5 text-obsidian-950"></i>
-                                <div class="h-[1px] flex-1 bg-black/15"></div>
+
+                        <div class="bg-white border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] p-8 relative group hover:border-academic-navy/30 transition-colors">
+                            <div class="text-5xl font-serif font-black text-slate-100 absolute top-6 right-6 group-hover:text-academic-red/10 transition-colors">03</div>
+                            <div class="w-8 h-1 bg-academic-red mb-8"></div>
+                            <div class="flex items-center gap-3 mb-4 relative z-10">
+                                <i data-lucide="gift" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                <h4 class="text-xl font-serif font-bold text-academic-navy">培训</h4>
                             </div>
-                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">培训</div>
-                            <div class="mt-3 text-sm text-black/70 leading-relaxed text-center">完成系统培训，接收启动资源包</div>
+                            <p class="text-sm text-slate-500 leading-relaxed font-light relative z-10">完成系统培训，接收启动资源包</p>
                         </div>
-                        <div class="hidden md:flex items-center justify-center px-2 text-black/30 text-2xl select-none">→</div>
-                        <div class="flex-1 p-6 bg-white border border-black/10 shadow-sm">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="settings" class="w-5 h-5 text-obsidian-950"></i>
-                                <div class="h-[1px] flex-1 bg-black/15"></div>
+
+                        <div class="bg-academic-navy border border-academic-navy shadow-[0_10px_30px_-15px_rgba(0,0,0,0.2)] p-8 relative group overflow-hidden">
+                            <div class="absolute inset-0 bg-academic-red/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                            <div class="text-5xl font-serif font-black text-white/10 absolute top-6 right-6">04</div>
+                            <div class="w-8 h-1 bg-academic-red mb-8 relative z-10"></div>
+                            <div class="flex items-center gap-3 mb-4 relative z-10">
+                                <i data-lucide="settings" class="w-6 h-6 text-white group-hover:text-academic-red transition-colors"></i>
+                                <h4 class="text-xl font-serif font-bold text-white">营运</h4>
                             </div>
-                            <div class="mt-4 text-lg font-serif font-bold text-obsidian-950 text-center">营运</div>
-                            <div class="mt-3 text-sm text-black/70 leading-relaxed text-center">正式开展业务，获得持续支持与佣金结算</div>
+                            <p class="text-sm text-white/80 leading-relaxed font-light relative z-10">正式开展业务，获得持续支持与佣金结算</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact-modes" class="py-24 bg-white border-b border-slate-200/60">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-16 scrub-item anim-fade-up">
+                        <div class="max-w-2xl">
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase block mb-4">Cooperation Modes</span>
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy leading-tight" x-text="t[lang].contact_modes_title"></h2>
+                            <p class="mt-6 text-slate-500 text-lg font-light leading-relaxed">
+                                无论您是区域市场的建设者，还是精英圈层的连接者，都能在这里找到共创价值的路径。
+                            </p>
                         </div>
                     </div>
 
-                    <div class="mt-16 max-w-5xl mx-auto scrub-item anim-fade-up">
-                        <div id="contact-modes" class="mt-20 text-center scrub-item anim-fade-up">
-                            <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Cooperation Modes</span> -->
-                            <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].contact_modes_title"></h2>
-                            <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                            <div class="mt-6 text-black/60 text-sm md:text-base leading-relaxed">
-                                <div>无论您是区域市场的建设者，还是精英圈层的连接者，</div>
-                                <div class="mt-2">都能在这里找到共创价值的路径。</div>
-                            </div>
-                        </div>
-
-                        <div class="mt-12 grid md:grid-cols-2 gap-10 scrub-item anim-fade-up">
-                            <div class="p-8 bg-white border border-black/10 shadow-sm">
-                                <div class="flex items-center gap-4">
-                                    <i data-lucide="building-2" class="w-5 h-5 text-obsidian-950"></i>
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
+                    <div class="grid md:grid-cols-2 gap-10 scrub-item anim-fade-up">
+                        <article class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy group-hover:w-2 transition-all duration-300"></div>
+                            <div class="flex items-center gap-4 border-b border-slate-100 pb-6 mb-6">
+                                <div class="w-12 h-12 rounded-full bg-academic-navy/10 flex items-center justify-center text-academic-navy">
+                                    <i data-lucide="building-2" class="w-6 h-6"></i>
                                 </div>
-                                <div class="mt-4 text-xl font-serif font-bold text-obsidian-950">模式A：城市合作人（机构合作）</div>
-
-                                <div class="mt-5 text-sm text-black/70 leading-relaxed">
-                                    <div class="font-bold text-obsidian-950">对象：</div>
-                                    <div class="mt-1">教育机构、留学公司、拥有本地资源的企业家或创业者</div>
-
-                                    <div class="mt-6 font-bold text-obsidian-950">核心权益：</div>
-                                    <ul class="mt-3 space-y-2">
-                                        <li class="flex gap-3">
-                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                            <span>在授权城市独家或优先运营“汇生会”品牌业务。</span>
-                                        </li>
-                                        <li class="flex gap-3">
-                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                            <span>共享全线产品（留学、公寓、职涯）的完整分项。</span>
-                                        </li>
-                                        <li class="flex gap-3">
-                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                            <span>获得品牌授权、全员系统化培训，共享全国业务资源。</span>
-                                        </li>
+                                <h3 class="text-2xl font-serif font-bold text-academic-navy">模式A：城市合作人<span class="block text-sm font-light text-slate-500 mt-1">机构合作</span></h3>
+                            </div>
+                            <div class="space-y-6 text-slate-600 font-light leading-relaxed">
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-1">目标对象</div>
+                                    <div>教育机构、留学公司、拥有本地资源的企业家或创业者</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-2">核心权益</div>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_5px_rgba(200,16,46,0.5)]"></span><span>在授权城市独家或优先运营“汇生会”品牌业务。</span></li>
+                                        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_5px_rgba(200,16,46,0.5)]"></span><span>共享全线产品（留学、公寓、职涯）的完整分项。</span></li>
+                                        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_5px_rgba(200,16,46,0.5)]"></span><span>获得品牌授权、全员系统化培训，共享全国业务资源。</span></li>
                                     </ul>
                                 </div>
                             </div>
+                        </article>
 
-                            <div class="p-8 bg-white border border-black/10 shadow-sm">
-                                <div class="flex items-center gap-4">
-                                    <i data-lucide="badge-check" class="w-5 h-5 text-obsidian-950"></i>
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
+                        <article class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-academic-red group-hover:w-2 transition-all duration-300"></div>
+                            <div class="flex items-center gap-4 border-b border-slate-100 pb-6 mb-6">
+                                <div class="w-12 h-12 rounded-full bg-academic-red/10 flex items-center justify-center text-academic-red">
+                                    <i data-lucide="badge-check" class="w-6 h-6"></i>
                                 </div>
-                                <div class="mt-4 text-xl font-serif font-bold text-obsidian-950">模式B：精英代理人（个人合作）</div>
-
-                                <div class="mt-5 text-sm text-black/70 leading-relaxed">
-                                    <div class="font-bold text-obsidian-950">对象：</div>
-                                    <div class="mt-1">资深教育顾问、校园代理、考虑发展副业的个人</div>
-
-                                    <div class="mt-6 font-bold text-obsidian-950">核心权益：</div>
-                                    <ul class="mt-3 space-y-2">
-                                        <li class="flex gap-3">
-                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                            <span>合作门槛低，灵活无限制。</span>
-                                        </li>
-                                        <li class="flex gap-3">
-                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                            <span>高额推荐佣金，成功签约即享奖励。</span>
-                                        </li>
-                                        <li class="flex gap-3">
-                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                            <span>专属代理人后台，实时跟踪客户进度与佣金。</span>
-                                        </li>
-                                        <li class="flex gap-3">
-                                            <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                            <span>定期产品及技能培训。</span>
-                                        </li>
+                                <h3 class="text-2xl font-serif font-bold text-academic-navy">模式B：精英代理人<span class="block text-sm font-light text-slate-500 mt-1">个人合作</span></h3>
+                            </div>
+                            <div class="space-y-6 text-slate-600 font-light leading-relaxed">
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-1">目标对象</div>
+                                    <div>资深教育顾问、校园代理、考虑发展副业的个人</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-academic-navy tracking-widest uppercase mb-2">核心权益</div>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_5px_rgba(200,16,46,0.5)]"></span><span>合作门槛低，灵活无限制。</span></li>
+                                        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_5px_rgba(200,16,46,0.5)]"></span><span>高额推荐佣金，成功签约即享奖励。</span></li>
+                                        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_5px_rgba(200,16,46,0.5)]"></span><span>专属代理人后台，实时跟踪客户进度与佣金。</span></li>
+                                        <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0 shadow-[0_0_5px_rgba(200,16,46,0.5)]"></span><span>定期产品及技能培训。</span></li>
                                     </ul>
                                 </div>
                             </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact-value" class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Cooperation Value</span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].contact_value_title"></h2>
+                        <p class="mt-6 text-slate-500 text-lg font-light leading-relaxed">共享品牌红利，共拓教育蓝海。</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8 scrub-item anim-fade-up">
+                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                            <div class="w-12 h-12 rounded-full bg-academic-red/10 flex items-center justify-center text-academic-red mb-6">
+                                <i data-lucide="sparkles" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-academic-navy mb-4">资源赋能</h3>
+                            <ul class="space-y-3 text-sm text-slate-600 font-light leading-relaxed">
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span>数据洞察：共享留学意向与住宿偏好关联数据。</span></li>
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red mt-2 shrink-0"></span><span>品牌联动：通过官网、社交媒体及线下场景，提供品牌联合露出机会。</span></li>
+                            </ul>
                         </div>
 
-                        <div id="contact-value" class="mt-20 text-center scrub-item anim-fade-up">
-                            <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Cooperation Value</span> -->
-                            <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].contact_value_title"></h2>
-                            <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                            <div class="mt-6 text-black/60 text-sm md:text-base leading-relaxed">共享品牌红利，共拓教育蓝海。</div>
+                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                            <div class="w-12 h-12 rounded-full bg-academic-navy/10 flex items-center justify-center text-academic-navy mb-6">
+                                <i data-lucide="life-buoy" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-academic-navy mb-4">服务支持</h3>
+                            <ul class="space-y-3 text-sm text-slate-600 font-light leading-relaxed">
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-navy mt-2 shrink-0"></span><span>一站式服务系统：提供全流程系统支持，减少运营复杂度。</span></li>
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-navy mt-2 shrink-0"></span><span>专属客户管理后台：实时跟踪学生进度及收益数据，实现透明化协作。</span></li>
+                            </ul>
                         </div>
 
-                        <div class="mt-12 grid md:grid-cols-3 gap-10 scrub-item anim-fade-up">
-                            <div class="p-8 bg-white border border-black/10 shadow-sm">
-                                <div class="flex items-center gap-4">
-                                    <i data-lucide="sparkles" class="w-5 h-5 text-obsidian-950"></i>
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
-                                </div>
-                                <div class="mt-4 text-xl font-serif font-bold text-obsidian-950">资源赋能</div>
-                                <ul class="mt-5 space-y-3 text-sm text-black/70 leading-relaxed">
-                                    <li class="flex gap-3">
-                                        <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                        <span>数据洞察：共享留学意向与住宿偏好关联数据。</span>
-                                    </li>
-                                    <li class="flex gap-3">
-                                        <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                        <span>品牌联动：通过官网、社交媒体及线下场景，提供品牌联合露出机会。</span>
-                                    </li>
-                                </ul>
+                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                            <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 mb-6">
+                                <i data-lucide="handshake" class="w-6 h-6"></i>
                             </div>
+                            <h3 class="text-xl font-serif font-bold text-academic-navy mb-4">商业共赢</h3>
+                            <ul class="space-y-3 text-sm text-slate-600 font-light leading-relaxed">
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></span><span>收益快速启动：成熟流程保障合作快速开展，缩短回报周期。</span></li>
+                                <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></span><span>长期价值增长：通过学生生命周期管理（从申请到毕业），持续挖掘留学后服务、实习推荐等延伸价值。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                            <div class="p-8 bg-white border border-black/10 shadow-sm">
-                                <div class="flex items-center gap-4">
-                                    <i data-lucide="life-buoy" class="w-5 h-5 text-obsidian-950"></i>
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
-                                </div>
-                                <div class="mt-4 text-xl font-serif font-bold text-obsidian-950">服务支持</div>
-                                <ul class="mt-5 space-y-3 text-sm text-black/70 leading-relaxed">
-                                    <li class="flex gap-3">
-                                        <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                        <span>一站式服务系统：提供全流程系统支持，减少运营复杂度。</span>
-                                    </li>
-                                    <li class="flex gap-3">
-                                        <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                        <span>专属客户管理后台：实时跟踪学生进度及收益数据，实现透明化协作。</span>
-                                    </li>
-                                </ul>
-                            </div>
+            <section id="contact-network" class="py-24 bg-white border-b border-slate-200/60">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="text-center mb-16 scrub-item anim-fade-up">
+                        <div class="flex items-center justify-center gap-4 mb-4">
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Enterprise Network</span>
+                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="t[lang].contact_network_title"></h2>
+                        <p class="mt-6 text-slate-500 text-lg font-light leading-relaxed max-w-2xl mx-auto" x-text="t[lang].partner_sub"></p>
+                    </div>
 
-                            <div class="p-8 bg-white border border-black/10 shadow-sm">
-                                <div class="flex items-center gap-4">
-                                    <i data-lucide="handshake" class="w-5 h-5 text-obsidian-950"></i>
-                                    <div class="h-[1px] flex-1 bg-black/15"></div>
-                                </div>
-                                <div class="mt-4 text-xl font-serif font-bold text-obsidian-950">商业共赢</div>
-                                <ul class="mt-5 space-y-3 text-sm text-black/70 leading-relaxed">
-                                    <li class="flex gap-3">
-                                        <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                        <span>收益快速启动：成熟流程保障合作快速开展，缩短回报周期。</span>
-                                    </li>
-                                    <li class="flex gap-3">
-                                        <span class="mt-2 w-2 h-2 border border-gold-400 rounded-full shrink-0"></span>
-                                        <span>长期价值增长：通过学生生命周期管理（从申请到毕业），持续挖掘留学后服务、实习推荐等延伸价值。</span>
-                                    </li>
-                                </ul>
+                    <div class="relative w-full aspect-[21/9] md:aspect-[24/9] mb-14 rounded-xl overflow-hidden scrub-item anim-scale bg-academic-navy shadow-2xl">
+                        <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp')] bg-contain bg-center bg-no-repeat opacity-80 mix-blend-screen transition-transform duration-1000 hover:scale-[1.03]"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-academic-navy via-transparent to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-b from-academic-navy/60 via-transparent to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-academic-navy via-transparent to-academic-navy"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 scrub-item anim-fade-up mb-16">
+                        <div class="bg-white border border-slate-100 shadow-lg rounded-sm overflow-hidden group">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full aspect-[16/9] object-contain bg-slate-50 group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            <div class="p-4 border-t border-slate-50 bg-white">
+                                <div class="text-base font-serif font-bold text-academic-navy leading-snug group-hover:text-academic-red transition-colors" x-text="t[lang].office_hk_title"></div>
+                                <div class="mt-1 text-xs text-slate-500 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
                             </div>
                         </div>
-
-                        <!-- Page 2 "商业合作" block (copied) -->
-                        <section id="contact-network" class="mt-20">
-                            <div class="text-center mb-10">
-                                <!-- <span class="text-gold-400 text-xs font-bold tracking-[0.5em] uppercase mb-4 block">Enterprise Network</span> -->
-                                <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950" x-text="t[lang].contact_network_title"></h2>
-                                <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mx-auto mt-6"></div>
-                                <p class="mt-6 text-black/60 text-sm md:text-base" x-text="t[lang].partner_sub"></p>
+                        <div class="bg-white border border-slate-100 shadow-lg rounded-sm overflow-hidden group">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full aspect-[16/9] object-contain bg-slate-50 group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            <div class="p-4 border-t border-slate-50 bg-white">
+                                <div class="text-base font-serif font-bold text-academic-navy leading-snug group-hover:text-academic-red transition-colors" x-text="t[lang].office_sz_title"></div>
+                                <div class="mt-1 text-xs text-slate-500 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
                             </div>
-
-                            <div class="relative w-full aspect-[16/9] border border-black/10 mb-10 rounded-sm overflow-hidden">
-                                <div class="absolute inset-0 bg-[url('https://static.sdlvhk.com/图片素材/other/WImage%202.4.1%20PRC%20Network.webp')] bg-contain bg-center bg-no-repeat opacity-100"></div>
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-lg rounded-sm overflow-hidden group">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full aspect-[16/9] object-contain bg-slate-50 group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            <div class="p-4 border-t border-slate-50 bg-white">
+                                <div class="text-base font-serif font-bold text-academic-navy leading-snug group-hover:text-academic-red transition-colors" x-text="t[lang].office_fs_title"></div>
+                                <div class="mt-1 text-xs text-slate-500 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
                             </div>
-
-                            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 text-left mb-10">
-                                <div class="overflow-hidden">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Hong%20Kong.webp" alt="Hong Kong" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
-                                    <div class="p-4">
-                                        <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_hk_title"></div>
-                                        <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_hk_addr"></div>
-                                    </div>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Shenzhen.webp" alt="Shenzhen" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
-                                    <div class="p-4">
-                                        <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_sz_title"></div>
-                                        <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_sz_addr"></div>
-                                    </div>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Foshan.webp" alt="Foshan" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
-                                    <div class="p-4">
-                                        <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_fs_title"></div>
-                                        <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_fs_addr"></div>
-                                    </div>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
-                                    <div class="p-4">
-                                        <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_wh_title"></div>
-                                        <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
-                                    </div>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full aspect-[16/9] object-contain bg-black/5" loading="lazy" decoding="async" />
-                                    <div class="p-4">
-                                        <div class="text-base font-serif font-bold text-obsidian-950 leading-snug" x-text="t[lang].office_gy_title"></div>
-                                        <div class="mt-1 text-xs text-black/60 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-lg rounded-sm overflow-hidden group">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Wuhan.webp" alt="Wuhan" class="w-full aspect-[16/9] object-contain bg-slate-50 group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            <div class="p-4 border-t border-slate-50 bg-white">
+                                <div class="text-base font-serif font-bold text-academic-navy leading-snug group-hover:text-academic-red transition-colors" x-text="t[lang].office_wh_title"></div>
+                                <div class="mt-1 text-xs text-slate-500 leading-relaxed" x-text="t[lang].office_wh_addr"></div>
                             </div>
-                        </section>
+                        </div>
+                        <div class="bg-white border border-slate-100 shadow-lg rounded-sm overflow-hidden group">
+                            <img src="https://static.sdlvhk.com/图片素材/other/Image%202.4%20Corporate%20Network/WImage%202.4%20Guizhou.webp" alt="Guiyang" class="w-full aspect-[16/9] object-contain bg-slate-50 group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+                            <div class="p-4 border-t border-slate-50 bg-white">
+                                <div class="text-base font-serif font-bold text-academic-navy leading-snug group-hover:text-academic-red transition-colors" x-text="t[lang].office_gy_title"></div>
+                                <div class="mt-1 text-xs text-slate-500 leading-relaxed" x-text="t[lang].office_gy_addr"></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mt-16 flex justify-center scrub-item anim-fade-up">
-                        <button type="button"
-                                @click="goAgentPortal()"
-                                class="px-8 py-3 bg-obsidian-950 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-gold-400 hover:text-black transition shadow-xl">
-                            代理登录 Portal
+                        <button type="button" @click="goAgentPortal()" class="px-10 py-4 bg-academic-navy text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-academic-red transition-colors shadow-[0_15px_40px_-10px_rgba(0,51,102,0.4)] flex items-center gap-3 rounded-sm">
+                            代理登录 Portal <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- 页面底部：FAQ + 再次提交合作申请表单 -->
-            <section id="contact-faq" class="py-24 bg-paper border-b border-black/10">
+            <section id="contact-faq" class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div x-data="{ openFaq: { 1: true, 2: false, 3: false, 4: false } }">
-                        <h2 class="text-3xl font-serif font-bold text-obsidian-950" x-text="t[lang].contact_faq_title"></h2>
+                    <div class="max-w-3xl mx-auto" x-data="{ openFaq: { 1: true, 2: false, 3: false, 4: false } }">
+                        <div class="text-center mb-12 scrub-item anim-fade-up">
+                            <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy" x-text="t[lang].contact_faq_title"></h2>
+                        </div>
 
-                        <div class="mt-8 space-y-3">
-                            <div class="bg-white border border-black/10">
-                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq[1] = !openFaq[1]" :aria-expanded="!!openFaq[1]">
-                                    <div class="font-bold text-obsidian-950">Q1：提交合作意向申请后，工作人员多久会联络我？</div>
-                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq[1] ? 'rotate-180' : ''"></i>
+                        <div class="space-y-4 scrub-item anim-fade-up">
+                            <div class="bg-white border border-slate-100 shadow-sm rounded-sm overflow-hidden transition-all duration-300" :class="openFaq[1] ? 'border-l-4 border-l-academic-red' : ''">
+                                <button type="button" class="w-full px-6 py-5 flex items-center justify-between text-left" @click="openFaq[1] = !openFaq[1]" :aria-expanded="!!openFaq[1]">
+                                    <div class="font-bold text-academic-navy text-sm md:text-base">Q1：提交合作意向申请后，工作人员多久会联络我？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform" :class="openFaq[1] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq[1]" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
-                                    A：我们的工作人员在收到你的合作申请后，最快24小时候会与您联络。
+                                <div x-show="openFaq[1]" x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
+                                    A：我们的工作人员在收到您的合作申请后，最快 24 小时内会与您取得联络。
                                 </div>
                             </div>
 
-                            <div class="bg-white border border-black/10">
-                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq[2] = !openFaq[2]" :aria-expanded="!!openFaq[2]">
-                                    <div class="font-bold text-obsidian-950">Q2：合作的流程是怎样的？一般需要多久启动？</div>
-                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq[2] ? 'rotate-180' : ''"></i>
+                            <div class="bg-white border border-slate-100 shadow-sm rounded-sm overflow-hidden transition-all duration-300" :class="openFaq[2] ? 'border-l-4 border-l-academic-red' : ''">
+                                <button type="button" class="w-full px-6 py-5 flex items-center justify-between text-left" @click="openFaq[2] = !openFaq[2]" :aria-expanded="!!openFaq[2]">
+                                    <div class="font-bold text-academic-navy text-sm md:text-base">Q2：合作的流程是怎样的？一般需要多久启动？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform" :class="openFaq[2] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq[2]" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
-                                    A：我们的合作流程高效清晰：初步洽谈 → 协议签署 → 系统培训 → 正式上线。对于标准合作，最快可在2-3周内完成全部流程并启动。
+                                <div x-show="openFaq[2]" x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
+                                    A：我们的合作流程高效清晰：初步洽谈 → 协议签署 → 系统培训 → 正式上线。对于标准合作，最快可在 2-3 周内完成全部流程并启动。
                                 </div>
                             </div>
 
-                            <div class="bg-white border border-black/10">
-                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq[3] = !openFaq[3]" :aria-expanded="!!openFaq[3]">
-                                    <div class="font-bold text-obsidian-950">Q3：合作的佣金模式是怎样的？结算周期是多久？</div>
-                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq[3] ? 'rotate-180' : ''"></i>
+                            <div class="bg-white border border-slate-100 shadow-sm rounded-sm overflow-hidden transition-all duration-300" :class="openFaq[3] ? 'border-l-4 border-l-academic-red' : ''">
+                                <button type="button" class="w-full px-6 py-5 flex items-center justify-between text-left" @click="openFaq[3] = !openFaq[3]" :aria-expanded="!!openFaq[3]">
+                                    <div class="font-bold text-academic-navy text-sm md:text-base">Q3：合作的佣金模式是怎样的？结算周期是多久？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform" :class="openFaq[3] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq[3]" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                <div x-show="openFaq[3]" x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
                                     A：我们采用透明化的佣金模式。留学申请与公寓预订分别有明确的分成比例，具体会在协议中清晰约定。结算通常按月或按季度进行，款项通过系统对账后准时支付。
                                 </div>
                             </div>
 
-                            <div class="bg-white border border-black/10">
-                                <button type="button" class="w-full px-5 py-4 flex items-center justify-between text-left" @click="openFaq[4] = !openFaq[4]" :aria-expanded="!!openFaq[4]">
-                                    <div class="font-bold text-obsidian-950">Q4：我们（合作方）需要承担哪些责任？</div>
-                                    <i data-lucide="chevron-down" class="w-5 h-5 text-black/50" :class="openFaq[4] ? 'rotate-180' : ''"></i>
+                            <div class="bg-white border border-slate-100 shadow-sm rounded-sm overflow-hidden transition-all duration-300" :class="openFaq[4] ? 'border-l-4 border-l-academic-red' : ''">
+                                <button type="button" class="w-full px-6 py-5 flex items-center justify-between text-left" @click="openFaq[4] = !openFaq[4]" :aria-expanded="!!openFaq[4]">
+                                    <div class="font-bold text-academic-navy text-sm md:text-base">Q4：我们（合作方）需要承担哪些责任？</div>
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform" :class="openFaq[4] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq[4]" x-transition class="px-5 pb-5 text-sm text-black/70 leading-relaxed">
+                                <div x-show="openFaq[4]" x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
                                     A：合作期间，您主要负责前端引流与客户关系维护，而我们则提供系统、流程、签约及主要运营支持，权责清晰。
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
-                        <button type="button"
-                                @click="document.getElementById('contact-flow')?.scrollIntoView({behavior:'smooth'})"
-                                class="w-full px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition">
-                            查看详细合作流程
-                        </button>
-                        <button type="button"
-                                @click="openWeChatModal()"
-                                class="w-full px-8 py-3 bg-black text-white font-bold uppercase hover:bg-gold-400 hover:text-black transition">
-                            加入我们
-                        </button>
+                        <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto scrub-item anim-fade-up">
+                            <button type="button" @click="document.getElementById('contact-flow')?.scrollIntoView({behavior:'smooth'})" class="w-full px-8 py-4 border-2 border-academic-navy text-academic-navy font-bold uppercase tracking-widest text-xs hover:bg-academic-navy hover:text-white transition-colors text-center rounded-sm">
+                                查看详细流程
+                            </button>
+                            <button type="button" @click="openWeChatModal()" class="w-full px-8 py-4 bg-academic-red text-white font-bold uppercase tracking-widest text-xs hover:bg-red-800 transition-colors shadow-lg shadow-academic-red/20 text-center rounded-sm">
+                                加入我们
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
