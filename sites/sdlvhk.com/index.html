@@ -354,6 +354,8 @@
                     introHeight: 0,
                     historyReleaseOffset: 0,
                     partnerOffset: 0,
+                    scrollFrame: 0,
+                    resizeTimer: null,
                     mobileBreakpoint: 768,
                     activeDurationVh: 145,
                     stickyHeightVh: 50,
@@ -390,19 +392,21 @@
                         if (!this.sharedStageEnabled()) return '';
                         return `margin-top: calc(-${this.activeDurationVh}vh - ${this.introHeight}px); transform: translate3d(0, ${this.partnerOffset}px, 0)`;
                     },
-                    updateMetrics() {
+                    updateMetrics(force = false) {
                         if ($refs.introSection) {
-                            this.introHeight = $refs.introSection.offsetHeight || 0;
+                            const nextIntroHeight = $refs.introSection.offsetHeight || 0;
+                            if (force || nextIntroHeight !== this.introHeight) {
+                                this.introHeight = nextIntroHeight;
+                            }
                         }
                         if (!$refs.track) return;
                         const width = $refs.track.scrollWidth;
-                        if (width !== this.trackWidth) {
+                        if (force || width !== this.trackWidth) {
                             this.trackWidth = width;
                             this.maxTranslate = Math.max(0, width - window.innerWidth + 300);
                         }
                     },
                     updateScroll() {
-                        this.updateMetrics();
                         if (!$refs.historySection) return;
                         const rect = $refs.historySection.getBoundingClientRect();
                         const vh = window.innerHeight;
@@ -416,18 +420,38 @@
                         this.historyReleaseOffset = this.sharedStageEnabled() ? Math.max(0, actualScrolled - scrollableHeight) : 0;
                         this.partnerOffset = this.sharedStageEnabled() ? traveled : 0;
                     },
+                    scheduleScrollUpdate() {
+                        if (this.scrollFrame) return;
+                        this.scrollFrame = requestAnimationFrame(() => {
+                            this.scrollFrame = 0;
+                            this.updateScroll();
+                        });
+                    },
+                    handleResize() {
+                        clearTimeout(this.resizeTimer);
+                        this.resizeTimer = setTimeout(() => {
+                            this.updateMetrics(true);
+                            this.scheduleScrollUpdate();
+                        }, 80);
+                    },
                     initScroll() {
                         this.$nextTick(() => {
-                            this.updateMetrics();
-                            this.updateScroll();
-                            requestAnimationFrame(() => this.updateScroll());
-                            setTimeout(() => this.updateScroll(), 260);
+                            this.updateMetrics(true);
+                            this.scheduleScrollUpdate();
+                            requestAnimationFrame(() => {
+                                this.updateMetrics(true);
+                                this.scheduleScrollUpdate();
+                            });
+                            setTimeout(() => {
+                                this.updateMetrics(true);
+                                this.scheduleScrollUpdate();
+                            }, 260);
                         });
                     }
                 }"
                 x-init="initScroll()"
-                @scroll.window.passive="updateScroll()"
-                @resize.window.passive="initScroll()"
+                @scroll.window.passive="scheduleScrollUpdate()"
+                @resize.window.passive="handleResize()"
                 @load.window.passive="initScroll()"
             >
             <!-- 3. 品牌简介 -->
@@ -491,8 +515,8 @@
                     <div class="relative w-full z-10 flex-1 flex flex-col justify-start pt-0">
                         <div class="absolute left-0 right-0 top-[22px] h-[2px] bg-slate-200/60 z-0"></div>
 
-                        <div x-ref="track"
-                             class="relative flex items-start gap-12 md:gap-20 px-6 md:px-[max(24px,calc((100vw-1280px)/2+24px))] w-max will-change-transform ease-out duration-75"
+                            <div x-ref="track"
+                                class="relative flex items-start gap-12 md:gap-20 px-6 md:px-[max(24px,calc((100vw-1280px)/2+24px))] w-max will-change-transform"
                              :style="`transform: translate3d(-${progress}px, 0, 0)`">
                             <div class="w-[320px] shrink-0 relative z-10 group">
                                 <div class="mt-8 text-4xl font-serif font-bold text-academic-navy relative z-10">2016</div>
