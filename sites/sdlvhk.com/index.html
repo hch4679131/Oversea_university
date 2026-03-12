@@ -356,6 +356,7 @@
                     partnerOffset: 0,
                     scrollFrame: 0,
                     resizeTimer: null,
+                    lowPerformanceMode: false,
                     mobileBreakpoint: 768,
                     activeDurationVh: 145,
                     stickyHeightVh: 50,
@@ -365,8 +366,14 @@
                     isMobileStage() {
                         return window.innerWidth < this.mobileBreakpoint;
                     },
+                    detectLowPerformanceMode() {
+                        const reducedMotion = !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        const lowCpu = Number(navigator.hardwareConcurrency || 0) > 0 && Number(navigator.hardwareConcurrency || 0) <= 4;
+                        const lowMemory = Number(navigator.deviceMemory || 0) > 0 && Number(navigator.deviceMemory || 0) <= 4;
+                        this.lowPerformanceMode = reducedMotion || lowCpu || lowMemory;
+                    },
                     sharedStageEnabled() {
-                        return !this.isMobileStage();
+                        return !this.isMobileStage() && !this.lowPerformanceMode;
                     },
                     stickyTopVh() {
                         return this.isMobileStage() ? 0 : 45;
@@ -375,7 +382,7 @@
                         return this.isMobileStage() ? 100 : 50;
                     },
                     historyHeightVh() {
-                        if (this.isMobileStage()) return 220;
+                        if (!this.sharedStageEnabled()) return 0;
                         return this.stickyTopVh() + this.stickyHeightVhValue() + this.activeDurationVh;
                     },
                     wrapperStyle() {
@@ -386,6 +393,7 @@
                         return `transform: translate3d(0, ${offset}px, 0)`;
                     },
                     historyStickyStyle() {
+                        if (!this.sharedStageEnabled()) return '';
                         return `top: ${this.stickyTopVh()}vh; height: ${this.stickyHeightVhValue()}vh; transform: translate3d(0, -${this.historyReleaseOffset}px, 0)`;
                     },
                     partnersStyle() {
@@ -407,6 +415,12 @@
                         }
                     },
                     updateScroll() {
+                        if (!this.sharedStageEnabled()) {
+                            this.progress = 0;
+                            this.historyReleaseOffset = 0;
+                            this.partnerOffset = 0;
+                            return;
+                        }
                         if (!$refs.historySection) return;
                         const rect = $refs.historySection.getBoundingClientRect();
                         const vh = window.innerHeight;
@@ -430,19 +444,23 @@
                     handleResize() {
                         clearTimeout(this.resizeTimer);
                         this.resizeTimer = setTimeout(() => {
+                            this.detectLowPerformanceMode();
                             this.updateMetrics(true);
                             this.scheduleScrollUpdate();
                         }, 80);
                     },
                     initScroll() {
                         this.$nextTick(() => {
+                            this.detectLowPerformanceMode();
                             this.updateMetrics(true);
                             this.scheduleScrollUpdate();
                             requestAnimationFrame(() => {
+                                this.detectLowPerformanceMode();
                                 this.updateMetrics(true);
                                 this.scheduleScrollUpdate();
                             });
                             setTimeout(() => {
+                                this.detectLowPerformanceMode();
                                 this.updateMetrics(true);
                                 this.scheduleScrollUpdate();
                             }, 260);
@@ -488,9 +506,10 @@
             <section id="home-history"
                 x-ref="historySection"
                 class="relative w-full bg-[#f8fafc] text-slate-900 overflow-visible"
-                :style="`height: ${historyHeightVh()}vh;`"
+                :style="sharedStageEnabled() ? `height: ${historyHeightVh()}vh;` : ''"
             >
-                <div class="sticky left-0 w-full flex flex-col justify-start pt-4 overflow-hidden"
+                <div class="w-full flex flex-col justify-start pt-4"
+                    :class="sharedStageEnabled() ? 'sticky left-0 overflow-hidden' : 'relative'"
                     :style="historyStickyStyle()">
                     <div class="absolute inset-0 z-0 pointer-events-none">
                         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white rounded-full blur-[100px] opacity-60"></div>
@@ -502,7 +521,8 @@
                                 <h2 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy tracking-tight" x-text="t[lang].home_history_title"></h2>
                                 <p class="text-slate-500 text-base mt-3 flex items-center gap-2">
                                     <span>自 2016 年起，深耕香港，服务全球。</span>
-                                    <span class="text-academic-red/70 text-sm font-bold tracking-widest uppercase ml-4 hidden md:inline-block">滑动滚轮探索 <i data-lucide="arrow-right" class="inline w-4 h-4 mb-0.5"></i></span>
+                                    <span class="text-academic-red/70 text-sm font-bold tracking-widest uppercase ml-4 hidden md:inline-block" x-show="sharedStageEnabled()">滑动滚轮探索 <i data-lucide="arrow-right" class="inline w-4 h-4 mb-0.5"></i></span>
+                                    <span class="text-academic-red/70 text-sm font-bold tracking-widest uppercase ml-4 hidden md:inline-block" x-show="!sharedStageEnabled()">左右拖动浏览 <i data-lucide="move-horizontal" class="inline w-4 h-4 mb-0.5"></i></span>
                                 </p>
                             </div>
                             <button @click="switchPage('about', 'history')" class="group flex items-center gap-2 text-academic-red font-bold text-xs uppercase tracking-widest whitespace-nowrap hover:text-red-800 transition-colors">
@@ -513,11 +533,14 @@
                     </div>
 
                     <div class="relative w-full z-10 flex-1 flex flex-col justify-start pt-0">
-                        <div class="absolute left-0 right-0 top-[22px] h-[2px] bg-slate-200/60 z-0"></div>
+                        <div class="absolute left-0 right-0 top-[22px] h-[2px] bg-slate-200/60 z-0" x-show="sharedStageEnabled()"></div>
 
+                        <div x-ref="trackViewport"
+                            class="relative"
+                            :class="sharedStageEnabled() ? 'overflow-visible' : 'overflow-x-auto overflow-y-hidden pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'">
                             <div x-ref="track"
                                 class="relative flex items-start gap-12 md:gap-20 px-6 md:px-[max(24px,calc((100vw-1280px)/2+24px))] w-max will-change-transform"
-                             :style="`transform: translate3d(-${progress}px, 0, 0)`">
+                                :style="sharedStageEnabled() ? `transform: translate3d(-${progress}px, 0, 0)` : ''">
                             <div class="w-[320px] shrink-0 relative z-10 group">
                                 <div class="mt-8 text-4xl font-serif font-bold text-academic-navy relative z-10">2016</div>
                                 <div class="mt-2 text-xl font-bold text-academic-red" x-text="t[lang].hist_2016_t"></div>
@@ -591,6 +614,7 @@
                                 <div class="mt-8 text-4xl font-serif font-bold text-academic-navy relative z-10">2026+</div>
                                 <div class="mt-2 text-xl font-bold text-academic-navy" x-text="t[lang].hist_2026_t"></div>
                                 <div class="mt-4 text-base text-slate-500 leading-relaxed font-light" x-text="t[lang].hist_2026_d"></div>
+                            </div>
                             </div>
                         </div>
                     </div>
