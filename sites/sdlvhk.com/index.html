@@ -346,14 +346,10 @@
 
             <!-- 3-5. 品牌简介 + 企业历程 + 商业合作：共享滚动舞台 -->
             <div class="relative"
-                :style="wrapperStyle()"
                 x-data="{
                     progress: 0,
                     maxTranslate: 0,
                     trackWidth: 0,
-                    introHeight: 0,
-                    historyReleaseOffset: 0,
-                    partnerOffset: 0,
                     scrollFrame: 0,
                     resizeTimer: null,
                     lowPerformanceMode: false,
@@ -385,28 +381,11 @@
                         if (!this.sharedStageEnabled()) return 0;
                         return this.stickyTopVh() + this.stickyHeightVhValue() + this.activeDurationVh;
                     },
-                    wrapperStyle() {
-                        return this.sharedStageEnabled() ? `padding-bottom: ${this.activeDurationVh}vh;` : '';
-                    },
-                    introStyle() {
-                        const offset = this.sharedStageEnabled() ? this.partnerOffset : 0;
-                        return `transform: translate3d(0, ${offset}px, 0)`;
-                    },
                     historyStickyStyle() {
                         if (!this.sharedStageEnabled()) return '';
-                        return `top: ${this.stickyTopVh()}vh; height: ${this.stickyHeightVhValue()}vh; transform: translate3d(0, -${this.historyReleaseOffset}px, 0)`;
-                    },
-                    partnersStyle() {
-                        if (!this.sharedStageEnabled()) return '';
-                        return `margin-top: calc(-${this.activeDurationVh}vh - ${this.introHeight}px); transform: translate3d(0, ${this.partnerOffset}px, 0)`;
+                        return `top: ${this.stickyTopVh()}vh; height: ${this.stickyHeightVhValue()}vh;`;
                     },
                     updateMetrics(force = false) {
-                        if ($refs.introSection) {
-                            const nextIntroHeight = $refs.introSection.offsetHeight || 0;
-                            if (force || nextIntroHeight !== this.introHeight) {
-                                this.introHeight = nextIntroHeight;
-                            }
-                        }
                         if (!$refs.track) return;
                         const width = $refs.track.scrollWidth;
                         if (force || width !== this.trackWidth) {
@@ -417,8 +396,6 @@
                     updateScroll() {
                         if (!this.sharedStageEnabled()) {
                             this.progress = 0;
-                            this.historyReleaseOffset = 0;
-                            this.partnerOffset = 0;
                             return;
                         }
                         if (!$refs.historySection) return;
@@ -431,8 +408,6 @@
                         const traveled = this.clamp(actualScrolled, 0, scrollableHeight);
                         const ratio = traveled / scrollableHeight;
                         this.progress = ratio * this.maxTranslate;
-                        this.historyReleaseOffset = this.sharedStageEnabled() ? Math.max(0, actualScrolled - scrollableHeight) : 0;
-                        this.partnerOffset = this.sharedStageEnabled() ? traveled : 0;
                     },
                     scheduleScrollUpdate() {
                         if (this.scrollFrame) return;
@@ -473,8 +448,7 @@
                 @load.window.passive="initScroll()"
             >
             <!-- 3. 品牌简介 -->
-            <section id="home-intro" x-ref="introSection" class="py-16 bg-academic-slate/30 relative z-30 overflow-hidden"
-                :style="introStyle()">
+            <section id="home-intro" class="py-16 bg-academic-slate/30 relative z-30 overflow-hidden">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="flex flex-col lg:flex-row gap-14 items-center">
                         <div class="lg:w-1/2 relative scrub-item anim-scale">
@@ -539,7 +513,7 @@
                             class="relative"
                             :class="sharedStageEnabled() ? 'overflow-visible' : 'overflow-x-auto overflow-y-hidden pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'">
                             <div x-ref="track"
-                                class="relative flex items-start gap-12 md:gap-20 px-6 md:px-[max(24px,calc((100vw-1280px)/2+24px))] w-max will-change-transform"
+                                class="relative flex items-start gap-12 md:gap-20 px-6 md:px-[max(24px,calc((100vw-1280px)/2+24px))] w-max will-change-transform transform-gpu [contain:layout_paint] [backface-visibility:hidden]"
                                 :style="sharedStageEnabled() ? `transform: translate3d(-${progress}px, 0, 0)` : ''">
                             <div class="w-[320px] shrink-0 relative z-10 group">
                                 <div class="mt-8 text-4xl font-serif font-bold text-academic-navy relative z-10">2016</div>
@@ -622,8 +596,7 @@
             </section>
 
             <!-- 5. 商业合作（蓝底 / 无Hover / 边缘定位版） -->
-            <section id="home-partners" class="py-24 bg-academic-navy text-white relative z-20 overflow-visible"
-                :style="partnersStyle()">
+            <section id="home-partners" class="py-24 bg-academic-navy text-white relative z-20 overflow-visible">
 
                 <div class="max-w-7xl mx-auto px-6 relative z-10">
                     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
