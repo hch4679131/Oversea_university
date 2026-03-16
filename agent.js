@@ -803,10 +803,6 @@ router.post(
                 return res.status(400).json({ success: false, message: '所属上级参数错误' });
             }
 
-            if (parentUserId === Number(req.agent.id)) {
-                return res.status(400).json({ success: false, message: '所属上级不能选择当前账号' });
-            }
-
             const [parentRows] = await pool.execute(
                 'SELECT id, role, status FROM agent_users WHERE id = ? LIMIT 1',
                 [parentUserId]
