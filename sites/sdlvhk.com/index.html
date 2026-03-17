@@ -5205,36 +5205,36 @@
 
         <!-- 微信咨询弹窗（模板） -->
         <div x-show="wechatModalOpen" x-cloak class="fixed inset-0 z-[60]" @keydown.escape.window="closeWeChatModal()">
-            <div class="absolute inset-0 bg-black/60" @click="closeWeChatModal()"></div>
+            <div class="absolute inset-0 bg-academic-navy/55 backdrop-blur-sm" @click="closeWeChatModal()"></div>
             <div class="relative min-h-full flex items-end sm:items-center justify-center p-4">
-                <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 rounded-lg shadow-2xl overflow-hidden" @click.stop>
-                    <div class="px-5 py-4 border-b border-black/10 flex items-center justify-between">
+                <div class="w-full max-w-md bg-slate-50 text-academic-navy border border-academic-navy/10 rounded-lg shadow-2xl overflow-hidden" @click.stop>
+                    <div class="px-5 py-4 border-b border-academic-red/15 bg-gradient-to-r from-academic-navy to-[#0a427f] text-white flex items-center justify-between">
                         <div>
                             <div class="text-sm font-bold tracking-widest">微信咨询</div>
-                            <div class="text-xs text-black/60">扫码或复制微信号添加（模板）</div>
+                            <div class="text-xs text-white/70">扫码或复制微信号添加（模板）</div>
                         </div>
-                        <button type="button" class="text-black/60 hover:text-black transition" @click="closeWeChatModal()">关闭</button>
+                        <button type="button" class="text-white/70 hover:text-white transition" @click="closeWeChatModal()">关闭</button>
                     </div>
 
                     <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div class="flex items-center justify-center">
-                            <div class="w-44 h-44 bg-black/5 border border-black/10 rounded flex items-center justify-center text-xs text-black/50 text-center px-4">
+                            <div class="w-44 h-44 bg-white border border-academic-navy/10 rounded flex items-center justify-center text-xs text-slate-500 text-center px-4 shadow-sm">
                                 二维码占位
                                 <br>（后续替换为真实微信二维码）
                             </div>
                         </div>
                         <div class="flex flex-col justify-center">
-                            <div class="text-xs tracking-widest uppercase text-black/50">WeChat ID</div>
+                            <div class="text-xs tracking-widest uppercase text-academic-red/70">WeChat ID</div>
                             <div class="mt-2 text-lg font-bold break-all" x-text="wechatId"></div>
 
                             <button type="button"
-                                    class="mt-4 w-full px-4 py-2 bg-black text-white font-bold hover:bg-gold-400 hover:text-black transition"
+                                    class="mt-4 w-full px-4 py-2 bg-academic-red text-white font-bold hover:bg-red-800 transition"
                                     @click="copyWeChatId()"
                                     x-text="wechatCopied ? '已复制' : '复制微信号'">
                             </button>
 
                             <button type="button"
-                                    class="mt-3 w-full px-4 py-2 border border-black/15 text-black font-bold hover:border-gold-400 hover:text-black transition"
+                                    class="mt-3 w-full px-4 py-2 border border-academic-navy/15 text-academic-navy font-bold hover:border-academic-red hover:text-academic-red transition bg-white"
                                     @click="switchPage('contact'); closeWeChatModal()">
                                 去联系页
                             </button>
