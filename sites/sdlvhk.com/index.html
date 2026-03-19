@@ -120,7 +120,7 @@
                     <span @click="switchPage('home', 'achievements')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
                 </div> -->
                 <div class="nav-item group">
-                    <span @click="switchPage('about')" :class="page === 'about' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
+                    <span @click="switchPage('about')" :class="isPageActive('about') ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_about"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('about', 'about-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].about_hero_title"></a>
                          <a @click.stop="switchPage('about', 'intro')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].home_about_title"></a>
@@ -131,7 +131,7 @@
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <span @click="switchPage('study')" :class="page === 'study' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_study"></span>
+                    <span @click="switchPage('study')" :class="isPageActive('study') ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_study"></span>
                      <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('study', 'study-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].study_hero_t"></a>
                         <a @click.stop="switchPage('study', 'study-scope')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].study_scope_title"></a>
@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <span @click="switchPage('career')" :class="page === 'career' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
+                    <span @click="switchPage('career')" :class="isPageActive('career') ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_career"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('career', 'career-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_hero_t"></a>
                         <a @click.stop="switchPage('career', 'career-internships')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].career_intern_nav"></a>
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <span @click="switchPage('apartments', 'apartments-hero')" :class="page === 'apartments' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_apt"></span>
+                    <span @click="switchPage('apartments', 'apartments-hero')" :class="isPageActive('apartments') ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_apt"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('apartments', 'apartments-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].apt_hero_t"></a>
 
@@ -171,7 +171,7 @@
                     </div>
                 </div>
                 <div class="nav-item group">
-                    <span @click="switchPage('achievements')" :class="page === 'achievements' ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
+                    <span @click="switchPage('achievements')" :class="isPageActive('achievements') ? 'text-academic-red' : 'hover:text-white'" x-text="t[lang].nav_achievements"></span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[180px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('achievements', 'achievements-hero')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].ach_title"></a>
                         <a @click.stop="switchPage('achievements', 'achievements-offer-gallery')" class="block py-2 hover:text-academic-red whitespace-nowrap" x-text="t[lang].ach_gallery_title"></a>
@@ -197,9 +197,9 @@
             <!-- 语言切换 + 手机菜单 -->
             <div class="flex items-center gap-3">
                 <div class="flex items-center gap-3 text-xs font-bold pl-6 border-l border-white/10">
-                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">简</button>
-                    <button @click="lang = 'tc'" :class="lang==='tc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">繁</button>
-                    <button @click="lang = 'en'" :class="lang==='en' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">EN</button>
+                    <button @click="switchLanguage('sc')" :class="lang==='sc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">简</button>
+                    <button @click="switchLanguage('tc')" :class="lang==='tc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">繁</button>
+                    <button @click="switchLanguage('en')" :class="lang==='en' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">EN</button>
                 </div>
 
                 <button type="button"
@@ -233,31 +233,31 @@
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'about' ? 'text-academic-red' : 'text-gray-200'"
+                    :class="isPageActive('about') ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('about'); mobileNavOpen = false"
                     x-text="t[lang].nav_about"
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'study' ? 'text-academic-red' : 'text-gray-200'"
+                    :class="isPageActive('study') ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('study'); mobileNavOpen = false"
                     x-text="t[lang].nav_study"
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'career' ? 'text-academic-red' : 'text-gray-200'"
+                    :class="isPageActive('career') ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('career'); mobileNavOpen = false"
                     x-text="t[lang].nav_career"
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'apartments' ? 'text-academic-red' : 'text-gray-200'"
+                    :class="isPageActive('apartments') ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('apartments', 'apartments-hero'); mobileNavOpen = false"
                     x-text="t[lang].nav_apt"
                 ></button>
 
                 <button type="button" class="w-full text-left py-3 text-sm tracking-[0.15em] uppercase hover:text-white"
-                    :class="page === 'achievements' ? 'text-academic-red' : 'text-gray-200'"
+                    :class="isPageActive('achievements') ? 'text-academic-red' : 'text-gray-200'"
                     @click="switchPage('achievements'); mobileNavOpen = false"
                     x-text="t[lang].nav_achievements"
                 ></button>
@@ -268,11 +268,9 @@
                 ></button>
 
                 <div class="pt-4 border-t border-white/10 flex items-center justify-center gap-6 text-xs font-bold">
-                    <button @click="lang = 'sc'" :class="lang==='sc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">简</button>
-                    <button disabled aria-disabled="true" class="text-gray-500 opacity-50 cursor-not-allowed">繁</button>
-                    <!-- @click="lang = 'tc'" -->
-                    <button disabled aria-disabled="true" class="text-gray-500 opacity-50 cursor-not-allowed">EN</button>
-                    <!-- @click="lang = 'en'" -->
+                    <button @click="switchLanguage('sc')" :class="lang==='sc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">简</button>
+                    <button @click="switchLanguage('tc')" :class="lang==='tc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">繁</button>
+                    <button @click="switchLanguage('en')" :class="lang==='en' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">EN</button>
                 </div>
             </div>
         </div>

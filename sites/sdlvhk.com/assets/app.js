@@ -32,6 +32,10 @@ refreshLucideIcons();
         function appData() {
             return {
                 init() {
+                    const initialRoute = this.parseCurrentRoute();
+                    this.lang = initialRoute.lang;
+                    this.page = initialRoute.page;
+
                     try {
                         this.agentToken = localStorage.getItem('agent_token') || '';
                     } catch (e) {
@@ -48,12 +52,213 @@ refreshLucideIcons();
                             this.agentLogout(false);
                         });
                     }
+
+                    if (!this.routeListenerBound) {
+                        window.addEventListener('popstate', () => {
+                            const route = this.parseCurrentRoute();
+                            this.lang = route.lang;
+                            this.page = route.page;
+                            this.mobileNavOpen = false;
+                            this.syncHeadMetadata(route.lang, route.page);
+                            this.finalizePageSwitch(route.page, route.anchorId, 'auto');
+                        });
+                        this.routeListenerBound = true;
+                    }
+
+                    this.syncBrowserUrl(this.lang, this.page, initialRoute.anchorId, true);
+                    this.finalizePageSwitch(this.page, initialRoute.anchorId, 'auto');
                 },
                 lang: 'sc', // sc, tc, en
                 page: 'home',
+                routeLangMap: { sc: 'zh-CN', tc: 'zh-HK', en: 'en' },
+                routePageSlugs: {
+                    home: '',
+                    about: 'about',
+                    study: 'study',
+                    career: 'career',
+                    apartments: 'apartments',
+                    achievements: 'achievements',
+                    contact: 'contact',
+                    'apartment-ymt': 'apartments/ymt',
+                    'apartment-csw': 'apartments/csw',
+                    'apartment-tst': 'apartments/tst',
+                    'apartment-oy': 'apartments/oy',
+                    'apartment-syp1': 'apartments/syp1',
+                    'apartment-syp2': 'apartments/syp2',
+                    'apartment-syp3': 'apartments/syp3',
+                    'apartment-pfl': 'apartments/pfl',
+                    'agent-login': 'agent/login',
+                    'agent-dashboard': 'agent/dashboard'
+                },
+                routePageTitles: {
+                    home: '汇生会 SDLV',
+                    about: 'nav_about',
+                    study: 'nav_study',
+                    career: 'nav_career',
+                    apartments: 'nav_apt',
+                    achievements: 'nav_achievements',
+                    contact: 'nav_contact',
+                    'apartment-ymt': 'apt_ymt_card_title',
+                    'apartment-csw': 'apt_csw_card_title',
+                    'apartment-tst': 'apt_tst_card_title',
+                    'apartment-oy': 'apt_oy_card_title',
+                    'apartment-syp1': 'apt_syp1_card_title',
+                    'apartment-syp2': 'apt_syp2_card_title',
+                    'apartment-syp3': 'apt_syp3_card_title',
+                    'apartment-pfl': 'apt_pfl_card_title',
+                    'agent-login': '代理登录',
+                    'agent-dashboard': '代理后台'
+                },
+                routeListenerBound: false,
 
                 // ===== Mobile Nav =====
                 mobileNavOpen: false,
+
+                getRouteBasePath() {
+                    const segments = window.location.pathname.split('/').filter(Boolean);
+                    return segments[0] === 'sdlvhk.com' ? '/sdlvhk.com' : '';
+                },
+
+                getRouteLangKey(lang = this.lang) {
+                    return this.routeLangMap[lang] || this.routeLangMap.sc;
+                },
+
+                getRouteLangFromSegment(segment) {
+                    const normalized = String(segment || '').toLowerCase();
+                    if (normalized === 'zh-cn') return 'sc';
+                    if (normalized === 'zh-hk') return 'tc';
+                    if (normalized === 'zh-tw') return 'tc';
+                    if (normalized === 'en') return 'en';
+                    return null;
+                },
+
+                getSlugToPageMap() {
+                    return Object.entries(this.routePageSlugs).reduce((acc, [page, slug]) => {
+                        acc[slug] = page;
+                        return acc;
+                    }, {});
+                },
+
+                normalizePage(page) {
+                    return Object.prototype.hasOwnProperty.call(this.routePageSlugs, page) ? page : 'home';
+                },
+
+                buildRoutePath(lang = this.lang, page = this.page) {
+                    const basePath = this.getRouteBasePath();
+                    const langSegment = this.getRouteLangKey(lang);
+                    const slug = this.routePageSlugs[this.normalizePage(page)] || '';
+                    return `${basePath}/${langSegment}${slug ? `/${slug}` : ''}`;
+                },
+
+                parseCurrentRoute() {
+                    const segments = window.location.pathname.split('/').filter(Boolean);
+                    if (segments[0] === 'sdlvhk.com') {
+                        segments.shift();
+                    }
+
+                    const firstSegment = segments[0] || '';
+                    const parsedLang = this.getRouteLangFromSegment(firstSegment);
+                    const lang = parsedLang || 'sc';
+                    const slugSegments = parsedLang ? segments.slice(1) : segments;
+                    const slug = slugSegments.join('/');
+                    const slugToPageMap = this.getSlugToPageMap();
+                    const page = this.normalizePage(slugToPageMap[slug] || 'home');
+                    const anchorId = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : null;
+
+                    return { lang, page, anchorId };
+                },
+
+                getPageTitle(page = this.page, lang = this.lang) {
+                    const titleEntry = this.routePageTitles[this.normalizePage(page)] || this.routePageTitles.home;
+                    if (titleEntry === '汇生会 SDLV' || titleEntry === '代理登录' || titleEntry === '代理后台') {
+                        return titleEntry;
+                    }
+                    return (this.t[lang] && this.t[lang][titleEntry]) || '汇生会 SDLV';
+                },
+
+                syncHeadMetadata(lang = this.lang, page = this.page) {
+                    const locale = this.getRouteLangKey(lang);
+                    const title = this.getPageTitle(page, lang);
+
+                    document.documentElement.lang = locale;
+                    document.title = page === 'home'
+                        ? '汇生会 SDLV | Global Education & Career Elite'
+                        : `${title} | 汇生会 SDLV`;
+
+                    const canonicalHref = `${window.location.origin}${this.buildRoutePath(lang, page)}`;
+                    const ensureLink = (rel, id, href, hrefLang = null) => {
+                        let link = document.getElementById(id);
+                        if (!link) {
+                            link = document.createElement('link');
+                            link.id = id;
+                            link.rel = rel;
+                            document.head.appendChild(link);
+                        }
+                        link.href = href;
+                        if (hrefLang) {
+                            link.hreflang = hrefLang;
+                        } else {
+                            link.removeAttribute('hreflang');
+                        }
+                    };
+
+                    ensureLink('canonical', 'canonical-link', canonicalHref);
+                    Object.entries(this.routeLangMap).forEach(([langKey, routeLang]) => {
+                        ensureLink(
+                            'alternate',
+                            `alternate-link-${langKey}`,
+                            `${window.location.origin}${this.buildRoutePath(langKey, page)}`,
+                            routeLang
+                        );
+                    });
+                    ensureLink('alternate', 'alternate-link-x-default', `${window.location.origin}${this.buildRoutePath('sc', page)}`, 'x-default');
+                },
+
+                syncBrowserUrl(lang = this.lang, page = this.page, anchorId = null, replace = false) {
+                    const targetUrl = `${this.buildRoutePath(lang, page)}${anchorId ? `#${encodeURIComponent(anchorId)}` : ''}`;
+                    const currentUrl = `${window.location.pathname}${window.location.hash}`;
+                    if (targetUrl !== currentUrl) {
+                        const method = replace ? 'replaceState' : 'pushState';
+                        window.history[method]({ lang, page, anchorId }, '', targetUrl);
+                    }
+                    this.syncHeadMetadata(lang, page);
+                },
+
+                scrollToPageAnchor(anchorId, behavior = 'smooth') {
+                    const el = anchorId ? document.getElementById(anchorId) : null;
+                    if (!el) return;
+
+                    const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+                    window.scrollTo({ top: y, behavior });
+                },
+
+                finalizePageSwitch(page, anchorId = null, anchorBehavior = 'smooth') {
+                    setTimeout(() => {
+                        initScrollEngine();
+                        refreshLucideIcons();
+                        if (page === 'apartments') {
+                            this.initAmapEmbed();
+                        }
+                        if (anchorId) {
+                            this.scrollToPageAnchor(anchorId, anchorBehavior);
+                            return;
+                        }
+                        window.scrollTo({ top: 0, behavior: 'auto' });
+                    }, 100);
+                },
+
+                switchLanguage(nextLang) {
+                    const targetLang = this.routeLangMap[nextLang] ? nextLang : 'sc';
+                    const anchorId = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : null;
+                    this.switchPage(this.page, anchorId, { lang: targetLang });
+                },
+
+                isPageActive(targetPage) {
+                    if (targetPage === 'apartments') {
+                        return this.page === 'apartments' || this.page.startsWith('apartment-');
+                    }
+                    return this.page === targetPage;
+                },
 
                 // ===== AMap Embed (Page 4B reserved map area) =====
                 amapEmbedInited: false,
@@ -1778,36 +1983,26 @@ refreshLucideIcons();
                 },
                 t: window.SDLV_I18N,
                 
-                switchPage(newPage, anchorId = null) {
+                switchPage(newPage, anchorId = null, options = {}) {
                     // Guard: agent pages require login
                     if (newPage === 'agent-dashboard' && !this.agentToken) {
-                        this.page = 'agent-login';
                         this.agentNotify('请先登录代理账号', 'error');
-                        window.scrollTo({ top: 0, behavior: 'auto' });
-                        setTimeout(() => initScrollEngine(), 100);
-                        return;
+                        return this.switchPage('agent-login', null, {
+                            ...options,
+                            lang: options.lang || this.lang,
+                            replace: options.replace
+                        });
                     }
 
                     this.mobileNavOpen = false;
 
-                    this.page = newPage;
-                    window.scrollTo({ top: 0, behavior: 'auto' });
-                    
-                    // 等待页面DOM更新后，重新初始化动画引擎
-                    setTimeout(() => {
-                        initScrollEngine();
-                        refreshLucideIcons();
-                        if (newPage === 'apartments') {
-                            this.initAmapEmbed();
-                        }
-                        if(anchorId) {
-                            const el = document.getElementById(anchorId);
-                            if(el) {
-                                const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
-                                window.scrollTo({top: y, behavior: 'smooth'});
-                            }
-                        }
-                    }, 100);
+                    const targetLang = this.routeLangMap[options.lang] ? options.lang : this.lang;
+                    const targetPage = this.normalizePage(newPage);
+
+                    this.lang = targetLang;
+                    this.page = targetPage;
+                    this.syncBrowserUrl(targetLang, targetPage, anchorId, Boolean(options.replace));
+                    this.finalizePageSwitch(targetPage, anchorId, options.anchorBehavior || 'smooth');
                 }
             }
         }
