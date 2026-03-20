@@ -7,7 +7,8 @@
     "start": "node server.js",
     "server": "node server.js",
     "scrape": "node catch.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "export:sdlvhk": "node scripts/export_sdlvhk_routes.js"
   },
   "keywords": [
     "study-abroad",
