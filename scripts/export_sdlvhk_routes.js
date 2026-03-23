@@ -5,6 +5,10 @@ const vm = require('vm');
 const siteDir = path.join(__dirname, '..', 'sites', 'sdlvhk.com');
 const sourceIndexPath = path.join(siteDir, 'index.html');
 const i18nSourcePath = path.join(siteDir, 'assets', 'i18n.js');
+const appSourcePath = path.join(siteDir, 'assets', 'app.js');
+const siteBaseUrl = 'https://sdlvhk.com';
+const siteName = 'SDLV';
+const defaultOgImage = 'https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp';
 
 const langSegments = {
   sc: 'zh-CN',
@@ -125,11 +129,24 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
+function escapeXml(value) {
+  return escapeHtml(value).replace(/'/g, '&apos;');
+}
+
 function loadTranslations() {
   const sandbox = { window: {} };
   vm.createContext(sandbox);
   vm.runInContext(fs.readFileSync(i18nSourcePath, 'utf8'), sandbox);
   return sandbox.window.SDLV_I18N || {};
+}
+
+function loadAppConfig() {
+  const appSource = fs.readFileSync(appSourcePath, 'utf8');
+  const wechatIdMatch = appSource.match(/wechatId:\s*'([^']+)'/);
+
+  return {
+    wechatId: wechatIdMatch ? wechatIdMatch[1] : ''
+  };
 }
 
 function buildRoutePath(langKey, pageKey) {
@@ -181,6 +198,60 @@ function findMatchingDivEnd(html, openStart) {
   }
 
   throw new Error(`Unable to find closing </div> for block starting at ${openStart}`);
+}
+
+function findMatchingTemplateEnd(html, openStart) {
+  const templateTagPattern = /<\/?template\b[^>]*>/g;
+  templateTagPattern.lastIndex = openStart;
+
+  let depth = 0;
+  let match;
+
+  while ((match = templateTagPattern.exec(html))) {
+    const tag = match[0];
+    const isClosing = tag.startsWith('</');
+
+    if (!isClosing) {
+      depth += 1;
+    } else {
+      depth -= 1;
+    }
+
+    if (depth === 0) {
+      return match.index + tag.length;
+    }
+  }
+
+  throw new Error(`Unable to find closing </template> for block starting at ${openStart}`);
+}
+
+function findMatchingElementEnd(html, openStart, tagName) {
+  const tagPattern = new RegExp(`<\\/?${tagName}\\b[^>]*>`, 'g');
+  tagPattern.lastIndex = openStart;
+
+  let depth = 0;
+  let match;
+
+  while ((match = tagPattern.exec(html))) {
+    const tag = match[0];
+    const isClosing = tag.startsWith('</');
+    const isSelfClosing = !isClosing && /\/>$/.test(tag);
+
+    if (!isClosing) {
+      depth += 1;
+      if (isSelfClosing) {
+        depth -= 1;
+      }
+    } else {
+      depth -= 1;
+    }
+
+    if (depth === 0) {
+      return match.index + tag.length;
+    }
+  }
+
+  throw new Error(`Unable to find closing </${tagName}> for block starting at ${openStart}`);
 }
 
 function extractPageBlocks(mainInner) {
@@ -301,27 +372,30 @@ function replaceDynamicHrefs(html, langKey, pageKey) {
   });
 }
 
-function resolveTextExpression(expr, translations, langKey) {
-  const directMatch = expr.match(/^t\[lang\]\.([A-Za-z0-9_]+)$/);
-  if (directMatch) {
-    return translations[langKey]?.[directMatch[1]] ?? null;
+function evaluateExpression(expr, context) {
+  try {
+    return vm.runInNewContext(expr, {
+      ...context,
+      Math,
+      Number,
+      String,
+      Boolean,
+      Array,
+      Object,
+      JSON
+    }, { timeout: 50 });
+  } catch {
+    return undefined;
   }
-
-  const fallbackMatch = expr.match(/^t\[lang\]\.([A-Za-z0-9_]+)\s*\|\|\s*'([^']*)'$/);
-  if (fallbackMatch) {
-    return translations[langKey]?.[fallbackMatch[1]] ?? fallbackMatch[2];
-  }
-
-  return null;
 }
 
-function replaceSimpleXText(html, translations, langKey) {
+function replaceSimpleXText(html, context) {
   return html.replace(/<([a-zA-Z][\w:-]*)([^>]*)\s+x-text="([^"]+)"([^>]*)>([\s\S]*?)<\/\1>/g, (match, tagName, beforeAttrs, expr, afterAttrs, innerHtml) => {
     if (innerHtml.trim() && /</.test(innerHtml)) {
       return match;
     }
 
-    const resolvedText = resolveTextExpression(expr.trim(), translations, langKey);
+    const resolvedText = evaluateExpression(expr.trim(), context);
     if (resolvedText == null) {
       return match;
     }
@@ -330,19 +404,227 @@ function replaceSimpleXText(html, translations, langKey) {
   });
 }
 
+function replaceBoundAttributes(html, context) {
+  return html.replace(/\s:([a-zA-Z-]+)="([^"]+)"/g, (match, attributeName, expr) => {
+    if (!['src', 'alt', 'title', 'aria-label'].includes(attributeName)) {
+      return match;
+    }
+
+    const resolvedValue = evaluateExpression(expr.trim(), context);
+    if (typeof resolvedValue === 'undefined') {
+      return match;
+    }
+
+    if (resolvedValue == null || resolvedValue === false) {
+      return '';
+    }
+
+    return ` ${attributeName}="${escapeHtml(resolvedValue)}"`;
+  });
+}
+
+function parseForExpression(expr) {
+  const match = expr.trim().match(/^(?:\(([^)]+)\)|([A-Za-z_$][\w$]*))\s+in\s+([\s\S]+)$/);
+  if (!match) {
+    return null;
+  }
+
+  const loopVars = (match[1] || match[2]).split(',').map((entry) => entry.trim()).filter(Boolean);
+  return {
+    loopVars,
+    iterableExpr: match[3].trim()
+  };
+}
+
+function renderLoopTemplates(html, context) {
+  let cursor = 0;
+
+  while (cursor < html.length) {
+    const markerIndex = html.indexOf('x-for="', cursor);
+    if (markerIndex === -1) {
+      break;
+    }
+
+    const templateStart = html.lastIndexOf('<template', markerIndex);
+    if (templateStart === -1) {
+      cursor = markerIndex + 7;
+      continue;
+    }
+
+    const templateOpenEnd = html.indexOf('>', markerIndex);
+    if (templateOpenEnd === -1) {
+      break;
+    }
+
+    const templateEnd = findMatchingTemplateEnd(html, templateStart);
+    const openingTag = html.slice(templateStart, templateOpenEnd + 1);
+    const exprMatch = openingTag.match(/x-for="([^"]+)"/);
+    const parsedExpression = exprMatch ? parseForExpression(exprMatch[1]) : null;
+    const iterableValue = parsedExpression ? evaluateExpression(parsedExpression.iterableExpr, context) : undefined;
+
+    if (!parsedExpression || !iterableValue || typeof iterableValue[Symbol.iterator] !== 'function') {
+      cursor = templateEnd;
+      continue;
+    }
+
+    const innerHtml = html.slice(templateOpenEnd + 1, templateEnd - '</template>'.length);
+    const rendered = Array.from(iterableValue).map((item, index) => {
+      const childContext = {
+        ...context,
+        [parsedExpression.loopVars[0]]: item
+      };
+
+      if (parsedExpression.loopVars[1]) {
+        childContext[parsedExpression.loopVars[1]] = index;
+      }
+
+      return renderFragment(innerHtml, childContext);
+    }).join('');
+
+    html = `${html.slice(0, templateStart)}${rendered}${html.slice(templateEnd)}`;
+    cursor = templateStart + rendered.length;
+  }
+
+  return html;
+}
+
+function renderConditionalTemplates(html, context) {
+  let cursor = 0;
+
+  while (cursor < html.length) {
+    const markerIndex = html.indexOf('x-if="', cursor);
+    if (markerIndex === -1) {
+      break;
+    }
+
+    const templateStart = html.lastIndexOf('<template', markerIndex);
+    if (templateStart === -1) {
+      cursor = markerIndex + 6;
+      continue;
+    }
+
+    const templateOpenEnd = html.indexOf('>', markerIndex);
+    if (templateOpenEnd === -1) {
+      break;
+    }
+
+    const templateEnd = findMatchingTemplateEnd(html, templateStart);
+    const openingTag = html.slice(templateStart, templateOpenEnd + 1);
+    const exprMatch = openingTag.match(/x-if="([^"]+)"/);
+    const shouldRender = exprMatch ? evaluateExpression(exprMatch[1], context) : undefined;
+
+    if (typeof shouldRender === 'undefined') {
+      cursor = templateEnd;
+      continue;
+    }
+
+    const innerHtml = html.slice(templateOpenEnd + 1, templateEnd - '</template>'.length);
+    const replacement = shouldRender ? renderFragment(innerHtml, context) : '';
+    html = `${html.slice(0, templateStart)}${replacement}${html.slice(templateEnd)}`;
+    cursor = templateStart + replacement.length;
+  }
+
+  return html;
+}
+
+function renderShownElements(html, context) {
+  let cursor = 0;
+
+  while (cursor < html.length) {
+    const markerIndex = html.indexOf('x-show="', cursor);
+    if (markerIndex === -1) {
+      break;
+    }
+
+    const openStart = html.lastIndexOf('<', markerIndex);
+    if (openStart === -1) {
+      cursor = markerIndex + 7;
+      continue;
+    }
+
+    const openingTagMatch = html.slice(openStart).match(/^<([a-zA-Z][\w:-]*)\b[^>]*>/);
+    if (!openingTagMatch) {
+      cursor = markerIndex + 7;
+      continue;
+    }
+
+    const tagName = openingTagMatch[1];
+    const openingTag = openingTagMatch[0];
+    const exprMatch = openingTag.match(/x-show="([^"]+)"/);
+    const openEnd = openStart + openingTag.length;
+    const elementEnd = findMatchingElementEnd(html, openStart, tagName);
+    const shouldRender = exprMatch ? evaluateExpression(exprMatch[1], context) : undefined;
+
+    if (typeof shouldRender === 'undefined') {
+      cursor = elementEnd;
+      continue;
+    }
+
+    if (!shouldRender) {
+      html = `${html.slice(0, openStart)}${html.slice(elementEnd)}`;
+      cursor = openStart;
+      continue;
+    }
+
+    const closingTag = `</${tagName}>`;
+    const innerHtml = html.slice(openEnd, elementEnd - closingTag.length);
+    const strippedOpeningTag = openingTag.replace(/\s+x-show="[^"]*"/, '');
+    const replacement = `${strippedOpeningTag}${renderFragment(innerHtml, context)}${closingTag}`;
+    html = `${html.slice(0, openStart)}${replacement}${html.slice(elementEnd)}`;
+    cursor = openStart + replacement.length;
+  }
+
+  return html;
+}
+
+function renderFragment(html, context) {
+  let renderedHtml = html;
+  renderedHtml = renderLoopTemplates(renderedHtml, context);
+  renderedHtml = renderConditionalTemplates(renderedHtml, context);
+  renderedHtml = renderShownElements(renderedHtml, context);
+  renderedHtml = replaceBoundAttributes(renderedHtml, context);
+  renderedHtml = replaceSimpleXText(renderedHtml, context);
+  return renderedHtml;
+}
+
 function buildAlternateLinks(pageKey) {
   const lines = Object.entries(langSegments).map(([langKey, langSegment]) => {
-    return `    <link id="alternate-link-${langKey}" rel="alternate" hreflang="${langSegment}" href="https://sdlvhk.com${buildRoutePath(langKey, pageKey)}">`;
+    return `    <link id="alternate-link-${langKey}" rel="alternate" hreflang="${langSegment}" href="${siteBaseUrl}${buildRoutePath(langKey, pageKey)}">`;
   });
-  lines.push(`    <link id="alternate-link-x-default" rel="alternate" hreflang="x-default" href="https://sdlvhk.com${buildRoutePath('sc', pageKey)}">`);
+  lines.push(`    <link id="alternate-link-x-default" rel="alternate" hreflang="x-default" href="${siteBaseUrl}${buildRoutePath('sc', pageKey)}">`);
   return lines.join('\n');
 }
 
+function buildMetaHead(meta, canonicalHref, pageKey, langKey) {
+  return `<title>${escapeHtml(meta.title)}</title>
+    <meta name="description" content="${escapeHtml(meta.description)}">
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="${escapeHtml(siteName)}">
+    <meta property="og:title" content="${escapeHtml(meta.title)}">
+    <meta property="og:description" content="${escapeHtml(meta.description)}">
+    <meta property="og:url" content="${canonicalHref}">
+    <meta property="og:image" content="${defaultOgImage}">
+    <meta property="og:locale" content="${langSegments[langKey]}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${escapeHtml(meta.title)}">
+    <meta name="twitter:description" content="${escapeHtml(meta.description)}">
+    <meta name="twitter:image" content="${defaultOgImage}">
+    <link id="canonical-link" rel="canonical" href="${canonicalHref}">
+${buildAlternateLinks(pageKey)}`;
+}
+
 function renderHtml(template, langKey, pageKey) {
-  const { shell, blocks, translations } = template;
+  const { shell, blocks, translations, appConfig } = template;
   const meta = pageMeta[pageKey][langKey];
   const routePath = buildRoutePath(langKey, pageKey);
-  const canonicalHref = `https://sdlvhk.com${routePath}`;
+  const canonicalHref = `${siteBaseUrl}${routePath}`;
+  const renderContext = {
+    t: { lang: translations[langKey] },
+    lang: 'lang',
+    wechatId: appConfig.wechatId,
+    wechatCopied: false
+  };
 
   let html = `${shell.beforeMain}\n${stripPageWrapperDirectives(blocks[pageKey])}\n${shell.afterMain}`;
 
@@ -353,11 +635,11 @@ function renderHtml(template, langKey, pageKey) {
 
   html = html.replace(
     /<title>[\s\S]*?<\/title>/,
-    `<title>${escapeHtml(meta.title)}</title>\n    <meta name="description" content="${escapeHtml(meta.description)}">\n    <meta name="robots" content="index,follow">\n    <link id="canonical-link" rel="canonical" href="${canonicalHref}">\n${buildAlternateLinks(pageKey)}`
+    buildMetaHead(meta, canonicalHref, pageKey, langKey)
   );
 
   html = replaceDynamicHrefs(html, langKey, pageKey);
-  html = replaceSimpleXText(html, translations, langKey);
+  html = renderFragment(html, renderContext);
 
   return html;
 }
@@ -378,21 +660,49 @@ function removeGeneratedRoots() {
   });
 }
 
+function writeSitemapFiles() {
+  const urls = [];
+
+  Object.keys(langSegments).forEach((langKey) => {
+    Object.keys(pageSlugs).forEach((pageKey) => {
+      urls.push(`${siteBaseUrl}${buildRoutePath(langKey, pageKey)}`);
+    });
+  });
+
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map((url) => `  <url><loc>${escapeXml(url)}</loc></url>`).join('\n')}
+</urlset>
+`;
+
+  const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: ${siteBaseUrl}/sitemap.xml
+`;
+
+  fs.writeFileSync(path.join(siteDir, 'sitemap.xml'), sitemapXml, 'utf8');
+  fs.writeFileSync(path.join(siteDir, 'robots.txt'), robotsTxt, 'utf8');
+}
+
 function main() {
   const sourceHtml = fs.readFileSync(sourceIndexPath, 'utf8');
   const shell = splitDocument(sourceHtml);
   const blocks = extractPageBlocks(shell.mainInner);
   const translations = loadTranslations();
+  const appConfig = loadAppConfig();
 
   removeGeneratedRoots();
 
   Object.keys(langSegments).forEach((langKey) => {
     Object.keys(pageSlugs).forEach((pageKey) => {
-      writeRouteFile(langKey, pageKey, { shell, blocks, translations });
+      writeRouteFile(langKey, pageKey, { shell, blocks, translations, appConfig });
     });
   });
 
-  console.log('Generated static route HTML under sites/sdlvhk.com/{zh-CN,zh-HK,en}/');
+  writeSitemapFiles();
+
+  console.log('Generated static route HTML under sites/sdlvhk.com/{zh-CN,zh-HK,en}/ with sitemap.xml and robots.txt.');
 }
 
 main();

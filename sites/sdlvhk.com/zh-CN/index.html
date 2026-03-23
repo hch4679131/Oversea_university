@@ -6,6 +6,17 @@
     <title>汇生会 SDLV | Global Education &amp; Career Elite</title>
     <meta name="description" content="汇生会 SDLV 提供香港及全球留学申请、学生公寓与职涯规划一站式服务。">
     <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SDLV">
+    <meta property="og:title" content="汇生会 SDLV | Global Education &amp; Career Elite">
+    <meta property="og:description" content="汇生会 SDLV 提供香港及全球留学申请、学生公寓与职涯规划一站式服务。">
+    <meta property="og:url" content="https://sdlvhk.com/zh-CN">
+    <meta property="og:image" content="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp">
+    <meta property="og:locale" content="zh-CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="汇生会 SDLV | Global Education &amp; Career Elite">
+    <meta name="twitter:description" content="汇生会 SDLV 提供香港及全球留学申请、学生公寓与职涯规划一站式服务。">
+    <meta name="twitter:image" content="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp">
     <link id="canonical-link" rel="canonical" href="https://sdlvhk.com/zh-CN">
     <link id="alternate-link-sc" rel="alternate" hreflang="zh-CN" href="https://sdlvhk.com/zh-CN">
     <link id="alternate-link-tc" rel="alternate" hreflang="zh-HK" href="https://sdlvhk.com/zh-HK">
@@ -335,17 +346,17 @@
                             <div @click="switchPage('study')" class="group bg-academic-navy px-7 py-8 border-r border-slate-100 cursor-pointer shadow-2xl hover:bg-red-800 transition-all overflow-hidden">
                                 <div class="w-12 h-1 bg-white/40 mb-5 group-hover:w-20 transition-all duration-500"></div>
                                 <h3 class="text-xl font-bold text-white mb-2">留学申请</h3>
-                                <p class="text-white/80 text-xs leading-relaxed" x-text="t[lang].biz_study_sub + '，' + t[lang].biz_study_sub2"></p>
+                                <p class="text-white/80 text-xs leading-relaxed">我们为您精确匹配学业与发展目标，探索我们的定制留学方案</p>
                             </div>
                             <div @click="switchPage('apartments')" class="group bg-white px-7 py-8 border-r border-slate-100 cursor-pointer shadow-xl hover:bg-red-800 transition-all overflow-hidden">
                                 <div class="w-12 h-1 bg-academic-red group-hover:bg-white/40 mb-5 group-hover:w-20 transition-all duration-500"></div>
                                 <h3 class="text-xl font-bold text-academic-navy group-hover:text-white transition-colors mb-2">汇生会社</h3>
-                                <p class="text-academic-navy/80 group-hover:text-white/80 transition-colors text-xs leading-relaxed" x-text="t[lang].biz_apt_sub + '，' + t[lang].biz_apt_locs"></p>
+                                <p class="text-academic-navy/80 group-hover:text-white/80 transition-colors text-xs leading-relaxed">探索我们遍布全港的学生居所，我们为您提供便捷可靠的理想居所</p>
                             </div>
                             <div @click="switchPage('career')" class="group bg-white px-7 py-8 cursor-pointer shadow-xl hover:bg-red-800 transition-all overflow-hidden">
                                 <div class="w-12 h-1 bg-academic-red group-hover:bg-white/40 mb-5 group-hover:w-20 transition-all duration-500"></div>
                                 <h3 class="text-xl font-bold text-academic-navy group-hover:text-white transition-colors mb-2">职涯规划</h3>
-                                <p class="text-slate-500 group-hover:text-white/80 transition-colors text-xs leading-relaxed" x-text="t[lang].biz_career_sub + '，' + t[lang].biz_career_tags"></p>
+                                <p class="text-slate-500 group-hover:text-white/80 transition-colors text-xs leading-relaxed">告诉我们您的理想规划，我们为您铺就坚实的道路与机遇</p>
                             </div>
                         </div>
                     </div>
@@ -831,13 +842,12 @@
                         </div>
                         <div class="flex flex-col justify-center">
                             <div class="text-xs tracking-widest uppercase text-black/50">WeChat ID</div>
-                            <div class="mt-2 text-lg font-bold break-all" x-text="wechatId"></div>
+                            <div class="mt-2 text-lg font-bold break-all">SDLV_Consultant_001</div>
 
                             <button type="button"
                                     class="mt-4 w-full px-4 py-2 bg-black text-white font-bold hover:bg-gold-400 hover:text-black transition"
                                     @click="copyWeChatId()"
-                                    x-text="wechatCopied ? '已复制' : '复制微信号'">
-                            </button>
+                                   >复制微信号</button>
 
                             <button type="button"
                                     class="mt-3 w-full px-4 py-2 border border-black/15 text-black font-bold hover:border-gold-400 hover:text-black transition"

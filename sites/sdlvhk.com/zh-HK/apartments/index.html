@@ -6,6 +6,17 @@
     <title>學生公寓 | 滙生會 SDLV</title>
     <meta name="description" content="查看滙生會 SDLV 學生公寓分布、配套設施、公寓展示與住戶評價。">
     <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SDLV">
+    <meta property="og:title" content="學生公寓 | 滙生會 SDLV">
+    <meta property="og:description" content="查看滙生會 SDLV 學生公寓分布、配套設施、公寓展示與住戶評價。">
+    <meta property="og:url" content="https://sdlvhk.com/zh-HK/apartments">
+    <meta property="og:image" content="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp">
+    <meta property="og:locale" content="zh-HK">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="學生公寓 | 滙生會 SDLV">
+    <meta name="twitter:description" content="查看滙生會 SDLV 學生公寓分布、配套設施、公寓展示與住戶評價。">
+    <meta name="twitter:image" content="https://static.sdlvhk.com/%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/other/WImage%202.2%20About%20SDLV%20on%20Frontpage.webp">
     <link id="canonical-link" rel="canonical" href="https://sdlvhk.com/zh-HK/apartments">
     <link id="alternate-link-sc" rel="alternate" hreflang="zh-CN" href="https://sdlvhk.com/zh-CN/apartments">
     <link id="alternate-link-tc" rel="alternate" hreflang="zh-HK" href="https://sdlvhk.com/zh-HK/apartments">
@@ -346,7 +357,7 @@
 
                     <!-- Life support cards -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 scrub-item anim-fade-up">
-                        <template x-for="(card, idx) in t[lang].apt_life_cards" :key="idx">
+                        
                             <div class="bg-white border border-slate-100 shadow-xl p-8 relative group hover:-translate-y-2 transition-transform duration-500">
                                 <div class="absolute top-0 left-0 w-full h-1 bg-slate-200 group-hover:bg-academic-red transition-colors"></div>
                                 
@@ -356,17 +367,92 @@
                                     </div>
                                 </div>
                                 
-                                <h4 class="text-xl font-serif font-bold text-academic-navy mb-4" x-text="card.title"></h4>
+                                <h4 class="text-xl font-serif font-bold text-academic-navy mb-4">設施設備</h4>
                                 <ul class="space-y-3 text-sm text-slate-500 leading-relaxed font-light">
-                                    <template x-for="(row, rIdx) in card.items" :key="rIdx">
+                                    
                                         <li class="flex flex-col">
-                                            <span class="font-bold text-slate-800" x-text="row.k"></span>
-                                            <span x-text="row.v"></span>
+                                            <span class="font-bold text-slate-800">智能門禁及安保：</span>
+                                            <span>安全可靠，出入安心。</span>
                                         </li>
-                                    </template>
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">全套傢俱家電：</span>
+                                            <span>輕鬆拎包入住，享受品質生活。</span>
+                                        </li>
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">WIFI 覆蓋：</span>
+                                            <span>學習娛樂，網絡無憂。</span>
+                                        </li>
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">定期保潔：</span>
+                                            <span>提供定期公共區域清潔，生活無憂。</span>
+                                        </li>
+                                    
                                 </ul>
                             </div>
-                        </template>
+                        
+                            <div class="bg-white border border-slate-100 shadow-xl p-8 relative group hover:-translate-y-2 transition-transform duration-500">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-slate-200 group-hover:bg-academic-red transition-colors"></div>
+                                
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-10 h-10 rounded-full bg-academic-navy/5 flex items-center justify-center text-academic-navy group-hover:text-academic-red transition-colors">
+                                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                    </div>
+                                </div>
+                                
+                                <h4 class="text-xl font-serif font-bold text-academic-navy mb-4">專屬服務</h4>
+                                <ul class="space-y-3 text-sm text-slate-500 leading-relaxed font-light">
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">專屬管家服務：</span>
+                                            <span>快速響應諮詢、維修等各類生活需求。</span>
+                                        </li>
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">入住指引：</span>
+                                            <span>提供清晰入住指引，讓你輕鬆「回家」。</span>
+                                        </li>
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">快速維修響應：</span>
+                                            <span>設施故障，專業師傅及時上門。</span>
+                                        </li>
+                                    
+                                </ul>
+                            </div>
+                        
+                            <div class="bg-white border border-slate-100 shadow-xl p-8 relative group hover:-translate-y-2 transition-transform duration-500">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-slate-200 group-hover:bg-academic-red transition-colors"></div>
+                                
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-10 h-10 rounded-full bg-academic-navy/5 flex items-center justify-center text-academic-navy group-hover:text-academic-red transition-colors">
+                                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                    </div>
+                                </div>
+                                
+                                <h4 class="text-xl font-serif font-bold text-academic-navy mb-4">社群特色</h4>
+                                <ul class="space-y-3 text-sm text-slate-500 leading-relaxed font-light">
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">定期社群活動：</span>
+                                            <span>節日派對、職業分享、探索城市、拓展人脈。</span>
+                                        </li>
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">線上社區互助：</span>
+                                            <span>入住即融入，學生、生活、求職資訊共享。</span>
+                                        </li>
+                                    
+                                        <li class="flex flex-col">
+                                            <span class="font-bold text-slate-800">共享學習休閒空間：</span>
+                                            <span>部分居社提供共享空間。</span>
+                                        </li>
+                                    
+                                </ul>
+                            </div>
+                        
                     </div>
 
                     <div class="h-20 border-b border-slate-200/60 mb-20 w-1/2 mx-auto"></div>
@@ -377,46 +463,186 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-                        <template x-for="(card, idx) in t[lang].apt_compare_cards" :key="idx">
+                        
                             <div class="scrub-item anim-fade-up flex">
                                 <!-- 高亮主推卡片 (SDLV) -->
-                                <div x-show="idx === 1" class="w-full bg-academic-navy text-white p-8 md:p-10 shadow-2xl relative overflow-hidden group transform lg:-translate-y-4 rounded-sm">
+                                
+
+                                <!-- 普通对比卡片 -->
+                                <div class="w-full bg-white border border-slate-100 shadow-lg p-8 md:p-10 rounded-sm">
+                                    <div class="flex items-center gap-3 mb-6 opacity-50">
+                                        <i data-lucide="box" class="w-5 h-5 text-slate-400"></i>
+                                        <div class="h-[1px] flex-1 bg-slate-200"></div>
+                                    </div>
+                                    <h4 class="text-xl font-serif font-bold text-slate-400 mb-8">其他學生公寓</h4>
+                                    <ul class="space-y-4 text-sm text-slate-500 font-light leading-relaxed">
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>高昂中介費</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>高昂租金</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>隱形成本多</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>住客人員混雜</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>設施老舊或不齊全</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>缺乏維修保障</span>
+                                            </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        
+                            <div class="scrub-item anim-fade-up flex">
+                                <!-- 高亮主推卡片 (SDLV) -->
+                                <div class="w-full bg-academic-navy text-white p-8 md:p-10 shadow-2xl relative overflow-hidden group transform lg:-translate-y-4 rounded-sm">
                                     <div class="absolute top-0 right-0 w-48 h-48 bg-academic-red/20 rounded-full blur-[60px] -mr-10 -mt-10 pointer-events-none"></div>
                                     <div class="relative z-10">
                                         <div class="flex items-center gap-3 mb-6">
                                             <i data-lucide="sparkles" class="w-6 h-6 text-academic-red"></i>
                                             <div class="h-[1px] flex-1 bg-white/20"></div>
                                         </div>
-                                        <h4 class="text-2xl md:text-3xl font-serif font-bold text-white mb-8" x-text="card.title"></h4>
+                                        <h4 class="text-2xl md:text-3xl font-serif font-bold text-white mb-8">滙生會學生居社</h4>
                                         <ul class="space-y-4 text-base text-white/80 font-light leading-relaxed">
-                                            <template x-for="(b, bIdx) in card.bullets" :key="bIdx">
+                                            
                                                 <li class="flex gap-4">
                                                     <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
-                                                    <span x-text="b"></span>
+                                                    <span>透明合理的定價</span>
                                                 </li>
-                                            </template>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>早鳥優惠</span>
+                                                </li>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>無隱藏收費</span>
+                                                </li>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>安全保障</span>
+                                                </li>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>設施齊全</span>
+                                                </li>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>地理位置優越</span>
+                                                </li>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>日常維修</span>
+                                                </li>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>定期保潔</span>
+                                                </li>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>學生聯誼活動</span>
+                                                </li>
+                                            
+                                                <li class="flex gap-4">
+                                                    <span class="mt-2 rounded-full w-1.5 h-1.5 bg-academic-red shrink-0 shadow-[0_0_8px_rgba(200,16,46,0.8)]"></span>
+                                                    <span>一站式生活支持服務</span>
+                                                </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
 
                                 <!-- 普通对比卡片 -->
-                                <div x-show="idx !== 1" class="w-full bg-white border border-slate-100 shadow-lg p-8 md:p-10 rounded-sm">
+                                
+                            </div>
+                        
+                            <div class="scrub-item anim-fade-up flex">
+                                <!-- 高亮主推卡片 (SDLV) -->
+                                
+
+                                <!-- 普通对比卡片 -->
+                                <div class="w-full bg-white border border-slate-100 shadow-lg p-8 md:p-10 rounded-sm">
                                     <div class="flex items-center gap-3 mb-6 opacity-50">
                                         <i data-lucide="box" class="w-5 h-5 text-slate-400"></i>
                                         <div class="h-[1px] flex-1 bg-slate-200"></div>
                                     </div>
-                                    <h4 class="text-xl font-serif font-bold text-slate-400 mb-8" x-text="card.title"></h4>
+                                    <h4 class="text-xl font-serif font-bold text-slate-400 mb-8">普通私人住宅</h4>
                                     <ul class="space-y-4 text-sm text-slate-500 font-light leading-relaxed">
-                                        <template x-for="(b, bIdx) in card.bullets" :key="bIdx">
+                                        
                                             <li class="flex gap-4">
                                                 <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
-                                                <span x-text="b"></span>
+                                                <span>高昂中介費</span>
                                             </li>
-                                        </template>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>高昂租金</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>隱形成本多</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>住客人員混雜</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>設施老舊或不齊全</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>安全隱患多</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>缺乏維修保障</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>位置分散</span>
+                                            </li>
+                                        
+                                            <li class="flex gap-4">
+                                                <span class="mt-2 rounded-full w-1.5 h-1.5 bg-slate-300 shrink-0"></span>
+                                                <span>自費 WIFI</span>
+                                            </li>
+                                        
                                     </ul>
                                 </div>
                             </div>
-                        </template>
+                        
                     </div>
                 </div>
             </section>
@@ -745,13 +971,12 @@
                         </div>
                         <div class="flex flex-col justify-center">
                             <div class="text-xs tracking-widest uppercase text-black/50">WeChat ID</div>
-                            <div class="mt-2 text-lg font-bold break-all" x-text="wechatId"></div>
+                            <div class="mt-2 text-lg font-bold break-all">SDLV_Consultant_001</div>
 
                             <button type="button"
                                     class="mt-4 w-full px-4 py-2 bg-black text-white font-bold hover:bg-gold-400 hover:text-black transition"
                                     @click="copyWeChatId()"
-                                    x-text="wechatCopied ? '已复制' : '复制微信号'">
-                            </button>
+                                   >复制微信号</button>
 
                             <button type="button"
                                     class="mt-3 w-full px-4 py-2 border border-black/15 text-black font-bold hover:border-gold-400 hover:text-black transition"
