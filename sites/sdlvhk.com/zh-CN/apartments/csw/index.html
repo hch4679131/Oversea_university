@@ -344,58 +344,7 @@
             </section>
 
             <!-- 我们的房间（与 PAGE 4B 完全一致结构） -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ cswBookingOpen: false, cswRoomsPhotos: [
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/1号房/W长沙湾1号房.webp', label: '1号房', alt: '1号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/1号房/W长沙湾1号房%20浴室.webp', label: '1号房', alt: '1号房 浴室' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾2号房.webp', label: '2号房', alt: '2号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾2号房%20浴室.webp', label: '2号房', alt: '2号房 浴室' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾%202号房%20浴室2.webp', label: '2号房', alt: '2号房 浴室2' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾%203号房.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾3号房.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾%203号房%2002.webp', label: '3号房', alt: '3号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20房间_结果.webp', label: '4号房', alt: '4号房 房间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20房间%2002_结果.webp', label: '4号房', alt: '4号房 房间 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20浴室_结果.webp', label: '4号房', alt: '4号房 浴室' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2001.webp', label: '5号房', alt: '5号房 01' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2002.webp', label: '5号房', alt: '5号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2003.webp', label: '5号房', alt: '5号房 03' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%20房间_结果.webp', label: '6号房', alt: '6号房 房间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%2002房间_结果.webp', label: '6号房', alt: '6号房 02房间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%2003房间_结果.webp', label: '6号房', alt: '6号房 03房间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2001_结果.webp', label: '7号房', alt: '7号房 01' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2002_结果.webp', label: '7号房', alt: '7号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2003_结果.webp', label: '7号房', alt: '7号房 03' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/8号房/长沙湾%208号房%2001_结果.webp', label: '8号房', alt: '8号房 01' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/8号房/长沙湾%208号房%2002_结果.webp', label: '8号房', alt: '8号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W学生取信处.webp', label: '公共区域', alt: '公共区域 学生取信处' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20休息区%2B洗衣区%20全景.webp', label: '公共区域', alt: '公共区域 休息区+洗衣区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20休息区.webp', label: '公共区域', alt: '公共区域 休息区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20健身区.webp', label: '公共区域', alt: '公共区域 健身区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房%2002%20全景.webp', label: '公共区域', alt: '公共区域 厨房 02 全景' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房%20冰箱区域.webp', label: '公共区域', alt: '公共区域 厨房 冰箱区域' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20天台休息区.webp', label: '公共区域', alt: '公共区域 天台休息区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20洗衣房.webp', label: '公共区域', alt: '公共区域 洗衣房' }
-            ], groupedCswRooms: [], cswPublicPhotos: [], cswRoomSlides: {}, init() {
-                const buckets = {};
-                this.cswPublicPhotos = this.cswRoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.cswRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedCswRooms = Object.values(buckets);
-                this.groupedCswRooms.forEach((_, idx) => { this.cswRoomSlides[idx] = 0; });
-            }, prevCswSlide(idx) {
-                const total = this.groupedCswRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.cswRoomSlides[idx] = (this.cswRoomSlides[idx] - 1 + total) % total;
-            }, nextCswSlide(idx) {
-                const total = this.groupedCswRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.cswRoomSlides[idx] = (this.cswRoomSlides[idx] + 1) % total;
-            } }">
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-center">
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
@@ -403,70 +352,235 @@
                         <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
                     </div>
 
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedCswRooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[cswRoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[cswRoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevCswSlide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextCswSlide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                        <template x-if="item.label !== '公共区域'">
-                                            <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="cswBookingOpen = true">抢先以早鸟价格订房</button>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8"><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">1号房</div>
+        <a href="/zh-CN/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/1号房/W长沙湾1号房.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="1号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">1号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/1号房/W长沙湾1号房%20浴室.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="1号房 浴室" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">1号房 浴室</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">2号房</div>
+        <a href="/zh-CN/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾2号房.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="2号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">2号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾2号房%20浴室.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="2号房 浴室" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">2号房 浴室</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾%202号房%20浴室2.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="2号房 浴室2" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">2号房 浴室2</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">3号房</div>
+        <a href="/zh-CN/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾%203号房.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="3号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">3号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾3号房.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="3号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">3号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾%203号房%2002.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="3号房 02" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">3号房 02</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">4号房</div>
+        <a href="/zh-CN/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20房间_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="4号房 房间" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">4号房 房间</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20房间%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="4号房 房间 02" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">4号房 房间 02</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20浴室_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="4号房 浴室" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">4号房 浴室</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">5号房</div>
+        <a href="/zh-CN/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2001.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="5号房 01" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">5号房 01</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2002.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="5号房 02" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">5号房 02</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2003.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="5号房 03" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">5号房 03</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">6号房</div>
+        <a href="/zh-CN/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%20房间_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="6号房 房间" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">6号房 房间</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%2002房间_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="6号房 02房间" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">6号房 02房间</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%2003房间_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="6号房 03房间" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">6号房 03房间</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">7号房</div>
+        <a href="/zh-CN/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2001_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="7号房 01" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">7号房 01</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="7号房 02" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">7号房 02</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2003_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="7号房 03" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">7号房 03</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">8号房</div>
+        <a href="/zh-CN/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/8号房/长沙湾%208号房%2001_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="8号房 01" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">8号房 01</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/8号房/长沙湾%208号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="8号房 02" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">8号房 02</figcaption>
+    </figure>
+      </div>
+    </article></div>
 
                     <div class="mt-12 border-t border-black/15"></div>
                     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in cswPublicPhotos" :key="'csw-public-' + idx">
+                        
                             <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
                                 <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W学生取信处.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 学生取信处" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
                                     <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
                                     </div>
                                 </div>
                             </div>
-                        </template>
+                        
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20休息区%2B洗衣区%20全景.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 休息区+洗衣区" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20休息区.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 休息区" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20健身区.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 健身区" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房%2002%20全景.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 厨房 02 全景" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房%20冰箱区域.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 厨房 冰箱区域" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 厨房" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20天台休息区.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 天台休息区" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20洗衣房.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 洗衣房" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
                     </div>
 
                     <!-- Booking Modal -->
-                    <div class="fixed inset-0 z-[90]" x-show="cswBookingOpen" x-transition.opacity @keydown.escape.window="cswBookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/60" @click="cswBookingOpen = false"></div>
-                        <div class="relative min-h-full flex items-center justify-center p-6">
-                            <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 shadow-2xl">
-                                <div class="flex items-center justify-between px-6 py-5 border-b border-black/10">
-                                    <div>
-                                        <div class="text-2xl font-serif font-bold">立即预定</div>
-                                    </div>
-                                    <button type="button" class="p-2 text-black/60 hover:text-black transition" @click="cswBookingOpen = false" aria-label="Close">
-                                        <i data-lucide="x" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                                <div class="px-6 py-6">
-                                    <div class="text-sm text-black/70">请扫描二维码，立即预定房间!</div>
-                                    <div class="mt-5 border border-black/10 bg-white overflow-hidden aspect-square w-64 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-black/5" loading="lazy" decoding="async">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </section>
 

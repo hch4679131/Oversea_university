@@ -344,31 +344,7 @@
             </section>
 
             <!-- 我们的房间 -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ syp1BookingOpen: false, syp1RoomsPhotos: [
-                { src: '/assets/apartments/syp1/room-a-room-c-01.webp', label: 'RoomA-RoomC', alt: 'RoomA-RoomC' },
-                { src: '/assets/apartments/syp1/room-a-room-c-02.webp', label: 'RoomA-RoomC', alt: 'RoomA-RoomC 02' },
-                { src: '/assets/apartments/syp1/room-d-01.webp', label: 'RoomD', alt: 'RoomD' },
-                { src: '/assets/apartments/syp1/room-e-01.webp', label: 'RoomE', alt: 'RoomE' },
-                { src: '/assets/apartments/syp1/room-e-02.webp', label: 'RoomE', alt: 'RoomE 02' }
-            ], groupedSyp1Rooms: [], syp1RoomSlides: {}, init() {
-                const buckets = {};
-                this.syp1RoomsPhotos.forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedSyp1Rooms = Object.values(buckets);
-                this.groupedSyp1Rooms.forEach((_, idx) => { this.syp1RoomSlides[idx] = 0; });
-            }, prevSyp1Slide(idx) {
-                const total = this.groupedSyp1Rooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.syp1RoomSlides[idx] = (this.syp1RoomSlides[idx] - 1 + total) % total;
-            }, nextSyp1Slide(idx) {
-                const total = this.groupedSyp1Rooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.syp1RoomSlides[idx] = (this.syp1RoomSlides[idx] + 1) % total;
-            } }">
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-center">
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
@@ -376,48 +352,48 @@
                         <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
                     </div>
 
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedSyp1Rooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[syp1RoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[syp1RoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevSyp1Slide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextSyp1Slide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                        <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="syp1BookingOpen = true">抢先以早鸟价格订房</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8"><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">RoomA-RoomC</div>
+        <a href="/en/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="/assets/apartments/syp1/room-a-room-c-01.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="RoomA-RoomC" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">RoomA-RoomC</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="/assets/apartments/syp1/room-a-room-c-02.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="RoomA-RoomC 02" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">RoomA-RoomC 02</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">RoomD</div>
+        <a href="/en/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="/assets/apartments/syp1/room-d-01.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="RoomD" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">RoomD</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">RoomE</div>
+        <a href="/en/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="/assets/apartments/syp1/room-e-01.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="RoomE" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">RoomE</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="/assets/apartments/syp1/room-e-02.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="RoomE 02" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">RoomE 02</figcaption>
+    </figure>
+      </div>
+    </article></div>
 
-                    <div class="fixed inset-0 z-[90]" x-show="syp1BookingOpen" x-transition.opacity @keydown.escape.window="syp1BookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/60" @click="syp1BookingOpen = false"></div>
-                        <div class="relative min-h-full flex items-center justify-center p-6">
-                            <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 shadow-2xl">
-                                <div class="flex items-center justify-between px-6 py-5 border-b border-black/10">
-                                    <div><div class="text-2xl font-serif font-bold">立即预定</div></div>
-                                    <button type="button" class="p-2 text-black/60 hover:text-black transition" @click="syp1BookingOpen = false" aria-label="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
-                                </div>
-                                <div class="px-6 py-6">
-                                    <div class="text-sm text-black/70">请扫描二维码，立即预定房间!</div>
-                                    <div class="mt-5 border border-black/10 bg-white overflow-hidden aspect-square w-64 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-black/5" loading="lazy" decoding="async">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </section>
         </div>

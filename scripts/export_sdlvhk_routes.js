@@ -171,70 +171,51 @@ function splitDocument(sourceHtml) {
   };
 }
 
-function findMatchingDivEnd(html, openStart) {
-  const divTagPattern = /<\/??div\b[^>]*>/g;
-  divTagPattern.lastIndex = openStart;
+function findOpeningTagEnd(html, openStart) {
+  let quote = null;
 
-  let depth = 0;
-  let match;
+  for (let index = openStart; index < html.length; index += 1) {
+    const char = html[index];
 
-  while ((match = divTagPattern.exec(html))) {
-    const tag = match[0];
-    const isClosing = tag.startsWith('</');
-    const isSelfClosing = tag.endsWith('/>');
-
-    if (!isClosing) {
-      depth += 1;
-      if (isSelfClosing) {
-        depth -= 1;
+    if (quote) {
+      if (char === quote && html[index - 1] !== '\\') {
+        quote = null;
       }
-    } else {
-      depth -= 1;
+      continue;
     }
 
-    if (depth === 0) {
-      return match.index + tag.length;
-    }
-  }
-
-  throw new Error(`Unable to find closing </div> for block starting at ${openStart}`);
-}
-
-function findMatchingTemplateEnd(html, openStart) {
-  const templateTagPattern = /<\/?template\b[^>]*>/g;
-  templateTagPattern.lastIndex = openStart;
-
-  let depth = 0;
-  let match;
-
-  while ((match = templateTagPattern.exec(html))) {
-    const tag = match[0];
-    const isClosing = tag.startsWith('</');
-
-    if (!isClosing) {
-      depth += 1;
-    } else {
-      depth -= 1;
+    if (char === '"' || char === '\'') {
+      quote = char;
+      continue;
     }
 
-    if (depth === 0) {
-      return match.index + tag.length;
+    if (char === '>') {
+      return index;
     }
   }
 
-  throw new Error(`Unable to find closing </template> for block starting at ${openStart}`);
+  throw new Error(`Unable to find end of opening tag starting at ${openStart}`);
 }
 
-function findMatchingElementEnd(html, openStart, tagName) {
-  const tagPattern = new RegExp(`<\\/?${tagName}\\b[^>]*>`, 'g');
-  tagPattern.lastIndex = openStart;
-
+function findMatchingTagEnd(html, openStart, tagName) {
+  const tagStartPattern = new RegExp(`^<\\/?${tagName}(?=[\\s>/])`);
   let depth = 0;
-  let match;
+  let cursor = openStart;
 
-  while ((match = tagPattern.exec(html))) {
-    const tag = match[0];
-    const isClosing = tag.startsWith('</');
+  while (cursor < html.length) {
+    const nextTagStart = html.indexOf('<', cursor);
+    if (nextTagStart === -1) {
+      break;
+    }
+
+    if (!tagStartPattern.test(html.slice(nextTagStart))) {
+      cursor = nextTagStart + 1;
+      continue;
+    }
+
+    const tagEnd = findOpeningTagEnd(html, nextTagStart);
+    const tag = html.slice(nextTagStart, tagEnd + 1);
+    const isClosing = tag.startsWith(`</${tagName}`);
     const isSelfClosing = !isClosing && /\/>$/.test(tag);
 
     if (!isClosing) {
@@ -247,11 +228,25 @@ function findMatchingElementEnd(html, openStart, tagName) {
     }
 
     if (depth === 0) {
-      return match.index + tag.length;
+      return tagEnd + 1;
     }
+
+    cursor = tagEnd + 1;
   }
 
   throw new Error(`Unable to find closing </${tagName}> for block starting at ${openStart}`);
+}
+
+function findMatchingDivEnd(html, openStart) {
+  return findMatchingTagEnd(html, openStart, 'div');
+}
+
+function findMatchingTemplateEnd(html, openStart) {
+  return findMatchingTagEnd(html, openStart, 'template');
+}
+
+function findMatchingElementEnd(html, openStart, tagName) {
+  return findMatchingTagEnd(html, openStart, tagName);
 }
 
 function extractPageBlocks(mainInner) {
@@ -389,6 +384,188 @@ function evaluateExpression(expr, context) {
   }
 }
 
+function evaluateDataExpression(expr, context) {
+  return evaluateExpression(`(${expr})`, context);
+}
+
+function stripAttribute(openingTag, attributeName) {
+  const pattern = new RegExp(`\\s+${attributeName}="[^"]*"`, 'g');
+  return openingTag.replace(pattern, '');
+}
+
+function replaceFirstDivByClass(html, classNameFragment, replacement) {
+  let cursor = 0;
+
+  while (cursor < html.length) {
+    const blockStart = html.indexOf('<div', cursor);
+    if (blockStart === -1) {
+      return html;
+    }
+
+    const openEnd = findOpeningTagEnd(html, blockStart);
+    const openingTag = html.slice(blockStart, openEnd + 1);
+    const classMatch = openingTag.match(/\sclass="([^"]+)"/);
+
+    if (classMatch && classMatch[1].includes(classNameFragment)) {
+      const blockEnd = findMatchingDivEnd(html, blockStart);
+      return `${html.slice(0, blockStart)}${replacement}${html.slice(blockEnd)}`;
+    }
+
+    cursor = openEnd + 1;
+  }
+
+  return html;
+}
+
+function buildStaticPhotoGrid(photos, label) {
+  return photos.map((photo) => {
+    const alt = photo.alt || label;
+    return `<figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="${escapeHtml(photo.src)}" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">${escapeHtml(alt)}</figcaption>
+    </figure>`;
+  }).join('');
+}
+
+function buildStaticApartmentRoomCards(groupedRooms, langKey) {
+  const bookingHref = buildRoutePath(langKey, 'contact');
+
+  return `<div class="grid grid-cols-1 md:grid-cols-2 gap-8">${groupedRooms.map((item) => {
+    const showBookingLink = item.label !== '公共区域';
+    return `<article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">${escapeHtml(item.label)}</div>
+        ${showBookingLink ? `<a href="${bookingHref}" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>` : ''}
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        ${buildStaticPhotoGrid(item.photos || [], item.label)}
+      </div>
+    </article>`;
+  }).join('')}</div>`;
+}
+
+function buildStaticPublicPhotoGrid(publicPhotos) {
+  return `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">${publicPhotos.map((item) => {
+    const alt = item.alt || item.label;
+    return `<div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-56 overflow-hidden bg-slate-50">
+        <img src="${escapeHtml(item.src)}" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">${escapeHtml(alt)}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function buildStaticFloorPlanGrid(floorPlans) {
+  return `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">${floorPlans.map((item) => {
+    const alt = item.alt || item.label;
+    return `<div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="${escapeHtml(item.src)}" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">${escapeHtml(item.label)}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function renderApartmentMediaSection(tagName, openingTag, innerHtml, scopeContext) {
+  const groupedRoomsKey = Object.keys(scopeContext).find((key) => /^grouped.*Rooms$/.test(key) && Array.isArray(scopeContext[key]));
+  const publicPhotosKey = Object.keys(scopeContext).find((key) => /PublicPhotos$/.test(key) && Array.isArray(scopeContext[key]));
+  const floorPlansKey = Object.keys(scopeContext).find((key) => /FloorPlans$/.test(key) && Array.isArray(scopeContext[key]));
+  let transformedInner = innerHtml;
+
+  if (groupedRoomsKey) {
+    transformedInner = replaceFirstDivByClass(
+      transformedInner,
+      'grid grid-cols-1 md:grid-cols-2 gap-8',
+      buildStaticApartmentRoomCards(scopeContext[groupedRoomsKey], scopeContext.routeLangKey)
+    );
+
+    if (publicPhotosKey) {
+      transformedInner = replaceFirstDivByClass(
+        transformedInner,
+        'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6',
+        buildStaticPublicPhotoGrid(scopeContext[publicPhotosKey])
+      );
+    }
+  }
+
+  if (floorPlansKey) {
+    transformedInner = replaceFirstDivByClass(
+      transformedInner,
+      'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8',
+      buildStaticFloorPlanGrid(scopeContext[floorPlansKey])
+    );
+  }
+
+  return `<${tagName}${stripAttribute(openingTag.slice(tagName.length + 1, -1), 'x-data')}>${renderFragment(transformedInner, scopeContext)}</${tagName}>`;
+}
+
+function renderDataScopes(html, context) {
+  let cursor = 0;
+
+  while (cursor < html.length) {
+    const markerIndex = html.indexOf('x-data="', cursor);
+    if (markerIndex === -1) {
+      break;
+    }
+
+    const openStart = html.lastIndexOf('<', markerIndex);
+    if (openStart === -1) {
+      cursor = markerIndex + 7;
+      continue;
+    }
+
+    const openingTagMatch = html.slice(openStart).match(/^<([a-zA-Z][\w:-]*)\b/);
+    if (!openingTagMatch) {
+      cursor = markerIndex + 7;
+      continue;
+    }
+
+    const tagName = openingTagMatch[1];
+    const openEnd = findOpeningTagEnd(html, openStart);
+    const openingTag = html.slice(openStart, openEnd + 1);
+    const exprMatch = openingTag.match(/x-data="([\s\S]*?)"/);
+    const elementEnd = findMatchingElementEnd(html, openStart, tagName);
+
+    if (!exprMatch) {
+      cursor = openEnd + 1;
+      continue;
+    }
+
+    const evaluatedScope = evaluateDataExpression(exprMatch[1], context);
+    if (!evaluatedScope || typeof evaluatedScope !== 'object') {
+      cursor = openEnd + 1;
+      continue;
+    }
+
+    if (typeof evaluatedScope.init === 'function') {
+      try {
+        evaluatedScope.init.call(evaluatedScope);
+      } catch {
+        cursor = openEnd + 1;
+        continue;
+      }
+    }
+
+    const scopeContext = {
+      ...context,
+      ...evaluatedScope
+    };
+    const innerHtml = html.slice(openEnd + 1, elementEnd - `</${tagName}>`.length);
+    const replacement = renderApartmentMediaSection(tagName, openingTag, innerHtml, scopeContext);
+
+    html = `${html.slice(0, openStart)}${replacement}${html.slice(elementEnd)}`;
+    cursor = openStart + replacement.length;
+  }
+
+  return html;
+}
+
 function replaceSimpleXText(html, context) {
   return html.replace(/<([a-zA-Z][\w:-]*)([^>]*)\s+x-text="([^"]+)"([^>]*)>([\s\S]*?)<\/\1>/g, (match, tagName, beforeAttrs, expr, afterAttrs, innerHtml) => {
     if (innerHtml.trim() && /</.test(innerHtml)) {
@@ -451,10 +628,7 @@ function renderLoopTemplates(html, context) {
       continue;
     }
 
-    const templateOpenEnd = html.indexOf('>', markerIndex);
-    if (templateOpenEnd === -1) {
-      break;
-    }
+    const templateOpenEnd = findOpeningTagEnd(html, templateStart);
 
     const templateEnd = findMatchingTemplateEnd(html, templateStart);
     const openingTag = html.slice(templateStart, templateOpenEnd + 1);
@@ -503,10 +677,7 @@ function renderConditionalTemplates(html, context) {
       continue;
     }
 
-    const templateOpenEnd = html.indexOf('>', markerIndex);
-    if (templateOpenEnd === -1) {
-      break;
-    }
+    const templateOpenEnd = findOpeningTagEnd(html, templateStart);
 
     const templateEnd = findMatchingTemplateEnd(html, templateStart);
     const openingTag = html.slice(templateStart, templateOpenEnd + 1);
@@ -542,21 +713,21 @@ function renderShownElements(html, context) {
       continue;
     }
 
-    const openingTagMatch = html.slice(openStart).match(/^<([a-zA-Z][\w:-]*)\b[^>]*>/);
+    const openingTagMatch = html.slice(openStart).match(/^<([a-zA-Z][\w:-]*)\b/);
     if (!openingTagMatch) {
       cursor = markerIndex + 7;
       continue;
     }
 
     const tagName = openingTagMatch[1];
-    const openingTag = openingTagMatch[0];
+    const openEnd = findOpeningTagEnd(html, openStart);
+    const openingTag = html.slice(openStart, openEnd + 1);
     const exprMatch = openingTag.match(/x-show="([^"]+)"/);
-    const openEnd = openStart + openingTag.length;
     const elementEnd = findMatchingElementEnd(html, openStart, tagName);
     const shouldRender = exprMatch ? evaluateExpression(exprMatch[1], context) : undefined;
 
     if (typeof shouldRender === 'undefined') {
-      cursor = elementEnd;
+      cursor = openEnd + 1;
       continue;
     }
 
@@ -567,7 +738,7 @@ function renderShownElements(html, context) {
     }
 
     const closingTag = `</${tagName}>`;
-    const innerHtml = html.slice(openEnd, elementEnd - closingTag.length);
+    const innerHtml = html.slice(openEnd + 1, elementEnd - closingTag.length);
     const strippedOpeningTag = openingTag.replace(/\s+x-show="[^"]*"/, '');
     const replacement = `${strippedOpeningTag}${renderFragment(innerHtml, context)}${closingTag}`;
     html = `${html.slice(0, openStart)}${replacement}${html.slice(elementEnd)}`;
@@ -579,6 +750,7 @@ function renderShownElements(html, context) {
 
 function renderFragment(html, context) {
   let renderedHtml = html;
+  renderedHtml = renderDataScopes(renderedHtml, context);
   renderedHtml = renderLoopTemplates(renderedHtml, context);
   renderedHtml = renderConditionalTemplates(renderedHtml, context);
   renderedHtml = renderShownElements(renderedHtml, context);
@@ -622,11 +794,17 @@ function renderHtml(template, langKey, pageKey) {
   const renderContext = {
     t: { lang: translations[langKey] },
     lang: 'lang',
+    routeLangKey: langKey,
     wechatId: appConfig.wechatId,
     wechatCopied: false
   };
+  let pageBlockHtml = stripPageWrapperDirectives(blocks[pageKey]);
 
-  let html = `${shell.beforeMain}\n${stripPageWrapperDirectives(blocks[pageKey])}\n${shell.afterMain}`;
+  if (pageKey.startsWith('apartment-')) {
+    pageBlockHtml = renderDataScopes(pageBlockHtml, renderContext);
+  }
+
+  let html = `${shell.beforeMain}\n${pageBlockHtml}\n${shell.afterMain}`;
 
   html = html.replace(
     /<html lang="[^"]+"/,

@@ -575,7 +575,7 @@
 
             <section id="contact-faq" class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
-                    <div class="max-w-3xl mx-auto" x-data="{ openFaq: { 1: true, 2: false, 3: false, 4: false } }">
+                    <div class="max-w-3xl mx-auto">
                         <div class="text-center mb-12 scrub-item anim-fade-up">
                             <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">合作常见问题 Q&amp;A</h2>
                         </div>
@@ -586,7 +586,7 @@
                                     <div class="font-bold text-academic-navy text-sm md:text-base">Q1：提交合作意向申请后，工作人员多久会联络我？</div>
                                     <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform" :class="openFaq[1] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq[1]" x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
+                                <div x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
                                     A：我们的工作人员在收到您的合作申请后，最快 24 小时内会与您取得联络。
                                 </div>
                             </div>
@@ -596,9 +596,7 @@
                                     <div class="font-bold text-academic-navy text-sm md:text-base">Q2：合作的流程是怎样的？一般需要多久启动？</div>
                                     <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform" :class="openFaq[2] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq[2]" x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
-                                    A：我们的合作流程高效清晰：初步洽谈 → 协议签署 → 系统培训 → 正式上线。对于标准合作，最快可在 2-3 周内完成全部流程并启动。
-                                </div>
+                                
                             </div>
 
                             <div class="bg-white border border-slate-100 shadow-sm rounded-sm overflow-hidden transition-all duration-300" :class="openFaq[3] ? 'border-l-4 border-l-academic-red' : ''">
@@ -606,9 +604,7 @@
                                     <div class="font-bold text-academic-navy text-sm md:text-base">Q3：合作的佣金模式是怎样的？结算周期是多久？</div>
                                     <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform" :class="openFaq[3] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq[3]" x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
-                                    A：我们采用透明化的佣金模式。留学申请与公寓预订分别有明确的分成比例，具体会在协议中清晰约定。结算通常按月或按季度进行，款项通过系统对账后准时支付。
-                                </div>
+                                
                             </div>
 
                             <div class="bg-white border border-slate-100 shadow-sm rounded-sm overflow-hidden transition-all duration-300" :class="openFaq[4] ? 'border-l-4 border-l-academic-red' : ''">
@@ -616,9 +612,7 @@
                                     <div class="font-bold text-academic-navy text-sm md:text-base">Q4：我们（合作方）需要承担哪些责任？</div>
                                     <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform" :class="openFaq[4] ? 'rotate-180' : ''"></i>
                                 </button>
-                                <div x-show="openFaq[4]" x-transition class="px-6 pb-6 text-sm text-slate-600 leading-relaxed font-light border-t border-slate-50 pt-4">
-                                    A：合作期间，您主要负责前端引流与客户关系维护，而我们则提供系统、流程、签约及主要运营支持，权责清晰。
-                                </div>
+                                
                             </div>
                         </div>
 

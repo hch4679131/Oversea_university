@@ -372,116 +372,161 @@
             </section>
 
             <!-- 第二部份：我们的房间 (Alpine) -->
-            <section class="py-24 bg-white border-b border-slate-200/60" x-data="{ ymtBookingOpen: false, ymtRoomsPhotos:[
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/1号房/1号房_结果.webp', label: '1号房', alt: '1号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房_结果.webp', label: '2号房', alt: '2号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房%2002_结果.webp', label: '2号房', alt: '2号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房_结果.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房%2002_结果.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房_结果.webp', label: '4号房', alt: '4号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房%2002_结果.webp', label: '4号房', alt: '4号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房_结果.webp', label: '5号房', alt: '5号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房%2002_结果.webp', label: '5号房', alt: '5号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房%2002_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房%2003_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/7号房/7号房_结果.webp', label: '7号房', alt: '7号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房%2002_结果.webp', label: '8号房', alt: '8号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房_结果.webp', label: '8号房', alt: '8号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/厨房_结果.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/电梯_结果.webp', label: '公共区域', alt: '公共区域 电梯' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/洗衣区_结果.webp', label: '公共区域', alt: '公共区域 洗衣区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/走廊_结果.webp', label: '公共区域', alt: '公共区域 走廊' }
-            ], groupedRooms: [], ymtPublicPhotos:[], roomSlides: {}, init() {
-                const buckets = {};
-                this.ymtPublicPhotos = this.ymtRoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.ymtRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) { buckets[photo.label] = { label: photo.label, photos: [] }; }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedRooms = Object.values(buckets);
-                this.groupedRooms.forEach((_, idx) => { this.roomSlides[idx] = 0; });
-            }, prevSlide(idx) {
-                const total = this.groupedRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.roomSlides[idx] = (this.roomSlides[idx] - 1 + total) % total;
-            }, nextSlide(idx) {
-                const total = this.groupedRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.roomSlides[idx] = (this.roomSlides[idx] + 1) % total;
-            } }">
+            <section class="py-24 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">我们的房间</h2>
                         <p class="mt-4 text-slate-500 font-light">软硬件设施一览 / 实景相册</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedRooms" :key="item.label">
-                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
-                                <div class="relative h-72 overflow-hidden bg-slate-50">
-                                    <img :src="item.photos[roomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="item.photos[roomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevSlide(idx)">
-                                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextSlide(idx)">
-                                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-
-                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.label"></div>
-                                        <template x-if="item.label !== '公共区域'">
-                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="ymtBookingOpen = true">抢先以早鸟价格订房</button>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8"><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">1号房</div>
+        <a href="/zh-HK/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/1号房/1号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="1号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">1号房</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">2号房</div>
+        <a href="/zh-HK/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="2号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">2号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="2号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">2号房</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">3号房</div>
+        <a href="/zh-HK/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="3号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">3号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="3号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">3号房</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">4号房</div>
+        <a href="/zh-HK/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="4号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">4号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="4号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">4号房</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">5号房</div>
+        <a href="/zh-HK/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="5号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">5号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="5号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">5号房</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">6号房</div>
+        <a href="/zh-HK/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="6号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">6号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="6号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">6号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房%2003_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="6号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">6号房</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">7号房</div>
+        <a href="/zh-HK/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/7号房/7号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="7号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">7号房</figcaption>
+    </figure>
+      </div>
+    </article><article class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="mb-4 flex items-center justify-between gap-4 flex-wrap">
+        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy rounded-sm">8号房</div>
+        <a href="/zh-HK/contact" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm">抢先以早鸟价格订房</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="8号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">8号房</figcaption>
+    </figure><figure class="relative h-56 overflow-hidden bg-slate-50 border border-slate-100 rounded-sm group/photo">
+      <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover/photo:scale-105" alt="8号房" loading="lazy" decoding="async">
+      <figcaption class="absolute bottom-3 left-3 px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">8号房</figcaption>
+    </figure>
+      </div>
+    </article></div>
 
                     <div class="mt-16 mb-8 flex items-center gap-4 scrub-item anim-fade-up">
                         <h3 class="text-2xl font-serif font-bold text-academic-navy">公共区域</h3>
                         <div class="h-[1px] flex-1 bg-slate-200"></div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <template x-for="(item, idx) in ymtPublicPhotos" :key="'ymt-public-' + idx">
-                            <div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up group">
-                                <div class="relative h-56 overflow-hidden bg-slate-50">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute bottom-3 left-3">
-                                        <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.alt || item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-56 overflow-hidden bg-slate-50">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/厨房_结果.webp" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="公共区域 厨房" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 厨房</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-56 overflow-hidden bg-slate-50">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/电梯_结果.webp" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="公共区域 电梯" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 电梯</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-56 overflow-hidden bg-slate-50">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/洗衣区_结果.webp" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="公共区域 洗衣区" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 洗衣区</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-56 overflow-hidden bg-slate-50">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/走廊_结果.webp" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="公共区域 走廊" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 走廊</div>
+        </div>
+      </div>
+    </div></div>
 
                     <!-- Booking Modal -->
-                    <div class="fixed inset-0 z-[90]" x-show="ymtBookingOpen" x-transition.opacity @keydown.escape.window="ymtBookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" @click="ymtBookingOpen = false"></div>
-                        <div class="relative min-h-full flex items-center justify-center p-6">
-                            <div class="w-full max-w-md bg-white text-slate-900 border border-slate-100 shadow-2xl rounded-sm">
-                                <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100 bg-slate-50">
-                                    <div class="text-xl font-serif font-bold text-academic-navy">立即预定</div>
-                                    <button type="button" class="p-2 text-slate-400 hover:text-academic-red transition" @click="ymtBookingOpen = false" aria-label="Close">
-                                        <i data-lucide="x" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                                <div class="px-6 py-8 text-center">
-                                    <div class="text-sm text-slate-600 mb-6">请扫描下方二维码，联系专属顾问获取早鸟报价</div>
-                                    <div class="border border-slate-200 bg-white p-2 shadow-lg aspect-square w-56 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-slate-50" loading="lazy" decoding="async">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </section>
 
@@ -606,36 +651,84 @@
             </section>
 
             <!-- 第五部份：户型图 -->
-            <section class="py-24 bg-academic-slate/30 border-b border-slate-200/60" x-data="{ ymtFloorPlans:[
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1楼_结果.webp', label: '1楼', alt: '1楼 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2-5楼_结果.webp', label: '2-5楼', alt: '2-5楼 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1号房_结果.webp', label: '1号房', alt: '1号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2号房_结果.webp', label: '2号房', alt: '2号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/3号房_结果.webp', label: '3号房', alt: '3号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/4号房（2-5楼）_结果.webp', label: '4号房（2-5楼）', alt: '4号房（2-5楼） 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/5号房_结果.webp', label: '5号房', alt: '5号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/6号房_结果.webp', label: '6号房', alt: '6号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/7号房_结果.webp', label: '7号房', alt: '7号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/8号房_结果.webp', label: '8号房', alt: '8号房 户型图' }
-            ] }">
+            <section class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">户型图</h2>
                         <p class="mt-4 text-slate-500 font-light">平面图一览 / 楼层与房型布局</p>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <template x-for="(item, idx) in ymtFloorPlans" :key="idx">
-                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
-                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-                                    <img :src="item.src" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute bottom-3 left-3">
-                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1楼_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="1楼 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">1楼</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2-5楼_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="2-5楼 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">2-5楼</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="1号房 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">1号房</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="2号房 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">2号房</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/3号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="3号房 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">3号房</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/4号房（2-5楼）_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="4号房（2-5楼） 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">4号房（2-5楼）</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/5号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="5号房 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">5号房</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/6号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="6号房 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">6号房</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/7号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="7号房 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">7号房</div>
+        </div>
+      </div>
+    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
+      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/8号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="8号房 户型图" loading="lazy" decoding="async">
+        <div class="absolute bottom-3 left-3">
+          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">8号房</div>
+        </div>
+      </div>
+    </div></div>
                 </div>
             </section>
 
