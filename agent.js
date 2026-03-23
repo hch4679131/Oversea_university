@@ -7,12 +7,17 @@
  */
 
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
+const { spawnSync } = require('child_process');
+const { createApartmentRecord } = require('./sites/sdlvhk.com/assets/apartment-data');
 
 const router = express.Router();
+const customApartmentDataPath = path.join(__dirname, 'sites', 'sdlvhk.com', 'assets', 'apartment-custom-data.js');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'HKSD_2025_Secret_Key_Change_In_Production';
 const IS_PROD = process.env.NODE_ENV === 'production';
@@ -191,6 +196,59 @@ function nextRoleByParentRole(parentRole) {
     if (role === 'agent2') return 'agent3';
     if (role === 'agent3') return 'agent4';
     return null;
+}
+
+function canManageApartments(role) {
+    const normalized = String(role || '').trim();
+    return normalized === 'admin' || normalized === 'consultant';
+}
+
+function loadCustomApartmentsFromFile() {
+    try {
+        delete require.cache[require.resolve('./sites/sdlvhk.com/assets/apartment-custom-data')];
+        const loaded = require('./sites/sdlvhk.com/assets/apartment-custom-data');
+        return loaded && typeof loaded === 'object' ? loaded : {};
+    } catch {
+        return {};
+    }
+}
+
+function writeCustomApartmentsToFile(apartmentMap) {
+    const serialized = JSON.stringify(apartmentMap, null, 2);
+    const content = `(function initApartmentCustomData(factory) {\n  const data = factory();\n\n  if (typeof module !== 'undefined' && module.exports) {\n    module.exports = data;\n  }\n\n  if (typeof globalThis !== 'undefined') {\n    globalThis.SDLV_CUSTOM_APARTMENTS = data;\n  }\n}(function buildApartmentCustomData() {\n  return ${serialized};\n}));\n`;
+    fs.writeFileSync(customApartmentDataPath, content, 'utf8');
+}
+
+function regenerateStaticApartments() {
+    const result = spawnSync(process.execPath, [path.join(__dirname, 'scripts', 'export_sdlvhk_routes.js')], {
+        cwd: __dirname,
+        encoding: 'utf8'
+    });
+
+    if (result.status !== 0) {
+        const message = result.stderr || result.stdout || 'Static export failed';
+        throw new Error(message.trim());
+    }
+
+    return result.stdout || 'Generated static route HTML.';
+}
+
+function saveApartmentRecordToFile(apartmentRecord, options = {}) {
+    const { allowCreate = true, allowOverwrite = false } = options;
+    const customApartments = loadCustomApartmentsFromFile();
+    const existsInCustomFile = Boolean(customApartments[apartmentRecord.pageKey]);
+
+    if (!allowCreate && !existsInCustomFile) {
+        throw new Error(`公寓不存在于可编辑数据文件中：${apartmentRecord.pageKey}`);
+    }
+
+    if (!allowOverwrite && existsInCustomFile) {
+        throw new Error(`公寓已存在：${apartmentRecord.pageKey}`);
+    }
+
+    customApartments[apartmentRecord.pageKey] = apartmentRecord;
+    writeCustomApartmentsToFile(customApartments);
+    return customApartments;
 }
 
 function generateVerificationCode() {
@@ -706,6 +764,70 @@ router.get('/me', authenticateAgent, async (req, res) => {
         res.json({ success: true, user: rows[0] });
     } catch (e) {
         res.status(500).json({ success: false, message: '服务器错误', ...(IS_PROD ? {} : { error: e.message }) });
+    }
+});
+
+router.post('/apartments', authenticateAgent, async (req, res) => {
+    try {
+        if (!canManageApartments(req.agent?.role)) {
+            return res.status(403).json({ success: false, message: '当前账号无权管理公寓数据' });
+        }
+
+        const apartmentRecord = createApartmentRecord(req.body || {});
+        saveApartmentRecordToFile(apartmentRecord, { allowCreate: true, allowOverwrite: false });
+        const exportOutput = regenerateStaticApartments();
+
+        await logAction({
+            userId: req.agent?.id,
+            action: 'ADD_APARTMENT',
+            detail: `新增公寓 ${apartmentRecord.pageKey} / ${apartmentRecord.slug}`,
+            ip: req.ip
+        });
+
+        return res.json({
+            success: true,
+            message: '公寓数据已写入并完成静态导出',
+            apartment: apartmentRecord,
+            exportOutput
+        });
+    } catch (error) {
+        console.error('[agent][apartments] save failed:', error);
+        return res.status(500).json({ success: false, message: error.message || '保存公寓数据失败' });
+    }
+});
+
+router.put('/apartments/:pageKey', authenticateAgent, async (req, res) => {
+    try {
+        if (!canManageApartments(req.agent?.role)) {
+            return res.status(403).json({ success: false, message: '当前账号无权管理公寓数据' });
+        }
+
+        const expectedPageKey = String(req.params.pageKey || '').trim();
+        const apartmentRecord = createApartmentRecord(req.body || {});
+
+        if (!expectedPageKey || apartmentRecord.pageKey !== expectedPageKey) {
+            return res.status(400).json({ success: false, message: '更新公寓时 pageKey 不匹配' });
+        }
+
+        saveApartmentRecordToFile(apartmentRecord, { allowCreate: true, allowOverwrite: true });
+        const exportOutput = regenerateStaticApartments();
+
+        await logAction({
+            userId: req.agent?.id,
+            action: 'UPDATE_APARTMENT',
+            detail: `更新公寓 ${apartmentRecord.pageKey} / ${apartmentRecord.slug}`,
+            ip: req.ip
+        });
+
+        return res.json({
+            success: true,
+            message: '公寓数据已更新并完成静态导出',
+            apartment: apartmentRecord,
+            exportOutput
+        });
+    } catch (error) {
+        console.error('[agent][apartments] update failed:', error);
+        return res.status(500).json({ success: false, message: error.message || '更新公寓数据失败' });
     }
 });
 

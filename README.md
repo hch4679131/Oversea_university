@@ -30,6 +30,28 @@ Visit `http://localhost:3000` and use buttons to scrape websites. Results save t
     └── copilot-instructions.md  # AI agent guidelines
 ```
 
+## SDLV Apartment Architecture
+
+The SDLV site now uses a source-template plus generated-route structure for apartment pages.
+
+- Source template: [sites/sdlvhk.com/index.html](sites/sdlvhk.com/index.html)
+- Shared apartment data store: [sites/sdlvhk.com/assets/apartment-store.js](sites/sdlvhk.com/assets/apartment-store.js)
+- Runtime helpers: [sites/sdlvhk.com/assets/apartment-data.js](sites/sdlvhk.com/assets/apartment-data.js)
+- Custom apartment overrides / new apartments: [sites/sdlvhk.com/assets/apartment-custom-data.js](sites/sdlvhk.com/assets/apartment-custom-data.js)
+- Static exporter: [scripts/export_sdlvhk_routes.js](scripts/export_sdlvhk_routes.js)
+
+Naming rule:
+
+- Generated route files intentionally stay as directory-style `index.html`, for example `sites/sdlvhk.com/zh-CN/apartments/ymt/index.html`.
+- Those `index.html` files are build artifacts, not the primary authoring source.
+- The human-maintained source of truth is the shared template plus the apartment data files above.
+
+Apartment admin flow:
+
+- Agent dashboard can create or edit apartment JSON.
+- Saved data is written to `apartment-custom-data.js`.
+- After save, the backend automatically reruns the static exporter so the generated route pages stay in sync.
+
 ## Available Commands
 
 ```bash

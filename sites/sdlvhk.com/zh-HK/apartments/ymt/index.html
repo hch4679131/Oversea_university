@@ -126,7 +126,7 @@
                 <!-- 首页入口暂时隐藏：点击 Logo 可返回首页 -->
                 <!--
                 <div class="nav-item group">
-                    <span @click="switchPage('home')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'">首頁</span>
+                    <span @click="switchPage('home')" class="hover:text-white">首頁</span>
                     <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 bg-paper border border-black/10 text-black p-4 min-w-[160px] shadow-2xl rounded-sm">
                         <a @click.stop="switchPage('home', 'hero')" class="block py-2 hover:text-gold-400 whitespace-nowrap">Hero概覽</a>
                         <a @click.stop="switchPage('home', 'core-business')" class="block py-2 hover:text-gold-400 whitespace-nowrap">核心業務</a>
@@ -135,7 +135,7 @@
                 -->
                 <!-- 成就与反馈 -->
                 <!-- <div class="nav-item group">
-                    <span @click="switchPage('home', 'achievements')" :class="page === 'home' ? 'text-gold-400' : 'hover:text-white'">成就與反饋</span>
+                    <span @click="switchPage('home', 'achievements')" class="hover:text-white">成就與反饋</span>
                 </div> -->
                 <div class="nav-item group">
                     <a href="/zh-HK/about" @click.prevent="switchPage('about')" :class="isPageActive('about') ? 'text-academic-red' : 'hover:text-white'">關於我們</a>
@@ -215,9 +215,9 @@
             <!-- 语言切换 + 手机菜单 -->
             <div class="flex items-center gap-3">
                 <div class="flex items-center gap-3 text-xs font-bold pl-6 border-l border-white/10">
-                    <a href="/zh-CN/apartments/ymt" @click.prevent="switchLanguage('sc')" :class="lang==='sc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">简</a>
-                    <a href="/zh-HK/apartments/ymt" @click.prevent="switchLanguage('tc')" :class="lang==='tc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">繁</a>
-                    <a href="/en/apartments/ymt" @click.prevent="switchLanguage('en')" :class="lang==='en' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">EN</a>
+                    <a href="/zh-CN/apartments/ymt" @click.prevent="switchLanguage('sc')" class="text-gray-300 hover:text-white">简</a>
+                    <a href="/zh-HK/apartments/ymt" @click.prevent="switchLanguage('tc')" class="text-gray-300 hover:text-white">繁</a>
+                    <a href="/en/apartments/ymt" @click.prevent="switchLanguage('en')" class="text-gray-300 hover:text-white">EN</a>
                 </div>
 
                 <button type="button"
@@ -293,9 +293,9 @@
                 >商業合作</a>
 
                 <div class="pt-4 border-t border-white/10 flex items-center justify-center gap-6 text-xs font-bold">
-                    <a href="/zh-CN/apartments/ymt" @click.prevent="switchLanguage('sc')" :class="lang==='sc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">简</a>
-                    <a href="/zh-HK/apartments/ymt" @click.prevent="switchLanguage('tc')" :class="lang==='tc' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">繁</a>
-                    <a href="/en/apartments/ymt" @click.prevent="switchLanguage('en')" :class="lang==='en' ? 'text-academic-red' : 'text-gray-300 hover:text-white'">EN</a>
+                    <a href="/zh-CN/apartments/ymt" @click.prevent="switchLanguage('sc')" class="text-gray-300 hover:text-white">简</a>
+                    <a href="/zh-HK/apartments/ymt" @click.prevent="switchLanguage('tc')" class="text-gray-300 hover:text-white">繁</a>
+                    <a href="/en/apartments/ymt" @click.prevent="switchLanguage('en')" class="text-gray-300 hover:text-white">EN</a>
                 </div>
             </div>
         </div>
@@ -304,112 +304,101 @@
     <!-- 主容器 -->
     <main class="pt-20 min-h-screen relative">
 <div class="w-full bg-white text-slate-900 font-sans">
-            
-            <!-- HERO: 顶部地标信息 -->
             <section class="py-20 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
                     <div class="scrub-item anim-fade-up">
-                        <div class="flex items-center gap-4 mb-6">
-                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
-                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Premium Residence</span>
-                        </div>
-                        <h1 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy">汇生会社(油麻地)</h1>
-                        <p class="mt-4 text-slate-500 leading-relaxed font-light">居社地理位置：香港油麻地吴松街1号</p>
                         
-                        <div class="mt-10 bg-white p-3 shadow-xl border border-slate-100 rounded-sm">
-                            <div class="overflow-hidden bg-slate-50 rounded-sm">
-                                <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地地图_结果.webp" class="w-full object-cover mix-blend-multiply" alt="Map">
+                            <div class="flex items-center gap-4 mb-6">
+                                <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                                <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Premium Residence</span>
                             </div>
-                        </div>
+                        
+                        <h1 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy">滙生会社（油麻地）</h1>
+                        
+                            <p class="mt-4 text-slate-500 leading-relaxed font-light">居社地理位置：香港油麻地吴松街1号</p>
+                        
+
+                        
+                            <div class="mt-10 bg-white p-3 shadow-xl border border-slate-100 rounded-sm">
+                                <div class="overflow-hidden bg-slate-50 rounded-sm">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地地图_结果.webp" class="w-full object-cover mix-blend-multiply" alt="滙生会社（油麻地） Map">
+                                </div>
+                            </div>
+                        
                     </div>
                 </div>
             </section>
 
-            <!-- 第一部份：交通出行 -->
             <section class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">交通出行</h2>
                         <p class="mt-4 text-slate-500 font-light">周边大学通勤时间 / 主要交通节点</p>
                     </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-8 scrub-item anim-fade-up">
-                        <div class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative group hover:-translate-y-1 transition-transform duration-300">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy group-hover:w-2 transition-all duration-300"></div>
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-12 h-12 rounded-full bg-academic-navy/5 flex items-center justify-center text-academic-navy group-hover:text-academic-red transition-colors">
-                                    <i data-lucide="train" class="w-6 h-6"></i>
-                                </div>
-                                <div class="text-xl font-serif font-bold text-academic-navy">周边大学及通勤时长</div>
-                            </div>
-                            <div class="space-y-4 text-sm text-slate-600 font-light leading-relaxed pl-16">
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港理工大学：步行 15 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港都会大学：巴士 20 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港城市大学：地铁 25 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港浸会大学：地铁 25 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港大学：地铁 25 分钟</span></div>
-                            </div>
-                        </div>
 
-                        <div class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative group hover:-translate-y-1 transition-transform duration-300">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-academic-red group-hover:w-2 transition-all duration-300"></div>
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-12 h-12 rounded-full bg-academic-red/10 flex items-center justify-center text-academic-red group-hover:text-academic-navy transition-colors">
-                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    <div class="grid md:grid-cols-2 gap-8 scrub-item anim-fade-up">
+                        
+                            <div class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative group hover:-translate-y-1 transition-transform duration-300">
+                                
+                                
+                                    <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy group-hover:w-2 transition-all duration-300"></div>
+                                
+
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 rounded-full flex items-center justify-center transition-colors bg-academic-navy/5 text-academic-navy group-hover:text-academic-red">
+                                        <i data-lucide="train" class="w-6 h-6"></i>
+                                    </div>
+                                    <div class="text-xl font-serif font-bold text-academic-navy">周边大学及通勤时长</div>
                                 </div>
-                                <div class="text-xl font-serif font-bold text-academic-navy">主要交通节点</div>
+
+                                <div class="space-y-4 text-sm text-slate-600 font-light leading-relaxed pl-16">
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>香港理工大学：步行 15 分钟</span></div>
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>香港都会大学：巴士 20 分钟</span></div>
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>香港城市大学：地铁 25 分钟</span></div>
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>香港浸会大学：地铁 25 分钟</span></div>
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>香港大学：地铁 25 分钟</span></div>
+                                    
+                                </div>
                             </div>
-                            <div class="space-y-4 text-sm text-slate-600 font-light leading-relaxed pl-16">
-                                <div class="flex items-start gap-3"><span class="mt-1">🚇</span> <span>油麻地地铁站：步行 3 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🚇</span> <span>佐敦地铁站：步行 5 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🚇</span> <span>柯士甸地铁站：步行 5 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🚌</span> <span>西九龙站巴士总站：步行 10 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🚄</span> <span>西九龙高铁站：巴士 20 分钟</span></div>
+                        
+                            <div class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative group hover:-translate-y-1 transition-transform duration-300">
+                                
+                                    <div class="absolute top-0 left-0 w-1 h-full bg-academic-red group-hover:w-2 transition-all duration-300"></div>
+                                
+                                
+
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 rounded-full flex items-center justify-center transition-colors bg-academic-red/10 text-academic-red group-hover:text-academic-navy">
+                                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                    </div>
+                                    <div class="text-xl font-serif font-bold text-academic-navy">主要交通节点</div>
+                                </div>
+
+                                <div class="space-y-4 text-sm text-slate-600 font-light leading-relaxed pl-16">
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>油麻地地铁站：步行 3 分钟</span></div>
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>佐敦地铁站：步行 5 分钟</span></div>
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>柯士甸地铁站：步行 5 分钟</span></div>
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>西九龙站巴士总站：步行 10 分钟</span></div>
+                                    
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span>西九龙高铁站：巴士 20 分钟</span></div>
+                                    
+                                </div>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
             </section>
 
-            <!-- 第二部份：我们的房间 (Alpine) -->
-            <section class="py-24 bg-white border-b border-slate-200/60" x-data="{ ymtBookingOpen: false, ymtRoomsPhotos:[
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/1号房/1号房_结果.webp', label: '1号房', alt: '1号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房_结果.webp', label: '2号房', alt: '2号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房%2002_结果.webp', label: '2号房', alt: '2号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房_结果.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房%2002_结果.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房_结果.webp', label: '4号房', alt: '4号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房%2002_结果.webp', label: '4号房', alt: '4号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房_结果.webp', label: '5号房', alt: '5号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房%2002_结果.webp', label: '5号房', alt: '5号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房%2002_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房%2003_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/7号房/7号房_结果.webp', label: '7号房', alt: '7号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房%2002_结果.webp', label: '8号房', alt: '8号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房_结果.webp', label: '8号房', alt: '8号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/厨房_结果.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/电梯_结果.webp', label: '公共区域', alt: '公共区域 电梯' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/洗衣区_结果.webp', label: '公共区域', alt: '公共区域 洗衣区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/走廊_结果.webp', label: '公共区域', alt: '公共区域 走廊' }
-            ], groupedRooms: [], ymtPublicPhotos:[], roomSlides: {}, init() {
-                const buckets = {};
-                this.ymtPublicPhotos = this.ymtRoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.ymtRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) { buckets[photo.label] = { label: photo.label, photos: [] }; }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedRooms = Object.values(buckets);
-                this.groupedRooms.forEach((_, idx) => { this.roomSlides[idx] = 0; });
-            }, prevSlide(idx) {
-                const total = this.groupedRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.roomSlides[idx] = (this.roomSlides[idx] - 1 + total) % total;
-            }, nextSlide(idx) {
-                const total = this.groupedRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.roomSlides[idx] = (this.roomSlides[idx] + 1) % total;
-            } }">
+            <section class="py-24 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">我们的房间</h2>
@@ -417,212 +406,536 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedRooms" :key="item.label">
+                        
                             <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
                                 <div class="relative h-72 overflow-hidden bg-slate-50">
-                                    <img :src="item.photos[roomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="item.photos[roomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/1号房/1号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="1号房" loading="lazy" decoding="async">
+
                                     
-                                    <template x-if="item.photos.length > 1">
+
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">1号房</div>
+                                        
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()">抢先以早鸟价格订房</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-72 overflow-hidden bg-slate-50">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="2号房" loading="lazy" decoding="async">
+
+                                    
                                         <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevSlide(idx)">
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(idx)">
                                                 <i data-lucide="chevron-left" class="w-5 h-5"></i>
                                             </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextSlide(idx)">
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(idx)">
                                                 <i data-lucide="chevron-right" class="w-5 h-5"></i>
                                             </button>
                                         </div>
-                                    </template>
+                                    
 
-                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.label"></div>
-                                        <template x-if="item.label !== '公共区域'">
-                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="ymtBookingOpen = true">抢先以早鸟价格订房</button>
-                                        </template>
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">2号房</div>
+                                        
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()">抢先以早鸟价格订房</button>
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </template>
-                    </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-72 overflow-hidden bg-slate-50">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="3号房" loading="lazy" decoding="async">
 
-                    <div class="mt-16 mb-8 flex items-center gap-4 scrub-item anim-fade-up">
-                        <h3 class="text-2xl font-serif font-bold text-academic-navy">公共区域</h3>
-                        <div class="h-[1px] flex-1 bg-slate-200"></div>
-                    </div>
+                                    
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                                            </button>
+                                        </div>
+                                    
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-56 overflow-hidden bg-slate-50">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/厨房_结果.webp" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="公共区域 厨房" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 厨房</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-56 overflow-hidden bg-slate-50">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/电梯_结果.webp" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="公共区域 电梯" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 电梯</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-56 overflow-hidden bg-slate-50">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/洗衣区_结果.webp" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="公共区域 洗衣区" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 洗衣区</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-56 overflow-hidden bg-slate-50">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/走廊_结果.webp" class="w-full h-full object-cover transition duration-700 hover:scale-105" alt="公共区域 走廊" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 走廊</div>
-        </div>
-      </div>
-    </div></div>
-
-                    <!-- Booking Modal -->
-                    <div class="fixed inset-0 z-[90]" x-show="ymtBookingOpen" x-transition.opacity @keydown.escape.window="ymtBookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" @click="ymtBookingOpen = false"></div>
-                        <div class="relative min-h-full flex items-center justify-center p-6">
-                            <div class="w-full max-w-md bg-white text-slate-900 border border-slate-100 shadow-2xl rounded-sm">
-                                <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100 bg-slate-50">
-                                    <div class="text-xl font-serif font-bold text-academic-navy">立即预定</div>
-                                    <button type="button" class="p-2 text-slate-400 hover:text-academic-red transition" @click="ymtBookingOpen = false" aria-label="Close">
-                                        <i data-lucide="x" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                                <div class="px-6 py-8 text-center">
-                                    <div class="text-sm text-slate-600 mb-6">请扫描下方二维码，联系专属顾问获取早鸟报价</div>
-                                    <div class="border border-slate-200 bg-white p-2 shadow-lg aspect-square w-56 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-slate-50" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">3号房</div>
+                                        
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()">抢先以早鸟价格订房</button>
+                                        
                                     </div>
                                 </div>
                             </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-72 overflow-hidden bg-slate-50">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="4号房" loading="lazy" decoding="async">
+
+                                    
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                                            </button>
+                                        </div>
+                                    
+
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">4号房</div>
+                                        
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()">抢先以早鸟价格订房</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-72 overflow-hidden bg-slate-50">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="5号房" loading="lazy" decoding="async">
+
+                                    
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                                            </button>
+                                        </div>
+                                    
+
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">5号房</div>
+                                        
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()">抢先以早鸟价格订房</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-72 overflow-hidden bg-slate-50">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="6号房" loading="lazy" decoding="async">
+
+                                    
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                                            </button>
+                                        </div>
+                                    
+
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">6号房</div>
+                                        
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()">抢先以早鸟价格订房</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-72 overflow-hidden bg-slate-50">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/7号房/7号房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="7号房" loading="lazy" decoding="async">
+
+                                    
+
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">7号房</div>
+                                        
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()">抢先以早鸟价格订房</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-72 overflow-hidden bg-slate-50">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="8号房" loading="lazy" decoding="async">
+
+                                    
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                                            </button>
+                                        </div>
+                                    
+
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
+                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">8号房</div>
+                                        
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()">抢先以早鸟价格订房</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+                    </div>
+
+                    <div>
+                        <div class="mt-16 mb-8 flex items-center gap-4 scrub-item anim-fade-up">
+                            <h3 class="text-2xl font-serif font-bold text-academic-navy">公共区域</h3>
+                            <div class="h-[1px] flex-1 bg-slate-200"></div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            
+                                <div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up group">
+                                    <div class="relative h-56 overflow-hidden bg-slate-50">
+                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/厨房_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="公共区域 厨房" loading="lazy" decoding="async">
+                                        <div class="absolute bottom-3 left-3">
+                                            <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 厨房</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up group">
+                                    <div class="relative h-56 overflow-hidden bg-slate-50">
+                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/电梯_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="公共区域 电梯" loading="lazy" decoding="async">
+                                        <div class="absolute bottom-3 left-3">
+                                            <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 电梯</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up group">
+                                    <div class="relative h-56 overflow-hidden bg-slate-50">
+                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/洗衣区_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="公共区域 洗衣区" loading="lazy" decoding="async">
+                                        <div class="absolute bottom-3 left-3">
+                                            <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 洗衣区</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up group">
+                                    <div class="relative h-56 overflow-hidden bg-slate-50">
+                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/走廊_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="公共区域 走廊" loading="lazy" decoding="async">
+                                        <div class="absolute bottom-3 left-3">
+                                            <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">公共区域 走廊</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
                         </div>
                     </div>
+
+                    
                 </div>
             </section>
 
-            <!-- 第三部份：生活配套 -->
             <section class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">生活配套</h2>
                         <p class="mt-4 text-slate-500 font-light">一站式便捷生活圈</p>
                     </div>
-                    
+
                     <div class="grid md:grid-cols-3 gap-8 scrub-item anim-fade-up">
-                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
-                            <div class="w-12 h-12 rounded-full bg-academic-red/10 flex items-center justify-center text-academic-red mb-6">
-                                <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                        
+                            <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-academic-red/10 text-academic-red">
+                                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                                </div>
+                                <div class="text-xl font-serif font-bold text-academic-navy mb-4">美食购物（5-20 分钟）</div>
+                                <ul class="space-y-3 text-sm text-slate-600 font-light">
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>庙街夜市 / 旺角朗豪坊</span></li>
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>圆方商场 / 信和中心</span></li>
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>西洋菜南街 / 荷里活商业中心</span></li>
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>百老汇电影中心</span></li>
+                                    
+                                </ul>
                             </div>
-                            <div class="text-xl font-serif font-bold text-academic-navy mb-4">美食购物（5-20 分钟）</div>
-                            <ul class="space-y-3 text-sm text-slate-600 font-light">
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>庙街夜市 / 旺角朗豪坊</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>圆方商场 / 信和中心</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>西洋菜南街 / 荷里活商业中心</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>百老汇电影中心</span></li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
-                            <div class="w-12 h-12 rounded-full bg-academic-navy/10 flex items-center justify-center text-academic-navy mb-6">
-                                <i data-lucide="store" class="w-6 h-6"></i>
+                        
+                            <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-academic-navy/10 text-academic-navy">
+                                    <i data-lucide="store" class="w-6 h-6"></i>
+                                </div>
+                                <div class="text-xl font-serif font-bold text-academic-navy mb-4">生活日用（1-5 分钟）</div>
+                                <ul class="space-y-3 text-sm text-slate-600 font-light">
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>711 便利店</span></li>
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>惠康超市 / 百佳超市</span></li>
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>油麻地果栏</span></li>
+                                    
+                                </ul>
                             </div>
-                            <div class="text-xl font-serif font-bold text-academic-navy mb-4">生活日用（1-5 分钟）</div>
-                            <ul class="space-y-3 text-sm text-slate-600 font-light">
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-navy shrink-0"></span><span>711 便利店</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-navy shrink-0"></span><span>惠康超市 / 百佳超市</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-navy shrink-0"></span><span>油麻地果栏</span></li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
-                            <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 mb-6">
-                                <i data-lucide="building-2" class="w-6 h-6"></i>
+                        
+                            <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-slate-100 text-slate-600">
+                                    <i data-lucide="building-2" class="w-6 h-6"></i>
+                                </div>
+                                <div class="text-xl font-serif font-bold text-academic-navy mb-4">公共设施（5-15 分钟）</div>
+                                <ul class="space-y-3 text-sm text-slate-600 font-light">
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>油麻地警署</span></li>
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>九龙公园 / 京士柏公园</span></li>
+                                    
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>伊利沙伯医院</span></li>
+                                    
+                                </ul>
                             </div>
-                            <div class="text-xl font-serif font-bold text-academic-navy mb-4">公共设施（5-15 分钟）</div>
-                            <ul class="space-y-3 text-sm text-slate-600 font-light">
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span><span>油麻地警署</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span><span>九龙公园 / 京士柏公园</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span><span>伊利沙伯医院</span></li>
-                            </ul>
-                        </div>
+                        
                     </div>
                 </div>
             </section>
 
-            <!-- 第四部份：馆内设施及服务 -->
             <section class="py-24 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-16">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">居社设施及服务</h2>
                         <p class="mt-4 text-slate-500 font-light">软硬件设施一览 / 尊享学生服务</p>
                     </div>
-                    
-                    <div class="space-y-16">
-                        <!-- 房间内部设施 -->
-                        <div class="scrub-item anim-fade-up">
-                            <div class="flex items-center gap-4 mb-8">
-                                <h3 class="text-xl font-serif font-bold text-academic-navy">房间内部设施</h3>
-                                <div class="h-[1px] flex-1 bg-slate-200"></div>
-                            </div>
-                            <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 max-w-5xl mx-auto">
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="bed-double" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">大床</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="layers" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">床垫</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="armchair" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">桌椅</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="archive" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">衣柜</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="air-vent" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">冷气机</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="blinds" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">窗帘</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="bath" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">洗手间</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="flame" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">热水器</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="mirror" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">镜子</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="shower-head" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">淋浴器</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="fan" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">抽气扇</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="lock" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">标配门锁</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="lamp" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">床头灯</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="plug" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">电源插座</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="shirt" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">衣架</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="trash" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">垃圾桶</div></div>
-                            </div>
-                        </div>
 
-                        <!-- 公共空间与尊享服务 -->
-                        <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                    <div class="space-y-16">
+                        
+                            <div class="scrub-item anim-fade-up">
+                                <div class="flex items-center gap-4 mb-8">
+                                    <h3 class="text-xl font-serif font-bold text-academic-navy">房间内部设施</h3>
+                                    <div class="h-[1px] flex-1 bg-slate-200"></div>
+                                </div>
+                                <div class="grid gap-6 max-w-5xl mx-auto grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 max-w-5xl mx-auto">
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="bed-double" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">大床</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="layers" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">床垫</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="armchair" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">桌椅</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="archive" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">衣柜</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="air-vent" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">冷气机</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="blinds" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">窗帘</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="bath" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">洗手间</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="flame" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">热水器</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="scan" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">镜子</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="shower-head" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">淋浴器</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="fan" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">抽气扇</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="lock" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">标配门锁</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="lamp" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">床头灯</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="plug" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">电源插座</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="shirt" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">衣架</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="trash" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">垃圾桶</div>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                        
                             <div class="scrub-item anim-fade-up">
                                 <div class="flex items-center gap-4 mb-8">
                                     <h3 class="text-xl font-serif font-bold text-academic-navy">公共空间设施</h3>
                                     <div class="h-[1px] flex-1 bg-slate-200"></div>
                                 </div>
-                                <div class="grid grid-cols-4 gap-4">
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="elevator" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">电梯</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="utensils" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">公共厨房</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="wind" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">抽油烟机</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="microwave" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">微波炉</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="refrigerator" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">冰箱</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="dryer" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">烘干机</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="washer" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">洗衣机</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="wifi" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">WIFI</div></div>
+                                <div class="grid gap-6 max-w-5xl mx-auto grid grid-cols-4 gap-4">
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="arrow-up-down" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">电梯</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="utensils" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">公共厨房</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="wind" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">抽油烟机</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="microwave" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">微波炉</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="refrigerator" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">冰箱</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="wind" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">烘干机</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="washing-machine" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">洗衣机</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="wifi" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">WIFI</div>
+                                        </div>
+                                    
                                 </div>
                             </div>
-
+                        
                             <div class="scrub-item anim-fade-up">
                                 <div class="flex items-center gap-4 mb-8">
                                     <h3 class="text-xl font-serif font-bold text-academic-navy">专属服务</h3>
                                     <div class="h-[1px] flex-1 bg-slate-200"></div>
                                 </div>
-                                <div class="grid grid-cols-4 gap-4">
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="headset" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">专属客服</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="wrench" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">设备维护</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="brush" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">公区清洁</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="users" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">联谊活动</div></div>
+                                <div class="grid gap-6 max-w-5xl mx-auto grid grid-cols-4 gap-4">
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="headset" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">专属客服</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="wrench" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">设备维护</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="brush" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">公区清洁</div>
+                                        </div>
+                                    
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i data-lucide="users" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600">联谊活动</div>
+                                        </div>
+                                    
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
             </section>
 
-            <!-- 第五部份：户型图 -->
             <section class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
@@ -630,81 +943,102 @@
                         <p class="mt-4 text-slate-500 font-light">平面图一览 / 楼层与房型布局</p>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1楼_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="1楼 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">1楼</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2-5楼_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="2-5楼 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">2-5楼</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="1号房 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">1号房</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="2号房 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">2号房</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/3号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="3号房 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">3号房</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/4号房（2-5楼）_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="4号房（2-5楼） 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">4号房（2-5楼）</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/5号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="5号房 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">5号房</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/6号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="6号房 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">6号房</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/7号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="7号房 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">7号房</div>
-        </div>
-      </div>
-    </div><div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up">
-      <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
-        <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/8号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 hover:scale-105" alt="8号房 户型图" loading="lazy" decoding="async">
-        <div class="absolute bottom-3 left-3">
-          <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">8号房</div>
-        </div>
-      </div>
-    </div></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1楼_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="1楼 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">1楼</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2-5楼_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="2-5楼 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">2-5楼</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="1号房 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">1号房</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="2号房 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">2号房</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/3号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="3号房 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">3号房</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/4号房（2-5楼）_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="4号房（2-5楼） 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">4号房（2-5楼）</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/5号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="5号房 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">5号房</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/6号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="6号房 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">6号房</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/7号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="7号房 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">7号房</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
+                                <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
+                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/8号房_结果.webp" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" alt="8号房 户型图" loading="lazy" decoding="async">
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="px-3 py-1.5 text-[10px] tracking-widest uppercase font-bold text-academic-navy bg-white/90 shadow-sm rounded-sm border border-slate-200">8号房</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                    </div>
                 </div>
             </section>
 
-            <!-- 第六部份：互动地图（高德） -->
             <section class="py-24 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
@@ -723,7 +1057,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mt-12 text-center">
                         <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-8 py-3 border border-academic-navy text-academic-navy font-bold hover:bg-academic-navy hover:text-white transition uppercase text-xs tracking-widest rounded-sm">
                             <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -732,7 +1066,6 @@
                     </div>
                 </div>
             </section>
-
         </div>
 </main>
 
@@ -984,7 +1317,10 @@
         </div>
     </footer>
     <script src="/sdlvhk.com/assets/i18n.js?v=20260202_0001"></script>
-    <script src="/sdlvhk.com/assets/app.js?v=20260323_0002"></script>
+    <script src="/sdlvhk.com/assets/apartment-custom-data.js?v=20260323_0001"></script>
+    <script src="/sdlvhk.com/assets/apartment-store.js?v=20260323_0002"></script>
+    <script src="/sdlvhk.com/assets/apartment-data.js?v=20260323_0002"></script>
+    <script src="/sdlvhk.com/assets/app.js?v=20260323_0003"></script>
     
 
     

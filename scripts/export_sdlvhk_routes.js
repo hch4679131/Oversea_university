@@ -1,6 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
+const { buildApartmentMeta, buildApartmentSlugs, getApartmentTemplate } = require('./apartment-config');
+const {
+  buildApartmentState,
+  getApartmentPage,
+  getApartmentLocalizedTitle
+} = require('../sites/sdlvhk.com/assets/apartment-data');
 
 const siteDir = path.join(__dirname, '..', 'sites', 'sdlvhk.com');
 const sourceIndexPath = path.join(siteDir, 'index.html');
@@ -16,25 +22,22 @@ const langSegments = {
   en: 'en'
 };
 
-const pageSlugs = {
+const basePageSlugs = {
   home: '',
   about: 'about',
   study: 'study',
   career: 'career',
   apartments: 'apartments',
   achievements: 'achievements',
-  contact: 'contact',
-  'apartment-ymt': 'apartments/ymt',
-  'apartment-csw': 'apartments/csw',
-  'apartment-tst': 'apartments/tst',
-  'apartment-oy': 'apartments/oy',
-  'apartment-syp1': 'apartments/syp1',
-  'apartment-syp2': 'apartments/syp2',
-  'apartment-syp3': 'apartments/syp3',
-  'apartment-pfl': 'apartments/pfl'
+  contact: 'contact'
 };
 
-const pageMeta = {
+const pageSlugs = {
+  ...basePageSlugs,
+  ...buildApartmentSlugs()
+};
+
+const basePageMeta = {
   home: {
     sc: {
       title: '汇生会 SDLV | Global Education & Career Elite',
@@ -78,47 +81,12 @@ const pageMeta = {
     sc: { title: '商业合作 | 汇生会 SDLV', description: '查看汇生会 SDLV 商业合作流程、合作模式、价值与联系入口。' },
     tc: { title: '商業合作 | 滙生會 SDLV', description: '查看滙生會 SDLV 商業合作流程、合作模式、價值與聯繫入口。' },
     en: { title: 'Contact & Partnerships | SDLV', description: 'Contact SDLV for partnerships, service collaboration, and business inquiries.' }
-  },
-  'apartment-ymt': {
-    sc: { title: '汇生会社（油麻地） | 汇生会 SDLV', description: '查看汇生会社油麻地学生公寓的户型、配套与环境。' },
-    tc: { title: '滙生会社（油麻地） | 滙生會 SDLV', description: '查看滙生会社油麻地學生公寓的戶型、配套與環境。' },
-    en: { title: 'Yau Ma Tei Residence | SDLV', description: 'Explore SDLV Yau Ma Tei student accommodation, room layout, amenities, and environment.' }
-  },
-  'apartment-csw': {
-    sc: { title: '汇生会社（长沙湾） | 汇生会 SDLV', description: '查看汇生会社长沙湾学生公寓的户型、配套与环境。' },
-    tc: { title: '滙生会社（長沙灣） | 滙生會 SDLV', description: '查看滙生会社長沙灣學生公寓的戶型、配套與環境。' },
-    en: { title: 'Cheung Sha Wan Residence | SDLV', description: 'Explore SDLV Cheung Sha Wan student accommodation, room layout, amenities, and environment.' }
-  },
-  'apartment-tst': {
-    sc: { title: '汇生会社（尖沙咀） | 汇生会 SDLV', description: '查看汇生会社尖沙咀学生公寓的户型、配套与环境。' },
-    tc: { title: '滙生会社（尖沙咀） | 滙生會 SDLV', description: '查看滙生会社尖沙咀學生公寓的戶型、配套與環境。' },
-    en: { title: 'Tsim Sha Tsui Residence | SDLV', description: 'Explore SDLV Tsim Sha Tsui student accommodation, room layout, amenities, and environment.' }
-  },
-  'apartment-oy': {
-    sc: { title: '汇生会社（奥运） | 汇生会 SDLV', description: '查看汇生会社奥运学生公寓的户型、配套与环境。' },
-    tc: { title: '滙生会社（奧運） | 滙生會 SDLV', description: '查看滙生会社奧運學生公寓的戶型、配套與環境。' },
-    en: { title: 'Olympic Residence | SDLV', description: 'Explore SDLV Olympic student accommodation, room layout, amenities, and environment.' }
-  },
-  'apartment-syp1': {
-    sc: { title: '汇生会社（西营盘一期） | 汇生会 SDLV', description: '查看汇生会社西营盘一期学生公寓的户型、配套与环境。' },
-    tc: { title: '滙生会社（西營盤一期） | 滙生會 SDLV', description: '查看滙生会社西營盤一期學生公寓的戶型、配套與環境。' },
-    en: { title: 'Sai Ying Pun Phase 1 Residence | SDLV', description: 'Explore SDLV Sai Ying Pun Phase 1 student accommodation, room layout, amenities, and environment.' }
-  },
-  'apartment-syp2': {
-    sc: { title: '汇生会社（西营盘二期） | 汇生会 SDLV', description: '查看汇生会社西营盘二期学生公寓的户型、配套与环境。' },
-    tc: { title: '滙生会社（西營盤二期） | 滙生會 SDLV', description: '查看滙生会社西營盤二期學生公寓的戶型、配套與環境。' },
-    en: { title: 'Sai Ying Pun Phase 2 Residence | SDLV', description: 'Explore SDLV Sai Ying Pun Phase 2 student accommodation, room layout, amenities, and environment.' }
-  },
-  'apartment-syp3': {
-    sc: { title: '汇生会社（西营盘三期） | 汇生会 SDLV', description: '查看汇生会社西营盘三期学生公寓的户型、配套与环境。' },
-    tc: { title: '滙生会社（西營盤三期） | 滙生會 SDLV', description: '查看滙生会社西營盤三期學生公寓的戶型、配套與環境。' },
-    en: { title: 'Sai Ying Pun Phase 3 Residence | SDLV', description: 'Explore SDLV Sai Ying Pun Phase 3 student accommodation, room layout, amenities, and environment.' }
-  },
-  'apartment-pfl': {
-    sc: { title: '汇生会社（薄扶林） | 汇生会 SDLV', description: '查看汇生会社薄扶林学生公寓的户型、配套与环境。' },
-    tc: { title: '滙生会社（薄扶林） | 滙生會 SDLV', description: '查看滙生会社薄扶林學生公寓的戶型、配套與環境。' },
-    en: { title: 'Pok Fu Lam Residence | SDLV', description: 'Explore SDLV Pok Fu Lam student accommodation, room layout, amenities, and environment.' }
   }
+};
+
+const pageMeta = {
+  ...basePageMeta,
+  ...buildApartmentMeta()
 };
 
 function escapeHtml(value) {
@@ -251,8 +219,24 @@ function findMatchingElementEnd(html, openStart, tagName) {
 
 function extractPageBlocks(mainInner) {
   const blocks = {};
+  const sharedApartmentMarker = 'x-show="isApartmentDetailPage(page)"';
+  const sharedApartmentMarkerIndex = mainInner.indexOf(sharedApartmentMarker);
+  let sharedApartmentBlock = null;
+
+  if (sharedApartmentMarkerIndex !== -1) {
+    const sharedBlockStart = mainInner.lastIndexOf('<div', sharedApartmentMarkerIndex);
+    if (sharedBlockStart !== -1) {
+      const sharedBlockEnd = findMatchingDivEnd(mainInner, sharedBlockStart);
+      sharedApartmentBlock = mainInner.slice(sharedBlockStart, sharedBlockEnd);
+    }
+  }
 
   Object.keys(pageSlugs).forEach((pageKey) => {
+    if (pageKey.startsWith('apartment-') && sharedApartmentBlock) {
+      blocks[pageKey] = sharedApartmentBlock;
+      return;
+    }
+
     const marker = `x-show="page === '${pageKey}'"`;
     const markerIndex = mainInner.indexOf(marker);
     if (markerIndex === -1) {
@@ -633,7 +617,7 @@ function replaceSimpleXText(html, context) {
 
 function replaceBoundAttributes(html, context) {
   return html.replace(/\s:([a-zA-Z-]+)="([^"]+)"/g, (match, attributeName, expr) => {
-    if (!['src', 'alt', 'title', 'aria-label'].includes(attributeName)) {
+    if (!['src', 'alt', 'title', 'aria-label', 'data-lucide'].includes(attributeName)) {
       return match;
     }
 
@@ -647,6 +631,33 @@ function replaceBoundAttributes(html, context) {
     }
 
     return ` ${attributeName}="${escapeHtml(resolvedValue)}"`;
+  });
+}
+
+function replaceBoundClasses(html, context) {
+  return html.replace(/<([a-zA-Z][\w:-]*)([^>]*?)\s:class="([^"]+)"([^>]*)>/g, (match, tagName, beforeAttrs, expr, afterAttrs) => {
+    const resolvedValue = evaluateExpression(expr.trim(), context);
+    if (typeof resolvedValue === 'undefined') {
+      return match;
+    }
+
+    const normalizedClass = Array.isArray(resolvedValue)
+      ? resolvedValue.filter(Boolean).join(' ')
+      : (resolvedValue ? String(resolvedValue).trim() : '');
+    let attrs = `${beforeAttrs}${afterAttrs}`;
+
+    if (normalizedClass) {
+      if (/\sclass="([^"]*)"/.test(attrs)) {
+        attrs = attrs.replace(/\sclass="([^"]*)"/, (_, existingValue) => {
+          const merged = `${existingValue} ${normalizedClass}`.trim().replace(/\s+/g, ' ');
+          return ` class="${escapeHtml(merged)}"`;
+        });
+      } else {
+        attrs = `${attrs} class="${escapeHtml(normalizedClass)}"`;
+      }
+    }
+
+    return `<${tagName}${attrs}>`;
   });
 }
 
@@ -804,6 +815,7 @@ function renderFragment(html, context) {
   renderedHtml = renderLoopTemplates(renderedHtml, context);
   renderedHtml = renderConditionalTemplates(renderedHtml, context);
   renderedHtml = renderShownElements(renderedHtml, context);
+  renderedHtml = replaceBoundClasses(renderedHtml, context);
   renderedHtml = replaceBoundAttributes(renderedHtml, context);
   renderedHtml = replaceSimpleXText(renderedHtml, context);
   return renderedHtml;
@@ -841,11 +853,41 @@ function renderHtml(template, langKey, pageKey) {
   const meta = pageMeta[pageKey][langKey];
   const routePath = buildRoutePath(langKey, pageKey);
   const canonicalHref = `${siteBaseUrl}${routePath}`;
+  const apartmentData = pageKey.startsWith('apartment-') ? getApartmentPage(pageKey) : null;
+  const apartmentUiState = apartmentData ? buildApartmentState(pageKey) : null;
+  const apartmentTranslations = translations[langKey] || {};
   const renderContext = {
     t: { lang: translations[langKey] },
     lang: 'lang',
+    page: pageKey,
     routeLangKey: langKey,
     routePageKey: pageKey,
+    apartmentTemplate: getApartmentTemplate(pageKey),
+    buildApartmentState,
+    isApartmentDetailPage: (value = pageKey) => typeof value === 'string' && value.startsWith('apartment-'),
+    getApartmentData: () => apartmentData,
+    getApartmentLocalizedTitle: () => getApartmentLocalizedTitle(pageKey, langKey, apartmentTranslations),
+    getApartmentTransportCards: () => apartmentData && apartmentData.transport ? apartmentData.transport.cards || [] : [],
+    getApartmentGroupedRooms: () => apartmentUiState ? apartmentUiState.groupedRooms : [],
+    getApartmentActiveRoomPhoto: (item, idx) => {
+      const slideIndex = apartmentUiState && apartmentUiState.roomSlides ? apartmentUiState.roomSlides[idx] || 0 : 0;
+      return item && Array.isArray(item.photos) ? item.photos[slideIndex] || item.photos[0] || null : null;
+    },
+    getApartmentPublicPhotos: () => apartmentUiState ? apartmentUiState.publicPhotos : [],
+    getApartmentBooking: () => apartmentData ? apartmentData.booking || {} : {},
+    shouldShowApartmentBookingButton: (item) => {
+      const booking = apartmentData ? apartmentData.booking || {} : {};
+      const excluded = Array.isArray(booking.excludeLabels) ? booking.excludeLabels : [];
+      return Boolean(booking.enabled) && !excluded.includes(item && item.label ? item.label : '');
+    },
+    openApartmentBooking: () => false,
+    closeApartmentBooking: () => false,
+    isApartmentBookingOpen: () => false,
+    prevApartmentSlide: () => false,
+    nextApartmentSlide: () => false,
+    getApartmentLifestyleCards: () => apartmentData ? apartmentData.lifestyleCards || [] : [],
+    getApartmentAmenityGroups: () => apartmentData ? apartmentData.amenityGroups || [] : [],
+    getApartmentFloorPlans: () => apartmentData ? apartmentData.floorPlans || [] : [],
     wechatId: appConfig.wechatId,
     wechatCopied: false
   };

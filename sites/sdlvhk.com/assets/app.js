@@ -75,9 +75,14 @@ function initStaticCarousels(root = document) {
 refreshLucideIcons();
 initStaticCarousels();
 
+const apartmentHelpers = window.SDLV_APARTMENTS || window.SDLV_APARTMENT_STORE || {};
+const apartmentRouteSlugs = apartmentHelpers.buildApartmentSlugs ? apartmentHelpers.buildApartmentSlugs() : {};
+const apartmentRouteTitles = apartmentHelpers.buildApartmentTitleKeys ? apartmentHelpers.buildApartmentTitleKeys() : {};
+
         function appData() {
             return {
                 init() {
+                    this.refreshApartmentRouteMaps();
                     const initialRoute = this.parseCurrentRoute();
                     this.lang = initialRoute.lang;
                     this.page = initialRoute.page;
@@ -117,6 +122,17 @@ initStaticCarousels();
                 lang: 'sc', // sc, tc, en
                 page: 'home',
                 routeLangMap: { sc: 'zh-CN', tc: 'zh-HK', en: 'en' },
+                baseRoutePageSlugs: {
+                    home: '',
+                    about: 'about',
+                    study: 'study',
+                    career: 'career',
+                    apartments: 'apartments',
+                    achievements: 'achievements',
+                    contact: 'contact',
+                    'agent-login': 'agent/login',
+                    'agent-dashboard': 'agent/dashboard'
+                },
                 routePageSlugs: {
                     home: '',
                     about: 'about',
@@ -125,16 +141,20 @@ initStaticCarousels();
                     apartments: 'apartments',
                     achievements: 'achievements',
                     contact: 'contact',
-                    'apartment-ymt': 'apartments/ymt',
-                    'apartment-csw': 'apartments/csw',
-                    'apartment-tst': 'apartments/tst',
-                    'apartment-oy': 'apartments/oy',
-                    'apartment-syp1': 'apartments/syp1',
-                    'apartment-syp2': 'apartments/syp2',
-                    'apartment-syp3': 'apartments/syp3',
-                    'apartment-pfl': 'apartments/pfl',
+                    ...apartmentRouteSlugs,
                     'agent-login': 'agent/login',
                     'agent-dashboard': 'agent/dashboard'
+                },
+                baseRoutePageTitles: {
+                    home: '汇生会 SDLV',
+                    about: 'nav_about',
+                    study: 'nav_study',
+                    career: 'nav_career',
+                    apartments: 'nav_apt',
+                    achievements: 'nav_achievements',
+                    contact: 'nav_contact',
+                    'agent-login': '代理登录',
+                    'agent-dashboard': '代理后台'
                 },
                 routePageTitles: {
                     home: '汇生会 SDLV',
@@ -144,18 +164,16 @@ initStaticCarousels();
                     apartments: 'nav_apt',
                     achievements: 'nav_achievements',
                     contact: 'nav_contact',
-                    'apartment-ymt': 'apt_ymt_card_title',
-                    'apartment-csw': 'apt_csw_card_title',
-                    'apartment-tst': 'apt_tst_card_title',
-                    'apartment-oy': 'apt_oy_card_title',
-                    'apartment-syp1': 'apt_syp1_card_title',
-                    'apartment-syp2': 'apt_syp2_card_title',
-                    'apartment-syp3': 'apt_syp3_card_title',
-                    'apartment-pfl': 'apt_pfl_card_title',
+                    ...apartmentRouteTitles,
                     'agent-login': '代理登录',
                     'agent-dashboard': '代理后台'
                 },
                 routeListenerBound: false,
+                apartmentUiStates: {},
+                apartmentAdminJson: '',
+                apartmentAdminSelectedPageKey: '',
+                apartmentAdminNotice: '',
+                apartmentAdminNoticeType: 'info',
 
                 // ===== Mobile Nav =====
                 mobileNavOpen: false,
@@ -228,6 +246,9 @@ initStaticCarousels();
 
                 getPageTitle(page = this.page, lang = this.lang) {
                     const titleEntry = this.routePageTitles[this.normalizePage(page)] || this.routePageTitles.home;
+                    if (this.isApartmentDetailPage(page)) {
+                        return this.getApartmentLocalizedTitle(page, lang) || this.getApartmentData(page)?.displayName || '汇生会 SDLV';
+                    }
                     if (titleEntry === '汇生会 SDLV' || titleEntry === '代理登录' || titleEntry === '代理后台') {
                         return titleEntry;
                     }
@@ -295,7 +316,7 @@ initStaticCarousels();
                         initScrollEngine();
                         refreshLucideIcons();
                         initStaticCarousels();
-                        if (page === 'apartments') {
+                        if (page === 'apartments' || (this.isApartmentDetailPage(page) && this.getApartmentData(page)?.hero?.showInteractiveMap)) {
                             this.initAmapEmbed();
                         }
                         if (anchorId) {
@@ -317,6 +338,235 @@ initStaticCarousels();
                         return this.page === 'apartments' || this.page.startsWith('apartment-');
                     }
                     return this.page === targetPage;
+                },
+
+                isApartmentDetailPage(page = this.page) {
+                    return typeof page === 'string' && page.startsWith('apartment-');
+                },
+
+                getApartmentPageKeys() {
+                    return apartmentHelpers.getApartmentPageKeys ? apartmentHelpers.getApartmentPageKeys() : [];
+                },
+
+                refreshApartmentRouteMaps() {
+                    const dynamicSlugs = apartmentHelpers.buildApartmentSlugs ? apartmentHelpers.buildApartmentSlugs() : {};
+                    const dynamicTitles = apartmentHelpers.buildApartmentTitleKeys ? apartmentHelpers.buildApartmentTitleKeys() : {};
+                    this.routePageSlugs = { ...this.baseRoutePageSlugs, ...dynamicSlugs };
+                    this.routePageTitles = { ...this.baseRoutePageTitles, ...dynamicTitles };
+                },
+
+                getApartmentData(page = this.page) {
+                    if (!this.isApartmentDetailPage(page) || !apartmentHelpers.getApartmentPage) {
+                        return null;
+                    }
+
+                    return apartmentHelpers.getApartmentPage(page);
+                },
+
+                getApartmentLocalizedTitle(page = this.page, lang = this.lang) {
+                    return apartmentHelpers.getApartmentLocalizedTitle
+                        ? apartmentHelpers.getApartmentLocalizedTitle(page, lang, this.t[lang])
+                        : '';
+                },
+
+                ensureApartmentUiState(page = this.page) {
+                    if (!this.isApartmentDetailPage(page) || !apartmentHelpers.buildApartmentState) {
+                        return null;
+                    }
+
+                    if (!this.apartmentUiStates[page]) {
+                        this.apartmentUiStates[page] = apartmentHelpers.buildApartmentState(page);
+                    }
+
+                    return this.apartmentUiStates[page];
+                },
+
+                getApartmentTransportCards(page = this.page) {
+                    const apartment = this.getApartmentData(page);
+                    return apartment && apartment.transport ? apartment.transport.cards || [] : [];
+                },
+
+                getApartmentGroupedRooms(page = this.page) {
+                    const state = this.ensureApartmentUiState(page);
+                    return state ? state.groupedRooms : [];
+                },
+
+                getApartmentActiveRoomPhoto(item, idx, page = this.page) {
+                    const state = this.ensureApartmentUiState(page);
+                    const slideIndex = state && state.roomSlides ? state.roomSlides[idx] || 0 : 0;
+                    return item && Array.isArray(item.photos) ? item.photos[slideIndex] || item.photos[0] || null : null;
+                },
+
+                prevApartmentSlide(idx, page = this.page) {
+                    const state = this.ensureApartmentUiState(page);
+                    const item = this.getApartmentGroupedRooms(page)[idx];
+                    const total = item && Array.isArray(item.photos) ? item.photos.length : 0;
+                    if (!state || total <= 1) return;
+                    state.roomSlides[idx] = (state.roomSlides[idx] - 1 + total) % total;
+                },
+
+                nextApartmentSlide(idx, page = this.page) {
+                    const state = this.ensureApartmentUiState(page);
+                    const item = this.getApartmentGroupedRooms(page)[idx];
+                    const total = item && Array.isArray(item.photos) ? item.photos.length : 0;
+                    if (!state || total <= 1) return;
+                    state.roomSlides[idx] = (state.roomSlides[idx] + 1) % total;
+                },
+
+                getApartmentPublicPhotos(page = this.page) {
+                    const state = this.ensureApartmentUiState(page);
+                    return state ? state.publicPhotos : [];
+                },
+
+                getApartmentBooking(page = this.page) {
+                    const apartment = this.getApartmentData(page);
+                    return apartment ? apartment.booking || {} : {};
+                },
+
+                shouldShowApartmentBookingButton(item, page = this.page) {
+                    const booking = this.getApartmentBooking(page);
+                    if (!booking.enabled) return false;
+                    const excluded = Array.isArray(booking.excludeLabels) ? booking.excludeLabels : [];
+                    return !excluded.includes(item && item.label ? item.label : '');
+                },
+
+                openApartmentBooking(page = this.page) {
+                    const state = this.ensureApartmentUiState(page);
+                    if (state) state.bookingOpen = true;
+                },
+
+                closeApartmentBooking(page = this.page) {
+                    const state = this.ensureApartmentUiState(page);
+                    if (state) state.bookingOpen = false;
+                },
+
+                isApartmentBookingOpen(page = this.page) {
+                    const state = this.ensureApartmentUiState(page);
+                    return Boolean(state && state.bookingOpen);
+                },
+
+                getApartmentLifestyleCards(page = this.page) {
+                    const apartment = this.getApartmentData(page);
+                    return apartment ? apartment.lifestyleCards || [] : [];
+                },
+
+                getApartmentAmenityGroups(page = this.page) {
+                    const apartment = this.getApartmentData(page);
+                    return apartment ? apartment.amenityGroups || [] : [];
+                },
+
+                getApartmentFloorPlans(page = this.page) {
+                    const apartment = this.getApartmentData(page);
+                    return apartment ? apartment.floorPlans || [] : [];
+                },
+
+                apartmentAdminLoadSample() {
+                    this.apartmentAdminSelectedPageKey = '';
+                    this.apartmentAdminJson = JSON.stringify({
+                        slug: 'new-residence',
+                        pageKey: 'apartment-new-residence',
+                        titleKey: 'apt_new_residence_card_title',
+                        displayName: '汇生会社(新公寓)',
+                        meta: {
+                            sc: { title: '汇生会社（新公寓） | 汇生会 SDLV', description: '填写新公寓的中文简介。' },
+                            tc: { title: '滙生会社（新公寓） | 滙生會 SDLV', description: '填寫新公寓的繁中簡介。' },
+                            en: { title: 'New Residence | SDLV', description: 'Add an English summary for the new residence.' }
+                        },
+                        hero: {
+                            badge: 'Premium Residence',
+                            locationLine: '填写公寓地址',
+                            mapImage: '',
+                            showInteractiveMap: false
+                        },
+                        transport: {
+                            cards: [
+                                { accent: 'navy', icon: 'train', title: '周边大学及通勤时长', items: ['填写大学与通勤信息'] },
+                                { accent: 'red', icon: 'map-pin', title: '主要交通节点', items: ['填写交通节点信息'] }
+                            ]
+                        },
+                        rooms: {
+                            photos: [
+                                { src: 'https://example.com/room-1.webp', label: '1号房', alt: '1号房' },
+                                { src: 'https://example.com/public-1.webp', label: '公共区域', alt: '公共区域' }
+                            ]
+                        },
+                        booking: {
+                            enabled: true,
+                            ctaText: '抢先以早鸟价格订房',
+                            modalTitle: '立即预定',
+                            modalDescription: '请扫描二维码，立即预定房间!'
+                        },
+                        lifestyleCards: [],
+                        amenityGroups: [],
+                        floorPlans: []
+                    }, null, 2);
+                    this.apartmentAdminNotice = '';
+                },
+
+                apartmentAdminEdit(pageKey) {
+                    const apartment = this.getApartmentData(pageKey);
+                    if (!apartment) {
+                        this.apartmentAdminNotify('未找到对应公寓数据。', 'error');
+                        return;
+                    }
+
+                    this.apartmentAdminSelectedPageKey = pageKey;
+                    this.apartmentAdminJson = JSON.stringify(apartment, null, 2);
+                    this.apartmentAdminNotify(`已载入公寓：${apartment.displayName || pageKey}`, 'info');
+                },
+
+                apartmentAdminResetEditor() {
+                    this.apartmentAdminSelectedPageKey = '';
+                    this.apartmentAdminJson = '';
+                    this.apartmentAdminNotice = '';
+                    this.apartmentAdminNoticeType = 'info';
+                },
+
+                apartmentAdminNotify(message, type = 'info') {
+                    this.apartmentAdminNotice = message;
+                    this.apartmentAdminNoticeType = type;
+                },
+
+                async apartmentAdminAdd() {
+                    if (!apartmentHelpers.createApartmentRecord || !apartmentHelpers.addApartmentPage) {
+                        this.apartmentAdminNotify('当前环境未启用公寓数据写入能力。', 'error');
+                        return;
+                    }
+
+                    let parsed;
+                    try {
+                        parsed = JSON.parse(this.apartmentAdminJson || '{}');
+                    } catch {
+                        this.apartmentAdminNotify('JSON 格式无效，请先修正。', 'error');
+                        return;
+                    }
+
+                    try {
+                        const apartmentRecord = apartmentHelpers.createApartmentRecord(parsed);
+                        const isEditingExisting = Boolean(this.apartmentAdminSelectedPageKey);
+
+                        if (isEditingExisting && apartmentRecord.pageKey !== this.apartmentAdminSelectedPageKey) {
+                            this.apartmentAdminNotify('编辑现有公寓时不能修改 pageKey；如需新建，请先清空编辑器。', 'error');
+                            return;
+                        }
+
+                        if (isEditingExisting) {
+                            await this.agentApi(`/api/agent/apartments/${encodeURIComponent(apartmentRecord.pageKey)}`, 'PUT', apartmentRecord, true);
+                            apartmentHelpers.addApartmentPage(apartmentRecord, { overwrite: true, persist: false });
+                            this.apartmentAdminNotify(`已更新公寓并写入数据文件：${apartmentRecord.displayName || apartmentRecord.pageKey}`, 'success');
+                        } else {
+                            await this.agentApi('/api/agent/apartments', 'POST', apartmentRecord, true);
+                            apartmentHelpers.addApartmentPage(apartmentRecord, { persist: false });
+                            this.apartmentAdminNotify(`已新增公寓并写入数据文件：${apartmentRecord.displayName || apartmentRecord.pageKey}`, 'success');
+                        }
+
+                        this.apartmentAdminSelectedPageKey = apartmentRecord.pageKey;
+                        this.refreshApartmentRouteMaps();
+                        this.apartmentUiStates[apartmentRecord.pageKey] = apartmentHelpers.buildApartmentState(apartmentRecord.pageKey);
+                        this.switchPage(apartmentRecord.pageKey);
+                    } catch (error) {
+                        this.apartmentAdminNotify(error && error.message ? error.message : '新增公寓失败。', 'error');
+                    }
                 },
 
                 // ===== AMap Embed (Page 4B reserved map area) =====
@@ -478,7 +728,7 @@ initStaticCarousels();
                 agentSalesTrendFilters: { startDate: '', endDate: '' },
                 agentSalesTrendHover: { active: false, i: 0, px: 0, w: 0 },
 
-                agentDashTab: 'overview', // overview | register_sub | downline_orders | change_password
+                agentDashTab: 'overview', // overview | apartments | register_sub | downline_orders | change_password
                 agentChangePasswordForm: { oldPassword: '', newPassword: '', confirmPassword: '' },
 
                 agentDownlineFilters: { q: '', status: '', role: '', startDate: '', endDate: '' },
@@ -561,6 +811,7 @@ initStaticCarousels();
                 agentDashTabs() {
                     const tabs = [
                         { id: 'overview', label: '数据总览', icon: 'layout-dashboard' },
+                        { id: 'apartments', label: '公寓数据', icon: 'building-2' },
                         { id: 'register_sub', label: '注册下级', icon: 'user-plus' },
                         { id: 'downline_orders', label: '下级开单', icon: 'users' },
                         { id: 'change_password', label: '安全设置', icon: 'lock' }
@@ -736,7 +987,7 @@ initStaticCarousels();
 
                 agentSetDashTab(tab) {
                     const t = String(tab || '').trim();
-                    const allowed = ['overview', 'register_sub', 'downline_orders', 'change_password'];
+                    const allowed = ['overview', 'apartments', 'register_sub', 'downline_orders', 'change_password'];
                     this.agentDashTab = allowed.includes(t) ? t : 'overview';
 
                     if (this.agentDashTab === 'register_sub' && String(this.agentUser?.role || '').trim() !== 'consultant') {

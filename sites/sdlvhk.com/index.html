@@ -2058,1076 +2058,95 @@
             </section>
         </div>
 
-        <!-- ================= PAGE 4C: 长沙湾 · 公寓详情（占位版） ================= -->
-        <div x-show="page === 'apartment-csw'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
-                    <div class="scrub-item anim-fade-up">
-                        <!-- <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
-                            <span>公寓頁標籤</span>
-                            <span class="text-black/40">/</span>
-                            <span class="font-bold">汇生会社(长沙湾)</span>
-                        </div> -->
-                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950">汇生会社(长沙湾)</h1>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <!-- <p class="mt-4 text-black/70 leading-relaxed">长沙湾，九龙</p> -->
-
-                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🎓 香港城市大学</div>
-                                    <div>🎓 香港浸会大学</div>
-                                </div>
-                            </div>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🚇 油麻地站</div>
-                                    <div>🚇 柯士甸站</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-10">
-                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
-                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                                <span>返回公寓展示</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 我们的房间（与 PAGE 4B 完全一致结构） -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ cswBookingOpen: false, cswRoomsPhotos: [
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/1号房/W长沙湾1号房.webp', label: '1号房', alt: '1号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/1号房/W长沙湾1号房%20浴室.webp', label: '1号房', alt: '1号房 浴室' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾2号房.webp', label: '2号房', alt: '2号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾2号房%20浴室.webp', label: '2号房', alt: '2号房 浴室' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/2号房/W长沙湾%202号房%20浴室2.webp', label: '2号房', alt: '2号房 浴室2' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾%203号房.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾3号房.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/3号房/W长沙湾%203号房%2002.webp', label: '3号房', alt: '3号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20房间_结果.webp', label: '4号房', alt: '4号房 房间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20房间%2002_结果.webp', label: '4号房', alt: '4号房 房间 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/4号房/W长沙湾%204号房%20浴室_结果.webp', label: '4号房', alt: '4号房 浴室' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2001.webp', label: '5号房', alt: '5号房 01' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2002.webp', label: '5号房', alt: '5号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/5号房/W长沙湾%205号房%2003.webp', label: '5号房', alt: '5号房 03' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%20房间_结果.webp', label: '6号房', alt: '6号房 房间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%2002房间_结果.webp', label: '6号房', alt: '6号房 02房间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/6号房/W长沙湾%206号房%2003房间_结果.webp', label: '6号房', alt: '6号房 03房间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2001_结果.webp', label: '7号房', alt: '7号房 01' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2002_结果.webp', label: '7号房', alt: '7号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/7号房/W长沙湾%207号房%2003_结果.webp', label: '7号房', alt: '7号房 03' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/8号房/长沙湾%208号房%2001_结果.webp', label: '8号房', alt: '8号房 01' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/8号房/长沙湾%208号房%2002_结果.webp', label: '8号房', alt: '8号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W学生取信处.webp', label: '公共区域', alt: '公共区域 学生取信处' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20休息区%2B洗衣区%20全景.webp', label: '公共区域', alt: '公共区域 休息区+洗衣区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20休息区.webp', label: '公共区域', alt: '公共区域 休息区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20健身区.webp', label: '公共区域', alt: '公共区域 健身区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房%2002%20全景.webp', label: '公共区域', alt: '公共区域 厨房 02 全景' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房%20冰箱区域.webp', label: '公共区域', alt: '公共区域 厨房 冰箱区域' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20厨房.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20天台休息区.webp', label: '公共区域', alt: '公共区域 天台休息区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（长沙湾）/公寓照片九江街/公共区域/W长沙湾%20洗衣房.webp', label: '公共区域', alt: '公共区域 洗衣房' }
-            ], groupedCswRooms: [], cswPublicPhotos: [], cswRoomSlides: {}, init() {
-                const buckets = {};
-                this.cswPublicPhotos = this.cswRoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.cswRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedCswRooms = Object.values(buckets);
-                this.groupedCswRooms.forEach((_, idx) => { this.cswRoomSlides[idx] = 0; });
-            }, prevCswSlide(idx) {
-                const total = this.groupedCswRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.cswRoomSlides[idx] = (this.cswRoomSlides[idx] - 1 + total) % total;
-            }, nextCswSlide(idx) {
-                const total = this.groupedCswRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.cswRoomSlides[idx] = (this.cswRoomSlides[idx] + 1) % total;
-            } }">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-center">
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
-                    </div>
-
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedCswRooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[cswRoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[cswRoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevCswSlide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextCswSlide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                        <template x-if="item.label !== '公共区域'">
-                                            <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="cswBookingOpen = true">抢先以早鸟价格订房</button>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-
-                    <div class="mt-12 border-t border-black/15"></div>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in cswPublicPhotos" :key="'csw-public-' + idx">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-
-                    <!-- Booking Modal -->
-                    <div class="fixed inset-0 z-[90]" x-show="cswBookingOpen" x-transition.opacity @keydown.escape.window="cswBookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/60" @click="cswBookingOpen = false"></div>
-                        <div class="relative min-h-full flex items-center justify-center p-6">
-                            <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 shadow-2xl">
-                                <div class="flex items-center justify-between px-6 py-5 border-b border-black/10">
-                                    <div>
-                                        <div class="text-2xl font-serif font-bold">立即预定</div>
-                                    </div>
-                                    <button type="button" class="p-2 text-black/60 hover:text-black transition" @click="cswBookingOpen = false" aria-label="Close">
-                                        <i data-lucide="x" class="w-5 h-5"></i>
-                                    </button>
-                                </div>
-                                <div class="px-6 py-6">
-                                    <div class="text-sm text-black/70">请扫描二维码，立即预定房间!</div>
-                                    <div class="mt-5 border border-black/10 bg-white overflow-hidden aspect-square w-64 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-black/5" loading="lazy" decoding="async">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-
-        <!-- ================= PAGE 4D: 尖沙咀 · 公寓详情（占位版） ================= -->
-        <div x-show="page === 'apartment-tst'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
-                    <div class="scrub-item anim-fade-up">
-                        <!-- <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
-                            <span>公寓頁標籤</span>
-                            <span class="text-black/40">/</span>
-                            <span class="font-bold" x-text="t[lang].apt_tst_card_title"></span>
-                        </div> -->
-                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_tst_card_title"></h1>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_tst_card_loc"></p> -->
-
-                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🎓 香港理工大学</div>
-                                    <div>🎓 香港城市大学</div>
-                                    <div>🎓 香港浸会大学</div>
-                                    <div>🎓 香港都会大学</div>
-                                    <div>🎓 香港大学</div>
-                                </div>
-                            </div>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🚇 尖沙咀站</div>
-                                    <div>🚇 尖东站</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-10">
-                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
-                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                                <span>返回公寓展示</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 我们的房间（与 PAGE 4B 完全一致结构） -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ tstBookingOpen: false, tstRoomsPhotos: [
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/101/101_结果.webp', label: '101', alt: '101房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/101/101厕所_结果.webp', label: '101', alt: '101房 卫生间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/102/102_结果.webp', label: '102', alt: '102房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/103/103_结果.webp', label: '103', alt: '103房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/103/103厕所_结果.webp', label: '103', alt: '103房 卫生间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/104-106-107/104、106、107_结果.webp', label: '104/106/107', alt: '104/106/107房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/104-106-107/104、106、107厕所_结果.webp', label: '104/106/107', alt: '104/106/107房 卫生间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/105-108/105,108_结果.webp', label: '105/108', alt: '105/108房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/105-108/105、108厕所_结果.webp', label: '105/108', alt: '105/108房 卫生间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/109/109_结果.webp', label: '109', alt: '109房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/109/109厕所_结果.webp', label: '109', alt: '109房 卫生间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/110/110_结果.webp', label: '110', alt: '110房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/110/110厕所_结果.webp', label: '110', alt: '110房 卫生间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/公共区域/厨房1_结果.webp', label: '公共区域', alt: '公共区域 厨房1' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/公共区域/厨房_结果.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/公共区域/厨房厕所_结果.webp', label: '公共区域', alt: '公共区域 厨房卫生间' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/公共区域/尖沙咀多福大厦_结果.webp', label: '公共区域', alt: '公共区域 多福大厦' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/公共区域/洗衣房_结果.webp', label: '公共区域', alt: '公共区域 洗衣房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/多福2026%20效果圖/公共区域/自修室_结果.webp', label: '公共区域', alt: '公共区域 自修室' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/一楼电梯口%20信封区域_结果.webp', label: '公共区域', alt: '公共区域 一楼电梯口信封区域' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/公寓走廊_结果.webp', label: '公共区域', alt: '公共区域 公寓走廊' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/公寓走廊_结果_结果.webp', label: '公共区域', alt: '公共区域 公寓走廊' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/厨房_结果.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/厨房_结果_结果.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/尖沙咀%20外围门牌图片_结果.webp', label: '公共区域', alt: '公共区域 外围门牌' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/楼下门口%20_结果.webp', label: '公共区域', alt: '公共区域 楼下门口' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/洗衣房_结果.webp', label: '公共区域', alt: '公共区域 洗衣房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（尖沙咀）/尖沙咀公寓照片/自修室_结果.webp', label: '公共区域', alt: '公共区域 自修室' }
-            ], groupedTstRooms: [], tstPublicPhotos: [], tstRoomSlides: {}, init() {
-                const buckets = {};
-                this.tstPublicPhotos = this.tstRoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.tstRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedTstRooms = Object.values(buckets);
-                this.groupedTstRooms.forEach((_, idx) => { this.tstRoomSlides[idx] = 0; });
-            }, prevTstSlide(idx) {
-                const total = this.groupedTstRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.tstRoomSlides[idx] = (this.tstRoomSlides[idx] - 1 + total) % total;
-            }, nextTstSlide(idx) {
-                const total = this.groupedTstRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.tstRoomSlides[idx] = (this.tstRoomSlides[idx] + 1) % total;
-            } }">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-center">
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
-                    </div>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedTstRooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[tstRoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[tstRoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevTstSlide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextTstSlide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                        <template x-if="item.label !== '公共区域'">
-                                            <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="tstBookingOpen = true">抢先以早鸟价格订房</button>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-
-                    <div class="mt-12 border-t border-black/15"></div>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in tstPublicPhotos" :key="'tst-public-' + idx">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="fixed inset-0 z-[90]" x-show="tstBookingOpen" x-transition.opacity @keydown.escape.window="tstBookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/60" @click="tstBookingOpen = false"></div>
-                        <div class="relative min-h-full flex items-center justify-center p-6">
-                            <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 shadow-2xl">
-                                <div class="flex items-center justify-between px-6 py-5 border-b border-black/10">
-                                    <div><div class="text-2xl font-serif font-bold">立即预定</div></div>
-                                    <button type="button" class="p-2 text-black/60 hover:text-black transition" @click="tstBookingOpen = false" aria-label="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
-                                </div>
-                                <div class="px-6 py-6">
-                                    <div class="text-sm text-black/70">请扫描二维码，立即预定房间!</div>
-                                    <div class="mt-5 border border-black/10 bg-white overflow-hidden aspect-square w-64 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-black/5" loading="lazy" decoding="async">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-
-        <!-- ================= PAGE 4E: 西营盘三期 · 公寓详情（占位版） ================= -->
-        <div x-show="page === 'apartment-syp3'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
-                    <div class="scrub-item anim-fade-up">
-                        <!-- <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
-                            <span>公寓頁標籤</span>
-                            <span class="text-black/40">/</span>
-                            <span class="font-bold" x-text="t[lang].apt_syp3_card_title"></span>
-                        </div> -->
-                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_syp3_card_title"></h1>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_syp3_card_loc"></p> -->
-
-                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🎓 香港大学</div>
-                                    <div>🎓 香港演艺学院</div>
-                                    <div>🎓 香港树仁大学</div>
-                                </div>
-                            </div>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🚇 西营盘站</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-10">
-                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
-                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                                <span>返回公寓展示</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ syp3RoomsPhotos: [
-                { src: '/assets/apartments/syp3/room-1-01.webp', label: '1号房', alt: '1号房 01' },
-                { src: '/assets/apartments/syp3/room-1-02.webp', label: '1号房', alt: '1号房 02' },
-                { src: '/assets/apartments/syp3/room-1-03.webp', label: '1号房', alt: '1号房 03' },
-                { src: '/assets/apartments/syp3/room-2-01.webp', label: '2号房', alt: '2号房 01' },
-                { src: '/assets/apartments/syp3/room-2-02.webp', label: '2号房', alt: '2号房 02' },
-                { src: '/assets/apartments/syp3/room-2-03.webp', label: '2号房', alt: '2号房 03' },
-                { src: '/assets/apartments/syp3/room-3-01.webp', label: '3号房', alt: '3号房 01' },
-                { src: '/assets/apartments/syp3/room-3-02.webp', label: '3号房', alt: '3号房 02' },
-                { src: '/assets/apartments/syp3/room-3-03.webp', label: '3号房', alt: '3号房 03' },
-                { src: '/assets/apartments/syp3/room-4-01.webp', label: '4号房', alt: '4号房 01' },
-                { src: '/assets/apartments/syp3/room-4-02.webp', label: '4号房', alt: '4号房 02' },
-                { src: '/assets/apartments/syp3/room-4-03.webp', label: '4号房', alt: '4号房 03' },
-                { src: '/assets/apartments/syp3/room-g02-01.webp', label: 'G02房', alt: 'G02房 01' },
-                { src: '/assets/apartments/syp3/room-g02-02.webp', label: 'G02房', alt: 'G02房 02' },
-                { src: '/assets/apartments/syp3/room-g03-01.webp', label: 'G03房', alt: 'G03房 01' },
-                { src: '/assets/apartments/syp3/room-g03-02.webp', label: 'G03房', alt: 'G03房 02' },
-                { src: '/assets/apartments/syp3/public-kitchen-01.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: '/assets/apartments/syp3/public-kitchen-02.webp', label: '公共区域', alt: '公共区域 厨房2' },
-                { src: '/assets/apartments/syp3/public-wc-01.webp', label: '公共区域', alt: '公共区域 洗手间' },
-                { src: '/assets/apartments/syp3/public-wc-panorama-01.webp', label: '公共区域', alt: '公共区域 洗手间全景' },
-                { src: '/assets/apartments/syp3/public-bathroom-01.webp', label: '公共区域', alt: '公共区域 浴室' },
-                { src: '/assets/apartments/syp3/public-corridor-01.webp', label: '公共区域', alt: '公共区域 走廊' }
-            ], groupedSyp3Rooms: [], syp3PublicPhotos: [], syp3Slides: {}, init() {
-                const buckets = {};
-                this.syp3PublicPhotos = this.syp3RoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.syp3RoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedSyp3Rooms = Object.values(buckets);
-                this.groupedSyp3Rooms.forEach((_, idx) => { this.syp3Slides[idx] = 0; });
-            }, prevSyp3Slide(idx) {
-                const total = this.groupedSyp3Rooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.syp3Slides[idx] = (this.syp3Slides[idx] - 1 + total) % total;
-            }, nextSyp3Slide(idx) {
-                const total = this.groupedSyp3Rooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.syp3Slides[idx] = (this.syp3Slides[idx] + 1) % total;
-            } }">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-left">
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
-                    </div>
-
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedSyp3Rooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[syp3Slides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[syp3Slides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevSyp3Slide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextSyp3Slide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-
-                    <div class="mt-12 border-t border-black/15"></div>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in syp3PublicPhotos" :key="'syp3-public-' + idx">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-
-        <!-- ================= PAGE 4F: 薄扶林 · 公寓详情（占位版） ================= -->
-        <div x-show="page === 'apartment-pfl'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
-                    <div class="scrub-item anim-fade-up">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
-                            <span>公寓頁標籤</span>
-                            <span class="text-black/40">/</span>
-                            <span class="font-bold" x-text="t[lang].apt_pfl_card_title"></span>
-                        </div>
-                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_pfl_card_title"></h1>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_pfl_card_loc"></p> -->
-
-                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🎓 香港大学</div>
-                                </div>
-                            </div>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🚌 多条巴士线路直达香港大学</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-10">
-                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
-                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                                <span>返回公寓展示</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ pflRoomsPhotos: [
-                { src: '/assets/apartments/pfl/room-1-01.webp', label: '1号房', alt: '1号房 01' },
-                { src: '/assets/apartments/pfl/room-1-02.webp', label: '1号房', alt: '1号房 02' },
-                { src: '/assets/apartments/pfl/room-2-01.webp', label: '2号房', alt: '2号房 01' },
-                { src: '/assets/apartments/pfl/room-3-01.webp', label: '3号房', alt: '3号房 01' },
-                { src: '/assets/apartments/pfl/room-3-02.webp', label: '3号房', alt: '3号房 02' },
-                { src: '/assets/apartments/pfl/room-4-01.webp', label: '4号房', alt: '4号房 01' },
-                { src: '/assets/apartments/pfl/room-4-02.webp', label: '4号房', alt: '4号房 02' },
-                { src: '/assets/apartments/pfl/public-lobby-01.webp', label: '公共区域', alt: '公共区域 一楼大堂' },
-                { src: '/assets/apartments/pfl/public-building-panorama-01.webp', label: '公共区域', alt: '公共区域 单元楼全景' },
-                { src: '/assets/apartments/pfl/public-kitchen-01.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: '/assets/apartments/pfl/public-living-room-01.webp', label: '公共区域', alt: '公共区域 客厅' },
-                { src: '/assets/apartments/pfl/public-wc-01.webp', label: '公共区域', alt: '公共区域 洗手间' },
-                { src: '/assets/apartments/pfl/public-elevator-01.webp', label: '公共区域', alt: '公共区域 电梯' },
-                { src: '/assets/apartments/pfl/public-estate-map-01.webp', label: '公共区域', alt: '公共区域 置富花园小区图' },
-                { src: '/assets/apartments/pfl/public-location-map-01.webp', label: '公共区域', alt: '公共区域 置富花园地图' }
-            ], groupedPflRooms: [], pflPublicPhotos: [], pflSlides: {}, init() {
-                const buckets = {};
-                this.pflPublicPhotos = this.pflRoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.pflRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedPflRooms = Object.values(buckets);
-                this.groupedPflRooms.forEach((_, idx) => { this.pflSlides[idx] = 0; });
-            }, prevPflSlide(idx) {
-                const total = this.groupedPflRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.pflSlides[idx] = (this.pflSlides[idx] - 1 + total) % total;
-            }, nextPflSlide(idx) {
-                const total = this.groupedPflRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.pflSlides[idx] = (this.pflSlides[idx] + 1) % total;
-            } }">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-left">
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
-                    </div>
-
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedPflRooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[pflSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[pflSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevPflSlide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextPflSlide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-
-                    <div class="mt-12 border-t border-black/15"></div>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in pflPublicPhotos" :key="'pfl-public-' + idx">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- ================= PAGE 4G: 奥运 · 公寓详情（占位版） ================= -->
-        <div x-show="page === 'apartment-oy'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
-                    <div class="scrub-item anim-fade-up">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
-                            <span>公寓頁標籤</span>
-                            <span class="text-black/40">/</span>
-                            <span class="font-bold" x-text="t[lang].apt_oy_card_title"></span>
-                        </div>
-                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_oy_card_title"></h1>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_oy_card_loc"></p> -->
-
-                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🎓 香港理工大学</div>
-                                    <div>🎓 香港城市大学</div>
-                                    <div>🎓 香港浸会大学</div>
-                                    <div>🎓 香港都会大学</div>
-                                </div>
-                            </div>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🚇 油麻地站</div>
-                                    <div>🚇 柯士甸站</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-10">
-                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
-                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                                <span>返回公寓展示</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 我们的房间（与 PAGE 4B 完全一致结构） -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ oyBookingOpen: false, oyRoomsPhotos: [
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房_结果.webp', label: '三号房', alt: '三号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房%2002_结果.webp', label: '三号房', alt: '三号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房%2003_结果.webp', label: '三号房', alt: '三号房 03' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房_结果.webp', label: '四号房', alt: '四号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2002_结果.webp', label: '四号房', alt: '四号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2003_结果.webp', label: '四号房', alt: '四号房 03' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2004_结果.webp', label: '四号房', alt: '四号房 04' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房_结果.webp', label: '五号房', alt: '五号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房%2002_结果.webp', label: '五号房', alt: '五号房 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房%2003_结果.webp', label: '五号房', alt: '五号房 03' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂_结果.webp', label: '公共区域', alt: '公共区域 大堂' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂%2002_结果.webp', label: '公共区域', alt: '公共区域 大堂 02' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/酒店外围_结果.webp', label: '公共区域', alt: '公共区域 酒店外围' }
-            ], groupedOyRooms: [], oyPublicPhotos: [], oyRoomSlides: {}, init() {
-                const buckets = {};
-                this.oyPublicPhotos = this.oyRoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.oyRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedOyRooms = Object.values(buckets);
-                this.groupedOyRooms.forEach((_, idx) => { this.oyRoomSlides[idx] = 0; });
-            }, prevOySlide(idx) {
-                const total = this.groupedOyRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.oyRoomSlides[idx] = (this.oyRoomSlides[idx] - 1 + total) % total;
-            }, nextOySlide(idx) {
-                const total = this.groupedOyRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.oyRoomSlides[idx] = (this.oyRoomSlides[idx] + 1) % total;
-            } }">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-center">
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
-                    </div>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedOyRooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[oyRoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[oyRoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevOySlide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextOySlide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                        <template x-if="item.label !== '公共区域'">
-                                            <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="oyBookingOpen = true">抢先以早鸟价格订房</button>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-
-                    <div class="mt-12 border-t border-black/15"></div>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in oyPublicPhotos" :key="'oy-public-' + idx">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="fixed inset-0 z-[90]" x-show="oyBookingOpen" x-transition.opacity @keydown.escape.window="oyBookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/60" @click="oyBookingOpen = false"></div>
-                        <div class="relative min-h-full flex items-center justify-center p-6">
-                            <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 shadow-2xl">
-                                <div class="flex items-center justify-between px-6 py-5 border-b border-black/10">
-                                    <div><div class="text-2xl font-serif font-bold">立即预定</div></div>
-                                    <button type="button" class="p-2 text-black/60 hover:text-black transition" @click="oyBookingOpen = false" aria-label="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
-                                </div>
-                                <div class="px-6 py-6">
-                                    <div class="text-sm text-black/70">请扫描二维码，立即预定房间!</div>
-                                    <div class="mt-5 border border-black/10 bg-white overflow-hidden aspect-square w-64 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-black/5" loading="lazy" decoding="async">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- ================= PAGE 4H: 西营盘一期 · 公寓详情（占位版） ================= -->
-        <div x-show="page === 'apartment-syp1'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
-                    <div class="scrub-item anim-fade-up">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-black/5 border border-black/10 text-xs text-black/70">
-                            <span>公寓頁標籤</span>
-                            <span class="text-black/40">/</span>
-                            <span class="font-bold" x-text="t[lang].apt_syp1_card_title"></span>
-                        </div>
-                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_syp1_card_title"></h1>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <!-- <p class="mt-4 text-black/70 leading-relaxed" x-text="t[lang].apt_syp1_card_loc"></p> -->
-
-                        <div class="mt-10 grid sm:grid-cols-2 gap-6">
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">邻近大学</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🎓 香港大学</div>
-                                    <div>🎓 香港演艺学院</div>
-                                    <div>🎓 香港树仁大学</div>
-                                </div>
-                            </div>
-                            <div class="p-6 bg-black/5 border border-black/10">
-                                <div class="text-sm font-bold text-obsidian-950">交通枢纽</div>
-                                <div class="mt-4 space-y-2 text-sm text-black/80">
-                                    <div>🚇 西营盘站</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-10">
-                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
-                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                                <span>返回公寓展示</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 我们的房间 -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ syp1BookingOpen: false, syp1RoomsPhotos: [
-                { src: '/assets/apartments/syp1/room-a-room-c-01.webp', label: 'RoomA-RoomC', alt: 'RoomA-RoomC' },
-                { src: '/assets/apartments/syp1/room-a-room-c-02.webp', label: 'RoomA-RoomC', alt: 'RoomA-RoomC 02' },
-                { src: '/assets/apartments/syp1/room-d-01.webp', label: 'RoomD', alt: 'RoomD' },
-                { src: '/assets/apartments/syp1/room-e-01.webp', label: 'RoomE', alt: 'RoomE' },
-                { src: '/assets/apartments/syp1/room-e-02.webp', label: 'RoomE', alt: 'RoomE 02' }
-            ], groupedSyp1Rooms: [], syp1RoomSlides: {}, init() {
-                const buckets = {};
-                this.syp1RoomsPhotos.forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedSyp1Rooms = Object.values(buckets);
-                this.groupedSyp1Rooms.forEach((_, idx) => { this.syp1RoomSlides[idx] = 0; });
-            }, prevSyp1Slide(idx) {
-                const total = this.groupedSyp1Rooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.syp1RoomSlides[idx] = (this.syp1RoomSlides[idx] - 1 + total) % total;
-            }, nextSyp1Slide(idx) {
-                const total = this.groupedSyp1Rooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.syp1RoomSlides[idx] = (this.syp1RoomSlides[idx] + 1) % total;
-            } }">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-center">
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
-                    </div>
-
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedSyp1Rooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[syp1RoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[syp1RoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevSyp1Slide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextSyp1Slide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                        <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="syp1BookingOpen = true">抢先以早鸟价格订房</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-
-                    <div class="fixed inset-0 z-[90]" x-show="syp1BookingOpen" x-transition.opacity @keydown.escape.window="syp1BookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/60" @click="syp1BookingOpen = false"></div>
-                        <div class="relative min-h-full flex items-center justify-center p-6">
-                            <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 shadow-2xl">
-                                <div class="flex items-center justify-between px-6 py-5 border-b border-black/10">
-                                    <div><div class="text-2xl font-serif font-bold">立即预定</div></div>
-                                    <button type="button" class="p-2 text-black/60 hover:text-black transition" @click="syp1BookingOpen = false" aria-label="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
-                                </div>
-                                <div class="px-6 py-6">
-                                    <div class="text-sm text-black/70">请扫描二维码，立即预定房间!</div>
-                                    <div class="mt-5 border border-black/10 bg-white overflow-hidden aspect-square w-64 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-black/5" loading="lazy" decoding="async">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- ================= PAGE 4I: 西营盘二期 · 公寓详情 ================= -->
-        <div x-show="page === 'apartment-syp2'" x-transition:enter="transition ease-out duration-500" class="w-full">
-            <section class="py-20 bg-paper border-b border-black/10 text-obsidian-950">
-                <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
-                    <div class="scrub-item anim-fade-up">
-                        <h1 class="mt-6 text-4xl md:text-5xl font-serif font-bold text-obsidian-950" x-text="t[lang].apt_syp2_card_title"></h1>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-6 text-black/70 leading-relaxed">居社地理位置：香港西营盘高升大厦</p>
-                        <div class="mt-10">
-                            <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-6 py-3 border border-gold-400 text-gold-600 font-bold hover:bg-gold-400 hover:text-white transition uppercase text-xs tracking-[0.2em]">
-                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                                <span>返回公寓展示</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ syp2RoomsPhotos: [
-                { src: '/assets/apartments/syp2/dining-room-01.webp', label: 'Dining Room', alt: 'Dining Room 01' },
-                { src: '/assets/apartments/syp2/dining-room-02.webp', label: 'Dining Room', alt: 'Dining Room 02' },
-                { src: '/assets/apartments/syp2/dining-room-03.webp', label: 'Dining Room', alt: 'Dining Room 03' },
-                { src: '/assets/apartments/syp2/dining-room-04.webp', label: 'Dining Room', alt: 'Dining Room 04' },
-                { src: '/assets/apartments/syp2/wc-01.webp', label: 'WC', alt: 'WC' },
-                { src: '/assets/apartments/syp2/balcony-01.webp', label: '阳台', alt: '阳台' }
-            ], groupedSyp2Rooms: [], syp2Slides: {}, init() {
-                const buckets = {};
-                this.syp2RoomsPhotos.forEach((photo) => {
-                    if (!buckets[photo.label]) {
-                        buckets[photo.label] = { label: photo.label, photos: [] };
-                    }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedSyp2Rooms = Object.values(buckets);
-                this.groupedSyp2Rooms.forEach((_, idx) => { this.syp2Slides[idx] = 0; });
-            }, prevSyp2Slide(idx) {
-                const total = this.groupedSyp2Rooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.syp2Slides[idx] = (this.syp2Slides[idx] - 1 + total) % total;
-            }, nextSyp2Slide(idx) {
-                const total = this.groupedSyp2Rooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.syp2Slides[idx] = (this.syp2Slides[idx] + 1) % total;
-            } }">
-                <div class="max-w-7xl mx-auto px-6">
-                    <div class="scrub-item anim-fade-up text-left">
-                        <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
-                        <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
-                    </div>
-
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedSyp2Rooms" :key="item.label">
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img :src="item.photos[syp2Slides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[syp2Slides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevSyp2Slide(idx)">
-                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextSyp2Slide(idx)">
-                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-                                            </button>
-                                        </div>
-                                    </template>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- ================= PAGE 4B: 油麻地 · 核心馆（公寓详情）(优化：贴合高级学术风) ================= -->
-        <div x-show="page === 'apartment-ymt'" x-transition:enter="transition ease-out duration-500" class="w-full bg-white text-slate-900 font-sans">
-            
-            <!-- HERO: 顶部地标信息 -->
+        <div x-show="isApartmentDetailPage(page)" x-transition:enter="transition ease-out duration-500" class="w-full bg-white text-slate-900 font-sans">
             <section class="py-20 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6 grid gap-10 items-start">
                     <div class="scrub-item anim-fade-up">
-                        <div class="flex items-center gap-4 mb-6">
-                            <span class="w-12 h-[1px] bg-academic-red/30"></span>
-                            <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase">Premium Residence</span>
-                        </div>
-                        <h1 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy">汇生会社(油麻地)</h1>
-                        <p class="mt-4 text-slate-500 leading-relaxed font-light">居社地理位置：香港油麻地吴松街1号</p>
-                        
-                        <div class="mt-10 bg-white p-3 shadow-xl border border-slate-100 rounded-sm">
-                            <div class="overflow-hidden bg-slate-50 rounded-sm">
-                                <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地地图_结果.webp" class="w-full object-cover mix-blend-multiply" alt="Map">
+                        <template x-if="getApartmentData() && getApartmentData().hero && getApartmentData().hero.badge">
+                            <div class="flex items-center gap-4 mb-6">
+                                <span class="w-12 h-[1px] bg-academic-red/30"></span>
+                                <span class="text-academic-red text-xs font-bold tracking-[0.35em] uppercase" x-text="getApartmentData().hero.badge"></span>
                             </div>
-                        </div>
+                        </template>
+                        <h1 class="text-4xl md:text-5xl font-serif font-bold text-academic-navy" x-text="getApartmentLocalizedTitle()"></h1>
+                        <template x-if="getApartmentData() && getApartmentData().hero && getApartmentData().hero.locationLine">
+                            <p class="mt-4 text-slate-500 leading-relaxed font-light" x-text="getApartmentData().hero.locationLine"></p>
+                        </template>
+
+                        <template x-if="getApartmentData() && getApartmentData().hero && getApartmentData().hero.mapImage">
+                            <div class="mt-10 bg-white p-3 shadow-xl border border-slate-100 rounded-sm">
+                                <div class="overflow-hidden bg-slate-50 rounded-sm">
+                                    <img :src="getApartmentData().hero.mapImage" class="w-full object-cover mix-blend-multiply" :alt="getApartmentLocalizedTitle() + ' Map'">
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </section>
 
-            <!-- 第一部份：交通出行 -->
-            <section class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
+            <section x-show="getApartmentTransportCards().length > 0" class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
-                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">交通出行</h2>
-                        <p class="mt-4 text-slate-500 font-light">周边大学通勤时间 / 主要交通节点</p>
+                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy" x-text="(getApartmentData() && getApartmentData().transport && getApartmentData().transport.sectionTitle) || '交通出行'"></h2>
+                        <p class="mt-4 text-slate-500 font-light" x-text="(getApartmentData() && getApartmentData().transport && getApartmentData().transport.sectionSubtitle) || '周边大学通勤时间 / 主要交通节点'"></p>
                     </div>
-                    
+
                     <div class="grid md:grid-cols-2 gap-8 scrub-item anim-fade-up">
-                        <div class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative group hover:-translate-y-1 transition-transform duration-300">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy group-hover:w-2 transition-all duration-300"></div>
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-12 h-12 rounded-full bg-academic-navy/5 flex items-center justify-center text-academic-navy group-hover:text-academic-red transition-colors">
-                                    <i data-lucide="train" class="w-6 h-6"></i>
-                                </div>
-                                <div class="text-xl font-serif font-bold text-academic-navy">周边大学及通勤时长</div>
-                            </div>
-                            <div class="space-y-4 text-sm text-slate-600 font-light leading-relaxed pl-16">
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港理工大学：步行 15 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港都会大学：巴士 20 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港城市大学：地铁 25 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港浸会大学：地铁 25 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🎓</span> <span>香港大学：地铁 25 分钟</span></div>
-                            </div>
-                        </div>
+                        <template x-for="card in getApartmentTransportCards()" :key="card.title">
+                            <div class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative group hover:-translate-y-1 transition-transform duration-300">
+                                <template x-if="card.accent === 'red'">
+                                    <div class="absolute top-0 left-0 w-1 h-full bg-academic-red group-hover:w-2 transition-all duration-300"></div>
+                                </template>
+                                <template x-if="card.accent !== 'red'">
+                                    <div class="absolute top-0 left-0 w-1 h-full bg-academic-navy group-hover:w-2 transition-all duration-300"></div>
+                                </template>
 
-                        <div class="bg-white border border-slate-100 shadow-xl p-8 md:p-10 rounded-sm relative group hover:-translate-y-1 transition-transform duration-300">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-academic-red group-hover:w-2 transition-all duration-300"></div>
-                            <div class="flex items-center gap-4 mb-6">
-                                <div class="w-12 h-12 rounded-full bg-academic-red/10 flex items-center justify-center text-academic-red group-hover:text-academic-navy transition-colors">
-                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-12 h-12 rounded-full flex items-center justify-center transition-colors" :class="card.accent === 'red' ? 'bg-academic-red/10 text-academic-red group-hover:text-academic-navy' : 'bg-academic-navy/5 text-academic-navy group-hover:text-academic-red'">
+                                        <i :data-lucide="card.icon || 'circle'" class="w-6 h-6"></i>
+                                    </div>
+                                    <div class="text-xl font-serif font-bold text-academic-navy" x-text="card.title"></div>
                                 </div>
-                                <div class="text-xl font-serif font-bold text-academic-navy">主要交通节点</div>
+
+                                <div class="space-y-4 text-sm text-slate-600 font-light leading-relaxed pl-16">
+                                    <template x-for="item in (card.items || [])" :key="item">
+                                        <div class="flex items-start gap-3"><span class="mt-1">•</span><span x-text="item"></span></div>
+                                    </template>
+                                </div>
                             </div>
-                            <div class="space-y-4 text-sm text-slate-600 font-light leading-relaxed pl-16">
-                                <div class="flex items-start gap-3"><span class="mt-1">🚇</span> <span>油麻地地铁站：步行 3 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🚇</span> <span>佐敦地铁站：步行 5 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🚇</span> <span>柯士甸地铁站：步行 5 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🚌</span> <span>西九龙站巴士总站：步行 10 分钟</span></div>
-                                <div class="flex items-start gap-3"><span class="mt-1">🚄</span> <span>西九龙高铁站：巴士 20 分钟</span></div>
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </section>
 
-            <!-- 第二部份：我们的房间 (Alpine) -->
-            <section class="py-24 bg-white border-b border-slate-200/60" x-data="{ ymtBookingOpen: false, ymtRoomsPhotos:[
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/1号房/1号房_结果.webp', label: '1号房', alt: '1号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房_结果.webp', label: '2号房', alt: '2号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/2号房/2号房%2002_结果.webp', label: '2号房', alt: '2号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房_结果.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/3号房/3号房%2002_结果.webp', label: '3号房', alt: '3号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房_结果.webp', label: '4号房', alt: '4号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/4号房/4号房%2002_结果.webp', label: '4号房', alt: '4号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房_结果.webp', label: '5号房', alt: '5号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/5号房/5号房%2002_结果.webp', label: '5号房', alt: '5号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房%2002_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/6号房/6号房%2003_结果.webp', label: '6号房', alt: '6号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/7号房/7号房_结果.webp', label: '7号房', alt: '7号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房%2002_结果.webp', label: '8号房', alt: '8号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/8号房/8号房_结果.webp', label: '8号房', alt: '8号房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/厨房_结果.webp', label: '公共区域', alt: '公共区域 厨房' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/电梯_结果.webp', label: '公共区域', alt: '公共区域 电梯' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/洗衣区_结果.webp', label: '公共区域', alt: '公共区域 洗衣区' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地公寓照片/公共区域/走廊_结果.webp', label: '公共区域', alt: '公共区域 走廊' }
-            ], groupedRooms: [], ymtPublicPhotos:[], roomSlides: {}, init() {
-                const buckets = {};
-                this.ymtPublicPhotos = this.ymtRoomsPhotos.filter((photo) => photo.label === '公共区域');
-                this.ymtRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
-                    if (!buckets[photo.label]) { buckets[photo.label] = { label: photo.label, photos: [] }; }
-                    buckets[photo.label].photos.push(photo);
-                });
-                this.groupedRooms = Object.values(buckets);
-                this.groupedRooms.forEach((_, idx) => { this.roomSlides[idx] = 0; });
-            }, prevSlide(idx) {
-                const total = this.groupedRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.roomSlides[idx] = (this.roomSlides[idx] - 1 + total) % total;
-            }, nextSlide(idx) {
-                const total = this.groupedRooms[idx]?.photos?.length || 0;
-                if (total <= 1) return;
-                this.roomSlides[idx] = (this.roomSlides[idx] + 1) % total;
-            } }">
+            <section class="py-24 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
-                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">我们的房间</h2>
-                        <p class="mt-4 text-slate-500 font-light">软硬件设施一览 / 实景相册</p>
+                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy" x-text="(getApartmentData() && getApartmentData().rooms && getApartmentData().rooms.sectionTitle) || '我们的房间'"></h2>
+                        <p class="mt-4 text-slate-500 font-light" x-text="(getApartmentData() && getApartmentData().rooms && getApartmentData().rooms.sectionSubtitle) || '软硬件设施一览 / 实景相册'"></p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <template x-for="(item, idx) in groupedRooms" :key="item.label">
+                        <template x-for="(item, idx) in getApartmentGroupedRooms()" :key="item.label">
                             <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
                                 <div class="relative h-72 overflow-hidden bg-slate-50">
-                                    <img :src="item.photos[roomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="item.photos[roomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
-                                    
+                                    <img :src="(getApartmentActiveRoomPhoto(item, idx) || {}).src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="(getApartmentActiveRoomPhoto(item, idx) || {}).alt || item.label" loading="lazy" decoding="async">
+
                                     <template x-if="item.photos.length > 1">
                                         <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevSlide(idx)">
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(idx)">
                                                 <i data-lucide="chevron-left" class="w-5 h-5"></i>
                                             </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextSlide(idx)">
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(idx)">
                                                 <i data-lucide="chevron-right" class="w-5 h-5"></i>
                                             </button>
                                         </div>
                                     </template>
 
-                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
                                         <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.label"></div>
-                                        <template x-if="item.label !== '公共区域'">
-                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="ymtBookingOpen = true">抢先以早鸟价格订房</button>
+                                        <template x-if="shouldShowApartmentBookingButton(item)">
+                                            <button type="button" class="px-5 py-2 bg-academic-red text-white font-bold tracking-widest uppercase hover:bg-red-800 transition shadow-lg text-[10px] rounded-sm" @click="openApartmentBooking()" x-text="getApartmentBooking().ctaText || '抢先以早鸟价格订房'"></button>
                                         </template>
                                     </div>
                                 </div>
@@ -3135,39 +2154,40 @@
                         </template>
                     </div>
 
-                    <div class="mt-16 mb-8 flex items-center gap-4 scrub-item anim-fade-up">
-                        <h3 class="text-2xl font-serif font-bold text-academic-navy">公共区域</h3>
-                        <div class="h-[1px] flex-1 bg-slate-200"></div>
-                    </div>
+                    <div x-show="getApartmentPublicPhotos().length > 0">
+                        <div class="mt-16 mb-8 flex items-center gap-4 scrub-item anim-fade-up">
+                            <h3 class="text-2xl font-serif font-bold text-academic-navy" x-text="(getApartmentData() && getApartmentData().rooms && getApartmentData().rooms.publicAreaHeading) || '公共区域'"></h3>
+                            <div class="h-[1px] flex-1 bg-slate-200"></div>
+                        </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <template x-for="(item, idx) in ymtPublicPhotos" :key="'ymt-public-' + idx">
-                            <div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up group">
-                                <div class="relative h-56 overflow-hidden bg-slate-50">
-                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="item.alt || item.label" loading="lazy" decoding="async">
-                                    <div class="absolute bottom-3 left-3">
-                                        <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.alt || item.label"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <template x-for="(item, idx) in getApartmentPublicPhotos()" :key="'public-' + idx">
+                                <div class="bg-white p-2 border border-slate-100 shadow-lg rounded-sm scrub-item anim-fade-up group">
+                                    <div class="relative h-56 overflow-hidden bg-slate-50">
+                                        <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="item.alt || item.label" loading="lazy" decoding="async">
+                                        <div class="absolute bottom-3 left-3">
+                                            <div class="px-3 py-1 text-[10px] tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.alt || item.label"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </template>
+                            </template>
+                        </div>
                     </div>
 
-                    <!-- Booking Modal -->
-                    <div class="fixed inset-0 z-[90]" x-show="ymtBookingOpen" x-transition.opacity @keydown.escape.window="ymtBookingOpen = false" style="display: none;">
-                        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" @click="ymtBookingOpen = false"></div>
+                    <div class="fixed inset-0 z-[90]" x-show="isApartmentBookingOpen()" x-transition.opacity @keydown.escape.window="closeApartmentBooking()" style="display: none;">
+                        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" @click="closeApartmentBooking()"></div>
                         <div class="relative min-h-full flex items-center justify-center p-6">
                             <div class="w-full max-w-md bg-white text-slate-900 border border-slate-100 shadow-2xl rounded-sm">
                                 <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100 bg-slate-50">
-                                    <div class="text-xl font-serif font-bold text-academic-navy">立即预定</div>
-                                    <button type="button" class="p-2 text-slate-400 hover:text-academic-red transition" @click="ymtBookingOpen = false" aria-label="Close">
+                                    <div class="text-xl font-serif font-bold text-academic-navy" x-text="getApartmentBooking().modalTitle || '立即预定'"></div>
+                                    <button type="button" class="p-2 text-slate-400 hover:text-academic-red transition" @click="closeApartmentBooking()" aria-label="Close">
                                         <i data-lucide="x" class="w-5 h-5"></i>
                                     </button>
                                 </div>
                                 <div class="px-6 py-8 text-center">
-                                    <div class="text-sm text-slate-600 mb-6">请扫描下方二维码，联系专属顾问获取早鸟报价</div>
+                                    <div class="text-sm text-slate-600 mb-6" x-text="getApartmentBooking().modalDescription || '请扫描二维码，立即预定房间!'"></div>
                                     <div class="border border-slate-200 bg-white p-2 shadow-lg aspect-square w-56 max-w-full mx-auto">
-                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-slate-50" loading="lazy" decoding="async">
+                                        <img :src="getApartmentBooking().qrCode" alt="预定二维码" class="w-full h-full object-contain bg-slate-50" loading="lazy" decoding="async">
                                     </div>
                                 </div>
                             </div>
@@ -3176,139 +2196,62 @@
                 </div>
             </section>
 
-            <!-- 第三部份：生活配套 -->
-            <section class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
+            <section x-show="getApartmentLifestyleCards().length > 0" class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">生活配套</h2>
                         <p class="mt-4 text-slate-500 font-light">一站式便捷生活圈</p>
                     </div>
-                    
+
                     <div class="grid md:grid-cols-3 gap-8 scrub-item anim-fade-up">
-                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
-                            <div class="w-12 h-12 rounded-full bg-academic-red/10 flex items-center justify-center text-academic-red mb-6">
-                                <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                        <template x-for="card in getApartmentLifestyleCards()" :key="card.title">
+                            <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
+                                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-6" :class="card.accent === 'red' ? 'bg-academic-red/10 text-academic-red' : (card.accent === 'navy' ? 'bg-academic-navy/10 text-academic-navy' : 'bg-slate-100 text-slate-600')">
+                                    <i :data-lucide="card.icon || 'circle'" class="w-6 h-6"></i>
+                                </div>
+                                <div class="text-xl font-serif font-bold text-academic-navy mb-4" x-text="card.title"></div>
+                                <ul class="space-y-3 text-sm text-slate-600 font-light">
+                                    <template x-for="item in (card.items || [])" :key="item">
+                                        <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span x-text="item"></span></li>
+                                    </template>
+                                </ul>
                             </div>
-                            <div class="text-xl font-serif font-bold text-academic-navy mb-4">美食购物（5-20 分钟）</div>
-                            <ul class="space-y-3 text-sm text-slate-600 font-light">
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>庙街夜市 / 旺角朗豪坊</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>圆方商场 / 信和中心</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>西洋菜南街 / 荷里活商业中心</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-red shrink-0"></span><span>百老汇电影中心</span></li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
-                            <div class="w-12 h-12 rounded-full bg-academic-navy/10 flex items-center justify-center text-academic-navy mb-6">
-                                <i data-lucide="store" class="w-6 h-6"></i>
-                            </div>
-                            <div class="text-xl font-serif font-bold text-academic-navy mb-4">生活日用（1-5 分钟）</div>
-                            <ul class="space-y-3 text-sm text-slate-600 font-light">
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-navy shrink-0"></span><span>711 便利店</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-navy shrink-0"></span><span>惠康超市 / 百佳超市</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-academic-navy shrink-0"></span><span>油麻地果栏</span></li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-white p-8 shadow-xl border border-slate-100 rounded-sm hover:-translate-y-1 transition-transform duration-300">
-                            <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 mb-6">
-                                <i data-lucide="building-2" class="w-6 h-6"></i>
-                            </div>
-                            <div class="text-xl font-serif font-bold text-academic-navy mb-4">公共设施（5-15 分钟）</div>
-                            <ul class="space-y-3 text-sm text-slate-600 font-light">
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span><span>油麻地警署</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span><span>九龙公园 / 京士柏公园</span></li>
-                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span><span>伊利沙伯医院</span></li>
-                            </ul>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </section>
 
-            <!-- 第四部份：馆内设施及服务 -->
-            <section class="py-24 bg-white border-b border-slate-200/60">
+            <section x-show="getApartmentAmenityGroups().length > 0" class="py-24 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-16">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">居社设施及服务</h2>
                         <p class="mt-4 text-slate-500 font-light">软硬件设施一览 / 尊享学生服务</p>
                     </div>
-                    
+
                     <div class="space-y-16">
-                        <!-- 房间内部设施 -->
-                        <div class="scrub-item anim-fade-up">
-                            <div class="flex items-center gap-4 mb-8">
-                                <h3 class="text-xl font-serif font-bold text-academic-navy">房间内部设施</h3>
-                                <div class="h-[1px] flex-1 bg-slate-200"></div>
-                            </div>
-                            <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-6 max-w-5xl mx-auto">
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="bed-double" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">大床</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="layers" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">床垫</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="armchair" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">桌椅</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="archive" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">衣柜</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="air-vent" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">冷气机</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="blinds" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">窗帘</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="bath" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">洗手间</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="flame" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">热水器</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="mirror" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">镜子</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="shower-head" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">淋浴器</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="fan" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">抽气扇</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="lock" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">标配门锁</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="lamp" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">床头灯</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="plug" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">电源插座</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="shirt" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">衣架</div></div>
-                                <div class="flex flex-col items-center justify-center text-center group"><div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors"><i data-lucide="trash" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-3 text-xs text-slate-600">垃圾桶</div></div>
-                            </div>
-                        </div>
-
-                        <!-- 公共空间与尊享服务 -->
-                        <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                        <template x-for="group in getApartmentAmenityGroups()" :key="group.title">
                             <div class="scrub-item anim-fade-up">
                                 <div class="flex items-center gap-4 mb-8">
-                                    <h3 class="text-xl font-serif font-bold text-academic-navy">公共空间设施</h3>
+                                    <h3 class="text-xl font-serif font-bold text-academic-navy" x-text="group.title"></h3>
                                     <div class="h-[1px] flex-1 bg-slate-200"></div>
                                 </div>
-                                <div class="grid grid-cols-4 gap-4">
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="elevator" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">电梯</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="utensils" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">公共厨房</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="wind" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">抽油烟机</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="microwave" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">微波炉</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="refrigerator" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">冰箱</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="dryer" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">烘干机</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="washer" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">洗衣机</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="wifi" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">WIFI</div></div>
+                                <div class="grid gap-6 max-w-5xl mx-auto" :class="group.columnsClass || 'grid-cols-3 md:grid-cols-4 lg:grid-cols-6'">
+                                    <template x-for="item in (group.items || [])" :key="group.title + '-' + item.label">
+                                        <div class="flex flex-col items-center justify-center text-center group">
+                                            <div class="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:border-academic-red transition-colors">
+                                                <i :data-lucide="item.icon || 'circle'" class="w-6 h-6 text-academic-navy group-hover:text-academic-red transition-colors"></i>
+                                            </div>
+                                            <div class="mt-3 text-xs text-slate-600" x-text="item.label"></div>
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
-
-                            <div class="scrub-item anim-fade-up">
-                                <div class="flex items-center gap-4 mb-8">
-                                    <h3 class="text-xl font-serif font-bold text-academic-navy">专属服务</h3>
-                                    <div class="h-[1px] flex-1 bg-slate-200"></div>
-                                </div>
-                                <div class="grid grid-cols-4 gap-4">
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="headset" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">专属客服</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="wrench" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">设备维护</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="brush" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">公区清洁</div></div>
-                                    <div class="flex flex-col items-center text-center group"><div class="w-12 h-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center"><i data-lucide="users" class="w-5 h-5 text-academic-navy group-hover:text-academic-red transition-colors"></i></div><div class="mt-2 text-[11px] text-slate-600">联谊活动</div></div>
-                                </div>
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </section>
 
-            <!-- 第五部份：户型图 -->
-            <section class="py-24 bg-academic-slate/30 border-b border-slate-200/60" x-data="{ ymtFloorPlans:[
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1楼_结果.webp', label: '1楼', alt: '1楼 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2-5楼_结果.webp', label: '2-5楼', alt: '2-5楼 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/1号房_结果.webp', label: '1号房', alt: '1号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/2号房_结果.webp', label: '2号房', alt: '2号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/3号房_结果.webp', label: '3号房', alt: '3号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/4号房（2-5楼）_结果.webp', label: '4号房（2-5楼）', alt: '4号房（2-5楼） 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/5号房_结果.webp', label: '5号房', alt: '5号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/6号房_结果.webp', label: '6号房', alt: '6号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/7号房_结果.webp', label: '7号房', alt: '7号房 户型图' },
-                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社（油麻地）/油麻地平面圖(新)/油麻地平面圖(新)/8号房_结果.webp', label: '8号房', alt: '8号房 户型图' }
-            ] }">
+            <section x-show="getApartmentFloorPlans().length > 0" class="py-24 bg-academic-slate/30 border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">户型图</h2>
@@ -3316,7 +2259,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <template x-for="(item, idx) in ymtFloorPlans" :key="idx">
+                        <template x-for="item in getApartmentFloorPlans()" :key="item.label">
                             <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
                                 <div class="relative h-64 bg-slate-50 flex items-center justify-center overflow-hidden border border-slate-100">
                                     <img :src="item.src" class="w-full h-full object-contain p-2 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" :alt="item.alt || item.label" loading="lazy" decoding="async">
@@ -3330,8 +2273,7 @@
                 </div>
             </section>
 
-            <!-- 第六部份：互动地图（高德） -->
-            <section class="py-24 bg-white border-b border-slate-200/60">
+            <section x-show="getApartmentData() && getApartmentData().hero && getApartmentData().hero.showInteractiveMap" class="py-24 bg-white border-b border-slate-200/60">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left mb-12">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-academic-navy">地理位置</h2>
@@ -3349,7 +2291,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mt-12 text-center">
                         <button @click="switchPage('apartments', 'showcase')" class="inline-flex items-center gap-2 px-8 py-3 border border-academic-navy text-academic-navy font-bold hover:bg-academic-navy hover:text-white transition uppercase text-xs tracking-widest rounded-sm">
                             <i data-lucide="arrow-left" class="w-4 h-4"></i>
@@ -3358,7 +2300,6 @@
                     </div>
                 </div>
             </section>
-
         </div>
 
         <!-- ================= PAGE 5: 职涯规划 ================= -->
@@ -4808,6 +3749,62 @@
                                 </div>
                             </div>
                         
+                                <!-- [TAB] 公寓数据 -->
+                                <div x-show="agentDashTab === 'apartments'" x-transition:enter="transition ease-out duration-500">
+                                    <div class="bg-obsidian-950/60 border border-white/5 p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden space-y-8">
+                                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                                            <div>
+                                                <h2 class="text-2xl font-serif font-bold text-white tracking-tight">公寓数据工作台</h2>
+                                                <p class="text-[10px] text-white/30 uppercase tracking-widest mt-1">统一数据结构 + 单模板渲染 + 新增 / 编辑公寓入口</p>
+                                            </div>
+                                            <div class="flex flex-wrap gap-3">
+                                                <button type="button" @click="apartmentAdminLoadSample()" class="px-4 py-2 border border-white/10 text-white/70 hover:text-white hover:border-gold-400/40 transition text-[10px] font-bold uppercase tracking-widest">载入示例 JSON</button>
+                                                <button type="button" @click="apartmentAdminResetEditor()" class="px-4 py-2 border border-white/10 text-white/70 hover:text-white hover:border-gold-400/40 transition text-[10px] font-bold uppercase tracking-widest">清空编辑器</button>
+                                                <button type="button" @click="apartmentAdminAdd()" class="px-5 py-2 bg-gold-400 text-black font-bold uppercase tracking-widest hover:bg-gold-300 transition text-[10px]" x-text="apartmentAdminSelectedPageKey ? '保存当前公寓' : '新增公寓数据'"></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid md:grid-cols-3 gap-4">
+                                            <div class="bg-black/30 border border-white/10 p-5">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest">当前公寓数量</div>
+                                                <div class="mt-3 text-3xl font-serif text-gold-400" x-text="getApartmentPageKeys().length"></div>
+                                            </div>
+                                            <div class="bg-black/30 border border-white/10 p-5 md:col-span-2">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest">说明</div>
+                                                <div class="mt-3 text-sm text-white/70 leading-relaxed">这里新增或编辑的公寓会立刻进入当前站点运行时路由，并使用统一模板渲染。保存后会写入公寓数据文件并自动重新执行静态导出。</div>
+                                            </div>
+                                        </div>
+
+                                        <div x-show="apartmentAdminNotice" class="px-5 py-4 border-l-4" :class="apartmentAdminNoticeType === 'error' ? 'bg-red-950/20 border-red-500 text-red-200' : (apartmentAdminNoticeType === 'success' ? 'bg-green-950/20 border-green-500 text-green-200' : 'bg-white/5 border-gold-400 text-white/80')" x-text="apartmentAdminNotice"></div>
+
+                                        <div class="grid xl:grid-cols-5 gap-6">
+                                            <div class="xl:col-span-3">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest mb-2">公寓数据 JSON</div>
+                                                <div x-show="apartmentAdminSelectedPageKey" class="mb-3 px-4 py-3 border border-gold-400/30 bg-gold-400/10 text-gold-300 text-xs tracking-widest uppercase" x-text="'当前编辑：' + apartmentAdminSelectedPageKey"></div>
+                                                <textarea x-model="apartmentAdminJson" class="w-full min-h-[520px] bg-black/40 border border-white/10 px-5 py-4 text-sm font-mono text-white/85 focus:border-gold-400 outline-none transition shadow-inner resize-y" spellcheck="false" placeholder="点击“载入示例 JSON”新建，或在右侧点击“编辑”加载现有公寓。"></textarea>
+                                            </div>
+                                            <div class="xl:col-span-2 space-y-4">
+                                                <div class="text-[10px] text-white/30 uppercase tracking-widest">已接入公寓</div>
+                                                <div class="border border-white/10 divide-y divide-white/10 max-h-[520px] overflow-auto bg-black/30">
+                                                    <template x-for="pageKey in getApartmentPageKeys()" :key="pageKey">
+                                                        <div class="px-4 py-4 space-y-2">
+                                                            <div class="flex items-center justify-between gap-3">
+                                                                <div class="text-sm font-bold text-white" x-text="(getApartmentData(pageKey) && getApartmentData(pageKey).displayName) || pageKey"></div>
+                                                                <div class="flex items-center gap-3">
+                                                                    <button type="button" @click="apartmentAdminEdit(pageKey)" class="text-[10px] font-bold uppercase tracking-widest text-white/70 hover:text-white">编辑</button>
+                                                                    <button type="button" @click="switchPage(pageKey)" class="text-[10px] font-bold uppercase tracking-widest text-gold-400 hover:text-gold-300">查看</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-[10px] text-white/35 font-mono" x-text="pageKey"></div>
+                                                            <div class="text-xs text-white/55" x-text="'/' + ((getApartmentData(pageKey) && getApartmentData(pageKey).slug) || '')"></div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- [TAB] 注册下级 -->
                                 <div x-show="agentDashTab === 'register_sub' && agentUser && agentUser.role === 'consultant'" x-transition:enter="transition ease-out duration-500">
                                     <div class="bg-obsidian-950/60 border border-white/5 p-6 md:p-8 rounded-sm shadow-2xl overflow-hidden">
@@ -5440,7 +4437,10 @@
         </div>
     </footer>
     <script src="/sdlvhk.com/assets/i18n.js?v=20260202_0001"></script>
-    <script src="/sdlvhk.com/assets/app.js?v=20260323_0002"></script>
+    <script src="/sdlvhk.com/assets/apartment-custom-data.js?v=20260323_0001"></script>
+    <script src="/sdlvhk.com/assets/apartment-store.js?v=20260323_0002"></script>
+    <script src="/sdlvhk.com/assets/apartment-data.js?v=20260323_0002"></script>
+    <script src="/sdlvhk.com/assets/app.js?v=20260323_0003"></script>
     
 
     
