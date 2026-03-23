@@ -27,7 +27,53 @@ function refreshLucideIcons() {
     window.lucide.createIcons();
 }
 
+function initStaticCarousels(root = document) {
+    const scope = root && typeof root.querySelectorAll === 'function' ? root : document;
+
+    scope.querySelectorAll('[data-static-carousel]').forEach((carousel) => {
+        if (carousel.dataset.staticCarouselBound === 'true') return;
+
+        const slides = Array.from(carousel.querySelectorAll('[data-static-carousel-slide]'));
+        if (!slides.length) return;
+
+        let activeIndex = Number.parseInt(carousel.getAttribute('data-static-carousel-index') || '0', 10);
+        if (!Number.isFinite(activeIndex)) activeIndex = 0;
+
+        const updateSlides = (nextIndex) => {
+            activeIndex = ((nextIndex % slides.length) + slides.length) % slides.length;
+            carousel.setAttribute('data-static-carousel-index', String(activeIndex));
+
+            slides.forEach((slide, index) => {
+                const isActive = index === activeIndex;
+                slide.classList.toggle('opacity-100', isActive);
+                slide.classList.toggle('z-10', isActive);
+                slide.classList.toggle('opacity-0', !isActive);
+                slide.classList.toggle('pointer-events-none', !isActive);
+                slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+            });
+        };
+
+        carousel.querySelectorAll('[data-static-carousel-prev]').forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                updateSlides(activeIndex - 1);
+            });
+        });
+
+        carousel.querySelectorAll('[data-static-carousel-next]').forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                updateSlides(activeIndex + 1);
+            });
+        });
+
+        carousel.dataset.staticCarouselBound = 'true';
+        updateSlides(activeIndex);
+    });
+}
+
 refreshLucideIcons();
+initStaticCarousels();
 
         function appData() {
             return {
@@ -248,6 +294,7 @@ refreshLucideIcons();
                     setTimeout(() => {
                         initScrollEngine();
                         refreshLucideIcons();
+                        initStaticCarousels();
                         if (page === 'apartments') {
                             this.initAmapEmbed();
                         }
@@ -2117,5 +2164,6 @@ refreshLucideIcons();
         // 启动引擎
         document.addEventListener('DOMContentLoaded', () => {
             initScrollEngine();
+            initStaticCarousels();
             scrollLoop();
         });
