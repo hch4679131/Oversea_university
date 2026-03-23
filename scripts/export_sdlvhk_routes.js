@@ -911,6 +911,7 @@ function renderHtml(template, langKey, pageKey) {
 
   html = replaceDynamicHrefs(html, langKey, pageKey);
   html = renderFragment(html, renderContext);
+  html = html.replace(/\/sdlvhk\.com\/assets\//g, '/assets/');
 
   return html;
 }

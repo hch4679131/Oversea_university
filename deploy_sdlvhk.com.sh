@@ -81,6 +81,10 @@ else
   cp -a "$SITE_SRC/." "$SITE_DST/"
 fi
 
+echo "==> Normalizing deployed file permissions"
+find "$SITE_DST" -type d -exec chmod 755 {} +
+find "$SITE_DST" -type f -exec chmod 644 {} +
+
 echo "==> Testing and reloading nginx"
 "$NGINX_BIN" -t
 "$NGINX_BIN" -s reload
