@@ -341,7 +341,42 @@
                 </div>
             </section>
 
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ pflRoomsPhotos: [
+                { src: '/assets/apartments/pfl/room-1-01.webp', label: '1号房', alt: '1号房 01' },
+                { src: '/assets/apartments/pfl/room-1-02.webp', label: '1号房', alt: '1号房 02' },
+                { src: '/assets/apartments/pfl/room-2-01.webp', label: '2号房', alt: '2号房 01' },
+                { src: '/assets/apartments/pfl/room-3-01.webp', label: '3号房', alt: '3号房 01' },
+                { src: '/assets/apartments/pfl/room-3-02.webp', label: '3号房', alt: '3号房 02' },
+                { src: '/assets/apartments/pfl/room-4-01.webp', label: '4号房', alt: '4号房 01' },
+                { src: '/assets/apartments/pfl/room-4-02.webp', label: '4号房', alt: '4号房 02' },
+                { src: '/assets/apartments/pfl/public-lobby-01.webp', label: '公共区域', alt: '公共区域 一楼大堂' },
+                { src: '/assets/apartments/pfl/public-building-panorama-01.webp', label: '公共区域', alt: '公共区域 单元楼全景' },
+                { src: '/assets/apartments/pfl/public-kitchen-01.webp', label: '公共区域', alt: '公共区域 厨房' },
+                { src: '/assets/apartments/pfl/public-living-room-01.webp', label: '公共区域', alt: '公共区域 客厅' },
+                { src: '/assets/apartments/pfl/public-wc-01.webp', label: '公共区域', alt: '公共区域 洗手间' },
+                { src: '/assets/apartments/pfl/public-elevator-01.webp', label: '公共区域', alt: '公共区域 电梯' },
+                { src: '/assets/apartments/pfl/public-estate-map-01.webp', label: '公共区域', alt: '公共区域 置富花园小区图' },
+                { src: '/assets/apartments/pfl/public-location-map-01.webp', label: '公共区域', alt: '公共区域 置富花园地图' }
+            ], groupedPflRooms: [], pflPublicPhotos: [], pflSlides: {}, init() {
+                const buckets = {};
+                this.pflPublicPhotos = this.pflRoomsPhotos.filter((photo) => photo.label === '公共区域');
+                this.pflRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedPflRooms = Object.values(buckets);
+                this.groupedPflRooms.forEach((_, idx) => { this.pflSlides[idx] = 0; });
+            }, prevPflSlide(idx) {
+                const total = this.groupedPflRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.pflSlides[idx] = (this.pflSlides[idx] - 1 + total) % total;
+            }, nextPflSlide(idx) {
+                const total = this.groupedPflRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.pflSlides[idx] = (this.pflSlides[idx] + 1) % total;
+            } }">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-left">
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
@@ -349,152 +384,43 @@
                         <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
                     </div>
 
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8"><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
-        <img data-static-carousel-slide src="/assets/apartments/pfl/room-1-01.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="1号房 01" loading="lazy" decoding="async" aria-hidden="false"><img data-static-carousel-slide src="/assets/apartments/pfl/room-1-02.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="1号房 02" loading="lazy" decoding="async" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        <div>
-          <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
-            <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-          </button>
-          <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-next aria-label="Next image">
-            <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-          </button>
-        </div>
-        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">1号房</div>
-          <a href="/zh-CN/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
-        </div>
-      </div>
-    </div><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
-        <img data-static-carousel-slide src="/assets/apartments/pfl/room-2-01.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="2号房 01" loading="lazy" decoding="async" aria-hidden="false">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        
-        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">2号房</div>
-          <a href="/zh-CN/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
-        </div>
-      </div>
-    </div><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
-        <img data-static-carousel-slide src="/assets/apartments/pfl/room-3-01.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="3号房 01" loading="lazy" decoding="async" aria-hidden="false"><img data-static-carousel-slide src="/assets/apartments/pfl/room-3-02.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="3号房 02" loading="lazy" decoding="async" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        <div>
-          <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
-            <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-          </button>
-          <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-next aria-label="Next image">
-            <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-          </button>
-        </div>
-        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">3号房</div>
-          <a href="/zh-CN/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
-        </div>
-      </div>
-    </div><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
-        <img data-static-carousel-slide src="/assets/apartments/pfl/room-4-01.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="4号房 01" loading="lazy" decoding="async" aria-hidden="false"><img data-static-carousel-slide src="/assets/apartments/pfl/room-4-02.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="4号房 02" loading="lazy" decoding="async" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        <div>
-          <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
-            <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-          </button>
-          <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-next aria-label="Next image">
-            <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-          </button>
-        </div>
-        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">4号房</div>
-          <a href="/zh-CN/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
-        </div>
-      </div>
-    </div></div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in groupedPflRooms" :key="item.label">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.photos[pflSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[pflSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevPflSlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextPflSlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
 
                     <div class="mt-12 border-t border-black/15"></div>
                     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        
+                        <template x-for="(item, idx) in pflPublicPhotos" :key="'pfl-public-' + idx">
                             <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
                                 <div class="relative h-72 overflow-hidden">
-                                    <img src="/assets/apartments/pfl/public-lobby-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 一楼大堂" loading="lazy" decoding="async">
+                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
                                     <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                     </div>
                                 </div>
                             </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="/assets/apartments/pfl/public-building-panorama-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 单元楼全景" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="/assets/apartments/pfl/public-kitchen-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 厨房" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="/assets/apartments/pfl/public-living-room-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 客厅" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="/assets/apartments/pfl/public-wc-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 洗手间" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="/assets/apartments/pfl/public-elevator-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 电梯" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="/assets/apartments/pfl/public-estate-map-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 置富花园小区图" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="/assets/apartments/pfl/public-location-map-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 置富花园地图" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
+                        </template>
                     </div>
                 </div>
             </section>

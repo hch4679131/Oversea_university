@@ -532,20 +532,12 @@ function renderApartmentMediaSection(tagName, openingTag, innerHtml, scopeContex
   const floorPlansKey = Object.keys(scopeContext).find((key) => /FloorPlans$/.test(key) && Array.isArray(scopeContext[key]));
   let transformedInner = innerHtml;
 
-  if (groupedRoomsKey) {
+  if (publicPhotosKey) {
     transformedInner = replaceFirstDivByClass(
       transformedInner,
-      'grid grid-cols-1 md:grid-cols-2 gap-8',
-      buildStaticApartmentRoomCards(scopeContext[groupedRoomsKey], scopeContext.routeLangKey, scopeContext.routePageKey)
+      'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6',
+      buildStaticPublicPhotoGrid(scopeContext[publicPhotosKey])
     );
-
-    if (publicPhotosKey) {
-      transformedInner = replaceFirstDivByClass(
-        transformedInner,
-        'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6',
-        buildStaticPublicPhotoGrid(scopeContext[publicPhotosKey])
-      );
-    }
   }
 
   if (floorPlansKey) {
@@ -554,6 +546,10 @@ function renderApartmentMediaSection(tagName, openingTag, innerHtml, scopeContex
       'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8',
       buildStaticFloorPlanGrid(scopeContext[floorPlansKey])
     );
+  }
+
+  if (groupedRoomsKey) {
+    return `${openingTag}${transformedInner}</${tagName}>`;
   }
 
   return `<${tagName}${stripAttribute(openingTag.slice(tagName.length + 1, -1), 'x-data')}>${renderFragment(transformedInner, scopeContext)}</${tagName}>`;

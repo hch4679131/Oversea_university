@@ -346,101 +346,104 @@
             </section>
 
             <!-- 我们的房间（与 PAGE 4B 完全一致结构） -->
-            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10">
+            <section class="py-20 bg-paper text-obsidian-950 border-b border-black/10" x-data="{ oyBookingOpen: false, oyRoomsPhotos: [
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房_结果.webp', label: '三号房', alt: '三号房' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房%2002_结果.webp', label: '三号房', alt: '三号房 02' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房%2003_结果.webp', label: '三号房', alt: '三号房 03' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房_结果.webp', label: '四号房', alt: '四号房' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2002_结果.webp', label: '四号房', alt: '四号房 02' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2003_结果.webp', label: '四号房', alt: '四号房 03' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2004_结果.webp', label: '四号房', alt: '四号房 04' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房_结果.webp', label: '五号房', alt: '五号房' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房%2002_结果.webp', label: '五号房', alt: '五号房 02' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房%2003_结果.webp', label: '五号房', alt: '五号房 03' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂_结果.webp', label: '公共区域', alt: '公共区域 大堂' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂%2002_结果.webp', label: '公共区域', alt: '公共区域 大堂 02' },
+                { src: 'https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/酒店外围_结果.webp', label: '公共区域', alt: '公共区域 酒店外围' }
+            ], groupedOyRooms: [], oyPublicPhotos: [], oyRoomSlides: {}, init() {
+                const buckets = {};
+                this.oyPublicPhotos = this.oyRoomsPhotos.filter((photo) => photo.label === '公共区域');
+                this.oyRoomsPhotos.filter((photo) => photo.label !== '公共区域').forEach((photo) => {
+                    if (!buckets[photo.label]) {
+                        buckets[photo.label] = { label: photo.label, photos: [] };
+                    }
+                    buckets[photo.label].photos.push(photo);
+                });
+                this.groupedOyRooms = Object.values(buckets);
+                this.groupedOyRooms.forEach((_, idx) => { this.oyRoomSlides[idx] = 0; });
+            }, prevOySlide(idx) {
+                const total = this.groupedOyRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.oyRoomSlides[idx] = (this.oyRoomSlides[idx] - 1 + total) % total;
+            }, nextOySlide(idx) {
+                const total = this.groupedOyRooms[idx]?.photos?.length || 0;
+                if (total <= 1) return;
+                this.oyRoomSlides[idx] = (this.oyRoomSlides[idx] + 1) % total;
+            } }">
                 <div class="max-w-7xl mx-auto px-6">
                     <div class="scrub-item anim-fade-up text-center">
                         <h2 class="text-4xl md:text-5xl font-serif text-obsidian-950">我们的房间</h2>
                         <div class="w-20 h-1 bg-gradient-to-r from-gold-400 to-gold-300 mt-6"></div>
                         <p class="mt-6 text-black/60">软硬件设施一览 / 生活与学业支持服务</p>
                     </div>
-                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8"><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
-        <img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="三号房" loading="lazy" decoding="async" aria-hidden="false"><img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房%2002_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="三号房 02" loading="lazy" decoding="async" aria-hidden="true"><img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/三号房/三号房%2003_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="三号房 03" loading="lazy" decoding="async" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        <div>
-          <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
-            <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-          </button>
-          <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-next aria-label="Next image">
-            <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-          </button>
-        </div>
-        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">三号房</div>
-          <a href="/en/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
-        </div>
-      </div>
-    </div><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
-        <img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="四号房" loading="lazy" decoding="async" aria-hidden="false"><img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2002_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="四号房 02" loading="lazy" decoding="async" aria-hidden="true"><img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2003_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="四号房 03" loading="lazy" decoding="async" aria-hidden="true"><img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/四号房/四号房%2004_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="四号房 04" loading="lazy" decoding="async" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        <div>
-          <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
-            <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-          </button>
-          <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-next aria-label="Next image">
-            <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-          </button>
-        </div>
-        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">四号房</div>
-          <a href="/en/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
-        </div>
-      </div>
-    </div><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
-        <img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="五号房" loading="lazy" decoding="async" aria-hidden="false"><img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房%2002_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="五号房 02" loading="lazy" decoding="async" aria-hidden="true"><img data-static-carousel-slide src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/五号房/五号房%2003_结果.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="五号房 03" loading="lazy" decoding="async" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        <div>
-          <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
-            <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-          </button>
-          <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-next aria-label="Next image">
-            <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-          </button>
-        </div>
-        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">五号房</div>
-          <a href="/en/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
-        </div>
-      </div>
-    </div></div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <template x-for="(item, idx) in groupedOyRooms" :key="item.label">
+                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img :src="item.photos[oyRoomSlides[idx] || 0].src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.photos[oyRoomSlides[idx] || 0].alt || item.label" loading="lazy" decoding="async">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+                                    <template x-if="item.photos.length > 1">
+                                        <div>
+                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="prevOySlide(idx)">
+                                                <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" @click.stop="nextOySlide(idx)">
+                                                <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
+                                        <template x-if="item.label !== '公共区域'">
+                                            <button type="button" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs" @click="oyBookingOpen = true">抢先以早鸟价格订房</button>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
 
                     <div class="mt-12 border-t border-black/15"></div>
                     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        
+                        <template x-for="(item, idx) in oyPublicPhotos" :key="'oy-public-' + idx">
                             <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
                                 <div class="relative h-72 overflow-hidden">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 大堂" loading="lazy" decoding="async">
+                                    <img :src="item.src" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" :alt="item.alt || item.label" loading="lazy" decoding="async">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
                                     <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
+                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm" x-text="item.label"></div>
                                     </div>
                                 </div>
                             </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/大堂%2002_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 大堂 02" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="https://static.sdlvhk.com/图片素材/other/Image%206.2%20学生居社/2026%20最新公寓照片/汇生会社青年公寓（城汇奥运）/公共区域/酒店外围_结果.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="公共区域 酒店外围" loading="lazy" decoding="async">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-                                    <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
-                                        <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">公共区域</div>
-                                    </div>
-                                </div>
-                            </div>
-                        
+                        </template>
                     </div>
-                    
+                    <div class="fixed inset-0 z-[90]" x-show="oyBookingOpen" x-transition.opacity @keydown.escape.window="oyBookingOpen = false" style="display: none;">
+                        <div class="absolute inset-0 bg-black/60" @click="oyBookingOpen = false"></div>
+                        <div class="relative min-h-full flex items-center justify-center p-6">
+                            <div class="w-full max-w-md bg-paper text-obsidian-950 border border-black/10 shadow-2xl">
+                                <div class="flex items-center justify-between px-6 py-5 border-b border-black/10">
+                                    <div><div class="text-2xl font-serif font-bold">立即预定</div></div>
+                                    <button type="button" class="p-2 text-black/60 hover:text-black transition" @click="oyBookingOpen = false" aria-label="Close"><i data-lucide="x" class="w-5 h-5"></i></button>
+                                </div>
+                                <div class="px-6 py-6">
+                                    <div class="text-sm text-black/70">请扫描二维码，立即预定房间!</div>
+                                    <div class="mt-5 border border-black/10 bg-white overflow-hidden aspect-square w-64 max-w-full mx-auto">
+                                        <img src="https://static.sdlvhk.com/图片素材/other/Image%202.6%20Contact%20Us/WImage%202.6%20學生居社.webp" alt="预定二维码" class="w-full h-full object-contain bg-black/5" loading="lazy" decoding="async">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
