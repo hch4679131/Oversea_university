@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const vm = require('vm');
 
 const siteDir = path.join(__dirname, '..', 'sites', 'sdlvhk.com');
 const sourceIndexPath = path.join(siteDir, 'index.html');
+const i18nSourcePath = path.join(siteDir, 'assets', 'i18n.js');
 
 const langSegments = {
   sc: 'zh-CN',
@@ -123,10 +125,209 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
+function loadTranslations() {
+  const sandbox = { window: {} };
+  vm.createContext(sandbox);
+  vm.runInContext(fs.readFileSync(i18nSourcePath, 'utf8'), sandbox);
+  return sandbox.window.SDLV_I18N || {};
+}
+
 function buildRoutePath(langKey, pageKey) {
   const langSegment = langSegments[langKey];
   const slug = pageSlugs[pageKey];
   return `/${langSegment}${slug ? `/${slug}` : ''}`;
+}
+
+function splitDocument(sourceHtml) {
+  const mainStart = sourceHtml.indexOf('<main ');
+  const mainOpenEnd = sourceHtml.indexOf('>', mainStart) + 1;
+  const mainCloseStart = sourceHtml.lastIndexOf('</main>');
+
+  if (mainStart === -1 || mainOpenEnd === 0 || mainCloseStart === -1) {
+    throw new Error('Unable to locate <main> wrapper in source HTML');
+  }
+
+  return {
+    beforeMain: sourceHtml.slice(0, mainOpenEnd),
+    mainInner: sourceHtml.slice(mainOpenEnd, mainCloseStart),
+    afterMain: sourceHtml.slice(mainCloseStart)
+  };
+}
+
+function findMatchingDivEnd(html, openStart) {
+  const divTagPattern = /<\/??div\b[^>]*>/g;
+  divTagPattern.lastIndex = openStart;
+
+  let depth = 0;
+  let match;
+
+  while ((match = divTagPattern.exec(html))) {
+    const tag = match[0];
+    const isClosing = tag.startsWith('</');
+    const isSelfClosing = tag.endsWith('/>');
+
+    if (!isClosing) {
+      depth += 1;
+      if (isSelfClosing) {
+        depth -= 1;
+      }
+    } else {
+      depth -= 1;
+    }
+
+    if (depth === 0) {
+      return match.index + tag.length;
+    }
+  }
+
+  throw new Error(`Unable to find closing </div> for block starting at ${openStart}`);
+}
+
+function extractPageBlocks(mainInner) {
+  const blocks = {};
+
+  Object.keys(pageSlugs).forEach((pageKey) => {
+    const marker = `x-show="page === '${pageKey}'"`;
+    const markerIndex = mainInner.indexOf(marker);
+    if (markerIndex === -1) {
+      throw new Error(`Unable to find page block for ${pageKey}`);
+    }
+
+    const blockStart = mainInner.lastIndexOf('<div', markerIndex);
+    if (blockStart === -1) {
+      throw new Error(`Unable to find opening <div> for ${pageKey}`);
+    }
+
+    const blockEnd = findMatchingDivEnd(mainInner, blockStart);
+    blocks[pageKey] = mainInner.slice(blockStart, blockEnd);
+  });
+
+  return blocks;
+}
+
+function stripPageWrapperDirectives(blockHtml) {
+  return blockHtml
+    .replace(/\s+x-show="[^"]*"/, '')
+    .replace(/\s+x-transition:[^=]+="[^"]*"/g, '');
+}
+
+function splitArgs(argString) {
+  const args = [];
+  let current = '';
+  let quote = null;
+  let depth = 0;
+
+  for (let i = 0; i < argString.length; i += 1) {
+    const char = argString[i];
+
+    if (quote) {
+      current += char;
+      if (char === quote && argString[i - 1] !== '\\') {
+        quote = null;
+      }
+      continue;
+    }
+
+    if (char === '\'' || char === '"') {
+      quote = char;
+      current += char;
+      continue;
+    }
+
+    if (char === '(') {
+      depth += 1;
+      current += char;
+      continue;
+    }
+
+    if (char === ')') {
+      depth -= 1;
+      current += char;
+      continue;
+    }
+
+    if (char === ',' && depth === 0) {
+      args.push(current.trim());
+      current = '';
+      continue;
+    }
+
+    current += char;
+  }
+
+  if (current.trim()) {
+    args.push(current.trim());
+  }
+
+  return args;
+}
+
+function normalizeQuotedValue(value) {
+  const singleQuoted = value.match(/^'([^']*)'$/);
+  if (singleQuoted) return singleQuoted[1];
+
+  const doubleQuoted = value.match(/^"([^"]*)"$/);
+  if (doubleQuoted) return doubleQuoted[1];
+
+  return value;
+}
+
+function resolveRouteArg(arg, currentLangKey, currentPageKey) {
+  const normalizedArg = String(arg || '').trim();
+  if (!normalizedArg || normalizedArg === 'null') return null;
+
+  if (normalizedArg === 'page' || normalizedArg === 'this.page') return currentPageKey;
+  if (normalizedArg === 'lang' || normalizedArg === 'this.lang') return currentLangKey;
+  if (normalizedArg === 'anchorId' || normalizedArg === 'getCurrentAnchorId()') return null;
+
+  return normalizeQuotedValue(normalizedArg);
+}
+
+function buildExportHref(argString, currentLangKey, currentPageKey) {
+  const args = splitArgs(argString);
+  const pageArg = resolveRouteArg(args[0], currentLangKey, currentPageKey) || currentPageKey;
+  const anchorArg = resolveRouteArg(args[1], currentLangKey, currentPageKey);
+  const langArg = resolveRouteArg(args[2], currentLangKey, currentPageKey) || currentLangKey;
+
+  const pageKey = Object.prototype.hasOwnProperty.call(pageSlugs, pageArg) ? pageArg : currentPageKey;
+  const langKey = Object.prototype.hasOwnProperty.call(langSegments, langArg) ? langArg : currentLangKey;
+
+  return `${buildRoutePath(langKey, pageKey)}${anchorArg ? `#${encodeURIComponent(anchorArg)}` : ''}`;
+}
+
+function replaceDynamicHrefs(html, langKey, pageKey) {
+  return html.replace(/:href="routeHref\(([^\"]+)\)"/g, (_, args) => {
+    return `href="${buildExportHref(args, langKey, pageKey)}"`;
+  });
+}
+
+function resolveTextExpression(expr, translations, langKey) {
+  const directMatch = expr.match(/^t\[lang\]\.([A-Za-z0-9_]+)$/);
+  if (directMatch) {
+    return translations[langKey]?.[directMatch[1]] ?? null;
+  }
+
+  const fallbackMatch = expr.match(/^t\[lang\]\.([A-Za-z0-9_]+)\s*\|\|\s*'([^']*)'$/);
+  if (fallbackMatch) {
+    return translations[langKey]?.[fallbackMatch[1]] ?? fallbackMatch[2];
+  }
+
+  return null;
+}
+
+function replaceSimpleXText(html, translations, langKey) {
+  return html.replace(/<([a-zA-Z][\w:-]*)([^>]*)\s+x-text="([^"]+)"([^>]*)>([\s\S]*?)<\/\1>/g, (match, tagName, beforeAttrs, expr, afterAttrs, innerHtml) => {
+    if (innerHtml.trim() && /</.test(innerHtml)) {
+      return match;
+    }
+
+    const resolvedText = resolveTextExpression(expr.trim(), translations, langKey);
+    if (resolvedText == null) {
+      return match;
+    }
+
+    return `<${tagName}${beforeAttrs}${afterAttrs}>${escapeHtml(resolvedText)}</${tagName}>`;
+  });
 }
 
 function buildAlternateLinks(pageKey) {
@@ -138,16 +339,25 @@ function buildAlternateLinks(pageKey) {
 }
 
 function renderHtml(template, langKey, pageKey) {
+  const { shell, blocks, translations } = template;
   const meta = pageMeta[pageKey][langKey];
   const routePath = buildRoutePath(langKey, pageKey);
   const canonicalHref = `https://sdlvhk.com${routePath}`;
 
-  let html = template.replace(/<html lang="[^"]+"/, `<html lang="${langSegments[langKey]}"`);
+  let html = `${shell.beforeMain}\n${stripPageWrapperDirectives(blocks[pageKey])}\n${shell.afterMain}`;
+
+  html = html.replace(
+    /<html lang="[^"]+"/,
+    `<html lang="${langSegments[langKey]}" data-static-export="true" data-static-page="${pageKey}" data-static-lang="${langSegments[langKey]}"`
+  );
 
   html = html.replace(
     /<title>[\s\S]*?<\/title>/,
     `<title>${escapeHtml(meta.title)}</title>\n    <meta name="description" content="${escapeHtml(meta.description)}">\n    <meta name="robots" content="index,follow">\n    <link id="canonical-link" rel="canonical" href="${canonicalHref}">\n${buildAlternateLinks(pageKey)}`
   );
+
+  html = replaceDynamicHrefs(html, langKey, pageKey);
+  html = replaceSimpleXText(html, translations, langKey);
 
   return html;
 }
@@ -170,12 +380,15 @@ function removeGeneratedRoots() {
 
 function main() {
   const sourceHtml = fs.readFileSync(sourceIndexPath, 'utf8');
+  const shell = splitDocument(sourceHtml);
+  const blocks = extractPageBlocks(shell.mainInner);
+  const translations = loadTranslations();
 
   removeGeneratedRoots();
 
   Object.keys(langSegments).forEach((langKey) => {
     Object.keys(pageSlugs).forEach((pageKey) => {
-      writeRouteFile(langKey, pageKey, sourceHtml);
+      writeRouteFile(langKey, pageKey, { shell, blocks, translations });
     });
   });
 

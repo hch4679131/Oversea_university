@@ -158,6 +158,10 @@ refreshLucideIcons();
                     return window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : null;
                 },
 
+                isStaticExportMode() {
+                    return document.documentElement.getAttribute('data-static-export') === 'true';
+                },
+
                 parseCurrentRoute() {
                     const segments = window.location.pathname.split('/').filter(Boolean);
                     if (segments[0] === 'sdlvhk.com') {
@@ -2006,6 +2010,22 @@ refreshLucideIcons();
 
                     const targetLang = this.routeLangMap[options.lang] ? options.lang : this.lang;
                     const targetPage = this.normalizePage(newPage);
+
+                    if (this.isStaticExportMode()) {
+                        const targetUrl = `${this.buildRoutePath(targetLang, targetPage)}${anchorId ? `#${encodeURIComponent(anchorId)}` : ''}`;
+                        const isSameRoute = targetLang === this.lang && targetPage === this.page;
+
+                        if (isSameRoute) {
+                            this.lang = targetLang;
+                            this.page = targetPage;
+                            this.syncBrowserUrl(targetLang, targetPage, anchorId, Boolean(options.replace));
+                            this.finalizePageSwitch(targetPage, anchorId, options.anchorBehavior || 'smooth');
+                            return;
+                        }
+
+                        window.location.assign(targetUrl);
+                        return;
+                    }
 
                     this.lang = targetLang;
                     this.page = targetPage;
