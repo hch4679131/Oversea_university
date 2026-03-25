@@ -428,7 +428,7 @@ function buildYmtRoomCarouselCards(groupedRooms, langKey, includeWrapper = true)
     return `<div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
       <div class="relative h-72 overflow-hidden bg-slate-50" data-static-carousel data-static-carousel-index="0">
         ${buildStaticCarouselSlides(photos, 'object-cover transition duration-700 group-hover:scale-105')}
-        ${hasMultiplePhotos ? `<div class="relative z-20">
+        ${hasMultiplePhotos ? `<div>
           <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" data-static-carousel-prev aria-label="Previous image">
             <i data-lucide="chevron-left" class="w-5 h-5"></i>
           </button>
@@ -457,7 +457,7 @@ function buildDarkRoomCarouselCards(groupedRooms, langKey, includeWrapper = true
       <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
         ${buildStaticCarouselSlides(photos, 'object-cover transition duration-700 group-hover:scale-110')}
         <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        ${hasMultiplePhotos ? `<div class="relative z-20">
+        ${hasMultiplePhotos ? `<div>
           <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
             <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
           </button>
