@@ -96,6 +96,10 @@ body {
     max-width: 27rem;
 }
 
+#study-hero .sdlv-home-like-hero-copy {
+    padding-top: 0.75rem;
+}
+
 /* 地图交互 */
 .map-point-glow {
     position: absolute;
@@ -368,6 +372,10 @@ body {
         max-width: 27rem !important;
         margin-bottom: 1.5rem !important;
         gap: 0.875rem !important;
+    }
+
+    #study-hero .sdlv-home-like-hero-copy {
+        padding-top: 1.5rem !important;
     }
 
     .sdlv-home-like-hero .sdlv-home-like-hero-body p {

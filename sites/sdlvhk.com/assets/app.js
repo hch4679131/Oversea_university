@@ -307,7 +307,9 @@ const apartmentRouteTitles = apartmentHelpers.buildApartmentTitleKeys ? apartmen
                     const el = anchorId ? document.getElementById(anchorId) : null;
                     if (!el) return;
 
-                    const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+                    const targetTop = el.getBoundingClientRect().top + window.pageYOffset;
+                    const isPageHeroAnchor = anchorId === 'hero' || /-hero$/.test(anchorId);
+                    const y = isPageHeroAnchor ? 0 : Math.max(targetTop - 100, 0);
                     window.scrollTo({ top: y, behavior });
                 },
 
