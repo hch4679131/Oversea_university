@@ -243,13 +243,13 @@ body {
 .sdlv-site-footer .footer-links,
 .sdlv-site-footer .footer-links a,
 .sdlv-site-footer .footer-links button {
-    font-size: 0.75rem;
-    line-height: 1.4;
+    font-size: 0.6875rem;
+    line-height: 1.35;
 }
 
 .sdlv-site-footer .text-slate-300\/60.text-xs {
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
+    font-size: 0.625rem;
+    letter-spacing: 0.13em;
 }
 
 /* Agent dashboard: prevent browser default blue focus/autofill tint */
