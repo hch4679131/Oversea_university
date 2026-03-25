@@ -448,40 +448,11 @@ function buildYmtRoomCarouselCards(groupedRooms, langKey, includeWrapper = true)
 }
 
 function buildDarkRoomCarouselCards(groupedRooms, langKey, includeWrapper = true) {
-  const bookingHref = buildRoutePath(langKey, 'contact');
-  const cards = groupedRooms.map((item) => {
-    const showBookingLink = item.label !== '公共区域';
-    const photos = item.photos || [];
-    const hasMultiplePhotos = photos.length > 1;
-    return `<div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
-      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
-        ${buildStaticCarouselSlides(photos, 'object-cover transition duration-700 group-hover:scale-110')}
-        <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
-        ${hasMultiplePhotos ? `<div>
-          <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
-            <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
-          </button>
-          <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-next aria-label="Next image">
-            <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
-          </button>
-        </div>` : ''}
-        <div class="absolute bottom-4 left-4 z-20 flex flex-col items-start gap-3">
-          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">${escapeHtml(item.label)}</div>
-          ${showBookingLink ? `<a href="${bookingHref}" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>` : ''}
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-
-  return includeWrapper ? `<div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">${cards}</div>` : cards;
+  return buildYmtRoomCarouselCards(groupedRooms, langKey, includeWrapper);
 }
 
 function buildStaticApartmentRoomCards(groupedRooms, langKey, pageKey, includeWrapper = true) {
-  if (pageKey === 'apartment-ymt') {
-    return buildYmtRoomCarouselCards(groupedRooms, langKey, includeWrapper);
-  }
-
-  return buildDarkRoomCarouselCards(groupedRooms, langKey, includeWrapper);
+  return buildYmtRoomCarouselCards(groupedRooms, langKey, includeWrapper);
 }
 
 function buildStaticPublicPhotoGrid(publicPhotos) {
