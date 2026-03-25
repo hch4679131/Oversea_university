@@ -295,6 +295,54 @@ body {
         padding-right: 2rem !important;
     }
 
+    #hero {
+        min-height: clamp(38rem, 62vh, 46rem) !important;
+        align-items: center !important;
+    }
+
+    #hero-bg img {
+        width: 68% !important;
+        height: 118% !important;
+        transform: translate(-50%, -53%) !important;
+    }
+
+    #hero .max-w-3xl {
+        max-width: 39rem !important;
+    }
+
+    #hero .flex.items-center.gap-4.mb-8 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    #hero h1 {
+        font-size: clamp(3.6rem, 6vw, 4.5rem) !important;
+        line-height: 1.02 !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    #hero p.text-xl {
+        max-width: 31rem !important;
+        font-size: 1rem !important;
+        line-height: 1.65 !important;
+        margin-bottom: 2rem !important;
+    }
+
+    #hero-planner-bar {
+        max-width: 29rem !important;
+        padding: 0.375rem !important;
+    }
+
+    #hero-planner-bar .flex-1 {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+    }
+
+    #hero-planner-bar button {
+        padding: 0.9rem 1.5rem !important;
+        font-size: 0.9375rem !important;
+        gap: 0.5rem !important;
+    }
+
     .sdlv-compact-network-grid {
         max-width: 64rem !important;
         grid-template-columns: 11rem minmax(0, 1fr) 11rem !important;
