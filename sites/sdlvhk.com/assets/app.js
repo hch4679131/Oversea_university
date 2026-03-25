@@ -400,7 +400,16 @@ const apartmentRouteTitles = apartmentHelpers.buildApartmentTitleKeys ? apartmen
                     return item && Array.isArray(item.photos) ? item.photos[slideIndex] || item.photos[0] || null : null;
                 },
 
+                getApartmentRoomIndex(item, page = this.page) {
+                    const rooms = this.getApartmentGroupedRooms(page);
+                    if (!item || !Array.isArray(rooms) || rooms.length === 0) return -1;
+                    const directIndex = rooms.indexOf(item);
+                    if (directIndex !== -1) return directIndex;
+                    return rooms.findIndex((room) => room && room.label === item.label);
+                },
+
                 prevApartmentSlide(idx, page = this.page) {
+                    if (!Number.isInteger(idx) || idx < 0) return;
                     const state = this.ensureApartmentUiState(page);
                     const item = this.getApartmentGroupedRooms(page)[idx];
                     const total = item && Array.isArray(item.photos) ? item.photos.length : 0;
@@ -409,6 +418,7 @@ const apartmentRouteTitles = apartmentHelpers.buildApartmentTitleKeys ? apartmen
                 },
 
                 nextApartmentSlide(idx, page = this.page) {
+                    if (!Number.isInteger(idx) || idx < 0) return;
                     const state = this.ensureApartmentUiState(page);
                     const item = this.getApartmentGroupedRooms(page)[idx];
                     const total = item && Array.isArray(item.photos) ? item.photos.length : 0;
