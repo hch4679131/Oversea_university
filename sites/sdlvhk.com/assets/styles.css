@@ -276,3 +276,87 @@ body {
     transition: background-color 9999s ease-out 0s;
     box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.35) inset !important;
 }
+
+@media (max-width: 1280px) {
+    .max-w-7xl {
+        max-width: 68rem !important;
+    }
+
+    .max-w-6xl {
+        max-width: 62rem !important;
+    }
+
+    .max-w-5xl {
+        max-width: 56rem !important;
+    }
+
+    .px-6 {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+
+    .sdlv-compact-network-grid {
+        max-width: 64rem !important;
+        grid-template-columns: 11rem minmax(0, 1fr) 11rem !important;
+        gap: 0.75rem !important;
+        min-height: 32rem !important;
+        margin-top: 4rem !important;
+        margin-bottom: 4rem !important;
+    }
+
+    .sdlv-compact-network-grid > .grid {
+        gap: 0.5rem !important;
+    }
+
+    .sdlv-compact-network-grid > .grid > div {
+        width: 10rem !important;
+    }
+
+    .sdlv-compact-network-grid .relative.max-w-\[44rem\] {
+        max-width: 38rem !important;
+    }
+
+    .sdlv-site-footer {
+        padding-top: 4.5rem !important;
+        padding-bottom: 4.5rem !important;
+    }
+
+    .sdlv-site-footer-main {
+        gap: 2.5rem !important;
+        font-size: 0.8125rem !important;
+    }
+
+    .sdlv-site-footer-title {
+        font-size: 1.875rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .sdlv-site-footer-brand-copy {
+        font-size: 0.6875rem !important;
+        letter-spacing: 0.16em !important;
+        max-width: 16rem !important;
+    }
+
+    .sdlv-site-footer-links {
+        column-gap: 1.25rem !important;
+        row-gap: 2rem !important;
+    }
+
+    .sdlv-site-footer .footer-links,
+    .sdlv-site-footer .footer-links a,
+    .sdlv-site-footer .footer-links button {
+        font-size: 0.8125rem !important;
+        line-height: 1.45 !important;
+    }
+
+    .sdlv-site-footer .text-xs,
+    .sdlv-site-footer .text-sm {
+        font-size: 0.75rem !important;
+    }
+
+    .sdlv-site-footer-bottom {
+        margin-top: 2.75rem !important;
+        padding-top: 1.25rem !important;
+        font-size: 0.6875rem !important;
+    }
+}
