@@ -88,6 +88,14 @@ body {
     will-change: transform;
 }
 
+.sdlv-home-like-hero-title {
+    text-wrap: balance;
+}
+
+.sdlv-home-like-hero-body p {
+    max-width: 27rem;
+}
+
 /* 地图交互 */
 .map-point-glow {
     position: absolute;
@@ -335,6 +343,37 @@ body {
         padding: 0.8rem 1.2rem !important;
         font-size: 0.875rem !important;
         gap: 0.375rem !important;
+    }
+
+    .sdlv-home-like-hero {
+        min-height: clamp(36rem, 60vh, 44rem) !important;
+        align-items: center !important;
+    }
+
+    .sdlv-home-like-hero .sdlv-home-like-hero-copy {
+        max-width: 34rem !important;
+    }
+
+    .sdlv-home-like-hero .sdlv-home-like-hero-kicker {
+        margin-bottom: 1.1rem !important;
+    }
+
+    .sdlv-home-like-hero .sdlv-home-like-hero-title {
+        font-size: clamp(3rem, 5vw, 3.9rem) !important;
+        line-height: 1 !important;
+        margin-bottom: 1.1rem !important;
+    }
+
+    .sdlv-home-like-hero .sdlv-home-like-hero-body {
+        max-width: 27rem !important;
+        margin-bottom: 1.5rem !important;
+        gap: 0.875rem !important;
+    }
+
+    .sdlv-home-like-hero .sdlv-home-like-hero-body p {
+        max-width: 27rem !important;
+        font-size: 0.9375rem !important;
+        line-height: 1.55 !important;
     }
 
     #core-business {
