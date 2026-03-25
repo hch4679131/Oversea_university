@@ -309,8 +309,9 @@ const apartmentRouteTitles = apartmentHelpers.buildApartmentTitleKeys ? apartmen
 
                     const targetTop = el.getBoundingClientRect().top + window.pageYOffset;
                     const isPageHeroAnchor = anchorId === 'hero' || /-hero$/.test(anchorId);
+                    const resolvedBehavior = isPageHeroAnchor ? 'auto' : behavior;
                     const y = isPageHeroAnchor ? 0 : Math.max(targetTop - 100, 0);
-                    window.scrollTo({ top: y, behavior });
+                    window.scrollTo({ top: y, behavior: resolvedBehavior });
                 },
 
                 finalizePageSwitch(page, anchorId = null, anchorBehavior = 'smooth') {
