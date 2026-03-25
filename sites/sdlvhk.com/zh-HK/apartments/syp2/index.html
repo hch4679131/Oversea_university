@@ -327,57 +327,44 @@
                         <p class="mt-4 text-slate-500 font-light">软硬件设施一览 / 生活与学业支持服务</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        
-                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
-                                <div class="relative h-72 overflow-hidden bg-slate-50">
-                                    <img src="/assets/apartments/syp2/dining-room-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Dining Room 01" loading="lazy" decoding="async">
-
-                                    
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(getApartmentRoomIndex(item))">
-                                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(getApartmentRoomIndex(item))">
-                                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
-                                            </button>
-                                        </div>
-                                    
-
-                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
-                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">Dining Room</div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
-                                <div class="relative h-72 overflow-hidden bg-slate-50">
-                                    <img src="/assets/apartments/syp2/wc-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="WC" loading="lazy" decoding="async">
-
-                                    
-
-                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
-                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">WC</div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <div class="bg-white p-3 border border-slate-100 shadow-xl rounded-sm scrub-item anim-fade-up group">
-                                <div class="relative h-72 overflow-hidden bg-slate-50">
-                                    <img src="/assets/apartments/syp2/balcony-01.webp" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="阳台" loading="lazy" decoding="async">
-
-                                    
-
-                                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
-                                        <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm">阳台</div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        
-                    </div>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8"><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
+        <img data-static-carousel-slide src="/assets/apartments/syp2/dining-room-01.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="Dining Room 01" loading="lazy" decoding="async" aria-hidden="false"><img data-static-carousel-slide src="/assets/apartments/syp2/dining-room-02.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="Dining Room 02" loading="lazy" decoding="async" aria-hidden="true"><img data-static-carousel-slide src="/assets/apartments/syp2/dining-room-03.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="Dining Room 03" loading="lazy" decoding="async" aria-hidden="true"><img data-static-carousel-slide src="/assets/apartments/syp2/dining-room-04.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-0 pointer-events-none" alt="Dining Room 04" loading="lazy" decoding="async" aria-hidden="true">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+        <div>
+          <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-prev aria-label="Previous image">
+            <i data-lucide="chevron-left" class="w-4 h-4 mx-auto"></i>
+          </button>
+          <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-black/45 text-white hover:bg-black/65 transition" data-static-carousel-next aria-label="Next image">
+            <i data-lucide="chevron-right" class="w-4 h-4 mx-auto"></i>
+          </button>
+        </div>
+        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">Dining Room</div>
+          <a href="/zh-HK/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
+        </div>
+      </div>
+    </div><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
+        <img data-static-carousel-slide src="/assets/apartments/syp2/wc-01.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="WC" loading="lazy" decoding="async" aria-hidden="false">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+        
+        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">WC</div>
+          <a href="/zh-HK/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
+        </div>
+      </div>
+    </div><div class="group overflow-hidden rounded-sm scrub-item anim-fade-up bg-white">
+      <div class="relative h-72 overflow-hidden" data-static-carousel data-static-carousel-index="0">
+        <img data-static-carousel-slide src="/assets/apartments/syp2/balcony-01.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-100 z-10" alt="阳台" loading="lazy" decoding="async" aria-hidden="false">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent pointer-events-none"></div>
+        
+        <div class="absolute bottom-4 left-4 flex flex-col items-start gap-3">
+          <div class="px-3 py-1 text-xs tracking-widest uppercase font-bold text-white bg-black/40 backdrop-blur-sm">阳台</div>
+          <a href="/zh-HK/contact" class="px-6 py-3 bg-black text-white font-bold tracking-widest uppercase hover:bg-gold-400 hover:text-black transition text-xs">抢先以早鸟价格订房</a>
+        </div>
+      </div>
+    </div></div>
 
                     
 
@@ -646,7 +633,7 @@
     <script src="/assets/apartment-custom-data.js?v=20260323_0002"></script>
     <script src="/assets/apartment-store.js?v=20260323_0003"></script>
     <script src="/assets/apartment-data.js?v=20260323_0003"></script>
-    <script src="/assets/app.js?v=20260325_0009"></script>
+    <script src="/assets/app.js?v=20260325_0010"></script>
     
 
     

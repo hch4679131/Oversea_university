@@ -2229,16 +2229,14 @@
                                 <div class="relative h-72 overflow-hidden bg-slate-50">
                                     <img :src="(getApartmentActiveRoomPhoto(item, idx) || {}).src" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" :alt="(getApartmentActiveRoomPhoto(item, idx) || {}).alt || item.label" loading="lazy" decoding="async">
 
-                                    <template x-if="item.photos.length > 1">
-                                        <div>
-                                            <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(getApartmentRoomIndex(item))">
-                                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
-                                            </button>
-                                            <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(getApartmentRoomIndex(item))">
-                                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
-                                            </button>
-                                        </div>
-                                    </template>
+                                    <div x-show="item.photos.length > 1">
+                                        <button type="button" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="prevApartmentSlide(idx)">
+                                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                                        </button>
+                                        <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 text-academic-navy shadow hover:bg-white hover:text-academic-red transition flex items-center justify-center" @click.stop="nextApartmentSlide(idx)">
+                                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                                        </button>
+                                    </div>
 
                                     <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3">
                                         <div class="px-4 py-1.5 text-xs tracking-widest uppercase font-bold text-white bg-academic-navy/80 backdrop-blur-md rounded-sm" x-text="item.label"></div>
@@ -4657,7 +4655,7 @@
     <script src="/assets/apartment-custom-data.js?v=20260323_0002"></script>
     <script src="/assets/apartment-store.js?v=20260323_0003"></script>
     <script src="/assets/apartment-data.js?v=20260323_0003"></script>
-    <script src="/assets/app.js?v=20260325_0009"></script>
+    <script src="/assets/app.js?v=20260325_0010"></script>
     
 
     

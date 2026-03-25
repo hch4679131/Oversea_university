@@ -419,10 +419,9 @@ function buildStaticCarouselSlides(photos, imageClassName) {
   }).join('');
 }
 
-function buildYmtRoomCarouselCards(groupedRooms, langKey) {
+function buildYmtRoomCarouselCards(groupedRooms, langKey, includeWrapper = true) {
   const bookingHref = buildRoutePath(langKey, 'contact');
-
-  return `<div class="grid grid-cols-1 md:grid-cols-2 gap-8">${groupedRooms.map((item) => {
+  const cards = groupedRooms.map((item) => {
     const showBookingLink = item.label !== '公共区域';
     const photos = item.photos || [];
     const hasMultiplePhotos = photos.length > 1;
@@ -443,13 +442,14 @@ function buildYmtRoomCarouselCards(groupedRooms, langKey) {
         </div>
       </div>
     </div>`;
-  }).join('')}</div>`;
+  }).join('');
+
+  return includeWrapper ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-8">${cards}</div>` : cards;
 }
 
-function buildDarkRoomCarouselCards(groupedRooms, langKey) {
+function buildDarkRoomCarouselCards(groupedRooms, langKey, includeWrapper = true) {
   const bookingHref = buildRoutePath(langKey, 'contact');
-
-  return `<div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">${groupedRooms.map((item) => {
+  const cards = groupedRooms.map((item) => {
     const showBookingLink = item.label !== '公共区域';
     const photos = item.photos || [];
     const hasMultiplePhotos = photos.length > 1;
@@ -471,15 +471,17 @@ function buildDarkRoomCarouselCards(groupedRooms, langKey) {
         </div>
       </div>
     </div>`;
-  }).join('')}</div>`;
+  }).join('');
+
+  return includeWrapper ? `<div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">${cards}</div>` : cards;
 }
 
-function buildStaticApartmentRoomCards(groupedRooms, langKey, pageKey) {
+function buildStaticApartmentRoomCards(groupedRooms, langKey, pageKey, includeWrapper = true) {
   if (pageKey === 'apartment-ymt') {
-    return buildYmtRoomCarouselCards(groupedRooms, langKey);
+    return buildYmtRoomCarouselCards(groupedRooms, langKey, includeWrapper);
   }
 
-  return buildDarkRoomCarouselCards(groupedRooms, langKey);
+  return buildDarkRoomCarouselCards(groupedRooms, langKey, includeWrapper);
 }
 
 function buildStaticPublicPhotoGrid(publicPhotos) {
@@ -516,6 +518,18 @@ function renderApartmentMediaSection(tagName, openingTag, innerHtml, scopeContex
   const floorPlansKey = Object.keys(scopeContext).find((key) => /FloorPlans$/.test(key) && Array.isArray(scopeContext[key]));
   let transformedInner = innerHtml;
 
+  if (groupedRoomsKey) {
+    transformedInner = replaceFirstDivByClass(
+      transformedInner,
+      'grid grid-cols-1 md:grid-cols-2 gap-8',
+      buildStaticApartmentRoomCards(
+        scopeContext[groupedRoomsKey],
+        scopeContext.routeLangKey,
+        scopeContext.routePageKey
+      )
+    );
+  }
+
   if (publicPhotosKey) {
     transformedInner = replaceFirstDivByClass(
       transformedInner,
@@ -533,7 +547,7 @@ function renderApartmentMediaSection(tagName, openingTag, innerHtml, scopeContex
   }
 
   if (groupedRoomsKey) {
-    return `${openingTag}${transformedInner}</${tagName}>`;
+    return `<${tagName}${stripAttribute(openingTag.slice(tagName.length + 1, -1), 'x-data')}>${renderFragment(transformedInner, scopeContext)}</${tagName}>`;
   }
 
   return `<${tagName}${stripAttribute(openingTag.slice(tagName.length + 1, -1), 'x-data')}>${renderFragment(transformedInner, scopeContext)}</${tagName}>`;
@@ -703,6 +717,13 @@ function renderLoopTemplates(html, context) {
     }
 
     const innerHtml = html.slice(templateOpenEnd + 1, templateEnd - '</template>'.length);
+    if (parsedExpression.iterableExpr === 'getApartmentGroupedRooms()' && context.routeLangKey && context.routePageKey) {
+      const replacement = buildStaticApartmentRoomCards(Array.from(iterableValue), context.routeLangKey, context.routePageKey, false);
+      html = `${html.slice(0, templateStart)}${replacement}${html.slice(templateEnd)}`;
+      cursor = templateStart + replacement.length;
+      continue;
+    }
+
     const rendered = Array.from(iterableValue).map((item, index) => {
       const childContext = {
         ...context,
@@ -911,6 +932,15 @@ function renderHtml(template, langKey, pageKey) {
 
   html = replaceDynamicHrefs(html, langKey, pageKey);
   html = renderFragment(html, renderContext);
+
+  if (apartmentData && apartmentUiState) {
+    html = replaceFirstDivByClass(
+      html,
+      'grid grid-cols-1 md:grid-cols-2 gap-8',
+      buildStaticApartmentRoomCards(apartmentUiState.groupedRooms, langKey, pageKey)
+    );
+  }
+
   html = html.replace(/\/sdlvhk\.com\/assets\//g, '/assets/');
 
   return html;
