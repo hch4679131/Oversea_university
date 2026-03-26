@@ -648,7 +648,7 @@ const apartmentRouteTitles = apartmentHelpers.buildApartmentTitleKeys ? apartmen
 
                 // ===== WeChat Popup (Template) =====
                 wechatModalOpen: false,
-                wechatId: 'SDLV_Consultant_001',
+                wechatId: 'Fortchtile',
                 wechatQrSrc: 'https://static.sdlvhk.com/图片素材/other/qrc.png',
                 wechatCopied: false,
 
